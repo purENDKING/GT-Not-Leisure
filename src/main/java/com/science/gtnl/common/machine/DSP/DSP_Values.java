@@ -6,7 +6,7 @@ public final class DSP_Values {
 
     public static final double secondsOfArtificialStarProgressCycleTime = MainConfig.secondsOfArtificialStarProgressCycleTime;// default
     // 6.4
-    public static final byte EnableRenderDefaultArtificialStar = (byte) (MainConfig.EnableRenderDefaultArtificialStar
+    public static final byte EnableRenderDefaultArtificialStar = (byte) (MainConfig.enableRenderDefaultArtificialStar
         ? 1
         : 0);
 }
