@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -141,23 +142,38 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (!player.isSneaking()) {
+        if (!player.isSneaking() && !world.isRemote) { // 确保代码在服务端运行
             AxisAlignedBB area = player.boundingBox.expand(50.0, 50.0, 50.0);
             List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, area);
 
             for (Entity entity : entities) {
+                // 处理掉落物
                 if (entity instanceof EntityItem) {
                     EntityItem item = (EntityItem) entity;
                     ItemStack itemStack = item.getEntityItem();
 
+                    // 尝试将物品堆放入玩家背包
                     if (player.inventory.addItemStackToInventory(itemStack)) {
-                        item.setDead();
+                        item.setDead(); // 销毁掉落物实体
+                        player.inventory.markDirty(); // 标记物品栏为脏数据，确保同步
                     } else {
+                        // 如果背包已满，将掉落物传送到玩家中心
                         double centerX = player.posX;
                         double centerY = player.posY + (player.height / 2.0);
                         double centerZ = player.posZ;
                         item.setPosition(centerX, centerY, centerZ);
                     }
+                }
+
+                // 处理经验球
+                if (entity instanceof EntityXPOrb) {
+                    EntityXPOrb xpOrb = (EntityXPOrb) entity;
+
+                    // 将经验球传送到玩家中心
+                    double centerX = player.posX;
+                    double centerY = player.posY + (player.height / 2.0);
+                    double centerZ = player.posZ;
+                    xpOrb.setPosition(centerX, centerY, centerZ);
                 }
             }
         }
