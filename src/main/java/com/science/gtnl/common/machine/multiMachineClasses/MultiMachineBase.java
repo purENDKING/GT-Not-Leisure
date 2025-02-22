@@ -43,7 +43,6 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedRow;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.science.gtnl.common.hatch.CustomFluidHatch;
-import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.gui.modularui.GTUITextures;
@@ -902,8 +901,7 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
 
     @Override
     public boolean getDefaultBatchMode() {
-        if (!supportsBatchMode()) return false;
-        return MainConfig.DEFAULT_BATCH_MODE;
+        return false;
     }
 
     @Override

@@ -7,12 +7,12 @@ import net.minecraftforge.common.config.Configuration;
 // spotless:off
 public class MainConfig {
 
-    public static int EUEveryEnhancementCore = 1;// default 1024L * Integer.MAX_VALUE;
+    public static int EUEveryEnhancementCore = 1;
     public static int EUEveryDepletedExcitedNaquadahFuelRod = 2750000;
     public static double secondsOfArtificialStarProgressCycleTime = 6.4;
     public static boolean EnableRenderDefaultArtificialStar = true;
     public static boolean enablePortalToAlfheimBigBoom = true;
-    public static boolean DEFAULT_BATCH_MODE = false;
+    public static boolean enableCheatRecipeWithOwner = false;
 
     private static Configuration config;
 
@@ -33,54 +33,52 @@ public class MainConfig {
     public static void loadConfig() {
 
         EUEveryEnhancementCore = config
-            .get("EU Every Enhancement Core",
-                "enable",
+            .get(
+                "EU Every Enhancement Core",
+                "1",
                 EUEveryEnhancementCore,
                 "Set the power generation of EU Every Enhancement Core")
             .getInt(EUEveryEnhancementCore);
 
-        enablePortalToAlfheimBigBoom = config
-            .get(
-                "enable Portal To Alfheim Big Boom",
-                "enable",
-                enablePortalToAlfheimBigBoom,
-                "Setting this to false will reduce the Portal To Alfheim explosion to little more then a tnt blast")
-            .getBoolean(enablePortalToAlfheimBigBoom);
-
         EUEveryDepletedExcitedNaquadahFuelRod = config
-            .get("EU Every Depleted Excited Naquadah FuelRod",
-                "enable",
+            .get(
+                "EU Every Depleted Excited Naquadah FuelRod",
+                "2750000",
                 EUEveryDepletedExcitedNaquadahFuelRod,
                 "Set the power generation of EU Every Depleted Excited Naquadah FuelRod")
             .getInt(EUEveryDepletedExcitedNaquadahFuelRod);
 
         secondsOfArtificialStarProgressCycleTime = config
-            .get("seconds Of Artificial Star Progress Cycle Time",
-                "enable",
+            .get(
+                "Seconds Of Artificial Star Progress Cycle Time",
+                "6.4",
                 secondsOfArtificialStarProgressCycleTime,
                 "Set secondsOfArtificialStarProgressCycleTime running time")
             .getDouble(secondsOfArtificialStarProgressCycleTime);
 
+        enablePortalToAlfheimBigBoom = config
+            .get(
+                "Enable Portal To Alfheim Big Boom",
+                "true",
+                enablePortalToAlfheimBigBoom,
+                "Setting this to false will reduce the Portal To Alfheim explosion to little more then a tnt blast")
+            .getBoolean(enablePortalToAlfheimBigBoom);
+
         EnableRenderDefaultArtificialStar = config
-            .get("Enable Render Default Artificial Star",
-                "enable",
+            .get(
+                "Enable Render Default Artificial Star",
+                "true",
                 EnableRenderDefaultArtificialStar,
                 "Open RenderDefaultArtificialStar rendering")
             .getBoolean(EnableRenderDefaultArtificialStar);
 
-        enablePortalToAlfheimBigBoom = config
-            .get("Enable Portal To Alfheim Big Boom",
-                "enable",
-                enablePortalToAlfheimBigBoom,
-                "Whether to turn on the Big Bang")
+        enableCheatRecipeWithOwner = config
+            .get(
+                "Enable Only Player Owner Cheat Recipe (Need 7 Mods)",
+                "false",
+                enableCheatRecipeWithOwner,
+                "Add Debug Energy Hatch Recipe")
             .getBoolean(enablePortalToAlfheimBigBoom);
-
-        DEFAULT_BATCH_MODE = config
-            .get("DEFAULT BATCH MODE!!!",
-                "enable",
-                DEFAULT_BATCH_MODE,
-                "DEFAULT_BATCH_MODE!!!")
-            .getBoolean(DEFAULT_BATCH_MODE);
 
         if (config.hasChanged()) {
             config.save();

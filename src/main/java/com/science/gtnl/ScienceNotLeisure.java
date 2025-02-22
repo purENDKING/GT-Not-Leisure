@@ -7,8 +7,8 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
-
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,6 +21,7 @@ import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
@@ -30,6 +31,7 @@ import com.science.gtnl.loader.RecipeLoaderRunnable;
 import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -148,17 +150,17 @@ public class ScienceNotLeisure {
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new AnvilEventHandler());
 
-        /*
-         * if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
-         * && ProgrammableHatches.isModLoaded()
-         * && TwistSpaceTechnology.isModLoaded()
-         * && NHUtilities.isModLoaded()
-         * && AE2Thing.isModLoaded()
-         * && QzMiner.isModLoaded()) {
-         * FMLCommonHandler.instance()
-         * .bus()
-         * .register(new CheatRecipes());
-         * }
-         */
+        if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
+            && ProgrammableHatches.isModLoaded()
+            && TwistSpaceTechnology.isModLoaded()
+            && NHUtilities.isModLoaded()
+            && AE2Thing.isModLoaded()
+            && QzMiner.isModLoaded()
+            && MainConfig.enableCheatRecipeWithOwner) {
+            FMLCommonHandler.instance()
+                .bus()
+                .register(new CheatRecipes());
+        }
+
     }
 }
