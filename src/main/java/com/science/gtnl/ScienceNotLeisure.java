@@ -8,6 +8,7 @@ import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
 
+import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -68,6 +69,8 @@ public class ScienceNotLeisure {
     public static final String Arthor = "HFstudio";
     public static final String RESOURCE_ROOT_ID = "sciencenotleisure";
     public static final Logger LOG = LogManager.getLogger(MODID);
+
+    public static Configuration config;
 
     /**
      * <li>The signal of whether in Development Mode.

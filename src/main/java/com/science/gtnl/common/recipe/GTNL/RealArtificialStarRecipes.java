@@ -17,7 +17,7 @@ public class RealArtificialStarRecipes implements IRecipePool {
     public void loadRecipes() {
         GTValues.RA.stdBuilder()
             .itemInputs(EnhancementCore.get(1))
-            .specialValue((int) (EUEveryEnhancementCore / Integer.MAX_VALUE))
+            .specialValue((int) (EUEveryEnhancementCore))
             .eut(0)
             .duration(0)
             .fake()
@@ -39,7 +39,7 @@ public class RealArtificialStarRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(DepletedExcitedNaquadahFuelRod.get(1))
-            .specialValue((int) (EUEveryDepletedExcitedNaquadahFuelRod / Integer.MAX_VALUE))
+            .specialValue((int) (EUEveryDepletedExcitedNaquadahFuelRod))
             .eut(0)
             .duration(0)
             .fake()
