@@ -155,19 +155,12 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                 // 处理掉落物
                 if (entity instanceof EntityItem) {
                     EntityItem item = (EntityItem) entity;
-                    ItemStack itemStack = item.getEntityItem();
 
-                    // 尝试将物品堆放入玩家背包
-                    if (player.inventory.addItemStackToInventory(itemStack)) {
-                        item.setDead(); // 销毁掉落物实体
-                        player.inventory.markDirty(); // 标记物品栏为脏数据，确保同步
-                    } else {
-                        // 如果背包已满，将掉落物传送到玩家中心
-                        double centerX = player.posX;
-                        double centerY = player.posY + (player.height / 2.0);
-                        double centerZ = player.posZ;
-                        item.setPosition(centerX, centerY, centerZ);
-                    }
+                    double centerX = player.posX;
+                    double centerY = player.posY + (player.height / 2.0);
+                    double centerZ = player.posZ;
+                    item.setPosition(centerX, centerY, centerZ);
+
                 }
 
                 // 处理经验球
