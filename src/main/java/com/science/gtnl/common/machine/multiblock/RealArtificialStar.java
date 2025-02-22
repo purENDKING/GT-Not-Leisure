@@ -103,8 +103,8 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public static void initStatics() {
         DepletedExcitedNaquadahFuelRod = GTNL_ItemID.createNoNBT(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1));
         EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));
-        MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod / Integer.MAX_VALUE;
-        MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore / Integer.MAX_VALUE;
+        MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
+        MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
     }
 
     // endregion
