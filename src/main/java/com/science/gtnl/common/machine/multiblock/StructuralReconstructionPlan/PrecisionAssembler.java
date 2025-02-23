@@ -349,7 +349,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         }
 
         updateHatchTexture();
-        return mCasing >= 35 && casingTier >= 0;
+        return mCasing >= 30 && casingTier >= 0;
     }
 
     @Override
