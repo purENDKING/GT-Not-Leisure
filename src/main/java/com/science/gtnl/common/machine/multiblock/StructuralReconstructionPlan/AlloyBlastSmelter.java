@@ -149,7 +149,7 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mEnergyHatches.size() <= 1
             && mMufflerHatches.size() == 1
-            && mCasing >= 55) {
+            && mCasing >= 35) {
             ParallelTier = getParallelTier(aStack);
             energyHatchTier = checkEnergyHatchTier();
             for (MTEHatch hatch : getExoticEnergyHatches()) {
