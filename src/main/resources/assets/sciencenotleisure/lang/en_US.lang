@@ -1328,6 +1328,17 @@ Tooltip_AlloyBlastSmelter_05=在控制器内放入并行控制核心来减少耗
 Tooltip_AlloyBlastSmelter_06=能源仓限制了机器工作的电压等级
 Tooltip_AlloyBlastSmelter_Casing=任意冶炼炉机械方块
 
+NameMegaAlloyBlastSmelter=巨型合金冶炼炉
+MegaAlloyBlastSmelterRecipeType=合金冶炼炉
+Tooltip_MegaAlloyBlastSmelter_00=比合金冶炼炉快200%%
+Tooltip_MegaAlloyBlastSmelter_01=只需要使用配方要求功率的80%%
+Tooltip_MegaAlloyBlastSmelter_02=每超过配方温度900K，耗能均将乘以95%%（不计超频）
+Tooltip_MegaAlloyBlastSmelter_03=每级玻璃等级将额外提供2%%概率的双倍产出！
+Tooltip_MegaAlloyBlastSmelter_04=每级线圈等级额外提供2%%的耗电减免和2%%的加速！
+Tooltip_MegaAlloyBlastSmelter_05=超过MV后的每一级电压，都会将温度提高100K
+Tooltip_MegaAlloyBlastSmelter_06=机器可进行§c无损超频§7
+Tooltip_MegaAlloyBlastSmelter_Casing=任意冶炼炉机械方块
+
 NamePetrochemicalPlant=石化工厂
 gtnl.recipe.PetrochemicalPlantRecipes=石化工厂
 PetrochemicalPlantRecipeType=石化工厂

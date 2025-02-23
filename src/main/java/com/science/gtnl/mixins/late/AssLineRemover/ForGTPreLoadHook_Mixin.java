@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.science.gtnl.Utils.recipes.AssLineRecipeHook;
+import com.science.gtnl.common.recipe.Special.AssLineRecipeHook;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import gregtech.GTMod;

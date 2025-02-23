@@ -1,6 +1,6 @@
 package com.science.gtnl.mixins.late.AssLineRemover;
 
-import static com.science.gtnl.Utils.recipes.AssLineRecipeHook.RECIPE_TO_REMOVE;
+import static com.science.gtnl.common.recipe.Special.AssLineRecipeHook.RECIPE_TO_REMOVE;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.science.gtnl.Utils.recipes.AssLineRecipeHook;
+import com.science.gtnl.common.recipe.Special.AssLineRecipeHook;
 
 import cpw.mods.fml.common.registry.GameData;
 import tectech.recipe.TTRecipeAdder;

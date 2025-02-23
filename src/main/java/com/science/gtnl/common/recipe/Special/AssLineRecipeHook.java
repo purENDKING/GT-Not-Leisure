@@ -1,4 +1,4 @@
-package com.science.gtnl.Utils.recipes;
+package com.science.gtnl.common.recipe.Special;
 
 import static gregtech.api.util.GTRecipeBuilder.HOURS;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -11,6 +11,8 @@ import java.util.Map;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import com.science.gtnl.config.MainConfig;
+
 import gregtech.api.enums.TierEU;
 
 @SuppressWarnings({ "unused", "SpellCheckingInspection" })
@@ -21,22 +23,23 @@ public class AssLineRecipeHook {
     // 必须在此处移除装配线配方, 不能调用对象获取name, 因为本方法执行在gt pre load 阶段开始
     public static void loadAndInit() {
 
-        // 移除 生物处理器单元
-        Builder.newBuilder()
-            .addOutputItem("gregtech:gt.metaitem.03", 1, 32077)
-            .addResearchItem("gregtech:gt.metaitem.03", 1, 32072)
-            .addResearchKey(2 * HOURS)
-            .addProcessKey(30 * SECONDS, (int) (TierEU.RECIPE_UHV / 2))
-            .build();
+        if (MainConfig.enableDeleteRecipe) {
+            // 移除 生物处理器单元
+            Builder.newBuilder()
+                .addOutputItem("gregtech:gt.metaitem.03", 1, 32077)
+                .addResearchItem("gregtech:gt.metaitem.03", 1, 32072)
+                .addResearchKey(2 * HOURS)
+                .addProcessKey(30 * SECONDS, (int) (TierEU.RECIPE_UHV / 2))
+                .build();
 
-        // 一个测试TT那边用的 移除 样板输入输入总成
-        // Builder.newBuilder()
-        // .addOutputItem("gregtech:gt.blockmachines", 1, 2714)
-        // .addResearchItem("gregtech:gt.blockmachines", 1, 2715)
-        // .addResearchKey(2000 * 60 * 8, 2000, 3000000, 2)
-        // .addProcessKey(30 * SECONDS, (int) TierEU.RECIPE_UIV)
-        // .build();
-
+            // 一个测试TT那边用的 移除 样板输入输入总成
+            // Builder.newBuilder()
+            // .addOutputItem("gregtech:gt.blockmachines", 1, 2714)
+            // .addResearchItem("gregtech:gt.blockmachines", 1, 2715)
+            // .addResearchKey(2000 * 60 * 8, 2000, 3000000, 2)
+            // .addProcessKey(30 * SECONDS, (int) TierEU.RECIPE_UIV)
+            // .build();
+        }
     }
 
     @SuppressWarnings("SameParameterValue")
