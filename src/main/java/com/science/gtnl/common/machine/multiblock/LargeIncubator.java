@@ -245,22 +245,54 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     }
 
     protected GTRecipe recipeWithMultiplier(GTRecipe recipe, FluidStack[] fluidInputs) {
+        // 检查 recipe 和 fluidInputs 是否为 null
+        if (recipe == null || fluidInputs == null) {
+            return recipe; // 直接返回原始 recipe
+        }
+
+        // 检查 recipe.mFluidInputs 和 recipe.mFluidOutputs 是否为 null 或空数组
+        if (recipe.mFluidInputs == null || recipe.mFluidInputs.length == 0
+            || recipe.mFluidOutputs == null
+            || recipe.mFluidOutputs.length == 0) {
+            return recipe; // 直接返回原始 recipe
+        }
+
+        // 检查 recipe.mFluidInputs[0] 和 recipe.mFluidOutputs[0] 是否为 null
+        if (recipe.mFluidInputs[0] == null || recipe.mFluidOutputs[0] == null) {
+            return recipe; // 直接返回原始 recipe
+        }
+
+        // 检查 fluidInputs 中是否存在 null
+        for (FluidStack fluid : fluidInputs) {
+            if (fluid == null) {
+                return recipe; // 直接返回原始 recipe
+            }
+        }
+
+        // 如果所有检查通过，继续处理
         GTRecipe tRecipe = recipe.copy();
         int multiplier = 1001;
         mExpectedMultiplier = multiplier;
-        // Calculate max multiplier limited by input fluids
+
+        // 计算基于输入流体的最大倍数
         long fluidAmount = 0;
         for (FluidStack fluid : fluidInputs) {
             if (recipe.mFluidInputs[0].isFluidEqual(fluid)) {
                 fluidAmount += fluid.amount;
             }
         }
+
+        // 计算倍数
         multiplier = (int) Math.min(multiplier, fluidAmount / recipe.mFluidInputs[0].amount);
-        // In case multiplier is 0
+
+        // 确保倍数至少为 1
         multiplier = Math.max(multiplier, 1);
         mTimes = multiplier;
+
+        // 更新流体输入和输出的量
         tRecipe.mFluidInputs[0].amount *= multiplier;
         tRecipe.mFluidOutputs[0].amount *= multiplier;
+
         return tRecipe;
     }
 

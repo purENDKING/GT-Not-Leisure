@@ -6,7 +6,7 @@ StructuralReconstructionPlan=结构代替计划
 AppliedEnergistics2=应用能源2
 
 Adder=添加模组: 
-Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r能源仓！
+Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
 
 Waila.General.WirelessMode=无线模式
 Waila.General.CurrentEuCost=当前EU消耗
@@ -56,6 +56,7 @@ DebugEnergyHatch=Debug能源仓
 Tooltip_DebugEnergyHatch_00=凭空而生的能量
 Tooltip_DebugEnergyHatch_01=§9无限能源的生产/消耗设备
 Tooltip_DebugEnergyHatch_02=§9它们从何而来?
+NEI.DebugEnergyHatchRecipe.01=§o我从哪里来?(需要同时安装7个模组方可出现此配方)
 
 NinefoldInputHatchEV=九重输入仓(EV)
 NinefoldInputHatchIV=九重输入仓(IV)
@@ -423,7 +424,6 @@ MetaItem.61.name=MAX并行控制核心
 tooltips.MAXParallelControllerCore_00=§d速度: +26%%
 tooltips.MAXParallelControllerCore_01=§5EU消耗: 52%%
 tooltips.MAXParallelControllerCore_02=§b并行: 16777216
-
 MetaItem.62.name=§d传闻 - 娜迦之书
 MetaItem.63.name=§6都市传说 - 暮色之书
 MetaItem.64.name=杂质 - 巫妖之书
@@ -437,6 +437,8 @@ MetaItem.71.name=§b都市之星 - 终焉之书
 MetaItem.72.name=§d传闻 - 巨人之书
 MetaItem.73.name=黏土荧石粉
 MetaItem.74.name=量子磁盘
+MetaItem.75.name=中子掺杂的单晶硅
+MetaItem.76.name=中子掺杂的晶圆
 
 item.TestItem.name=测试物品
 Tooltip_Testitem_00=如果你看到了这个Tooltip
@@ -536,7 +538,7 @@ bw.werkstoff.25011.name=氟化硼
 bw.werkstoff.25012.name=四氟硼酸钠
 bw.werkstoff.25013.name=氧化硼
 bw.werkstoff.25014.name=二基基四乙酰六氮杂异纤锌烷
-bw.werkstoff.25015.name=苯甲醇
+bw.werkstoff.25015.name=苯甲醛
 bw.werkstoff.25016.name=氢溴酸
 bw.werkstoff.25017.name=琥珀酰亚胺醋酸酯
 bw.werkstoff.25018.name=六苄基六氮杂异伍兹烷
@@ -633,7 +635,7 @@ Material.boronfluoride=氟化硼
 Material.sodiumtetrafluoroborate=四氟硼酸钠
 Material.borontrioxide=氧化硼
 Material.dibenzyltetraacetylhexaazaisowurtzitane=二基基四乙酰六氮杂异纤锌烷
-Material.benzaldehyde=苯甲醇
+Material.benzaldehyde=苯甲醛
 Material.hydrobromicacid=氢溴酸
 Material.succinimidylacetate=琥珀酰亚胺醋酸酯
 Material.hexabenzylhexaazaisowurtzitane=六苄基六氮杂异伍兹烷
@@ -730,7 +732,7 @@ fluid.boronfluoride=氟化硼
 fluid.sodiumtetrafluoroborate=四氟硼酸钠
 fluid.borontrioxide=氧化硼
 fluid.dibenzyltetraacetylhexaazaisowurtzitane=二基基四乙酰六氮杂异纤锌烷
-fluid.benzaldehyde=苯甲醇
+fluid.benzaldehyde=苯甲醛
 fluid.hydrobromicacid=氢溴酸
 fluid.succinimidylacetate=琥珀酰亚胺醋酸酯
 fluid.hexabenzylhexaazaisowurtzitane=六苄基六氮杂异伍兹烷
@@ -829,6 +831,7 @@ Tooltip_GTMMultiMachine_00=比相同电压的单方块机器快167%%
 Tooltip_GTMMultiMachine_01=只需要使用配方要求功率的80%%
 Tooltip_GTMMultiMachine_02=初始并行为8
 Tooltip_GTMMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
+Tooltip_GTMMultiMachine_04=支持§9Tec§1Tech§r多安能源仓！
 
 NameLargeHammer=大型锻造锤
 LargeHammerRecipeType=锻造锤
@@ -910,6 +913,20 @@ Tooltip_LargeNaquadahReactor_02=这会让时间减半，功率翻倍
 Tooltip_LargeNaquadahReactor_03=代价是每秒会消耗2000L的氧气
 Tooltip_LargeNaquadahReactor_04=只能在不输入氢气的情况下使用!
 Tooltip_LargeNaquadahReactor_Casing=任意放射硅岩合金机械方块
+
+NamePrecisionAssembler=精密组装机
+PreciseAssemblerRecipeType=组装机 / 精密组装机
+PreciseAssembler_Mode_0=组装机
+PreciseAssembler_Mode_1=精密组装机
+Tooltip_PreciseAssembler_00=机械方块等级决定了能源仓最大等级, UHV机械方块解锁所有等级
+Tooltip_PreciseAssembler_01=并行数: 2 ^ 玻璃等级
+Tooltip_PreciseAssembler_02=机器可进行§c无损超频§7
+Tooltip_PreciseAssembler_Casing=任意精密机械方块
+
+NameDecayHastener=衰变加速器
+gtnl.recipe.DecayHastenerRecipes=衰变扭曲
+DecayHastenerRecipeType=衰变扭曲
+Tooltip_DecayHastener_Casing=任意放射硅岩合金机械方块
 
 NameWoodDistillation=木化工厂
 gtnl.recipe.WoodDistillationRecipes=集成木质生物质热解
@@ -1057,8 +1074,8 @@ Tooltip_HandOfJohnDavisonRockefeller_01=§8§o不幸的是，它在压裂中央�
 Tooltip_HandOfJohnDavisonRockefeller_02=每级电压并行+4，每级玻璃并行+2
 Tooltip_HandOfJohnDavisonRockefeller_03=基础并行为16
 Tooltip_HandOfJohnDavisonRockefeller_04=玻璃等级 - 1 限制了能源仓等级，UMV玻璃解锁所有等级
-Tooltip_HandOfJohnDavisonRockefeller_05=每增加一级玻璃或电压等级，EU消耗减少1%%
-Tooltip_HandOfJohnDavisonRockefeller_06=每增加一级玻璃或电压等级，速度加快约2%%
+Tooltip_HandOfJohnDavisonRockefeller_05=每增加一级玻璃或电压等级，EU消耗乘以95%%
+Tooltip_HandOfJohnDavisonRockefeller_06=每增加一级玻璃或电压等级，速度加快2.5%%，不会低于配方时间的0.1倍
 Tooltip_HandOfJohnDavisonRockefeller_07=无视配方要求的等级!
 Tooltip_HandOfJohnDavisonRockefeller_08=能源仓等级大于UIV时开启§c无损超频
 Tooltip_HandOfJohnDavisonRockefeller_Casing=任意压力抑制机械方块
@@ -1083,6 +1100,13 @@ Tooltip_LargeSteamCircuitAssembler_01=仅消耗正常需求125%%的蒸汽
 Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
 Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamExtruder=大型蒸汽压模机
+LargeSteamExtruderRecipeType=压模机
+Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机慢10%%
+Tooltip_LargeSteamExtruder_01=仅消耗正常需求125%%的蒸汽
+Tooltip_LargeSteamExtruder_02=一次可处理多达8个物品
+Tooltip_LargeSteamExtruder_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameRareEarthCentrifugal=稀土离心机
 gtnl.recipe.RareEarthCentrifugalRecipes=稀土离心
@@ -1301,6 +1325,7 @@ Tooltip_AlloyBlastSmelter_02=超过MV后的每一级电压，都会将温度提�
 Tooltip_AlloyBlastSmelter_03=只能安装一个能源仓!
 Tooltip_AlloyBlastSmelter_04=固定并行为16
 Tooltip_AlloyBlastSmelter_05=在控制器内放入并行控制核心来减少耗电！
+Tooltip_AlloyBlastSmelter_06=能源仓限制了机器工作的电压等级
 Tooltip_AlloyBlastSmelter_Casing=任意冶炼炉机械方块
 
 NamePetrochemicalPlant=石化工厂

@@ -168,6 +168,8 @@ public enum GTNLItemList {
     GiantBook,
     ClayedGlowstone,
     QuantumDisk,
+    NeutroniumBoule,
+    NeutroniumWafer,
 
     FortifyGlowstone,
     GaiaGlass,
@@ -250,7 +252,9 @@ public enum GTNLItemList {
     LargePacker,
     LargeAlloySmelter,
     LargePyrolyseOven,
+    PreciseAssembler,
 
+    DecayHastener,
     LargeSteamExtruder,
     DraconicFusionCrafting,
     LargeNaquadahReactor,

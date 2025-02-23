@@ -308,6 +308,8 @@ public class ItemRegister {
         GTNLItemList.GiantBook.set(initItem("§dRumor - Giant Book", 72));
         GTNLItemList.ClayedGlowstone.set(initItem("Clayed Glowstone", 73));
         GTNLItemList.QuantumDisk.set(initItem("Quantum Disk", 74));
+        GTNLItemList.NeutroniumBoule.set(initItem("Neutronium Boule", 75));
+        GTNLItemList.NeutroniumWafer.set(initItem("Neutronium Wafer", 76));
     }
 
     public static void registry() {

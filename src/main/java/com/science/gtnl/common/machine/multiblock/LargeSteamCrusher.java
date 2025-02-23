@@ -67,8 +67,11 @@ import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchInputBattery;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchOutputBattery;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTEHatchCustomFluidBase;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTESteamMultiBase;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -610,5 +613,18 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
             }
         }
         return outputSuccess;
+    }
+
+    @Override
+    public void updateSlots() {
+        for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
+        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
+        for (final MTEHatchInputBattery tHatch : validMTEList(this.mChargeHatches)) {
+            tHatch.updateSlots();
+        }
+        for (final MTEHatchOutputBattery tHatch : validMTEList(this.mDischargeHatches)) {
+            tHatch.updateSlots();
+        }
+        super.updateSlots();
     }
 }

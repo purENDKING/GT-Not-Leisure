@@ -7,6 +7,7 @@ import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
+import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
 import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
@@ -28,22 +29,27 @@ import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.AssemblingLineRecipes;
+import com.science.gtnl.common.recipe.GregTech.BacterialVatRecipes;
+import com.science.gtnl.common.recipe.GregTech.BlastFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.CentrifugeRecipes;
 import com.science.gtnl.common.recipe.GregTech.ChemicalBathRecipes;
 import com.science.gtnl.common.recipe.GregTech.ChemicalDehydratorRecipes;
 import com.science.gtnl.common.recipe.GregTech.ChemicalRecipes;
 import com.science.gtnl.common.recipe.GregTech.CompressorRecipes;
 import com.science.gtnl.common.recipe.GregTech.CraftingTableRecipes;
+import com.science.gtnl.common.recipe.GregTech.CuttingRecipes;
 import com.science.gtnl.common.recipe.GregTech.DigesterRecipes;
 import com.science.gtnl.common.recipe.GregTech.DissolutionTankRecipes;
 import com.science.gtnl.common.recipe.GregTech.DistilleryRecipes;
 import com.science.gtnl.common.recipe.GregTech.DragonEvolutionFusionCraftingRecipes;
 import com.science.gtnl.common.recipe.GregTech.ElectrolyzerRecipes;
 import com.science.gtnl.common.recipe.GregTech.FluidExtraction;
+import com.science.gtnl.common.recipe.GregTech.FluidExtractorRecipes;
 import com.science.gtnl.common.recipe.GregTech.FusionReactorRecipes;
 import com.science.gtnl.common.recipe.GregTech.LaserEngraverRecipes;
 import com.science.gtnl.common.recipe.GregTech.MixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.PlasmaForgeRecipes;
+import com.science.gtnl.common.recipe.GregTech.PreciseAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
@@ -69,7 +75,9 @@ public class RecipeLoader {
             new TheTwilightForestRecipes(), new IsaMillRecipes(), new CellRegulatorRecipes(),
             new VacuumFurnaceRecipes(), new FishingGroundRecipes(), new DistilleryRecipes(),
             new ElementCopyingRecipes(), new AlloySmelterRecipes(), new MolecularTransformerRecipes(),
-            new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes() };
+            new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes(),
+            new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
+            new DecayHastenerRecipes(), new PreciseAssemblerRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();

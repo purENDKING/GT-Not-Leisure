@@ -20,6 +20,7 @@ import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.CheatOreProcessingFactory;
 import com.science.gtnl.common.machine.multiblock.ComponentAssembler;
+import com.science.gtnl.common.machine.multiblock.DecayHastener;
 import com.science.gtnl.common.machine.multiblock.Desulfurizer;
 import com.science.gtnl.common.machine.multiblock.DraconicFusionCrafting;
 import com.science.gtnl.common.machine.multiblock.EdenGarden;
@@ -94,6 +95,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MolecularTransformer;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.PreciseAssembler;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumDryingFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
@@ -450,6 +452,13 @@ public class MachineLoader {
         GTNLItemList.LargeSteamExtruder
             .set(new LargeSteamExtruder(21086, "LargeSteamExtruder", TextLocalization.NameLargeSteamExtruder));
         addItemTooltip(GTNLItemList.LargeSteamExtruder.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.DecayHastener.set(new DecayHastener(21087, "DecayHastener", TextLocalization.NameDecayHastener));
+        addItemTooltip(GTNLItemList.DecayHastener.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.PreciseAssembler
+            .set(new PreciseAssembler(21088, "PreciseAssembler", TextLocalization.NamePrecisionAssembler));
+        addItemTooltip(GTNLItemList.PreciseAssembler.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

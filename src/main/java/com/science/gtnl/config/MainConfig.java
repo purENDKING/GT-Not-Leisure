@@ -14,6 +14,7 @@ public class MainConfig {
     public static boolean enablePortalToAlfheimBigBoom = true;
     public static boolean enableCheatRecipeWithOwner = false;
     public static boolean enableRenderInfinitySwordSpecial = true;
+    public static boolean enableDeleteRecipe = true;
 
     private static Configuration config;
 
@@ -88,6 +89,10 @@ public class MainConfig {
                 enableRenderInfinitySwordSpecial,
                 "Enable Player Render")
             .getBoolean(enableRenderInfinitySwordSpecial);
+
+        enableDeleteRecipe = config
+            .get("Enable Delete Vanilla GTNH Recipe", "enable", enableDeleteRecipe, "Enable Delete Recipe")
+            .getBoolean(enableDeleteRecipe);
 
         if (config.hasChanged()) {
             config.save();

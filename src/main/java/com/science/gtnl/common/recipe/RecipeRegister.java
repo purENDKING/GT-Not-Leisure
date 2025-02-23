@@ -281,4 +281,14 @@ public class RecipeRegister {
         .disableOptimize()
         .addSpecialTexture(59, 20, 58, 42, GGUITextures.PICTURE_NAQUADAH_REACTOR)
         .build();
+
+    public static RecipeMap<RecipeMapBackend> DecayHastenerRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.DecayHastenerRecipes")
+        .maxIO(1, 1, 1, 1)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.DecayHastener.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
 }

@@ -833,6 +833,23 @@ public class TextLocalization {
         "Any Wash Plant Casing",
         "Tooltip_LargeCanning_Casing");
 
+    public static final String NamePrecisionAssembler = texter("Precise Assembler", "NamePrecisionAssembler");
+    public static final String PreciseAssemblerRecipeType = texter(
+        "Assembler / Precision Assembler",
+        "PreciseAssemblerRecipeType");
+    public static final String Tooltip_PreciseAssembler_00 = texter(
+        "The level of the mechanical block determines the maximum level of the energy warehouse. UHV mechanical blocks unlock all levels.",
+        "Tooltip_PreciseAssembler_00");
+    public static final String Tooltip_PreciseAssembler_01 = texter(
+        "Parallel: 2 ^ Glass Level",
+        "Tooltip_PreciseAssembler_01");
+    public static final String Tooltip_PreciseAssembler_02 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_PreciseAssembler_02");
+    public static final String Tooltip_PreciseAssembler_Casing = texter(
+        "Any Unit Casing",
+        "Tooltip_PreciseAssembler_Casing");
+
     public static final String NameLargeCutter = texter("Large Cutter", "NameLargeCutter");
     public static final String LargeCutterRecipeType = texter(
         "Cutting Machine / Slicing Machine",
@@ -893,6 +910,12 @@ public class TextLocalization {
     public static final String Tooltip_LargeBrewer_Casing = texter(
         "Any Structural Coke Oven Casing",
         "Tooltip_LargeBrewer_Casing");
+
+    public static final String NameDecayHastener = texter("Decay Hastener", "NameDecayHastener");
+    public static final String DecayHastenerRecipeType = texter("Decay Hastener", "DecayHastenerRecipeType");
+    public static final String Tooltip_DecayHastener_Casing = texter(
+        "Any Radiant Naquadah Alloy Casing",
+        "Tooltip_DecayHastener_Casing");
 
     public static final String NameLargeIndustrialLathe = texter("Large Industrial Lathe", "NameLargeIndustrialLathe");
     public static final String LargeIndustrialLatheRecipeType = texter("Lathe", "LargeIndustrialLatheRecipeType");
