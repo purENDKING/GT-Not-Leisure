@@ -59,10 +59,10 @@ import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
-public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> implements ISurvivalConstructable {
+public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> implements ISurvivalConstructable {
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    private static IStructureDefinition<PreciseAssembler> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<PrecisionAssembler> STRUCTURE_DEFINITION = null;
     public static final String LPA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/precise_assembler";
     private static final int MACHINEMODE_ASSEMBLER = 0;
     private static final int MACHINEMODE_PRECISION = 1;
@@ -76,19 +76,19 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
     protected int machineTier = -1;
     public byte glassTier = 0;
 
-    public PreciseAssembler(int aID, String aName, String aNameRegional) {
+    public PrecisionAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
         shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     }
 
-    public PreciseAssembler(String aName) {
+    public PrecisionAssembler(String aName) {
         super(aName);
         shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new PreciseAssembler(this.mName);
+        return new PrecisionAssembler(this.mName);
     }
 
     @Override
@@ -151,9 +151,9 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
     }
 
     @Override
-    public IStructureDefinition<PreciseAssembler> getStructureDefinition() {
+    public IStructureDefinition<PrecisionAssembler> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<PreciseAssembler>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<PrecisionAssembler>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement(
                     'A',
@@ -170,7 +170,7 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
                     withChannel(
                         "TierCasing",
                         ofBlocksTiered(
-                            PreciseAssembler::getMachineTier,
+                            PrecisionAssembler::getMachineTier,
                             ImmutableList.of(
                                 Pair.of(sBlockCasings1, 0),
                                 Pair.of(sBlockCasings1, 1),
@@ -189,7 +189,7 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
                 .addElement(
                     'D',
                     ofChain(
-                        buildHatchAdder(PreciseAssembler.class).casingIndex(CASING_INDEX)
+                        buildHatchAdder(PrecisionAssembler.class).casingIndex(CASING_INDEX)
                             .dot(1)
                             .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                             .buildAndChain(
@@ -198,7 +198,7 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
                                     withChannel(
                                         "PreciseCasing",
                                         ofBlocksTiered(
-                                            PreciseAssembler::getCasingTier,
+                                            PrecisionAssembler::getCasingTier,
                                             ImmutableList.of(
                                                 Pair.of(Loaders.impreciseUnitCasing, 0),
                                                 Pair.of(Loaders.preciseUnitCasing, 0),
@@ -349,7 +349,7 @@ public class PreciseAssembler extends MultiMachineBase<PreciseAssembler> impleme
         }
 
         updateHatchTexture();
-        return mCasing >= 60 && casingTier >= 0;
+        return mCasing >= 35 && casingTier >= 0;
     }
 
     @Override

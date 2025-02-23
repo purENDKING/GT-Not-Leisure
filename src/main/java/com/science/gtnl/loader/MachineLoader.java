@@ -95,7 +95,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MolecularTransformer;
-import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.PreciseAssembler;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.PrecisionAssembler;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumDryingFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
@@ -457,7 +457,7 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.DecayHastener.get(1), AnimatedText.SNL_QYZG);
 
         GTNLItemList.PreciseAssembler
-            .set(new PreciseAssembler(21088, "PreciseAssembler", TextLocalization.NamePrecisionAssembler));
+            .set(new PrecisionAssembler(21088, "PrecisionAssembler", TextLocalization.NamePrecisionAssembler));
         addItemTooltip(GTNLItemList.PreciseAssembler.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
