@@ -209,6 +209,7 @@ public enum GTNLItemList {
     LightGrayLampBorderless,
     WhiteLamp,
     WhiteLampBorderless,
+    MegaAlloyBlastSmelter,
 
     MegaBlastFurnace,
     BrickedBlastFurnace,

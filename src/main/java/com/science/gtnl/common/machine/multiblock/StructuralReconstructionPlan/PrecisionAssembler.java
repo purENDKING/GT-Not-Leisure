@@ -168,7 +168,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                 .addElement(
                     'B',
                     withChannel(
-                        "TierCasing",
+                        "tiercasing",
                         ofBlocksTiered(
                             PrecisionAssembler::getMachineTier,
                             ImmutableList.of(
@@ -196,7 +196,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                                 onElementPass(
                                     x -> ++x.mCasing,
                                     withChannel(
-                                        "PreciseCasing",
+                                        "precisecasing",
                                         ofBlocksTiered(
                                             PrecisionAssembler::getCasingTier,
                                             ImmutableList.of(

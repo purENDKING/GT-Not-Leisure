@@ -43,7 +43,7 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<AlloyBlastSmelter> STRUCTURE_DEFINITION = null;
-    public static final String LIL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/alloy_blast_smelter";
+    public static final String ABS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/alloy_blast_smelter";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(15);
     private int mHeatingCapacity = 0;
     protected int energyHatchTier;
@@ -55,12 +55,12 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
 
     public AlloyBlastSmelter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
+        shape = StructureUtils.readStructureFromFile(ABS_STRUCTURE_FILE_PATH);
     }
 
     public AlloyBlastSmelter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
+        shape = StructureUtils.readStructureFromFile(ABS_STRUCTURE_FILE_PATH);
     }
 
     @Override

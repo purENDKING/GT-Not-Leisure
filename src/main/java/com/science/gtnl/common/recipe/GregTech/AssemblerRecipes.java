@@ -1160,15 +1160,6 @@ public class AssemblerRecipes implements IRecipePool {
             .addTo(As);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(16), GregtechItemList.Industrial_MacerationStack.get(1L))
-            .itemOutputs(GTNLItemList.LargeMacerationTower.get(1))
-            .specialValue(0)
-            .noOptimize()
-            .duration(50)
-            .eut(16)
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
             .itemInputs(
                 ItemList.Hatch_Output_Bus_EV.get(1L),
                 GTModHandler.getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 440),
@@ -1620,6 +1611,22 @@ public class AssemblerRecipes implements IRecipePool {
             .specialValue(0)
             .noOptimize()
             .duration(200)
+            .eut(7680)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.Industrial_AlloyBlastSmelter.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4L),
+                MaterialsAlloy.ZIRCONIUM_CARBIDE.getPlateDouble(8),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.HSSG, 8L),
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.Tungsten, 8L),
+                ItemList.IV_Coil.get(2))
+            .itemOutputs(GTNLItemList.AlloyBlastSmelter.get(1))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(576))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
             .eut(7680)
             .addTo(As);
     }

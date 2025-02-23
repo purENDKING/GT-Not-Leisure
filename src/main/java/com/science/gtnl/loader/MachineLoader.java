@@ -93,6 +93,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSolidifier;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamOreWasher;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaAlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MolecularTransformer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.PrecisionAssembler;
@@ -459,6 +460,10 @@ public class MachineLoader {
         GTNLItemList.PreciseAssembler
             .set(new PrecisionAssembler(21088, "PrecisionAssembler", TextLocalization.NamePrecisionAssembler));
         addItemTooltip(GTNLItemList.PreciseAssembler.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.MegaAlloyBlastSmelter
+            .set(new MegaAlloyBlastSmelter(21089, "MegaAlloyBlastSmelter", TextLocalization.NameMegaAlloyBlastSmelter));
+        addItemTooltip(GTNLItemList.MegaAlloyBlastSmelter.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

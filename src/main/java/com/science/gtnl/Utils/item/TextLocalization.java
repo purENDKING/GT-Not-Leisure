@@ -1081,6 +1081,37 @@ public class TextLocalization {
         "Any Blast Smelter Casing Block",
         "Tooltip_AlloyBlastSmelter_Casing");
 
+    public static final String NameMegaAlloyBlastSmelter = texter(
+        "Mega Alloy Blast Smelter",
+        "NameMegaAlloyBlastSmelter");
+    public static final String MegaAlloyBlastSmelterRecipeType = texter(
+        "Alloy Blast Smelter",
+        "MegaAlloyBlastSmelterRecipeType");
+    public static final String Tooltip_MegaAlloyBlastSmelter_00 = texter(
+        "200%% faster than using Alloy Blast Smelter",
+        "Tooltip_MegaAlloyBlastSmelter_00");
+    public static final String Tooltip_MegaAlloyBlastSmelter_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_MegaAlloyBlastSmelter_01");
+    public static final String Tooltip_MegaAlloyBlastSmelter_02 = texter(
+        "Every time the formula temperature exceeds 900K, the energy consumption will be multiplied by 95%% (excluding overclocking)",
+        "Tooltip_MegaAlloyBlastSmelter_02");
+    public static final String Tooltip_MegaAlloyBlastSmelter_03 = texter(
+        "Each level of glass grade will provide an additional 2%% chance of double output!",
+        "Tooltip_MegaAlloyBlastSmelter_03");
+    public static final String Tooltip_MegaAlloyBlastSmelter_04 = texter(
+        "Each level of coil grade provides an additional 2%% reduction in power consumption and a 2%% increase in speed!",
+        "Tooltip_MegaAlloyBlastSmelter_04");
+    public static final String Tooltip_MegaAlloyBlastSmelter_05 = texter(
+        "After each voltage level exceeds MV, the temperature will increase by 100K",
+        "Tooltip_MegaAlloyBlastSmelter_05");
+    public static final String Tooltip_MegaAlloyBlastSmelter_06 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_MegaAlloyBlastSmelter_06");
+    public static final String Tooltip_MegaAlloyBlastSmelter_Casing = texter(
+        "Any Blast Smelter Casing Block",
+        "Tooltip_MegaAlloyBlastSmelter_Casing");
+
     public static final String NameLargeMixer = texter("Large Mixer", "NameLargeMixer");
     public static final String LargeMixerRecipeType = texter("Mixer", "LargeMixerRecipeType");
     public static final String Tooltip_LargeMixer_Casing = texter(
