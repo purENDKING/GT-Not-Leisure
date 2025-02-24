@@ -24,13 +24,23 @@ import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.common.recipe.Special.RemoveRecipes;
 import com.science.gtnl.config.MainConfig;
-import com.science.gtnl.loader.*;
+import com.science.gtnl.loader.LazyStaticsInitLoader;
+import com.science.gtnl.loader.MachineLoader;
+import com.science.gtnl.loader.MaterialLoader;
+import com.science.gtnl.loader.RecipeLoader;
+import com.science.gtnl.loader.RecipeLoaderRunnable;
+import com.science.gtnl.loader.RecipeLoaderServerStart;
+import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 // after

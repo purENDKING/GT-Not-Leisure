@@ -9,7 +9,11 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
-import gregtech.api.enums.*;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
