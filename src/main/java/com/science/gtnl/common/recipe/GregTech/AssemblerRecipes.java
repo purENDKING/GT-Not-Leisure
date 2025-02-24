@@ -1,13 +1,11 @@
 package com.science.gtnl.common.recipe.GregTech;
 
-import static com.science.gtnl.Mods.ScienceNotLeisure;
 import static com.science.gtnl.loader.IScriptLoader.missing;
 import static gregtech.api.enums.Mods.*;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
@@ -33,7 +31,6 @@ import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.item.crafting.ItemDummyResearch;
-import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
@@ -65,210 +62,6 @@ public class AssemblerRecipes implements IRecipePool {
             MEoutputHatchType.setLong("baseCapacity", 9223372036854775807L);
             MEoutputHatch.setTagCompound(MEoutputHatchType);
         }
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Battery_RE_ULV_Tantalum.get(4L),
-                ItemList.Circuit_Parts_Wiring_Basic.get(4L),
-                ItemList.Circuit_Parts_Coil.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
-                ItemList.Circuit_Primitive.get(1L))
-            .fluidInputs(Materials.Tin.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 9))
-            .specialValue(0)
-            .noOptimize()
-            .duration(50)
-            .eut(30)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_Advanced.get(4L),
-                ItemList.Circuit_Parts_Wiring_Elite.get(4L),
-                ItemList.Circuit_Parts_Wiring_Advanced.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 9))
-            .fluidInputs(Materials.Tin.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 10))
-            .specialValue(0)
-            .noOptimize()
-            .duration(90)
-            .eut(120)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_Advanced.get(8L),
-                ItemList.Circuit_Parts_Wiring_Elite.get(8L),
-                ItemList.Circuit_Parts_Wiring_Advanced.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 10))
-            .fluidInputs(Materials.Tin.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 11))
-            .specialValue(0)
-            .noOptimize()
-            .duration(150)
-            .eut(480)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_DiodeSMD.get(4L),
-                ItemList.Circuit_Parts_TransistorSMD.get(4L),
-                ItemList.Circuit_Parts_CapacitorSMD.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 2, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 11))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 12))
-            .specialValue(0)
-            .noOptimize()
-            .duration(230)
-            .eut(1920)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_DiodeSMD.get(8L),
-                ItemList.Circuit_Parts_TransistorSMD.get(8L),
-                ItemList.Circuit_Parts_CapacitorSMD.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 12))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 13))
-            .specialValue(0)
-            .noOptimize()
-            .duration(330)
-            .eut(7680)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_DiodeASMD.get(4L),
-                ItemList.Circuit_Parts_TransistorASMD.get(4L),
-                ItemList.Circuit_Parts_CapacitorASMD.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 13))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 14))
-            .specialValue(0)
-            .noOptimize()
-            .duration(450)
-            .eut(30720)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_DiodeASMD.get(8L),
-                ItemList.Circuit_Parts_TransistorASMD.get(8L),
-                ItemList.Circuit_Parts_CapacitorASMD.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 14))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 15))
-            .specialValue(0)
-            .noOptimize()
-            .duration(570)
-            .eut(122880)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTNLItemList.BiowareSMDDiode.get(16),
-                GTNLItemList.BiowareSMDCapacitor.get(16),
-                GTNLItemList.BiowareSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 15))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(144))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 16))
-            .specialValue(0)
-            .noOptimize()
-            .duration(710)
-            .eut(491520)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Parts_DiodeXSMD.get(16L),
-                ItemList.Circuit_Parts_TransistorXSMD.get(16L),
-                ItemList.Circuit_Parts_CapacitorXSMD.get(16L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 16))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 17))
-            .specialValue(0)
-            .noOptimize()
-            .duration(730)
-            .eut(1966080)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTNLItemList.ExoticSMDDiode.get(16),
-                GTNLItemList.ExoticSMDCapacitor.get(16),
-                GTNLItemList.ExoticSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 17))
-            .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(432))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 18))
-            .specialValue(0)
-            .noOptimize()
-            .duration(750)
-            .eut(7864320)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTNLItemList.CosmicSMDDiode.get(16),
-                GTNLItemList.CosmicSMDCapacitor.get(16),
-                GTNLItemList.CosmicSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 18))
-            .fluidInputs(MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(288))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 19))
-            .specialValue(0)
-            .noOptimize()
-            .duration(770)
-            .eut(31457280)
-            .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTNLItemList.TemporallySMDDiode.get(16),
-                GTNLItemList.TemporallySMDCapacitor.get(16),
-                GTNLItemList.TemporallySMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
-                WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
-                GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 1, 19))
-            .fluidInputs(MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(432))
-            .itemOutputs(GTModHandler.getModItem(ScienceNotLeisure.ID, "MetaItem", 4, 20))
-            .specialValue(0)
-            .noOptimize()
-            .duration(790)
-            .eut(125829120)
-            .requiresCleanRoom()
-            .addTo(As);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -337,77 +130,6 @@ public class AssemblerRecipes implements IRecipePool {
             .duration(100)
             .eut(491520)
             .requiresCleanRoom()
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTUtility.copyAmount(0, ItemList.Circuit_Primitive.get(1L)),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1),
-                GTModHandler.getModItem(Minecraft.ID, "redstone", 1, 0))
-            .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 20))
-            .itemOutputs(GTNLItemList.VerySimpleCircuit.get(2))
-            .specialValue(0)
-            .noOptimize()
-            .duration(40)
-            .eut(7)
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTUtility.copyAmount(0, GTModHandler.getModItem(IndustrialCraft2.ID, "itemPartCircuit", 1)),
-                GTNLItemList.VerySimpleCircuit.get(1),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.RedAlloy, 1))
-            .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 20))
-            .itemOutputs(GTNLItemList.SimpleCircuit.get(2))
-            .specialValue(0)
-            .noOptimize()
-            .duration(80)
-            .eut(16)
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTUtility.copyAmount(0, ItemList.Circuit_Good.get(1L)),
-                GTModHandler.getModItem(Minecraft.ID, "paper", 1, 0),
-                GTNLItemList.SimpleCircuit.get(2),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.WroughtIron, 1),
-                GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.Diamond, 1))
-            .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 20))
-            .itemOutputs(GTNLItemList.BasicCircuit.get(2))
-            .specialValue(0)
-            .noOptimize()
-            .duration(160)
-            .eut(30)
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTUtility.copyAmount(0, GTModHandler.getModItem(IndustrialCraft2.ID, "itemPartCircuitAdv", 1)),
-                ItemList.Circuit_Board_Coated_Basic.get(1L),
-                GTNLItemList.BasicCircuit.get(1),
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1),
-                GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.Obsidian, 1),
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.RedAlloy, 1))
-            .fluidInputs(FluidRegistry.getFluidStack("refinedglue", 20))
-            .itemOutputs(GTNLItemList.AdvancedCircuit.get(1))
-            .specialValue(0)
-            .noOptimize()
-            .duration(80)
-            .eut(120)
-            .addTo(As);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                ItemList.Circuit_Board_Phenolic_Good.get(1L),
-                GTNLItemList.AdvancedCircuit.get(1),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.RedAlloy, 8))
-            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
-            .itemOutputs(GTNLItemList.EliteCircuit.get(1))
-            .specialValue(0)
-            .noOptimize()
-            .duration(200)
-            .eut(480)
             .addTo(As);
 
         GTValues.RA.stdBuilder()

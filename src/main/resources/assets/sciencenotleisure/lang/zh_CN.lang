@@ -438,7 +438,13 @@ MetaItem.72.name=§d传闻 - 巨人之书
 MetaItem.73.name=黏土荧石粉
 MetaItem.74.name=量子磁盘
 MetaItem.75.name=中子掺杂的单晶硅
+tooltips.NeutroniumBoule_00=电路板原料
 MetaItem.76.name=中子掺杂的晶圆
+tooltips.NeutroniumWafer_00=电路板原料
+MetaItem.77.name=HASoC晶圆
+tooltips.HighlyAdvancedSocWafer_00=电路板原料
+MetaItem.78.name=HASoC芯片
+tooltips.HighlyAdvancedSoc_00=高度先进芯片级系统
 
 item.TestItem.name=测试物品
 Tooltip_Testitem_00=如果你看到了这个Tooltip

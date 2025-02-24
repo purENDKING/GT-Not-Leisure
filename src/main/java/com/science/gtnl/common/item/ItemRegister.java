@@ -308,8 +308,20 @@ public class ItemRegister {
         GTNLItemList.GiantBook.set(initItem("§dRumor - Giant Book", 72));
         GTNLItemList.ClayedGlowstone.set(initItem("Clayed Glowstone", 73));
         GTNLItemList.QuantumDisk.set(initItem("Quantum Disk", 74));
-        GTNLItemList.NeutroniumBoule.set(initItem("Neutronium Boule", 75));
-        GTNLItemList.NeutroniumWafer.set(initItem("Neutronium Wafer", 76));
+        GTNLItemList.NeutroniumBoule.set(
+            initItem("Neutronium Boule", 75, new String[] { texter("Raw Circuit", "tooltips.NeutroniumBoule_00") }));
+        GTNLItemList.NeutroniumWafer.set(
+            initItem("Neutronium Wafer", 76, new String[] { texter("Raw Circuit", "tooltips.NeutroniumWafer_00") }));
+        GTNLItemList.HighlyAdvancedSocWafer.set(
+            initItem(
+                "Highly Advanced Soc Wafer",
+                77,
+                new String[] { texter("Raw Circuit", "tooltips.HighlyAdvancedSocWafer_00") }));
+        GTNLItemList.HighlyAdvancedSoc.set(
+            initItem(
+                "Highly Advanced Soc",
+                78,
+                new String[] { texter("Highly Advanced SoC", "tooltips.HighlyAdvancedSoc_00") }));
     }
 
     public static void registry() {

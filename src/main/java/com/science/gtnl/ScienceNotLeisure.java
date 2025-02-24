@@ -21,6 +21,7 @@ import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.recipe.GregTech.CircuitAssemblerRecipes;
 import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.common.recipe.Special.RemoveRecipes;
 import com.science.gtnl.config.MainConfig;
@@ -35,11 +36,7 @@ import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 // after
@@ -142,6 +139,10 @@ public class ScienceNotLeisure {
             .registries()
             .interfaceTerminal()
             .register(SuperCraftingInputHatchME.class);
+
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new CircuitAssemblerRecipes());
     }
 
     @Mod.EventHandler

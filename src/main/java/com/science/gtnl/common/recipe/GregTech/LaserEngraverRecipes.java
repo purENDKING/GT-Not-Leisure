@@ -151,5 +151,16 @@ public class LaserEngraverRecipes implements IRecipePool {
             100,
             TierEU.RECIPE_IV);
 
+        recipeWithPurifiedWater(
+            new ItemStack[] { GTNLItemList.NeutroniumWafer.get(1),
+                GTUtility
+                    .copyAmountUnsafe(0, GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedEntropy, 1L)) },
+            new ItemStack[] { GTUtility.copyAmountUnsafe(1, GTNLItemList.HighlyAdvancedSocWafer.get(1)) },
+            Materials.Grade5PurifiedWater,
+            Materials.Grade6PurifiedWater,
+            900,
+            450,
+            TierEU.RECIPE_IV);
+
     }
 }

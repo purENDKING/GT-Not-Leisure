@@ -170,6 +170,8 @@ public enum GTNLItemList {
     QuantumDisk,
     NeutroniumBoule,
     NeutroniumWafer,
+    HighlyAdvancedSocWafer,
+    HighlyAdvancedSoc,
 
     FortifyGlowstone,
     GaiaGlass,

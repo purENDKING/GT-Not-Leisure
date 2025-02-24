@@ -48,5 +48,14 @@ public class CuttingRecipes implements IRecipePool {
             2400,
             1200,
             TierEU.RECIPE_IV);
+
+        recipeWithPurifiedWater(
+            new ItemStack[] { GTNLItemList.HighlyAdvancedSocWafer.get(1) },
+            new ItemStack[] { GTNLItemList.HighlyAdvancedSoc.get(6) },
+            Materials.Grade5PurifiedWater,
+            Materials.Grade6PurifiedWater,
+            900,
+            450,
+            TierEU.RECIPE_IV);
     }
 }
