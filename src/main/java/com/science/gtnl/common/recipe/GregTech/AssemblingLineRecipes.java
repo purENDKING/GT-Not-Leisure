@@ -681,5 +681,23 @@ public class AssemblingLineRecipes implements IRecipePool {
             GTNLItemList.DraconicFusionCrafting.get(1),
             120 * SECONDS,
             (int) TierEU.RECIPE_UEV);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, ItemList.Circuit_Ultimatecrystalcomputer.get(1))
+            .metadata(RESEARCH_TIME, 30 * MINUTES)
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.HSSE, 2L),
+                ItemList.Circuit_Ultimatecrystalcomputer.get(2),
+                ItemList.Circuit_Chip_Ram.get(32),
+                ItemList.Circuit_Chip_HPIC.get(2),
+                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.NiobiumTitanium, 8L),
+                ItemList.Circuit_Parts_InductorASMD.get(8),
+                ItemList.Circuit_Parts_CapacitorASMD.get(16),
+                ItemList.Circuit_Parts_DiodeASMD.get(8))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(1440))
+            .itemOutputs(ItemList.Circuit_Crystalmainframe.get(1))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(40 * SECONDS)
+            .addTo(AssemblyLine);
     }
 }

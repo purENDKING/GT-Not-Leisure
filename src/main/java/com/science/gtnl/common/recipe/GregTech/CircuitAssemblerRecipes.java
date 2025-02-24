@@ -9,9 +9,6 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import gregtech.api.enums.*;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
@@ -21,25 +18,6 @@ import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
 
 public class CircuitAssemblerRecipes implements IRecipePool {
-
-    private static boolean hasRun = false;
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && !hasRun) {
-            loadRecipesServerStart();
-            hasRun = true;
-        }
-    }
-
-    public static void loadRecipesServerStart() {
-
-        IRecipePool[] recipePools = new IRecipePool[] { new CircuitAssemblerRecipes() };
-
-        for (IRecipePool recipePool : recipePools) {
-            recipePool.loadRecipes();
-        }
-    }
 
     final RecipeMap<?> CAR = RecipeMaps.circuitAssemblerRecipes;
 
@@ -336,6 +314,71 @@ public class CircuitAssemblerRecipes implements IRecipePool {
             .noOptimize()
             .duration(200)
             .eut(TierEU.RECIPE_UV)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(1L),
+                ItemList.Circuit_Chip_CrystalCPU.get(1),
+                ItemList.Circuit_Chip_NanoCPU.get(2),
+                ItemList.Circuit_Parts_CapacitorASMD.get(6),
+                ItemList.Circuit_Parts_TransistorASMD.get(6),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 8))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
+            .itemOutputs(ItemList.Circuit_Crystalprocessor.get(1))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(1L),
+                ItemList.Circuit_Chip_CrystalSoC.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 8),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.YttriumBariumCuprate, 8))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(144))
+            .itemOutputs(ItemList.Circuit_Crystalprocessor.get(2))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(1L),
+                ItemList.Circuit_Crystalprocessor.get(2),
+                ItemList.Circuit_Parts_InductorASMD.get(4),
+                ItemList.Circuit_Parts_CapacitorASMD.get(8),
+                ItemList.Circuit_Chip_Ram.get(24),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 16))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(288))
+            .itemOutputs(ItemList.Circuit_Crystalcomputer.get(2))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(400)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Multifiberglass_Elite.get(1L),
+                ItemList.Circuit_Chip_Ram.get(4),
+                ItemList.Circuit_Chip_NOR.get(32),
+                ItemList.Circuit_Chip_NAND.get(64),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NiobiumTitanium, 32))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(288))
+            .itemOutputs(ItemList.Circuit_Ultimatecrystalcomputer.get(1))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(400)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(CAR);
 
     }

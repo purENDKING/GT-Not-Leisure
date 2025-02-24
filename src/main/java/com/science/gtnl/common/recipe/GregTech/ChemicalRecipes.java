@@ -5,16 +5,20 @@ import static com.science.gtnl.Utils.Utils.setStackSize;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
+import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
 
 public class ChemicalRecipes implements IRecipePool {
 
@@ -475,6 +479,111 @@ public class ChemicalRecipes implements IRecipePool {
             .noOptimize()
             .duration(120)
             .eut(30)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.SodiumNitrite.get(OrePrefixes.dust, 4))
+            .fluidInputs(Materials.HydrochloricAcid.getFluid(1000), MaterialPool.FluoroboricAcide.getFluidOrGas(2000))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 2))
+            .fluidOutputs(
+                MaterialPool.BenzenediazoniumTetrafluoroborate.getFluidOrGas(1000),
+                Materials.Water.getFluid(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(130)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTUtility.copyAmount(0, GTNLItemList.BlackLight.get(1)))
+            .fluidInputs(
+                GGMaterial.fluoroantimonicAcid.getFluidOrGas(1000),
+                Materials.Methane.getGas(1000),
+                MaterialPool.FluoroBenzene.getFluidOrGas(1000))
+            .itemOutputs(MaterialPool.AntimonyTrifluoride.get(OrePrefixes.dust, 4))
+            .fluidOutputs(MaterialPool.Fluorotoluene.getFluidOrGas(1000), Materials.Water.getFluid(4000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(150)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.AntimonyTrioxide, 5))
+            .fluidInputs(Materials.HydrofluoricAcid.getFluid(6000))
+            .itemOutputs(MaterialPool.AntimonyTrifluoride.get(OrePrefixes.dust, 8))
+            .fluidOutputs(Materials.Water.getFluid(3000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(60)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.AntimonyTrifluoride.get(OrePrefixes.dust, 4))
+            .fluidInputs(Materials.HydrofluoricAcid.getFluid(4000))
+            .fluidOutputs(GGMaterial.fluoroantimonicAcid.getFluidOrGas(1000), Materials.Hydrogen.getGas(2000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(300)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.AntimonyTrifluoride.get(OrePrefixes.dust, 4))
+            .fluidInputs(Materials.Fluorine.getGas(2000))
+            .fluidOutputs(GGMaterial.antimonyPentafluoride.getFluidOrGas(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
+            .fluidInputs(
+                Materials.Benzene.getFluid(2000),
+                Materials.Oxygen.getGas(5000),
+                Materials.Propene.getGas(1000))
+            .fluidOutputs(
+                MaterialPool.Resorcinol.getFluidOrGas(1000),
+                MaterialPool.Hydroquinone.getFluidOrGas(1000),
+                Materials.Acetone.getFluid(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTUtility.copyAmount(0, GTNLItemList.ZnFeAlClCatalyst.get(1)))
+            .itemOutputs(MaterialPool.Difluorobenzophenone.get(OrePrefixes.dust, 24))
+            .fluidInputs(
+                MaterialPool.Fluorotoluene.getFluidOrGas(1000),
+                Materials.Chlorine.getGas(6000),
+                Materials.Water.getFluid(1000),
+                MaterialPool.FluoroBenzene.getFluidOrGas(1000))
+            .fluidOutputs(Materials.HydrochloricAcid.getFluid(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(
+                MaterialPool.Difluorobenzophenone.get(OrePrefixes.dust, 24),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodaAsh, 6))
+            .itemOutputs(MaterialsFluorides.SODIUM_FLUORIDE.getDust(4))
+            .fluidInputs(MaterialPool.Hydroquinone.getFluidOrGas(1000))
+            .fluidOutputs(
+                MaterialPool.Polyetheretherketone.getMolten(2592),
+                Materials.Water.getFluid(1000),
+                Materials.CarbonDioxide.getGas(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(250)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(mCR);
     }
 }

@@ -252,5 +252,14 @@ public class CraftingTableRecipes implements IRecipePool {
             new Object[] { " A ", " B ", "   ", 'A',
                 GTOreDictUnificator.get(OrePrefixes.pipeNonuple, MaterialsUEVplus.SpaceTime, 1L), 'B',
                 ItemList.Hatch_Input_MAX.get(1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.BlackLight.get(1),
+            new Object[] { "ABA", "CDC", "EBF", 'A',
+                GTOreDictUnificator.get(OrePrefixes.screw, Materials.TungstenCarbide, 1L), 'B',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenCarbide, 1L), 'C',
+                GTModHandler.getModItem(IndustrialCraft2.ID, "blockAlloyGlass", 1, 0, missing), 'D',
+                GTOreDictUnificator.get(OrePrefixes.spring, Materials.Europium, 1L), 'E', "circuitElite", 'F',
+                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Platinum, 1L) });
     }
 }

@@ -15,6 +15,7 @@ public class MainConfig {
     public static boolean enableCheatRecipeWithOwner = false;
     public static boolean enableRenderInfinitySwordSpecial = true;
     public static boolean enableDeleteRecipe = true;
+    public static boolean enableDebugMode = false;
 
     private static Configuration config;
 
@@ -93,6 +94,9 @@ public class MainConfig {
         enableDeleteRecipe = config
             .get("Enable Delete Vanilla GTNH Recipe", "enable", enableDeleteRecipe, "Enable Delete Recipe")
             .getBoolean(enableDeleteRecipe);
+
+        enableDebugMode = config.get("Enable Debug Print Log", "enable", enableDebugMode, "Enable Debug Print Log")
+            .getBoolean(enableDebugMode);
 
         if (config.hasChanged()) {
             config.save();

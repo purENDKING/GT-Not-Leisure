@@ -8,6 +8,7 @@ import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
@@ -222,6 +223,16 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
+            .addTo(electrolyzer);
+
+        RecipeBuilder.builder()
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 6))
+            .fluidInputs(MaterialPool.FluoroBenzene.getFluidOrGas(1000))
+            .fluidOutputs(Materials.Hydrogen.getGas(5000), Materials.Fluorine.getGas(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(96)
+            .eut(TierEU.RECIPE_MV)
             .addTo(electrolyzer);
     }
 }

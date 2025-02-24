@@ -21,16 +21,10 @@ import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
-import com.science.gtnl.common.recipe.GregTech.CircuitAssemblerRecipes;
 import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.common.recipe.Special.RemoveRecipes;
 import com.science.gtnl.config.MainConfig;
-import com.science.gtnl.loader.LazyStaticsInitLoader;
-import com.science.gtnl.loader.MachineLoader;
-import com.science.gtnl.loader.MaterialLoader;
-import com.science.gtnl.loader.RecipeLoader;
-import com.science.gtnl.loader.RecipeLoaderRunnable;
-import com.science.gtnl.loader.ScriptLoader;
+import com.science.gtnl.loader.*;
 
 import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -115,7 +109,6 @@ public class ScienceNotLeisure {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
-        RemoveRecipes.removeRecipes();
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -142,7 +135,10 @@ public class ScienceNotLeisure {
 
         FMLCommonHandler.instance()
             .bus()
-            .register(new CircuitAssemblerRecipes());
+            .register(new RecipeLoaderServerStart());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new RemoveRecipes());
     }
 
     @Mod.EventHandler

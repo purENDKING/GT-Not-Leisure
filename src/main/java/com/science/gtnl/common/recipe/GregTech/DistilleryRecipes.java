@@ -7,11 +7,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
@@ -215,6 +217,13 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 100))
             .duration(500)
             .eut(2048)
+            .addTo(DR);
+
+        GTValues.RA.stdBuilder()
+            .fluidInputs(MaterialPool.BenzenediazoniumTetrafluoroborate.getFluidOrGas(1000))
+            .fluidOutputs(MaterialPool.FluoroBenzene.getFluidOrGas(1000))
+            .duration(100)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(DR);
     }
 }

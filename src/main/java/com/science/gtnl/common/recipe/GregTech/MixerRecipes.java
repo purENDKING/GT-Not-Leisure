@@ -7,20 +7,23 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.material.MaterialMisc;
 
 public class MixerRecipes implements IRecipePool {
 
-    final RecipeMap<?> mixer = GTPPRecipeMaps.mixerNonCellRecipes;
+    final RecipeMap<?> MNCR = GTPPRecipeMaps.mixerNonCellRecipes;
 
     @Override
     public void loadRecipes() {
         RecipeBuilder.builder()
             .itemInputs(
-                GTModHandler.getModItem("gregtech", "gt.metaitem.01", 3, 2685),
-                GTModHandler.getModItem("gregtech", "gt.metaitem.01", 3, 2837))
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 3L),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 3L))
             .itemOutputs()
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 1000))
             .fluidOutputs(MaterialPool.SilicaGelBase.getFluidOrGas(1000))
@@ -28,27 +31,31 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(130)
             .eut(480)
-            .addTo(mixer);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTModHandler.getModItem("miscutils", "itemDustSodiumNitrate", 5))
+            .itemInputs(MaterialMisc.SODIUM_NITRATE.getDust(5))
             .itemOutputs()
-            .fluidInputs(FluidRegistry.getFluidStack("water", 1000))
+            .fluidInputs(Materials.Water.getFluid(1000))
             .fluidOutputs(MaterialPool.SodiumNitrateSolution.getFluidOrGas(1000))
             .specialValue(0)
             .noOptimize()
             .duration(80)
             .eut(120)
-            .addTo(mixer);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
-            .fluidInputs(Materials.RedMud.getFluid(1000L), Materials.HydrochloricAcid.getFluid(4000))
-            .fluidOutputs(MaterialPool.NeutralisedRedMud.getFluidOrGas(2000))
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Zinc, 1L),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Aluminium, 1L))
+            .fluidInputs(Materials.Chlorine.getGas(1000))
+            .itemOutputs(MaterialPool.ZnFeAlCl.get(OrePrefixes.dust, 4))
             .specialValue(0)
             .noOptimize()
-            .duration(100)
-            .eut(120)
-            .addTo(mixer);
+            .duration(250)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(MNCR);
 
     }
 }

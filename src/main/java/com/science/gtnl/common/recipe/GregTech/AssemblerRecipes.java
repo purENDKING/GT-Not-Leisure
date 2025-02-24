@@ -18,12 +18,7 @@ import bartworks.common.loaders.ItemRegistry;
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.util.ItemRefer;
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.GTValues;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsBotania;
-import gregtech.api.enums.MaterialsUEVplus;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.*;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
@@ -33,6 +28,7 @@ import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.item.crafting.ItemDummyResearch;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
+import gtPlusPlus.core.recipe.common.CI;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
@@ -1350,6 +1346,26 @@ public class AssemblerRecipes implements IRecipePool {
             .noOptimize()
             .duration(100)
             .eut(7680)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(CI.getEmptyCatalyst(1), MaterialPool.ZnFeAlCl.get(OrePrefixes.dust, 16))
+            .itemOutputs(GTNLItemList.ZnFeAlClCatalyst.get(1))
+            .duration(392)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.screw, Materials.TungstenCarbide, 2L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenCarbide, 2L),
+                GTModHandler.getModItem(IndustrialCraft2.ID, "blockAlloyGlass", 2, 0, missing),
+                GTOreDictUnificator.get(OrePrefixes.spring, Materials.Europium, 1L),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 1L),
+                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Platinum, 1L))
+            .itemOutputs(GTNLItemList.BlackLight.get(1))
+            .duration(20)
+            .eut(TierEU.RECIPE_MV)
             .addTo(As);
     }
 }

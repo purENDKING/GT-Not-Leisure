@@ -322,6 +322,12 @@ public class ItemRegister {
                 "Highly Advanced Soc",
                 78,
                 new String[] { texter("Highly Advanced SoC", "tooltips.HighlyAdvancedSoc_00") }));
+        GTNLItemList.ZnFeAlClCatalyst.set(initItem("Zn-Fe-Al-Cl Catalyst", 79));
+        GTNLItemList.BlackLight.set(
+            initItem(
+                "Black Light",
+                80,
+                new String[] { texter("§8long-wave §dultraviolet §8light source", "tooltips.BlackLight_00") }));
     }
 
     public static void registry() {

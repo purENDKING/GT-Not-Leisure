@@ -172,6 +172,8 @@ public enum GTNLItemList {
     NeutroniumWafer,
     HighlyAdvancedSocWafer,
     HighlyAdvancedSoc,
+    ZnFeAlClCatalyst,
+    BlackLight,
 
     FortifyGlowstone,
     GaiaGlass,

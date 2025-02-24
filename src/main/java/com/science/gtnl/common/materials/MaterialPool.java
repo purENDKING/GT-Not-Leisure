@@ -1243,6 +1243,94 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 94,
         TextureSet.SET_SHINY);
 
+    public static final Werkstoff ZnFeAlCl = new Werkstoff(
+        new short[] { 150, 59, 123 },
+        "ZnFeAlCl",
+        subscriptNumbers("ZnFeAlCl"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 95,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff BenzenediazoniumTetrafluoroborate = new Werkstoff(
+        new short[] { 110, 143, 110 },
+        "BenzenediazoniumTetrafluoroborate",
+        subscriptNumbers("C6H5BF4N2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 96,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff FluoroBenzene = new Werkstoff(
+        new short[] { 110, 143, 110 },
+        "FluoroBenzene",
+        subscriptNumbers("C6H5F"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 97,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff AntimonyTrifluoride = new Werkstoff(
+        new short[] { 199, 194, 180 },
+        "AntimonyTrifluoride",
+        subscriptNumbers("SbF3"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 98,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff Fluorotoluene = new Werkstoff(
+        new short[] { 167, 161, 102 },
+        "Fluorotoluene",
+        subscriptNumbers("C7H7F"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 99,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff Resorcinol = new Werkstoff(
+        new short[] { 114, 38, 21 },
+        "Resorcinol",
+        subscriptNumbers("C6H6O2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 100,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff Hydroquinone = new Werkstoff(
+        new short[] { 114, 38, 21 },
+        "Hydroquinone",
+        subscriptNumbers("C6H6O2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 101,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff Difluorobenzophenone = new Werkstoff(
+        new short[] { 150, 59, 126 },
+        "Difluorobenzophenone",
+        subscriptNumbers("F2C13H8O"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 102,
+        TextureSet.SET_FLUID);
+
     public static final Werkstoff Periodicium = new Werkstoff(
         new short[] { 60, 74, 243 },
         "Periodicium",
