@@ -181,11 +181,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
         }
         if (shouldExplode) {
             World world = aBaseMetaTileEntity.getWorld();
-            for (Object player : world.playerEntities) {
-                if (player instanceof EntityPlayer) {
-                    world.playSoundAtEntity((EntityPlayer) player, "sciencenotleisure:protal.boom", 1.0F, 1.0F); // 播放音效给所有玩家
-                }
-            }
+            world.playSoundEffect(0, 0, 0, "sciencenotleisure:protal.boom", 1.0F, 1.0F);
             triggerExplosion(aBaseMetaTileEntity, Strength);
             return CheckRecipeResultRegistry.SUCCESSFUL;
         }

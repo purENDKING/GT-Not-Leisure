@@ -4,7 +4,6 @@ import static com.science.gtnl.Utils.Utils.filterValidMTEs;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static kubatech.api.Variables.ln4;
-import static org.lwjgl.LWJGLUtil.log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,7 +66,9 @@ import gregtech.common.tileentities.machines.IDualInputInventory;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchInputME;
 import gtPlusPlus.GTplusplus;
+import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.api.objects.minecraft.BlockPos;
+import gtPlusPlus.core.config.ASMConfiguration;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.METHatchAirIntake;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchInputBattery;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchOutputBattery;
@@ -664,6 +665,16 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
             return true;
         } else {
             return false;
+        }
+    }
+
+    public void log(String s) {
+        if (!ASMConfiguration.debug.disableAllLogging) {
+            if (ASMConfiguration.debug.debugMode) {
+                Logger.INFO(s);
+            } else {
+                Logger.MACHINE_INFO(s);
+            }
         }
     }
 

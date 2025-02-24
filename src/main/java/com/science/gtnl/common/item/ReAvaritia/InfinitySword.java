@@ -17,7 +17,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
@@ -42,6 +41,7 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -116,9 +116,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                     player.extinguish();
                 }
 
+                // 处理负面药水效果
                 List<Integer> badEffects = new ArrayList<>();
                 for (PotionEffect effect : player.getActivePotionEffects()) {
-                    if (Potion.potionTypes[effect.getPotionID()].isBadEffect()) {
+                    if (isBadEffect(effect)) { // 判断是否为负面效果
                         badEffects.add(effect.getPotionID());
                     }
                 }
@@ -127,15 +128,37 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                     player.removePotionEffect(potionID);
                 }
 
+                // 恢复生命值和饱食度
                 player.setHealth(player.getMaxHealth());
                 player.getFoodStats()
                     .addStats(20, 20.0F);
 
+                // 防止玩家掉入虚空
                 if (player.posY < 0) {
                     player.setPositionAndUpdate(player.posX, 255, player.posZ);
                 }
             }
         }
+    }
+
+    private boolean isBadEffect(PotionEffect effect) {
+        if (FMLCommonHandler.instance()
+            .getSide()
+            .isClient()) {
+            return isBadEffectClient(effect);
+        } else {
+            return isBadEffectServer(effect);
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private boolean isBadEffectClient(PotionEffect effect) {
+        return net.minecraft.potion.Potion.potionTypes[effect.getPotionID()].isBadEffect();
+    }
+
+    private boolean isBadEffectServer(PotionEffect effect) {
+        int potionID = effect.getPotionID();
+        return potionID >= 1 && potionID < 256;
     }
 
     private void applyInfinityDamage(EntityLivingBase target, EntityLivingBase attacker) {

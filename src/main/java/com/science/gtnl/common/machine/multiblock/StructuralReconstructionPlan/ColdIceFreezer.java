@@ -244,6 +244,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
         super.onPostTick(aBaseMetaTileEntity, aTick);
 
         if (this.mStartUpCheck < 0) {
+            startRecipeProcessing();
             if (this.mMaxProgresstime > 0 && this.mProgresstime != 0 || this.getBaseMetaTileEntity()
                 .hasWorkJustBeenEnabled()) {
                 if (aTick % 20 == 0 || this.getBaseMetaTileEntity()
@@ -258,9 +259,11 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
                                     FluidUtils.getFluidStack(
                                         "ice",
                                         (int) (10 * getInputVoltageTier() * getInputVoltageTier())))));
+                        endRecipeProcessing();
                     }
                 }
             }
+            endRecipeProcessing();
         }
     }
 

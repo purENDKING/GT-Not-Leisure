@@ -329,6 +329,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
         super.onPostTick(aBaseMetaTileEntity, aTick);
 
         if (this.mStartUpCheck < 0) {
+            startRecipeProcessing();
             if (this.mMaxProgresstime > 0 && this.mProgresstime != 0 || this.getBaseMetaTileEntity()
                 .hasWorkJustBeenEnabled()) {
                 if (aTick % 20 == 0 || this.getBaseMetaTileEntity()
@@ -343,9 +344,11 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
                                     FluidUtils.getFluidStack(
                                         "molten.blaze",
                                         (int) (10 * getInputVoltageTier() * getInputVoltageTier())))));
+                        endRecipeProcessing();
                     }
                 }
             }
+            endRecipeProcessing();
         }
     }
 

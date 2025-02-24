@@ -6,7 +6,6 @@ import static gregtech.api.enums.Mods.GTPlusPlus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings5Misc;
-import static org.lwjgl.LWJGLUtil.log;
 
 import java.util.ArrayList;
 
