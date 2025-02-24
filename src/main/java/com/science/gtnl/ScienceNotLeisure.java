@@ -125,15 +125,7 @@ public class ScienceNotLeisure {
     // GameRegistry." (Remove if not needed)
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        File configDir = new File(event.getModConfigurationDirectory(), "GTNotLeisure");
-        if (!configDir.exists()) {
-            configDir.mkdirs();
-        }
-        File mainConfigFile = new File(configDir, "main.cfg");
-        MainConfig.init(mainConfigFile);
-
         BlazeSword.registerEntity();
-
         proxy.preInit(event);
         MaterialLoader.load();
         new RecipeLoaderRunnable().run();
@@ -170,6 +162,15 @@ public class ScienceNotLeisure {
                 .bus()
                 .register(new CheatRecipes());
         }
+    }
 
+    static {
+        File configDir = new File("config/GTNotLeisure");
+        if (!configDir.exists()) {
+            configDir.mkdirs();
+        }
+
+        File mainConfigFile = new File(configDir, "main.cfg");
+        MainConfig.init(mainConfigFile);
     }
 }
