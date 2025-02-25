@@ -168,21 +168,21 @@ public class ItemRegister {
         GTNLItemList.BiowareSMDInductor.set(initItem("Bioware SMD Inductor", 30));
         GTNLItemList.BiowareSMDResistor.set(initItem("Bioware SMD Resistor", 31));
         GTNLItemList.BiowareSMDTransistor.set(initItem("Bioware SMD Transistor", 32));
-        GTNLItemList.ExoticSMDCapacitor.set(initItem("Exotic SMD Capacitor", 33));
-        GTNLItemList.ExoticSMDDiode.set(initItem("Exotic SMD Diode", 34));
-        GTNLItemList.ExoticSMDInductor.set(initItem("Exotic SMD Inductor", 35));
-        GTNLItemList.ExoticSMDResistor.set(initItem("Exotic SMD Resistor", 36));
-        GTNLItemList.ExoticSMDTransistor.set(initItem("Exotic SMD Transistor", 37));
-        GTNLItemList.TemporallySMDCapacitor.set(initItem("Temporally SMD Capacitor", 38));
-        GTNLItemList.TemporallySMDDiode.set(initItem("Temporally SMD Diode", 39));
-        GTNLItemList.TemporallySMDInductor.set(initItem("Temporally SMD Inductor", 40));
-        GTNLItemList.TemporallySMDResistor.set(initItem("Temporally SMD Resistor", 41));
-        GTNLItemList.TemporallySMDTransistor.set(initItem("Temporally SMD Transistor", 42));
-        GTNLItemList.CosmicSMDCapacitor.set(initItem("Cosmic SMD Capacitor", 43));
-        GTNLItemList.CosmicSMDDiode.set(initItem("Cosmic SMD Diode", 44));
-        GTNLItemList.CosmicSMDInductor.set(initItem("Cosmic SMD Inductor", 45));
-        GTNLItemList.CosmicSMDResistor.set(initItem("Cosmic SMD Resistor", 46));
-        GTNLItemList.CosmicSMDTransistor.set(initItem("Cosmic SMD Transistor", 47));
+        GTNLItemList.CosmicSMDCapacitor.set(initItem("Cosmic SMD Capacitor", 33));
+        GTNLItemList.CosmicSMDDiode.set(initItem("Cosmic SMD Diode", 34));
+        GTNLItemList.CosmicSMDInductor.set(initItem("Cosmic SMD Inductor", 35));
+        GTNLItemList.CosmicSMDResistor.set(initItem("Cosmic SMD Resistor", 36));
+        GTNLItemList.CosmicSMDTransistor.set(initItem("Cosmic SMD Transistor", 37));
+        GTNLItemList.ExoticSMDCapacitor.set(initItem("Exotic SMD Capacitor", 38));
+        GTNLItemList.ExoticSMDDiode.set(initItem("Exotic SMD Diode", 39));
+        GTNLItemList.ExoticSMDInductor.set(initItem("Exotic SMD Inductor", 40));
+        GTNLItemList.ExoticSMDResistor.set(initItem("Exotic SMD Resistor", 41));
+        GTNLItemList.ExoticSMDTransistor.set(initItem("Exotic SMD Transistor", 42));
+        GTNLItemList.TemporallySMDCapacitor.set(initItem("Temporally SMD Capacitor", 43));
+        GTNLItemList.TemporallySMDDiode.set(initItem("Temporally SMD Diode", 44));
+        GTNLItemList.TemporallySMDInductor.set(initItem("Temporally SMD Inductor", 45));
+        GTNLItemList.TemporallySMDResistor.set(initItem("Temporally SMD Resistor", 46));
+        GTNLItemList.TemporallySMDTransistor.set(initItem("Temporally SMD Transistor", 47));
         GTNLItemList.LVParallelControllerCore.set(
             initItem(
                 "LV Parallel Controller Core",
