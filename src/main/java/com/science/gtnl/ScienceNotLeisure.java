@@ -133,10 +133,6 @@ public class ScienceNotLeisure {
         MaterialLoader.load();
         new RecipeLoaderRunnable().run();
 
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new RemoveRecipes());
-
         AEApi.instance()
             .registries()
             .interfaceTerminal()
