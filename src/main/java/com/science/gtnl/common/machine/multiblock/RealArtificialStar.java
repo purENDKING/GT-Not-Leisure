@@ -84,7 +84,6 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
 
     public RealArtificialStar(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
     }
 
     @Override

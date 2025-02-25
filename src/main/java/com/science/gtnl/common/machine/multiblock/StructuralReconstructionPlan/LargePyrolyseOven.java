@@ -52,7 +52,6 @@ public class LargePyrolyseOven extends GTMMultiMachineBase<LargePyrolyseOven> im
 
     public LargePyrolyseOven(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LPO_STRUCTURE_FILE_PATH);
     }
 
     @Override

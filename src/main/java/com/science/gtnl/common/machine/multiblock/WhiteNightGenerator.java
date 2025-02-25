@@ -79,7 +79,6 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
 
     public WhiteNightGenerator(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(WNG_STRUCTURE_FILE_PATH);
     }
 
     @Override

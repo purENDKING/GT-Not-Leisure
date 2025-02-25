@@ -56,7 +56,6 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
 
     public LargeAlloySmelter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     }
 
     @Override

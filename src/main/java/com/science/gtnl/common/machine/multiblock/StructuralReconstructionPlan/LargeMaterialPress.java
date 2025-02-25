@@ -50,7 +50,6 @@ public class LargeMaterialPress extends GTMMultiMachineBase<LargeMaterialPress> 
 
     public LargeMaterialPress(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     @Override

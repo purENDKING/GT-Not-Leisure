@@ -57,7 +57,6 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
 
     public VacuumFreezer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(VF_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -94,7 +94,6 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
 
     public LargeSteamCircuitAssembler(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSCA_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamCircuitAssembler(int aID, String aName, String aNameRegional) {

@@ -61,7 +61,6 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
 
     public LapotronChip(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     public LapotronChip(int aID, String aName, String aNameRegional) {

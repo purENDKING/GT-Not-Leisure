@@ -72,7 +72,6 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
 
     public Digester(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(D_STRUCTURE_FILE_PATH);
     }
 
     @Override

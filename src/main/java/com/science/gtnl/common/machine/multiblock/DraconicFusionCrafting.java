@@ -61,7 +61,6 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
 
     public DraconicFusionCrafting(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(DFC_STRUCTURE_FILE_PATH);
     }
 
     @Override

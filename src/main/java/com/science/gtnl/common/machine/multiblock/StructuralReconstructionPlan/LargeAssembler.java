@@ -55,7 +55,6 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
 
     public LargeAssembler(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -84,7 +84,6 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
 
     public LargeIncubator(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(L_INCUBATOR_STRUCTURE_FILE_PATH);
     }
 
     @Override

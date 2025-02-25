@@ -62,7 +62,6 @@ public class VibrantPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<V
 
     public VibrantPhotovoltaicPowerStation(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(PPS_STRUCTURE_FILE_PATH);
     }
 
     @Override

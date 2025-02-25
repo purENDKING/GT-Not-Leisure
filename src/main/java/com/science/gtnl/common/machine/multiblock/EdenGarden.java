@@ -245,7 +245,6 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
 
     public EdenGarden(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(EG_STRUCTURE_FILE_PATH);
     }
 
     @Override

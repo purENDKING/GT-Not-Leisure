@@ -65,7 +65,6 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
 
     public MegaAlloyBlastSmelter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(MABS_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -58,7 +58,6 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
 
     public ReactionFurnace(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(RF_STRUCTURE_FILE_PATH);
     }
 
     @Override

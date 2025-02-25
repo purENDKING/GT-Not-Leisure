@@ -59,7 +59,6 @@ public class WoodDistillation extends GTMMultiMachineBase<WoodDistillation> impl
 
     public WoodDistillation(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(WD_STRUCTURE_FILE_PATH);
     }
 
     @Override

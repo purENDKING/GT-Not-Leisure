@@ -50,7 +50,6 @@ public class LargeExtruder extends GTMMultiMachineBase<LargeExtruder> implements
 
     public LargeExtruder(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
     }
 
     @Override

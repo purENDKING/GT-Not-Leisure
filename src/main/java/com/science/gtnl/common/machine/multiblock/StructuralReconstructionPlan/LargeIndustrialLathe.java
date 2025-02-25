@@ -50,7 +50,6 @@ public class LargeIndustrialLathe extends GTMMultiMachineBase<LargeIndustrialLat
 
     public LargeIndustrialLathe(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -58,7 +58,6 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
 
     public FlotationCellRegulator(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(FCR_STRUCTURE_FILE_PATH);
     }
 
     @Override

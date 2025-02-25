@@ -50,7 +50,6 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
 
     public MolecularTransformer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(MT_STRUCTURE_FILE_PATH);
     }
 
     @Override

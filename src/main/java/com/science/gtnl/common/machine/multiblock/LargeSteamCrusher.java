@@ -95,7 +95,6 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
 
     public LargeSteamCrusher(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamCrusher(int aID, String aName, String aNameRegional) {

@@ -48,7 +48,6 @@ public class LargeBender extends GTMMultiMachineBase<LargeBender> implements ISu
 
     public LargeBender(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
     }
 
     @Override

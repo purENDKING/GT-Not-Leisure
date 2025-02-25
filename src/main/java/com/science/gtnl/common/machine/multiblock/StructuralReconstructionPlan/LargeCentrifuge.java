@@ -62,7 +62,6 @@ public class LargeCentrifuge extends GTMMultiMachineBase<LargeCentrifuge> implem
 
     public LargeCentrifuge(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     @Override

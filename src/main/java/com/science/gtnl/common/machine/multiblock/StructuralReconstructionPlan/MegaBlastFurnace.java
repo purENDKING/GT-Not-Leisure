@@ -71,7 +71,6 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     public MegaBlastFurnace(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(MBF_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -117,6 +117,9 @@ HumongousInputBusUMV=巨型输入总线 (UMV)
 HumongousInputBusUXV=巨型输入总线 (UXV)
 HumongousInputBusMAX=巨型输入总线 (MAX)
 
+SuperDataAccessHatch=超级数据访问仓
+Tooltip_SuperDataAccessHatch_00=增加81个额外的格子以放置闪存
+
 MetaCasing.0.name=测试机械方块
 MetaCasing.1.name=蒸汽装配机械方块
 MetaCasing.2.name=散热片
@@ -1028,6 +1031,15 @@ Tooltip_LargeNaquadahReactor_02=这会让时间减半，功率翻倍
 Tooltip_LargeNaquadahReactor_03=代价是每秒会消耗2000L的氧气
 Tooltip_LargeNaquadahReactor_04=只能在不输入氢气的情况下使用!
 Tooltip_LargeNaquadahReactor_Casing=任意放射硅岩合金机械方块
+
+NameGrandAssemblyLine=大型装配线
+GrandAssemblyLineRecipeType=无序装配线
+Tooltip_GrandAssemblyLine_00=§r§l让亨利·福特也黯然失色。
+Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。
+Tooltip_GrandAssemblyLine_02=不再需要按顺序输入物品
+Tooltip_GrandAssemblyLine_03=机器可进行跨配方处理！
+Tooltip_GrandAssemblyLine_04=只能安装一个能源仓！
+Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
 
 NamePrecisionAssembler=精密组装机
 PreciseAssemblerRecipeType=组装机 / 精密组装机

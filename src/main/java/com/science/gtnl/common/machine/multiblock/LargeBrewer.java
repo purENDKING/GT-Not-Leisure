@@ -63,7 +63,6 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
 
     public LargeBrewer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
     }
 
     @Override

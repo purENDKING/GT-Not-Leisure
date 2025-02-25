@@ -62,7 +62,6 @@ public class AdvancedPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<
 
     public AdvancedPhotovoltaicPowerStation(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(PPS_STRUCTURE_FILE_PATH);
     }
 
     @Override

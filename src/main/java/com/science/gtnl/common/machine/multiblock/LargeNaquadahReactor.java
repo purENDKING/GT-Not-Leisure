@@ -75,7 +75,6 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
 
     public LargeNaquadahReactor(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LNR_STRUCTURE_FILE_PATH);
     }
 
     @Override

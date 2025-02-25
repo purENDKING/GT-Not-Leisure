@@ -48,7 +48,6 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
 
     public LargeSiftingFunnel(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
     }
 
     @Override

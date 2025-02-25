@@ -55,7 +55,6 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
 
     public BloodSoulSacrificialArray(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
     }
 
     protected float getSpeedBonus() {

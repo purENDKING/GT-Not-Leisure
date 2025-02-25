@@ -51,7 +51,6 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
 
     public ElementCopying(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(EC_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -88,7 +88,6 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
 
     public ProcessingArray(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(PA_STRUCTURE_FILE_PATH);
     }
 
     @Override

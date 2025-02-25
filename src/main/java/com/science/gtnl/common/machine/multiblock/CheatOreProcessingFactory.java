@@ -64,7 +64,6 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
 
     public CheatOreProcessingFactory(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(COPF_STRUCTURE_FILE_PATH);
     }
 
     @Override

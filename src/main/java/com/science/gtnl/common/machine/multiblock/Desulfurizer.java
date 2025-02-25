@@ -58,7 +58,6 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
 
     public Desulfurizer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(Desu_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -72,7 +72,6 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
 
     public LargeSolidifier(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LS_STRUCTURE_FILE_PATH);
     }
 
     @Override

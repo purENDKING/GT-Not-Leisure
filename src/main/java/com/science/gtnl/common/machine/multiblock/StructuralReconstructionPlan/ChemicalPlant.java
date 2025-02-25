@@ -56,7 +56,6 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
 
     public ChemicalPlant(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(CP_STRUCTURE_FILE_PATH);
     }
 
     @Override

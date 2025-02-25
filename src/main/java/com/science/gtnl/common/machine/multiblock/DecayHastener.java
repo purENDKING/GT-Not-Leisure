@@ -49,7 +49,6 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
 
     public DecayHastener(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(DH_STRUCTURE_FILE_PATH);
     }
 
     @Override

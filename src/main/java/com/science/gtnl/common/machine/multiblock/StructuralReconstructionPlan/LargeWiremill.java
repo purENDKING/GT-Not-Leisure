@@ -49,7 +49,6 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
 
     public LargeWiremill(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     @Override

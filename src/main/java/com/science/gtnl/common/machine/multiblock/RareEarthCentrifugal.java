@@ -53,7 +53,6 @@ public class RareEarthCentrifugal extends MultiMachineBase<RareEarthCentrifugal>
 
     public RareEarthCentrifugal(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(REC_STRUCTURE_FILE_PATH);
     }
 
     @Override

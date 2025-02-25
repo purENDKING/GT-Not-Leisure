@@ -48,7 +48,6 @@ public class LargeElectrolyzer extends GTMMultiMachineBase<LargeElectrolyzer> im
 
     public LargeElectrolyzer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -65,7 +65,6 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
 
     public HandOfJohnDavisonRockefeller(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(HODR_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -94,7 +94,6 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
 
     public LargeSteamAlloySmelter(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSAS_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamAlloySmelter(int aID, String aName, String aNameRegional) {

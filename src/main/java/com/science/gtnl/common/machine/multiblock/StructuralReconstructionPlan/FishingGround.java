@@ -56,7 +56,6 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
 
     public FishingGround(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(FG_STRUCTURE_FILE_PATH);
     }
 
     @Override

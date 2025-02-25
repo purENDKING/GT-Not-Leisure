@@ -60,7 +60,6 @@ public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssemble
 
     public LargeCircuitAssembler(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LCA_STRUCTURE_FILE_PATH);
     }
 
     @Override

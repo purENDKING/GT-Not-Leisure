@@ -97,7 +97,6 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
 
     public LargeSteamExtruder(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSE_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamExtruder(int aID, String aName, String aNameRegional) {

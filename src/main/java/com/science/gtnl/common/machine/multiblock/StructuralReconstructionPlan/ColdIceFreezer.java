@@ -69,7 +69,6 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     public ColdIceFreezer(final String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
     }
 
     @Override

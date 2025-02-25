@@ -50,7 +50,6 @@ public class LargeHammer extends GTMMultiMachineBase<LargeHammer> implements ISu
 
     public LargeHammer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
     }
 
     @Override

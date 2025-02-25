@@ -15,6 +15,7 @@ import com.science.gtnl.common.hatch.HumongousSolidifierHatch;
 import com.science.gtnl.common.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.hatch.SuperCraftingInputProxy;
+import com.science.gtnl.common.hatch.SuperDataAccessHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
@@ -27,6 +28,7 @@ import com.science.gtnl.common.machine.multiblock.EdenGarden;
 import com.science.gtnl.common.machine.multiblock.ElementCopying;
 import com.science.gtnl.common.machine.multiblock.EnergeticPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
+import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
 import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
 import com.science.gtnl.common.machine.multiblock.LapotronChip;
@@ -465,6 +467,10 @@ public class MachineLoader {
             .set(new MegaAlloyBlastSmelter(21089, "MegaAlloyBlastSmelter", TextLocalization.NameMegaAlloyBlastSmelter));
         addItemTooltip(GTNLItemList.MegaAlloyBlastSmelter.get(1), AnimatedText.SNL_SRP);
 
+        GTNLItemList.GrandAssemblyLine
+            .set(new GrandAssemblyLine(21090, "GrandAssemblyLine", TextLocalization.NameGrandAssemblyLine));
+        addItemTooltip(GTNLItemList.GrandAssemblyLine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -723,6 +729,10 @@ public class MachineLoader {
         GTNLItemList.HumongousInputBusMAX
             .set(new HumongousInputBus(22516, "Humongous Input Bus MAX", TextLocalization.HumongousInputBusMAX, 14));
         addItemTooltip(GTNLItemList.HumongousInputBusMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SuperDataAccessHatch
+            .set(new SuperDataAccessHatch(22517, "Super Data Access Hatch", TextLocalization.SuperDataAccessHatch, 14));
+        addItemTooltip(GTNLItemList.SuperDataAccessHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
     }
 

@@ -67,7 +67,6 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
 
     public IndustrialArcaneAssembler(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LCA_STRUCTURE_FILE_PATH);
     }
 
     @Override

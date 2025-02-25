@@ -61,7 +61,6 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
 
     public LargeExtractor(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     @Override

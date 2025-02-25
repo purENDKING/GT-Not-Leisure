@@ -49,7 +49,6 @@ public class LargeAutoclave extends GTMMultiMachineBase<LargeAutoclave> implemen
 
     public LargeAutoclave(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     @Override

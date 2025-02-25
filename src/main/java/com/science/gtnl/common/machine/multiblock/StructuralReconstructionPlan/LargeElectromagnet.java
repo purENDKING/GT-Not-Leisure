@@ -63,7 +63,6 @@ public class LargeElectromagnet extends GTMMultiMachineBase<LargeElectromagnet> 
 
     public LargeElectromagnet(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LEM_STRUCTURE_FILE_PATH);
     }
 
     @Override

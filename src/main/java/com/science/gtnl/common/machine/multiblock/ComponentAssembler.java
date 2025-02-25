@@ -135,7 +135,6 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     public ComponentAssembler(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     }
 
     @Override

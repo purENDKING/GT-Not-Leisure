@@ -84,7 +84,6 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
         super(aName);
         minRepairStatus = (byte) getIdealStatus();
         eDismantleBoom = true;
-        shape = StructureUtils.readStructureFromFile(EI_STRUCTURE_FILE_PATH);
     }
 
     private boolean isItemStackFullyCharged(ItemStack stack) {

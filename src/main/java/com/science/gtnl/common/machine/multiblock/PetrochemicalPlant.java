@@ -62,7 +62,6 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     public PetrochemicalPlant(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(PP_STRUCTURE_FILE_PATH);
     }
 
     @Override

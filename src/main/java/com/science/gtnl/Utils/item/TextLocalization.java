@@ -346,6 +346,11 @@ public class TextLocalization {
         "Link failed",
         "Chat_SuperCraftingInputProxy_03");
 
+    public static final String SuperDataAccessHatch = texter("Super Data Access Hatch", "SuperDataAccessHatch");
+    public static final String Tooltip_SuperDataAccessHatch_00 = texter(
+        "Adds 81 extra slots for Data Sticks",
+        "Tooltip_SuperDataAccessHatch_00");
+
     public static final String Tooltip_LaserBeacon = texter(
         "Produces a high precision laser from a powerful current.",
         "Tooltip_LaserBeacon");
@@ -375,6 +380,29 @@ public class TextLocalization {
     public static final String Tooltip_LargeSteamCircuitAssembler_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCircuitAssembler_Casing");
+
+    public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
+    public static final String GrandAssemblyLineRecipeType = texter(
+        "Disordered Assembly Line",
+        "GrandAssemblyLineRecipeType");
+    public static final String Tooltip_GrandAssemblyLine_00 = texter(
+        "§r§lPuts Henry Ford to shame.",
+        "Tooltip_GrandAssemblyLine_00");
+    public static final String Tooltip_GrandAssemblyLine_01 = texter(
+        "§rAssembles hardware at blinding speeds.",
+        "Tooltip_GrandAssemblyLine_01");
+    public static final String Tooltip_GrandAssemblyLine_02 = texter(
+        "No longer need to input items in order",
+        "Tooltip_GrandAssemblyLine_02");
+    public static final String Tooltip_GrandAssemblyLine_03 = texter(
+        "The machine can perform cross recipe processing!",
+        "Tooltip_GrandAssemblyLine_03");
+    public static final String Tooltip_GrandAssemblyLine_04 = texter(
+        "Only one energy hatch can be installed!",
+        "Tooltip_GrandAssemblyLine_04");
+    public static final String Tooltip_GrandAssemblyLine_Casing = texter(
+        "Ang Advanced Computer Casing Or Reinforced Glass",
+        "Tooltip_GrandAssemblyLine_Casing");
 
     public static final String NameEdenGarden = texter("Ecological Singularity \"Edenscape\"", "NameEdenGarden");
     public static final String EdenGardenRecipeType = texter("Crop Farm", "EdenGardenRecipeType");

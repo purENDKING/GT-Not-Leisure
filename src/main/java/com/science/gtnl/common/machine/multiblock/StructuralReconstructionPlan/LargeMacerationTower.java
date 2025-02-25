@@ -48,7 +48,6 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
 
     public LargeMacerationTower(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LMT_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -92,7 +92,6 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
 
     public LargeSteamExtractor(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamExtractor(int aID, String aName, String aNameRegional) {

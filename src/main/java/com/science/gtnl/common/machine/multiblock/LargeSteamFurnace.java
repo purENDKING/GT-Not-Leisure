@@ -248,7 +248,6 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
 
     public LargeSteamFurnace(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
     }
 
     @Override

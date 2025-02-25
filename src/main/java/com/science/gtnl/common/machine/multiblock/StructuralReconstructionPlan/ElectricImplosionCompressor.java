@@ -49,7 +49,6 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
 
     public ElectricImplosionCompressor(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(ELC_STRUCTURE_FILE_PATH);
     }
 
     @Override

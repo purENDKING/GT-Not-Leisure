@@ -62,7 +62,6 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     public GenerationEarthEngine(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(GEE_STRUCTURE_FILE_PATH);
     }
 
     public GenerationEarthEngine(int aID, String aName, String aNameRegional) {

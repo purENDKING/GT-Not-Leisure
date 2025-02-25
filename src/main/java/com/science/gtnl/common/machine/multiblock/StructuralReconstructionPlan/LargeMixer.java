@@ -51,7 +51,6 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
 
     public LargeMixer(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     @Override

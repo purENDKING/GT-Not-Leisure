@@ -54,7 +54,6 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
 
     public LargeEngravingLaser(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LEL_STRUCTURE_FILE_PATH);
     }
 
     @Override

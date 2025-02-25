@@ -106,7 +106,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
     public NineIndustrialMultiMachine(final String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(NIMM_STRUCTURE_FILE_PATH);
     }
 
     @Override

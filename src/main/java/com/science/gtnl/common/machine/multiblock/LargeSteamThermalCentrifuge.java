@@ -95,7 +95,6 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
 
     public LargeSteamThermalCentrifuge(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSTC_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamThermalCentrifuge(int aID, String aName, String aNameRegional) {

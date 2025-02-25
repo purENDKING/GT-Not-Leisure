@@ -84,7 +84,6 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
 
     public SteamCracking(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSCr_STRUCTURE_FILE_PATH);
     }
 
     public SteamCracking(int aID, String aName, String aNameRegional) {

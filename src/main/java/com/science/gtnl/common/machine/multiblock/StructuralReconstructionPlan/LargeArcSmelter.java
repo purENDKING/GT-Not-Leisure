@@ -64,7 +64,6 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
 
     public LargeArcSmelter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     }
 
     @Override

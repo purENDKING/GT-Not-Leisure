@@ -73,7 +73,6 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
 
     public IsaMill(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(IM_STRUCTURE_FILE_PATH);
     }
 
     @Override

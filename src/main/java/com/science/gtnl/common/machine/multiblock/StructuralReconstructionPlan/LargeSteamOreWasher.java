@@ -115,7 +115,6 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
 
     public LargeSteamOreWasher(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamOreWasher(int aID, String aName, String aNameRegional) {

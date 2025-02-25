@@ -70,7 +70,6 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
 
     public LargeChemicalBath(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LCB_STRUCTURE_FILE_PATH);
     }
 
     @Override

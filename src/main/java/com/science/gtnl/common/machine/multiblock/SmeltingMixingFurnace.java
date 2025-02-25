@@ -75,7 +75,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     public SmeltingMixingFurnace(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
     }
 
     public SmeltingMixingFurnace(int aID, String aName, String aNameRegional) {

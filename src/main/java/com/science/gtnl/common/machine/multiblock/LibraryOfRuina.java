@@ -59,7 +59,6 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
 
     public LibraryOfRuina(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LOR_STRUCTURE_FILE_PATH);
     }
 
     @Override

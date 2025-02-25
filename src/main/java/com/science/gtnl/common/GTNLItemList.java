@@ -259,6 +259,7 @@ public enum GTNLItemList {
     LargePyrolyseOven,
     PreciseAssembler,
 
+    GrandAssemblyLine,
     DecayHastener,
     LargeSteamExtruder,
     DraconicFusionCrafting,
@@ -304,6 +305,7 @@ public enum GTNLItemList {
     LargeSteamCircuitAssembler,
     GenerationEarthEngine,
 
+    SuperDataAccessHatch,
     FluidManaInputHatch,
     FluidIceInputHatch,
     FluidBlazeInputHatch,

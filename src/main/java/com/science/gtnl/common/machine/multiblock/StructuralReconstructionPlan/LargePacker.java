@@ -61,7 +61,6 @@ public class LargePacker extends GTMMultiMachineBase<LargePacker> implements ISu
 
     public LargePacker(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LP_STRUCTURE_FILE_PATH);
     }
 
     @Override

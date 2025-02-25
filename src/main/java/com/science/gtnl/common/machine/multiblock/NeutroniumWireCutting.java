@@ -70,7 +70,6 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
 
     public NeutroniumWireCutting(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
     }
 
     public NeutroniumWireCutting(int aID, String aName, String aNameRegional) {

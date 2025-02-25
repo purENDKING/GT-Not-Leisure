@@ -63,7 +63,6 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
 
     public LargeCutter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     @Override

@@ -72,7 +72,6 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
 
     public MatterFabricator(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(MF_STRUCTURE_FILE_PATH);
     }
 
     @Override

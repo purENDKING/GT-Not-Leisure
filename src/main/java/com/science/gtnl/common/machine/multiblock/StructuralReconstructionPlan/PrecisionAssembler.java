@@ -83,7 +83,6 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     public PrecisionAssembler(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     }
 
     @Override

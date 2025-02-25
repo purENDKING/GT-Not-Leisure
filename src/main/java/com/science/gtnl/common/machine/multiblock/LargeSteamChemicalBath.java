@@ -94,7 +94,6 @@ public class LargeSteamChemicalBath extends MTESteamMultiBase<LargeSteamChemical
 
     public LargeSteamChemicalBath(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(LSCB_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamChemicalBath(int aID, String aName, String aNameRegional) {

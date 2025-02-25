@@ -79,7 +79,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
     public TeleportationArrayToAlfheim(String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
     }
 
     protected float getSpeedBonus() {

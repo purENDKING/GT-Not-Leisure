@@ -54,7 +54,6 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
 
     public LargeForming(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LF_STRUCTURE_FILE_PATH);
     }
 
     @Override

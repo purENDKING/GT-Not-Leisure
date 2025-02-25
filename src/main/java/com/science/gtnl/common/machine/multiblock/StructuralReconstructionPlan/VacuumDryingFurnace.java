@@ -68,7 +68,6 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
 
     public VacuumDryingFurnace(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(VDF_STRUCTURE_FILE_PATH);
     }
 
     @Override

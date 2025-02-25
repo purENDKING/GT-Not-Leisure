@@ -60,7 +60,6 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
 
     public AlloyBlastSmelter(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(ABS_STRUCTURE_FILE_PATH);
     }
 
     @Override

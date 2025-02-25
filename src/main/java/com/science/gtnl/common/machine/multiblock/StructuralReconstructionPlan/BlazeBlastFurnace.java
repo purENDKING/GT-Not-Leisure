@@ -79,7 +79,6 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
     public BlazeBlastFurnace(final String aName) {
         super(aName);
-        this.shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
     }
 
     @Override

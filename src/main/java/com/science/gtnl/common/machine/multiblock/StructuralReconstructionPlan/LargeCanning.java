@@ -67,7 +67,6 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
 
     public LargeCanning(String aName) {
         super(aName);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     @Override
