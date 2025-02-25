@@ -55,13 +55,14 @@ public class SuperDataAccessHatch extends MTEHatchDataAccess implements IItemHan
 
     @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 int slotIndex = row * 9 + col;
                 builder.widget(
                     new SlotWidget(this, slotIndex)
                         .setBackground(ModularUITextures.ITEM_SLOT, GTUITextures.OVERLAY_SLOT_CIRCUIT)
-                        .setPos(col * 18 + 52, row * 38));
+                        .setPos(col * 18 + 43, row * 18 + 18));
             }
         }
     }

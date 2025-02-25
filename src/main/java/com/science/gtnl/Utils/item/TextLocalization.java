@@ -400,6 +400,15 @@ public class TextLocalization {
     public static final String Tooltip_GrandAssemblyLine_04 = texter(
         "Only one energy hatch can be installed!",
         "Tooltip_GrandAssemblyLine_04");
+    public static final String Tooltip_GrandAssemblyLine_05 = texter(
+        "If the power of a certain formula is greater than the maximum power of the energy warehouse, it will be skipped directly",
+        "Tooltip_GrandAssemblyLine_05");
+    public static final String Tooltip_GrandAssemblyLine_06 = texter(
+        "If the total power of the formula is greater than the power of the energy warehouse, the total power will be halved and the time will be doubled",
+        "Tooltip_GrandAssemblyLine_06");
+    public static final String Tooltip_GrandAssemblyLine_07 = texter(
+        "If the power of the energy warehouse is greater than 4 times the total power of the formula, perform a lossy overclocking operation",
+        "Tooltip_GrandAssemblyLine_07");
     public static final String Tooltip_GrandAssemblyLine_Casing = texter(
         "Ang Advanced Computer Casing Or Reinforced Glass",
         "Tooltip_GrandAssemblyLine_Casing");

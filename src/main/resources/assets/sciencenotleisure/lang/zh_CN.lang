@@ -1039,6 +1039,9 @@ Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。
 Tooltip_GrandAssemblyLine_02=不再需要按顺序输入物品
 Tooltip_GrandAssemblyLine_03=机器可进行跨配方处理！
 Tooltip_GrandAssemblyLine_04=只能安装一个能源仓！
+Tooltip_GrandAssemblyLine_05=如果某一配方功率大于能源仓最大功率，将会直接跳过
+Tooltip_GrandAssemblyLine_06=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
+Tooltip_GrandAssemblyLine_07=如果能源仓功率大于配方总功率 * 4，则执行有损超频
 Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
 
 NamePrecisionAssembler=精密组装机
