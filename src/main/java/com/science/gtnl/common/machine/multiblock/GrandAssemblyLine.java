@@ -9,7 +9,12 @@ import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.IInventory;
@@ -31,7 +36,10 @@ import com.science.gtnl.common.GTNLItemList;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.*;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoidingMode;
 import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
