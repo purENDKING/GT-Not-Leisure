@@ -40,7 +40,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.eventhandler.EventPriority;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 // after
@@ -130,17 +133,14 @@ public class ScienceNotLeisure {
         MaterialLoader.load();
         new RecipeLoaderRunnable().run();
 
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new RemoveRecipes());
+
         AEApi.instance()
             .registries()
             .interfaceTerminal()
             .register(SuperCraftingInputHatchME.class);
-
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new RecipeLoaderServerStart());
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new RemoveRecipes());
     }
 
     @Mod.EventHandler
@@ -162,6 +162,13 @@ public class ScienceNotLeisure {
                 .bus()
                 .register(new CheatRecipes());
         }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @Mod.EventHandler
+    public void serverStarted(FMLServerStartedEvent event) {
+        RemoveRecipes.removeRecipes();
+        RecipeLoaderServerStart.loadRecipesServerStart();
     }
 
     static {

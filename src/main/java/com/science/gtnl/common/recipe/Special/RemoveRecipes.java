@@ -9,25 +9,12 @@ import net.minecraft.item.ItemStack;
 
 import com.science.gtnl.config.MainConfig;
 
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import gregtech.api.enums.ItemList;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTRecipe;
 
 public class RemoveRecipes {
-
-    private static boolean hasRun = false;
-
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && !hasRun && MainConfig.enableDeleteRecipe) {
-            removeRecipes();
-            hasRun = true;
-        }
-    }
 
     public static void removeRecipes() {
         RecipeMapBackend AutoClaveRecipe = RecipeMaps.autoclaveRecipes.getBackend();
