@@ -163,7 +163,9 @@ public class ScienceNotLeisure {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     @Mod.EventHandler
     public void serverStarted(FMLServerStartedEvent event) {
-        RemoveRecipes.removeRecipes();
+        if (MainConfig.enableDeleteRecipe) {
+            RemoveRecipes.removeRecipes();
+        }
         RecipeLoaderServerStart.loadRecipesServerStart();
     }
 

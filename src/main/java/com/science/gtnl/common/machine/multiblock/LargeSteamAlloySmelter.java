@@ -47,10 +47,7 @@ import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
-import gregtech.api.metatileentity.implementations.MTEHatchOutput;
-import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
+import gregtech.api.metatileentity.implementations.*;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
@@ -106,7 +103,7 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
     }
 
     public static final int HORIZONTAL_OFF_SET = 1;
-    public static final int VERTICAL_OFF_SET = 1;
+    public static final int VERTICAL_OFF_SET = 2;
     public static final int DEPTH_OFF_SET = 0;
 
     public boolean isBroken = true;
@@ -329,7 +326,7 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(3, 3, 3, false)
+            .beginStructureBlock(3, 4, 3, false)
             .addInputBus(TextLocalization.Tooltip_LargeSteamAlloySmelter_Casing, 1)
             .addOutputBus(TextLocalization.Tooltip_LargeSteamAlloySmelter_Casing, 1)
             .toolTipFinisher();
@@ -555,6 +552,8 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
     public void updateSlots() {
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
         for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
+        for (MTEHatchInput tHatch : validMTEList(mInputHatches)) tHatch.updateSlots();
+        for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) tHatch.updateSlots();
         for (final MTEHatchInputBattery tHatch : validMTEList(this.mChargeHatches)) {
             tHatch.updateSlots();
         }

@@ -49,10 +49,7 @@ import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
-import gregtech.api.metatileentity.implementations.MTEHatchOutput;
-import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
+import gregtech.api.metatileentity.implementations.*;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
@@ -648,6 +645,8 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
     public void updateSlots() {
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
         for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
+        for (MTEHatchInput tHatch : validMTEList(mInputHatches)) tHatch.updateSlots();
+        for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) tHatch.updateSlots();
         for (final MTEHatchInputBattery tHatch : validMTEList(this.mChargeHatches)) {
             tHatch.updateSlots();
         }
