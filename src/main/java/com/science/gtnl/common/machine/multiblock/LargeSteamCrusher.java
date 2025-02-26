@@ -290,6 +290,7 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierGearCasing = -1;
         tierMachineCasing = -1;

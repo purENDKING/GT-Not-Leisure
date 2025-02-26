@@ -264,6 +264,7 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierPipeCasing = -1;
         tierMachineCasing = -1;

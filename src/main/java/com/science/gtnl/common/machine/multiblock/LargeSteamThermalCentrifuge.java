@@ -272,6 +272,7 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierPipeCasing = -1;
         tierMachineCasing = -1;

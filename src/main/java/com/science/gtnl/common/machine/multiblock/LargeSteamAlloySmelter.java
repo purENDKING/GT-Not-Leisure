@@ -242,6 +242,7 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierMachineCasing = -1;
         tierFireboxCasing = -1;

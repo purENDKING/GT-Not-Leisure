@@ -309,6 +309,7 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierGearCasing = -1;
         tierMachineCasing = -1;

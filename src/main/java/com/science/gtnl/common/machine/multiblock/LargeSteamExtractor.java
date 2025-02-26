@@ -270,6 +270,7 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierPipeCasing = -1;
         tierMachineCasing = -1;

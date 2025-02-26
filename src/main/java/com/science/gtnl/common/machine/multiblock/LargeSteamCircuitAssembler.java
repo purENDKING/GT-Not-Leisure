@@ -246,6 +246,7 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierPipeCasing = -1;
         tierMachineCasing = -1;

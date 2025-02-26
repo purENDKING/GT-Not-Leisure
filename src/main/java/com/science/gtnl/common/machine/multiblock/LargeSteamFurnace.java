@@ -324,6 +324,7 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
         return !mSteamInputFluids.isEmpty();
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierPipeCasing = -1;
         tierMachineCasing = -1;

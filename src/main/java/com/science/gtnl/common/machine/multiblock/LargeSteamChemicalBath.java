@@ -248,6 +248,7 @@ public class LargeSteamChemicalBath extends MTESteamMultiBase<LargeSteamChemical
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierMachineCasing = -1;
         tierFrameCasing = -1;

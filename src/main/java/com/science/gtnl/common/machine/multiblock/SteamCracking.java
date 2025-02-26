@@ -239,6 +239,7 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
             true);
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierFireboxCasing = -1;
         tierMachineCasing = -1;
