@@ -68,11 +68,11 @@ public class AssemblerRecipes implements IRecipePool {
         ItemStack CreativeCapacitorBank = GTModHandler.getModItem(EnderIO.ID, "blockCapBank", 1, 0);
         NBTTagCompound CreativeCapacitorBankType = CreativeCapacitorBank.getTagCompound();
         if (CreativeCapacitorBankType != null) {
-            CreativeCapacitorBankType.setInteger("storedEmergyRF", 2500000);
+            CreativeCapacitorBankType.setInteger("storedEnergyRF", 2500000);
             CreativeCapacitorBankType.setString("type", "CREATIVE");
         } else {
             CreativeCapacitorBankType = new NBTTagCompound();
-            CreativeCapacitorBankType.setInteger("storedEmergyRF", 2500000);
+            CreativeCapacitorBankType.setInteger("storedEnergyRF", 2500000);
             CreativeCapacitorBankType.setString("type", "CREATIVE");
             CreativeCapacitorBank.setTagCompound(CreativeCapacitorBankType);
         }
