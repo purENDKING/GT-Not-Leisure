@@ -47,15 +47,11 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
     public static final int HORIZONTAL_OFF_SET = 321;
     public static final int VERTICAL_OFF_SET = 321;
     public static final int DEPTH_OFF_SET = 17;
-
     public int tCountCasing = 0;
-
-    public int casing;
-
-    public IStructureDefinition<GenerationEarthEngine> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<GenerationEarthEngine> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String GEE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/generation_earth_engine"; // 文件路径
-    public String[][] shape = StructureUtils.readStructureFromFile(GEE_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(GEE_STRUCTURE_FILE_PATH);
 
     public GenerationEarthEngine(String aName) {
         super(aName);
@@ -156,7 +152,7 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
                         .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Maintenance, Energy.or(ExoticEnergy))
                         .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(5))
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.casing, ofBlock(ModBlocks.blockCasings2Misc, 12))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(ModBlocks.blockCasings2Misc, 12))))
                 .addElement('M', ofBlock(Blocks.beacon, 1))
                 .addElement('N', ofBlock(EnderIO.blockIngotStorageEndergy, 3))
                 .build();
@@ -183,11 +179,7 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tCountCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing >= 5) {
-            updateHatchTexture();
-            return true;
-        }
-        return false;
+        return tCountCasing >= 5;
     }
 
     @Override

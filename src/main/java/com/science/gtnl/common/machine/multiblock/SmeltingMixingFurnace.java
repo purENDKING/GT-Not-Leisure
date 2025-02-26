@@ -75,10 +75,10 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     protected static final int CASING_INDEX = BlockGTCasingsTT.textureOffset;
     public int tCountCasing = 0;
     public int casing;
-    public IStructureDefinition<SmeltingMixingFurnace> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<SmeltingMixingFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String SMF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/smelting_mixing_furnace";
-    public String[][] shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
 
     public SmeltingMixingFurnace(String aName) {
         super(aName);

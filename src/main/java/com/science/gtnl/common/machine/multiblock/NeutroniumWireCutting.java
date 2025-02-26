@@ -56,10 +56,10 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     public static final int VERTICAL_OFF_SET = 10;
     public static final int DEPTH_OFF_SET = 0;
     public int tCountCasing = 0;
-    public IStructureDefinition<NeutroniumWireCutting> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<NeutroniumWireCutting> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String ICF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/neutronium_wire_cutting"; // 文件路径
-    public String[][] shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
 
     public NeutroniumWireCutting(String aName) {
         super(aName);

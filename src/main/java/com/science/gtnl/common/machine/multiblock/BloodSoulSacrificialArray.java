@@ -52,7 +52,7 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
     public final int depthOffSet = 9;
     public static IStructureDefinition<BloodSoulSacrificialArray> STRUCTURE_DEFINITION = null;
     public byte mode = 1;
-    public String[][] shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
 
     public BloodSoulSacrificialArray(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);

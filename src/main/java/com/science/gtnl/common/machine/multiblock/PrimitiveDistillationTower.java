@@ -69,7 +69,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     public static final String STRUCTURE_PIECE_LAYER = "layer";
     public static final String STRUCTURE_PIECE_LAYER_HINT = "layerHint";
     public static final String STRUCTURE_PIECE_TOP_HINT = "topHint";
-    public static IStructureDefinition<PrimitiveDistillationTower> STRUCTURE_DEFINITION;
+    private static IStructureDefinition<PrimitiveDistillationTower> STRUCTURE_DEFINITION;
 
     public final List<List<MTEHatchOutput>> mOutputHatchesByLayer = new ArrayList<>();
     public int mHeight;

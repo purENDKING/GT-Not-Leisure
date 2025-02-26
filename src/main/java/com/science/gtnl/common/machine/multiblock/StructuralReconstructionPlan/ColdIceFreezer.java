@@ -54,11 +54,11 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
     private int mCasing;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String CIF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/cold_ice_freeze";
-    public String[][] shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static IStructureDefinition<ColdIceFreezer> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<ColdIceFreezer> STRUCTURE_DEFINITION = null;
 
     public final ArrayList<CustomFluidHatch> FluidIceInputHatch = new ArrayList<>();
 

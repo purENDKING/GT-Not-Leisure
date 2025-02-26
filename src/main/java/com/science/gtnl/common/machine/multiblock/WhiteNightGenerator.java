@@ -62,9 +62,9 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
 
     protected boolean wirelessMode = false;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public IStructureDefinition<WhiteNightGenerator> STRUCTURE_DEFINITION = null;
+    public static IStructureDefinition<WhiteNightGenerator> STRUCTURE_DEFINITION = null;
     public static final String WNG_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/white_night_generator";
-    public String[][] shape = StructureUtils.readStructureFromFile(WNG_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(WNG_STRUCTURE_FILE_PATH);
     public static final int CASING_INDEX = ((BlockCasings10) GregTechAPI.sBlockCasings10).getTextureIndex(13);
     public int multiTier = 0;
     public String ownerName;

@@ -49,12 +49,10 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
 
     public int tCountCasing = 0;
 
-    public int casing;
-
-    public IStructureDefinition<LapotronChip> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<LapotronChip> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String LC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/lapotron_chip"; // 文件路径
-    public String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
 
     public LapotronChip(String aName) {
         super(aName);
@@ -170,7 +168,7 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
                         .atLeast(InputBus, OutputBus, InputHatch, Maintenance, Energy, Energy.or(ExoticEnergy))
                         .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10))
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.casing, ofBlock(sBlockCasings8, 10))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 10))))
                 .addElement('F', ofBlock(MetaBlockGlow, 0))
                 .addElement(
                     'G',
@@ -271,11 +269,7 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tCountCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing >= 10000 && checkHatches()) {
-            updateHatchTexture();
-            return true;
-        }
-        return false;
+        return tCountCasing >= 10000 && checkHatches();
     }
 
     @Override

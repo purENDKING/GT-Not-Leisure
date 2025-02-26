@@ -65,7 +65,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public final int verticalOffSet = 15;
     public final int depthOffSet = 2;
     public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
-    public String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID Bread;
     public final ArrayList<CustomFluidHatch> FluidManaInputHatch = new ArrayList<>();
     private int mCasing;

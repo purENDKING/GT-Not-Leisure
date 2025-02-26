@@ -46,8 +46,7 @@ public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase
 
     private int mCasing;
     protected int fuelConsumption;
-
-    private static IStructureDefinition<EnergeticPhotovoltaicPowerStation> STRUCTURE_DEFINITION = null;
+    public static IStructureDefinition<EnergeticPhotovoltaicPowerStation> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String PPS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/photovoltaic_power_station";
     public static String[][] shape = StructureUtils.readStructureFromFile(PPS_STRUCTURE_FILE_PATH);

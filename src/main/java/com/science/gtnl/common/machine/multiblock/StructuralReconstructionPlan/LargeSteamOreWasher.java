@@ -84,6 +84,10 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
 
     private static final int MACHINEMODE_OREWASH = 0;
     private static final int MACHINEMODE_SIMPLEWASH = 1;
+    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static IStructureDefinition<LargeSteamOreWasher> STRUCTURE_DEFINITION = null;
+    public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_ore_washer";
+    public static String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
@@ -108,14 +112,6 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
     public String getMachineType() {
         return TextLocalization.LargeSteamOreWasherRecipeType;
     }
-
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-
-    public IStructureDefinition<LargeSteamOreWasher> STRUCTURE_DEFINITION = null;
-
-    public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_ore_washer";
-
-    public String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamOreWasher(String aName) {
         super(aName);

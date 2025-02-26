@@ -57,9 +57,9 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
     public static final int CASING_INDEX = TAE.GTPP_INDEX(15);
     private int mCasing;
-    public String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String BBF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blaze_blast_furnace";
+    public static String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 1;

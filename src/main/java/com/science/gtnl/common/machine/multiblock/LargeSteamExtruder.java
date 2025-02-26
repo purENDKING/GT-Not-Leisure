@@ -92,9 +92,9 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public IStructureDefinition<LargeSteamExtruder> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<LargeSteamExtruder> STRUCTURE_DEFINITION = null;
     public static final String LSE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_extruder"; // 文件路径
-    public String[][] shape = StructureUtils.readStructureFromFile(LSE_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(LSE_STRUCTURE_FILE_PATH);
 
     public LargeSteamExtruder(String aName) {
         super(aName);

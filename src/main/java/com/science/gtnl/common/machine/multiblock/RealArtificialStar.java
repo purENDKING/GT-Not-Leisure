@@ -72,9 +72,9 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     implements IWirelessEnergyHatchInformation {
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
     public static final String RAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/real_artificial_star";
-    public String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
+    public static String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID DepletedExcitedNaquadahFuelRod;
     protected static GTNL_ItemID EnhancementCore;
     protected static long MaxOfDepletedExcitedNaquadahFuelRod;
