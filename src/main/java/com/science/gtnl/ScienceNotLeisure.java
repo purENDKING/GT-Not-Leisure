@@ -12,7 +12,9 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.science.gtnl.Utils.PlayerJoinHandler;
 import com.science.gtnl.Utils.item.TextHandler;
+import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.AnvilEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
@@ -45,6 +47,8 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 // after
 @Mod(
@@ -78,6 +82,7 @@ public class ScienceNotLeisure {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     public static Configuration config;
+    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
 
     /**
      * <li>The signal of whether in Development Mode.
@@ -132,6 +137,10 @@ public class ScienceNotLeisure {
         proxy.preInit(event);
         MaterialLoader.load();
         new RecipeLoaderRunnable().run();
+        network.registerMessage(SyncRecipesPacket.Handler.class, SyncRecipesPacket.class, 0, Side.CLIENT);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new PlayerJoinHandler());
 
         AEApi.instance()
             .registries()

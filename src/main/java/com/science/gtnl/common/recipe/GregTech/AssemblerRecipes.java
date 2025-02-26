@@ -65,6 +65,18 @@ public class AssemblerRecipes implements IRecipePool {
             MEoutputHatch.setTagCompound(MEoutputHatchType);
         }
 
+        ItemStack CreativeCapacitorBank = GTModHandler.getModItem(EnderIO.ID, "blockCapBank", 1, 0);
+        NBTTagCompound CreativeCapacitorBankType = CreativeCapacitorBank.getTagCompound();
+        if (CreativeCapacitorBankType != null) {
+            CreativeCapacitorBankType.setInteger("storedEmergyRF", 2500000);
+            CreativeCapacitorBankType.setString("type", "CREATIVE");
+        } else {
+            CreativeCapacitorBankType = new NBTTagCompound();
+            CreativeCapacitorBankType.setInteger("storedEmergyRF", 2500000);
+            CreativeCapacitorBankType.setString("type", "CREATIVE");
+            CreativeCapacitorBank.setTagCompound(CreativeCapacitorBankType);
+        }
+
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
@@ -900,7 +912,7 @@ public class AssemblerRecipes implements IRecipePool {
                 ItemList.Hatch_Output_EV.get(1L),
                 GTModHandler.getModItem(AE2FluidCraft.ID, "part_fluid_interface", 1),
                 GTModHandler.getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 2, 30))
-            .itemOutputs(MEoutputHatch)
+            .itemOutputs(CreativeCapacitorBank)
             .specialValue(0)
             .noOptimize()
             .duration(300)
@@ -1372,6 +1384,15 @@ public class AssemblerRecipes implements IRecipePool {
             .itemOutputs(GTNLItemList.BlackLight.get(1))
             .duration(20)
             .eut(TierEU.RECIPE_MV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.copyAmount(0, CreativeCapacitorBank),
+                GTModHandler.getModItem(DraconicEvolution.ID, "draconium", 1, 0, missing))
+            .itemOutputs(GTModHandler.getModItem(DraconicEvolution.ID, "draconium", 1, 2, missing))
+            .duration(20)
+            .eut(TierEU.RECIPE_LV)
             .addTo(As);
     }
 }

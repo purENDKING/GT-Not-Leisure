@@ -12,6 +12,7 @@ import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,9 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -34,6 +37,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -53,6 +57,7 @@ import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
@@ -162,11 +167,20 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
+        // 预初始化配方池并删除所有配方
+        if (!MainConfig.enableDebugMode) {
+            RecipeMapBackend grandAssemblyLineRecipes = RecipeRegister.GrandAssemblyLineRecipes.getBackend();
+            List<GTRecipe> recipesToRemove = new ArrayList<>(grandAssemblyLineRecipes.getAllRecipes());
+            grandAssemblyLineRecipes.removeRecipes(recipesToRemove);
+        }
+
         // 第一步：初始化参数
         boolean isPollingMode = false; // 轮询模式，默认关闭
         int limit = 128; // limit 取批处理时间 128 tick
         long energyEU = getMaxInputEnergy(); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
+        int powerParallel = 0;
+        long needEUt = 0;
 
         // 获取所有输入物品和流体
         ArrayList<ItemStack> allInputs = getStoredInputs();
@@ -192,7 +206,13 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
         // 第二步：提取输入输出物品和流体，计算超频次数，调整 mEUt 和 mDuration
         List<GTRecipe.RecipeAssemblyLine> overclockedRecipes = new ArrayList<>();
+
+        // 按照 recipe.mEUt 从小到大排序
+        validRecipes.sort(Comparator.comparingInt(recipe -> recipe.mEUt));
+
         for (GTRecipe.RecipeAssemblyLine recipe : validRecipes) {
+            powerParallel = (int) Math.floor(energyEU / recipe.mEUt);
+
             // 提取输入输出物品和流体
             ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
                 .map(ItemStack::copy)
@@ -266,6 +286,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 .fluidOutputs(outputFluids)
                 .duration(recipe.mDuration)
                 .eut(recipe.mEUt)
+                // .noBuffer()
                 .build()
                 .orElse(null);
 
@@ -286,35 +307,52 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
         // 第五步：根据轮询模式处理配方所用并行检查逻辑
         Map<GTRecipe, Integer> recipeParallelMap = new HashMap<>();
-        int remainingMaxParallel = maxParallel; // 剩余的最大并行数
+        int remainingMaxParallel = 0; // 剩余的最大并行数
+
+        // 标志变量，用于记录是否有至少一个配方的 recipeParallel 大于 0
+        boolean hasValidRecipe = false;
 
         for (GTRecipe recipe : filteredTempRecipes) {
+            // 计算功率并行数 (PowerParallel)
+            remainingMaxParallel = Math.min(powerParallel, maxParallel);
+
             // 计算物品并行数 (ItemParallel)
-            int itemParallel = Integer.MAX_VALUE;
+            List<Integer> itemParallels = new ArrayList<>(); // 存储每个物品的并行数
             for (ItemStack input : recipe.mInputs) {
                 int available = getAvailableItemCount(input, allInputs); // 使用自定义方法
                 int required = input.stackSize;
-                itemParallel = Math.min(itemParallel, available / required);
+                int itemParallel = available / required; // 向下取整
+                itemParallels.add(itemParallel);
             }
+            int itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
 
             // 计算流体并行数 (FluidParallel)
-            int fluidParallel = Integer.MAX_VALUE;
+            List<Integer> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数
             for (FluidStack fluid : recipe.mFluidInputs) {
                 int available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
                 int required = fluid.amount;
-                fluidParallel = Math.min(fluidParallel, available / required);
+                int fluidParallel = available / required; // 向下取整
+                fluidParallels.add(fluidParallel);
             }
+            int fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
 
             // 取较小的并行数作为当前配方的并行数 (RecipeParallel)
             int recipeParallel = Math.min(itemParallel, fluidParallel);
 
+            // 如果当前配方的并行数为 0，跳过此配方
+            if (recipeParallel == 0) {
+                continue;
+            }
+
+            // 标记有至少一个有效配方
+            hasValidRecipe = true;
+
+            // 使用功率并行数限制 RecipeParallel
+            recipeParallel = Math.min(recipeParallel, powerParallel);
+
             if (isPollingMode) {
                 // 轮询模式下，RecipeParallel 最大为 1
                 recipeParallel = Math.min(recipeParallel, 1);
-            }
-
-            if (recipeParallel <= 0) {
-                continue; // 如果并行数为 0，跳过此配方
             }
 
             // 检查剩余的最大并行数
@@ -333,6 +371,11 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             }
         }
 
+        // 如果没有任何配方的 recipeParallel 大于 0，则返回 NO_RECIPE
+        if (!hasValidRecipe) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
+
         if (recipeParallelMap.isEmpty()) {
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
@@ -349,13 +392,36 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 调整功率和时间以适配能源仓输入功率
+        boolean isLoopCompleted = false; // 标志变量，表示循环是否成功执行并跳出
+        needEUt = (long) needEU / needTime;
+
         while (needEU / needTime > energyEU) {
             needEU /= 2;
             needTime *= 2;
+            isLoopCompleted = true;
+        }
+
+        if (isLoopCompleted) {
+
+            double needEUtDouble = needEUt;
+            double needTimeDouble = needTime;
+
+            double adjustmentFactor = (double) energyEU / needEUt;
+
+            needEUtDouble *= adjustmentFactor;
+            needTimeDouble /= adjustmentFactor;
+
+            needEUt = (long) needEUtDouble;
+            needTime = (int) needTimeDouble;
         }
 
         while ((needEU / needTime) * 4 <= energyEU) {
-            needEU *= 4;
+            if (needEUt >= Long.MAX_VALUE) {
+                needEUt = Long.MAX_VALUE;
+                break; // 打断循环
+            }
+
+            needEUt *= 4;
             needTime /= 2;
         }
 
@@ -395,7 +461,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         updateSlots();
 
         // 设置功率和时间
-        this.lEUt = -needEU; // 使用调整后的总功率
+        this.lEUt = -needEUt; // 使用调整后的总功率
         this.mMaxProgresstime = needTime; // 使用调整后的时间
 
         // 更新效率
@@ -411,35 +477,144 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     // 自定义方法：获取可用物品数量
     private int getAvailableItemCount(ItemStack required, ArrayList<ItemStack> allInputs) {
         int count = 0;
+        Map<GTUtility.ItemId, ItemStack> inputsFromME = new HashMap<>();
+
+        // 优先检查完全匹配的物品
         for (ItemStack input : allInputs) {
-            if (input != null && input.isItemEqual(required)) {
-                count += input.stackSize;
+            if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
+                // 如果是来自 ME 总线的物品，使用 GTUtility.ItemId 去重
+                if (isFromMEBus(input)) {
+                    GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                    if (!inputsFromME.containsKey(itemId)) {
+                        inputsFromME.put(itemId, input);
+                        count += input.stackSize;
+                    }
+                } else {
+                    // 非 ME 总线的物品直接累加
+                    count += input.stackSize;
+                }
             }
         }
+
+        // 如果没有完全匹配的物品，尝试检查矿辞匹配的物品
+        if (count == 0) {
+            // 获取矿辞名称
+            int[] oreIDs = OreDictionary.getOreIDs(required);
+            if (oreIDs.length > 0) {
+                // 遍历所有矿辞匹配的物品
+                for (int oreID : oreIDs) {
+                    String oreName = OreDictionary.getOreName(oreID);
+                    List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
+
+                    // 遍历输入槽位中的所有物品
+                    for (ItemStack input : allInputs) {
+                        if (input != null) {
+                            // 检查输入物品是否与矿辞匹配
+                            for (ItemStack oreDictItem : oreDictItems) {
+                                if (OreDictionary.itemMatches(oreDictItem, input, false)) {
+                                    // 如果是来自 ME 总线的物品，使用 GTUtility.ItemId 去重
+                                    if (isFromMEBus(input)) {
+                                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                                        if (!inputsFromME.containsKey(itemId)) {
+                                            inputsFromME.put(itemId, input);
+                                            count += input.stackSize;
+                                        }
+                                    } else {
+                                        // 非 ME 总线的物品直接累加
+                                        count += input.stackSize;
+                                    }
+                                    break; // 匹配成功后跳出矿辞匹配循环
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         return count;
     }
 
     // 自定义方法：获取可用流体数量
     private int getAvailableFluidAmount(FluidStack required, ArrayList<FluidStack> allFluids) {
         int amount = 0;
+        Map<Fluid, FluidStack> inputsFromME = new HashMap<>();
+
         for (FluidStack fluid : allFluids) {
             if (fluid != null && fluid.isFluidEqual(required)) {
-                amount += fluid.amount;
+                // 如果是来自 ME 总线的流体，使用 Fluid 去重
+                if (isFromMEHatch(fluid)) {
+                    if (!inputsFromME.containsKey(fluid.getFluid())) {
+                        inputsFromME.put(fluid.getFluid(), fluid);
+                        amount += fluid.amount;
+                    }
+                } else {
+                    // 非 ME 总线的流体直接累加
+                    amount += fluid.amount;
+                }
             }
         }
+
         return amount;
+    }
+
+    // 判断物品是否来自 ME 总线
+    private boolean isFromMEBus(ItemStack itemStack) {
+        // 根据实际逻辑判断是否为来自 ME 总线的物品
+        // 例如，检查物品的 UnlocalizedName 或其他标识
+        return itemStack.getUnlocalizedName()
+            .startsWith("gt.me_bus_item");
+    }
+
+    // 判断流体是否来自 ME 总线
+    private boolean isFromMEHatch(FluidStack fluidStack) {
+        // 根据实际逻辑判断是否为来自 ME 总线的流体
+        // 例如，检查流体的 UnlocalizedName 或其他标识
+        return fluidStack.getUnlocalizedName()
+            .startsWith("gt.me_hatch_fluid");
     }
 
     // 自定义方法：消耗物品
     private void consumeItems(ItemStack required, int amount, ArrayList<ItemStack> allInputs) {
         int remaining = amount;
+
+        // 优先消耗完全匹配的物品
         for (ItemStack input : allInputs) {
-            if (input != null && input.isItemEqual(required)) {
+            if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
                 int toConsume = Math.min(input.stackSize, remaining);
                 input.stackSize -= toConsume;
                 remaining -= toConsume;
                 if (remaining <= 0) {
-                    break;
+                    return; // 消耗完毕，直接返回
+                }
+            }
+        }
+
+        // 如果没有完全匹配的物品，尝试消耗矿辞匹配的物品
+        if (remaining > 0) {
+            // 获取矿辞名称
+            int[] oreIDs = OreDictionary.getOreIDs(required);
+            if (oreIDs.length > 0) {
+                // 遍历所有矿辞匹配的物品
+                for (int oreID : oreIDs) {
+                    String oreName = OreDictionary.getOreName(oreID);
+                    List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
+
+                    // 遍历所有相同矿辞的物品
+                    for (ItemStack oreDictItem : oreDictItems) {
+                        // 在输入槽位中查找匹配的物品
+                        for (ItemStack input : allInputs) {
+                            if (input != null && OreDictionary.itemMatches(oreDictItem, input, false)) {
+                                int toConsume = Math.min(input.stackSize, remaining);
+                                input.stackSize -= toConsume;
+                                remaining -= toConsume;
+                                if (remaining <= 0) {
+                                    return; // 消耗完毕，直接返回
+                                }
+                                break; // 消耗完当前物品后，跳出内层循环，继续查找下一个矿辞匹配的物品
+                            }
+                        }
+                    }
                 }
             }
         }
