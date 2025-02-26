@@ -46,11 +46,11 @@ import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
-import gregtech.api.recipe.maps.FormingPressBackend;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.AssemblyLineUtils;
 import gregtech.api.util.GTRecipe;
@@ -243,8 +243,9 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 第四步：构建临时配方池
-        RecipeMap<FormingPressBackend> tempRecipeMap = RecipeMapBuilder.of("gt.recipe.temp", FormingPressBackend::new)
-            .maxIO(16, 1, 4, 0) // 输入物品 16，输出物品 1，输入流体 4，输出流体 0
+        RecipeMap<RecipeMapBackend> tempRecipeMap = RecipeMapBuilder
+            .of("gtnl.recipe.GrandAssemblyLineRecipes", RecipeMapBackend::new)
+            .maxIO(16, 1, 4, 0)
             .build();
 
         for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {

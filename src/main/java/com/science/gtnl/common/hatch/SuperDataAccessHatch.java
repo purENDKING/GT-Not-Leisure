@@ -19,6 +19,8 @@ import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 
 public class SuperDataAccessHatch extends MTEHatchDataAccess implements IItemHandlerModifiable {
 
+    private ItemStack[] mInventory;
+
     public SuperDataAccessHatch(int aID, String aName, String aNameRegional, int aTier) {
         super(aID, aName, aNameRegional, aTier);
         mDescriptionArray[1] = TextLocalization.Tooltip_SuperDataAccessHatch_00;
@@ -39,10 +41,8 @@ public class SuperDataAccessHatch extends MTEHatchDataAccess implements IItemHan
         try {
             Field mInventoryField = MetaTileEntity.class.getDeclaredField("mInventory");
             mInventoryField.setAccessible(true);
-
-            ItemStack[] newInventory = new ItemStack[size];
-
-            mInventoryField.set(this, newInventory);
+            mInventory = new ItemStack[size];
+            mInventoryField.set(this, mInventory);
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize mInventory", e);
         }
@@ -55,7 +55,6 @@ public class SuperDataAccessHatch extends MTEHatchDataAccess implements IItemHan
 
     @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
-
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 int slotIndex = row * 9 + col;
