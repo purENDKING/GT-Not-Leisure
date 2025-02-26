@@ -187,7 +187,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         if (validRecipes.isEmpty()) {
-            return CheckRecipeResultRegistry.NO_RECIPE;
+            return CheckRecipeResultRegistry.NO_DATA_STICKS;
         }
 
         // 第二步：提取输入输出物品和流体，计算超频次数，调整 mEUt 和 mDuration
