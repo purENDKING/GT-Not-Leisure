@@ -56,13 +56,12 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     private static final int MACHINEMODE_CANNER = 0;
     private static final int MACHINEMODE_FLUIDCANNER = 1;
 
     public LargeCanning(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     public LargeCanning(String aName) {

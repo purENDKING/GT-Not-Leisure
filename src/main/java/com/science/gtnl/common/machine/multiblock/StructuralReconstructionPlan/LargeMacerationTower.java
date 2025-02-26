@@ -39,11 +39,10 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LMT_STRUCTURE_FILE_PATH);
 
     public LargeMacerationTower(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LMT_STRUCTURE_FILE_PATH);
     }
 
     public LargeMacerationTower(String aName) {

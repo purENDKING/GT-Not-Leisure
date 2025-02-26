@@ -115,7 +115,7 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
 
     public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_ore_washer";
 
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamOreWasher(String aName) {
         super(aName);
@@ -123,7 +123,6 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
 
     public LargeSteamOreWasher(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 4;

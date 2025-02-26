@@ -42,11 +42,10 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
 
     public LargeMixer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     public LargeMixer(String aName) {

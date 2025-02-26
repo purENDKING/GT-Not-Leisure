@@ -47,11 +47,10 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(FG_STRUCTURE_FILE_PATH);
 
     public FishingGround(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(FG_STRUCTURE_FILE_PATH);
     }
 
     public FishingGround(String aName) {

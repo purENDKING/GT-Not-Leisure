@@ -63,11 +63,10 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(MF_STRUCTURE_FILE_PATH);
 
     public MatterFabricator(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(MF_STRUCTURE_FILE_PATH);
     }
 
     public MatterFabricator(String aName) {

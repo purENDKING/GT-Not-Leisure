@@ -43,15 +43,14 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
     private int mCasing;
     private static IStructureDefinition<ChemicalPlant> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String CP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/chemical_plant";
     public final int horizontalOffSet = 0;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
+    public static String[][] shape = StructureUtils.readStructureFromFile(CP_STRUCTURE_FILE_PATH);
 
     public ChemicalPlant(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(CP_STRUCTURE_FILE_PATH);
     }
 
     public ChemicalPlant(String aName) {

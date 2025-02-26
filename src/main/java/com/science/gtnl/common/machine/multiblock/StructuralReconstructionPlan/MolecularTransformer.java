@@ -41,11 +41,10 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 9;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(MT_STRUCTURE_FILE_PATH);
 
     public MolecularTransformer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(MT_STRUCTURE_FILE_PATH);
     }
 
     public MolecularTransformer(String aName) {

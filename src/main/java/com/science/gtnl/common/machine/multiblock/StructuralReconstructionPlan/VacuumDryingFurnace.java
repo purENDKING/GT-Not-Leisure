@@ -59,11 +59,10 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(VDF_STRUCTURE_FILE_PATH);
 
     public VacuumDryingFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(VDF_STRUCTURE_FILE_PATH);
     }
 
     public VacuumDryingFurnace(String aName) {

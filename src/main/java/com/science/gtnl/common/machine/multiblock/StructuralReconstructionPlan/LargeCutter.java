@@ -54,11 +54,10 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
 
     public LargeCutter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     public LargeCutter(String aName) {

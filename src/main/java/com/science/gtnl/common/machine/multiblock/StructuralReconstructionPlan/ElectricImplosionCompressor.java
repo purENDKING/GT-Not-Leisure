@@ -40,11 +40,10 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 7;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(ELC_STRUCTURE_FILE_PATH);
 
     public ElectricImplosionCompressor(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(ELC_STRUCTURE_FILE_PATH);
     }
 
     public ElectricImplosionCompressor(String aName) {

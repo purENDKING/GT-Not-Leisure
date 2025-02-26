@@ -83,8 +83,8 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
     protected static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(12);
     private static IStructureDefinition<NineIndustrialMultiMachine> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String NIMM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nine_industrial_multi_machine";
+    public static String[][] shape = StructureUtils.readStructureFromFile(NIMM_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 14;
     public final int verticalOffSet = 27;
     public final int depthOffSet = 0;
@@ -101,7 +101,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
     public NineIndustrialMultiMachine(final int aID, final String aName, final String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(NIMM_STRUCTURE_FILE_PATH);
     }
 
     public NineIndustrialMultiMachine(final String aName) {

@@ -53,12 +53,9 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
     public int casing;
 
     public IStructureDefinition<GenerationEarthEngine> STRUCTURE_DEFINITION = null;
-
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public static final String GEE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/generation_earth_engine"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(GEE_STRUCTURE_FILE_PATH);
 
     public GenerationEarthEngine(String aName) {
         super(aName);
@@ -66,7 +63,6 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     public GenerationEarthEngine(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(GEE_STRUCTURE_FILE_PATH);
     }
 
     @Override

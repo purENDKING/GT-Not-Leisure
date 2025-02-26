@@ -89,12 +89,9 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamCircuitAssembler> STRUCTURE_DEFINITION = null;
-
     public static final String LSCA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_circuit_assembler"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSCA_STRUCTURE_FILE_PATH);
 
     public LargeSteamCircuitAssembler(String aName) {
         super(aName);
@@ -102,7 +99,6 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
 
     public LargeSteamCircuitAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSCA_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 1;

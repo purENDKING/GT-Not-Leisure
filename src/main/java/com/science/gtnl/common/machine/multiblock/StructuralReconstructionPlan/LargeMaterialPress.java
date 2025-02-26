@@ -41,11 +41,10 @@ public class LargeMaterialPress extends GTMMultiMachineBase<LargeMaterialPress> 
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
 
     public LargeMaterialPress(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     public LargeMaterialPress(String aName) {

@@ -53,11 +53,10 @@ public class LargeCentrifuge extends GTMMultiMachineBase<LargeCentrifuge> implem
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
 
     public LargeCentrifuge(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     public LargeCentrifuge(String aName) {

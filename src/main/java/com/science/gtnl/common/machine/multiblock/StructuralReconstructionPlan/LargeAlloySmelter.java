@@ -46,12 +46,11 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     private HeatingCoilLevel mCoilLevel;
 
     public LargeAlloySmelter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     }
 
     public LargeAlloySmelter(String aName) {

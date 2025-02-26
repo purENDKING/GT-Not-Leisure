@@ -56,11 +56,10 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     public final int verticalOffSet = 15;
     public final int depthOffSet = 0;
     public byte glassTier = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(MABS_STRUCTURE_FILE_PATH);
 
     public MegaAlloyBlastSmelter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(MABS_STRUCTURE_FILE_PATH);
     }
 
     public MegaAlloyBlastSmelter(String aName) {

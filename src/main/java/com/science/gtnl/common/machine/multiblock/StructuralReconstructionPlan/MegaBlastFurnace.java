@@ -57,8 +57,8 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     private int mHeatingCapacity = 0;
     private static IStructureDefinition<MegaBlastFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String MBF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/mega_blast_furnace";
+    public static String[][] shape = StructureUtils.readStructureFromFile(MBF_STRUCTURE_FILE_PATH);
     private int mCasing;
     public final int horizontalOffSet = 11;
     public final int verticalOffSet = 41;
@@ -66,7 +66,6 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     public MegaBlastFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(MBF_STRUCTURE_FILE_PATH);
     }
 
     public MegaBlastFurnace(String aName) {

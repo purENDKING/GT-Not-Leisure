@@ -87,12 +87,9 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamExtractor> STRUCTURE_DEFINITION = null;
-
     public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_extractor";
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamExtractor(String aName) {
         super(aName);
@@ -100,7 +97,6 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
 
     public LargeSteamExtractor(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 2;

@@ -39,11 +39,10 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
 
     public LargeSiftingFunnel(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
     }
 
     public LargeSiftingFunnel(String aName) {

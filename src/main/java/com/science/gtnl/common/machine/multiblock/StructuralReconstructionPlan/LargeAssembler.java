@@ -46,11 +46,10 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
 
     public LargeAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     public LargeAssembler(String aName) {

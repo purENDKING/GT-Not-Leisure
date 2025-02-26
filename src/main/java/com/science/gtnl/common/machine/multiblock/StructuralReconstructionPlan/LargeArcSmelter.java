@@ -55,11 +55,10 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
 
     public LargeArcSmelter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     }
 
     public LargeArcSmelter(String aName) {

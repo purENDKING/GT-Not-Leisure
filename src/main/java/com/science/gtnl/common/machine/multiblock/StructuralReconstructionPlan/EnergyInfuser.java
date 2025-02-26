@@ -45,8 +45,8 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
     private int mCasing;
     private static IStructureDefinition<EnergyInfuser> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String EI_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/energy_infuser";
+    public static String[][] shape = StructureUtils.readStructureFromFile(EI_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 7;
     public final int depthOffSet = 0;
@@ -77,7 +77,6 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
         super(aID, aName, aNameRegional);
         minRepairStatus = (byte) getIdealStatus();
         eDismantleBoom = true;
-        shape = StructureUtils.readStructureFromFile(EI_STRUCTURE_FILE_PATH);
     }
 
     public EnergyInfuser(String aName) {

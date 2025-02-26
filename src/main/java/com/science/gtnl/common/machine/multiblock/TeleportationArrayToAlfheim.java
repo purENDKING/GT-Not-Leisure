@@ -59,7 +59,13 @@ import tectech.thing.casing.TTCasingsContainer;
 
 public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationArrayToAlfheim> {
 
-    public String[][] shape;
+    public static final String STRUCTURE_PIECE_MAIN = "main";
+    public static final String TATA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/teleportation_array_to_alfheim";
+    public final int horizontalOffSet = 11;
+    public final int verticalOffSet = 15;
+    public final int depthOffSet = 2;
+    public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
+    public String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID Bread;
     public final ArrayList<CustomFluidHatch> FluidManaInputHatch = new ArrayList<>();
     private int mCasing;
@@ -74,7 +80,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
     public TeleportationArrayToAlfheim(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
     }
 
     public TeleportationArrayToAlfheim(String aName) {
@@ -231,13 +236,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             false,
             true);
     }
-
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String TATA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/teleportation_array_to_alfheim";
-    public final int horizontalOffSet = 11;
-    public final int verticalOffSet = 15;
-    public final int depthOffSet = 2;
-    public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
 
     @Override
     public IStructureDefinition<TeleportationArrayToAlfheim> getStructureDefinition() {

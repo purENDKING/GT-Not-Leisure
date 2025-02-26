@@ -41,11 +41,10 @@ public class LargeHammer extends GTMMultiMachineBase<LargeHammer> implements ISu
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 7;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
 
     public LargeHammer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
     }
 
     public LargeHammer(String aName) {

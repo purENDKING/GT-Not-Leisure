@@ -41,11 +41,10 @@ public class LargeIndustrialLathe extends GTMMultiMachineBase<LargeIndustrialLat
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
 
     public LargeIndustrialLathe(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
     }
 
     public LargeIndustrialLathe(String aName) {

@@ -39,11 +39,10 @@ public class LargeElectrolyzer extends GTMMultiMachineBase<LargeElectrolyzer> im
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
 
     public LargeElectrolyzer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
     }
 
     public LargeElectrolyzer(String aName) {

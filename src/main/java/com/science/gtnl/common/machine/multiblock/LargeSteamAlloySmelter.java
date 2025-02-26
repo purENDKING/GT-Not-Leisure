@@ -89,12 +89,9 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamAlloySmelter> STRUCTURE_DEFINITION = null;
-
     public static final String LSAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_alloy_smelter"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSAS_STRUCTURE_FILE_PATH);
 
     public LargeSteamAlloySmelter(String aName) {
         super(aName);
@@ -102,7 +99,6 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
 
     public LargeSteamAlloySmelter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSAS_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 1;

@@ -40,11 +40,10 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 11;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(DH_STRUCTURE_FILE_PATH);
 
     public DecayHastener(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(DH_STRUCTURE_FILE_PATH);
     }
 
     public DecayHastener(String aName) {

@@ -40,11 +40,10 @@ public class LargeAutoclave extends GTMMultiMachineBase<LargeAutoclave> implemen
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
 
     public LargeAutoclave(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
     }
 
     public LargeAutoclave(String aName) {

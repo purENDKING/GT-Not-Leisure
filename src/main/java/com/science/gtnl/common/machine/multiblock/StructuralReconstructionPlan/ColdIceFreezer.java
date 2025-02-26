@@ -52,9 +52,9 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(1);
     private int mCasing;
-    public String[][] shape;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String CIF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/cold_ice_freeze";
+    public String[][] shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
@@ -64,7 +64,6 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     public ColdIceFreezer(final int aID, final String aName, final String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
     }
 
     public ColdIceFreezer(final String aName) {

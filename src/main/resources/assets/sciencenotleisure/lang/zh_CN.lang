@@ -1492,6 +1492,8 @@ Tooltip_LargeCircuitAssembler_Casing=任意多功能机械方块
 NameSmeltingMixingFurnace=合金搅拌炉
 SmeltingMixingFurnaceRecipeType=合金搅拌
 gtnl.recipe.SmeltingMixingFurnaceRecipes=合金搅拌
+SmeltingMixingFurnace_Mode_0=合金搅拌
+SmeltingMixingFurnace_Mode_1=超维度等离子锻炉
 Tooltip_SmeltingMixingFurnace_Casing=任意超能机械方块
 
 NameProcessingArrayGTNL=处理阵列：重生

@@ -75,12 +75,9 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<SteamCracking> STRUCTURE_DEFINITION = null;
-
     public static final String LSCr_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_cracking"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSCr_STRUCTURE_FILE_PATH);
 
     public SteamCracking(String aName) {
         super(aName);
@@ -88,7 +85,6 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
 
     public SteamCracking(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSCr_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 3;

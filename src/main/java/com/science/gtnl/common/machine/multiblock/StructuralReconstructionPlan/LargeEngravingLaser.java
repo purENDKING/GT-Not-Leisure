@@ -44,12 +44,11 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LEL_STRUCTURE_FILE_PATH);
     public byte glassTier = 0;
 
     public LargeEngravingLaser(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LEL_STRUCTURE_FILE_PATH);
     }
 
     public LargeEngravingLaser(String aName) {

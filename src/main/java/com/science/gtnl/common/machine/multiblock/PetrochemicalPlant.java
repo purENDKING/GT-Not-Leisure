@@ -48,8 +48,8 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     private static IStructureDefinition<PetrochemicalPlant> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String PP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/petrochemical_plant";
+    public static String[][] shape = StructureUtils.readStructureFromFile(PP_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 22;
     public final int verticalOffSet = 56;
     public final int depthOffSet = 0;
@@ -57,7 +57,6 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     public PetrochemicalPlant(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(PP_STRUCTURE_FILE_PATH);
     }
 
     public PetrochemicalPlant(String aName) {

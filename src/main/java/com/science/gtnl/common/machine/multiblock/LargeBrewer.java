@@ -54,11 +54,10 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
 
     public LargeBrewer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LB_STRUCTURE_FILE_PATH);
     }
 
     public LargeBrewer(String aName) {

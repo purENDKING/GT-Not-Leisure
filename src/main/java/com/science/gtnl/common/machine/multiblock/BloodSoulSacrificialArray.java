@@ -45,12 +45,17 @@ import kubatech.loaders.BlockLoader;
 
 public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrificialArray> {
 
+    public static final String STRUCTURE_PIECE_MAIN = "main";
+    public static final String BSSA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blood_soul_sacrificial_array"; // 文件路径
+    public final int horizontalOffSet = 16;
+    public final int verticalOffSet = 10;
+    public final int depthOffSet = 9;
+    public static IStructureDefinition<BloodSoulSacrificialArray> STRUCTURE_DEFINITION = null;
     public byte mode = 1;
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
 
     public BloodSoulSacrificialArray(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
     }
 
     public BloodSoulSacrificialArray(String aName) {
@@ -124,13 +129,6 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
             false,
             true);
     }
-
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String BSSA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blood_soul_sacrificial_array"; // 文件路径
-    public final int horizontalOffSet = 16;
-    public final int verticalOffSet = 10;
-    public final int depthOffSet = 9;
-    public static IStructureDefinition<BloodSoulSacrificialArray> STRUCTURE_DEFINITION = null;
 
     @Override
     public IStructureDefinition<BloodSoulSacrificialArray> getStructureDefinition() {

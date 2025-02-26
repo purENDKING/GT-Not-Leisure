@@ -41,11 +41,10 @@ public class LargeExtruder extends GTMMultiMachineBase<LargeExtruder> implements
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
 
     public LargeExtruder(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LE_STRUCTURE_FILE_PATH);
     }
 
     public LargeExtruder(String aName) {

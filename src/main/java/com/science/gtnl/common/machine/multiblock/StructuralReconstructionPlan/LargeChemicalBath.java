@@ -61,11 +61,10 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LCB_STRUCTURE_FILE_PATH);
 
     public LargeChemicalBath(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LCB_STRUCTURE_FILE_PATH);
     }
 
     public LargeChemicalBath(String aName) {

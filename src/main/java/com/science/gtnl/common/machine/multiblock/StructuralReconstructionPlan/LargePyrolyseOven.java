@@ -42,12 +42,11 @@ public class LargePyrolyseOven extends GTMMultiMachineBase<LargePyrolyseOven> im
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LPO_STRUCTURE_FILE_PATH);
     public HeatingCoilLevel mHeatingCapacity;
 
     public LargePyrolyseOven(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LPO_STRUCTURE_FILE_PATH);
     }
 
     public LargePyrolyseOven(String aName) {

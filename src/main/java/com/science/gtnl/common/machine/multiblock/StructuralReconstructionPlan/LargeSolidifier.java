@@ -63,11 +63,10 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LS_STRUCTURE_FILE_PATH);
 
     public LargeSolidifier(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LS_STRUCTURE_FILE_PATH);
     }
 
     public LargeSolidifier(String aName) {

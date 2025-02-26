@@ -62,13 +62,12 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(IM_STRUCTURE_FILE_PATH);
 
     private final ArrayList<MTEHatchMillingBalls> mMillingBallBuses = new ArrayList<>();
 
     public IsaMill(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(IM_STRUCTURE_FILE_PATH);
     }
 
     public IsaMill(String aName) {

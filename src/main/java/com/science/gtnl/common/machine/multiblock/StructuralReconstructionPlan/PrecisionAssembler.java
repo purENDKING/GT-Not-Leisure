@@ -70,7 +70,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     protected int mCasing;
     protected int casingTier = 0;
     protected int machineTier = -1;
@@ -78,7 +78,6 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     public PrecisionAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     }
 
     public PrecisionAssembler(String aName) {

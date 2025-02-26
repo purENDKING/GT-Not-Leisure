@@ -90,12 +90,9 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamCrusher> STRUCTURE_DEFINITION = null;
-
     public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_crusher"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamCrusher(String aName) {
         super(aName);
@@ -103,7 +100,6 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
 
     public LargeSteamCrusher(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 3;

@@ -65,16 +65,16 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     protected static final String STRUCTURE_PIECE_TOP_HINT = "topHint";
     protected static final String STRUCTURE_PIECE_TOP = "top";
     private static IStructureDefinition<LargeDistillery> STRUCTURE_DEFINITION = null;
-    public static String[][] shape_base;
-    public static String[][] shape_layer;
-    public static String[][] shape_layer_hint;
-    public static String[][] shape_top_hint;
-    public static String[][] shape_top;
     public static final String LDB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/base";
     public static final String LDL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer";
     public static final String LDLH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer_hint";
     public static final String LDTH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/top_hint";
     public static final String LDT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/top";
+    public static String[][] shape_base = StructureUtils.readStructureFromFile(LDB_STRUCTURE_FILE_PATH);
+    public static String[][] shape_layer = StructureUtils.readStructureFromFile(LDL_STRUCTURE_FILE_PATH);
+    public static String[][] shape_layer_hint = StructureUtils.readStructureFromFile(LDLH_STRUCTURE_FILE_PATH);
+    public static String[][] shape_top_hint = StructureUtils.readStructureFromFile(LDTH_STRUCTURE_FILE_PATH);
+    public static String[][] shape_top = StructureUtils.readStructureFromFile(LDT_STRUCTURE_FILE_PATH);
 
     protected final List<List<MTEHatchOutput>> mOutputHatchesByLayer = new ArrayList<>();
     protected int mHeight;
@@ -82,11 +82,6 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
 
     public LargeDistillery(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape_base = StructureUtils.readStructureFromFile(LDB_STRUCTURE_FILE_PATH);
-        shape_layer = StructureUtils.readStructureFromFile(LDL_STRUCTURE_FILE_PATH);
-        shape_layer_hint = StructureUtils.readStructureFromFile(LDLH_STRUCTURE_FILE_PATH);
-        shape_top_hint = StructureUtils.readStructureFromFile(LDTH_STRUCTURE_FILE_PATH);
-        shape_top = StructureUtils.readStructureFromFile(LDT_STRUCTURE_FILE_PATH);
     }
 
     public LargeDistillery(String aName) {

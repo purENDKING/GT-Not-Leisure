@@ -49,11 +49,10 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 1;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(FCR_STRUCTURE_FILE_PATH);
 
     public FlotationCellRegulator(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(FCR_STRUCTURE_FILE_PATH);
     }
 
     public FlotationCellRegulator(String aName) {

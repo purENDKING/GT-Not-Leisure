@@ -50,13 +50,12 @@ public class LargePacker extends GTMMultiMachineBase<LargePacker> implements ISu
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LP_STRUCTURE_FILE_PATH);
     private static final int MACHINEMODE_PACKAGER = 0;
     private static final int MACHINEMODE_UNPACKAGER = 1;
 
     public LargePacker(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LP_STRUCTURE_FILE_PATH);
     }
 
     public LargePacker(String aName) {

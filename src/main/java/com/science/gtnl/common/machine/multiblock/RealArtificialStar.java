@@ -74,41 +74,11 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
     public static final String RAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/real_artificial_star";
-    public String[][] shape;
-
-    // region Class Constructor
-    public RealArtificialStar(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
-    }
-
-    public RealArtificialStar(String aName) {
-        super(aName);
-    }
-
-    @Override
-    public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new RealArtificialStar(this.mName);
-    }
-
-    // endregion
-
-    // region Statics
+    public String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID DepletedExcitedNaquadahFuelRod;
     protected static GTNL_ItemID EnhancementCore;
     protected static long MaxOfDepletedExcitedNaquadahFuelRod;
     protected static long MaxOfEnhancementCore;
-
-    public static void initStatics() {
-        DepletedExcitedNaquadahFuelRod = GTNL_ItemID.createNoNBT(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1));
-        EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));
-        MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
-        MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
-    }
-
-    // endregion
-
-    // region Processing Logic
     public String ownerName;
     public UUID ownerUUID;
     public long storageEU = 0;
@@ -122,6 +92,29 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public final DecimalFormat decimalFormat = new DecimalFormat("#.0");
     public boolean isRendering = false;
     public byte enableRender = EnableRenderDefaultArtificialStar;
+    public final int horizontalOffSet = 62;
+    public final int verticalOffSet = 88;
+    public final int depthOffSet = 15;
+
+    public RealArtificialStar(int aID, String aName, String aNameRegional) {
+        super(aID, aName, aNameRegional);
+    }
+
+    public RealArtificialStar(String aName) {
+        super(aName);
+    }
+
+    @Override
+    public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
+        return new RealArtificialStar(this.mName);
+    }
+
+    public static void initStatics() {
+        DepletedExcitedNaquadahFuelRod = GTNL_ItemID.createNoNBT(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1));
+        EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));
+        MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
+        MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
+    }
 
     @Override
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
@@ -342,11 +335,6 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         enableRender = aNBT.getByte("enableRender");
     }
 
-    // endregion
-
-    // region Structure
-    // spotless:off
-    // disable crafting input bus/buffer
     @Override
     protected boolean supportsCraftingMEBuffer() {
         return false;
@@ -386,10 +374,6 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
             false,
             true);
     }
-
-    public final int horizontalOffSet = 62;
-    public final int verticalOffSet = 88;
-    public final int depthOffSet = 15;
 
     @Override
     public IStructureDefinition<RealArtificialStar> getStructureDefinition() {

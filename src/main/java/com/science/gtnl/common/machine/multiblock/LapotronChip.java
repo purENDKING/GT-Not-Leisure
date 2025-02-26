@@ -52,12 +52,9 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
     public int casing;
 
     public IStructureDefinition<LapotronChip> STRUCTURE_DEFINITION = null;
-
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public static final String LC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/lapotron_chip"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
 
     public LapotronChip(String aName) {
         super(aName);
@@ -65,7 +62,6 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
 
     public LapotronChip(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
     }
 
     @Override

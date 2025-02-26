@@ -51,12 +51,11 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
     public final int horizontalOffSet = 14;
     public final int verticalOffSet = 33;
     public final int depthOffSet = 5;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(DFC_STRUCTURE_FILE_PATH);
     public int tierCasing = -1;
 
     public DraconicFusionCrafting(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(DFC_STRUCTURE_FILE_PATH);
     }
 
     public DraconicFusionCrafting(String aName) {

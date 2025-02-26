@@ -49,11 +49,10 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     public final int horizontalOffSet = 15;
     public final int verticalOffSet = 18;
     public final int depthOffSet = 3;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(RF_STRUCTURE_FILE_PATH);
 
     public ReactionFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(RF_STRUCTURE_FILE_PATH);
     }
 
     public ReactionFurnace(String aName) {

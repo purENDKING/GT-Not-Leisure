@@ -62,8 +62,8 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
     public int casingTier;
     public byte glassTier = 0;
     public int casingAmount;
-    public static String[][] shape;
     public static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
+    public static String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 4;
@@ -130,7 +130,6 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     public ComponentAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     }
 
     public ComponentAssembler(String aName) {

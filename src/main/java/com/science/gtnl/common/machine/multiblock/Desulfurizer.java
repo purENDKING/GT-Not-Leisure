@@ -45,15 +45,14 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
     private int mCasing;
     private static IStructureDefinition<Desulfurizer> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String Desu_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/desulfurizer";
+    public static String[][] shape = StructureUtils.readStructureFromFile(Desu_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
 
     public Desulfurizer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(Desu_STRUCTURE_FILE_PATH);
     }
 
     public Desulfurizer(String aName) {

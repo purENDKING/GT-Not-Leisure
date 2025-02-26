@@ -45,11 +45,10 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 2;
     public final int depthOffSet = 0;
-    public static String[][] shape;
+    public static String[][] shape = StructureUtils.readStructureFromFile(LF_STRUCTURE_FILE_PATH);
 
     public LargeForming(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(LF_STRUCTURE_FILE_PATH);
     }
 
     public LargeForming(String aName) {

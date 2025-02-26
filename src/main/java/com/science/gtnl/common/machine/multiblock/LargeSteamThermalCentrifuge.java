@@ -90,12 +90,9 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamThermalCentrifuge> STRUCTURE_DEFINITION = null;
-
     public static final String LSTC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_thermal_centrifuge"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSTC_STRUCTURE_FILE_PATH);
 
     public LargeSteamThermalCentrifuge(String aName) {
         super(aName);
@@ -103,7 +100,6 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
 
     public LargeSteamThermalCentrifuge(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSTC_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 3;

@@ -89,12 +89,9 @@ public class LargeSteamChemicalBath extends MTESteamMultiBase<LargeSteamChemical
     }
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public IStructureDefinition<LargeSteamChemicalBath> STRUCTURE_DEFINITION = null;
-
     public static final String LSCB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_chemical_bath"; // 文件路径
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSCB_STRUCTURE_FILE_PATH);
 
     public LargeSteamChemicalBath(String aName) {
         super(aName);
@@ -102,7 +99,6 @@ public class LargeSteamChemicalBath extends MTESteamMultiBase<LargeSteamChemical
 
     public LargeSteamChemicalBath(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSCB_STRUCTURE_FILE_PATH);
     }
 
     public static final int HORIZONTAL_OFF_SET = 4;

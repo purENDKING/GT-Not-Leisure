@@ -13,11 +13,15 @@ import static kubatech.loaders.BlockLoader.defcCasingBlock;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
@@ -36,6 +42,7 @@ import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -63,20 +70,15 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     public static final int HORIZONTAL_OFF_SET = 8;
     public static final int VERTICAL_OFF_SET = 14;
     public static final int DEPTH_OFF_SET = 0;
-
+    private static final int MACHINEMODE_SMF = 0;
+    private static final int MACHINEMODE_DTPF = 1;
     protected static final int CASING_INDEX = BlockGTCasingsTT.textureOffset;
-
     public int tCountCasing = 0;
-
     public int casing;
-
     public IStructureDefinition<SmeltingMixingFurnace> STRUCTURE_DEFINITION = null;
-
     public static final String STRUCTURE_PIECE_MAIN = "main";
-
     public static final String SMF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/smelting_mixing_furnace";
-
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
 
     public SmeltingMixingFurnace(String aName) {
         super(aName);
@@ -84,7 +86,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     public SmeltingMixingFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
     }
 
     @Override
@@ -225,7 +226,14 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeRegister.SmeltingMixingFurnaceRecipes;
+        return (machineMode == MACHINEMODE_SMF) ? RecipeRegister.SmeltingMixingFurnaceRecipes
+            : RecipeMaps.plasmaForgeRecipes;
+    }
+
+    @Nonnull
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(RecipeRegister.SmeltingMixingFurnaceRecipes, RecipeMaps.plasmaForgeRecipes);
     }
 
     @Nonnull
@@ -309,18 +317,52 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     @Override
     public int getMaxParallelRecipes() {
-        return 256 * (GTUtility.getTier(this.getMaxInputVoltage()));
+        return 16384 * (GTUtility.getTier(this.getMaxInputVoltage()));
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.clear();
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_METAL);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_FLUID);
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        setMachineModeIcons();
+        builder.widget(createModeSwitchButton(builder));
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        this.machineMode = (byte) ((this.machineMode + 1) % 2);
+        GTUtility.sendChatToPlayer(
+            aPlayer,
+            StatCollector.translateToLocal("SmeltingMixingFurnace_Mode_" + this.machineMode));
+    }
+
+    @Override
+    public String getMachineModeName() {
+        return StatCollector.translateToLocal("SmeltingMixingFurnace_Mode_" + machineMode);
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
+        aNBT.setInteger("mode", machineMode);
         aNBT.setByte("mGlassTier", mGlassTier);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
+        machineMode = aNBT.getInteger("mode");
         mGlassTier = aNBT.getByte("mGlassTier");
     }
 

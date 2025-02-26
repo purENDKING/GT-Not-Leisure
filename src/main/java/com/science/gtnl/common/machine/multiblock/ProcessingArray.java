@@ -76,14 +76,13 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
     public int depthOffset = 0;
     public static IStructureDefinition<ProcessingArray> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static String[][] shape;
     public static final String PA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/processing_array";
+    public static String[][] shape = StructureUtils.readStructureFromFile(PA_STRUCTURE_FILE_PATH);
     public HeatingCoilLevel mHeatingCapacity;
     public static final int CASING_INDEX = ((BlockCasings4) sBlockCasings4).getTextureIndex(2);
 
     public ProcessingArray(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        shape = StructureUtils.readStructureFromFile(PA_STRUCTURE_FILE_PATH);
     }
 
     public ProcessingArray(String aName) {

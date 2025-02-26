@@ -82,7 +82,7 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
     private static final String STRUCTURE_PIECE_MAIN = "main";
     public IStructureDefinition<LargeSteamFurnace> STRUCTURE_DEFINITION = null;
     public static final String LSF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_furnace"; // 文件路径
-    public String[][] shape;
+    public String[][] shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
 
     @Override
     public IStructureDefinition<LargeSteamFurnace> getStructureDefinition() {
@@ -247,7 +247,6 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
 
     public LargeSteamFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-        this.shape = StructureUtils.readStructureFromFile(LSF_STRUCTURE_FILE_PATH);
     }
 
     public LargeSteamFurnace(String aName) {
