@@ -346,6 +346,7 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

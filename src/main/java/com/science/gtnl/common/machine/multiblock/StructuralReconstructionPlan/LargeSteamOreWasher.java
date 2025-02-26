@@ -281,6 +281,7 @@ public class LargeSteamOreWasher extends MTESteamMultiBase<LargeSteamOreWasher> 
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

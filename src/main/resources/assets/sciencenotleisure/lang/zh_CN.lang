@@ -1033,7 +1033,7 @@ Tooltip_LargeNaquadahReactor_04=只能在不输入氢气的情况下使用!
 Tooltip_LargeNaquadahReactor_Casing=任意放射硅岩合金机械方块
 
 NameGrandAssemblyLine=大型装配线
-GrandAssemblyLineRecipeTypeRecipes=无序装配线
+GrandAssemblyLineRecipeType=无序装配线
 gtnl.recipe.GrandAssemblyLine=无序装配线
 Tooltip_GrandAssemblyLine_00=§r§l让亨利·福特也黯然失色。
 Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。

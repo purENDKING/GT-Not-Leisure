@@ -299,6 +299,7 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

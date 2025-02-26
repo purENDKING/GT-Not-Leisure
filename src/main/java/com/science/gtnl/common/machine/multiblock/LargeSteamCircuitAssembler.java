@@ -263,6 +263,7 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

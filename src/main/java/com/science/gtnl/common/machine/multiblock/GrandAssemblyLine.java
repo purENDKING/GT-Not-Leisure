@@ -9,7 +9,13 @@ import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,6 +33,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.recipe.RecipeRegister;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -46,8 +53,6 @@ import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMapBackend;
-import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
@@ -242,12 +247,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             recipe.mDuration = adjustedTime;
         }
 
-        // 第四步：构建临时配方池
-        RecipeMap<RecipeMapBackend> tempRecipeMap = RecipeMapBuilder
-            .of("gtnl.recipe.GrandAssemblyLineRecipes", RecipeMapBackend::new)
-            .maxIO(16, 1, 4, 0)
-            .build();
-
         for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
             // 复制输入和输出的物品和流体
             ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
@@ -271,12 +270,12 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 .orElse(null);
 
             if (tempRecipe != null) {
-                tempRecipeMap.add(tempRecipe);
+                RecipeRegister.GrandAssemblyLineRecipes.add(tempRecipe);
             }
         }
 
         // 过滤掉需求功率大于能源仓最大功率的临时配方
-        List<GTRecipe> filteredTempRecipes = tempRecipeMap.getAllRecipes()
+        List<GTRecipe> filteredTempRecipes = RecipeRegister.GrandAssemblyLineRecipes.getAllRecipes()
             .stream()
             .filter(recipe -> recipe.mEUt <= energyEU)
             .collect(Collectors.toList());

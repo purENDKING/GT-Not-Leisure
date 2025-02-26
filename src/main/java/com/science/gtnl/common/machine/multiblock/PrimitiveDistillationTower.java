@@ -317,6 +317,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
             }
             mHeight++;
         }
+        updateHatchTexture();
 
         return mCasing >= 7 * (mHeight + 1) - 5 && mHeight == 6;
     }

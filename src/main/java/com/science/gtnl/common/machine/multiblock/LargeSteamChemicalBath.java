@@ -265,6 +265,7 @@ public class LargeSteamChemicalBath extends MTESteamMultiBase<LargeSteamChemical
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

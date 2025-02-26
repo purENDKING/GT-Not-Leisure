@@ -297,6 +297,7 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

@@ -365,6 +365,7 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

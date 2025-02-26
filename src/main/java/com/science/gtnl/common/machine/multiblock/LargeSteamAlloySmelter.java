@@ -259,6 +259,7 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 

@@ -291,4 +291,14 @@ public class RecipeRegister {
                 .setMaxRecipesPerPage(1))
         .disableOptimize()
         .build();
+
+    public static RecipeMap<RecipeMapBackend> GrandAssemblyLineRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.GrandAssemblyLineRecipes")
+        .maxIO(16, 1, 4, 0)
+        .dontUseProgressBar()
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.GrandAssemblyLine.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
 }

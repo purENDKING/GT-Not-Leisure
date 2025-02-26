@@ -323,6 +323,7 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
             tierMachine = 2;
             return true;
         }
+        updateHatchTexture();
         return false;
     }
 
