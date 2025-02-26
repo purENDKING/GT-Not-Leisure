@@ -12,6 +12,8 @@ import static gtPlusPlus.core.block.ModBlocks.*;
 import static kubatech.loaders.BlockLoader.defcCasingBlock;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
+import java.math.BigInteger;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
@@ -25,6 +27,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -41,7 +44,9 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -221,6 +226,55 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeRegister.SmeltingMixingFurnaceRecipes;
+    }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        if (this.getRecipeMap() == RecipeMaps.plasmaForgeRecipes) {
+            ItemStack requiredItem = GTNLItemList.StargateSingularity.get(1);
+
+            boolean hasRequiredItem = false;
+            for (int i = 0; i < this.getBaseMetaTileEntity()
+                .getSizeInventory(); i++) {
+                ItemStack stack = this.getBaseMetaTileEntity()
+                    .getStackInSlot(i);
+                if (stack != null && stack.isItemEqual(requiredItem)) {
+                    hasRequiredItem = true;
+                    break;
+                }
+            }
+
+            if (!hasRequiredItem) {
+                return CheckRecipeResultRegistry.NO_RECIPE;
+            }
+        }
+
+        costingEU = BigInteger.ZERO;
+        costingEUText = ZERO_STRING;
+        prepareProcessing();
+        if (!wirelessMode) return super.checkProcessing();
+
+        boolean succeeded = false;
+        CheckRecipeResult finalResult = CheckRecipeResultRegistry.SUCCESSFUL;
+        for (int i = 0; i < cycleNum; i++) {
+            CheckRecipeResult r = wirelessModeProcessOnce();
+            if (!r.wasSuccessful()) {
+                finalResult = r;
+                break;
+            }
+            succeeded = true;
+        }
+
+        updateSlots();
+        if (!succeeded) return finalResult;
+        costingEUText = GTUtility.formatNumbers(costingEU);
+
+        mEfficiency = 10000;
+        mEfficiencyIncrease = 10000;
+        mMaxProgresstime = getWirelessModeProcessingTime();
+
+        return CheckRecipeResultRegistry.SUCCESSFUL;
     }
 
     @Override
