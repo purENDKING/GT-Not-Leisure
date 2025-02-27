@@ -16,6 +16,7 @@ public class MainConfig {
     public static boolean enableRenderInfinitySwordSpecial = true;
     public static boolean enableDeleteRecipe = true;
     public static boolean enableDebugMode = false;
+    public static boolean enableInfinitySwordExplosion = true;
 
     private static Configuration config;
 
@@ -97,6 +98,14 @@ public class MainConfig {
 
         enableDebugMode = config.get("Enable Debug Print Log", "enable", enableDebugMode, "Enable Debug Print Log")
             .getBoolean(enableDebugMode);
+
+        enableInfinitySwordExplosion = config
+            .get(
+                "Enable when Infinity Sword hit Infinity Suit create Explosion",
+                "enable",
+                enableInfinitySwordExplosion,
+                "Enable Create Explosion")
+            .getBoolean(enableInfinitySwordExplosion);
 
         if (config.hasChanged()) {
             config.save();

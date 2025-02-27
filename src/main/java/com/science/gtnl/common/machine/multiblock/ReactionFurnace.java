@@ -7,6 +7,8 @@ import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -89,6 +91,12 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeMaps.furnaceRecipes;
+    }
+
+    @NotNull
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(RecipeMaps.furnaceRecipes);
     }
 
     @Override

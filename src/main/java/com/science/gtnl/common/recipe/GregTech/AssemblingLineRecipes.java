@@ -1,5 +1,6 @@
 package com.science.gtnl.common.recipe.GregTech;
 
+import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTRecipeBuilder.*;
 import static gregtech.api.util.GTRecipeConstants.*;
@@ -698,6 +699,97 @@ public class AssemblingLineRecipes implements IRecipePool {
             .itemOutputs(ItemList.Circuit_Crystalmainframe.get(1))
             .eut(TierEU.RECIPE_LuV)
             .duration(40 * SECONDS)
+            .addTo(AssemblyLine);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 1, 4),
+            1024000000,
+            51200,
+            (int) TierEU.RECIPE_UEV,
+            1,
+            new ItemStack[] { GregtechItemList.GTPP_Casing_UHV.get(16),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L), ItemList.Field_Generator_UHV.get(8),
+                ItemList.Robot_Arm_UHV.get(16), ItemList.Emitter_UHV.get(16),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFMagicLogSpecial", 64, 0),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.IronWood, 64L),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.Steeleaf, 64L),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 64L),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.Knightmetal, 64L),
+                GTModHandler.getModItem(TwilightForest.ID, "item.magicMapFocus", 64, 0),
+                GTModHandler.getModItem(TwilightForest.ID, "item.mazeMapFocus", 32, 0),
+                GTModHandler.getModItem(TwilightForest.ID, "item.lampOfCinders", 1, 0) },
+            new FluidStack[] { Materials.FierySteel.getFluid(32000), Materials.SolderingAlloy.getMolten(73728),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(36864), },
+            GTNLItemList.LibraryOfRuina.get(1),
+            300 * SECONDS,
+            (int) TierEU.RECIPE_UHV);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            ItemList.Machine_Multi_Furnace.get(1),
+            512000000,
+            51200,
+            (int) TierEU.RECIPE_UEV,
+            1,
+            new ItemStack[] { ItemList.Machine_Multi_Furnace.get(16), ItemList.Machine_Multi_Furnace.get(16),
+                ItemList.Machine_Multi_Furnace.get(16), ItemList.Machine_Multi_Furnace.get(16),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 32L), ItemList.Field_Generator_UV.get(16),
+                ItemList.Emitter_UV.get(32), ItemList.Sensor_UHV.get(32), GregtechItemList.Laser_Lens_Special.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUV, 32L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 64L),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.DraconiumAwakened, 4L) },
+            new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(640000),
+                Materials.CosmicNeutronium.getMolten(9216), Materials.Grade6PurifiedWater.getFluid(64000), },
+            GTNLItemList.LibraryOfRuina.get(1),
+            300 * SECONDS,
+            (int) TierEU.RECIPE_UHV);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GregtechItemList.Controller_IsaMill.get(1))
+            .metadata(RESEARCH_TIME, 4 * HOURS)
+            .itemInputs(
+                GregtechItemList.Controller_IsaMill.get(1),
+                GregtechItemList.Controller_IsaMill.get(1),
+                GregtechItemList.Controller_IsaMill.get(1),
+                GregtechItemList.Controller_IsaMill.get(1),
+                MaterialsAlloy.ZERON_100.getPlateDouble(16),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4L),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 8L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt04, Materials.SuperconductorLuV, 16L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 16L),
+                ItemList.Component_Grinder_Tungsten.get(16),
+                ItemList.Component_Grinder_Tungsten.get(16),
+                ItemList.Conveyor_Module_LuV.get(8),
+                ItemList.Electric_Motor_LuV.get(16))
+            .fluidInputs(Materials.Grade2PurifiedWater.getFluid(64000), Materials.Europium.getMolten(2304))
+            .itemOutputs(GTNLItemList.IsaMill.get(1))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(40 * SECONDS)
+            .addTo(AssemblyLine);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GTNLItemList.Incubator.get(1))
+            .metadata(RESEARCH_TIME, 4 * HOURS)
+            .itemInputs(
+                GTNLItemList.Incubator.get(1),
+                GTNLItemList.Incubator.get(1),
+                GTNLItemList.Incubator.get(1),
+                GTNLItemList.Incubator.get(1),
+                ItemList.ActivatedCarbonFilterMesh.get(32),
+                ItemList.Field_Generator_UV.get(16),
+                ItemList.Emitter_UV.get(32),
+                ItemList.Sensor_UV.get(32),
+                ItemList.Robot_Arm_UV.get(32),
+                ItemList.Conveyor_Module_UV.get(32),
+                ItemList.Electric_Pump_UV.get(48),
+                GGMaterial.lumiium.get(OrePrefixes.cableGt08, 32),
+                new ItemStack(bw_realglas, 32, 5))
+            .fluidInputs(Materials.Grade5PurifiedWater.getFluid(32000), Materials.CosmicNeutronium.getMolten(2304))
+            .itemOutputs(GTNLItemList.LargeIncubator.get(1))
+            .eut(TierEU.RECIPE_UV)
+            .duration(30 * SECONDS)
             .addTo(AssemblyLine);
     }
 }

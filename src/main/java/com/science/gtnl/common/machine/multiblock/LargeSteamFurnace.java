@@ -340,7 +340,10 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
             && tierPlatedCasing < 0
             && tierBrickCasing < 0
             && tierFireboxCasing < 0
-            && tierAdvancedCasing < 0) return false;
+            && tierAdvancedCasing < 0) {
+            updateHatchTexture();
+            return false;
+        }
         if (tierPipeCasing == 1 && tierMachineCasing == 1
             && tierFrameCasing == 1
             && tierPlatedCasing == 1

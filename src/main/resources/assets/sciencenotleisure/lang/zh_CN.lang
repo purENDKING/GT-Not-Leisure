@@ -1051,7 +1051,7 @@ PreciseAssembler_Mode_0=组装机
 PreciseAssembler_Mode_1=精密组装机
 Tooltip_PreciseAssembler_00=机械方块等级决定了能源仓最大等级, UHV机械方块解锁所有等级
 Tooltip_PreciseAssembler_01=并行数: 2 ^ 玻璃等级
-Tooltip_PreciseAssembler_02=机器可进行§c无损超频§7
+Tooltip_PreciseAssembler_02=当精密电子单元机械方块等级为3时，开启§c无损超频§7
 Tooltip_PreciseAssembler_Casing=任意精密机械方块
 
 NameDecayHastener=衰变加速器
@@ -1574,6 +1574,8 @@ Tooltip_LibraryOfRuina_03=§8§o光耀，孤寂，无尽
 Tooltip_LibraryOfRuina_04=§8§o满腹稀世书籍
 Tooltip_LibraryOfRuina_05=§8§o无用，不灭，隐秘
 Tooltip_LibraryOfRuina_06=§8§o正于此地，愿您找到想要的书。
+Tooltip_LibraryOfRuina_07=需要在控制器内放入暮色传送门激活水晶
+Tooltip_LibraryOfRuina_08=机器可进行§c无损超频§7
 
 NameEnergeticPhotovoltaicPowerStation=充能光伏电站
 NameAdvancedPhotovoltaicPowerStation=高级光伏电站

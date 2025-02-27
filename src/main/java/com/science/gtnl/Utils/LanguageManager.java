@@ -5,6 +5,22 @@ import static gregtech.api.util.GTLanguageManager.addStringLocalization;
 public class LanguageManager {
 
     public static void writePlaceholderStrings() {
+
+        addStringLocalization("Interaction_DESCRIPTION_Index_700", "需要铝研磨球");
+        addStringLocalization("Interaction_DESCRIPTION_Index_701", "需要皂石研磨球");
+        addStringLocalization("gt.blockmachines.wire.stargate.01.name", "1x星门导线");
+        addStringLocalization("gt.blockmachines.wire.stargate.02.name", "2x星门导线");
+        addStringLocalization("gt.blockmachines.wire.stargate.04.name", "4x星门导线");
+        addStringLocalization("gt.blockmachines.wire.stargate.08.name", "8x星门导线");
+        addStringLocalization("gt.blockmachines.wire.stargate.12.name", "12x星门导线");
+        addStringLocalization("gt.blockmachines.wire.stargate.16.name", "16x星门导线");
+        addStringLocalization("gt.blockmachines.cable.stargate.01.name", "1x星门线缆");
+        addStringLocalization("gt.blockmachines.cable.stargate.02.name", "2x星门线缆");
+        addStringLocalization("gt.blockmachines.cable.stargate.04.name", "4x星门线缆");
+        addStringLocalization("gt.blockmachines.cable.stargate.08.name", "8x星门线缆");
+        addStringLocalization("gt.blockmachines.cable.stargate.12.name", "12x星门线缆");
+        addStringLocalization("gt.blockmachines.cable.stargate.16.name", "16x星门线缆");
+
         // bw.werkstoff 系列
         addStringLocalization("bw.werkstoff.25001.name", "六硝基六氮杂异伍兹烷");
         addStringLocalization("bw.werkstoff.25002.name", "粗制六硝基六氮杂异伍兹烷");

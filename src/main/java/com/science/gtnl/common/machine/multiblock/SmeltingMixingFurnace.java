@@ -33,12 +33,12 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.BorosilicateGlass;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
@@ -240,7 +240,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     @Override
     public CheckRecipeResult checkProcessing() {
         if (this.getRecipeMap() == RecipeMaps.plasmaForgeRecipes) {
-            ItemStack requiredItem = GTNLItemList.StargateSingularity.get(1);
+            ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
 
             boolean hasRequiredItem = false;
             for (int i = 0; i < this.getBaseMetaTileEntity()
@@ -305,6 +305,12 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
                 setEuModifier(0.9);
                 setSpeedBonus(0.2);
                 return super.process();
+            }
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                return CheckRecipeResultRegistry.SUCCESSFUL;
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

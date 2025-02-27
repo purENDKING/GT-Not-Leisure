@@ -42,6 +42,7 @@ import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -106,7 +107,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
@@ -237,14 +238,16 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         for (Entity target : targets) {
             if (target == player) continue;
 
-            boolean isSneaking = !player.isSneaking();
+            boolean isSneaking = player.isSneaking();
             boolean isHostile = target instanceof IMob;
 
-            if (isSneaking && !(isHostile || target instanceof EntityPlayer)) continue;
+            if (!isSneaking && !(isHostile || target instanceof EntityPlayer)) continue;
 
             if (target instanceof EntityPlayer) {
-                handlePlayerTarget((EntityPlayer) target, player, world);
-                continue;
+                if (isSneaking) {
+                    handlePlayerTarget((EntityPlayer) target, player, world);
+                    continue;
+                }
             }
 
             if (target instanceof EntityLivingBase) {
@@ -256,7 +259,18 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
     private void handlePlayerTarget(EntityPlayer target, EntityPlayer attacker, World world) {
         if (LudicrousItems.isInfinite(target)) {
             target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 4.0F);
-            world.createExplosion(null, target.posX, target.posY, target.posZ, 25.0F, true);
+
+            float newHealth = target.getHealth() - 4.0F;
+            if (newHealth <= 0) {
+                target.setHealth(0);
+                target.onDeath(DamageSource.causePlayerDamage(attacker));
+            } else {
+                target.setHealth(newHealth);
+            }
+
+            if (MainConfig.enableInfinitySwordExplosion) {
+                world.createExplosion(null, target.posX, target.posY, target.posZ, 250.0F, true);
+            }
         } else {
             applyDoubleSweepDamage(target, attacker);
         }
@@ -273,7 +287,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         target.onDeath(originalSource);
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerAttacked(LivingAttackEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
@@ -285,7 +299,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(LivingDeathEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
@@ -394,7 +408,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void interceptLudicrousEvents(LivingDeathEvent event) {
         if (event.entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) event.entity;
@@ -405,7 +419,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
     }
 
     @SideOnly(Side.CLIENT)
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public void onRenderPlayer(RenderPlayerEvent.Pre event) {
         if (MainConfig.enableRenderInfinitySwordSpecial) {
             EntityPlayer player = event.entityPlayer;
@@ -425,7 +439,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
     }
 
     @SideOnly(Side.CLIENT)
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onRenderPlayerPost(RenderPlayerEvent.Post event) {
         if (MainConfig.enableRenderInfinitySwordSpecial) {
             EntityPlayer player = event.entityPlayer;

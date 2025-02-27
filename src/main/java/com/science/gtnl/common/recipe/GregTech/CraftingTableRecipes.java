@@ -4,7 +4,6 @@ import static com.science.gtnl.Mods.ScienceNotLeisure;
 import static com.science.gtnl.loader.IScriptLoader.missing;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.addCraftingRecipe;
-import static gregtech.api.util.GTModHandler.getModItem;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
@@ -35,12 +34,12 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GTNLItemList.BronzeBrickCasing.get(1),
             new Object[] { "AAA", "ABA", "ACA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
-                'B', "craftingToolWrench", 'C', getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
+                'B', "craftingToolWrench", 'C', GTModHandler.getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
 
         addCraftingRecipe(
             GTNLItemList.SteelBrickCasing.get(1),
             new Object[] { "AAA", "ABA", "ACA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1),
-                'B', "craftingToolWrench", 'C', getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
+                'B', "craftingToolWrench", 'C', GTModHandler.getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
 
         addCraftingRecipe(
             GTNLItemList.CheatOreProcessingFactory.get(1),
@@ -51,14 +50,15 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.LargeSteamFurnace.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
                 'B', ItemList.Casing_Pipe_Bronze.get(1), 'C', ItemList.Casing_Firebox_Bronze.get(1), 'D',
-                getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
-                getModItem("gregtech", "gt.blockmachines", 1, 103, missing) });
+                GTModHandler.getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
+                GTModHandler.getModItem("gregtech", "gt.blockmachines", 1, 103, missing) });
 
         addCraftingRecipe(
             GTNLItemList.LargeSteamAlloySmelter.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
-                'B', getModItem("miscutils", "itemBasicTurbine", 1, 1, missing), 'C',
-                ItemList.Casing_Firebox_Bronze.get(1), 'D', getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
+                'B', GTModHandler.getModItem("miscutils", "itemBasicTurbine", 1, 1, missing), 'C',
+                ItemList.Casing_Firebox_Bronze.get(1), 'D',
+                GTModHandler.getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
                 ItemList.Machine_Bronze_AlloySmelter.get(1) });
 
         addCraftingRecipe(
@@ -261,5 +261,19 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTModHandler.getModItem(IndustrialCraft2.ID, "blockAlloyGlass", 1, 0, missing), 'D',
                 GTOreDictUnificator.get(OrePrefixes.spring, Materials.Europium, 1L), 'E', "circuitElite", 'F',
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Platinum, 1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamExtractor.get(1),
+            new Object[] { "ABA", "CDE", "ABA", 'A', ItemList.Casing_Pipe_Bronze.get(1), 'B',
+                GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Bronze, 1L), 'C',
+                ItemList.Casing_Gearbox_Bronze.get(1), 'D', ItemList.Machine_Bronze_Extractor.get(1), 'E',
+                GTModHandler.getModItem(Minecraft.ID, "glass", 1, 0, missing) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamOreWasher.get(1),
+            new Object[] { "ABA", "CDC", "ABA", 'A', ItemList.Casing_Gearbox_Bronze.get(1), 'B',
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.WroughtIron, 1L), 'C',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'D',
+                GregtechItemList.Controller_SteamWasherMulti.get(1) });
     }
 }

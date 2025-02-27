@@ -105,7 +105,9 @@ import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
 import com.science.gtnl.common.machine.multiblock.WoodDistillation;
+import com.science.gtnl.common.materials.MaterialPool;
 
+import goodgenerator.util.CrackRecipeAdder;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
@@ -736,9 +738,14 @@ public class MachineLoader {
 
     }
 
+    public static void registerMTEWire() {
+        CrackRecipeAdder.registerWire(22701, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
+    }
+
     public static void run() {
         Logger.INFO("GTNL Content | Registering MTE Block Machine.");
         registerMTEHatch();
         loadMachines();
+        registerMTEWire();
     }
 }

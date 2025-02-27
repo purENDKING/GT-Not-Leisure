@@ -52,7 +52,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Nickel, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Nickel, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledNickel, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -100,7 +100,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Platinum, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Platinum, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPlatinum, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -112,7 +112,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Platinum, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Platinum, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPlatinum, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -148,7 +148,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Almandine, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Almandine, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledAlmandine, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -160,7 +160,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Almandine, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Almandine, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledAlmandine, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -196,7 +196,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Chalcopyrite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Chalcopyrite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledChalcopyrite, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -208,7 +208,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Chalcopyrite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Chalcopyrite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledChalcopyrite, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -244,7 +244,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Grossular, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Grossular, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledGrossular, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -256,7 +256,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Grossular, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Grossular, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledGrossular, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -292,7 +292,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Pyrope, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Pyrope, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPyrope, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -304,7 +304,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Pyrope, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Pyrope, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPyrope, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -340,7 +340,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Spessartine, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Spessartine, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledSpessartine, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -352,7 +352,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Spessartine, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Spessartine, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledSpessartine, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -388,7 +388,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Sphalerite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Sphalerite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledSphalerite, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -400,7 +400,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Sphalerite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Sphalerite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledSphalerite, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -436,7 +436,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Pentlandite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Pentlandite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPentlandite, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -448,7 +448,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Pentlandite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Pentlandite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledPentlandite, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -484,7 +484,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Monazite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Monazite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledMonazite, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -496,7 +496,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Monazite, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Monazite, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledMonazite, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -532,7 +532,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Redstone, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Redstone, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledRedstone, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -544,7 +544,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.Redstone, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.Redstone, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOreProcessing.milledRedstone, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)
@@ -580,7 +580,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(1),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.NaquadahEnriched, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.NaquadahEnriched, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOre.milledNaquadahEnriched, 1), 48))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 2)
@@ -592,7 +592,7 @@ public class IsaMillRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GTUtility.getIntegratedCircuit(10),
-                GTOreDictUnificator.get(OrePrefixes.ore, Materials.NaquadahEnriched, 16L))
+                GTOreDictUnificator.get(OrePrefixes.rawOre, Materials.NaquadahEnriched, 16L))
             .itemOutputs(setStackSize(new ItemStack(MilledOre.milledNaquadahEnriched, 1), 36))
             .fluidInputs(FluidRegistry.getFluidStack("ic2distilledwater", 50))
             .metadata(ISAMILL_TIER, 1)

@@ -881,7 +881,7 @@ public class TextLocalization {
         "Parallel: 2 ^ Glass Level",
         "Tooltip_PreciseAssembler_01");
     public static final String Tooltip_PreciseAssembler_02 = texter(
-        "It gains §cperfect overclock§7",
+        "When the Precise Electronic Unit Casing is at level 3, enable §cperfect overclock§7",
         "Tooltip_PreciseAssembler_02");
     public static final String Tooltip_PreciseAssembler_Casing = texter(
         "Any Unit Casing",
@@ -1535,6 +1535,12 @@ public class TextLocalization {
     public static final String Tooltip_LibraryOfRuina_06 = texter(
         "§8§oHere and now, may you find the book you seek.",
         "Tooltip_LibraryOfRuina_06");
+    public static final String Tooltip_LibraryOfRuina_07 = texter(
+        "Need Put Quick and Dirty Portal Generator in the Controller Slot",
+        "Tooltip_LibraryOfRuina_07");
+    public static final String Tooltip_LibraryOfRuina_08 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_LibraryOfRuina_08");
     public static final String Tooltip_LibraryOfRuina_Casing = texter(
         "Any Frost Proof Machine Casing",
         "Tooltip_LibraryOfRuina_Casing");

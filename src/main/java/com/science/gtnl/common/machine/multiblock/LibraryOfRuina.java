@@ -112,6 +112,10 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             .addInfo(TextLocalization.Tooltip_LibraryOfRuina_04)
             .addInfo(TextLocalization.Tooltip_LibraryOfRuina_05)
             .addInfo(TextLocalization.Tooltip_LibraryOfRuina_06)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_07)
+            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_08)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -174,6 +178,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        ParallelTier = 0;
         mCasing = 0;
         this.multiTier = getMultiTier(aStack);
 
@@ -181,6 +186,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             && mCasing >= 920
             && multiTier == 1) {
             replaceWaterWithPortal();
+            ParallelTier = getParallelTier(aStack);
             return true;
         } else {
             replacePortalWithWater();

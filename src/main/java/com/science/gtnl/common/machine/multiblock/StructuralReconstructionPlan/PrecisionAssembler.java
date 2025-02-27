@@ -66,7 +66,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     public static final String LPA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/precise_assembler";
     private static final int MACHINEMODE_ASSEMBLER = 0;
     private static final int MACHINEMODE_PRECISION = 1;
-    private static final int CASING_INDEX = 1541;
+    private static final int CASING_INDEX = 1540;
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 0;
@@ -92,24 +92,37 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
+        int id = Math.max(CASING_INDEX, CASING_INDEX + casingTier);
         if (side == aFacing) {
-            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
-                TextureFactory.builder()
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
+                TextureFactory.of(TexturesGtBlock.oMCDIndustrialCuttingMachineActive), TextureFactory.builder()
                     .addIcon(TexturesGtBlock.oMCDIndustrialCuttingMachineActive)
-                    .extFacing()
+                    .glow()
                     .build() };
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
-                TextureFactory.builder()
+            else return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
+                TextureFactory.of(TexturesGtBlock.oMCDIndustrialCuttingMachine), TextureFactory.builder()
                     .addIcon(TexturesGtBlock.oMCDIndustrialCuttingMachine)
-                    .extFacing()
+                    .glow()
                     .build() };
+        } else return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
+    }
+
+    @Override
+    public void onValueUpdate(byte aValue) {
+        if ((byte) casingTier != aValue) {
+            casingTier = (byte) (aValue & 0x0F);
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+    }
+
+    @Override
+    public byte getUpdateData() {
+        if (casingTier <= -1) return 0;
+        return (byte) casingTier;
     }
 
     public int getCasingTextureID() {
         if (casingTier >= 0) {
-            return CASING_INDEX + casingTier - 1;
+            return CASING_INDEX + casingTier;
         } else return CASING_INDEX;
     }
 
@@ -187,7 +200,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                 .addElement(
                     'D',
                     ofChain(
-                        buildHatchAdder(PrecisionAssembler.class).casingIndex(CASING_INDEX)
+                        buildHatchAdder(PrecisionAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                             .buildAndChain(
@@ -222,7 +235,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     @Override
     public boolean isEnablePerfectOverclock() {
-        return true;
+        return casingTier >= 4;
     }
 
     public static int getCasingTier(Block block, int meta) {
@@ -336,17 +349,24 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (machineTier < VoltageIndex.UHV & mEnergyHatch.mTier > machineTier) {
+                updateHatchTexture();
                 return false;
             }
         }
 
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
+                updateHatchTexture();
                 return false;
             }
         }
 
         updateHatchTexture();
+        updateTexture(aBaseMetaTileEntity, getCasingTextureID());
+        if (aBaseMetaTileEntity instanceof MTEHatch mteHatch) {
+            mteHatch.updateTexture(getCasingTextureID());
+            return true;
+        }
         return mCasing >= 30 && casingTier >= 0;
     }
 
@@ -358,7 +378,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
                 if (machineMode == 1) {
-                    if (recipe.mSpecialValue > (casingTier - 1)) {
+                    if (recipe.mSpecialValue > (Math.max(0, casingTier - 1))) {
                         return CheckRecipeResultRegistry.insufficientMachineTier(recipe.mSpecialValue);
                     }
                 }
@@ -381,7 +401,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     @Override
     public int getMaxParallelRecipes() {
         if (glassTier > 0) {
-            return (int) Math.pow(2, glassTier);
+            return (int) Math.pow(2, glassTier) + casingTier * 64;
         } else {
             return 0;
         }

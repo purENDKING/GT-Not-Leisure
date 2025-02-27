@@ -64,7 +64,7 @@ public class InfinityTotem extends Item {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle() {
+    public void showSubtitle() {
         String localized = TextLocalization.Tooltip_InfinityTotem_Enable;
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
 
@@ -98,8 +98,10 @@ public class InfinityTotem extends Item {
                 } else {
                     triggerNormalEffect(player.worldObj, player, stack);
                 }
-                showSubtitle();
-                player.worldObj.playSoundAtEntity(player, "sciencenotleisure:totem.enable", 1.0F, 1.0F);
+                if (player.worldObj.isRemote) {
+                    showSubtitle();
+                    player.worldObj.playSoundAtEntity(player, "sciencenotleisure:totem.enable", 1.0F, 1.0F);
+                }
             }
         }
     }
