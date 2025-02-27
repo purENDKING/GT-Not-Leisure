@@ -18,6 +18,8 @@ public class MainConfig {
     public static boolean enableDebugMode = false;
     public static boolean enableInfinitySwordExplosion = true;
 
+    public static boolean needSeedPacket = true;
+
     private static Configuration config;
 
     public static void init(File configFile) {

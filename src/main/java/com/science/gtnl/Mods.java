@@ -16,7 +16,8 @@ public enum Mods {
     NHUtilities(Names.NHUTILITIES),
     AE2Thing(Names.AE2THING),
     QzMiner(Names.QZMINER),
-    OTHTechnology(Names.OTHTECHNOLOGY);
+    OTHTechnology(Names.OTHTECHNOLOGY),
+    Baubles(Names.BAUBLES);
 
     public static class Names {
 
@@ -29,6 +30,7 @@ public enum Mods {
         public static final String AE2THING = "ae2thing";
         public static final String QZMINER = "qz_miner";
         public static final String OTHTECHNOLOGY = "123Technology";
+        public static final String BAUBLES = "Baubles";
     }
 
     public final String ID;

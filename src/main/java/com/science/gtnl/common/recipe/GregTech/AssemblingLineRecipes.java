@@ -742,7 +742,7 @@ public class AssemblingLineRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.DraconiumAwakened, 4L) },
             new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(640000),
                 Materials.CosmicNeutronium.getMolten(9216), Materials.Grade6PurifiedWater.getFluid(64000), },
-            GTNLItemList.LibraryOfRuina.get(1),
+            GTNLItemList.ReactionFurnace.get(1),
             300 * SECONDS,
             (int) TierEU.RECIPE_UHV);
 

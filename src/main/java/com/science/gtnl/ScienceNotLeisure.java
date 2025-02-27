@@ -172,10 +172,12 @@ public class ScienceNotLeisure {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     @Mod.EventHandler
     public void serverStarted(FMLServerStartedEvent event) {
+        MainConfig.needSeedPacket = true;
         if (MainConfig.enableDeleteRecipe) {
             RemoveRecipes.removeRecipes();
         }
         RecipeLoaderServerStart.loadRecipesServerStart();
+        MainConfig.needSeedPacket = false;
     }
 
     static {

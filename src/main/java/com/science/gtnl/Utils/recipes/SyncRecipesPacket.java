@@ -1,6 +1,7 @@
 package com.science.gtnl.Utils.recipes;
 
 import com.science.gtnl.common.recipe.Special.RemoveRecipes;
+import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.RecipeLoaderServerStart;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -22,8 +23,12 @@ public class SyncRecipesPacket implements IMessage {
 
         @Override
         public IMessage onMessage(SyncRecipesPacket message, MessageContext ctx) {
-            RemoveRecipes.removeRecipes();
-            RecipeLoaderServerStart.loadRecipesServerStart();
+            if (MainConfig.needSeedPacket) {
+                RemoveRecipes.removeRecipes();
+                RecipeLoaderServerStart.loadRecipesServerStart();
+                MainConfig.needSeedPacket = false;
+                return null;
+            }
             return null;
         }
     }
