@@ -1510,7 +1510,7 @@ public class AssemblerRecipes implements IRecipePool {
                 ItemList.Electric_Piston_IV.get(4),
                 MaterialsAlloy.INCOLOY_DS.getFrameBox(4),
                 MaterialsAlloy.ENERGYCRYSTAL.getPlateDouble(4),
-                GTOreDictUnificator.get(OrePrefixes.cable, Materials.Osmium, 4L),
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.Osmium, 4L),
                 GTModHandler.getModItem(EnderIO.ID, "blockDarkSteelAnvil", 4, 0))
             .itemOutputs(GTNLItemList.LargeHammer.get(1))
             .fluidInputs(Materials.Polybenzimidazole.getMolten(1152))
