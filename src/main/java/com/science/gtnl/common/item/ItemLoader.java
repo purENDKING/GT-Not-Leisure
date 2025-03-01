@@ -48,7 +48,7 @@ public class ItemLoader {
     public static Item InfinityTotem = new InfinityTotem();
     public static Item InfinityBucket = new InfinityBucket();
     public static Item MatterCluster = new MatterCluster();
-    public static Item KFCFamily = new KFCFamily(114514, 114514, true);
+    public static Item KFCFamily = new KFCFamily(20, 20, true);
     public static Item RecordSus = new ItemRecord("sus");
     public static Item RecordNewHorizons = new ItemRecord("newhorizons");
 

@@ -26,7 +26,7 @@ public class PerfectPhysiqueEffect extends GTNLEffectUtil {
             PotionEffect effect = player.getActivePotionEffect(this);
 
             if (effect != null) {
-                if (player.getHealth() < 15.0F) {
+                if (player.getHealth() > 0.0F && player.getHealth() < 15.0F) {
                     player.setHealth(15.0F);
                 }
                 FoodStats foodStats = player.getFoodStats();

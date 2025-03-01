@@ -124,6 +124,10 @@ public class LanguageManager {
         addStringLocalization("bw.werkstoff.25100.name", "间苯二酚");
         addStringLocalization("bw.werkstoff.25101.name", "对苯二酚");
         addStringLocalization("bw.werkstoff.25102.name", "二氟二甲苯酮");
+        addStringLocalization("bw.werkstoff.25103.name", "加氟裂化硅岩");
+        addStringLocalization("bw.werkstoff.25104.name", "富集硅岩废液");
+        addStringLocalization("bw.werkstoff.25105.name", "加氡裂化富集硅岩");
+        addStringLocalization("bw.werkstoff.25106.name", "超能硅岩废液");
         addStringLocalization("bw.werkstoff.25200.name", "錭錤錶");
         addStringLocalization("bw.werkstoff.25201.name", "星门");
 
@@ -230,6 +234,10 @@ public class LanguageManager {
         addStringLocalization("Material.resorcinol", "间苯二酚");
         addStringLocalization("Material.hydroquinone", "对苯二酚");
         addStringLocalization("Material.difluorobenzophenone", "二氟二甲苯酮");
+        addStringLocalization("Material.fluorinecrackednaquadah", "加氟裂化硅岩");
+        addStringLocalization("Material.enrichednaquadahwaste", "富集硅岩废液");
+        addStringLocalization("Material.radoncrackedenrichednaquadah", "加氡裂化富集硅岩");
+        addStringLocalization("Material.naquadriawaste", "超能硅岩废液");
         addStringLocalization("Material.periodicium", "錭錤錶");
         addStringLocalization("Material.stargate", "星门");
 
@@ -337,6 +345,10 @@ public class LanguageManager {
         addStringLocalization("fluid.resorcinol", "间苯二酚");
         addStringLocalization("fluid.hydroquinone", "对苯二酚");
         addStringLocalization("fluid.difluorobenzophenone", "二氟二甲苯酮");
+        addStringLocalization("fluid.fluorinecrackednaquadah", "加氟裂化硅岩");
+        addStringLocalization("fluid.enrichednaquadahwaste", "富集硅岩废液");
+        addStringLocalization("fluid.radoncrackedenrichednaquadah", "加氡裂化富集硅岩");
+        addStringLocalization("fluid.naquadriawaste", "超能硅岩废液");
         addStringLocalization("fluid.periodicium", "錭錤錶");
         addStringLocalization("fluid.stargate", "星门");
 
@@ -444,6 +456,10 @@ public class LanguageManager {
         addStringLocalization("fluid.molten.resorcinol", "间苯二酚");
         addStringLocalization("fluid.molten.hydroquinone", "对苯二酚");
         addStringLocalization("fluid.molten.difluorobenzophenone", "二氟二甲苯酮");
+        addStringLocalization("fluid.molten.fluorinecrackednaquadah", "加氟裂化硅岩");
+        addStringLocalization("fluid.molten.enrichednaquadahwaste", "富集硅岩废液");
+        addStringLocalization("fluid.molten.radoncrackedenrichednaquadah", "加氡裂化富集硅岩");
+        addStringLocalization("fluid.molten.naquadriawaste", "超能硅岩废液");
         addStringLocalization("fluid.molten.periodicium", "錭錤錶");
         addStringLocalization("fluid.molten.stargate", "星门");
     }

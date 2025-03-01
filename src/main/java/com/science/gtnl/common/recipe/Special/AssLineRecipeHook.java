@@ -32,6 +32,22 @@ public class AssLineRecipeHook {
                 .addProcessKey(30 * SECONDS, (int) (TierEU.RECIPE_UHV / 2))
                 .build();
 
+            // 移除 神经元处理器
+            Builder.newBuilder()
+                .addOutputItem("gregtech:gt.metaitem.03", 1, 32072)
+                .addResearchItem("gregtech:gt.metaitem.03", 1, 32073)
+                .addResearchKey(1 * HOURS)
+                .addProcessKey(30 * SECONDS, (int) (TierEU.RECIPE_ZPM))
+                .build();
+
+            // 移除 湿件处理器主机
+            Builder.newBuilder()
+                .addOutputItem("gregtech:gt.metaitem.03", 1, 32095)
+                .addResearchItem("gregtech:gt.metaitem.03", 1, 32094)
+                .addResearchKey(24000, 64, 50000, 4)
+                .addProcessKey(100 * SECONDS, 300000)
+                .build();
+
             // 一个测试TT那边用的 移除 样板输入输入总成
             // Builder.newBuilder()
             // .addOutputItem("gregtech:gt.blockmachines", 1, 2714)

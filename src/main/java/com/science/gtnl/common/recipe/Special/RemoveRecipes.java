@@ -58,6 +58,18 @@ public class RemoveRecipes {
                         recipesToRemoveFromCircuitAssembler.add(recipe);
                         break;
                     }
+                    if (output.isItemEqual(ItemList.Circuit_Neuroprocessor.get(1))) {
+                        recipesToRemoveFromCircuitAssembler.add(recipe);
+                        break;
+                    }
+                    if (output.isItemEqual(ItemList.Circuit_Wetwarecomputer.get(1))) {
+                        recipesToRemoveFromCircuitAssembler.add(recipe);
+                        break;
+                    }
+                    if (output.isItemEqual(ItemList.Circuit_Wetwaresupercomputer.get(1))) {
+                        recipesToRemoveFromCircuitAssembler.add(recipe);
+                        break;
+                    }
                 }
             }
         }

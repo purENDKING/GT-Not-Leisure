@@ -40,6 +40,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.objects.ItemData;
 import gregtech.api.recipe.RecipeMap;
@@ -243,7 +244,7 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
         }
 
         // 计算每tick消耗的EU
-        int euConsumption = (int) (outputAmount * 120);
+        int euConsumption = (int) Math.min(outputAmount * 4, Integer.MAX_VALUE);
 
         // 存储每tick消耗的EU，供onPostTick使用
         this.mEUt = -euConsumption;
@@ -273,6 +274,12 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
         for (MTEHatchEnergy energyHatch : mEnergyHatches) {
             if (energyHatch.getEUVar() >= amount) {
                 energyHatch.setEUVar(energyHatch.getEUVar() - amount);
+                return true;
+            }
+        }
+        for (MTEHatch exoEnergyHatch : mExoticEnergyHatches) {
+            if (exoEnergyHatch.getEUVar() >= amount) {
+                exoEnergyHatch.setEUVar(exoEnergyHatch.getEUVar() - amount);
                 return true;
             }
         }

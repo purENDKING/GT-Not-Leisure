@@ -24,7 +24,9 @@ public class SyncRecipesPacket implements IMessage {
         @Override
         public IMessage onMessage(SyncRecipesPacket message, MessageContext ctx) {
             if (MainConfig.needSeedPacket) {
-                RemoveRecipes.removeRecipes();
+                if (MainConfig.enableDeleteRecipe) {
+                    RemoveRecipes.removeRecipes();
+                }
                 RecipeLoaderServerStart.loadRecipesServerStart();
                 MainConfig.needSeedPacket = false;
                 return null;

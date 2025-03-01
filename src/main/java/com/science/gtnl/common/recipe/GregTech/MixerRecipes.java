@@ -6,6 +6,7 @@ import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
+import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
@@ -13,6 +14,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.material.MaterialMisc;
+import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class MixerRecipes implements IRecipePool {
 
@@ -54,6 +56,16 @@ public class MixerRecipes implements IRecipePool {
             .specialValue(0)
             .noOptimize()
             .duration(250)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(MNCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 2L))
+            .fluidInputs(WerkstoffMaterialPool.AmmoniumNitrate.getFluidOrGas(1000))
+            .fluidOutputs(GGMaterial.naquadahSolution.getFluidOrGas(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(400)
             .eut(TierEU.RECIPE_LuV)
             .addTo(MNCR);
 

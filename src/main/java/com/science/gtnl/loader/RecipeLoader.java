@@ -11,6 +11,7 @@ import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
 import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
+import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
 import com.science.gtnl.common.recipe.GTNL.IsaMillRecipes;
 import com.science.gtnl.common.recipe.GTNL.ManaInfusionRecipes;
 import com.science.gtnl.common.recipe.GTNL.MatterFabricatorRecipes;
@@ -36,10 +37,12 @@ import com.science.gtnl.common.recipe.GregTech.ChemicalBathRecipes;
 import com.science.gtnl.common.recipe.GregTech.ChemicalDehydratorRecipes;
 import com.science.gtnl.common.recipe.GregTech.ChemicalRecipes;
 import com.science.gtnl.common.recipe.GregTech.CompressorRecipes;
+import com.science.gtnl.common.recipe.GregTech.CrackingRecipes;
 import com.science.gtnl.common.recipe.GregTech.CraftingTableRecipes;
 import com.science.gtnl.common.recipe.GregTech.CuttingRecipes;
 import com.science.gtnl.common.recipe.GregTech.DigesterRecipes;
 import com.science.gtnl.common.recipe.GregTech.DissolutionTankRecipes;
+import com.science.gtnl.common.recipe.GregTech.DistillationTowerRecipes;
 import com.science.gtnl.common.recipe.GregTech.DistilleryRecipes;
 import com.science.gtnl.common.recipe.GregTech.DragonEvolutionFusionCraftingRecipes;
 import com.science.gtnl.common.recipe.GregTech.ElectrolyzerRecipes;
@@ -77,7 +80,8 @@ public class RecipeLoader {
             new ElementCopyingRecipes(), new AlloySmelterRecipes(), new MolecularTransformerRecipes(),
             new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes(),
             new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
-            new DecayHastenerRecipes(), new PreciseAssemblerRecipes() };
+            new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
+            new CrackingRecipes(), new DistillationTowerRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();

@@ -372,6 +372,7 @@ public class CircuitAssemblerRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 ItemList.Circuit_Board_Multifiberglass_Elite.get(1L),
+                ItemList.Circuit_Crystalcomputer.get(2),
                 ItemList.Circuit_Chip_Ram.get(4),
                 ItemList.Circuit_Chip_NOR.get(32),
                 ItemList.Circuit_Chip_NAND.get(64),
@@ -383,6 +384,72 @@ public class CircuitAssemblerRecipes implements IRecipePool {
             .noOptimize()
             .duration(400)
             .eut(TierEU.RECIPE_LuV)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Wetware_Extreme.get(1L),
+                ItemList.Circuit_Chip_Stemcell.get(16),
+                GTOreDictUnificator.get(OrePrefixes.pipeTiny, Materials.Polybenzimidazole, 8),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Electrum, 8),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Silicone, 16),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.HSSE, 8))
+            .fluidInputs(Materials.GrowthMediumSterilized.getFluid(250))
+            .itemOutputs(ItemList.Circuit_Chip_NeuroCPU.get(1))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(600)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Chip_NeuroCPU.get(1L),
+                ItemList.Circuit_Chip_CrystalCPU.get(1L),
+                ItemList.Circuit_Chip_NanoCPU.get(1L),
+                ItemList.Circuit_Parts_CapacitorASMD.get(8),
+                ItemList.Circuit_Parts_TransistorASMD.get(8),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 8))
+            .fluidInputs(Materials.SolderingAlloy.getFluid(144))
+            .itemOutputs(ItemList.Circuit_Neuroprocessor.get(1))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Chip_NeuroCPU.get(1L),
+                GTNLItemList.HighlyAdvancedSoc.get(1),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 8),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Naquadah, 8))
+            .fluidInputs(Materials.SolderingAlloy.getFluid(144))
+            .itemOutputs(ItemList.Circuit_Neuroprocessor.get(2))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_UV)
+            .addTo(CAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Circuit_Board_Wetware_Extreme.get(1L),
+                ItemList.Circuit_Neuroprocessor.get(2),
+                ItemList.Circuit_Parts_InductorASMD.get(6),
+                ItemList.Circuit_Parts_CapacitorASMD.get(12),
+                ItemList.Circuit_Chip_Ram.get(24),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 16))
+            .fluidInputs(Materials.SolderingAlloy.getFluid(288))
+            .itemOutputs(ItemList.Circuit_Wetwarecomputer.get(2))
+            .requiresCleanRoom()
+            .specialValue(0)
+            .noOptimize()
+            .duration(400)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(CAR);
 
     }

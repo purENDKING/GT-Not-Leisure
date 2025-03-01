@@ -33,6 +33,7 @@ public enum GTNLItemList {
     StargateTier9,
     Stargate_Coil_Compressed,
     LaserBeacon,
+
     BronzeBrickCasing,
     SteelBrickCasing,
     CrushingWheels,
@@ -259,6 +260,7 @@ public enum GTNLItemList {
     LargePyrolyseOven,
     PreciseAssembler,
 
+    FuelRefiningComplex,
     GrandAssemblyLine,
     DecayHastener,
     LargeSteamExtruder,

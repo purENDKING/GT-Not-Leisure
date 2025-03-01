@@ -614,6 +614,10 @@ bw.werkstoff.25099.name=氟甲苯
 bw.werkstoff.25100.name=间苯二酚
 bw.werkstoff.25101.name=对苯二酚
 bw.werkstoff.25102.name=二氟二甲苯酮
+bw.werkstoff.25103.name=加氟裂化硅岩
+bw.werkstoff.25104.name=富集硅岩废液
+bw.werkstoff.25105.name=加氡裂化富集硅岩
+bw.werkstoff.25106.name=超能硅岩废液
 bw.werkstoff.25200.name=錭錤錶
 bw.werkstoff.25201.name=星门
 
@@ -719,6 +723,10 @@ Material.fluorotoluene=氟甲苯
 Material.resorcinol=间苯二酚
 Material.hydroquinone=对苯二酚
 Material.difluorobenzophenone=二氟二甲苯酮
+Material.fluorinecrackednaquadah=加氟裂化硅岩
+Material.enrichednaquadahwaste=富集硅岩废液
+Material.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+Material.naquadriawaste=超能硅岩废液
 Material.periodicium=錭錤錶
 Material.stargate=星门
 
@@ -825,6 +833,10 @@ fluid.fluorotoluene=氟甲苯
 fluid.resorcinol=间苯二酚
 fluid.hydroquinone=对苯二酚
 fluid.difluorobenzophenone=二氟二甲苯酮
+fluid.fluorinecrackednaquadah=加氟裂化硅岩
+fluid.enrichednaquadahwaste=富集硅岩废液
+fluid.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+fluid.naquadriawaste=超能硅岩废液
 fluid.periodicium=錭錤錶
 fluid.stargate=星门
 
@@ -931,6 +943,10 @@ fluid.molten.fluorotoluene=氟甲苯
 fluid.molten.resorcinol=间苯二酚
 fluid.molten.hydroquinone=对苯二酚
 fluid.molten.difluorobenzophenone=二氟二甲苯酮
+fluid.molten.fluorinecrackednaquadah=加氟裂化硅岩
+fluid.molten.enrichednaquadahwaste=富集硅岩废液
+fluid.molten.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+fluid.molten.naquadriawaste=超能硅岩废液
 fluid.molten.periodicium=錭錤錶
 fluid.molten.stargate=星门
 
@@ -945,11 +961,15 @@ StructureTooComplex=结构太复杂了！
 BLUE_PRINT_INFO=请参考§9Structure§1Lib§7全息投影，构建主体结构
 textUseBlueprint=用§9蓝§b图§r预览
 
-Tooltip_GTMMultiMachine_00=比相同电压的单方块机器快167%%
+Tooltip_GTMMultiMachine_00=比相同电压的机器快167%%
 Tooltip_GTMMultiMachine_01=只需要使用配方要求功率的80%%
 Tooltip_GTMMultiMachine_02=初始并行为8
 Tooltip_GTMMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
 Tooltip_GTMMultiMachine_04=支持§9Tec§1Tech§r多安能源仓！
+
+NameFuelRefiningComplex=燃料精炼复合体
+FuelRefiningComplexRecipeType=燃料精炼复合体
+gtnl.recipe.FuelRefiningComplexRecipes=燃料精炼复合体
 
 NameLargeHammer=大型锻造锤
 LargeHammerRecipeType=锻造锤

@@ -1331,6 +1331,46 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 102,
         TextureSet.SET_FLUID);
 
+    public static final Werkstoff FluorineCrackedNaquadah = new Werkstoff(
+        new short[] { 57, 68, 72 },
+        "FluorineCrackedNaquadah",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 103,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff EnrichedNaquadahWaste = new Werkstoff(
+        new short[] { 67, 100, 71 },
+        "EnrichedNaquadahWaste",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 104,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff RadonCrackedEnrichedNaquadah = new Werkstoff(
+        new short[] { 67, 100, 71 },
+        "RadonCrackedEnrichedNaquadah",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 105,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff NaquadriaWaste = new Werkstoff(
+        new short[] { 61, 84, 69 },
+        "NaquadriaWaste",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 106,
+        TextureSet.SET_FLUID);
+
     public static final Werkstoff Periodicium = new Werkstoff(
         new short[] { 60, 74, 243 },
         "Periodicium",

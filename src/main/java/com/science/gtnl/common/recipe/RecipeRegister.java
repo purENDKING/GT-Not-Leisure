@@ -13,6 +13,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMapBuilder;
 import gregtech.api.util.GTRecipe;
+import gregtech.nei.formatter.HeatingCoilSpecialValueFormatter;
 
 public class RecipeRegister {
 
@@ -299,6 +300,18 @@ public class RecipeRegister {
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.GrandAssemblyLine.get(1))
                 .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
+
+    public static RecipeMap<RecipeMapBackend> FuelRefiningComplexRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.FuelRefiningComplexRecipes")
+        .maxIO(3, 0, 6, 1)
+        .frontend(GeneralFrontend::new)
+        .dontUseProgressBar()
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.FuelRefiningComplex.get(1))
+                .setMaxRecipesPerPage(1))
+        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .disableOptimize()
         .build();
 }

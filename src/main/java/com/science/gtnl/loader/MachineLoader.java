@@ -27,6 +27,7 @@ import com.science.gtnl.common.machine.multiblock.DraconicFusionCrafting;
 import com.science.gtnl.common.machine.multiblock.EdenGarden;
 import com.science.gtnl.common.machine.multiblock.ElementCopying;
 import com.science.gtnl.common.machine.multiblock.EnergeticPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.FuelRefiningComplex;
 import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
 import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
@@ -472,6 +473,10 @@ public class MachineLoader {
         GTNLItemList.GrandAssemblyLine
             .set(new GrandAssemblyLine(21090, "GrandAssemblyLine", TextLocalization.NameGrandAssemblyLine));
         addItemTooltip(GTNLItemList.GrandAssemblyLine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.FuelRefiningComplex
+            .set(new FuelRefiningComplex(21091, "FuelRefiningComplex", TextLocalization.NameFuelRefiningComplex));
+        addItemTooltip(GTNLItemList.FuelRefiningComplex.get(1), AnimatedText.SNL_QYZG);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

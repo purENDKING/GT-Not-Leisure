@@ -992,6 +992,14 @@ public class TextLocalization {
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeWiremill_Casing");
 
+    public static final String NameFuelRefiningComplex = texter("Fuel Refining Complex", "NameFuelRefiningComplex");
+    public static final String FuelRefiningComplexRecipeType = texter(
+        "Fuel Refining Complex",
+        "FuelRefiningComplexRecipeType");
+    public static final String Tooltip_FuelRefiningComplex_Casing = texter(
+        "Any Inconel Reinforced Casing",
+        "Tooltip_FuelRefiningComplex_Casing");
+
     public static final String NameLargePyrolyseOven = texter("Large Pyrolyse Oven", "NameLargePyrolyseOven");
     public static final String LargePyrolyseOvenRecipeType = texter("Pyrolyse", "LargePyrolyseOvenRecipeType");
     public static final String Tooltip_LargePyrolyseOven_Casing = texter(
@@ -1226,7 +1234,7 @@ public class TextLocalization {
         "Tooltip_ElectricImplosionCompressor_Casing");
 
     public static final String Tooltip_GTMMultiMachine_00 = texter(
-        "167%% faster than using single block machines of the same voltage",
+        "167%% faster than using machines of the same voltage",
         "Tooltip_GTMMultiMachine_00");
     public static final String Tooltip_GTMMultiMachine_01 = texter(
         "Only uses 80%% of the EU/t normally required",

@@ -791,5 +791,43 @@ public class AssemblingLineRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_UV)
             .duration(30 * SECONDS)
             .addTo(AssemblyLine);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, ItemList.Circuit_Wetwarecomputer.get(1))
+            .metadata(RESEARCH_TIME, 4 * HOURS)
+            .itemInputs(
+                ItemList.Circuit_Board_Wetware_Extreme.get(1),
+                ItemList.Circuit_Wetwarecomputer.get(2),
+                ItemList.Circuit_Parts_DiodeASMD.get(8),
+                ItemList.Circuit_Chip_NOR.get(16),
+                ItemList.Circuit_Chip_Ram.get(32),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 24),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 32),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Europium, 4))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(1152))
+            .itemOutputs(ItemList.Circuit_Wetwaresupercomputer.get(1))
+            .eut(TierEU.RECIPE_ZPM)
+            .duration(40 * SECONDS)
+            .addTo(AssemblyLine);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            ItemList.Circuit_Wetwaresupercomputer.get(1L),
+            384000,
+            96,
+            (int) TierEU.RECIPE_UV,
+            1,
+            new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Tritanium, 2),
+                ItemList.Circuit_Wetwaresupercomputer.get(2L), ItemList.Circuit_Parts_DiodeASMD.get(32),
+                ItemList.Circuit_Parts_CapacitorASMD.get(32), ItemList.Circuit_Parts_TransistorASMD.get(32),
+                ItemList.Circuit_Parts_ResistorASMD.get(32), ItemList.Circuit_Parts_InductorASMD.get(32),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Polybenzimidazole, 64),
+                ItemList.Circuit_Chip_Ram.get(32),
+                GTOreDictUnificator.get(OrePrefixes.wireGt02, Materials.SuperconductorUV, 16),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Europium, 8), },
+            new FluidStack[] { Materials.SolderingAlloy.getMolten(2880), Materials.Polybenzimidazole.getMolten(1152) },
+            ItemList.Circuit_Wetwaremainframe.get(1L),
+            2000,
+            300000);
+
     }
 }

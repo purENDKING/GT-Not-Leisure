@@ -95,6 +95,16 @@ public class ScienceNotLeisure {
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
     public static CommonProxy proxy;
 
+    static {
+        File configDir = new File("config/GTNotLeisure");
+        if (!configDir.exists()) {
+            configDir.mkdirs();
+        }
+
+        File mainConfigFile = new File(configDir, "main.cfg");
+        MainConfig.init(mainConfigFile);
+    }
+
     @Mod.EventHandler
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
@@ -178,15 +188,5 @@ public class ScienceNotLeisure {
         }
         RecipeLoaderServerStart.loadRecipesServerStart();
         MainConfig.needSeedPacket = false;
-    }
-
-    static {
-        File configDir = new File("config/GTNotLeisure");
-        if (!configDir.exists()) {
-            configDir.mkdirs();
-        }
-
-        File mainConfigFile = new File(configDir, "main.cfg");
-        MainConfig.init(mainConfigFile);
     }
 }
