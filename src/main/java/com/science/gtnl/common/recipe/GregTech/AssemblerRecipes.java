@@ -2,6 +2,7 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.science.gtnl.loader.IScriptLoader.missing;
+import static goodgenerator.loader.Loaders.huiCircuit;
 import static gregtech.api.enums.Mods.*;
 
 import net.minecraft.item.Item;
@@ -16,6 +17,7 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
+import goodgenerator.items.GGMaterial;
 import goodgenerator.util.ItemRefer;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
@@ -1548,7 +1550,7 @@ public class AssemblerRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(
                 GregtechItemList.Controller_Vacuum_Furnace.get(1),
-                CI.getEnergyCore(7, 2),
+                CI.getEnergyCore(6, 2),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4L),
                 ItemList.Robot_Arm_LuV.get(2),
                 ItemList.Field_Generator_LuV.get(1),
@@ -1575,6 +1577,85 @@ public class AssemblerRecipes implements IRecipePool {
             .fluidInputs(Materials.HSSG.getMolten(1152))
             .duration(200)
             .eut(TierEU.RECIPE_EV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Machine_Multi_IndustrialLaserEngraver.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4L),
+                ItemList.Energy_LapotronicOrb2.get(2),
+                ItemList.Field_Generator_LuV.get(2),
+                ItemList.Robot_Arm_LuV.get(4),
+                ItemList.Emitter_LuV.get(4),
+                WerkstoffLoader.LuVTierMaterial.get(OrePrefixes.plateDouble, 16),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.HSSS, 8L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt08, Materials.SuperconductorLuV, 4L))
+            .itemOutputs(GTNLItemList.LargeEngravingLaser.get(1))
+            .fluidInputs(Materials.NaquadahAlloy.getMolten(576))
+            .duration(200)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.Amazon_Warehouse_Controller.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2L),
+                GregtechItemList.Casing_AmazonWarehouse.get(4),
+                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(4),
+                ItemList.Robot_Arm_IV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.Platinum, 4L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenCarbide, 4L))
+            .itemOutputs(GTNLItemList.LargePacker.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(1152))
+            .duration(200)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.Industrial_AlloySmelter.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt08, Materials.Graphene, 4L),
+                MaterialsAlloy.INCOLOY_MA956.getPlateDouble(4),
+                MaterialsAlloy.TANTALUM_CARBIDE.getGear(4),
+                ItemList.Field_Generator_IV.get(2),
+                MaterialsAlloy.INCONEL_792.getFrameBox(4))
+            .itemOutputs(GTNLItemList.LargeAlloySmelter.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(1152))
+            .duration(200)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemRefer.Large_Naquadah_Reactor.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 2L),
+                ItemList.Electric_Pump_ZPM.get(8),
+                ItemList.Field_Generator_ZPM.get(2),
+                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Naquadah, 4L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.NaquadahAlloy, 8L),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 16L))
+            .itemOutputs(GTNLItemList.LargeNaquadahReactor.get(1))
+            .fluidInputs(Materials.Trinium.getMolten(2304))
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemRefer.Precise_Assembler.get(1),
+                new ItemStack(huiCircuit, 4, 1),
+                ItemList.Tool_DataOrb.get(8),
+                GGMaterial.hikarium.get(OrePrefixes.wireFine, 16),
+                ItemList.Robot_Arm_IV.get(8),
+                GGMaterial.marM200.get(OrePrefixes.plateDouble, 4),
+                GGMaterial.lumiium.get(OrePrefixes.gearGtSmall, 4),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Osmiridium, 4L),
+                GTOreDictUnificator.get(OrePrefixes.cableGt04, Materials.TungstenSteel, 4L))
+            .itemOutputs(GTNLItemList.PreciseAssembler.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(1152))
+            .duration(400)
+            .eut(TierEU.RECIPE_IV)
             .addTo(As);
 
     }

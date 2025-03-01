@@ -829,5 +829,22 @@ public class AssemblingLineRecipes implements IRecipePool {
             2000,
             300000);
 
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            ItemList.AmplifabricatorZPM.get(1L),
+            512000,
+            256,
+            (int) TierEU.RECIPE_UV,
+            1,
+            new ItemStack[] { ItemList.AmplifabricatorZPM.get(2), ItemList.AmplifabricatorZPM.get(2),
+                ItemList.AmplifabricatorZPM.get(2), ItemList.AmplifabricatorZPM.get(2),
+                ItemList.Electric_Pump_ZPM.get(32), ItemList.Field_Generator_ZPM.get(16),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 16),
+                GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Trinium, 24), ItemList.Energy_Module.get(8) },
+            new FluidStack[] { Materials.Tritanium.getMolten(4608), Materials.Grade7PurifiedWater.getFluid(32000),
+                MaterialsAlloy.ZERON_100.getFluidStack(9216) },
+            GTNLItemList.MatterFabricator.get(1),
+            200,
+            (int) TierEU.RECIPE_UV);
+
     }
 }

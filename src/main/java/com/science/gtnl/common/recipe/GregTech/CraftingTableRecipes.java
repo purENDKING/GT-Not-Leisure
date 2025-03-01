@@ -5,6 +5,9 @@ import static com.science.gtnl.loader.IScriptLoader.missing;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.addCraftingRecipe;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+
 import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.IRecipePool;
@@ -275,5 +278,11 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.WroughtIron, 1L), 'C',
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'D',
                 GregtechItemList.Controller_SteamWasherMulti.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamOreWasher.get(1),
+            new Object[] { "ABA", "CDC", "AAA", 'A', GregtechItemList.Casing_Machine_Custom_1.get(1), 'B',
+                ItemList.Casing_Gearbox_Bronze.get(1), 'C', GTNLItemList.PrecisionSteamMechanism.get(1), 'D',
+                new ItemStack(Blocks.piston, 1) });
     }
 }
