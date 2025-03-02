@@ -852,6 +852,9 @@ public class TextLocalization {
 
     public static final String NameLargeSiftingFunnel = texter("Large Sifting Funnel", "NameLargeSiftingFunnel");
     public static final String LargeSiftingFunnelRecipeType = texter("Pulverizer", "LargeSiftingFunnelRecipeType");
+    public static final String Tooltip_LargeSiftingFunnel_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargeSiftingFunnel_00");
     public static final String Tooltip_LargeSiftingFunnel_Casing = texter(
         "Any Centrifuge Casing",
         "Tooltip_LargeSiftingFunnel_Casing");

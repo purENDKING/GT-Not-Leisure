@@ -114,7 +114,7 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
     public int tierMachineCasing = -1;
     public int tierMachine = 1;
 
-    public int tCountCasing = 0;
+    private int tCountCasing = 0;
 
     public int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {

@@ -171,7 +171,7 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
     public int tierAdvancedCasing = -1;
     public int tierMachine = 1;
 
-    public int tCountCasing = 0;
+    private int tCountCasing = 0;
 
     public boolean isBroken = true;
 

@@ -9,6 +9,8 @@ import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -22,11 +24,14 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
@@ -85,7 +90,7 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeSiftingFunnelRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_LargeSiftingFunnel_00)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
@@ -158,5 +163,18 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
             env,
             false,
             true);
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.001, 0.2 - (ParallelTier / 200.0)));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 }

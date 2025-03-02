@@ -1024,6 +1024,7 @@ Tooltip_LargeMacerationTower_Casing=任意坚实铱锇机械方块
 
 NameLargeSiftingFunnel=大型筛选漏斗
 LargeSiftingFunnelRecipeType=筛选机
+Tooltip_LargeSiftingFunnel_00=比相同电压的机器快500%%
 Tooltip_LargeSiftingFunnel_Casing=任意离心机机械方块
 
 NameLargeCutter=大型切割机
