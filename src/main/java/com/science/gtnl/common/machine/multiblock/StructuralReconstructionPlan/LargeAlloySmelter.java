@@ -141,6 +141,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

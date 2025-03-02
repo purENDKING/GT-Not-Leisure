@@ -131,6 +131,7 @@ public class LargeAutoclave extends GTMMultiMachineBase<LargeAutoclave> implemen
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

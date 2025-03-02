@@ -178,6 +178,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
 
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

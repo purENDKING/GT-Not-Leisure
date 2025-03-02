@@ -185,6 +185,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
             }
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

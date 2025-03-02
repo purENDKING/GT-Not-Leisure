@@ -3,7 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.HatchElement.InputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -88,10 +88,10 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
         return TextLocalization.LargeSteamCircuitAssemblerRecipeType;
     }
 
-    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamCircuitAssembler> STRUCTURE_DEFINITION = null;
-    public static final String LSCA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_circuit_assembler"; // 文件路径
-    public static String[][] shape = StructureUtils.readStructureFromFile(LSCA_STRUCTURE_FILE_PATH);
+    private static final String LSCA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_circuit_assembler"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(LSCA_STRUCTURE_FILE_PATH);
 
     public LargeSteamCircuitAssembler(String aName) {
         super(aName);
@@ -111,15 +111,13 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
     public int tierMachineCasing = -1;
     public int tierMachine = 1;
 
-    private int tCountCasing = 0;
+    public int tCountCasing = 0;
 
-    public int getTierMachineCasing(Block block, int meta) {
+    public static int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {
-            tCountCasing++;
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
-            tCountCasing++;
             return 2;
         }
         return 0;
@@ -129,29 +127,6 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
         if (block == sBlockCasings2 && 12 == meta) return 1;
         if (block == sBlockCasings2 && 13 == meta) return 2;
         return 0;
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-    }
-
-    public int getCasingTextureID() {
-        if (tierPipeCasing == 2 || tierMachineCasing == 2)
-            return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
-        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
-    }
-
-    @Override
-    public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
-    }
-
-    @Override
-    public byte getUpdateData() {
-        return (byte) tierMachineCasing;
     }
 
     @Override
@@ -167,11 +142,13 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
     @Override
     public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
         final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
                 aActive ? getFrontOverlayActive() : getFrontOverlay() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
@@ -183,31 +160,41 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
                 .addElement(
                     'B',
                     ofChain(
-                        buildSteamInput(LargeSteamCircuitAssembler.class).casingIndex(10)
+                        buildSteamInput(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .build(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamCircuitAssembler::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing)))),
+                        buildHatchAdder(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                SteamHatchElement.OutputBus_Steam,
+                                InputBus,
+                                OutputBus,
+                                InputHatch)
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamCircuitAssembler::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
+
                 .addElement(
                     'C',
-                    ofChain(
-                        buildHatchAdder(LargeSteamCircuitAssembler.class)
-                            .atLeast(SteamHatchElement.InputBus_Steam, SteamHatchElement.OutputBus_Steam, InputHatch)
-                            .casingIndex(10)
-                            .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
-                .addElement(
-                    'D',
                     ofBlocksTiered(
                         LargeSteamCircuitAssembler::getTierPipeCasing,
                         ImmutableList.of(Pair.of(sBlockCasings2, 12), Pair.of(sBlockCasings2, 13)),
@@ -267,11 +254,36 @@ public class LargeSteamCircuitAssembler extends MTESteamMultiBase<LargeSteamCirc
         return false;
     }
 
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
+    }
+
+    public int getCasingTextureID() {
+        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+    }
+
     public boolean checkHatches() {
         return !mSteamInputFluids.isEmpty() && !mSteamInputs.isEmpty()
             && !mSteamOutputs.isEmpty()
             && mOutputHatches.isEmpty()
             && !mInputHatches.isEmpty();
+    }
+
+    @Override
+    public void onValueUpdate(byte aValue) {
+        if ((byte) tierMachine != aValue) {
+            tierMachine = (byte) (aValue & 0x0F);
+        }
+    }
+
+    @Override
+    public byte getUpdateData() {
+        if (tierMachine <= 0) return 0;
+        return (byte) tierMachine;
     }
 
     @Override

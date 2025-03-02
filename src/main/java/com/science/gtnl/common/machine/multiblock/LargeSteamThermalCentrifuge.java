@@ -116,13 +116,11 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
 
     private int tCountCasing = 0;
 
-    public int getTierMachineCasing(Block block, int meta) {
+    public static int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {
-            tCountCasing++;
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
-            tCountCasing++;
             return 2;
         }
         return 0;
@@ -146,30 +144,6 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
         return 0;
     }
 
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-    }
-
-    public int getCasingTextureID() {
-        if (tierPipeCasing == 2 || tierMachineCasing == 2 || tierFrameCasing == 2 || tierFireboxCasing == 2)
-            return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
-        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
-    }
-
-    @Override
-    public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
-    }
-
-    @Override
-    public byte getUpdateData() {
-        return (byte) tierMachineCasing;
-    }
-
     @Override
     protected GTRenderedTexture getFrontOverlay() {
         return new GTRenderedTexture(TexturesGtBlock.oMCDIndustrialThermalCentrifuge);
@@ -183,11 +157,13 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
     @Override
     public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
         final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
                 aActive ? getFrontOverlayActive() : getFrontOverlay() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
@@ -198,25 +174,37 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
                 .addElement(
                     'A',
                     ofChain(
-                        buildSteamInput(LargeSteamThermalCentrifuge.class)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                        buildSteamInput(LargeSteamThermalCentrifuge.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .build(),
-                        buildHatchAdder(LargeSteamThermalCentrifuge.class)
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamThermalCentrifuge::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing)))),
+                        buildHatchAdder(LargeSteamThermalCentrifuge.class).casingIndex(getCasingTextureID())
+                            .dot(1)
                             .atLeast(
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
                                 OutputBus)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
-                            .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamThermalCentrifuge::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -303,8 +291,34 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
         return false;
     }
 
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
+    }
+
+    public int getCasingTextureID() {
+        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+    }
+
     public boolean checkHatches() {
         return !mSteamInputFluids.isEmpty();
+    }
+
+    @Override
+    public void onValueUpdate(byte aValue) {
+        if ((byte) tierMachine != aValue) {
+            tierMachine = (byte) (aValue & 0x0F);
+        }
+    }
+
+    @Override
+    public byte getUpdateData() {
+        if (tierMachine <= 0) return 0;
+        return (byte) tierMachine;
     }
 
     @Override

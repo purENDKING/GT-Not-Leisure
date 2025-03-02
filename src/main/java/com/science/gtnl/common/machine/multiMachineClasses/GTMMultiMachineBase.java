@@ -8,7 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.common.GTNLItemList;
 
+import gregtech.api.enums.GTValues;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.OverclockCalculator;
@@ -17,6 +20,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
 
     protected int mCasing;
     protected int ParallelTier;
+    protected int energyHatchTier;
 
     public GTMMultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -43,10 +47,39 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(2)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
                     .setSpeedBoost(0.6 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @Override

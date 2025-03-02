@@ -4,11 +4,14 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings2Misc;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -19,7 +22,6 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.TAE;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
@@ -31,8 +33,12 @@ import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implements ISurvivalConstructable {
@@ -42,7 +48,6 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
     public static final String LA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_assembler";
     public static final int CASING_INDEX = TAE.getIndexFromPage(0, 10);
     public byte glassTier = 0;
-    protected int energyHatchTier;
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
@@ -176,29 +181,6 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
     }
 
     @Override
-    protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
-        logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
-        logic.setAmperageOC(true);
-    }
-
-    public long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier + 1];
-    }
-
-    private int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
-    }
-
-    @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
         buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
     }
@@ -216,5 +198,33 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
             env,
             false,
             true);
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @Nonnull
+            @Override
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (availableVoltage * 4 < recipe.mEUt) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(2)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(0.6 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 }

@@ -168,6 +168,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
                 return false;

@@ -73,7 +73,7 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
 
         public boolean isEmpty() {
             if (itemInventory != null) {
-                for (int i = 0; i < itemInventory.length - 3; i++) {
+                for (int i = 0; i < itemInventory.length - 1; i++) {
                     if (itemInventory[i] != null && itemInventory[i].stackSize > 0) {
                         return false;
                     }

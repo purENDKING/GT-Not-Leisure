@@ -1508,11 +1508,17 @@ public class TextLocalization {
         "The maximum parallel fixed is 64",
         "Tooltip_BlazeBlastFurnace_01");
     public static final String Tooltip_BlazeBlastFurnace_02 = texter(
-        "Need to provide 10x formula voltage level ^ 2 of Pyrotheum per second",
+        "Inserting Blaze Cube into the controller will increase parallel to 256",
         "Tooltip_BlazeBlastFurnace_02");
     public static final String Tooltip_BlazeBlastFurnace_03 = texter(
-        "After each voltage level exceeds MV, the temperature will increase by 100K",
+        "Need to provide 10x formula voltage level ^ 2 of Pyrotheum per second",
         "Tooltip_BlazeBlastFurnace_03");
+    public static final String Tooltip_BlazeBlastFurnace_04 = texter(
+        "After inserting the Blaze Cube, the consumption doubles",
+        "Tooltip_BlazeBlastFurnace_04");
+    public static final String Tooltip_BlazeBlastFurnace_05 = texter(
+        "After each voltage level exceeds MV, the temperature will increase by 100K",
+        "Tooltip_BlazeBlastFurnace_05");
     public static final String Tooltip_BlazeBlastFurnace_Casing_00 = texter(
         "Any Blast Smelter Casing Block",
         "Tooltip_BlazeBlastFurnace_Casing_00");
@@ -1566,7 +1572,7 @@ public class TextLocalization {
         "Only uses 80%% of the EU/t normally required",
         "Tooltip_ColdIceFreezer_01");
     public static final String Tooltip_ColdIceFreezer_02 = texter(
-        "The maximum parallel fixed is 64",
+        "The maximum parallel fixed is 128",
         "Tooltip_ColdIceFreezer_02");
     public static final String Tooltip_ColdIceFreezer_03 = texter(
         "Need to provide 10x formula voltage level ^ 2 of crushed ice per second",

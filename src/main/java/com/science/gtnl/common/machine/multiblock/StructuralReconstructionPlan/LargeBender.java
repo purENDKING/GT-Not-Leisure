@@ -129,6 +129,7 @@ public class LargeBender extends GTMMultiMachineBase<LargeBender> implements ISu
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

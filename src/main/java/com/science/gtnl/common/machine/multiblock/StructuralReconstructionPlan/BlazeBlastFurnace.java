@@ -21,6 +21,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
@@ -66,6 +67,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     public static IStructureDefinition<BlazeBlastFurnace> STRUCTURE_DEFINITION = null;
     private int mHeatingCapacity = 0;
     private HeatingCoilLevel mCoilLevel;
+    public int multiTier = 1;
     protected final FluidStack[] pollutionFluidStacks = { Materials.CarbonDioxide.getGas(1000),
         Materials.CarbonMonoxide.getGas(1000), Materials.SulfurDioxide.getGas(1000) };
 
@@ -93,6 +95,8 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
             .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_01)
             .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_02)
             .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_03)
+            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_04)
+            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_05)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .beginStructureBlock(7, 6, 7, true)
             .addInputBus(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
@@ -178,15 +182,24 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
             true);
     }
 
+    public int getMultiTier(ItemStack inventory) {
+        if (inventory == null) return 1;
+        if (inventory.isItemEqual(GTNLItemList.BlazeCube.get(1))) return 4;
+        return 1;
+    }
+
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
         mCasing = 0;
+        multiTier = 1;
         this.setCoilLevel(HeatingCoilLevel.None);
         this.mPollutionOutputHatches.clear();
         FluidBlazeInputHatch.clear();
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+
+        this.multiTier = getMultiTier(aStack);
 
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
 
@@ -319,7 +332,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
     @Override
     public int getMaxParallelRecipes() {
-        return 64;
+        return 64 * multiTier;
     }
 
     @Override
@@ -332,16 +345,15 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
                 .hasWorkJustBeenEnabled()) {
                 if (aTick % 20 == 0 || this.getBaseMetaTileEntity()
                     .hasWorkJustBeenEnabled()) {
-                    if (!this.depleteInputFromRestrictedHatches(
-                        this.FluidBlazeInputHatch,
-                        (int) (10 * getInputVoltageTier() * getInputVoltageTier()))) {
+                    int baseAmount = (int) (10 * getInputVoltageTier() * getInputVoltageTier());
+                    if (multiTier == 4) {
+                        baseAmount *= 2;
+                    }
+                    if (!this.depleteInputFromRestrictedHatches(this.FluidBlazeInputHatch, baseAmount)) {
                         this.causeMaintenanceIssue();
                         this.stopMachine(
                             ShutDownReasonRegistry.outOfFluid(
-                                Objects.requireNonNull(
-                                    FluidUtils.getFluidStack(
-                                        "molten.blaze",
-                                        (int) (10 * getInputVoltageTier() * getInputVoltageTier())))));
+                                Objects.requireNonNull(FluidUtils.getFluidStack("molten.blaze", baseAmount))));
                         endRecipeProcessing();
                     }
                 }

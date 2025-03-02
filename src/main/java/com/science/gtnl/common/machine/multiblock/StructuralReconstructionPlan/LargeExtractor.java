@@ -186,6 +186,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

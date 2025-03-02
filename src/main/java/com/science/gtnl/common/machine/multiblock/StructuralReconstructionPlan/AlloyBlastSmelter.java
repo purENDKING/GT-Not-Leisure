@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
-import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
 import static gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock.*;
 
@@ -21,7 +20,6 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.util.BWUtil;
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.TAE;
 import gregtech.api.enums.Textures;
@@ -30,8 +28,9 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -46,7 +45,6 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
     public static final String ABS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/alloy_blast_smelter";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(15);
     private int mHeatingCapacity = 0;
-    protected int energyHatchTier;
     private HeatingCoilLevel heatLevel;
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 4;
@@ -197,6 +195,15 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
 
             @Nonnull
             @Override
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (availableVoltage * 4 < recipe.mEUt) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @Nonnull
+            @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setMachineHeat(AlloyBlastSmelter.this.mHeatingCapacity)
                     .setHeatOC(true)
@@ -206,29 +213,6 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
-    }
-
-    @Override
-    protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
-        logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
-        logic.setAmperageOC(true);
-    }
-
-    public long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
-    }
-
-    private int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
     }
 
     @Override

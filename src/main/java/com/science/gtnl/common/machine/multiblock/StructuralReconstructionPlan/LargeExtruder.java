@@ -131,6 +131,7 @@ public class LargeExtruder extends GTMMultiMachineBase<LargeExtruder> implements
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

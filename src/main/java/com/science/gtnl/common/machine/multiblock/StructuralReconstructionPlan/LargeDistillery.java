@@ -306,6 +306,7 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
 
         if (!checkPiece(STRUCTURE_PIECE_TOP_HINT, horizontalOffSet, mHeight, depthOffSet)) return false;
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

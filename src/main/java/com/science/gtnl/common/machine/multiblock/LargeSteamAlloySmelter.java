@@ -2,8 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -88,10 +87,10 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
         return TextLocalization.LargeSteamAlloySmelterRecipeType;
     }
 
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static IStructureDefinition<LargeSteamAlloySmelter> STRUCTURE_DEFINITION = null;
-    public static final String LSAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_alloy_smelter"; // 文件路径
-    public static String[][] shape = StructureUtils.readStructureFromFile(LSAS_STRUCTURE_FILE_PATH);
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static IStructureDefinition<LargeSteamAlloySmelter> STRUCTURE_DEFINITION = null;
+    private static final String LSAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_alloy_smelter"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(LSAS_STRUCTURE_FILE_PATH);
 
     public LargeSteamAlloySmelter(String aName) {
         super(aName);
@@ -113,13 +112,11 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
 
     private int tCountCasing = 0;
 
-    public int getTierMachineCasing(Block block, int meta) {
+    public static int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {
-            tCountCasing++;
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
-            tCountCasing++;
             return 2;
         }
         return 0;
@@ -129,30 +126,6 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
         if (block == sBlockCasings3 && 13 == meta) return 1;
         if (block == sBlockCasings3 && 14 == meta) return 2;
         return 0;
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-    }
-
-    public int getCasingTextureID() {
-        if (tierMachineCasing == 2 || tierFireboxCasing == 2)
-            return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
-        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
-    }
-
-    @Override
-    public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
-    }
-
-    @Override
-    public byte getUpdateData() {
-        return (byte) tierMachineCasing;
     }
 
     @Override
@@ -168,11 +141,13 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
     @Override
     public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
         final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
                 aActive ? getFrontOverlayActive() : getFrontOverlay() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
@@ -183,25 +158,37 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
                 .addElement(
                     'A',
                     ofChain(
-                        buildSteamInput(LargeSteamAlloySmelter.class)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                        buildSteamInput(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .build(),
-                        buildHatchAdder(LargeSteamAlloySmelter.class)
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamAlloySmelter::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing)))),
+                        buildHatchAdder(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
+                            .dot(1)
                             .atLeast(
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
                                 OutputBus)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
-                            .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamAlloySmelter::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -263,6 +250,19 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
         return false;
     }
 
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
+    }
+
+    public int getCasingTextureID() {
+        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+    }
+
     public boolean checkHatches() {
         return !mSteamInputFluids.isEmpty();
     }
@@ -275,6 +275,19 @@ public class LargeSteamAlloySmelter extends MTESteamMultiBase<LargeSteamAlloySme
             return 32;
         }
         return 16;
+    }
+
+    @Override
+    public void onValueUpdate(byte aValue) {
+        if ((byte) tierMachine != aValue) {
+            tierMachine = (byte) (aValue & 0x0F);
+        }
+    }
+
+    @Override
+    public byte getUpdateData() {
+        if (tierMachine <= 0) return 0;
+        return (byte) tierMachine;
     }
 
     @Override

@@ -164,6 +164,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
             ParallelTier = getParallelTier(aStack);
+            energyHatchTier = checkEnergyHatchTier();
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
                     return false;

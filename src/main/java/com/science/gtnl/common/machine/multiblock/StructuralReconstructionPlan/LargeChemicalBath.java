@@ -224,6 +224,7 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mCasing >= 55) {
+            energyHatchTier = checkEnergyHatchTier();
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
                     return false;

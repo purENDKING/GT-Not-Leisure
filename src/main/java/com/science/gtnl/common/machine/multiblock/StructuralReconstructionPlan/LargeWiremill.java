@@ -133,6 +133,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

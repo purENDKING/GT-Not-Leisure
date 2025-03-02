@@ -130,6 +130,7 @@ public class LargeElectrolyzer extends GTMMultiMachineBase<LargeElectrolyzer> im
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

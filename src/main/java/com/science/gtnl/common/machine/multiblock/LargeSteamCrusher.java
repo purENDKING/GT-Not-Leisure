@@ -3,8 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -50,7 +49,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
@@ -89,10 +87,10 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
         return TextLocalization.LargeSteamCrusherRecipeType;
     }
 
-    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamCrusher> STRUCTURE_DEFINITION = null;
-    public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_crusher"; // 文件路径
-    public static String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
+    private static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_crusher"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamCrusher(String aName) {
         super(aName);
@@ -117,13 +115,11 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
 
     private int tCountCasing = 0;
 
-    public int getTierMachineCasing(Block block, int meta) {
+    public static int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {
-            tCountCasing++;
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
-            tCountCasing++;
             return 2;
         }
         return 0;
@@ -153,32 +149,6 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
         return 0;
     }
 
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-    }
-
-    public int getCasingTextureID() {
-        if (tierGearCasing == 2 || tierMachineCasing == 2
-            || tierFrameCasing == 2
-            || tierPlatedCasing == 2
-            || tierBrickCasing == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
-        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
-    }
-
-    @Override
-    public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
-    }
-
-    @Override
-    public byte getUpdateData() {
-        return (byte) tierMachineCasing;
-    }
-
     @Override
     protected GTRenderedTexture getFrontOverlay() {
         return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_TOP_STEAM_MACERATOR);
@@ -192,11 +162,13 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
     @Override
     public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
         final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
                 aActive ? getFrontOverlayActive() : getFrontOverlay() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
@@ -207,25 +179,37 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
                 .addElement(
                     'A',
                     ofChain(
-                        buildSteamInput(LargeSteamCrusher.class)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                        buildSteamInput(LargeSteamCrusher.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .build(),
-                        buildHatchAdder(LargeSteamCrusher.class)
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamCrusher::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing)))),
+                        buildHatchAdder(LargeSteamCrusher.class).casingIndex(getCasingTextureID())
+                            .dot(1)
                             .atLeast(
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
                                 OutputBus)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
-                            .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamCrusher::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -327,8 +311,34 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
         return false;
     }
 
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
+    }
+
+    public int getCasingTextureID() {
+        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+    }
+
     public boolean checkHatches() {
         return !mSteamInputFluids.isEmpty();
+    }
+
+    @Override
+    public void onValueUpdate(byte aValue) {
+        if ((byte) tierMachine != aValue) {
+            tierMachine = (byte) (aValue & 0x0F);
+        }
+    }
+
+    @Override
+    public byte getUpdateData() {
+        if (tierMachine <= 0) return 0;
+        return (byte) tierMachine;
     }
 
     @Override
@@ -617,7 +627,6 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
     public void updateSlots() {
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
         for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
-        for (MTEHatchInput tHatch : validMTEList(mInputHatches)) tHatch.updateSlots();
         for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) tHatch.updateSlots();
         for (final MTEHatchInputBattery tHatch : validMTEList(this.mChargeHatches)) {
             tHatch.updateSlots();

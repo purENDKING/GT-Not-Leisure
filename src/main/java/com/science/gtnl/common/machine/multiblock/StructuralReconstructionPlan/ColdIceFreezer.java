@@ -234,7 +234,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     @Override
     public int getMaxParallelRecipes() {
-        return 64;
+        return 128;
     }
 
     @Override

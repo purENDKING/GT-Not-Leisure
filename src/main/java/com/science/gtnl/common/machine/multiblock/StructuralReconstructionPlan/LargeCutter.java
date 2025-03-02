@@ -193,6 +193,7 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

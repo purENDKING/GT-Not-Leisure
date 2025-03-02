@@ -198,6 +198,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

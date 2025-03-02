@@ -139,6 +139,7 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

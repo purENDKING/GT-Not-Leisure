@@ -138,6 +138,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;

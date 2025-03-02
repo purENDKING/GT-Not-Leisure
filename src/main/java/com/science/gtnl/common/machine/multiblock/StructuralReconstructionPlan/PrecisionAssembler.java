@@ -36,6 +36,7 @@ import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
 import goodgenerator.loader.Loaders;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
@@ -75,6 +76,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     protected int casingTier = 0;
     protected int machineTier = -1;
     public byte glassTier = 0;
+    public int energyHatchTier;
 
     public PrecisionAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -354,6 +356,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             }
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 updateHatchTexture();
@@ -368,6 +371,29 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             return true;
         }
         return mCasing >= 30 && casingTier >= 0;
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @Override
