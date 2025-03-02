@@ -708,10 +708,7 @@ public class AssemblingLineRecipes implements IRecipePool {
             (int) TierEU.RECIPE_UEV,
             1,
             new ItemStack[] { GregtechItemList.GTPP_Casing_UHV.get(16),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 1L), ItemList.Field_Generator_UHV.get(8),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 4), ItemList.Field_Generator_UHV.get(8),
                 ItemList.Robot_Arm_UHV.get(16), ItemList.Emitter_UHV.get(16),
                 GTModHandler.getModItem(TwilightForest.ID, "tile.TFMagicLogSpecial", 64, 0),
                 GTOreDictUnificator.get(OrePrefixes.block, Materials.IronWood, 64L),
@@ -750,17 +747,13 @@ public class AssemblingLineRecipes implements IRecipePool {
             .metadata(RESEARCH_ITEM, GregtechItemList.Controller_IsaMill.get(1))
             .metadata(RESEARCH_TIME, 4 * HOURS)
             .itemInputs(
-                GregtechItemList.Controller_IsaMill.get(1),
-                GregtechItemList.Controller_IsaMill.get(1),
-                GregtechItemList.Controller_IsaMill.get(1),
-                GregtechItemList.Controller_IsaMill.get(1),
+                GregtechItemList.Controller_IsaMill.get(4),
                 MaterialsAlloy.ZERON_100.getPlateDouble(16),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4L),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 8L),
                 GTOreDictUnificator.get(OrePrefixes.wireGt04, Materials.SuperconductorLuV, 16L),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 16L),
-                ItemList.Component_Grinder_Tungsten.get(16),
-                ItemList.Component_Grinder_Tungsten.get(16),
+                ItemList.Component_Grinder_Tungsten.get(32),
                 ItemList.Conveyor_Module_LuV.get(8),
                 ItemList.Electric_Motor_LuV.get(16))
             .fluidInputs(Materials.Grade2PurifiedWater.getFluid(64000), Materials.Europium.getMolten(2304))
@@ -773,10 +766,7 @@ public class AssemblingLineRecipes implements IRecipePool {
             .metadata(RESEARCH_ITEM, GTNLItemList.Incubator.get(1))
             .metadata(RESEARCH_TIME, 4 * HOURS)
             .itemInputs(
-                GTNLItemList.Incubator.get(1),
-                GTNLItemList.Incubator.get(1),
-                GTNLItemList.Incubator.get(1),
-                GTNLItemList.Incubator.get(1),
+                GTNLItemList.Incubator.get(4),
                 ItemList.ActivatedCarbonFilterMesh.get(32),
                 ItemList.Field_Generator_UV.get(16),
                 ItemList.Emitter_UV.get(32),
@@ -835,10 +825,8 @@ public class AssemblingLineRecipes implements IRecipePool {
             256,
             (int) TierEU.RECIPE_UV,
             1,
-            new ItemStack[] { ItemList.AmplifabricatorZPM.get(2), ItemList.AmplifabricatorZPM.get(2),
-                ItemList.AmplifabricatorZPM.get(2), ItemList.AmplifabricatorZPM.get(2),
-                ItemList.Electric_Pump_ZPM.get(32), ItemList.Field_Generator_ZPM.get(16),
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 16),
+            new ItemStack[] { ItemList.AmplifabricatorZPM.get(8), ItemList.Electric_Pump_ZPM.get(32),
+                ItemList.Field_Generator_ZPM.get(16), GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 16),
                 GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Trinium, 24), ItemList.Energy_Module.get(8) },
             new FluidStack[] { Materials.Tritanium.getMolten(4608), Materials.Grade7PurifiedWater.getFluid(32000),
                 MaterialsAlloy.ZERON_100.getFluidStack(9216) },
@@ -890,14 +878,11 @@ public class AssemblingLineRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4),
                 ItemList.Electric_Motor_LuV.get(8),
                 ItemList.Electric_Piston_LuV.get(8),
-                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(8),
-                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(8),
+                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(16),
                 MaterialsAlloy.STELLITE.getGear(16),
                 WerkstoffLoader.LuVTierMaterial.get(OrePrefixes.rotor, 16),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 32),
-                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 32),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 32),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 32))
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 64),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 64))
             .fluidInputs(Materials.SolderingAlloy.getMolten(1152), MaterialsAlloy.INCONEL_690.getFluidStack(1152))
             .itemOutputs(GTNLItemList.FlotationCellRegulator.get(1))
             .eut(TierEU.RECIPE_LuV)

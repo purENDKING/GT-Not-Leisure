@@ -585,5 +585,18 @@ public class ChemicalRecipes implements IRecipePool {
             .duration(250)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(2),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 6))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodaAsh, 6))
+            .fluidInputs(Materials.CarbonDioxide.getGas(1000))
+            .fluidOutputs(Materials.Water.getFluid(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(80)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
     }
 }

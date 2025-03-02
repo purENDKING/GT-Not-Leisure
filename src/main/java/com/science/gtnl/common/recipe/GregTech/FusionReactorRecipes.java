@@ -27,6 +27,7 @@ public class FusionReactorRecipes implements IRecipePool {
             .duration(10)
             .eut(7680)
             .metadata(FUSION_THRESHOLD, 20000000)
+            .noOptimize()
             .addTo(fR);
 
         GTValues.RA.stdBuilder()
@@ -35,6 +36,7 @@ public class FusionReactorRecipes implements IRecipePool {
             .duration(10)
             .eut(491520)
             .metadata(FUSION_THRESHOLD, 1000000000)
+            .noOptimize()
             .addTo(fR);
 
         GTValues.RA.stdBuilder()
@@ -45,6 +47,7 @@ public class FusionReactorRecipes implements IRecipePool {
             .duration(32)
             .eut(TierEU.RECIPE_LuV)
             .metadata(FUSION_THRESHOLD, 200000000)
+            .noOptimize()
             .addTo(fR);
     }
 }

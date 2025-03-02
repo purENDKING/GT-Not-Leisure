@@ -46,6 +46,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(4000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -55,6 +56,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(4000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -64,6 +66,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(4000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -73,6 +76,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 1000))
             .duration(3000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -82,6 +86,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 1000))
             .duration(3000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -91,6 +96,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 1000))
             .duration(3000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -100,6 +106,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 250))
             .duration(2000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -109,6 +116,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 250))
             .duration(2000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -118,6 +126,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 250))
             .duration(2000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -127,6 +136,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -136,6 +146,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -145,6 +156,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 500))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -154,6 +166,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 100))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -163,6 +176,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 100))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -172,6 +186,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 200))
             .duration(500)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -181,6 +196,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 200))
             .duration(500)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -190,6 +206,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 50))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -199,6 +216,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 50))
             .duration(1000)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -208,6 +226,7 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 100))
             .duration(500)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
@@ -217,12 +236,14 @@ public class DistilleryRecipes implements IRecipePool {
             .fluidOutputs(new FluidStack(MilledOreProcessing.PineOil, 100))
             .duration(500)
             .eut(2048)
+            .noOptimize()
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
             .fluidInputs(MaterialPool.BenzenediazoniumTetrafluoroborate.getFluidOrGas(1000))
             .fluidOutputs(MaterialPool.FluoroBenzene.getFluidOrGas(1000))
             .duration(100)
+            .noOptimize()
             .eut(TierEU.RECIPE_ZPM)
             .addTo(DR);
     }
