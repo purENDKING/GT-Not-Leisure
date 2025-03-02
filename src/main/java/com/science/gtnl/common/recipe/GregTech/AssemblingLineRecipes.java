@@ -882,5 +882,27 @@ public class AssemblingLineRecipes implements IRecipePool {
             400,
             (int) TierEU.RECIPE_UV);
 
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GregtechItemList.Controller_Flotation_Cell.get(1))
+            .metadata(RESEARCH_TIME, 8 * HOURS)
+            .itemInputs(
+                GregtechItemList.Controller_Flotation_Cell.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4),
+                ItemList.Electric_Motor_LuV.get(8),
+                ItemList.Electric_Piston_LuV.get(8),
+                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(8),
+                MaterialsAlloy.HASTELLOY_C276.getPlateDouble(8),
+                MaterialsAlloy.STELLITE.getGear(16),
+                WerkstoffLoader.LuVTierMaterial.get(OrePrefixes.rotor, 16),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 32),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.YttriumBariumCuprate, 32),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 32),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Platinum, 32))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(1152), MaterialsAlloy.INCONEL_690.getFluidStack(1152))
+            .itemOutputs(GTNLItemList.FlotationCellRegulator.get(1))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(30 * SECONDS)
+            .addTo(AssemblyLine);
+
     }
 }
