@@ -846,5 +846,41 @@ public class AssemblingLineRecipes implements IRecipePool {
             200,
             (int) TierEU.RECIPE_UV);
 
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            ItemList.AcceleratorZPM.get(1L),
+            102400,
+            32,
+            (int) TierEU.RECIPE_UV,
+            1,
+            new ItemStack[] { ItemList.Neutron_Reflector.get(8), ItemList.Field_Generator_LuV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 4),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Naquadria, 16),
+                MaterialPool.Darmstadtium.get(OrePrefixes.stickLong, 8), MaterialsAlloy.INCOLOY_MA956.getPlateDouble(4),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Thorium, 16) },
+            new FluidStack[] { Materials.SolderingAlloy.getMolten(1296),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(1296) },
+            GTNLItemList.DecayHastener.get(1),
+            400,
+            (int) TierEU.RECIPE_UV);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GTNLItemList.AlloyBlastSmelter.get(1),
+            1024000,
+            2048,
+            (int) TierEU.RECIPE_UHV,
+            1,
+            new ItemStack[] { GTNLItemList.AlloyBlastSmelter.get(2), GTNLItemList.AlloyBlastSmelter.get(2),
+                GTNLItemList.AlloyBlastSmelter.get(2), GTNLItemList.AlloyBlastSmelter.get(2), ItemList.UHV_Coil.get(32),
+                ItemList.Conveyor_Module_UV.get(16), ItemList.Circuit_Chip_PPIC.get(32),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 16),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 32),
+                MaterialsAlloy.PIKYONIUM.getFrameBox(32), MaterialsAlloy.CINOBITE.getPlateDense(12),
+                GTOreDictUnificator.get(OrePrefixes.screw, Materials.CosmicNeutronium, 8) },
+            new FluidStack[] { Materials.Grade6PurifiedWater.getFluid(16000),
+                MaterialsAlloy.PIKYONIUM.getFluidStack(18432), MaterialsAlloy.INDALLOY_140.getFluidStack(4608) },
+            GTNLItemList.MegaAlloyBlastSmelter.get(1),
+            400,
+            (int) TierEU.RECIPE_UV);
+
     }
 }
