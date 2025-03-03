@@ -995,6 +995,22 @@ public class TextLocalization {
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeWiremill_Casing");
 
+    public static final String NameResourceCollectionModule = texter(
+        "Resource Collection Module",
+        "NameResourceCollectionModule");
+    public static final String ResourceCollectionModuleRecipeType = texter(
+        "Space Miner / Space Drill",
+        "ResourceCollectionModuleRecipeType");
+    public static final String Tooltip_ResourceCollectionModule_00 = texter(
+        "Module that adds the Space Miner and Space Drill to the Space Elevator",
+        "Tooltip_ResourceCollectionModule_00");
+    public static final String Tooltip_ResourceCollectionModule_01 = texter(
+        "§d§lsoar up into the sky with one start",
+        "Tooltip_ResourceCollectionModule_01");
+    public static final String Tooltip_ResourceCollectionModule_Casing = texter(
+        "Any Space Elevator Base Casing",
+        "Tooltip_ResourceCollectionModule_Casing");
+
     public static final String NameFuelRefiningComplex = texter("Fuel Refining Complex", "NameFuelRefiningComplex");
     public static final String FuelRefiningComplexRecipeType = texter(
         "Fuel Refining Complex",

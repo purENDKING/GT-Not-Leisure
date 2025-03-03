@@ -136,7 +136,7 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
         }
 
         ParallelTier = getParallelTier(aStack);
-        return mCasing >= 65;
+        return mCasing >= 55;
     }
 
     @Override

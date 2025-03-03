@@ -1008,6 +1008,21 @@ Tooltip_VacuumDryingFurnace_01=每超过配方温度1800K，将进行一次无�
 Tooltip_VacuumDryingFurnace_02=超过MV后的每一级电压，都会将温度提高100K
 Tooltip_VacuumDryingFurnace_Casing=任意真空机械方块
 
+NameResourceCollectionModule=太空电梯资源采集模块
+gtnl.recipe.SpaceMinerRecipes=太空采矿
+gtnl.recipe.SpaceDrillRecipes=太空钻井
+ResourceCollectionModuleRecipeType=太空采矿 / 太空钻井
+ResourceCollectionModule_Mode_0=太空采矿
+ResourceCollectionModule_Mode_1=太空钻井
+Tooltip_ResourceCollectionModule_00=将太空采矿和太空钻井功能添加到太空电梯
+Tooltip_ResourceCollectionModule_01=§d§l一飞冲天
+Tooltip_ResourceCollectionModule_Casing=任意太空电梯基座机械方块
+Interaction_DESCRIPTION_Index_702=需要采矿无人机MK-VIII x 16
+Interaction_DESCRIPTION_Index_703=需要采矿无人机MK-IX x 16
+Interaction_DESCRIPTION_Index_704=需要采矿无人机MK-X x 16
+Interaction_DESCRIPTION_Index_705=需要采矿无人机MK-XI x 16
+GT5U.gui.text.no_mining_drone=§7未找到采矿无人机
+
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
 Tooltip_LargeMixer_Casing=任意储罐拓展方块

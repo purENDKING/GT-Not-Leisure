@@ -194,10 +194,9 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
         }
 
         ParallelTier = getParallelTier(aStack);
-        return mCasing >= 60;
+        return mCasing >= 10;
     }
 
-    // 启用机器模式切换
     @Override
     public boolean supportsMachineModeSwitch() {
         return true;

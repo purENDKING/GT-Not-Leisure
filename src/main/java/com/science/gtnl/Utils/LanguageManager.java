@@ -8,6 +8,11 @@ public class LanguageManager {
 
         addStringLocalization("Interaction_DESCRIPTION_Index_700", "需要铝研磨球");
         addStringLocalization("Interaction_DESCRIPTION_Index_701", "需要皂石研磨球");
+        addStringLocalization("Interaction_DESCRIPTION_Index_702", "需要采矿无人机MK-VIII x 16");
+        addStringLocalization("Interaction_DESCRIPTION_Index_703", "需要采矿无人机MK-IX x 16");
+        addStringLocalization("Interaction_DESCRIPTION_Index_704", "需要采矿无人机MK-X x 16");
+        addStringLocalization("Interaction_DESCRIPTION_Index_705", "需要采矿无人机MK-XI x 16");
+        addStringLocalization("GT5U.gui.text.no_mining_drone", "§7未找到采矿无人机");
         addStringLocalization("gt.blockmachines.wire.stargate.01.name", "1x星门导线");
         addStringLocalization("gt.blockmachines.wire.stargate.02.name", "2x星门导线");
         addStringLocalization("gt.blockmachines.wire.stargate.04.name", "4x星门导线");

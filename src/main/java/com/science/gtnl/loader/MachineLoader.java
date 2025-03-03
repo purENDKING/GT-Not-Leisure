@@ -56,6 +56,7 @@ import com.science.gtnl.common.machine.multiblock.ProcessingArray;
 import com.science.gtnl.common.machine.multiblock.RareEarthCentrifugal;
 import com.science.gtnl.common.machine.multiblock.ReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.RealArtificialStar;
+import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
@@ -477,6 +478,13 @@ public class MachineLoader {
         GTNLItemList.FuelRefiningComplex
             .set(new FuelRefiningComplex(21091, "FuelRefiningComplex", TextLocalization.NameFuelRefiningComplex));
         addItemTooltip(GTNLItemList.FuelRefiningComplex.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.ResourceCollectionModule.set(
+            new ResourceCollectionModule(
+                21092,
+                "ResourceCollectionModule",
+                TextLocalization.NameResourceCollectionModule));
+        addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

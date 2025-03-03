@@ -6,6 +6,7 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
 import com.science.gtnl.common.recipe.Special.NaquadahReactorSpecialValue;
 import com.science.gtnl.common.recipe.Special.RealArtificialStarSpecialValue;
+import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
 
 import goodgenerator.client.GUI.GGUITextures;
 import gregtech.api.gui.modularui.GTUITextures;
@@ -312,6 +313,29 @@ public class RecipeRegister {
             builder -> builder.setDisplayStack(GTNLItemList.FuelRefiningComplex.get(1))
                 .setMaxRecipesPerPage(1))
         .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
+        .disableOptimize()
+        .build();
+
+    public static RecipeMap<RecipeMapBackend> SpaceMinerRecipes = RecipeMapBuilder.of("gtnl.recipe.SpaceMinerRecipes")
+        .maxIO(2, 6, 1, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.ResourceCollectionModule.get(1))
+                .setMaxRecipesPerPage(1))
+        .neiRecipeComparator(
+            Comparator
+                .<GTRecipe, Integer>comparing(
+                    recipe -> recipe.getMetadataOrDefault(ResourceCollectionModuleTierKey.INSTANCE, 0))
+                .thenComparing(GTRecipe::compareTo))
+        .disableOptimize()
+        .build();
+
+    public static RecipeMap<RecipeMapBackend> SpaceDrillRecipes = RecipeMapBuilder.of("gtnl.recipe.SpaceDrillRecipes")
+        .maxIO(2, 0, 1, 1)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.ResourceCollectionModule.get(1))
+                .setMaxRecipesPerPage(1))
         .disableOptimize()
         .build();
 }

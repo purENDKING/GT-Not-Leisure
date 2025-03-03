@@ -260,6 +260,7 @@ public enum GTNLItemList {
     LargePyrolyseOven,
     PreciseAssembler,
 
+    ResourceCollectionModule,
     FuelRefiningComplex,
     GrandAssemblyLine,
     DecayHastener,
