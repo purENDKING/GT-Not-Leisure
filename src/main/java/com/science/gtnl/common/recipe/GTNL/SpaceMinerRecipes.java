@@ -893,7 +893,7 @@ public class SpaceMinerRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(30, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Molybdenum, 1)),
                 GTUtility.copyAmountUnsafe(60, GTOreDictUnificator.get(OrePrefixes.ore, Materials.BrownLimonite, 1)),
                 GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.YellowLimonite, 1)),
-                GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Hematite, 1)),
+                GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.BandedIron, 1)),
                 GTUtility.copyAmountUnsafe(120, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Malachite, 1)))
             .fluidInputs(Materials.GasolinePremium.getFluid(10000))
             .noOptimize()
@@ -913,7 +913,7 @@ public class SpaceMinerRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(30, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Molybdenum, 1)),
                 GTUtility.copyAmountUnsafe(60, GTOreDictUnificator.get(OrePrefixes.ore, Materials.BrownLimonite, 1)),
                 GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.YellowLimonite, 1)),
-                GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Hematite, 1)),
+                GTUtility.copyAmountUnsafe(240, GTOreDictUnificator.get(OrePrefixes.ore, Materials.BandedIron, 1)),
                 GTUtility.copyAmountUnsafe(120, GTOreDictUnificator.get(OrePrefixes.ore, Materials.Malachite, 1)))
             .fluidInputs(FluidUtils.getFluidStack(RocketFuels.RP1_Plus_Liquid_Oxygen, 6000))
             .noOptimize()
