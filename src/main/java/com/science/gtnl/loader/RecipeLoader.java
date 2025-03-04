@@ -24,6 +24,7 @@ import com.science.gtnl.common.recipe.GTNL.RareEarthCentrifugalRecipes;
 import com.science.gtnl.common.recipe.GTNL.ReFusionReactorRecipes;
 import com.science.gtnl.common.recipe.GTNL.RealArtificialStarRecipes;
 import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
+import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
 import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
 import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
@@ -82,7 +83,7 @@ public class RecipeLoader {
             new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes(),
             new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
-            new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes() };
+            new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();
