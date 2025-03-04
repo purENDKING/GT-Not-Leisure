@@ -1976,7 +1976,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UEV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 3)
@@ -1991,7 +1991,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UEV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 3)
@@ -2007,7 +2007,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UEV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 3)
@@ -2022,7 +2022,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UEV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 3)
@@ -3291,7 +3291,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UIV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 4)
@@ -3306,7 +3306,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UIV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 4)
@@ -3322,7 +3322,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UIV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 4)
@@ -3337,7 +3337,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UIV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 4)
@@ -4606,7 +4606,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UMV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 5)
@@ -4621,7 +4621,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UMV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 5)
@@ -4637,7 +4637,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UMV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 5)
@@ -4652,7 +4652,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UMV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 5)
@@ -5921,7 +5921,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 6)
@@ -5936,7 +5936,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Pyrotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("pyrotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 6)
@@ -5952,7 +5952,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
             .fluidInputs(
                 FluidUtils.getFluidStack(RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 10000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 6)
@@ -5967,7 +5967,7 @@ public class SpaceDrillRecipes implements IRecipePool {
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
             .fluidInputs(GGMaterial.thoriumBasedLiquidFuel.getFluidOrGas(6000))
-            .fluidOutputs(Materials.Cryotheum.getFluid(10000000))
+            .fluidOutputs(FluidRegistry.getFluidStack("cryotheum", 10000000))
             .noOptimize()
             .specialValue(1)
             .metadata(MINER_TIER, 6)
