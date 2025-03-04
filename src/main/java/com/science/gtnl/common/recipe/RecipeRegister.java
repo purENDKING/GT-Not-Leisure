@@ -7,6 +7,7 @@ import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
 import com.science.gtnl.common.recipe.Special.NaquadahReactorSpecialValue;
 import com.science.gtnl.common.recipe.Special.RealArtificialStarSpecialValue;
 import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
+import com.science.gtnl.common.recipe.Special.SpaceMinerFrontend;
 
 import goodgenerator.client.GUI.GGUITextures;
 import gregtech.api.gui.modularui.GTUITextures;
@@ -327,7 +328,11 @@ public class RecipeRegister {
                 .<GTRecipe, Integer>comparing(
                     recipe -> recipe.getMetadataOrDefault(ResourceCollectionModuleTierKey.INSTANCE, 0))
                 .thenComparing(GTRecipe::compareTo))
+        .neiRecipeComparator(
+            Comparator.<GTRecipe, Integer>comparing(recipe -> recipe.mSpecialValue)
+                .thenComparing(GTRecipe::compareTo))
         .disableOptimize()
+        .frontend(SpaceMinerFrontend::new)
         .build();
 
     public static RecipeMap<RecipeMapBackend> SpaceDrillRecipes = RecipeMapBuilder.of("gtnl.recipe.SpaceDrillRecipes")

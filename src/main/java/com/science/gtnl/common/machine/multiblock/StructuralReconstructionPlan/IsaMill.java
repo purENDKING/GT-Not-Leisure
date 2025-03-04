@@ -347,21 +347,26 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
                 int recipeReq = recipe.getMetadataOrDefault(IsaMillTierKey.INSTANCE, 0);
                 millingBall = findMillingBall();
-                if (millingBall != null) {
-                    if (recipeReq == 1) {
-                        if (millingBall.isItemEqual(AluminaMillingBall)) {
-                            return CheckRecipeResultRegistry.SUCCESSFUL;
-                        }
-                        return CheckRecipeResultRegistry.NO_RECIPE;
-                    } else if (recipeReq == 2) {
-                        if (millingBall.isItemEqual(SoapstoneMillingBall)) {
-                            return CheckRecipeResultRegistry.SUCCESSFUL;
-                        }
-                        return CheckRecipeResultRegistry.NO_RECIPE;
-                    }
-                    return super.validateRecipe(recipe);
+
+                if (millingBall == null) {
+                    return SimpleCheckRecipeResult.ofFailure("no_milling_ball");
                 }
-                return SimpleCheckRecipeResult.ofFailure("no_milling_ball");
+
+                ItemStack requiredBall = null;
+                switch (recipeReq) {
+                    case 1:
+                        requiredBall = AluminaMillingBall;
+                        break;
+                    case 2:
+                        requiredBall = SoapstoneMillingBall;
+                        break;
+                }
+
+                if (requiredBall != null && millingBall.isItemEqual(requiredBall)) {
+                    return CheckRecipeResultRegistry.SUCCESSFUL;
+                }
+
+                return super.validateRecipe(recipe);
             }
 
             @NotNull

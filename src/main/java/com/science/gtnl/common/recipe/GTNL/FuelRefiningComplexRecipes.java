@@ -1,6 +1,8 @@
 package com.science.gtnl.common.recipe.GTNL;
 
 import static gregtech.api.util.GTRecipeConstants.COIL_HEAT;
+import static gtPlusPlus.core.item.chemistry.RocketFuels.Monomethylhydrazine_Plus_Nitric_Acid;
+import static gtPlusPlus.core.item.chemistry.RocketFuels.Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide;
 
 import net.minecraftforge.fluids.FluidStack;
 
@@ -122,7 +124,7 @@ public class FuelRefiningComplexRecipes implements IRecipePool {
                 Materials.Gas.getGas(2000),
                 Materials.Hydrogen.getGas(16000),
                 Materials.Oxygen.getGas(3000))
-            .fluidOutputs(Materials.GasolineRegular.getFluid(20000))
+            .fluidOutputs(Materials.BioDiesel.getFluid(20000))
             .noOptimize()
             .duration(400)
             .metadata(COIL_HEAT, 3200)
@@ -138,7 +140,7 @@ public class FuelRefiningComplexRecipes implements IRecipePool {
                 Materials.Nitrogen.getGas(6000),
                 Materials.NitricAcid.getFluid(3000),
                 new FluidStack(GenericChem.Hydrogen_Peroxide, 2000))
-            .fluidOutputs(Materials.GasolineRegular.getFluid(4000))
+            .fluidOutputs(FluidUtils.getFluidStack(Monomethylhydrazine_Plus_Nitric_Acid, 4000))
             .noOptimize()
             .duration(1200)
             .metadata(COIL_HEAT, 8100)
@@ -155,7 +157,7 @@ public class FuelRefiningComplexRecipes implements IRecipePool {
                 Materials.NitricAcid.getFluid(3000),
                 Materials.Oxygen.getGas(1000),
                 new FluidStack(GenericChem.Hydrogen_Peroxide, 2000))
-            .fluidOutputs(Materials.GasolineRegular.getFluid(4000))
+            .fluidOutputs(FluidUtils.getFluidStack(Unsymmetrical_Dimethylhydrazine_Plus_Nitrogen_Tetroxide, 5000))
             .noOptimize()
             .duration(1200)
             .metadata(COIL_HEAT, 9000)

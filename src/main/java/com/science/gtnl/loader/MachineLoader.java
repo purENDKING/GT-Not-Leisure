@@ -2,6 +2,8 @@ package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
 
+import net.minecraft.item.ItemStack;
+
 import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
@@ -114,6 +116,8 @@ import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
 public class MachineLoader {
+
+    public static ItemStack ResourceCollectionModule;
 
     public static void loadMachines() {
 
@@ -479,13 +483,6 @@ public class MachineLoader {
             .set(new FuelRefiningComplex(21091, "FuelRefiningComplex", TextLocalization.NameFuelRefiningComplex));
         addItemTooltip(GTNLItemList.FuelRefiningComplex.get(1), AnimatedText.SNL_QYZG);
 
-        GTNLItemList.ResourceCollectionModule.set(
-            new ResourceCollectionModule(
-                21092,
-                "ResourceCollectionModule",
-                TextLocalization.NameResourceCollectionModule));
-        addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -749,6 +746,15 @@ public class MachineLoader {
             .set(new SuperDataAccessHatch(22517, "Super Data Access Hatch", TextLocalization.SuperDataAccessHatch, 14));
         addItemTooltip(GTNLItemList.SuperDataAccessHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
+    }
+
+    public static void loadMachinesPostInit() {
+        ResourceCollectionModule = new ResourceCollectionModule(
+            21092,
+            "ResourceCollectionModule",
+            TextLocalization.NameResourceCollectionModule).getStackForm(1);
+        GTNLItemList.ResourceCollectionModule.set(ResourceCollectionModule);
+        addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWire() {

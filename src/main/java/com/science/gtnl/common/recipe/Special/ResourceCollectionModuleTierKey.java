@@ -29,4 +29,5 @@ public class ResourceCollectionModuleTierKey extends RecipeMetadataKey<Integer> 
             case 4 -> recipeInfo.drawText(trans("705", "Requires Mining Drone MK-XI x 16"));
         }
     }
+
 }
