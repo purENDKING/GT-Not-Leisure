@@ -889,5 +889,21 @@ public class AssemblingLineRecipes implements IRecipePool {
             .duration(30 * SECONDS)
             .addTo(AssemblyLine);
 
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            ItemList.OreDrill3.get(1),
+            10240000,
+            51200,
+            (int) TierEU.RECIPE_UV,
+            1,
+            new ItemStack[] { ItemRegistry.voidminer[2].copy(), ItemList.OilDrillInfinite.get(1),
+                ItemList.Robot_Arm_UV.get(4), MaterialsAlloy.STELLITE.getGear(16), ItemList.Conveyor_Module_UV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 4),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUV, 4),
+                MaterialsAlloy.PIKYONIUM.getPlateDouble(8) },
+            new FluidStack[] { Materials.SolderingAlloy.getMolten(2880), GGMaterial.artheriumSn.getMolten(2880) },
+            GTNLItemList.ResourceCollectionModule.get(1),
+            1200,
+            (int) TierEU.RECIPE_UV);
+
     }
 }
