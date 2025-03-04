@@ -27,6 +27,8 @@ public class ResourceCollectionModuleTierKey extends RecipeMetadataKey<Integer> 
             case 2 -> recipeInfo.drawText(trans("703", "Requires Mining Drone MK-IX x 16"));
             case 3 -> recipeInfo.drawText(trans("704", "Requires Mining Drone MK-X x 16"));
             case 4 -> recipeInfo.drawText(trans("705", "Requires Mining Drone MK-XI x 16"));
+            case 5 -> recipeInfo.drawText(trans("706", "Requires Mining Drone MK-XII x 16"));
+            case 6 -> recipeInfo.drawText(trans("707", "Requires Mining Drone MK-XIII x 16"));
         }
     }
 

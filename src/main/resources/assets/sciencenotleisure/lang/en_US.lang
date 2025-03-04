@@ -117,6 +117,9 @@ HumongousInputBusUMV=巨型输入总线 (UMV)
 HumongousInputBusUXV=巨型输入总线 (UXV)
 HumongousInputBusMAX=巨型输入总线 (MAX)
 
+SuperDataAccessHatch=超级数据访问仓
+Tooltip_SuperDataAccessHatch_00=增加81个额外的格子以放置闪存
+
 MetaCasing.0.name=测试机械方块
 MetaCasing.1.name=蒸汽装配机械方块
 MetaCasing.2.name=散热片
@@ -259,93 +262,69 @@ container.ExtremeAnvil=终焉之砧
 
 MetaItem.0.name=愚人脸
 tooltips.TrollFace=Never Gonna Give You Up~
-
 MetaItem.1.name=§b激发的混合硅岩燃料棒
 tooltips.DepletedExcitedNaquadahFuelRod=§o硅岩基燃料的最终形态。
-
 MetaItem.2.name=§e炽骨立方
 tooltips.BlazeCube=§8§o火焰风暴。
-
 MetaItem.3.name=§d无瑕核心
 tooltips.EnhancementCore=§8§o补全之路！
-
 MetaItem.5.name=激活的盖亚水晶
 MetaItem.6.name=精密蒸汽构件
-
 MetaItem.7.name=坠星采矿场I图纸
 tooltips.MeteorMinerSchematic1=启用坠星采矿场I所需的图纸
-
 MetaItem.8.name=坠星采矿场II图纸
 tooltips.MeteorMinerSchematic2=启用坠星采矿场II所需的图纸
-
 MetaItem.9.name=原始磁共振电路
 tooltips.CircuitResonaticULV_00=一个原始的电路板
 tooltips.CircuitResonaticULV_01=§fULV-Tier
-
 MetaItem.10.name=基础磁共振电路
 tooltips.CircuitResonaticLV_00=一个基础的电路板
 tooltips.CircuitResonaticLV_01=LV-Tier
-
 MetaItem.11.name=进阶磁共振电路
 tooltips.CircuitResonaticMV_00=一个不错的电路板
 tooltips.CircuitResonaticMV_01=§6MV-Tier
-
 MetaItem.12.name=先进磁共振电路
 tooltips.CircuitResonaticHV_00=一个进阶电路板
 tooltips.CircuitResonaticHV_01=§eHV-Tier
-
 MetaItem.13.name=数据磁共振电路
 tooltips.CircuitResonaticEV_00=一个高级电路板
 tooltips.CircuitResonaticEV_01=§8EV-Tier
-
 MetaItem.14.name=精英磁共振电路
 tooltips.CircuitResonaticIV_00=一个精英电路板
 tooltips.CircuitResonaticIV_01=§aIV-Tier
-
 MetaItem.15.name=大师磁共振电路
 tooltips.CircuitResonaticLuV_00=一个大师电路板
 tooltips.CircuitResonaticLuV_01=§dLuV-Tier
-
 MetaItem.16.name=顶级磁共振电路
 tooltips.CircuitResonaticZPM_00=一个顶级电路板
 tooltips.CircuitResonaticZPM_01=§bZPM-Tier
-
 MetaItem.17.name=超导磁共振电路
 tooltips.CircuitResonaticUV_00=一个超级电路板
 tooltips.CircuitResonaticUV_01=§2UV-Tier
-
 MetaItem.18.name=终极磁共振电路
 tooltips.CircuitResonaticUHV_00=一个终极电路板
 tooltips.CircuitResonaticUHV_01=§4UHV-Tier
-
 MetaItem.19.name=生物磁共振电路
 tooltips.CircuitResonaticUEV_00=一个生物电路板
 tooltips.CircuitResonaticUEV_01=§5UEV-Tier
-
 MetaItem.20.name=光学磁共振电路
 tooltips.CircuitResonaticUIV_00=一个光学电路板
 tooltips.CircuitResonaticUIV_01=§l§1UIV-Tier
-
 MetaItem.21.name=极简控制电路
 tooltips.VerySimpleCircuit_00=一个极简电路板
 tooltips.VerySimpleCircuit_01=§fULV-Tier
-
 MetaItem.22.name=简单控制电路
 tooltips.SimpleCircuit_00=一个简单的电路板
 tooltips.SimpleCircuit_01=LV-Tier
-
 MetaItem.23.name=基础控制电路
 tooltips.BasicCircuit_00=一个基础电路板
 tooltips.BasicCircuit_01=§6MV-Tier
-
 MetaItem.24.name=基础控制电路
 tooltips.AdvancedCircuit_00=一个高级电路板
 tooltips.AdvancedCircuit_01=§eHV-Tier
-
 MetaItem.25.name=精英控制电路
 tooltips.EliteCircuit_00=一个精英电路板
 tooltips.EliteCircuit_01=§8EV-Tier
-
 MetaItem.26.name=星门奇点
 MetaItem.27.name=压缩星门奇点
 MetaItem.28.name=生物贴片电容
@@ -358,11 +337,11 @@ MetaItem.34.name=寰宇贴片晶体管
 MetaItem.35.name=寰宇贴片电感
 MetaItem.36.name=寰宇贴片电阻
 MetaItem.37.name=寰宇贴片二极管
-MetaItem.38.name=天顶星贴片电容
-MetaItem.39.name=天顶星贴片晶体管
-MetaItem.40.name=天顶星贴片电感
-MetaItem.41.name=天顶星贴片电阻
-MetaItem.42.name=天顶星贴片二极管
+MetaItem.38.name=异星贴片电容
+MetaItem.39.name=异星贴片晶体管
+MetaItem.40.name=异星贴片电感
+MetaItem.41.name=异星贴片电阻
+MetaItem.42.name=异星贴片二极管
 MetaItem.43.name=超时空贴片电容
 MetaItem.44.name=超时空贴片晶体管
 MetaItem.45.name=超时空贴片电感
@@ -438,7 +417,16 @@ MetaItem.72.name=§d传闻 - 巨人之书
 MetaItem.73.name=黏土荧石粉
 MetaItem.74.name=量子磁盘
 MetaItem.75.name=中子掺杂的单晶硅
+tooltips.NeutroniumBoule_00=电路板原料
 MetaItem.76.name=中子掺杂的晶圆
+tooltips.NeutroniumWafer_00=电路板原料
+MetaItem.77.name=HASoC晶圆
+tooltips.HighlyAdvancedSocWafer_00=电路板原料
+MetaItem.78.name=HASoC芯片
+tooltips.HighlyAdvancedSoc_00=高度先进芯片级系统
+MetaItem.79.name=锌-铁-铝-氯混合催化剂
+MetaItem.80.name=黑光灯
+tooltips.BlackLight_00=§8长波§d紫外线§8光源
 
 item.TestItem.name=测试物品
 Tooltip_Testitem_00=如果你看到了这个Tooltip
@@ -618,6 +606,18 @@ bw.werkstoff.25091.name=钔
 bw.werkstoff.25092.name=锘
 bw.werkstoff.25093.name=铹
 bw.werkstoff.25094.name=鿭
+bw.werkstoff.25095.name=锌-铁-铝-氯混合
+bw.werkstoff.25096.name=四氟硼酸重氮苯
+bw.werkstoff.25097.name=氟苯
+bw.werkstoff.25098.name=三氟化锑
+bw.werkstoff.25099.name=氟甲苯
+bw.werkstoff.25100.name=间苯二酚
+bw.werkstoff.25101.name=对苯二酚
+bw.werkstoff.25102.name=二氟二甲苯酮
+bw.werkstoff.25103.name=加氟裂化硅岩
+bw.werkstoff.25104.name=富集硅岩废液
+bw.werkstoff.25105.name=加氡裂化富集硅岩
+bw.werkstoff.25106.name=超能硅岩废液
 bw.werkstoff.25200.name=錭錤錶
 bw.werkstoff.25201.name=星门
 
@@ -715,6 +715,18 @@ Material.mendelevium=钔
 Material.nobelium=锘
 Material.lawrencium=铹
 Material.nihonium=鿭
+Material.znfealcl=锌-铁-铝-氯混合
+Material.benzenediazoniumtetrafluoroborate=四氟硼酸重氮苯
+Material.fluorobenzene=氟苯
+Material.antimonytrifluoride=三氟化锑
+Material.fluorotoluene=氟甲苯
+Material.resorcinol=间苯二酚
+Material.hydroquinone=对苯二酚
+Material.difluorobenzophenone=二氟二甲苯酮
+Material.fluorinecrackednaquadah=加氟裂化硅岩
+Material.enrichednaquadahwaste=富集硅岩废液
+Material.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+Material.naquadriawaste=超能硅岩废液
 Material.periodicium=錭錤錶
 Material.stargate=星门
 
@@ -813,8 +825,130 @@ fluid.mendelevium=钔
 fluid.nobelium=锘
 fluid.lawrencium=铹
 fluid.nihonium=鿭
+fluid.znfealcl=锌-铁-铝-氯混合
+fluid.benzenediazoniumtetrafluoroborate=四氟硼酸重氮苯
+fluid.fluorobenzene=氟苯
+fluid.antimonytrifluoride=三氟化锑
+fluid.fluorotoluene=氟甲苯
+fluid.resorcinol=间苯二酚
+fluid.hydroquinone=对苯二酚
+fluid.difluorobenzophenone=二氟二甲苯酮
+fluid.fluorinecrackednaquadah=加氟裂化硅岩
+fluid.enrichednaquadahwaste=富集硅岩废液
+fluid.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+fluid.naquadriawaste=超能硅岩废液
 fluid.periodicium=錭錤錶
 fluid.stargate=星门
+
+fluid.molten.hexanitrohexaazaisowurtzitane=六硝基六氮杂异伍兹烷
+fluid.molten.crudehexanitrohexaazaisowurtzitane=粗制六硝基六氮杂异伍兹烷
+fluid.molten.silicagel=硅胶
+fluid.molten.ethylenediamine=乙二胺
+fluid.molten.ethanolamine=乙醇胺
+fluid.molten.silicagelbase=硅胶基质
+fluid.molten.fluoroboricacide=氟硼酸
+fluid.molten.tetraacetyldinitrohexaazaisowurtzitane=四乙酰二硝基六氮杂异戊二烯
+fluid.molten.nitroniumtetrafluoroborate=四氟硝铵
+fluid.molten.nitronsoniumtetrafluoroborate=四氟硼酸亚硝铵
+fluid.molten.boronfluoride=氟化硼
+fluid.molten.sodiumtetrafluoroborate=四氟硼酸钠
+fluid.molten.borontrioxide=氧化硼
+fluid.molten.dibenzyltetraacetylhexaazaisowurtzitane=二基基四乙酰六氮杂异纤锌烷
+fluid.molten.benzaldehyde=苯甲醛
+fluid.molten.hydrobromicacid=氢溴酸
+fluid.molten.succinimidylacetate=琥珀酰亚胺醋酸酯
+fluid.molten.hexabenzylhexaazaisowurtzitane=六苄基六氮杂异伍兹烷
+fluid.molten.nhydroxysuccinimide=羟基丁二酰亚胺
+fluid.molten.succinicanhydride=丁二酸酐
+fluid.molten.hydroxylaminehydrochloride=盐酸羟胺
+fluid.molten.bariumchloride=氯化钡
+fluid.molten.hydroxylammoniumsulfate=羟胺硫酸盐
+fluid.molten.acrylonitrilebutadienestyrene=ABS塑料
+fluid.molten.hydroboromicacid=氢溴酸
+fluid.molten.potassiumhydroxylaminedisulfonate=羟胺二磺酸钾
+fluid.molten.potassiumsulfate=硫酸钾
+fluid.molten.potassiumbisulfite=亚硫酸氢钾
+fluid.molten.nitrousacid=亚硝酸
+fluid.molten.sodiumnitrite=亚硝酸钠
+fluid.molten.coacabcatalyst=Co/AC-AB催化剂粉
+fluid.molten.sodiumnitratesolution=硝酸钠溶液
+fluid.molten.benzylamine=苄胺
+fluid.molten.glyoxal=乙二醛
+fluid.molten.acetonitrile=乙腈
+fluid.molten.ammoniumchloride=氯化铵
+fluid.molten.hexamethylenetetramine=环六亚甲基四胺
+fluid.molten.benzylchloride=氯化苄
+fluid.molten.succinicacid=琥珀酸
+fluid.molten.maleicanhydride=顺丁烯二酸酐
+fluid.molten.supermutatedlivingsolder=超突变活性焊料
+fluid.molten.polyimide=聚酰亚胺
+fluid.molten.ployamicacid=聚酰胺酸（PAA）
+fluid.molten.oxydianiline=二氨基二苯醚
+fluid.molten.pyromelliticdianhydride=均苯二甲酸酐
+fluid.molten.durene=杜烯
+fluid.molten.germaniumtungstennitride=锗-钨氮化物
+fluid.molten.polyetheretherketone=聚醚醚酮
+fluid.molten.fluidmana=液态魔力
+fluid.molten.excitednaquadah=激发的混合硅岩基燃料
+fluid.molten.rareearthhydroxides=稀土氢氧化物
+fluid.molten.rareearthchlorides=稀土氯化物
+fluid.molten.rareearthoxide=稀土氧化物
+fluid.molten.rareearthmetal=稀土金属
+fluid.molten.barnardacsappy=巴纳德C树汁
+fluid.molten.neutralisedredmud=中和赤泥
+fluid.molten.ferricreechloride=含稀土氯化铁
+fluid.molten.landoxidessolution=镧-钕氧化物
+fluid.molten.smgdoxidessolution=钐-钆氧化物
+fluid.molten.tbhooxidessolution=铽-钬氧化物
+fluid.molten.erluoxidessolution=饵-镥氧化物
+fluid.molten.praseodymiumoxide=氧化镨
+fluid.molten.scandiumoxide=氧化钪
+fluid.molten.gadoliniumoxide=氧化钆
+fluid.molten.terbiumoxide=氧化铽
+fluid.molten.dysprosiumoxide=氧化镝
+fluid.molten.holmiumoxide=氧化钬
+fluid.molten.erbiumoxide=氧化铒
+fluid.molten.thuliumoxide=氧化铥
+fluid.molten.ytterbiumoxide=氧化镱
+fluid.molten.lutetiumoxide=氧化镥
+fluid.molten.molybdenumdisilicide=二硅化钼
+fluid.molten.hslasteel=HSLA钢
+fluid.molten.actinium=锕
+fluid.molten.rutherfordium=𬬻
+fluid.molten.dubnium=𬭊
+fluid.molten.seaborgium=𬭳
+fluid.molten.technetium=锝
+fluid.molten.bohrium=𬭛
+fluid.molten.hassium=𬭶
+fluid.molten.meitnerium=鿏
+fluid.molten.darmstadtium=𫟼
+fluid.molten.roentgenium=𬬭
+fluid.molten.copernicium=鿔
+fluid.molten.moscovium=镆
+fluid.molten.livermorium=𫟷
+fluid.molten.astatine=砹
+fluid.molten.tennessine=鿬
+fluid.molten.francium=钫
+fluid.molten.berkelium=锫
+fluid.molten.einsteinium=锿
+fluid.molten.mendelevium=钔
+fluid.molten.nobelium=锘
+fluid.molten.lawrencium=铹
+fluid.molten.nihonium=鿭
+fluid.molten.znfealcl=锌-铁-铝-氯混合
+fluid.molten.benzenediazoniumtetrafluoroborate=四氟硼酸重氮苯
+fluid.molten.fluorobenzene=氟苯
+fluid.molten.antimonytrifluoride=三氟化锑
+fluid.molten.fluorotoluene=氟甲苯
+fluid.molten.resorcinol=间苯二酚
+fluid.molten.hydroquinone=对苯二酚
+fluid.molten.difluorobenzophenone=二氟二甲苯酮
+fluid.molten.fluorinecrackednaquadah=加氟裂化硅岩
+fluid.molten.enrichednaquadahwaste=富集硅岩废液
+fluid.molten.radoncrackedenrichednaquadah=加氡裂化富集硅岩
+fluid.molten.naquadriawaste=超能硅岩废液
+fluid.molten.periodicium=錭錤錶
+fluid.molten.stargate=星门
 
 tooltip.lamp.noglow=无光照
 tooltip.lamp.borderless=无边框
@@ -827,11 +961,15 @@ StructureTooComplex=结构太复杂了！
 BLUE_PRINT_INFO=请参考§9Structure§1Lib§7全息投影，构建主体结构
 textUseBlueprint=用§9蓝§b图§r预览
 
-Tooltip_GTMMultiMachine_00=比相同电压的单方块机器快167%%
+Tooltip_GTMMultiMachine_00=比相同电压的机器快167%%
 Tooltip_GTMMultiMachine_01=只需要使用配方要求功率的80%%
 Tooltip_GTMMultiMachine_02=初始并行为8
 Tooltip_GTMMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
 Tooltip_GTMMultiMachine_04=支持§9Tec§1Tech§r多安能源仓！
+
+NameFuelRefiningComplex=燃料精炼复合体
+FuelRefiningComplexRecipeType=燃料精炼复合体
+gtnl.recipe.FuelRefiningComplexRecipes=燃料精炼复合体
 
 NameLargeHammer=大型锻造锤
 LargeHammerRecipeType=锻造锤
@@ -870,6 +1008,23 @@ Tooltip_VacuumDryingFurnace_01=每超过配方温度1800K，将进行一次无�
 Tooltip_VacuumDryingFurnace_02=超过MV后的每一级电压，都会将温度提高100K
 Tooltip_VacuumDryingFurnace_Casing=任意真空机械方块
 
+NameResourceCollectionModule=太空电梯资源采集模块
+gtnl.recipe.SpaceMinerRecipes=太空采矿
+gtnl.recipe.SpaceDrillRecipes=太空钻井
+ResourceCollectionModuleRecipeType=太空采矿 / 太空钻井
+ResourceCollectionModule_Mode_0=太空采矿
+ResourceCollectionModule_Mode_1=太空钻井
+Tooltip_ResourceCollectionModule_00=将太空采矿和太空钻井功能添加到太空电梯
+Tooltip_ResourceCollectionModule_01=§d§l一飞冲天
+Tooltip_ResourceCollectionModule_Casing=任意太空电梯基座机械方块
+Interaction_DESCRIPTION_Index_702=需要采矿无人机MK-VIII x 16
+Interaction_DESCRIPTION_Index_703=需要采矿无人机MK-IX x 16
+Interaction_DESCRIPTION_Index_704=需要采矿无人机MK-X x 16
+Interaction_DESCRIPTION_Index_705=需要采矿无人机MK-XI x 16
+Interaction_DESCRIPTION_Index_706=需要采矿无人机MK-XII x 16
+Interaction_DESCRIPTION_Index_707=需要采矿无人机MK-XIII x 16
+GT5U.gui.text.no_mining_drone=§7未找到采矿无人机
+
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
 Tooltip_LargeMixer_Casing=任意储罐拓展方块
@@ -886,6 +1041,7 @@ Tooltip_LargeMacerationTower_Casing=任意坚实铱锇机械方块
 
 NameLargeSiftingFunnel=大型筛选漏斗
 LargeSiftingFunnelRecipeType=筛选机
+Tooltip_LargeSiftingFunnel_00=比相同电压的机器快500%%
 Tooltip_LargeSiftingFunnel_Casing=任意离心机机械方块
 
 NameLargeCutter=大型切割机
@@ -914,13 +1070,26 @@ Tooltip_LargeNaquadahReactor_03=代价是每秒会消耗2000L的氧气
 Tooltip_LargeNaquadahReactor_04=只能在不输入氢气的情况下使用!
 Tooltip_LargeNaquadahReactor_Casing=任意放射硅岩合金机械方块
 
+NameGrandAssemblyLine=大型装配线
+GrandAssemblyLineRecipeType=无序装配线
+gtnl.recipe.GrandAssemblyLineRecipes=无序装配线
+Tooltip_GrandAssemblyLine_00=§r§l让亨利·福特也黯然失色。
+Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。
+Tooltip_GrandAssemblyLine_02=不再需要按顺序输入物品
+Tooltip_GrandAssemblyLine_03=机器可进行跨配方处理！
+Tooltip_GrandAssemblyLine_04=只能安装一个能源仓！
+Tooltip_GrandAssemblyLine_05=如果某一配方功率大于能源仓最大功率，将会直接跳过
+Tooltip_GrandAssemblyLine_06=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
+Tooltip_GrandAssemblyLine_07=如果能源仓功率大于配方总功率 * 4，则执行有损超频
+Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
+
 NamePrecisionAssembler=精密组装机
 PreciseAssemblerRecipeType=组装机 / 精密组装机
 PreciseAssembler_Mode_0=组装机
 PreciseAssembler_Mode_1=精密组装机
 Tooltip_PreciseAssembler_00=机械方块等级决定了能源仓最大等级, UHV机械方块解锁所有等级
 Tooltip_PreciseAssembler_01=并行数: 2 ^ 玻璃等级
-Tooltip_PreciseAssembler_02=机器可进行§c无损超频§7
+Tooltip_PreciseAssembler_02=当精密电子单元机械方块等级为3时，开启§c无损超频§7
 Tooltip_PreciseAssembler_Casing=任意精密机械方块
 
 NameDecayHastener=衰变加速器
@@ -1362,6 +1531,8 @@ Tooltip_LargeCircuitAssembler_Casing=任意多功能机械方块
 NameSmeltingMixingFurnace=合金搅拌炉
 SmeltingMixingFurnaceRecipeType=合金搅拌
 gtnl.recipe.SmeltingMixingFurnaceRecipes=合金搅拌
+SmeltingMixingFurnace_Mode_0=合金搅拌
+SmeltingMixingFurnace_Mode_1=超维度等离子锻炉
 Tooltip_SmeltingMixingFurnace_Casing=任意超能机械方块
 
 NameProcessingArrayGTNL=处理阵列：重生
@@ -1404,8 +1575,10 @@ FluidBlazeInputHatch=烈焰输入仓
 BlazeBlastFurnaceRecipeType=工业高炉
 Tooltip_BlazeBlastFurnace_00=比工业高炉快200%%！
 Tooltip_BlazeBlastFurnace_01=最大并行数固定为64
-Tooltip_BlazeBlastFurnace_02=需每秒提供10x配方电压等级^2的熔融烈焰
-Tooltip_BlazeBlastFurnace_03=超过MV后的每一级电压，都会将温度提高100K
+Tooltip_BlazeBlastFurnace_02=在控制器内放入炽骨立方将并行提高到256
+Tooltip_BlazeBlastFurnace_03=需每秒提供10x配方电压等级^2的熔融烈焰
+Tooltip_BlazeBlastFurnace_04=安装炽骨立方后消耗翻倍
+Tooltip_BlazeBlastFurnace_05=超过MV后的每一级电压，都会将温度提高100K
 Tooltip_BlazeBlastFurnace_Casing_00=任意冶炼炉机械方块
 Tooltip_BlazeBlastFurnace_Casing_01=回收气体，任意炽焱高炉机械方块
 Tooltip_BlazeBlastFurnace_Casing_02=顶部中心炽焱高炉机械方块
@@ -1415,7 +1588,7 @@ FluidIceInputHatch=碎冰输入仓
 ColdIceFreezerRecipeType=凛冰冷冻机
 Tooltip_ColdIceFreezer_00=比真空冷冻机快200%%！
 Tooltip_ColdIceFreezer_01=只需要使用配方要求功率的80%%
-Tooltip_ColdIceFreezer_02=最大并行数固定为64
+Tooltip_ColdIceFreezer_02=最大并行数固定为128
 Tooltip_ColdIceFreezer_03=需每秒提供10x配方电压等级^2的碎冰
 Tooltip_ColdIceFreezer_Casing_00=任意防冻机械方块
 Tooltip_ColdIceFreezer_Casing_01=顶部中心防冻机械方块
@@ -1441,6 +1614,8 @@ Tooltip_LibraryOfRuina_03=§8§o光耀，孤寂，无尽
 Tooltip_LibraryOfRuina_04=§8§o满腹稀世书籍
 Tooltip_LibraryOfRuina_05=§8§o无用，不灭，隐秘
 Tooltip_LibraryOfRuina_06=§8§o正于此地，愿您找到想要的书。
+Tooltip_LibraryOfRuina_07=需要在控制器内放入暮色传送门激活水晶
+Tooltip_LibraryOfRuina_08=机器可进行§c无损超频§7
 
 NameEnergeticPhotovoltaicPowerStation=充能光伏电站
 NameAdvancedPhotovoltaicPowerStation=高级光伏电站

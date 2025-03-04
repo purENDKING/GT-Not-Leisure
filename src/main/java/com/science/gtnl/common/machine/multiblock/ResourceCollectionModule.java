@@ -87,6 +87,14 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
         IGItems.MiningDrones,
         16,
         ItemMiningDrones.DroneTiers.UIV.ordinal());
+    public final ItemStack MiningDroneMkXII = new ItemStack(
+        IGItems.MiningDrones,
+        16,
+        ItemMiningDrones.DroneTiers.UMV.ordinal());
+    public final ItemStack MiningDroneMkXIII = new ItemStack(
+        IGItems.MiningDrones,
+        16,
+        ItemMiningDrones.DroneTiers.UXV.ordinal());
 
     public ResourceCollectionModule(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional, 40, 5, 1);
@@ -200,8 +208,10 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        logic.setAvailableVoltage(Integer.MAX_VALUE);
-        logic.setAvailableAmperage(1);
+        long currentRecipe = logic.getCalculatedEut();
+        long recipePower = currentRecipe * 16;
+        logic.setAvailableVoltage(Math.min(recipePower, Integer.MAX_VALUE));
+        logic.setAvailableAmperage(2);
         logic.setAmperageOC(false);
     }
 
@@ -231,7 +241,7 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
                     return SimpleCheckRecipeResult.ofFailure("no_mining_drone");
                 }
 
-                if (recipeReq >= 1 && recipeReq <= 4) {
+                if (recipeReq >= 1 && recipeReq <= 6) {
                     ItemStack requiredDrone = null;
                     switch (recipeReq) {
                         case 1:
@@ -245,6 +255,12 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
                             break;
                         case 4:
                             requiredDrone = MiningDroneMkXI;
+                            break;
+                        case 5:
+                            requiredDrone = MiningDroneMkXII;
+                            break;
+                        case 6:
+                            requiredDrone = MiningDroneMkXIII;
                             break;
                     }
 
@@ -276,7 +292,9 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
             if (item != null) {
                 if (item.isItemEqual(MiningDroneMkVIII) || item.isItemEqual(MiningDroneMkIX)
                     || item.isItemEqual(MiningDroneMkX)
-                    || item.isItemEqual(MiningDroneMkXI)) {
+                    || item.isItemEqual(MiningDroneMkXI)
+                    || item.isItemEqual(MiningDroneMkXII)
+                    || item.isItemEqual(MiningDroneMkXIII)) {
                     return item;
                 }
             }

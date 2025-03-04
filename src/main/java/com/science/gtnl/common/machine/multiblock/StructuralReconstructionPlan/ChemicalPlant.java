@@ -203,7 +203,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(1 + (getCoilLevel().getTier() - 1) * 0.05)
+                    .setEUtDiscount(1 - (getCoilLevel().getTier() - 1) * 0.05)
                     .setSpeedBoost(1 - (getCoilLevel().getTier() - 1) * 0.05);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

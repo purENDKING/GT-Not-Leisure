@@ -318,7 +318,7 @@ public class RecipeRegister {
         .build();
 
     public static RecipeMap<RecipeMapBackend> SpaceMinerRecipes = RecipeMapBuilder.of("gtnl.recipe.SpaceMinerRecipes")
-        .maxIO(2, 6, 1, 0)
+        .maxIO(2, 9, 1, 0)
         .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.ResourceCollectionModule.get(1))
