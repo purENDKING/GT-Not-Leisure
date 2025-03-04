@@ -1,6 +1,5 @@
 package com.science.gtnl.common.machine.multiblock;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 import static gregtech.api.util.GTUtility.validMTEList;
 
 import java.util.Arrays;
@@ -16,9 +15,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
-import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.gtnewhorizons.gtnhintergalactic.item.IGItems;
 import com.gtnewhorizons.gtnhintergalactic.item.ItemMiningDrones;
 import com.gtnewhorizons.gtnhintergalactic.tile.multi.elevator.TileEntitySpaceElevator;
@@ -30,7 +26,6 @@ import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DynamicTextWidget;
-import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -52,23 +47,24 @@ import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.util.GTRecipe;
-import gregtech.api.util.GTStructureUtility;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import tectech.thing.metaTileEntity.multi.base.TTMultiblockBase;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import tectech.thing.metaTileEntity.multi.base.*;
 import tectech.thing.metaTileEntity.multi.base.render.TTRenderedExtendedFacingTexture;
 
 public class ResourceCollectionModule extends TileEntityModuleBase implements IOverclockDescriptionProvider {
 
+    Parameters.Group.ParameterIn parallelSetting;
+    private static final INameFunction<ResourceCollectionModule> PARALLEL_SETTING_NAME = (base, p) -> GCCoreUtil
+        .translate("gt.blockmachines.multimachine.project.ig.assembler.cfgi.0");
+    private static final IStatusFunction<ResourceCollectionModule> PARALLEL_STATUS = (base, p) -> LedStatus
+        .fromLimitsInclusiveOuterBoundary(p.get(), 0, 1, 100, base.getMaxParallelRecipes());
     private int ParallelTier;
     private int energyHatchTier;
     private static final int MACHINEMODE_MINER = 0;
     private static final int MACHINEMODE_DRILL = 1;
-    private static IStructureDefinition<ResourceCollectionModule> STRUCTURE_DEFINITION = null;
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/space_module";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(SM_STRUCTURE_FILE_PATH);
     public final ItemStack MiningDroneMkVIII = new ItemStack(
         IGItems.MiningDrones,
         16,
@@ -167,42 +163,6 @@ public class ResourceCollectionModule extends TileEntityModuleBase implements IO
     }
 
     @Override
-    public IStructureDefinition<? extends TTMultiblockBase> getStructure_EM() {
-        if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<ResourceCollectionModule>builder()
-                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement(
-                    'H',
-                    GTStructureUtility.ofHatchAdderOptional(
-                        ResourceCollectionModule::addClassicToMachineList,
-                        4096,
-                        1,
-                        IGBlocks.SpaceElevatorCasing,
-                        0))
-                .build();
-        }
-        return STRUCTURE_DEFINITION;
-    }
-
-    @Override
-    public void construct(ItemStack stackSize, boolean hintsOnly) {
-        structureBuild_EM(STRUCTURE_PIECE_MAIN, 0, 1, 0, stackSize, hintsOnly);
-    }
-
-    @Override
-    public boolean checkMachine_EM(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        fixAllIssues();
-        ParallelTier = 0;
-
-        if (!structureCheck_EM(STRUCTURE_PIECE_MAIN, 0, 1, 0)) return false;
-
-        energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
-
-        return true;
-    }
-
-    @Override
     public void setProcessingLogicPower(ProcessingLogic logic) {
         boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         logic.setAvailableVoltage(getMachineVoltageLimit());
@@ -231,6 +191,24 @@ public class ResourceCollectionModule extends TileEntityModuleBase implements IO
         } else {
             return (int) Math.pow(4, ParallelTier - 2);
         }
+    }
+
+    @Override
+    @NotNull
+    protected CheckRecipeResult checkProcessing_EM() {
+        ParallelTier = 0;
+        energyHatchTier = checkEnergyHatchTier();
+
+        ItemStack controllerSlotItem = getControllerSlot();
+        if (controllerSlotItem != null) {
+            ParallelTier = getParallelTier(controllerSlotItem);
+        }
+
+        if (processingLogic == null) {
+            return checkRecipe_EM(controllerSlotItem) ? CheckRecipeResultRegistry.SUCCESSFUL
+                : CheckRecipeResultRegistry.NO_RECIPE;
+        }
+        return super.checkProcessing();
     }
 
     @Override
@@ -279,9 +257,7 @@ public class ResourceCollectionModule extends TileEntityModuleBase implements IO
                     .setEUtDiscount(1 - (ParallelTier / 50.0))
                     .setSpeedBoost(1 - (ParallelTier / 200.0));
             }
-
-        }.setAmperageOC(false)
-            .setMaxParallelSupplier(() -> getMaxParallelRecipes());
+        }.setMaxParallelSupplier(() -> Math.min((int) parallelSetting.get(), getMaxParallelRecipes()));
     }
 
     private ItemStack findMiningDrone() {
@@ -300,6 +276,8 @@ public class ResourceCollectionModule extends TileEntityModuleBase implements IO
     @Override
     public void parametersInstantiation_EM() {
         super.parametersInstantiation_EM();
+        Parameters.Group hatch_0 = parametrization.getGroup(0, false);
+        parallelSetting = hatch_0.makeInParameter(0, getMaxParallelRecipes(), PARALLEL_SETTING_NAME, PARALLEL_STATUS);
     }
 
     @Override
