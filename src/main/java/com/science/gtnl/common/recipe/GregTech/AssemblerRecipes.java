@@ -1658,5 +1658,49 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_IV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                tectech.thing.CustomItemList.dataOut_Hatch.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 1L),
+                ItemList.Sensor_ZPM.get(1))
+            .itemOutputs(tectech.thing.CustomItemList.dataOut_Wireless_Hatch.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(576))
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                tectech.thing.CustomItemList.dataIn_Hatch.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 1L),
+                ItemList.Emitter_ZPM.get(1))
+            .itemOutputs(tectech.thing.CustomItemList.dataIn_Wireless_Hatch.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(576))
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                tectech.thing.CustomItemList.dataOutAss_Hatch.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 1L),
+                ItemList.Sensor_ZPM.get(1))
+            .itemOutputs(tectech.thing.CustomItemList.dataOutAss_Wireless_Hatch.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(576))
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                tectech.thing.CustomItemList.dataInAss_Hatch.get(1),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 1L),
+                ItemList.Emitter_ZPM.get(1))
+            .itemOutputs(tectech.thing.CustomItemList.dataInAss_Wireless_Hatch.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(576))
+            .duration(200)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
     }
 }
