@@ -1,7 +1,6 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
-import static gregtech.api.util.GTUtility.validMTEList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,20 +34,21 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
-import gregtech.api.util.*;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTStructureUtility;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 import tectech.thing.metaTileEntity.multi.base.INameFunction;
 import tectech.thing.metaTileEntity.multi.base.IStatusFunction;
@@ -65,7 +65,6 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
     private static final IStatusFunction<ResourceCollectionModule> PARALLEL_STATUS = (base, p) -> LedStatus
         .fromLimitsInclusiveOuterBoundary(p.get(), 0, 1, 100, base.getMaxParallelRecipes());
     private int ParallelTier;
-    private int energyHatchTier;
     private static final int MACHINEMODE_MINER = 0;
     private static final int MACHINEMODE_DRILL = 1;
     private static IStructureDefinition<ResourceCollectionModule> STRUCTURE_DEFINITION = null;
@@ -90,11 +89,11 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
         ItemMiningDrones.DroneTiers.UIV.ordinal());
 
     public ResourceCollectionModule(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional, 14, 5, 1);
+        super(aID, aName, aNameRegional, 40, 5, 1);
     }
 
     public ResourceCollectionModule(String aName) {
-        super(aName, 14, 5, 1);
+        super(aName, 40, 5, 1);
     }
 
     @Override
@@ -176,7 +175,6 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
 
         if (!structureCheck_EM(STRUCTURE_PIECE_MAIN, 0, 1, 0)) return false;
 
-        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
 
         return true;
@@ -201,26 +199,10 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
     }
 
     @Override
-    public void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
-        logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
-        logic.setAmperageOC(useSingleAmp);
-    }
-
-    public long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
-    }
-
-    public int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        logic.setAvailableVoltage(Integer.MAX_VALUE);
+        logic.setAvailableAmperage(1);
+        logic.setAmperageOC(false);
     }
 
     public int getMaxParallelRecipes() {

@@ -404,7 +404,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
                 if (machineMode == 1) {
-                    if (recipe.mSpecialValue > (Math.max(0, casingTier - 1))) {
+                    if (recipe.mSpecialValue > (Math.max(0, casingTier + 1))) {
                         return CheckRecipeResultRegistry.insufficientMachineTier(recipe.mSpecialValue);
                     }
                 }
