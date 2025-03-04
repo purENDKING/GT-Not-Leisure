@@ -59,6 +59,7 @@ import tectech.thing.metaTileEntity.multi.base.render.TTRenderedExtendedFacingTe
 
 public class ResourceCollectionModule extends TileEntityModuleBase {
 
+    private long processingLogicEU;
     Parameters.Group.ParameterIn parallelSetting;
     private static final INameFunction<ResourceCollectionModule> PARALLEL_SETTING_NAME = (base, p) -> GCCoreUtil
         .translate("gt.blockmachines.multimachine.project.ig.assembler.cfgi.0");
@@ -208,10 +209,16 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        long currentRecipe = logic.getCalculatedEut();
-        long recipePower = currentRecipe * 16;
-        logic.setAvailableVoltage(Math.min(recipePower, Integer.MAX_VALUE));
-        logic.setAvailableAmperage(2);
+        long recipePower;
+
+        if (processingLogicEU <= 0) {
+            recipePower = Integer.MAX_VALUE;
+        } else {
+            recipePower = processingLogicEU;
+        }
+
+        logic.setAvailableVoltage(recipePower);
+        logic.setAvailableAmperage((long) parallelSetting.get());
         logic.setAmperageOC(false);
     }
 
@@ -230,11 +237,15 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+
                 if (lastRecipe == recipe) {
+                    processingLogicEU = recipe.mEUt;
+                    setProcessingLogicPower(processingLogic);
                     return CheckRecipeResultRegistry.SUCCESSFUL;
                 }
 
                 int recipeReq = recipe.getMetadataOrDefault(ResourceCollectionModuleTierKey.INSTANCE, 0);
+
                 ItemStack miningDrone = findMiningDrone();
 
                 if (miningDrone == null) {
@@ -266,8 +277,11 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
 
                     if (miningDrone.isItemEqual(requiredDrone)) {
                         lastRecipe = recipe;
+                        processingLogicEU = recipe.mEUt;
+                        setProcessingLogicPower(processingLogic);
                         return CheckRecipeResultRegistry.SUCCESSFUL;
                     }
+
                     return CheckRecipeResultRegistry.NO_RECIPE;
                 }
 
