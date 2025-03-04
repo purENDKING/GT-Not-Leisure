@@ -164,32 +164,6 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
         return STRUCTURE_DEFINITION;
     }
 
-    @Nonnull
-    @Override
-    public CheckRecipeResult checkProcessing_EM() {
-        if (processingLogic == null) {
-            return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
-                : CheckRecipeResultRegistry.NO_RECIPE;
-        }
-
-        setupProcessingLogic(processingLogic);
-
-        CheckRecipeResult result = doCheckRecipe();
-        result = postCheckRecipe(result, processingLogic);
-        updateSlots();
-        if (!result.wasSuccessful()) return result;
-
-        mEfficiency = 10000;
-        mEfficiencyIncrease = 10000;
-        mMaxProgresstime = processingLogic.getDuration();
-        setEnergyUsage(processingLogic);
-
-        mOutputItems = processingLogic.getOutputItems();
-        mOutputFluids = processingLogic.getOutputFluids();
-
-        return result;
-    }
-
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
         structureBuild_EM(STRUCTURE_PIECE_MAIN, 0, 1, 0, stackSize, hintsOnly);
