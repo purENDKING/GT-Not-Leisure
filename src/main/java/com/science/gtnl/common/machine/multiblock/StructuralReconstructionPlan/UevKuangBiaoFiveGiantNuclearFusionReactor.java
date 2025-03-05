@@ -1,0 +1,280 @@
+package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
+
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
+import static gregtech.api.GregTechAPI.sBlockCasings10;
+import static gregtech.api.GregTechAPI.sBlockCasings8;
+import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gtPlusPlus.core.block.ModBlocks.*;
+import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
+
+import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import galaxyspace.core.register.GSBlocks;
+import goodgenerator.loader.Loaders;
+import gregtech.api.enums.*;
+import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
+
+public class UevKuangBiaoFiveGiantNuclearFusionReactor
+    extends GTMMultiMachineBase<UevKuangBiaoFiveGiantNuclearFusionReactor> implements ISurvivalConstructable {
+
+    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static IStructureDefinition<UevKuangBiaoFiveGiantNuclearFusionReactor> STRUCTURE_DEFINITION = null;
+    public static final String KBFR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/kuang_biao_giant_nuclear_fusion_reactor";
+    public static final int CASING_INDEX = TAE.GTPP_INDEX(52);
+    public final int horizontalOffSet = 19;
+    public final int verticalOffSet = 14;
+    public final int depthOffSet = 0;
+    public static String[][] shape = StructureUtils.readStructureFromFile(KBFR_STRUCTURE_FILE_PATH);
+
+    public UevKuangBiaoFiveGiantNuclearFusionReactor(int aID, String aName, String aNameRegional) {
+        super(aID, aName, aNameRegional);
+    }
+
+    public UevKuangBiaoFiveGiantNuclearFusionReactor(String aName) {
+        super(aName);
+    }
+
+    @Override
+    public IMetaTileEntity newMetaEntity(IGregTechTileEntity iGregTechTileEntity) {
+        return new UevKuangBiaoFiveGiantNuclearFusionReactor(this.mName);
+    }
+
+    @Override
+    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        mCasing = 0;
+        ParallelTier = 0;
+
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+            return false;
+        }
+
+        if (!checkHatch()) {
+            return false;
+        }
+
+        ParallelTier = getParallelTier(aStack);
+        return mCasing >= 1500;
+    }
+
+    @Override
+    public void construct(ItemStack stackSize, boolean hintsOnly) {
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+    }
+
+    @Override
+    public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
+        if (mMachine) return -1;
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            horizontalOffSet,
+            verticalOffSet,
+            depthOffSet,
+            elementBudget,
+            env,
+            false,
+            true);
+    }
+
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+        if (side == aFacing) {
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_DTPF_ON)
+                    .extFacing()
+                    .build() };
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_DTPF_OFF)
+                    .extFacing()
+                    .build() };
+        }
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+    }
+
+    public int getCasingTextureID() {
+        return CASING_INDEX;
+    }
+
+    @Override
+    public MultiblockTooltipBuilder createTooltip() {
+        MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
+        tt.addMachineType(TextLocalization.KuangBiaoOneGiantNuclearFusionReactorRecipeType)
+            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00)
+            .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00)
+            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02)
+            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03)
+            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 + "20480M EU")
+            .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01)
+            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(39, 17, 39, true)
+            .addInputBus(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing)
+            .addOutputBus(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing)
+            .addEnergyHatch(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing)
+            .addMaintenanceHatch(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing)
+            .toolTipFinisher();
+        return tt;
+    }
+
+    @Override
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeMaps.fusionRecipes;
+    }
+
+    @Override
+    public boolean isEnablePerfectOverclock() {
+        return true;
+    }
+
+    @Override
+    public int getRecipeCatalystPriority() {
+        return -2;
+    }
+
+    @Override
+    public long maxEUStore() {
+        return 20480000000L;
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(4)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(4 - (ParallelTier / 12.5))
+                    .setSpeedBoost(Math.max(0.0001, 0.2 - (ParallelTier / 200.0)));
+            }
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                if (!mRunningOnLoad) {
+                    if (recipe.mSpecialValue > 20480000000L) {
+                        return CheckRecipeResultRegistry.insufficientStartupPower(recipe.mSpecialValue);
+                    }
+                    if (recipe.mEUt > GTValues.V[14]) {
+                        return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                    }
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    public IStructureDefinition<UevKuangBiaoFiveGiantNuclearFusionReactor> getStructureDefinition() {
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<UevKuangBiaoFiveGiantNuclearFusionReactor>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlockAnyMeta(ELECTRODE_CASING))
+                .addElement('B', ofBlock(sBlockCasings8, 10))
+                .addElement(
+                    'C',
+                    buildHatchAdder(UevKuangBiaoFiveGiantNuclearFusionReactor.class).casingIndex(CASING_INDEX)
+                        .dot(1)
+                        .atLeast(InputHatch, OutputHatch, Energy.or(ExoticEnergy))
+                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings6Misc, 0))))
+                .addElement('D', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
+                .addElement('E', ofFrame(Materials.Tungsten))
+                .addElement('F', ofFrame(Materials.Infinity))
+                .addElement('G', ofBlock(MetaBlockGlass, 2))
+                .addElement('H', ofBlock(blockCasingsMisc, 5))
+                .addElement('I', ofBlock(Loaders.compactFusionCoil, 4))
+                .addElement('J', ofBlock(blockCasingsMisc, 15))
+                .addElement('K', ofBlock(sBlockCasings10, 3))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected SoundResource getActivitySoundLoop() {
+        return SoundResource.GT_MACHINES_FUSION_LOOP;
+    }
+
+    @Override
+    public String[] getInfoData() {
+        double plasmaOut = 0;
+        if (mMaxProgresstime > 0) plasmaOut = (double) mOutputFluids[0].amount / mMaxProgresstime;
+
+        return new String[] {
+            EnumChatFormatting.BLUE + "Fusion Reactor MK "
+                + EnumChatFormatting.RESET
+                + EnumChatFormatting.RED
+                + "IV"
+                + EnumChatFormatting.RESET,
+            StatCollector.translateToLocal("scanner.info.UX.0") + ": "
+                + EnumChatFormatting.LIGHT_PURPLE
+                + GTUtility.formatNumbers(getMaxParallelRecipes())
+                + EnumChatFormatting.RESET,
+            StatCollector.translateToLocal("GT5U.fusion.req") + ": "
+                + EnumChatFormatting.RED
+                + GTUtility.formatNumbers(-lEUt)
+                + EnumChatFormatting.RESET
+                + "EU/t",
+            StatCollector.translateToLocal("GT5U.fusion.plasma") + ": "
+                + EnumChatFormatting.YELLOW
+                + GTUtility.formatNumbers(plasmaOut)
+                + EnumChatFormatting.RESET
+                + "L/t" };
+    }
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCheckMaintenance() {
+        return false;
+    }
+
+}

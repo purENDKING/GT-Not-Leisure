@@ -99,12 +99,17 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSolidifier;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamOreWasher;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LuvKuangBiaoOneGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaAlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MolecularTransformer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.PrecisionAssembler;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.UevKuangBiaoFiveGiantNuclearFusionReactor;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.UhvKuangBiaoFourGiantNuclearFusionReactor;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.UvKuangBiaoThreeGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumDryingFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ZpmKuangBiaoTwoGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
@@ -482,6 +487,47 @@ public class MachineLoader {
         GTNLItemList.FuelRefiningComplex
             .set(new FuelRefiningComplex(21091, "FuelRefiningComplex", TextLocalization.NameFuelRefiningComplex));
         addItemTooltip(GTNLItemList.FuelRefiningComplex.get(1), AnimatedText.SNL_QYZG);
+
+        /**
+         * ResourceCollectionModule used 21092
+         * 
+         * @see #loadMachinesPostInit()
+         */
+
+        GTNLItemList.LuvKuangBiaoOneGiantNuclearFusionReactor.set(
+            new LuvKuangBiaoOneGiantNuclearFusionReactor(
+                21093,
+                "KuangBiaoOneGiantNuclearFusionReactor",
+                TextLocalization.NameLuvKuangBiaoOneGiantNuclearFusionReactor));
+        addItemTooltip(GTNLItemList.LuvKuangBiaoOneGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
+
+        GTNLItemList.ZpmKuangBiaoTwoGiantNuclearFusionReactor.set(
+            new ZpmKuangBiaoTwoGiantNuclearFusionReactor(
+                21094,
+                "KuangBiaoTwoGiantNuclearFusionReactor",
+                TextLocalization.NameZpmKuangBiaoTwoGiantNuclearFusionReactor));
+        addItemTooltip(GTNLItemList.ZpmKuangBiaoTwoGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
+
+        GTNLItemList.UvKuangBiaoThreeGiantNuclearFusionReactor.set(
+            new UvKuangBiaoThreeGiantNuclearFusionReactor(
+                21095,
+                "KuangBiaoThreeGiantNuclearFusionReactor",
+                TextLocalization.NameUvKuangBiaoThreeGiantNuclearFusionReactor));
+        addItemTooltip(GTNLItemList.UvKuangBiaoThreeGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
+
+        GTNLItemList.UhvKuangBiaoFourGiantNuclearFusionReactor.set(
+            new UhvKuangBiaoFourGiantNuclearFusionReactor(
+                21096,
+                "KuangBiaoFourGiantNuclearFusionReactor",
+                TextLocalization.NameUhvKuangBiaoFourGiantNuclearFusionReactor));
+        addItemTooltip(GTNLItemList.UhvKuangBiaoFourGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
+
+        GTNLItemList.UevKuangBiaoFiveGiantNuclearFusionReactor.set(
+            new UevKuangBiaoFiveGiantNuclearFusionReactor(
+                21097,
+                "KuangBiaoFiveGiantNuclearFusionReactor",
+                TextLocalization.NameUevKuangBiaoFiveGiantNuclearFusionReactor));
+        addItemTooltip(GTNLItemList.UevKuangBiaoFiveGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

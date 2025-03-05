@@ -989,6 +989,76 @@ public class TextLocalization {
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeHammer_Casing");
 
+    public static final String NameLuvKuangBiaoOneGiantNuclearFusionReactor = texter(
+        "Kuang-Biao One Giant Nuclear Fusion Reactor",
+        "NameLuvKuangBiaoOneGiantNuclearFusionReactor");
+    public static final String NameZpmKuangBiaoTwoGiantNuclearFusionReactor = texter(
+        "Kuang-Biao Two Giant Nuclear Fusion Reactor",
+        "NameZpmKuangBiaoTwoGiantNuclearFusionReactor");
+    public static final String NameUvKuangBiaoThreeGiantNuclearFusionReactor = texter(
+        "Kuang-Biao Three Giant Nuclear Fusion Reactor",
+        "NameUvKuangBiaoThreeGiantNuclearFusionReactor");
+    public static final String NameUhvKuangBiaoFourGiantNuclearFusionReactor = texter(
+        "Kuang-Biao Four Giant Nuclear Fusion Reactor",
+        "NameUhvKuangBiaoFourGiantNuclearFusionReactor");
+    public static final String NameUevKuangBiaoFiveGiantNuclearFusionReactor = texter(
+        "Kuang-Biao Five Giant Nuclear Fusion Reactor",
+        "NameUevKuangBiaoFiveGiantNuclearFusionReactor");
+    public static final String KuangBiaoOneGiantNuclearFusionReactorRecipeType = texter(
+        "Fusion Reactor",
+        "KuangBiaoOneGiantNuclearFusionReactorRecipeType");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00 = texter(
+        "§rWhat it simulates is an eternal and unchanging light",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01 = texter(
+        "200%% faster than using Fusion Reactor",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02 = texter(
+        "Only uses 400%% of the EU/t normally required",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03 = texter(
+        "No need to consume formula startup energy, but you still need the corresponding startup energy to start up",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 = texter(
+        "Energy storage upper limit: ",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04");
+    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05");
+    public static final String Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00 = texter(
+        "If the recipe requires a voltage tier over §dLuV§r§7 , you can't do it either",
+        "Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00");
+    public static final String Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_00 = texter(
+        "If the recipe requires a voltage tier over §bZPM§r§7 , you can't do it either",
+        "Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_00");
+    public static final String Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00 = texter(
+        "If the recipe requires a voltage tier over §2UV§r§7 , you can't do it either",
+        "Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00");
+    public static final String Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_00 = texter(
+        "If the recipe requires a voltage tier over §4UHV§r§7 , you can't do it either",
+        "Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_00");
+    public static final String Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00 = texter(
+        "500%% faster than using Fusion Reactor",
+        "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00");
+    public static final String Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01 = texter(
+        "If the recipe requires a voltage tier over §5UEV§r§7 , you can't do it either",
+        "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01");
+    public static final String Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing = texter(
+        "Any LuV Machine Casing",
+        "Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing");
+    public static final String Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing = texter(
+        "Any Fusion Machine Casing",
+        "Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing");
+    public static final String Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing = texter(
+        "Any Fusion Machine Casing MK II",
+        "Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing");
+    public static final String Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing = texter(
+        "Any Fusion Machine Casing MK III",
+        "Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing");
+    public static final String Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing = texter(
+        "Any Fusion Machine Casing MK IV",
+        "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_Casing");
+
     public static final String NameLargeWiremill = texter("Large Wiremill", "NameLargeWiremill");
     public static final String LargeWiremillRecipeType = texter("Wiremill", "LargeWiremillRecipeType");
     public static final String Tooltip_LargeWiremill_Casing = texter(

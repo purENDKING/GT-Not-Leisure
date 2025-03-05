@@ -259,6 +259,11 @@ public enum GTNLItemList {
     LargeAlloySmelter,
     LargePyrolyseOven,
     PreciseAssembler,
+    LuvKuangBiaoOneGiantNuclearFusionReactor,
+    ZpmKuangBiaoTwoGiantNuclearFusionReactor,
+    UvKuangBiaoThreeGiantNuclearFusionReactor,
+    UhvKuangBiaoFourGiantNuclearFusionReactor,
+    UevKuangBiaoFiveGiantNuclearFusionReactor,
 
     ResourceCollectionModule,
     FuelRefiningComplex,
