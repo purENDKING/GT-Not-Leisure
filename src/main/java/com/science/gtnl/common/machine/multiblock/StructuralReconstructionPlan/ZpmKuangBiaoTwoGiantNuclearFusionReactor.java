@@ -6,13 +6,17 @@ import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
 import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
+
+import java.util.Set;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -32,10 +36,13 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoidingMode;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -45,10 +52,13 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
     extends GTMMultiMachineBase<ZpmKuangBiaoTwoGiantNuclearFusionReactor> implements ISurvivalConstructable {
 
+    public GTRecipe lastRecipe;
+    public long mEUStore;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<ZpmKuangBiaoTwoGiantNuclearFusionReactor> STRUCTURE_DEFINITION = null;
     public static final String KBFR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/kuang_biao_giant_nuclear_fusion_reactor";
@@ -80,6 +90,7 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         if (!checkHatch()) {
             return false;
         }
@@ -177,6 +188,111 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
     }
 
     @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide()) {
+            mTotalRunTime++;
+            if (mEfficiency < 0) mEfficiency = 0;
+            if (mUpdated) {
+                if (mUpdate <= 0) mUpdate = 50;
+                mUpdated = false;
+            }
+            if (--mUpdate == 0 || --mStartUpCheck == 0) {
+                checkStructure(true, aBaseMetaTileEntity);
+            }
+
+            if (mStartUpCheck < 0) {
+                if (mMachine) {
+                    this.mEUStore = aBaseMetaTileEntity.getStoredEU();
+                    long maxEnergy = maxEUStore();
+
+                    if (!this.mEnergyHatches.isEmpty()) {
+                        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+                            if (mEUStore >= maxEnergy) break;
+
+                            long availableEnergy = tHatch.getBaseMetaTileEntity()
+                                .getStoredEU();
+                            long remainingCapacity = maxEnergy - mEUStore;
+
+                            long energyToMove = Math.min(availableEnergy, remainingCapacity);
+
+                            if (tHatch.getBaseMetaTileEntity()
+                                .decreaseStoredEnergyUnits(energyToMove, false)) {
+                                aBaseMetaTileEntity.increaseStoredEnergyUnits(energyToMove, true);
+                                mEUStore += energyToMove;
+                            }
+                        }
+                    }
+
+                    if (!this.mExoticEnergyHatches.isEmpty()) {
+                        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+                            if (mEUStore >= maxEnergy) break;
+
+                            long availableEnergy = tHatch.getBaseMetaTileEntity()
+                                .getStoredEU();
+                            long remainingCapacity = maxEnergy - mEUStore;
+
+                            long energyToMove = Math.min(availableEnergy, remainingCapacity);
+
+                            if (tHatch.getBaseMetaTileEntity()
+                                .decreaseStoredEnergyUnits(energyToMove, false)) {
+                                aBaseMetaTileEntity.increaseStoredEnergyUnits(energyToMove, true);
+                                mEUStore += energyToMove;
+                            }
+                        }
+                    }
+
+                    if (this.mEUStore <= 0 && mMaxProgresstime > 0) {
+                        stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                    }
+                    if (mMaxProgresstime > 0) {
+                        this.getBaseMetaTileEntity()
+                            .decreaseStoredEnergyUnits(-lEUt, true);
+                        if (mMaxProgresstime > 0 && ++mProgresstime >= mMaxProgresstime) {
+                            if (mOutputItems != null)
+                                for (ItemStack tStack : mOutputItems) if (tStack != null) addOutput(tStack);
+                            if (mOutputFluids != null)
+                                for (FluidStack tStack : mOutputFluids) if (tStack != null) addOutput(tStack);
+                            mEfficiency = 10000;
+                            mOutputItems = null;
+                            mOutputFluids = null;
+                            mProgresstime = 0;
+                            mMaxProgresstime = 0;
+                            mEfficiencyIncrease = 0;
+                            mLastWorkingTick = mTotalRunTime;
+                            this.mEUStore = aBaseMetaTileEntity.getStoredEU();
+                            this.lastRecipe = null;
+                            if (aBaseMetaTileEntity.isAllowedToWork()) {
+                                checkRecipe();
+                            }
+                        }
+                    } else {
+                        if (aTick % 100 == 0 || aBaseMetaTileEntity.hasWorkJustBeenEnabled()
+                            || aBaseMetaTileEntity.hasInventoryBeenModified()) {
+                            if (aBaseMetaTileEntity.isAllowedToWork()) {
+                                this.mEUStore = aBaseMetaTileEntity.getStoredEU();
+                                if (checkRecipe()) {
+                                    markDirty();
+                                    if (this.mEUStore < this.lastRecipe.mSpecialValue + this.lEUt) {
+                                        stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                                    }
+                                    aBaseMetaTileEntity.decreaseStoredEnergyUnits(this.lEUt, true);
+                                }
+                            }
+                            if (mMaxProgresstime <= 0) mEfficiency = 10000;
+                        }
+                    }
+                } else if (aBaseMetaTileEntity.isAllowedToWork()) {
+                    this.lastRecipe = null;
+                    stopMachine(ShutDownReasonRegistry.STRUCTURE_INCOMPLETE);
+                }
+            }
+            aBaseMetaTileEntity.setActive(mMaxProgresstime > 0);
+        } else {
+            doActivitySound(getActivitySoundLoop());
+        }
+    }
+
+    @Override
     public ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
@@ -196,14 +312,16 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                ZpmKuangBiaoTwoGiantNuclearFusionReactor.this.lastRecipe = null;
                 if (!mRunningOnLoad) {
-                    if (recipe.mSpecialValue > 320000000L) {
+                    if (recipe.mSpecialValue > mEUStore) {
                         return CheckRecipeResultRegistry.insufficientStartupPower(recipe.mSpecialValue);
                     }
                     if (recipe.mEUt > GTValues.V[8]) {
                         return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                     }
                 }
+                ZpmKuangBiaoTwoGiantNuclearFusionReactor.this.lastRecipe = recipe;
                 return CheckRecipeResultRegistry.SUCCESSFUL;
             }
 
@@ -279,4 +397,8 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
         return false;
     }
 
+    @Override
+    public Set<VoidingMode> getAllowedVoidingModes() {
+        return VoidingMode.FLUID_ONLY_MODES;
+    }
 }

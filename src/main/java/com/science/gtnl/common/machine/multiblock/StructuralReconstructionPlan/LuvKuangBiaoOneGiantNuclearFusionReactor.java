@@ -33,7 +33,6 @@ import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import goodgenerator.loader.Loaders;
-import gregtech.GTMod;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
@@ -61,6 +60,7 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
     extends GTMMultiMachineBase<LuvKuangBiaoOneGiantNuclearFusionReactor> implements ISurvivalConstructable {
 
     public GTRecipe lastRecipe;
+    public long mEUStore;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LuvKuangBiaoOneGiantNuclearFusionReactor> STRUCTURE_DEFINITION = null;
     public static final String KBFR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/kuang_biao_giant_nuclear_fusion_reactor";
@@ -189,8 +189,6 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
         return 160000000L;
     }
 
-    public long mEUStore;
-
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         if (aBaseMetaTileEntity.isServerSide()) {
@@ -258,20 +256,16 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
                                 for (FluidStack tStack : mOutputFluids) if (tStack != null) addOutput(tStack);
                             mEfficiency = 10000;
                             mOutputItems = null;
+                            mOutputFluids = null;
                             mProgresstime = 0;
                             mMaxProgresstime = 0;
                             mEfficiencyIncrease = 0;
                             mLastWorkingTick = mTotalRunTime;
-                            if (mOutputFluids != null && mOutputFluids.length > 0) {
-                                try {
-                                    GTMod.achievements.issueAchivementHatchFluid(
-                                        aBaseMetaTileEntity.getWorld()
-                                            .getPlayerEntityByName(aBaseMetaTileEntity.getOwnerName()),
-                                        mOutputFluids[0]);
-                                } catch (Exception ignored) {}
-                            }
                             this.mEUStore = aBaseMetaTileEntity.getStoredEU();
-                            if (aBaseMetaTileEntity.isAllowedToWork()) checkRecipe();
+                            this.lastRecipe = null;
+                            if (aBaseMetaTileEntity.isAllowedToWork()) {
+                                checkRecipe();
+                            }
                         }
                     } else {
                         if (aTick % 100 == 0 || aBaseMetaTileEntity.hasWorkJustBeenEnabled()
@@ -279,6 +273,7 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
                             if (aBaseMetaTileEntity.isAllowedToWork()) {
                                 this.mEUStore = aBaseMetaTileEntity.getStoredEU();
                                 if (checkRecipe()) {
+                                    markDirty();
                                     if (this.mEUStore < this.lastRecipe.mSpecialValue + this.lEUt) {
                                         stopMachine(ShutDownReasonRegistry.POWER_LOSS);
                                     }
