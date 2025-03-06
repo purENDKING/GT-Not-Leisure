@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.ReAvaritia;
+package com.science.gtnl.common.block.ReAvaritia.NeutronCollector;
 
 import java.util.Arrays;
 

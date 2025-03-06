@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.ReAvaritia;
+package com.science.gtnl.common.block.ReAvaritia.NeutronCollector;
 
 import static net.minecraft.block.BlockPistonBase.getPistonOrientation;
 

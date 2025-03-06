@@ -154,6 +154,7 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         if (this.mEnergyHatches.size() >= 2) return false;
         return mCasing >= 200;
     }

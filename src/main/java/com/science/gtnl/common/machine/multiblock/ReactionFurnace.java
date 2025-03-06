@@ -151,6 +151,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 115;
     }

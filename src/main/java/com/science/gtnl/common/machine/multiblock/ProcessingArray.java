@@ -399,7 +399,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
         if (GTUtility.getTier(this.getMaxInputVoltage()) > tTier + 4) {
             return false;
         }
-        return mCasing >= 50 && mMaintenanceHatches.size() == 1
+        return mCasing >= 40 && mMaintenanceHatches.size() == 1
             && getCoilLevel() != HeatingCoilLevel.None
             && this.mMufflerHatches.size() == 1;
     }

@@ -226,7 +226,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                     .setHeatOC(true)
                     .setHeatDiscount(false)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 0.2 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.005, 0.2 - (ParallelTier / 200.0)));
             }
 
             @Override
@@ -240,10 +240,10 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 2) {
-            return 256;
+        if (ParallelTier <= 1) {
+            return 8;
         } else {
-            return (int) (256 + Math.pow(4, ParallelTier - 3));
+            return (int) Math.pow(4, ParallelTier - 2) * 4;
         }
     }
 
@@ -286,6 +286,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
         this.mHeatingCapacity = (int) this.getCoilLevel()
             .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
 
+        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 3500;
     }

@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.ReAvaritia;
+package com.science.gtnl.common.block.ReAvaritia.NeutronCollector;
 
 import static net.minecraft.block.BlockPistonBase.getPistonOrientation;
 
@@ -23,16 +23,16 @@ import com.science.gtnl.client.GTNLCreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class NeutronCollector extends BlockContainer {
+public class DenseNeutronCollector extends BlockContainer {
 
     private IIcon bottom, front, sideLeft, sideRight, side, topFacingNorth, topFacingSouth, topFacingWest,
         topFacingEast;
 
-    public NeutronCollector() {
+    public DenseNeutronCollector() {
         super(Material.iron);
         setStepSound(Block.soundTypeMetal);
         setHardness(20.0F);
-        setBlockName("NeutronCollector");
+        setBlockName("DenseNeutronCollector");
         setHarvestLevel("pickaxe", 3);
         this.setCreativeTab(GTNLCreativeTabs.ReAvaritia);
     }
@@ -40,15 +40,15 @@ public class NeutronCollector extends BlockContainer {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        this.bottom = iconRegister.registerIcon("reavaritia:NeutronCollector_Bottom");
-        this.front = iconRegister.registerIcon("reavaritia:NeutronCollector_Front");
-        this.sideLeft = iconRegister.registerIcon("reavaritia:NeutronCollector_SideLeft");
-        this.sideRight = iconRegister.registerIcon("reavaritia:NeutronCollector_SideRight");
-        this.side = iconRegister.registerIcon("reavaritia:NeutronCollector_Side");
-        this.topFacingNorth = iconRegister.registerIcon("reavaritia:NeutronCollector_Top_North");
-        this.topFacingSouth = iconRegister.registerIcon("reavaritia:NeutronCollector_Top_South");
-        this.topFacingWest = iconRegister.registerIcon("reavaritia:NeutronCollector_Top_West");
-        this.topFacingEast = iconRegister.registerIcon("reavaritia:NeutronCollector_Top_East");
+        this.bottom = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Bottom");
+        this.front = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Front");
+        this.sideLeft = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_SideLeft");
+        this.sideRight = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_SideRight");
+        this.side = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Side");
+        this.topFacingNorth = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Top_North");
+        this.topFacingSouth = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Top_South");
+        this.topFacingWest = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Top_West");
+        this.topFacingEast = iconRegister.registerIcon("reavaritia:DenseNeutronCollector_Top_East");
     }
 
     @Override
@@ -128,7 +128,7 @@ public class NeutronCollector extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityNeutronCollector(3600, 2, "NeutronCollector");
+        return new TileEntityNeutronCollector(3600, 3, "DenseNeutronCollector");
     }
 
     @Override

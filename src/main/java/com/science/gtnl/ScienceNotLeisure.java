@@ -16,7 +16,6 @@ import com.science.gtnl.Utils.PlayerJoinHandler;
 import com.science.gtnl.Utils.item.TextHandler;
 import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
-import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.AnvilEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
@@ -165,7 +164,6 @@ public class ScienceNotLeisure {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new AnvilEventHandler());
 
         if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
             && ProgrammableHatches.isModLoaded()

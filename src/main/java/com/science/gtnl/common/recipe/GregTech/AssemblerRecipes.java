@@ -5,9 +5,11 @@ import static com.science.gtnl.loader.IScriptLoader.missing;
 import static goodgenerator.loader.Loaders.huiCircuit;
 import static gregtech.api.enums.Mods.*;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
@@ -78,6 +80,33 @@ public class AssemblerRecipes implements IRecipePool {
             CreativeCapacitorBankType.setInteger("storedEnergyRF", 2500000);
             CreativeCapacitorBankType.setString("type", "CREATIVE");
             CreativeCapacitorBank.setTagCompound(CreativeCapacitorBankType);
+        }
+
+        String[] lampTypes = { "Lamp", "LampBorderless", "LampOff", "LampOffBorderless" };
+
+        String[] colors = { "Black", "Pink", "Red", "Orange", "Yellow", "Green", "Lime", "Blue", "LightBlue", "Cyan",
+            "Brown", "Magenta", "Purple", "Gray", "LightGray" };
+
+        for (String color : colors) {
+            String fluidName = "dye.chemical.dye" + color.toLowerCase();
+
+            for (int i = 0; i < lampTypes.length; i++) {
+                String lampType = lampTypes[i];
+                int circuitConfig = i + 1;
+
+                GTValues.RA.stdBuilder()
+                    .itemInputs(
+                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glass, 6L),
+                        new ItemStack(Items.glowstone_dust, 1),
+                        GTUtility.getIntegratedCircuit(circuitConfig))
+                    .itemOutputs(
+                        GTNLItemList.valueOf(color + lampType)
+                            .get(1))
+                    .fluidInputs(FluidRegistry.getFluidStack(fluidName, 144))
+                    .duration(40)
+                    .eut(TierEU.RECIPE_LV)
+                    .addTo(As);
+            }
         }
 
         GTValues.RA.stdBuilder()
@@ -1700,6 +1729,32 @@ public class AssemblerRecipes implements IRecipePool {
             .fluidInputs(Materials.Polybenzimidazole.getMolten(576))
             .duration(200)
             .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1L),
+                GTOreDictUnificator.get(OrePrefixes.gearGt, Materials.TungstenSteel, 2L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 4L),
+                GTUtility.getIntegratedCircuit(3))
+            .itemOutputs(GTNLItemList.TungstensteelGearbox.get(1))
+            .specialValue(0)
+            .noOptimize()
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.DraconiumAwakened, 1L),
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.DraconiumAwakened, 6L),
+                ItemList.Field_Generator_ZPM.get(1))
+            .itemOutputs(GTNLItemList.PressureBalancedCasing.get(1))
+            .fluidInputs(Materials.Draconium.getMolten(576))
+            .specialValue(0)
+            .noOptimize()
+            .duration(800)
+            .eut(TierEU.RECIPE_EV)
             .addTo(As);
 
     }

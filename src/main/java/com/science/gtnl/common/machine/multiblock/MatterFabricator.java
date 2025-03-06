@@ -157,6 +157,7 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 115 && this.mEnergyHatches.size() == 1;
     }

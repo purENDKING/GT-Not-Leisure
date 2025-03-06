@@ -164,6 +164,7 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
         this.mHeatingCapacity = (int) getCoilLevel().getHeat();
 
+        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
 
         return mCasing >= 245;

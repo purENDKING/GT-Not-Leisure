@@ -203,6 +203,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         if (tierCasing < 0) return false;
 
         ParallelTier = getParallelTier(aStack);

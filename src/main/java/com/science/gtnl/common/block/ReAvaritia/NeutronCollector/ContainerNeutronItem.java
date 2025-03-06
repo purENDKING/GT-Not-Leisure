@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.ReAvaritia;
+package com.science.gtnl.common.block.ReAvaritia.NeutronCollector;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

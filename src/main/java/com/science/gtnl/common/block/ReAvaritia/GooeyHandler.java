@@ -5,6 +5,9 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.ContainerExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.ExtremeAnvilGUI;
+import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.ContainerNeutronItem;
+import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.NeutronCollectorGUI;
+import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.TileEntityNeutronCollector;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 

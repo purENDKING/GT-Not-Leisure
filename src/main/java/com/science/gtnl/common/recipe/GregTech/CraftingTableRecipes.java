@@ -280,9 +280,16 @@ public class CraftingTableRecipes implements IRecipePool {
                 GregtechItemList.Controller_SteamWasherMulti.get(1) });
 
         addCraftingRecipe(
-            GTNLItemList.LargeSteamOreWasher.get(1),
+            GTNLItemList.LargeSteamExtruder.get(1),
             new Object[] { "ABA", "CDC", "AAA", 'A', GregtechItemList.Casing_Machine_Custom_1.get(1), 'B',
                 ItemList.Casing_Gearbox_Bronze.get(1), 'C', GTNLItemList.PrecisionSteamMechanism.get(1), 'D',
                 new ItemStack(Blocks.piston, 1) });
+
+        addCraftingRecipe(
+            GTNLItemList.TungstensteelGearbox.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L), 'B', "craftingToolHardHammer",
+                'C', GTOreDictUnificator.get(OrePrefixes.gearGt, Materials.TungstenSteel, 1L), 'D',
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1L), 'E', "craftingToolWrench" });
     }
 }

@@ -1763,10 +1763,10 @@ public class TextLocalization {
         "After each voltage level exceeds MV, the temperature will increase by 100K",
         "Tooltip_MegaBlastFurnace_02");
     public static final String Tooltip_MegaBlastFurnace_03 = texter(
-        "It can run 256x recipes at most",
+        "Parallel = 4 * Parallel provided by the parallel control core",
         "Tooltip_MegaBlastFurnace_03");
     public static final String Tooltip_MegaBlastFurnace_04 = texter(
-        "400%% faster than single-block machines of the same voltage",
+        "500%% faster than Blast Furnace",
         "Tooltip_MegaBlastFurnace_04");
     public static final String Tooltip_MegaBlastFurnace_Casing_00 = texter(
         "Any Blast Smelter Casing Block",

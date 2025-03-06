@@ -186,6 +186,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             && mCasing >= 920
             && multiTier == 1) {
             replaceWaterWithPortal();
+            energyHatchTier = checkEnergyHatchTier();
             ParallelTier = getParallelTier(aStack);
             return true;
         } else {

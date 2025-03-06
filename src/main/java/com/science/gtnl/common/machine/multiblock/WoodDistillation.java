@@ -177,6 +177,7 @@ public class WoodDistillation extends GTMMultiMachineBase<WoodDistillation> impl
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         return mCasing >= 220 && this.mMufflerHatches.size() == 2;
     }
 

@@ -133,6 +133,7 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 25;
     }

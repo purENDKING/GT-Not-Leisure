@@ -169,6 +169,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
             && mEnergyHatches.size() <= 1
             && mMufflerHatches.size() == 1
             && mCasing >= 290) {
+            energyHatchTier = checkEnergyHatchTier();
             ParallelTier = getParallelTier(aStack);
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
