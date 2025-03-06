@@ -35,7 +35,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import goodgenerator.loader.Loaders;
 import gregtech.GTMod;
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.*;
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.SoundResource;
+import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoidingMode;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -47,7 +51,10 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.*;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public class LuvKuangBiaoOneGiantNuclearFusionReactor
@@ -314,7 +321,7 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
                 LuvKuangBiaoOneGiantNuclearFusionReactor.this.lastRecipe = null;
                 if (!mRunningOnLoad) {
-                    if (recipe.mSpecialValue > 160000000L) {
+                    if (recipe.mSpecialValue > mEUStore) {
                         return CheckRecipeResultRegistry.insufficientStartupPower(recipe.mSpecialValue);
                     }
                     if (recipe.mEUt > GTValues.V[7]) {

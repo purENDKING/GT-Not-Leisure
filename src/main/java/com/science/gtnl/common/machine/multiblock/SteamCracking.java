@@ -4,13 +4,16 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 
@@ -41,23 +44,33 @@ import com.science.gtnl.common.recipe.RecipeRegister;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
+import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
+import gregtech.common.tileentities.machines.MTEHatchInputBusME;
+import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchInputBattery;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchOutputBattery;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTEHatchCustomFluidBase;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTESteamMultiBase;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -100,13 +113,11 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
 
     public int tCountCasing = 0;
 
-    public int getTierMachineCasing(Block block, int meta) {
+    public static int getTierMachineCasing(Block block, int meta) {
         if (block == sBlockCasings1 && 10 == meta) {
-            tCountCasing++;
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
-            tCountCasing++;
             return 2;
         }
         return 0;
@@ -134,19 +145,21 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
     }
 
     public int getCasingTextureID() {
-        if (tierFireboxCasing == 2 || tierMachineCasing == 2 || tierPlatedCasing == 2)
-            return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
         return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
     }
 
     @Override
     public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
+        if ((byte) tierMachine != aValue) {
+            tierMachine = (byte) (aValue & 0x0F);
+        }
     }
 
     @Override
     public byte getUpdateData() {
-        return (byte) tierMachineCasing;
+        if (tierMachine <= 0) return 0;
+        return (byte) tierMachine;
     }
 
     @Override
@@ -162,11 +175,13 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
     @Override
     public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
         final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
                 aActive ? getFrontOverlayActive() : getFrontOverlay() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
@@ -177,21 +192,37 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
                 .addElement(
                     'A',
                     ofChain(
-                        buildSteamInput(SteamCracking.class)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                        buildSteamInput(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .build(),
-                        buildHatchAdder(SteamCracking.class)
-                            .atLeast(SteamHatchElement.InputBus_Steam, InputBus, OutputHatch, InputHatch)
-                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            SteamCracking::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing)))),
+                        buildHatchAdder(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            this::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                SteamHatchElement.OutputBus_Steam,
+                                InputBus,
+                                OutputBus)
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            SteamCracking::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -251,18 +282,22 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
             && tierPlatedCasing == 1
             && tCountCasing >= 10
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 1;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         if (tierFireboxCasing == 2 && tierMachineCasing == 2
             && tierPlatedCasing == 2
             && tCountCasing >= 10
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 2;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
+        getCasingTextureID();
+        updateHatchTexture();
         return false;
     }
 
@@ -401,6 +436,7 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
     @Override
     public ArrayList<ItemStack> getStoredInputs() {
         ArrayList<ItemStack> rList = new ArrayList<>();
+        Map<GTUtility.ItemId, ItemStack> inputsFromME = new HashMap<>();
         for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
             tHatch.mRecipeMap = getRecipeMap();
             for (int i = tHatch.getBaseMetaTileEntity()
@@ -414,16 +450,29 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
             }
         }
         for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) {
+            if (tHatch instanceof MTEHatchCraftingInputME) {
+                continue;
+            }
             tHatch.mRecipeMap = getRecipeMap();
-            for (int i = tHatch.getBaseMetaTileEntity()
-                .getSizeInventory() - 1; i >= 0; i--) {
-                if (tHatch.getBaseMetaTileEntity()
-                    .getStackInSlot(i) != null) {
-                    rList.add(
-                        tHatch.getBaseMetaTileEntity()
-                            .getStackInSlot(i));
+            IGregTechTileEntity tileEntity = tHatch.getBaseMetaTileEntity();
+            boolean isMEBus = tHatch instanceof MTEHatchInputBusME;
+            for (int i = tileEntity.getSizeInventory() - 1; i >= 0; i--) {
+                ItemStack itemStack = tileEntity.getStackInSlot(i);
+                if (itemStack != null) {
+                    if (isMEBus) {
+                        inputsFromME.put(GTUtility.ItemId.createNoCopy(itemStack), itemStack);
+                    } else {
+                        rList.add(itemStack);
+                    }
                 }
             }
+        }
+
+        ItemStack stackInSlot1 = getStackInSlot(1);
+        if (stackInSlot1 != null && stackInSlot1.getUnlocalizedName()
+            .startsWith("gt.integrated_circuit")) rList.add(stackInSlot1);
+        if (!inputsFromME.isEmpty()) {
+            rList.addAll(inputsFromME.values());
         }
         return rList;
     }
@@ -431,40 +480,124 @@ public class SteamCracking extends MTESteamMultiBase<SteamCracking> implements I
     @Override
     public ArrayList<ItemStack> getStoredOutputs() {
         ArrayList<ItemStack> rList = new ArrayList<>();
-        for (MTEHatchSteamBusOutput tHatch : validMTEList(mSteamOutputs)) {
-            for (int i = tHatch.getBaseMetaTileEntity()
-                .getSizeInventory() - 1; i >= 0; i--) {
-                rList.add(
-                    tHatch.getBaseMetaTileEntity()
-                        .getStackInSlot(i));
+
+        if (mOutputBusses != null && !mOutputBusses.isEmpty()) {
+            for (MTEHatchOutputBus tHatch : validMTEList(mOutputBusses)) {
+                IGregTechTileEntity baseMetaTileEntity = tHatch.getBaseMetaTileEntity();
+                for (int i = baseMetaTileEntity.getSizeInventory() - 1; i >= 0; i--) {
+                    rList.add(baseMetaTileEntity.getStackInSlot(i));
+                }
             }
         }
-        for (MTEHatchOutputBus tHatch : validMTEList(mOutputBusses)) {
-            for (int i = tHatch.getBaseMetaTileEntity()
-                .getSizeInventory() - 1; i >= 0; i--) {
-                rList.add(
-                    tHatch.getBaseMetaTileEntity()
-                        .getStackInSlot(i));
+
+        if (mSteamOutputs != null && !mSteamOutputs.isEmpty()) {
+            for (MTEHatchSteamBusOutput tHatch : validMTEList(mSteamOutputs)) {
+                for (int i = tHatch.getBaseMetaTileEntity()
+                    .getSizeInventory() - 1; i >= 0; i--) {
+                    rList.add(
+                        tHatch.getBaseMetaTileEntity()
+                            .getStackInSlot(i));
+                }
             }
         }
+
         return rList;
     }
 
     @Override
     public List<ItemStack> getItemOutputSlots(ItemStack[] toOutput) {
         List<ItemStack> ret = new ArrayList<>();
-        for (final MTEHatch tBus : validMTEList(mSteamOutputs)) {
-            final IInventory tBusInv = tBus.getBaseMetaTileEntity();
-            for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
-                ret.add(tBus.getStackInSlot(i));
+
+        if (mOutputBusses != null && !mOutputBusses.isEmpty()) {
+            for (final MTEHatch tBus : validMTEList(mOutputBusses)) {
+                if (!(tBus instanceof MTEHatchOutputBusME)) {
+                    final IInventory tBusInv = tBus.getBaseMetaTileEntity();
+                    for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
+                        final ItemStack stackInSlot = tBus.getStackInSlot(i);
+
+                        if (stackInSlot == null && tBus instanceof IItemLockable lockable && lockable.isLocked()) {
+                            assert lockable.getLockedItem() != null;
+                            ItemStack fakeItemStack = lockable.getLockedItem()
+                                .copy();
+                            fakeItemStack.stackSize = 0;
+                            ret.add(fakeItemStack);
+                        } else {
+                            ret.add(stackInSlot);
+                        }
+                    }
+                }
             }
         }
-        for (final MTEHatch tBus : validMTEList(mOutputBusses)) {
-            final IInventory tBusInv = tBus.getBaseMetaTileEntity();
-            for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
-                ret.add(tBus.getStackInSlot(i));
+
+        if (mSteamOutputs != null && !mSteamOutputs.isEmpty()) {
+            for (final MTEHatch tBus : validMTEList(mSteamOutputs)) {
+                final IInventory tBusInv = tBus.getBaseMetaTileEntity();
+                for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
+                    ret.add(tBus.getStackInSlot(i));
+                }
             }
         }
+
         return ret;
+    }
+
+    private boolean dumpItem(List<MTEHatchOutputBus> outputBuses, ItemStack itemStack, boolean restrictiveBusesOnly) {
+        for (MTEHatchOutputBus outputBus : outputBuses) {
+            if (restrictiveBusesOnly && !outputBus.isLocked()) {
+                continue;
+            }
+
+            if (outputBus.storeAll(itemStack)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addOutput(ItemStack aStack) {
+        if (GTUtility.isStackInvalid(aStack)) return false;
+        aStack = GTUtility.copy(aStack);
+        boolean outputSuccess = true;
+        final List<MTEHatchOutputBus> filteredBuses = filterValidMTEs(mOutputBusses);
+        if (dumpItem(filteredBuses, aStack, true) || dumpItem(filteredBuses, aStack, false)) {
+            return true;
+        }
+
+        while (outputSuccess && aStack.stackSize > 0) {
+            outputSuccess = false;
+            ItemStack single = aStack.splitStack(1);
+            for (MTEHatchSteamBusOutput tHatch : validMTEList(mSteamOutputs)) {
+                if (!outputSuccess) {
+                    for (int i = tHatch.getSizeInventory() - 1; i >= 0 && !outputSuccess; i--) {
+                        if (tHatch.getBaseMetaTileEntity()
+                            .addStackToSlot(i, single)) outputSuccess = true;
+                    }
+                }
+            }
+            for (MTEHatchOutput tHatch : validMTEList(mOutputHatches)) {
+                if (!outputSuccess && tHatch.outputsItems()) {
+                    if (tHatch.getBaseMetaTileEntity()
+                        .addStackToSlot(1, single)) outputSuccess = true;
+                }
+            }
+        }
+        return outputSuccess;
+    }
+
+    @Override
+    public void updateSlots() {
+        for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) tHatch.updateSlots();
+        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) tHatch.updateSlots();
+        for (MTEHatchInput tHatch : validMTEList(mInputHatches)) tHatch.updateSlots();
+        for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) tHatch.updateSlots();
+        for (final MTEHatchInputBattery tHatch : validMTEList(this.mChargeHatches)) {
+            tHatch.updateSlots();
+        }
+        for (final MTEHatchOutputBattery tHatch : validMTEList(this.mDischargeHatches)) {
+            tHatch.updateSlots();
+        }
+        super.updateSlots();
     }
 }

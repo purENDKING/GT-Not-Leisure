@@ -351,6 +351,7 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
             && tCountCasing >= 100
             && checkHatches()) {
             tierMachine = 1;
+            getCasingTextureID();
             updateHatchTexture();
             return true;
         }
@@ -363,9 +364,11 @@ public class LargeSteamFurnace extends MTESteamMultiBase<LargeSteamFurnace> impl
             && tCountCasing >= 100
             && checkHatches()) {
             tierMachine = 2;
+            getCasingTextureID();
             updateHatchTexture();
             return true;
         }
+        getCasingTextureID();
         updateHatchTexture();
         return false;
     }

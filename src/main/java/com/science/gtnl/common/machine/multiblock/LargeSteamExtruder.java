@@ -315,8 +315,9 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
             && tierPipeCasing == 1
             && tCountCasing >= 50
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 1;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         if (tierGearCasing == 2 && tierMachineCasing == 2
@@ -326,8 +327,9 @@ public class LargeSteamExtruder extends MTESteamMultiBase<LargeSteamExtruder> im
             && tierPipeCasing == 2
             && tCountCasing >= 50
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 2;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         updateHatchTexture();

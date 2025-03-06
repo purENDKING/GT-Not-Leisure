@@ -274,8 +274,9 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
             && tierFireboxCasing == 1
             && tCountCasing >= 80
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 1;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         if (tierPipeCasing == 2 && tierMachineCasing == 2
@@ -283,10 +284,12 @@ public class LargeSteamThermalCentrifuge extends MTESteamMultiBase<LargeSteamThe
             && tierFireboxCasing == 2
             && tCountCasing >= 80
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 2;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
+        getCasingTextureID();
         updateHatchTexture();
         return false;
     }

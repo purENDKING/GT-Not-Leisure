@@ -293,8 +293,9 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
             && tierBrickCasing == 1
             && tCountCasing >= 160
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 1;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         if (tierGearCasing == 2 && tierMachineCasing == 2
@@ -303,10 +304,12 @@ public class LargeSteamCrusher extends MTESteamMultiBase<LargeSteamCrusher> impl
             && tierBrickCasing == 2
             && tCountCasing >= 160
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 2;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
+        getCasingTextureID();
         updateHatchTexture();
         return false;
     }

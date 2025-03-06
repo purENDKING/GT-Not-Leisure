@@ -272,8 +272,9 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
             && tierGearCasing == 1
             && tCountCasing >= 55
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 1;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
         if (tierPipeCasing == 2 && tierMachineCasing == 2
@@ -281,10 +282,12 @@ public class LargeSteamExtractor extends MTESteamMultiBase<LargeSteamExtractor> 
             && tierGearCasing == 2
             && tCountCasing >= 55
             && checkHatches()) {
-            updateHatchTexture();
             tierMachine = 2;
+            getCasingTextureID();
+            updateHatchTexture();
             return true;
         }
+        getCasingTextureID();
         updateHatchTexture();
         return false;
     }
