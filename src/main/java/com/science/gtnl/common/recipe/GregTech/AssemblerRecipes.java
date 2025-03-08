@@ -326,7 +326,7 @@ public class AssemblerRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                ItemList.Machine_EV_CircuitAssembler.get(2),
+                ItemList.Machine_EV_CircuitAssembler.get(1),
                 ItemList.Robot_Arm_EV.get(2),
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Aluminium, 2L),
                 ItemList.Conveyor_Module_EV.get(2),
