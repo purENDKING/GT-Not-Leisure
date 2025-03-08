@@ -2,7 +2,6 @@ package com.science.gtnl.common.effect.effects;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.FoodStats;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
@@ -29,13 +28,8 @@ public class PerfectPhysiqueEffect extends GTNLEffectUtil {
                 if (player.getHealth() > 0.0F && player.getHealth() < 15.0F) {
                     player.setHealth(15.0F);
                 }
-                FoodStats foodStats = player.getFoodStats();
-                if (foodStats.getFoodLevel() < 20) {
-                    foodStats.setFoodLevel(20);
-                }
-                if (foodStats.getSaturationLevel() < 20.0F) {
-                    foodStats.setFoodSaturationLevel(20.0F);
-                }
+                player.getFoodStats()
+                    .addStats(20, 20.0F);
             }
         }
     }

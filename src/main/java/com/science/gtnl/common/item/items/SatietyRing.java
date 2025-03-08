@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.FoodStats;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
 
@@ -32,15 +31,8 @@ public class SatietyRing extends Item implements IBauble {
         player.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 200, 255));
 
         if (player instanceof EntityPlayer entityPlayer) {
-            FoodStats foodStats = entityPlayer.getFoodStats();
-
-            if (foodStats.getFoodLevel() < 20) {
-                foodStats.setFoodLevel(20);
-            }
-
-            if (foodStats.getSaturationLevel() < 20.0F) {
-                foodStats.setFoodSaturationLevel(20.0F);
-            }
+            entityPlayer.getFoodStats()
+                .addStats(20, 20.0F);
         }
     }
 
