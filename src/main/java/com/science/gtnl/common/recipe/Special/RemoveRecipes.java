@@ -19,6 +19,7 @@ public class RemoveRecipes {
     public static void removeRecipes() {
         RecipeMapBackend AutoClaveRecipe = RecipeMaps.autoclaveRecipes.getBackend();
         RecipeMapBackend CircuitAssemblerRecipe = RecipeMaps.circuitAssemblerRecipes.getBackend();
+        RecipeMapBackend FormingPressRecipe = RecipeMaps.formingPressRecipes.getBackend();
         Map<String, Integer> removedRecipeCounts = new HashMap<>();
 
         List<GTRecipe> recipesToRemoveFromAutoClave = new ArrayList<>();
@@ -33,6 +34,19 @@ public class RemoveRecipes {
             }
         }
         AutoClaveRecipe.removeRecipes(recipesToRemoveFromAutoClave);
+
+        List<GTRecipe> recipesToRemoveFromFormingPress = new ArrayList<>();
+        for (GTRecipe recipe : AutoClaveRecipe.getAllRecipes()) {
+            for (ItemStack output : recipe.mOutputs) {
+                if (output != null) {
+                    if (output.isItemEqual(ItemList.Optical_Cpu_Containment_Housing.get(1))) {
+                        recipesToRemoveFromAutoClave.add(recipe);
+                        break;
+                    }
+                }
+            }
+        }
+        FormingPressRecipe.removeRecipes(recipesToRemoveFromFormingPress);
 
         List<GTRecipe> recipesToRemoveFromCircuitAssembler = new ArrayList<>();
         for (GTRecipe recipe : CircuitAssemblerRecipe.getAllRecipes()) {
@@ -78,6 +92,7 @@ public class RemoveRecipes {
         if (MainConfig.enableDebugMode) {
             removedRecipeCounts.put("高压釜", recipesToRemoveFromAutoClave.size());
             removedRecipeCounts.put("电路组装机", recipesToRemoveFromCircuitAssembler.size());
+            removedRecipeCounts.put("冲压机床", recipesToRemoveFromFormingPress.size());
 
             StringBuilder logMessage = new StringBuilder("GTNL: 移除了以下配方池中的配方：");
             for (Map.Entry<String, Integer> entry : removedRecipeCounts.entrySet()) {

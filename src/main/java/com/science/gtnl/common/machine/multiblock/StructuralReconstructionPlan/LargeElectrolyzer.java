@@ -10,6 +10,8 @@ import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -23,10 +25,13 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
@@ -85,8 +90,8 @@ public class LargeElectrolyzer extends GTMMultiMachineBase<LargeElectrolyzer> im
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeElectrolyzerRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_LargeElectrolyzer_00)
+            .addInfo(TextLocalization.Tooltip_LargeElectrolyzer_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
@@ -139,6 +144,25 @@ public class LargeElectrolyzer extends GTMMultiMachineBase<LargeElectrolyzer> im
 
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 30;
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(2)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(0.5 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

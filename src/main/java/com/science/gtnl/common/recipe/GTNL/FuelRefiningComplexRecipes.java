@@ -124,7 +124,7 @@ public class FuelRefiningComplexRecipes implements IRecipePool {
                 Materials.Gas.getGas(2000),
                 Materials.Hydrogen.getGas(16000),
                 Materials.Oxygen.getGas(3000))
-            .fluidOutputs(Materials.BioDiesel.getFluid(20000))
+            .fluidOutputs(GGMaterial.ethanolGasoline.getFluidOrGas(20000))
             .noOptimize()
             .duration(400)
             .metadata(COIL_HEAT, 3200)

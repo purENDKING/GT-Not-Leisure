@@ -18,6 +18,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.item.chemistry.AgriculturalChem;
 import gtPlusPlus.core.item.chemistry.MilledOreProcessing;
 import gtPlusPlus.xmod.bop.blocks.BOPBlockRegistrator;
@@ -240,6 +241,7 @@ public class DistilleryRecipes implements IRecipePool {
             .addTo(DR);
 
         GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
             .fluidInputs(MaterialPool.BenzenediazoniumTetrafluoroborate.getFluidOrGas(1000))
             .fluidOutputs(MaterialPool.FluoroBenzene.getFluidOrGas(1000))
             .duration(100)

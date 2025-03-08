@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -33,12 +35,15 @@ import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
@@ -104,8 +109,8 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeExtractorRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_LargeExtractor_00)
+            .addInfo(TextLocalization.Tooltip_LargeExtractor_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
@@ -138,6 +143,25 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
                 .build();
         }
         return STRUCTURE_DEFINITION;
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(2)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(0.6 - (ParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.05, 0.4 - (ParallelTier / 200.0)));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

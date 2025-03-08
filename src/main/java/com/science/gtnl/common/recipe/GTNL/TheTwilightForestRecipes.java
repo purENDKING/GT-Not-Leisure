@@ -1,15 +1,24 @@
 package com.science.gtnl.common.recipe.GTNL;
 
+import static com.science.gtnl.Utils.Utils.setStackSize;
 import static gregtech.api.enums.Mods.*;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
 import com.dreammaster.item.ItemList;
+import com.science.gtnl.Utils.enums.TierEU;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 
 public class TheTwilightForestRecipes implements IRecipePool {
@@ -51,12 +60,13 @@ public class TheTwilightForestRecipes implements IRecipePool {
         RecipeBuilder.builder()
             .itemInputs(GTUtility.copyAmount(0, GTNLItemList.MinotaurBook.get(1)))
             .itemOutputs(
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 1, 5),
                 GTModHandler.getModItem(TwilightForest.ID, "item.steeleafIngot", 32),
                 GTModHandler.getModItem(TwilightForest.ID, "item.ironwoodIngot", 32),
                 GTModHandler.getModItem(Minecraft.ID, "emerald", 16),
                 GTModHandler.getModItem(Minecraft.ID, "emerald_block", 1),
                 GTModHandler.getModItem(Minecraft.ID, "iron_ingot", 32))
-            .outputChances(10000, 10000, 2500, 1000, 7500)
+            .outputChances(1000, 10000, 10000, 2500, 1000, 7500)
             .noOptimize()
             .duration(600)
             .eut(1966080)
@@ -153,6 +163,28 @@ public class TheTwilightForestRecipes implements IRecipePool {
             .noOptimize()
             .duration(600)
             .eut(1966080)
+            .addTo(TTFR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTUtility.copyAmount(0, GTNLItemList.TwilightForestBook.get(1)))
+            .itemOutputs(
+                setStackSize(new ItemStack(Items.book, 1), 262144),
+                setStackSize(new ItemStack(Items.ender_pearl, 1), 262144),
+                setStackSize(new ItemStack(Blocks.emerald_block, 1), 262144),
+                setStackSize(new ItemStack(Blocks.diamond_block, 1), 262144),
+                setStackSize(new ItemStack(Blocks.lapis_block, 1), 262144),
+                setStackSize(new ItemStack(Blocks.redstone_block, 1), 262144),
+                setStackSize(new ItemStack(Blocks.gold_block, 1), 262144),
+                setStackSize(new ItemStack(Blocks.iron_block, 1), 262144),
+                setStackSize(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Knightmetal, 1L), 262144),
+                setStackSize(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.FierySteel, 1L), 262144),
+                setStackSize(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.IronWood, 1L), 262144),
+                setStackSize(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Steeleaf, 1L), 262144),
+                setStackSize(GTModHandler.getModItem(TwilightForest.ID, "item.fieryBlood", 1), 65536),
+                setStackSize(GTModHandler.getModItem(TwilightForest.ID, "item.nagaScale", 1), 65536))
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_UHV)
             .addTo(TTFR);
     }
 }

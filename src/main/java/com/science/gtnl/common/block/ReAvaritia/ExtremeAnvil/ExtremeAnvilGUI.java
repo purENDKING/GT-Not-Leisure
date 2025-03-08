@@ -3,10 +3,11 @@ package com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -19,34 +20,31 @@ public class ExtremeAnvilGUI extends GuiContainer {
 
     private static final ResourceLocation ANVIL_TEXTURE = new ResourceLocation(
         "reavaritia:textures/gui/extreme_anvil.png");
-    private final InventoryPlayer playerInventory;
-    private final World world;
-    private final int x, y, z;
     private GuiTextField nameField;
-    private ContainerExtremeAnvil containerAnvil;
-    private String lastRepairedName = "";
+    private final ContainerExtremeAnvil containerAnvil;
+    private boolean isTextFieldManuallyEdited = false; // 标记文本框是否被手动编辑
 
-    public ExtremeAnvilGUI(InventoryPlayer playerInv, World world, int x, int y, int z) {
-        super(new ContainerExtremeAnvil(playerInv, world, x, y, z, playerInv.player));
-        this.playerInventory = playerInv;
-        this.world = world;
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public ExtremeAnvilGUI(InventoryPlayer playerInv, IInventory inputSlots, IInventory outputSlot) {
+        super(new ContainerExtremeAnvil(playerInv, inputSlots, outputSlot));
         this.containerAnvil = (ContainerExtremeAnvil) this.inventorySlots;
     }
 
     @Override
     public void initGui() {
         super.initGui();
-        this.nameField = new GuiTextField(this.fontRendererObj, this.guiLeft + 62, this.guiTop + 24, 103, 12);
-        this.nameField.setMaxStringLength(256);
-        this.nameField.setEnableBackgroundDrawing(false);
-        this.nameField.setTextColor(0xFFFFFF);
-        this.nameField.setDisabledTextColour(0xFFFFFF);
 
-        // 初始化名称字段
-        ItemStack inputStack = containerAnvil.inputSlots.getStackInSlot(0);
+        // 初始化 nameField
+        this.nameField = new GuiTextField(this.fontRendererObj, this.guiLeft + 62, this.guiTop + 24, 103, 12);
+        this.nameField.setMaxStringLength(256); // 设置最大字符数
+        this.nameField.setEnableBackgroundDrawing(false); // 禁用背景绘制
+        this.nameField.setTextColor(-1); // 设置文本颜色为白色
+        this.nameField.setFocused(true); // 设置焦点
+
+        // 获取第一个输入槽的物品
+        ItemStack inputStack = containerAnvil.getInputSlot1()
+            .getStack();
+
+        // 设置初始文本
         if (inputStack != null && inputStack.hasDisplayName()) {
             this.nameField.setText(inputStack.getDisplayName());
         } else {
@@ -57,10 +55,24 @@ public class ExtremeAnvilGUI extends GuiContainer {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        // 同步容器名称状态
-        if (!lastRepairedName.equals(containerAnvil.getRepairedItemName())) {
-            lastRepairedName = containerAnvil.getRepairedItemName();
-            nameField.setText(lastRepairedName);
+
+        // 获取第一个输入槽的物品
+        ItemStack inputStack = containerAnvil.getInputSlot1()
+            .getStack();
+
+        // 如果第一个输入槽的物品被拿走，清空文本框
+        if (inputStack == null) {
+            this.nameField.setText("");
+            this.isTextFieldManuallyEdited = false;
+            return;
+        }
+
+        // 如果文本框未被手动编辑，则同步修复后的物品名称
+        if (!isTextFieldManuallyEdited) {
+            String repairedName = containerAnvil.getRepairedItemName();
+            if (!repairedName.equals(this.nameField.getText())) {
+                this.nameField.setText(repairedName);
+            }
         }
     }
 
@@ -74,6 +86,7 @@ public class ExtremeAnvilGUI extends GuiContainer {
 
         // 名称字段处理
         if (this.nameField.textboxKeyTyped(typedChar, keyCode)) {
+            this.isTextFieldManuallyEdited = true; // 标记文本框被手动编辑
             this.updateRepairedName();
         } else {
             super.keyTyped(typedChar, keyCode);
@@ -82,8 +95,7 @@ public class ExtremeAnvilGUI extends GuiContainer {
 
     private void updateRepairedName() {
         String newName = this.nameField.getText();
-        this.containerAnvil.updateItemName(newName.trim());
-        this.lastRepairedName = newName;
+        this.containerAnvil.setRepairedItemName(newName.trim());
     }
 
     @Override
@@ -91,8 +103,8 @@ public class ExtremeAnvilGUI extends GuiContainer {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         this.nameField.mouseClicked(mouseX, mouseY, mouseButton);
 
-        // 使用自定义的点击检测方法
-        if (this.isPointInRegion(134, 47, 16, 16, mouseX, mouseY)) {
+        // 如果点击了输出槽，同步输出物品的名称
+        if (this.isPointInRegion(134, 47, 110, 16, mouseX, mouseY)) {
             ItemStack output = containerAnvil.outputSlot.getStackInSlot(0);
             if (output != null && output.hasDisplayName()) {
                 this.nameField.setText(output.getDisplayName());
@@ -100,10 +112,18 @@ public class ExtremeAnvilGUI extends GuiContainer {
             }
         }
 
-        // 点击输入框外区域取消焦点
+        // 如果点击了文本框以外的区域，取消焦点
         if (!this.isPointInRegion(59, 23, 110, 16, mouseX, mouseY)) {
             this.nameField.setFocused(false);
         }
+    }
+
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        Keyboard.enableRepeatEvents(false);
+        // 清空名称字段
+        this.nameField.setText("");
     }
 
     private boolean isPointInRegion(int x, int y, int width, int height, int mouseX, int mouseY) {
@@ -129,15 +149,6 @@ public class ExtremeAnvilGUI extends GuiContainer {
         this.fontRendererObj
             .drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 3, 0x404040);
 
-        // 动态更新名称字段
-        ItemStack input = containerAnvil.inputSlots.getStackInSlot(0);
-        if (input != null && !nameField.isFocused()) {
-            String defaultName = input.hasDisplayName() ? input.getDisplayName() : "";
-            if (!defaultName.equals(nameField.getText())) {
-                nameField.setText(defaultName);
-            }
-        }
-
         // 绘制名称输入框
         this.nameField.drawTextBox();
     }
@@ -152,28 +163,34 @@ public class ExtremeAnvilGUI extends GuiContainer {
         int y = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
 
-        // 绘制输入框背景
-        int textFieldState = this.nameField.isFocused() ? 1 : 0;
+        int textFieldState = this.nameField.isFocused() ? 0 : 1;
         this.drawTexturedModalRect(x + 59, y + 23, 0, this.ySize + textFieldState * 16, 110, 16);
 
-        // 绘制错误图标（当无法合成时）
         ItemStack input1 = containerAnvil.inputSlots.getStackInSlot(0);
         ItemStack input2 = containerAnvil.inputSlots.getStackInSlot(1);
-        ItemStack output = containerAnvil.outputSlot.getStackInSlot(0);
 
-        boolean showError = (input1 != null && input2 == null
-            && nameField.getText()
-                .isEmpty())
-            || (input1 != null && input2 != null && output == null);
+        boolean showError = false;
+
+        if (input1 != null) {
+            if (input2 == null && nameField.getText()
+                .isEmpty()) {
+                showError = true;
+            } else if (input2 != null) {
+                if (input2.getItem() instanceof ItemEnchantedBook) {
+                    showError = false;
+                } else if (input1.getItem() == input2.getItem()) {
+                    if (!input1.getItem()
+                        .isDamageable()) {
+                        showError = true;
+                    }
+                } else {
+                    showError = true;
+                }
+            }
+        }
 
         if (showError) {
-            this.drawTexturedModalRect(x + 98, y + 45, this.xSize, 0, 28, 21);
+            this.drawTexturedModalRect(x + 99, y + 47, this.xSize, 0, 28, 21);
         }
-    }
-
-    @Override
-    public void onGuiClosed() {
-        super.onGuiClosed();
-        Keyboard.enableRepeatEvents(false);
     }
 }

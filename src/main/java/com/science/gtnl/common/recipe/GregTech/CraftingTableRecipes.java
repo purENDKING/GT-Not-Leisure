@@ -6,10 +6,12 @@ import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.addCraftingRecipe;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.ItemList;
@@ -291,5 +293,30 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L), 'B', "craftingToolHardHammer",
                 'C', GTOreDictUnificator.get(OrePrefixes.gearGt, Materials.TungstenSteel, 1L), 'D',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1L), 'E', "craftingToolWrench" });
+
+        addCraftingRecipe(
+            new ItemStack(ItemLoader.RecordNewHorizons, 1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', GTModHandler.getModItem(SGCraft.ID, "stargateRing", 1, 0, missing),
+                'B', GTModHandler.getModItem(SGCraft.ID, "rfPowerUnit", 1, 0, missing), 'C',
+                GTModHandler.getModItem(SGCraft.ID, "stargateRing", 1, 1, missing), 'D',
+                GTModHandler.getModItem(SGCraft.ID, "stargateController", 1, 0, missing), 'E',
+                GTModHandler.getModItem(SGCraft.ID, "stargateBase", 1, 0, missing) });
+
+        addCraftingRecipe(
+            new ItemStack(ItemLoader.SatietyRing, 1),
+            new Object[] { "ABA", "CDC", "EFE", 'A', CustomItemList.CoinCookIII.get(1), 'B',
+                new ItemStack(Items.golden_apple, 1, 1), 'C',
+                GTModHandler.getModItem(ExtraUtilities.ID, "defoliageAxe", 1), 'D',
+                GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
+                GTModHandler.getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1), 'F',
+                new ItemStack(ItemLoader.KFCFamily, 1) });
+
+        addCraftingRecipe(
+            new ItemStack(ItemLoader.KFCFamily, 1),
+            new Object[] { "ABA", "CDC", "EBE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
+                'B', GTModHandler.getModItem(PamsHarvestCraft.ID, "roastchickenItem", 1), 'C',
+                new ItemStack(Items.cooked_chicken, 1), 'D',
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Paper, 1L), 'E',
+                ItemList.Food_Packaged_Fries.get(1) });
     }
 }

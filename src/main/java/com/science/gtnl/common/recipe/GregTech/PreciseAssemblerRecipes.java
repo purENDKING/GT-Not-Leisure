@@ -12,6 +12,7 @@ import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
+import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -19,6 +20,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
+import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
@@ -44,6 +46,40 @@ public class PreciseAssemblerRecipes implements IRecipePool {
             .duration(600)
             .eut(TierEU.RECIPE_UV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 3)
+            .addTo(PAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.NeutroniumWafer.get(4),
+                ItemList.Circuit_Parts_InductorXSMD.get(8),
+                ItemList.Circuit_Board_Optical.get(2),
+                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Glowstone, 1))
+            .itemOutputs(ItemList.Circuit_Chip_Optical.get(32))
+            .fluidInputs(
+                Materials.SolderingAlloy.getMolten(2880),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
+                Materials.Grade6PurifiedWater.getFluid(4000),
+                Materials.UUMatter.getFluid(4000))
+            .duration(200)
+            .eut(TierEU.RECIPE_UHV)
+            .metadata(PRECISE_ASSEMBLER_CASING_TIER, 3)
+            .addTo(PAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Optical_Cpu_Containment_Housing.get(1),
+                ItemList.Circuit_Chip_Optical.get(1),
+                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Gold, 8),
+                GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Zinc, 8))
+            .fluidInputs(
+                GGMaterial.lumiium.getMolten(144),
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(144),
+                Materials.SolderingAlloy.getMolten(288),
+                Materials.Helium.getGas(100))
+            .itemOutputs(ItemList.Optically_Perfected_CPU.get(1))
+            .metadata(PRECISE_ASSEMBLER_CASING_TIER, 3)
+            .duration(400)
+            .eut(TierEU.RECIPE_UHV)
             .addTo(PAR);
 
         GTValues.RA.stdBuilder()

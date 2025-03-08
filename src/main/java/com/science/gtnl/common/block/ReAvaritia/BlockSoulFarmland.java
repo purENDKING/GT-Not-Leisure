@@ -47,17 +47,33 @@ public class BlockSoulFarmland extends BlockFarmland {
 
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand) {
-        world.scheduleBlockUpdate(x, y, z, this, 200);
+        world.scheduleBlockUpdate(x, y, z, this, 1);
+        Block Block = world.getBlock(x, y + 1, z);
 
-        Block aboveBlock = world.getBlock(x, y + 1, z);
-        if (aboveBlock instanceof IGrowable && aboveBlock != Blocks.cactus && aboveBlock != Blocks.reeds) {
-            IGrowable growable = (IGrowable) aboveBlock;
-            if (growable.func_149851_a(world, x, y + 1, z, world.isRemote)) {
-                growable.func_149853_b(world, rand, x, y + 1, z);
+        for (int i = 1; i <= 3; i++) {
+            int currentY = y + i;
+            Block aboveBlock = world.getBlock(x, currentY, z);
+
+            if (aboveBlock instanceof IGrowable && aboveBlock != Blocks.cactus && aboveBlock != Blocks.reeds) {
+                IGrowable growable = (IGrowable) aboveBlock;
+                if (growable.func_149851_a(world, x, currentY, z, world.isRemote)) {
+                    growable.func_149853_b(world, rand, x, currentY, z);
+                }
             }
-        } else if (aboveBlock == Blocks.cactus || aboveBlock == Blocks.reeds) {
-            growTallCrop(world, x, y + 1, z, aboveBlock);
-        } else if (aboveBlock == Blocks.nether_wart) {
+
+            int accelerateTimes = 100;
+            long maxTime = System.nanoTime() + 1000000;
+            for (int j = 0; j < accelerateTimes; j++) {
+                aboveBlock.updateTick(world, x, currentY, z, rand);
+                if (System.nanoTime() > maxTime) {
+                    break;
+                }
+            }
+        }
+
+        if (Block == Blocks.cactus || Block == Blocks.reeds) {
+            growTallCrop(world, x, y + 1, z, Block);
+        } else if (Block == Blocks.nether_wart) {
             growNetherWart(world, x, y + 1, z, rand);
         }
     }
@@ -84,7 +100,7 @@ public class BlockSoulFarmland extends BlockFarmland {
         while (world.getBlock(x, y + height, z) == crop) {
             height++;
         }
-        if (height < 3) {
+        if (height < 256) {
             world.setBlock(x, y + height, z, crop);
         }
     }

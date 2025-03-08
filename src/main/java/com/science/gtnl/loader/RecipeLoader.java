@@ -50,11 +50,14 @@ import com.science.gtnl.common.recipe.GregTech.DragonEvolutionFusionCraftingReci
 import com.science.gtnl.common.recipe.GregTech.ElectrolyzerRecipes;
 import com.science.gtnl.common.recipe.GregTech.FluidExtraction;
 import com.science.gtnl.common.recipe.GregTech.FluidExtractorRecipes;
+import com.science.gtnl.common.recipe.GregTech.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.FusionReactorRecipes;
 import com.science.gtnl.common.recipe.GregTech.LaserEngraverRecipes;
 import com.science.gtnl.common.recipe.GregTech.MixerRecipes;
+import com.science.gtnl.common.recipe.GregTech.PCBFactoryRecipes;
 import com.science.gtnl.common.recipe.GregTech.PlasmaForgeRecipes;
 import com.science.gtnl.common.recipe.GregTech.PreciseAssemblerRecipes;
+import com.science.gtnl.common.recipe.GregTech.SpaceAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
@@ -83,7 +86,8 @@ public class RecipeLoader {
             new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes(),
             new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
-            new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes() };
+            new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
+            new SpaceAssemblerRecipes(), new FormingPressRecipes(), new PCBFactoryRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();

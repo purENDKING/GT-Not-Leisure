@@ -343,4 +343,17 @@ public class AnimatedText {
             YELLOW,
             GREEN),
         text(RESET + StatCollector.translateToLocal("gt.coilunittooltip")));
+
+    public static final Supplier<String> zeroCM = chain(
+        animatedText(
+            "Most machine recipe by zero_CM",
+            1,
+            100,
+            LIGHT_PURPLE + BOLD + OBFUSCATED,
+            RED + BOLD + OBFUSCATED,
+            GOLD + OBFUSCATED + BOLD,
+            YELLOW + OBFUSCATED + BOLD,
+            GREEN + OBFUSCATED + BOLD,
+            AQUA + OBFUSCATED + BOLD,
+            BLUE + OBFUSCATED + BOLD));
 }

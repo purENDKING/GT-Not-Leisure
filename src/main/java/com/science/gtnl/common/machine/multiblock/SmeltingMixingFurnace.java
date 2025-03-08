@@ -24,8 +24,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import org.jetbrains.annotations.NotNull;
-
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
@@ -33,7 +31,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -47,7 +44,6 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
-import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
@@ -57,7 +53,6 @@ import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.OverclockCalculator;
 import tectech.thing.casing.BlockGTCasingsTT;
 
 public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<SmeltingMixingFurnace>
@@ -66,15 +61,12 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     protected GTRecipe lastRecipeToBuffer;
 
     public byte mGlassTier = 0;
-
     public static final int HORIZONTAL_OFF_SET = 8;
     public static final int VERTICAL_OFF_SET = 14;
     public static final int DEPTH_OFF_SET = 0;
     private static final int MACHINEMODE_SMF = 0;
     private static final int MACHINEMODE_DTPF = 1;
     protected static final int CASING_INDEX = BlockGTCasingsTT.textureOffset;
-    public int tCountCasing = 0;
-    public int casing;
     private static IStructureDefinition<SmeltingMixingFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String SMF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/smelting_mixing_furnace";
@@ -173,7 +165,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
                         .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy, Energy.or(ExoticEnergy))
                         .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.casing, ofBlock(sBlockCasingsTT, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 0))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -213,14 +205,15 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
-        tCountCasing = 0;
+        mCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing <= 15 && !checkHatches() && mGlassTier < VoltageIndex.UEV) {
+        if (mCasing <= 15 && !checkHatches() && mGlassTier < VoltageIndex.UEV) {
             updateHatchTexture();
             return false;
         }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
+        energyHatchTier = checkEnergyHatchTier();
         return true;
     }
 
@@ -286,44 +279,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     }
 
     @Override
-    protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
-
-            @Nonnull
-            @Override
-            protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                if (wirelessMode) {
-                    return OverclockCalculator.ofNoOverclock(recipe);
-                } else {
-                    return super.createOverclockCalculator(recipe);
-                }
-            }
-
-            @NotNull
-            @Override
-            public CheckRecipeResult process() {
-                setEuModifier(0.9);
-                setSpeedBonus(0.2);
-                return super.process();
-            }
-
-            @NotNull
-            @Override
-            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                return CheckRecipeResultRegistry.SUCCESSFUL;
-            }
-
-        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
-    }
-
-    @Override
     public int getWirelessModeProcessingTime() {
         return 1024;
-    }
-
-    @Override
-    public int getMaxParallelRecipes() {
-        return 16384 * (GTUtility.getTier(this.getMaxInputVoltage()));
     }
 
     @Override

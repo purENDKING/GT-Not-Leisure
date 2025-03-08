@@ -7,10 +7,18 @@ import static gregtech.api.util.GTModHandler.getModItem;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+
+import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.loader.IScriptLoader;
 
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.util.GTOreDictUnificator;
 
 public class ScriptAvaritia implements IScriptLoader {
 
@@ -1943,5 +1951,425 @@ public class ScriptAvaritia implements IScriptLoader {
                 getModItem(GregTech.ID, "gt.blockmachines", 1, 812, missing),
                 '!',
                 getModItem(GregTech.ID, "gt.blockmachines", 1, 840, missing));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinitySword, 1),
+                "------AAA",
+                "-----ABBA",
+                "----ABCBA",
+                "-DDABEBA-",
+                "DBBDFBA--",
+                "-DDCDA---",
+                "-ADDBD---",
+                "ACADBD---",
+                "AA--D----",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                GTNLItemList.EnhancementCore.get(1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                new ItemStack(ItemLoader.BlazeSword, 1),
+                'F',
+                new ItemStack(ItemLoader.CrystalSword, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityAxe, 1),
+                "---BBBB-A",
+                "--BBBBDD-",
+                "--BBBBDDB",
+                "--B-ACBBB",
+                "---AEABBB",
+                "--AFA-BB-",
+                "-ACA-----",
+                "DDA------",
+                "DD-------",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                GTNLItemList.EnhancementCore.get(1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                new ItemStack(ItemLoader.BlazeAxe, 1),
+                'F',
+                new ItemStack(ItemLoader.CrystalAxe, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityPickaxe, 1),
+                "--BBBBBBA",
+                "-BBBBBDDB",
+                "-----BDDB",
+                "----ACBBB",
+                "---AEA-BB",
+                "--AFA--BB",
+                "-ACA---BB",
+                "DDA----B-",
+                "DD-------",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                GTNLItemList.EnhancementCore.get(1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                new ItemStack(ItemLoader.BlazePickaxe, 1),
+                'F',
+                new ItemStack(ItemLoader.CrystalPickaxe, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityShovel, 1),
+                "------BBB",
+                "-----BBBB",
+                "-----BBBB",
+                "----ACBB-",
+                "---AEA---",
+                "--AFA----",
+                "-ACA-----",
+                "DDA------",
+                "DD-------",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                GTNLItemList.EnhancementCore.get(1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                new ItemStack(ItemLoader.BlazeShovel, 1),
+                'F',
+                new ItemStack(ItemLoader.CrystalShovel, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityHoe, 1),
+                "-BBBBBBBA",
+                "--BBBBDDB",
+                "-----ADBB",
+                "----ACA-B",
+                "---AEA---",
+                "--AFA----",
+                "-ACA-----",
+                "DDA------",
+                "DD-------",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                GTNLItemList.EnhancementCore.get(1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                new ItemStack(ItemLoader.BlazeHoe, 1),
+                'F',
+                new ItemStack(ItemLoader.CrystalHoe, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityBucket, 1),
+                "AA-----AA",
+                "AAB---BAA",
+                "ACCB-BCCA",
+                "ACCB-BCCA",
+                "ACCBBBCCA",
+                "ACCCCCCCA",
+                "AACCCCCAA",
+                "-DAAAAAD-",
+                "--DDDDD--",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'C',
+                new ItemStack(Items.bucket, 1),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.InfinityTotem, 1),
+                "---AAA---",
+                "D-AAAAA-D",
+                "-DABACAD-",
+                "-EAAAAAE-",
+                "DDDAFADDD",
+                "EEAAAAAEE",
+                "-DAAAAAD-",
+                "D--DDD--D",
+                "---DDD---",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'B',
+                getModItem(Avaritia.ID, "Singularity", 1, 3, missing),
+                'C',
+                getModItem(Avaritia.ID, "Singularity", 1, 2, missing),
+                'D',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Infinity, 1),
+                'F',
+                getModItem(UniversalSingularities.ID, "universal.general.singularity", 1, 24, missing));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.BlazeSword, 1),
+                "-------CA",
+                "------CAC",
+                "--B--CAC-",
+                "--B-CAC--",
+                "-BACAC---",
+                "-BAFC----",
+                "--DAABB--",
+                "-D-BB----",
+                "E--------",
+                'A',
+                GTNLItemList.BlazeCube.get(1),
+                'B',
+                CustomItemList.LichBone.get(1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.NetherStar, 1),
+                'F',
+                GTNLItemList.BlazeCubeBlock.get(1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.BlazePickaxe, 1),
+                "--AAAAABB",
+                "-AAAAAABB",
+                "-----CBAA",
+                "----CBCAA",
+                "---CBC-AA",
+                "--CDC--AA",
+                "-CDC---AA",
+                "CDC----A-",
+                "EC-------",
+                'A',
+                GTNLItemList.BlazeCube.get(1),
+                'B',
+                CustomItemList.LichBone.get(1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.NetherStar, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.BlazeAxe, 1),
+                "---AAAAA-",
+                "--AAAAA--",
+                "--AAAAFA-",
+                "--A-CBAAA",
+                "---CBCAAA",
+                "--CDC--AA",
+                "-CDC-----",
+                "CDC------",
+                "EC-------",
+                'A',
+                GTNLItemList.BlazeCube.get(1),
+                'B',
+                CustomItemList.LichBone.get(1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.NetherStar, 1),
+                'F',
+                GTNLItemList.BlazeCubeBlock.get(1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.BlazeShovel, 1),
+                "------AA-",
+                "-----AAAA",
+                "-----AAAA",
+                "----CBAA-",
+                "---CBC---",
+                "--CBC----",
+                "-CDC-----",
+                "CDC------",
+                "EC-------",
+                'A',
+                GTNLItemList.BlazeCube.get(1),
+                'B',
+                CustomItemList.LichBone.get(1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.NetherStar, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.BlazeHoe, 1),
+                "--AAAAAA-",
+                "---AAAABB",
+                "-----CBBA",
+                "----CBCA-",
+                "---CDC---",
+                "--CDC----",
+                "-CDC-----",
+                "CDC------",
+                "EC-------",
+                'A',
+                GTNLItemList.BlazeCube.get(1),
+                'B',
+                CustomItemList.LichBone.get(1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.NetherStar, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                GTNLItemList.EnhancementCore.get(1),
+                "---AAA---",
+                "-BACCCAB-",
+                "-ADEEEDA-",
+                "ACEEFEECA",
+                "ACEFGFECA",
+                "ACEEFEECA",
+                "-ADEEEDA-",
+                "-BACCCAB-",
+                "---AAA---",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.CosmicNeutronium, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.ingot, Materials.CosmicNeutronium, 1),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1),
+                'E',
+                GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.Infinity, 1),
+                'F',
+                getModItem(Avaritia.ID, "Resource", 1, 5, missing),
+                'G',
+                getModItem(Avaritia.ID, "Endest_Pearl", 1, 0, missing));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.CrystalSword, 1),
+                "-------AB",
+                "------ABA",
+                "-B--ACBA-",
+                "-BCACBC--",
+                "BBCCBCA--",
+                "-BBCCA---",
+                "--DBCC---",
+                "BD-BBBB--",
+                "BB--B----",
+                'A',
+                getModItem(Avaritia.ID, "Resource", 1, 0, missing),
+                'B',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.CrystalPickaxe, 1),
+                "-BBBBBBAD",
+                "--BC-ABCA",
+                "-----BBBB",
+                "-----DBAB",
+                "----D---B",
+                "---D---CB",
+                "--D----BB",
+                "BD------B",
+                "BB-------",
+                'A',
+                getModItem(Avaritia.ID, "Resource", 1, 0, missing),
+                'B',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.CrystalAxe, 1),
+                "---AAAA--",
+                "--ABBBBC-",
+                "--ABBBBA-",
+                "--AAABBBA",
+                "--A-CABBA",
+                "---C--AA-",
+                "--C------",
+                "BC-------",
+                "BB-------",
+                'A',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'B',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'C',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.CrystalShovel, 1),
+                "-----CCCA",
+                "----CBBBC",
+                "---CBBBBC",
+                "----CDBBC",
+                "----DCBC-",
+                "---D--C--",
+                "--D------",
+                "BD-------",
+                "BB-------",
+                'A',
+                getModItem(Avaritia.ID, "Resource", 1, 0, missing),
+                'B',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                new ItemStack(ItemLoader.CrystalHoe, 1),
+                "-CCCCCCA-",
+                "--CBBBBBA",
+                "---CCCDBC",
+                "-----DCBC",
+                "----D--CC",
+                "---D----C",
+                "--D------",
+                "BD-------",
+                "BB-------",
+                'A',
+                getModItem(Avaritia.ID, "Resource", 1, 0, missing),
+                'B',
+                getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
+                'C',
+                getModItem(Avaritia.ID, "Resource", 1, 1, missing),
+                'D',
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
     }
 }

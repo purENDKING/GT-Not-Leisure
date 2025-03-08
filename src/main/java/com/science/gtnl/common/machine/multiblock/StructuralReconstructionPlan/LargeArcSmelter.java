@@ -19,6 +19,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -35,12 +37,15 @@ import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implements ISurvivalConstructable {
@@ -63,6 +68,11 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
 
     public LargeArcSmelter(String aName) {
         super(aName);
+    }
+
+    @Override
+    public boolean isEnablePerfectOverclock() {
+        return true;
     }
 
     @Override
@@ -107,11 +117,12 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeArcSmelterRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_00)
+            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_02)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
@@ -161,6 +172,25 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
 
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 45 && this.mMufflerHatches.size() == 1;
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                    .setDurationDecreasePerOC(4)
+                    .setEUtIncreasePerOC(4)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(0.4 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

@@ -477,6 +477,7 @@ public class TextLocalization {
     public static final String NameNeutroniumWireCutting = texter(
         "Neutronium Wire Cutting",
         "NameNeutroniumWireCutting");
+    public static final String NeutroniumWireCuttingRecipeType = texter("Cutting", "NeutroniumWireCuttingRecipeType");
 
     public static final String NameLargeSteamOreWasher = texter("Large Steam Ore Washer", "NameLargeSteamOreWasher");
     public static final String LargeSteamOreWasherRecipeType = texter(
@@ -863,12 +864,27 @@ public class TextLocalization {
     public static final String LargeExtractorRecipeType = texter(
         "Extractor / Fluid Extractor",
         "LargeExtractorRecipeType");
+    public static final String Tooltip_LargeExtractor_00 = texter(
+        "250%% faster than using machines of the same voltage",
+        "Tooltip_LargeExtractor_00");
+    public static final String Tooltip_LargeExtractor_01 = texter(
+        "Only uses 60%% of the EU/t normally required",
+        "Tooltip_LargeExtractor_01");
     public static final String Tooltip_LargeExtractor_Casing = texter(
         "Any Wash Plant Casing",
         "Tooltip_LargeExtractor_Casing");
 
     public static final String NameLargeCanning = texter("Large Canning", "NameLargeCanning");
     public static final String LargeCanningRecipeType = texter("Fluid Canner / Canner", "LargeCanningRecipeType");
+    public static final String Tooltip_LargeCanning_00 = texter(
+        "333%% faster than using machines of the same voltage",
+        "Tooltip_LargeCanning_00");
+    public static final String Tooltip_LargeCanning_01 = texter(
+        "Only uses 50%% of the EU/t normally required",
+        "Tooltip_LargeCanning_01");
+    public static final String Tooltip_LargeCanning_02 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_LargeCanning_02");
     public static final String Tooltip_LargeCanning_Casing = texter(
         "Any Wash Plant Casing",
         "Tooltip_LargeCanning_Casing");
@@ -894,6 +910,12 @@ public class TextLocalization {
     public static final String LargeCutterRecipeType = texter(
         "Cutting Machine / Slicing Machine",
         "LargeCutterRecipeType");
+    public static final String Tooltip_LargeCutter_00 = texter(
+        "200%% faster than using machines of the same voltage",
+        "Tooltip_LargeCutter_00");
+    public static final String Tooltip_LargeCutter_01 = texter(
+        "Only uses 50%% of the EU/t normally required",
+        "Tooltip_LargeCutter_01");
     public static final String Tooltip_LargeCutter_Casing = texter(
         "Any Cutting Factory Frame",
         "Tooltip_LargeCutter_Casing");
@@ -931,6 +953,12 @@ public class TextLocalization {
     public static final String LargeChemicalBathRecipeType = texter(
         "Ore Washer / Simple Washer / Chemical Bath",
         "LargeChemicalBathRecipeType");
+    public static final String Tooltip_LargeChemicalBath_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargeChemicalBath_00");
+    public static final String Tooltip_LargeChemicalBath_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeChemicalBath_01");
     public static final String Tooltip_LargeChemicalBath_Casing = texter(
         "Any Wash Plant Casing",
         "Tooltip_LargeChemicalBath_Casing");
@@ -1041,8 +1069,11 @@ public class TextLocalization {
         "500%% faster than using Fusion Reactor",
         "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00");
     public static final String Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01 = texter(
-        "If the recipe requires a voltage tier over §5UEV§r§7 , you can't do it either",
+        "Only uses 50%% of the EU/t normally required",
         "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01");
+    public static final String Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_02 = texter(
+        "If the recipe requires a voltage tier over §5UEV§r§7 , you can't do it either",
+        "Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_02");
     public static final String Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing = texter(
         "Any LuV Machine Casing",
         "Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing");
@@ -1061,6 +1092,12 @@ public class TextLocalization {
 
     public static final String NameLargeWiremill = texter("Large Wiremill", "NameLargeWiremill");
     public static final String LargeWiremillRecipeType = texter("Wiremill", "LargeWiremillRecipeType");
+    public static final String Tooltip_LargeWiremill_00 = texter(
+        "200%% faster than using machines of the same voltage",
+        "Tooltip_LargeWiremill_00");
+    public static final String Tooltip_LargeWiremill_01 = texter(
+        "Only uses 60%% of the EU/t normally required",
+        "Tooltip_LargeWiremill_01");
     public static final String Tooltip_LargeWiremill_Casing = texter(
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeWiremill_Casing");
@@ -1114,6 +1151,12 @@ public class TextLocalization {
 
     public static final String NameLargePacker = texter("Large Packer", "NameLargePacker");
     public static final String LargePackerRecipeType = texter("Packager / Unpackager", "LargePackerRecipeType");
+    public static final String Tooltip_LargePacker_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargePacker_00");
+    public static final String Tooltip_LargePacker_01 = texter(
+        "Only uses 50%% of the EU/t normally required",
+        "Tooltip_LargePacker_01");
     public static final String Tooltip_LargePacker_Casing = texter(
         "Any Robust Tungstensteel Machine Casing",
         "Tooltip_LargePacker_Casing");
@@ -1143,8 +1186,14 @@ public class TextLocalization {
         "Laser Engraver",
         "LargeEngravingLaserRecipeType");
     public static final String Tooltip_LargeEngravingLaser_00 = texter(
-        "Energy hatch limited by glass tier, UHV Glass unlocks all",
+        "333%% faster than using machines of the same voltage",
         "Tooltip_LargeEngravingLaser_00");
+    public static final String Tooltip_LargeEngravingLaser_01 = texter(
+        "Only uses 50%% of the EU/t normally required",
+        "Tooltip_LargeEngravingLaser_01");
+    public static final String Tooltip_LargeEngravingLaser_02 = texter(
+        "Energy hatch limited by glass tier, UHV Glass unlocks all",
+        "Tooltip_LargeEngravingLaser_02");
     public static final String Tooltip_LargeEngravingLaser_Casing = texter(
         "Any Laser Containment Casing",
         "Tooltip_LargeEngravingLaser_Casing");
@@ -1248,6 +1297,12 @@ public class TextLocalization {
 
     public static final String NameLargeMixer = texter("Large Mixer", "NameLargeMixer");
     public static final String LargeMixerRecipeType = texter("Mixer", "LargeMixerRecipeType");
+    public static final String Tooltip_LargeMixer_00 = texter(
+        "333%% faster than using machines of the same voltage",
+        "Tooltip_LargeMixer_00");
+    public static final String Tooltip_LargeMixer_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeMixer_01");
     public static final String Tooltip_LargeMixer_Casing = texter(
         "Any Multitank Exterior Casing",
         "Tooltip_LargeMixer_Casing");
@@ -1256,6 +1311,12 @@ public class TextLocalization {
     public static final String LargeDistilleryRecipeType = texter(
         "Distillation Tower / Distillery",
         "LargeDistilleryRecipeType");
+    public static final String Tooltip_LargeDistillery_00 = texter(
+        "333%% faster than using machines of the same voltage",
+        "Tooltip_LargeDistillery_00");
+    public static final String Tooltip_LargeDistillery_01 = texter(
+        "Only uses 50%% of the EU/t normally required",
+        "Tooltip_LargeDistillery_01");
     public static final String Tooltip_LargeDistillery_Casing = texter(
         "Any Multitank Exterior Casing",
         "Tooltip_LargeDistillery_Casing");
@@ -1282,12 +1343,24 @@ public class TextLocalization {
 
     public static final String NameLargeElectrolyzer = texter("Large Electrolyzer", "NameLargeElectrolyzer");
     public static final String LargeElectrolyzerRecipeType = texter("Electrolyzer", "LargeElectrolyzerRecipeType");
+    public static final String Tooltip_LargeElectrolyzer_00 = texter(
+        "200%% faster than using machines of the same voltage",
+        "Tooltip_LargeElectrolyzer_00");
+    public static final String Tooltip_LargeElectrolyzer_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeElectrolyzer_01");
     public static final String Tooltip_LargeElectrolyzer_Casing = texter(
         "Any Electrolyzer Casing",
         "Tooltip_LargeElectrolyzer_Casing");
 
     public static final String NameLargeExtruder = texter("Large Wiremill", "NameLargeExtruder");
     public static final String LargeExtruderRecipeType = texter("Wiremill", "LargeExtruderRecipeType");
+    public static final String Tooltip_LargeExtruder_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargeExtruder_00");
+    public static final String Tooltip_LargeExtruder_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeExtruder_01");
     public static final String Tooltip_LargeExtruder_Casing = texter(
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeExtruder_Casing");
@@ -1296,12 +1369,27 @@ public class TextLocalization {
     public static final String LargeArcSmelterRecipeType = texter(
         "Arc Furnace / Plasma Arc Furnace",
         "LargeArcSmelterRecipeType");
+    public static final String Tooltip_LargeArcSmelter_00 = texter(
+        "250%% faster than using machines of the same voltage",
+        "Tooltip_LargeArcSmelter_00");
+    public static final String Tooltip_LargeArcSmelter_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeArcSmelter_01");
+    public static final String Tooltip_LargeArcSmelter_02 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_LargeArcSmelter_02");
     public static final String Tooltip_LargeArcSmelter_Casing = texter(
         "Any Blast Smelter Casing Block",
         "Tooltip_LargeArcSmelter_Casing");
 
     public static final String NameLargeBender = texter("Large Bender", "NameLargeBender");
     public static final String LargeBenderRecipeType = texter("Bender", "LargeBenderRecipeType");
+    public static final String Tooltip_LargeBender_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargeBender_00");
+    public static final String Tooltip_LargeBender_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeBender_01");
     public static final String Tooltip_LargeBender_Casing = texter(
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeBender_Casing");

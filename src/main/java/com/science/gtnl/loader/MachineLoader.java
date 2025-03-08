@@ -490,7 +490,7 @@ public class MachineLoader {
 
         /**
          * ResourceCollectionModule used 21092
-         * 
+         *
          * @see #loadMachinesPostInit()
          */
 

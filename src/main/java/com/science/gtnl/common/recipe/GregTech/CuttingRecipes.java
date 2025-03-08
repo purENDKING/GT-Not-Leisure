@@ -6,6 +6,7 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
@@ -57,5 +58,13 @@ public class CuttingRecipes implements IRecipePool {
             900,
             450,
             TierEU.RECIPE_IV);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(ItemList.Circuit_Silicon_Wafer7.get(1))
+            .itemOutputs(ItemList.Circuit_Chip_Optical.get(16))
+            .fluidInputs(Materials.Grade6PurifiedWater.getFluid(280L))
+            .duration(560)
+            .eut(TierEU.RECIPE_UHV)
+            .addTo(CR);
     }
 }

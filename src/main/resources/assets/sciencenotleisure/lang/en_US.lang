@@ -349,59 +349,59 @@ MetaItem.46.name=超时空贴片电阻
 MetaItem.47.name=超时空贴片二极管
 MetaItem.48.name=LV并行控制核心
 tooltips.LVParallelControllerCore_00=§d速度: +1%%
-tooltips.LVParallelControllerCore_01=§5EU消耗: 78%%
+tooltips.LVParallelControllerCore_01=§5EU消耗: -2%%
 tooltips.LVParallelControllerCore_02=§b并行: 0
 MetaItem.49.name=MV并行控制核心
 tooltips.MVParallelControllerCore_00=§d速度: +2%%
-tooltips.MVParallelControllerCore_01=§5EU消耗: 76%%
+tooltips.MVParallelControllerCore_01=§5EU消耗: -4%%
 tooltips.MVParallelControllerCore_02=§b并行: 1
 MetaItem.50.name=HV并行控制核心
 tooltips.HVParallelControllerCore_00=§d速度: +4%%
-tooltips.HVParallelControllerCore_01=§5EU消耗: 74%%
+tooltips.HVParallelControllerCore_01=§5EU消耗: -6%%
 tooltips.HVParallelControllerCore_02=§b并行: 4
 MetaItem.51.name=EV并行控制核心
 tooltips.EVParallelControllerCore_00=§d速度: +6%%
-tooltips.EVParallelControllerCore_01=§5EU消耗: 72%%
+tooltips.EVParallelControllerCore_01=§5EU消耗: -8%%
 tooltips.EVParallelControllerCore_02=§b并行: 16
 MetaItem.52.name=IV并行控制核心
 tooltips.IVParallelControllerCore_00=§d速度: +8%%
-tooltips.IVParallelControllerCore_01=§5EU消耗: 70%%
+tooltips.IVParallelControllerCore_01=§5EU消耗: -10%%
 tooltips.IVParallelControllerCore_02=§b并行: 64
 MetaItem.53.name=LuV并行控制核心
 tooltips.LuVParallelControllerCore_00=§d速度: +10%%
-tooltips.LuVParallelControllerCore_01=§5EU消耗: 68%%
+tooltips.LuVParallelControllerCore_01=§5EU消耗: -12%%
 tooltips.LuVParallelControllerCore_02=§b并行: 256
 MetaItem.54.name=ZPM并行控制核心
 tooltips.ZPMParallelControllerCore_00=§d速度: +12%%
-tooltips.ZPMParallelControllerCore_01=§5EU消耗: 66%%
+tooltips.ZPMParallelControllerCore_01=§5EU消耗: -14%%
 tooltips.ZPMParallelControllerCore_02=§b并行: 1024
 MetaItem.55.name=UV并行控制核心
 tooltips.UVParallelControllerCore_00=§d速度: +14%%
-tooltips.UVParallelControllerCore_01=§5EU消耗: 64%%
+tooltips.UVParallelControllerCore_01=§5EU消耗: -16%%
 tooltips.UVParallelControllerCore_02=§b并行: 4096
 MetaItem.56.name=UHV并行控制核心
 tooltips.UHVParallelControllerCore_00=§d速度: +16%%
-tooltips.UHVParallelControllerCore_01=§5EU消耗: 62%%
+tooltips.UHVParallelControllerCore_01=§5EU消耗: -18%%
 tooltips.UHVParallelControllerCore_02=§b并行: 16384
 MetaItem.57.name=UEV并行控制核心
 tooltips.UEVParallelControllerCore_00=§d速度: +18%%
-tooltips.UEVParallelControllerCore_01=§5EU消耗: 60%%
+tooltips.UEVParallelControllerCore_01=§5EU消耗: -20%%
 tooltips.UEVParallelControllerCore_02=§b并行: 65536
 MetaItem.58.name=UIV并行控制核心
 tooltips.UIVParallelControllerCore_00=§d速度: +20%%
-tooltips.UIVParallelControllerCore_01=§5EU消耗: 58%%
+tooltips.UIVParallelControllerCore_01=§5EU消耗: -22%%
 tooltips.UIVParallelControllerCore_02=§b并行: 262144
 MetaItem.59.name=UMV并行控制核心
 tooltips.UMVParallelControllerCore_00=§d速度: +22%%
-tooltips.UMVParallelControllerCore_01=§5EU消耗: 56%%
+tooltips.UMVParallelControllerCore_01=§5EU消耗: -24%%
 tooltips.UMVParallelControllerCore_02=§b并行: 1048576
 MetaItem.60.name=UXV并行控制核心
 tooltips.UXVParallelControllerCore_00=§d速度: +24%%
-tooltips.UXVParallelControllerCore_01=§5EU消耗: 54%%
+tooltips.UXVParallelControllerCore_01=§5EU消耗: -26%%
 tooltips.UXVParallelControllerCore_02=§b并行: 4194304
 MetaItem.61.name=MAX并行控制核心
 tooltips.MAXParallelControllerCore_00=§d速度: +26%%
-tooltips.MAXParallelControllerCore_01=§5EU消耗: 52%%
+tooltips.MAXParallelControllerCore_01=§5EU消耗: -28%%
 tooltips.MAXParallelControllerCore_02=§b并行: 16777216
 MetaItem.62.name=§d传闻 - 娜迦之书
 MetaItem.63.name=§6都市传说 - 暮色之书
@@ -447,6 +447,8 @@ Tooltip_Testitem_13=§c§l另外提醒: 不要拿着这个物品右键!
 item.KFCFamily.name=疯狂星期四
 Tooltip_KFCFamily_00=§o疯狂星期四, v我50!
 gtnl.potion.perfect_physique=完美体魄
+
+item.SatietyRing.name=饱食指环
 
 item.CrystalSword.name=§d双锋裂界之剑
 Tooltip_CrystalSword_00=§8§o锋刃所向，裂界无阻；剑影所至，敌影无存。
@@ -999,7 +1001,8 @@ Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_00=当配方需求电压超过�
 Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00=当配方需求电压超过§2UV§r§7时，无法进行聚变
 Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_00=当配方需求电压超过§4UHV§r§7时，无法进行聚变
 Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00=比同等级聚变反应堆快500%%
-Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01=当配方需求电压超过§5UXV§r§7时，无法进行聚变
+Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01=只需要使用配方要求功率的50%%
+Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_02=当配方需求电压超过§5UXV§r§7时，无法进行聚变
 Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing=任意LuV机械方块
 Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing=任意聚变机械方块
 Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing=任意聚变机械方块MK II
@@ -1051,12 +1054,16 @@ GT5U.gui.text.no_mining_drone=§7未找到采矿无人机
 
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
+Tooltip_LargeMixer_00=比相同电压的机器快333%%
+Tooltip_LargeMixer_01=只需要使用配方要求功率的80%%
 Tooltip_LargeMixer_Casing=任意储罐拓展方块
 
 NameLargeDistillery=大型分馏蒸馏厂
 LargeDistilleryRecipeType=蒸馏塔 / 蒸馏室
 LargeDistillery_Mode_0=蒸馏塔
 LargeDistillery_Mode_1=蒸馏室
+Tooltip_LargeDistillery_00=比相同电压的机器快333%%
+Tooltip_LargeDistillery_01=只需要使用配方要求功率的50%%
 Tooltip_LargeDistillery_Casing=任意储罐拓展方块
 
 NameLargeMacerationTower=大型研磨塔
@@ -1070,6 +1077,8 @@ Tooltip_LargeSiftingFunnel_Casing=任意离心机机械方块
 
 NameLargeCutter=大型切割机
 LargeCutterRecipeType=切割机 / 切片机
+Tooltip_LargeCutter_00=比相同电压的机器快200%%
+Tooltip_LargeCutter_01=只需要使用配方要求功率的50%%
 Tooltip_LargeCutter_Casing=任意切割机框架
 LargeCutter_Mode_0=切割机
 LargeCutter_Mode_1=切片机
@@ -1135,6 +1144,8 @@ NameLargePacker=大型打包机
 LargePackerRecipeType=打包机 / 解包器
 LargePacker_Mode_0=打包机
 LargePacker_Mode_1=解包器
+Tooltip_LargePacker_00=比相同电压的机器快500%%
+Tooltip_LargePacker_01=只需要使用配方要求功率的50%%
 Tooltip_LargePacker_Casing=任意强化钨钢机械方块
 
 NameLargeAlloySmelter=大型合金炉
@@ -1157,20 +1168,29 @@ Tooltip_LargeMaterialPress_Casing=任意强化镍铬机械方块
 
 NameLargeWiremill=大型线材工厂
 LargeWiremillRecipeType=线缆轧机
+Tooltip_LargeWiremill_00=比相同电压的机器快200%%
+Tooltip_LargeWiremill_01=只需要使用配方要求功率的60%%
 Tooltip_LargeWiremill_Casing=任意强化镍铬机械方块
 
 NameLargeBender=大型卷板机
 LargeBenderRecipeType=卷板机
+Tooltip_LargeBender_00=比相同电压的机器快500%%
+Tooltip_LargeBender_01=只需要使用配方要求功率的80%%
 Tooltip_LargeBender_Casing=任意强化镍铬机械方块
 
 NameLargeExtruder=大型压模机
 LargeExtruderRecipeType=压模机
+Tooltip_LargeExtruder_00=比相同电压的机器快500%%
+Tooltip_LargeExtruder_01=只需要使用配方要求功率的80%%
 Tooltip_LargeExtruder_Casing=任意强化镍铬机械方块
 
 NameLargeArcSmelter=大型电弧炉
 LargeArcSmelterRecipeType=电弧炉 / 等离子电弧炉
 LargeArcSmelter_Mode_0=电弧炉
 LargeArcSmelter_Mode_1=等离子电弧炉
+Tooltip_LargeArcSmelter_00=比相同电压的机器快250%%
+Tooltip_LargeArcSmelter_01=只需要使用配方要求功率的80%%
+Tooltip_LargeArcSmelter_02=机器可进行§c无损超频§7
 Tooltip_LargeArcSmelter_Casing=任意冶炼炉机械方块
 
 NameLargeForming=大型冲压机
@@ -1179,6 +1199,8 @@ Tooltip_LargeForming_Casing=任意强化镍铬机械方块
 
 NameLargeElectrolyzer=大型电解槽
 LargeElectrolyzerRecipeType=电解机
+Tooltip_LargeElectrolyzer_00=比相同电压的机器快200%%
+Tooltip_LargeElectrolyzer_01=只需要使用配方要求功率的80%%
 Tooltip_LargeElectrolyzer_Casing=任意电解机机械方块
 
 NameLargeElectromagnet=大型电磁工厂
@@ -1192,6 +1214,8 @@ LargeChemicalBathRecipeType=洗矿池 / 简易洗矿池 / 化学浸洗机
 LargeChemicalBath_Mode_0=洗矿池
 LargeChemicalBath_Mode_1=简易洗矿池
 LargeChemicalBath_Mode_2=化学浸洗机
+Tooltip_LargeChemicalBath_00=比相同电压的机器快500%%
+Tooltip_LargeChemicalBath_01=只需要使用配方要求功率的80%%
 Tooltip_LargeChemicalBath_Casing=任意洗矿厂机械方块
 
 NameLargeAutoclave=大型高压结晶釜
@@ -1206,12 +1230,17 @@ NameLargeCanning=大型装罐机
 LargeCanningRecipeType=流体装罐机 / 装罐机
 LargeCanning_Mode_0=流体装罐机
 LargeCanning_Mode_1=装罐机
+Tooltip_LargeCanning_00=比相同电压的机器快333%%
+Tooltip_LargeCanning_01=只需要使用配方要求功率的50%%
+Tooltip_LargeCanning_02=机器可进行§c无损超频§7
 Tooltip_LargeCanning_Casing=任意洗矿厂机械方块
 
 NameLargeExtractor=大型提取机
 LargeExtractorRecipeType=提取机 / 流体提取机
 LargeExtractor_Mode_0=提取机
 LargeExtractor_Mode_1=流体提取机
+Tooltip_LargeExtractor_00=比相同电压的机器快250%%
+Tooltip_LargeExtractor_01=只需要使用配方要求功率的60%%
 Tooltip_LargeExtractor_Casing=任意洗矿厂机械方块
 
 NameLargeCentrifuge=大型离心机组
@@ -1235,7 +1264,9 @@ Tooltip_FishingGround_Casing=任意哈斯特洛伊-X结构方块
 
 NameLargeEngravingLaser=大型激光蚀刻机
 LargeEngravingLaserRecipeType=激光蚀刻机
-Tooltip_LargeEngravingLaser_00=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
+Tooltip_LargeEngravingLaser_00=比相同电压的机器快200%%
+Tooltip_LargeEngravingLaser_01=只需要使用配方要求功率的80%%
+Tooltip_LargeEngravingLaser_02=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
 Tooltip_LargeEngravingLaser_Casing=任意激光抑制机械方块
 
 NameElectricImplosionCompressor=电力聚爆压缩机
@@ -1740,8 +1771,8 @@ Tooltip_MegaBlastFurnaceRecipeType=工业高炉
 Tooltip_MegaBlastFurnace_00=每超过配方温度900K，耗能均将乘以95%%（不计超频）
 Tooltip_MegaBlastFurnace_01=每超过配方温度1800K，将进行一次无损超频
 Tooltip_MegaBlastFurnace_02=超过MV后的每一级电压，都会将温度提高100K
-Tooltip_MegaBlastFurnace_03=并行数 = 256 + 8 * 电压等级 + 16 * 线圈等级
-Tooltip_MegaBlastFurnace_04=比相同电压的单方块机器快400%%
+Tooltip_MegaBlastFurnace_03=并行数 = 4 * 并行控制核心提供的并行
+Tooltip_MegaBlastFurnace_04=比工业高炉快500%%
 Tooltip_MegaBlastFurnace_Casing_00=任意冶炼炉机械方块
 Tooltip_MegaBlastFurnace_Casing_01=回收气体，任意脱氧钢机械方块
 Tooltip_MegaBlastFurnace_Casing_02=顶部中心放射硅岩合金机械方块

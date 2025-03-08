@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.Utils.Utils.mergeArray;
+import static gregtech.api.util.GTUtility.validMTEList;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 
 import java.math.BigInteger;
@@ -20,10 +21,14 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.misc.OverclockType;
 
+import gregtech.api.enums.GTValues;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
@@ -34,6 +39,10 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMultiMachineBase<T>>
     extends MultiMachineBase<T> {
+
+    protected int mCasing;
+    protected int ParallelTier;
+    protected int energyHatchTier;
 
     public WirelessEnergyMultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -130,9 +139,82 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
-                    : super.createOverclockCalculator(recipe);
+                    : super.createOverclockCalculator(recipe).setEUtDiscount(0.4 - (ParallelTier / 50.0))
+                        .setSpeedBoost(0.4 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        if (!wirelessMode) {
+            boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+            logic.setAvailableVoltage(getMachineVoltageLimit());
+            logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+            logic.setAmperageOC(useSingleAmp);
+        } else {
+            logic.setAvailableVoltage(getAverageInputVoltage());
+            logic.setAvailableAmperage(getMaxInputAmps());
+            logic.setAmperageOC(mExoticEnergyHatches.size() > 0 || mEnergyHatches.size() != 1);
+        }
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
+    }
+
+    @Override
+    public int getMaxParallelRecipes() {
+        if (ParallelTier <= 1) {
+            return 8;
+        } else {
+            return (int) Math.pow(4, ParallelTier - 2) * 16;
+        }
+    }
+
+    public int getParallelTier(ItemStack inventory) {
+        if (inventory == null) return 0;
+        if (inventory.isItemEqual(GTNLItemList.LVParallelControllerCore.getInternalStack_unsafe())) {
+            return 1;
+        } else if (inventory.isItemEqual(GTNLItemList.MVParallelControllerCore.getInternalStack_unsafe())) {
+            return 2;
+        } else if (inventory.isItemEqual(GTNLItemList.HVParallelControllerCore.getInternalStack_unsafe())) {
+            return 3;
+        } else if (inventory.isItemEqual(GTNLItemList.EVParallelControllerCore.getInternalStack_unsafe())) {
+            return 4;
+        } else if (inventory.isItemEqual(GTNLItemList.IVParallelControllerCore.getInternalStack_unsafe())) {
+            return 5;
+        } else if (inventory.isItemEqual(GTNLItemList.LuVParallelControllerCore.getInternalStack_unsafe())) {
+            return 6;
+        } else if (inventory.isItemEqual(GTNLItemList.ZPMParallelControllerCore.getInternalStack_unsafe())) {
+            return 7;
+        } else if (inventory.isItemEqual(GTNLItemList.UVParallelControllerCore.getInternalStack_unsafe())) {
+            return 8;
+        } else if (inventory.isItemEqual(GTNLItemList.UHVParallelControllerCore.getInternalStack_unsafe())) {
+            return 9;
+        } else if (inventory.isItemEqual(GTNLItemList.UEVParallelControllerCore.getInternalStack_unsafe())) {
+            return 10;
+        } else if (inventory.isItemEqual(GTNLItemList.UIVParallelControllerCore.getInternalStack_unsafe())) {
+            return 11;
+        } else if (inventory.isItemEqual(GTNLItemList.UMVParallelControllerCore.getInternalStack_unsafe())) {
+            return 12;
+        } else if (inventory.isItemEqual(GTNLItemList.UXVParallelControllerCore.getInternalStack_unsafe())) {
+            return 13;
+        } else if (inventory.isItemEqual(GTNLItemList.MAXParallelControllerCore.getInternalStack_unsafe())) {
+            return 14;
+        }
+        return 0;
     }
 
     @Nonnull

@@ -87,9 +87,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LapotronChipRecipeType)
-            .addInfo(TextLocalization.Tooltip_LapotronChip_00)
-            .addInfo(TextLocalization.Tooltip_LapotronChip_01)
+        tt.addMachineType(TextLocalization.NeutroniumWireCuttingRecipeType)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)

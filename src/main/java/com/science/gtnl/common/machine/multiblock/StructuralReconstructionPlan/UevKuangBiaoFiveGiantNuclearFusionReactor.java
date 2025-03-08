@@ -149,10 +149,11 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
         tt.addMachineType(TextLocalization.KuangBiaoOneGiantNuclearFusionReactorRecipeType)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00)
             .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00)
+            .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 + "20480M EU")
-            .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01)
+            .addInfo(TextLocalization.Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_02)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
@@ -307,7 +308,7 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(4 - (ParallelTier / 12.5))
+                    .setEUtDiscount(0.5 - (ParallelTier / 50.0))
                     .setSpeedBoost(Math.max(0.0001, 0.2 - (ParallelTier / 200.0)));
             }
 

@@ -85,8 +85,6 @@ public class BlockExtremeAnvil extends BlockFalling {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
         float hitY, float hitZ) {
         if (!world.isRemote) {
-            return true;
-        } else {
             player.openGui(ScienceNotLeisure.instance, 1, world, x, y, z);
         }
         return true;
@@ -126,7 +124,7 @@ public class BlockExtremeAnvil extends BlockFalling {
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         if (!world.isRemote) {
-            this.harvesters.set(null);
+            this.harvesters.remove();
             super.breakBlock(world, x, y, z, block, meta);
         }
     }

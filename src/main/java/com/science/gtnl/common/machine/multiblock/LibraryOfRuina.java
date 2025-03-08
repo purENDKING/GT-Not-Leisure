@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.dreammaster.gthandler.CustomItemList;
 import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -36,7 +37,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 
@@ -197,7 +197,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
 
     public int getMultiTier(ItemStack inventory) {
         if (inventory == null) return 0;
-        return inventory.isItemEqual(GTModHandler.getModItem(NewHorizonsCoreMod.ID, "item.TwilightCrystal", 1)) ? 1 : 0;
+        return inventory.isItemEqual(CustomItemList.TwilightCrystal.get(1)) ? 1 : 0;
     }
 
     public void replaceWaterWithPortal() {

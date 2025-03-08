@@ -22,12 +22,10 @@ public class SpaceMinerFrontend extends RecipeMapFrontend {
 
     public SpaceMinerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
-        super(
-            uiPropertiesBuilder,
-            neiPropertiesBuilder.neiSpecialInfoFormatter(new SpaceAssemblerSpecialValueFormatter()));
+        super(uiPropertiesBuilder, neiPropertiesBuilder.neiSpecialInfoFormatter(new SpaceMinerSpecialValueFormatter()));
     }
 
-    private static class SpaceAssemblerSpecialValueFormatter implements INEISpecialInfoFormatter {
+    private static class SpaceMinerSpecialValueFormatter implements INEISpecialInfoFormatter {
 
         @Override
         public List<String> format(RecipeDisplayInfo recipeInfo) {

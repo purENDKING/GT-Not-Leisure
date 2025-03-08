@@ -1,5 +1,6 @@
 package com.science.gtnl.common.item;
 
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.item.BasicItems.MetaItem;
 import static com.science.gtnl.common.item.ItemAdder.initItem;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -188,7 +190,7 @@ public class ItemRegister {
                 "LV Parallel Controller Core",
                 48,
                 new String[] { texter("§dSpeed: +1%%", "tooltips.LVParallelControllerCore_00"),
-                    texter("§5EU Usage: 78%%", "tooltips.LVParallelControllerCore_01"),
+                    texter("§5EU Usage: -2%%", "tooltips.LVParallelControllerCore_01"),
                     texter("§bParallel: 0", "tooltips.LVParallelControllerCore_02") }));
 
         GTNLItemList.MVParallelControllerCore.set(
@@ -196,7 +198,7 @@ public class ItemRegister {
                 "MV Parallel Controller Core",
                 49,
                 new String[] { texter("§dSpeed: +2%%", "tooltips.MVParallelControllerCore_00"),
-                    texter("§5EU Usage: 76%%", "tooltips.MVParallelControllerCore_01"),
+                    texter("§5EU Usage: -4%%", "tooltips.MVParallelControllerCore_01"),
                     texter("§bParallel: 1", "tooltips.MVParallelControllerCore_02") }));
 
         GTNLItemList.HVParallelControllerCore.set(
@@ -204,7 +206,7 @@ public class ItemRegister {
                 "HV Parallel Controller Core",
                 50,
                 new String[] { texter("§dSpeed: +4%%", "tooltips.HVParallelControllerCore_00"),
-                    texter("§5EU Usage: 74%%", "tooltips.HVParallelControllerCore_01"),
+                    texter("§5EU Usage: -6%%", "tooltips.HVParallelControllerCore_01"),
                     texter("§bParallel: 4", "tooltips.HVParallelControllerCore_02") }));
 
         GTNLItemList.EVParallelControllerCore.set(
@@ -212,7 +214,7 @@ public class ItemRegister {
                 "EV Parallel Controller Core",
                 51,
                 new String[] { texter("§dSpeed: +6%%", "tooltips.EVParallelControllerCore_00"),
-                    texter("§5EU Usage: 72%%", "tooltips.EVParallelControllerCore_01"),
+                    texter("§5EU Usage: -8%%", "tooltips.EVParallelControllerCore_01"),
                     texter("§bParallel: 16", "tooltips.EVParallelControllerCore_02") }));
 
         GTNLItemList.IVParallelControllerCore.set(
@@ -220,7 +222,7 @@ public class ItemRegister {
                 "IV Parallel Controller Core",
                 52,
                 new String[] { texter("§dSpeed: +8%%", "tooltips.IVParallelControllerCore_00"),
-                    texter("§5EU Usage: 70%%", "tooltips.IVParallelControllerCore_01"),
+                    texter("§5EU Usage: -10%%", "tooltips.IVParallelControllerCore_01"),
                     texter("§bParallel: 64", "tooltips.IVParallelControllerCore_02") }));
 
         GTNLItemList.LuVParallelControllerCore.set(
@@ -228,7 +230,7 @@ public class ItemRegister {
                 "LuV Parallel Controller Core",
                 53,
                 new String[] { texter("§dSpeed: +10%%", "tooltips.LuVParallelControllerCore_00"),
-                    texter("§5EU Usage: 68%%", "tooltips.LuVParallelControllerCore_01"),
+                    texter("§5EU Usage: -12%%", "tooltips.LuVParallelControllerCore_01"),
                     texter("§bParallel: 256", "tooltips.LuVParallelControllerCore_02") }));
 
         GTNLItemList.ZPMParallelControllerCore.set(
@@ -236,7 +238,7 @@ public class ItemRegister {
                 "ZPM Parallel Controller Core",
                 54,
                 new String[] { texter("§dSpeed: +12%%", "tooltips.ZPMParallelControllerCore_00"),
-                    texter("§5EU Usage: 66%%", "tooltips.ZPMParallelControllerCore_01"),
+                    texter("§5EU Usage: -14%%", "tooltips.ZPMParallelControllerCore_01"),
                     texter("§bParallel: 1024", "tooltips.ZPMParallelControllerCore_02") }));
 
         GTNLItemList.UVParallelControllerCore.set(
@@ -244,7 +246,7 @@ public class ItemRegister {
                 "UV Parallel Controller Core",
                 55,
                 new String[] { texter("§dSpeed: +14%%", "tooltips.UVParallelControllerCore_00"),
-                    texter("§5EU Usage: 64%%", "tooltips.UVParallelControllerCore_01"),
+                    texter("§5EU Usage: -16%%", "tooltips.UVParallelControllerCore_01"),
                     texter("§bParallel: 4096", "tooltips.UVParallelControllerCore_02") }));
 
         GTNLItemList.UHVParallelControllerCore.set(
@@ -252,7 +254,7 @@ public class ItemRegister {
                 "UHV Parallel Controller Core",
                 56,
                 new String[] { texter("§dSpeed: +16%%", "tooltips.UHVParallelControllerCore_00"),
-                    texter("§5EU Usage: 62%%", "tooltips.UHVParallelControllerCore_01"),
+                    texter("§5EU Usage: -18%%", "tooltips.UHVParallelControllerCore_01"),
                     texter("§bParallel: 16384", "tooltips.UHVParallelControllerCore_02") }));
 
         GTNLItemList.UEVParallelControllerCore.set(
@@ -260,7 +262,7 @@ public class ItemRegister {
                 "UEV Parallel Controller Core",
                 57,
                 new String[] { texter("§dSpeed: +18%%", "tooltips.UEVParallelControllerCore_00"),
-                    texter("§5EU Usage: 60%%", "tooltips.UEVParallelControllerCore_01"),
+                    texter("§5EU Usage: -20%%", "tooltips.UEVParallelControllerCore_01"),
                     texter("§bParallel: 65536", "tooltips.UEVParallelControllerCore_02") }));
 
         GTNLItemList.UIVParallelControllerCore.set(
@@ -268,7 +270,7 @@ public class ItemRegister {
                 "UIV Parallel Controller Core",
                 58,
                 new String[] { texter("§dSpeed: +20%%", "tooltips.UIVParallelControllerCore_00"),
-                    texter("§5EU Usage: 58%%", "tooltips.UIVParallelControllerCore_01"),
+                    texter("§5EU Usage: -22%%", "tooltips.UIVParallelControllerCore_01"),
                     texter("§bParallel: 262144", "tooltips.UIVParallelControllerCore_02") }));
 
         GTNLItemList.UMVParallelControllerCore.set(
@@ -276,7 +278,7 @@ public class ItemRegister {
                 "UMV Parallel Controller Core",
                 59,
                 new String[] { texter("§dSpeed: +22%%", "tooltips.UMVParallelControllerCore_00"),
-                    texter("§5EU Usage: 56%%", "tooltips.UMVParallelControllerCore_01"),
+                    texter("§5EU Usage: -24%%", "tooltips.UMVParallelControllerCore_01"),
                     texter("§bParallel: 1048576", "tooltips.UMVParallelControllerCore_02") }));
 
         GTNLItemList.UXVParallelControllerCore.set(
@@ -284,7 +286,7 @@ public class ItemRegister {
                 "UXV Parallel Controller Core",
                 60,
                 new String[] { texter("§dSpeed: +24%%", "tooltips.UXVParallelControllerCore_00"),
-                    texter("§5EU Usage: 54%%", "tooltips.UXVParallelControllerCore_01"),
+                    texter("§5EU Usage: -26%%", "tooltips.UXVParallelControllerCore_01"),
                     texter("§bParallel: 4194304", "tooltips.UXVParallelControllerCore_02") }));
 
         GTNLItemList.MAXParallelControllerCore.set(
@@ -292,7 +294,7 @@ public class ItemRegister {
                 "MAX Parallel Controller Core",
                 61,
                 new String[] { texter("§dSpeed: +26%%", "tooltips.MAXParallelControllerCore_00"),
-                    texter("§5EU Usage: 52%%", "tooltips.MAXParallelControllerCore_01"),
+                    texter("§5EU Usage: -28%%", "tooltips.MAXParallelControllerCore_01"),
                     texter("§bParallel: 16777216", "tooltips.MAXParallelControllerCore_02") }));
 
         GTNLItemList.NagaBook.set(initItem("§dRumor - Naga Book", 62));
@@ -333,6 +335,8 @@ public class ItemRegister {
     public static void registry() {
         registryItems();
         registryItemContainers();
+
+        addItemTooltip(new ItemStack(ItemLoader.SatietyRing, 1), AnimatedText.zeroCM);
     }
 
     public static void registryOreDictionary() {

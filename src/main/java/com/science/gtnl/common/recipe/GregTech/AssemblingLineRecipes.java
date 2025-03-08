@@ -5,9 +5,11 @@ import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTRecipeBuilder.*;
 import static gregtech.api.util.GTRecipeConstants.*;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.block.BlockList;
@@ -19,6 +21,7 @@ import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.common.loaders.ItemRegistry;
 import bartworks.system.material.WerkstoffLoader;
+import ggfab.GGItemList;
 import goodgenerator.items.GGMaterial;
 import goodgenerator.util.ItemRefer;
 import gregtech.api.enums.GTValues;
@@ -904,6 +907,101 @@ public class AssemblingLineRecipes implements IRecipePool {
             GTNLItemList.ResourceCollectionModule.get(1),
             1200,
             (int) TierEU.RECIPE_UV);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, ItemRegistry.megaMachines[4])
+            .metadata(RESEARCH_TIME, 4 * HOURS)
+            .itemInputs(
+                ItemList.MixerLuV.get(4),
+                ItemList.CentrifugeLuV.get(4),
+                ItemList.DistilleryLuV.get(4),
+                ItemList.ChemicalReactorLuV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.pipeNonuple, Materials.TungstenSteel, 8L),
+                ItemList.Emitter_LuV.get(4),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 4L),
+                ItemList.Electric_Piston_LuV.get(8),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.HSSE, 16L))
+            .fluidInputs(
+                Materials.SolderingAlloy.getMolten(2304),
+                Materials.Polytetrafluoroethylene.getMolten(2304),
+                MaterialsAlloy.AQUATIC_STEEL.getFluidStack(1152))
+            .itemOutputs(GTNLItemList.FuelRefiningComplex.get(1))
+            .eut(TierEU.RECIPE_ZPM)
+            .duration(50 * SECONDS)
+            .addTo(AssemblyLine);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            CustomItemList.Godforge_SingularityShieldingCasing.get(1),
+            819200000,
+            512000,
+            (int) TierEU.RECIPE_UXV,
+            1,
+            new ItemStack[] { CustomItemList.Godforge_SingularityShieldingCasing.get(1), ItemList.Emitter_UMV.get(4),
+                ItemList.Sensor_UMV.get(4), GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UXV, 4),
+                ItemList.Field_Generator_UMV.get(16), GTNLItemList.EnhancementCore.get(64), ItemList.UHV_Coil.get(64),
+                ItemList.UHV_Coil.get(64), ItemList.ZPM5.get(1),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, MaterialsUEVplus.WhiteDwarfMatter, 8),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, MaterialsUEVplus.BlackDwarfMatter, 8),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, MaterialsUEVplus.MagMatter, 8) },
+            new FluidStack[] { MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(4000),
+                MaterialsUEVplus.Mellion.getMolten(4608), Materials.Europium.getMolten(9216),
+                GGMaterial.tairitsu.getMolten(9216) },
+            GTNLItemList.RealArtificialStar.get(1),
+            1800,
+            (int) TierEU.RECIPE_UXV);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GGItemList.AdvAssLine.get(1),
+            20480000,
+            12800,
+            (int) TierEU.RECIPE_UEV,
+            1,
+            new ItemStack[] { GGItemList.AdvAssLine.get(4), GGItemList.AdvAssLine.get(4), GGItemList.AdvAssLine.get(4),
+                GGItemList.AdvAssLine.get(4), GregtechItemList.TransmissionComponent_UHV.get(32),
+                ItemList.Robot_Arm_UHV.get(32), ItemList.Conveyor_Module_UHV.get(32),
+                ItemList.Field_Generator_UHV.get(32), GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 64),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UHV, 32),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UEV, 16),
+                GTModHandler.getModItem(AvaritiaAddons.ID, "InfinityChest", 4),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Osmiridium, 64),
+                GTOreDictUnificator.get(OrePrefixes.screw, Materials.CosmicNeutronium, 64),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Neutronium, 2) },
+            new FluidStack[] { Materials.SolderingAlloy.getMolten(23040),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(12800), Materials.Polytetrafluoroethylene.getMolten(46080),
+                Materials.Grade6PurifiedWater.getFluid(64000) },
+            GTNLItemList.GrandAssemblyLine.get(1),
+            1200,
+            (int) TierEU.RECIPE_UEV);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GTModHandler.getModItem(TwilightForest.ID, "item.lampOfCinders", 1))
+            .metadata(RESEARCH_TIME, 24 * HOURS)
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                GTNLItemList.NagaBook.get(4),
+                GTNLItemList.LichBook.get(4),
+                GTNLItemList.MinotaurBook.get(4),
+                GTNLItemList.HydraBook.get(4),
+                GTNLItemList.KnightPhantomBook.get(4),
+                GTNLItemList.UrGhastBook.get(4),
+                GTNLItemList.AlphaYetiBook.get(4),
+                GTNLItemList.SnowQueenBook.get(4),
+                GTNLItemList.GiantBook.get(4),
+                GTModHandler.getModItem(TwilightForest.ID, "item.mazebreakerPick", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 1, 8),
+                GTModHandler.getModItem(TwilightForest.ID, "item.crumbleHorn", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.charmOfKeeping3", 8),
+                GTModHandler.getModItem(TwilightForest.ID, "item.charmOfLife2", 32),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFSapling", 64, 5))
+            .fluidInputs(
+                Materials.FierySteel.getFluid(64000),
+                FluidRegistry.getFluidStack("xpjuice", 2560000),
+                Materials.AdvancedGlue.getFluid(640000),
+                MaterialMisc.ETHYL_CYANOACRYLATE.getFluidStack(320000))
+            .itemOutputs(GTNLItemList.TwilightForestBook.get(1))
+            .eut(TierEU.RECIPE_UHV)
+            .duration(60 * SECONDS)
+            .addTo(AssemblyLine);
 
     }
 }

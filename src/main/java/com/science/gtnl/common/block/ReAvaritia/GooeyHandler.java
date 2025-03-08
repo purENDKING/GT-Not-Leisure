@@ -5,6 +5,7 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.ContainerExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.ExtremeAnvilGUI;
+import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.ContainerNeutronItem;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.NeutronCollectorGUI;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.TileEntityNeutronCollector;
@@ -17,7 +18,10 @@ public class GooeyHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == 0)
             return new NeutronCollectorGUI(player.inventory, (TileEntityNeutronCollector) world.getTileEntity(x, y, z));
-        if (ID == 1) return new ExtremeAnvilGUI(player.inventory, world, x, y, z);
+        if (ID == 1) {
+            TileEntityExtremeAnvil tileEntity = (TileEntityExtremeAnvil) world.getTileEntity(x, y, z);
+            return new ExtremeAnvilGUI(player.inventory, tileEntity, tileEntity);
+        }
         return null;
     }
 
@@ -26,7 +30,11 @@ public class GooeyHandler implements IGuiHandler {
         if (ID == 0) return new ContainerNeutronItem(
             player.inventory,
             (TileEntityNeutronCollector) world.getTileEntity(x, y, z));
-        if (ID == 1) return new ContainerExtremeAnvil(player.inventory, world, x, y, z, player);
+        if (ID == 1) {
+            TileEntityExtremeAnvil tileEntity = (TileEntityExtremeAnvil) world.getTileEntity(x, y, z);
+            return new ContainerExtremeAnvil(player.inventory, tileEntity, tileEntity);
+        }
         return null;
     }
+
 }

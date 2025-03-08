@@ -1757,5 +1757,146 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_EV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GregtechItemList.AlgaeFarm_Controller.get(1),
+                GregtechItemList.Industrial_FishingPond.get(1),
+                ItemList.Field_Generator_IV.get(2),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt04, Materials.SuperconductorIV, 4L),
+                ItemList.AcceleratorIV.get(2),
+                GregtechItemList.GTPP_Casing_EV.get(4))
+            .itemOutputs(GTNLItemList.FishingGround.get(1))
+            .fluidInputs(Materials.Polybenzimidazole.getMolten(1152))
+            .duration(400)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.magicBeans", 64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.giantSword", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.giantPick", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.GiantObsidian", 16))
+            .itemOutputs(GTNLItemList.GiantBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.nagaScale", 64),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFSpiralBricks", 64),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.Steeleaf, 16))
+            .itemOutputs(GTNLItemList.NagaBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 0),
+                GTModHandler.getModItem(TwilightForest.ID, "item.hydraChop", 64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.fieryBlood", 64),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.FierySteel, 16))
+            .itemOutputs(GTNLItemList.HydraBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 4),
+                GTModHandler.getModItem(TwilightForest.ID, "item.tripleBow", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFAuroraBrick", 64),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.AuroraPillar", 64))
+            .itemOutputs(GTNLItemList.SnowQueenBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 6),
+                GTModHandler.getModItem(TwilightForest.ID, "item.phantomHelm", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.phantomPlate", 1),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.Knightmetal, 16))
+            .itemOutputs(GTNLItemList.KnightPhantomBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 3),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFTowerDevice", 64, 0),
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFTowerDevice", 64, 2),
+                GTModHandler.getModItem(TwilightForest.ID, "item.carminite", 32))
+            .itemOutputs(GTNLItemList.UrGhastBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 5),
+                GTModHandler.getModItem(TwilightForest.ID, "item.meefStroganoff", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.meefSteak", 64),
+                GTOreDictUnificator.get(OrePrefixes.block, Materials.IronWood, 16))
+            .itemOutputs(GTNLItemList.MinotaurBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 7),
+                GTModHandler.getModItem(TwilightForest.ID, "item.alphaFur", 16),
+                GTModHandler.getModItem(TwilightForest.ID, "item.iceBomb", 16),
+                GTModHandler.getModItem(TwilightForest.ID, "item.arcticFur", 64))
+            .itemOutputs(GTNLItemList.AlphaYetiBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(Items.book, 64),
+                CustomItemList.TwilightCrystal.get(64),
+                GTModHandler.getModItem(TwilightForest.ID, "item.trophy", 16, 2),
+                GTModHandler.getModItem(TwilightForest.ID, "item.scepterLifeDrain", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.scepterTwilight", 1),
+                GTModHandler.getModItem(TwilightForest.ID, "item.scepterZombie", 1))
+            .itemOutputs(GTNLItemList.LichBook.get(1))
+            .fluidInputs(Materials.FierySteel.getFluid(4000))
+            .duration(300)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
     }
 }

@@ -69,7 +69,6 @@ import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import tectech.thing.casing.BlockGTCasingsTT;
-import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssemblyLine>
     implements ISurvivalConstructable {
@@ -118,7 +117,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_07)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .beginStructureBlock(48, 5, 5, true)
             .addEnergyHatch(TextLocalization.Tooltip_GrandAssemblyLine_Casing, 1)
             .addMaintenanceHatch(TextLocalization.Tooltip_GrandAssemblyLine_Casing, 1)
@@ -746,12 +745,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
-            }
-        }
-
         ParallelTier = getParallelTier(aStack);
         return mEnergyHatches.size() <= 1 && mDataAccessHatches.size() <= 1
             && mMaintenanceHatches.size() <= 1
