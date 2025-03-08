@@ -312,11 +312,9 @@ public class CraftingTableRecipes implements IRecipePool {
                 new ItemStack(ItemLoader.KFCFamily, 1) });
 
         addCraftingRecipe(
-            new ItemStack(ItemLoader.KFCFamily, 1),
-            new Object[] { "ABA", "CDC", "EBE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
-                'B', GTModHandler.getModItem(PamsHarvestCraft.ID, "roastchickenItem", 1), 'C',
-                new ItemStack(Items.cooked_chicken, 1), 'D',
-                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Paper, 1L), 'E',
-                ItemList.Food_Packaged_Fries.get(1) });
+            GTNLItemList.BigSteamInputHatch.get(1),
+            new Object[] { "ABA", "CDC", "ABA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1L),
+                'B', GTOreDictUnificator.get(OrePrefixes.pipeHuge, Materials.Bronze, 1L), 'C',
+                GTNLItemList.PrecisionSteamMechanism.get(1), 'D', GregtechItemList.Hatch_Input_Steam.get(1) });
     }
 }
