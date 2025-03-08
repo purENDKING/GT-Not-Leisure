@@ -18,6 +18,8 @@ HatchCustomFluid_01=容量:
 HatchCustomFluid_02=允许的流体: 
 HatchCustomFluid_03=空
 
+BigSteamInputHatch=大型蒸汽仓
+
 SuperCraftingInputHatchME=超级样板输入总成(ME)
 SuperCraftingInputBusME=超级样板输入总线(ME)
 Tooltip_SuperCraftingInputHatchME_00=为多方块机器输入物品
@@ -1326,6 +1328,34 @@ Tooltip_LargeSteamCircuitAssembler_01=仅消耗正常需求125%%的蒸汽
 Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
 Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamCentrifuge=大型蒸汽离心机
+LargeSteamCentrifugeRecipeType=离心机
+Tooltip_LargeSteamCentrifuge_00=比同等级的单方块离心机快25%%
+Tooltip_LargeSteamCentrifuge_01=仅消耗正常需求100%%的蒸汽
+Tooltip_LargeSteamCentrifuge_02=一次可处理多达16个物品
+Tooltip_LargeSteamCentrifuge_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamHammer=大型蒸汽锻造锤
+LargeSteamHammerRecipeType=锻造锤
+Tooltip_LargeSteamHammer_00=比同等级的单方块锻造锤快25%%
+Tooltip_LargeSteamHammer_01=仅消耗正常需求75%%的蒸汽
+Tooltip_LargeSteamHammer_02=一次可处理多达16个物品
+Tooltip_LargeSteamHammer_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamCompressor=大型蒸汽压缩机
+LargeSteamCompressorRecipeType=压缩机
+Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快25%%
+Tooltip_LargeSteamCompressor_01=仅消耗正常需求85%%的蒸汽
+Tooltip_LargeSteamCompressor_02=一次可处理多达16个物品
+Tooltip_LargeSteamCompressor_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamSifter=大型蒸汽筛选机
+LargeSteamSifterRecipeType=筛选机
+Tooltip_LargeSteamSifter_00=比同等级的单方块筛选机快25%%
+Tooltip_LargeSteamSifter_01=仅消耗正常需求80%%的蒸汽
+Tooltip_LargeSteamSifter_02=一次可处理多达16个物品
+Tooltip_LargeSteamSifter_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtruder=大型蒸汽压模机
 LargeSteamExtruderRecipeType=压模机

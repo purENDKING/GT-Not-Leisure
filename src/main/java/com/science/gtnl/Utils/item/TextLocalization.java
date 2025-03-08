@@ -162,6 +162,8 @@ public class TextLocalization {
     public static final String HatchCustomFluid_02 = texter("Accepted Fluid: ", "HatchCustomFluid_02");
     public static final String HatchCustomFluid_03 = texter("Empty", "HatchCustomFluid_03");
 
+    public static final String BigSteamInputHatch = texter("Big Steam Input Hatch", "BigSteamInputHatch");
+
     public static final String DualInputHatchLV = texter("Dual Input Hatch LV", "DualInputHatchLV");
     public static final String DualInputHatchMV = texter("Dual Input Hatch MV", "DualInputHatchMV");
     public static final String DualInputHatchHV = texter("Dual Input Hatch HV", "DualInputHatchHV");
@@ -495,6 +497,66 @@ public class TextLocalization {
     public static final String Tooltip_LargeSteamOreWasher_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamOreWasher_Casing");
+
+    public static final String NameLargeSteamCentrifuge = texter("Large Steam Centrifuge", "NameLargeSteamCentrifuge");
+    public static final String LargeSteamCentrifugeRecipeType = texter("Centrifuge", "LargeSteamCentrifugeRecipeType");
+    public static final String Tooltip_LargeSteamCentrifuge_00 = texter(
+        "133%% faster than using single block steam machines of the same centrifuge",
+        "Tooltip_LargeSteamCentrifuge_00");
+    public static final String Tooltip_LargeSteamCentrifuge_01 = texter(
+        "Only consumes steam at 100%% of the L/s normally required",
+        "Tooltip_LargeSteamCentrifuge_01");
+    public static final String Tooltip_LargeSteamCentrifuge_02 = texter(
+        "Processes up to 16 items at once",
+        "Tooltip_LargeSteamCentrifuge_02");
+    public static final String Tooltip_LargeSteamCentrifuge_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamCentrifuge_Casing");
+
+    public static final String NameLargeSteamHammer = texter("Large Steam Hammer", "NameLargeSteamHammer");
+    public static final String LargeSteamHammerRecipeType = texter("Hammer", "LargeSteamHammerRecipeType");
+    public static final String Tooltip_LargeSteamHammer_00 = texter(
+        "133%% faster than using single block steam machines of the same Hammer",
+        "Tooltip_LargeSteamHammer_00");
+    public static final String Tooltip_LargeSteamHammer_01 = texter(
+        "Only consumes steam at 75%% of the L/s normally required",
+        "Tooltip_LargeSteamHammer_01");
+    public static final String Tooltip_LargeSteamHammer_02 = texter(
+        "Processes up to 16 items at once",
+        "Tooltip_LargeSteamHammer_02");
+    public static final String Tooltip_LargeSteamHammer_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamHammer_Casing");
+
+    public static final String NameLargeSteamCompressor = texter("Large Steam Compressor", "NameLargeSteamCompressor");
+    public static final String LargeSteamCompressorRecipeType = texter("Compressor", "LargeSteamCompressorRecipeType");
+    public static final String Tooltip_LargeSteamCompressor_00 = texter(
+        "133%% faster than using single block steam machines of the same Compressor",
+        "Tooltip_LargeSteamCompressor_00");
+    public static final String Tooltip_LargeSteamCompressor_01 = texter(
+        "Only consumes steam at 85%% of the L/s normally required",
+        "Tooltip_LargeSteamCompressor_01");
+    public static final String Tooltip_LargeSteamCompressor_02 = texter(
+        "Processes up to 16 items at once",
+        "Tooltip_LargeSteamCompressor_02");
+    public static final String Tooltip_LargeSteamCompressor_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamCompressor_Casing");
+
+    public static final String NameLargeSteamSifter = texter("Large Steam Sifter", "NameLargeSteamSifter");
+    public static final String LargeSteamSifterRecipeType = texter("Sifter", "LargeSteamSifterRecipeType");
+    public static final String Tooltip_LargeSteamSifter_00 = texter(
+        "133%% faster than using single block steam machines of the same Sifter",
+        "Tooltip_LargeSteamSifter_00");
+    public static final String Tooltip_LargeSteamSifter_01 = texter(
+        "Only consumes steam at 80%% of the L/s normally required",
+        "Tooltip_LargeSteamSifter_01");
+    public static final String Tooltip_LargeSteamSifter_02 = texter(
+        "Processes up to 16 items at once",
+        "Tooltip_LargeSteamSifter_02");
+    public static final String Tooltip_LargeSteamSifter_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamSifter_Casing");
 
     public static final String NameLargeSteamExtractor = texter("Large Steam Extractor", "NameLargeSteamExtractor");
     public static final String LargeSteamExtractorRecipeType = texter("Extractor", "LargeSteamExtractorRecipeType");

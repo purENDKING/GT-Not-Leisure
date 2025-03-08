@@ -264,7 +264,11 @@ public enum GTNLItemList {
     UvKuangBiaoThreeGiantNuclearFusionReactor,
     UhvKuangBiaoFourGiantNuclearFusionReactor,
     UevKuangBiaoFiveGiantNuclearFusionReactor,
+    LargeSteamCentrifuge,
+    LargeSteamHammer,
+    LargeSteamCompressor,
 
+    LargeSteamSifter,
     ResourceCollectionModule,
     FuelRefiningComplex,
     GrandAssemblyLine,
@@ -313,6 +317,7 @@ public enum GTNLItemList {
     LargeSteamCircuitAssembler,
     GenerationEarthEngine,
 
+    BigSteamInputHatch,
     SuperDataAccessHatch,
     FluidManaInputHatch,
     FluidIceInputHatch,

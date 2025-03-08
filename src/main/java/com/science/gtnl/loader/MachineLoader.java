@@ -97,7 +97,11 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargePyrolyseOven;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSiftingFunnel;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSolidifier;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamCentrifuge;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamCompressor;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamHammer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamOreWasher;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamSifter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LuvKuangBiaoOneGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaAlloyBlastSmelter;
@@ -529,6 +533,22 @@ public class MachineLoader {
                 TextLocalization.NameUevKuangBiaoFiveGiantNuclearFusionReactor));
         addItemTooltip(GTNLItemList.UevKuangBiaoFiveGiantNuclearFusionReactor.get(1), AnimatedText.SNL_QYZG_SRP);
 
+        GTNLItemList.LargeSteamCentrifuge
+            .set(new LargeSteamCentrifuge(21098, "LargeSteamCentrifuge", TextLocalization.NameLargeSteamCentrifuge));
+        addItemTooltip(GTNLItemList.LargeSteamCentrifuge.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeSteamHammer
+            .set(new LargeSteamHammer(21099, "LargeSteamHammer", TextLocalization.NameLargeSteamHammer));
+        addItemTooltip(GTNLItemList.LargeSteamHammer.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeSteamCompressor
+            .set(new LargeSteamCompressor(21100, "LargeSteamCompressor", TextLocalization.NameLargeSteamCompressor));
+        addItemTooltip(GTNLItemList.LargeSteamCompressor.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeSteamSifter
+            .set(new LargeSteamSifter(21101, "LargeSteamSifter", TextLocalization.NameLargeSteamSifter));
+        addItemTooltip(GTNLItemList.LargeSteamSifter.get(1), AnimatedText.SNL_QYZG);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -791,6 +811,17 @@ public class MachineLoader {
         GTNLItemList.SuperDataAccessHatch
             .set(new SuperDataAccessHatch(22517, "Super Data Access Hatch", TextLocalization.SuperDataAccessHatch, 14));
         addItemTooltip(GTNLItemList.SuperDataAccessHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.BigSteamInputHatch.set(
+            new CustomFluidHatch(
+                FluidUtils.getFluidStack("steam", 1)
+                    .getFluid(),
+                4096000,
+                22518,
+                "Big Steam Input Hatch",
+                TextLocalization.BigSteamInputHatch,
+                1));
+        addItemTooltip(GTNLItemList.BigSteamInputHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
     }
 

@@ -17,6 +17,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
@@ -89,12 +90,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
             }
 
             if (wearingInfinityArmor) {
-                // 扣除4点生命值
                 targetPlayer.setHealth(targetPlayer.getHealth() - 4.0F);
                 return true;
             } else {
 
-                // 原有击杀逻辑
                 applyInfinityDamage(victim, attacker);
             }
         }
@@ -117,10 +116,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                     player.extinguish();
                 }
 
-                // 处理负面药水效果
                 List<Integer> badEffects = new ArrayList<>();
                 for (PotionEffect effect : player.getActivePotionEffects()) {
-                    if (isBadEffect(effect)) { // 判断是否为负面效果
+                    if (isBadEffect(effect)) {
                         badEffects.add(effect.getPotionID());
                     }
                 }
@@ -129,12 +127,11 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                     player.removePotionEffect(potionID);
                 }
 
-                // 恢复生命值和饱食度
                 player.setHealth(player.getMaxHealth());
                 player.getFoodStats()
                     .addStats(20, 20.0F);
 
-                // 防止玩家掉入虚空
+                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 200, 255));
                 if (player.posY < 0) {
                     player.setPositionAndUpdate(player.posX, 255, player.posZ);
                 }

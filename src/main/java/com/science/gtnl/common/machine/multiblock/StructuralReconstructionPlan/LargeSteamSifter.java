@@ -1,12 +1,14 @@
-package com.science.gtnl.common.machine.multiblock;
+package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -34,33 +36,33 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 
-public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtractor> implements ISurvivalConstructable {
+public class LargeSteamSifter extends SteamMultiMachineBase<LargeSteamSifter> implements ISurvivalConstructable {
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new LargeSteamExtractor(this.mName);
+        return new LargeSteamSifter(this.mName);
     }
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamExtractorRecipeType;
+        return TextLocalization.LargeSteamSifterRecipeType;
     }
 
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static IStructureDefinition<LargeSteamExtractor> STRUCTURE_DEFINITION = null;
-    private static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_extractor";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
+    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static IStructureDefinition<LargeSteamSifter> STRUCTURE_DEFINITION = null;
+    public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_sifter";
+    public static String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
-    public LargeSteamExtractor(String aName) {
+    public LargeSteamSifter(String aName) {
         super(aName);
     }
 
-    public LargeSteamExtractor(int aID, String aName, String aNameRegional) {
+    public LargeSteamSifter(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
     public static final int HORIZONTAL_OFF_SET = 2;
-    public static final int VERTICAL_OFF_SET = 3;
+    public static final int VERTICAL_OFF_SET = 5;
     public static final int DEPTH_OFF_SET = 0;
 
     @Override
@@ -74,38 +76,14 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
     }
 
     @Override
-    public IStructureDefinition<LargeSteamExtractor> getStructureDefinition() {
+    public IStructureDefinition<LargeSteamSifter> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<LargeSteamExtractor>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<LargeSteamSifter>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement(
                     'A',
-                    ofBlocksTiered(
-                        LargeSteamExtractor::getTierGearCasing,
-                        ImmutableList.of(Pair.of(sBlockCasings2, 2), Pair.of(sBlockCasings2, 3)),
-                        -1,
-                        (t, m) -> t.tierGearCasing = m,
-                        t -> t.tierGearCasing))
-                .addElement(
-                    'B',
-                    ofBlocksTiered(
-                        LargeSteamExtractor::getTierPipeCasing,
-                        ImmutableList.of(Pair.of(sBlockCasings2, 12), Pair.of(sBlockCasings2, 13)),
-                        -1,
-                        (t, m) -> t.tierPipeCasing = m,
-                        t -> t.tierPipeCasing))
-                .addElement(
-                    'C',
-                    ofBlocksTiered(
-                        LargeSteamExtractor::getTierFrameCasing,
-                        ImmutableList.of(Pair.of(sBlockFrames, 300), Pair.of(sBlockFrames, 305)),
-                        -1,
-                        (t, m) -> t.tierFrameCasing = m,
-                        t -> t.tierFrameCasing))
-                .addElement(
-                    'D',
                     ofChain(
-                        buildSteamBigInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
+                        buildSteamBigInput(LargeSteamSifter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .buildAndChain(
                                 onElementPass(
@@ -113,12 +91,12 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
                                     withChannel(
                                         "tier",
                                         ofBlocksTiered(
-                                            LargeSteamExtractor::getTierMachineCasing,
+                                            LargeSteamSifter::getTierMachineCasing,
                                             ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
                                             -1,
                                             (t, m) -> t.tierMachineCasing = m,
                                             t -> t.tierMachineCasing)))),
-                        buildSteamInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
+                        buildSteamInput(LargeSteamSifter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .buildAndChain(
                                 onElementPass(
@@ -126,30 +104,56 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
                                     withChannel(
                                         "tier",
                                         ofBlocksTiered(
-                                            LargeSteamExtractor::getTierMachineCasing,
+                                            LargeSteamSifter::getTierMachineCasing,
                                             ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
                                             -1,
                                             (t, m) -> t.tierMachineCasing = m,
                                             t -> t.tierMachineCasing)))),
-                        buildHatchAdder(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
+                        buildHatchAdder(LargeSteamSifter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
                                 OutputBus,
-                                InputHatch)
+                                InputHatch,
+                                OutputHatch)
                             .buildAndChain(
                                 onElementPass(
                                     x -> ++x.tCountCasing,
                                     withChannel(
                                         "tier",
                                         ofBlocksTiered(
-                                            LargeSteamExtractor::getTierMachineCasing,
+                                            LargeSteamSifter::getTierMachineCasing,
                                             ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
                                             -1,
                                             (t, m) -> t.tierMachineCasing = m,
                                             t -> t.tierMachineCasing))))))
+                .addElement(
+                    'B',
+                    ofBlocksTiered(
+                        LargeSteamSifter::getTierGearCasing,
+                        ImmutableList.of(Pair.of(sBlockCasings2, 2), Pair.of(sBlockCasings2, 3)),
+                        -1,
+                        (t, m) -> t.tierGearCasing = m,
+                        t -> t.tierGearCasing))
+                .addElement(
+                    'C',
+                    ofBlocksTiered(
+                        LargeSteamSifter::getTierFrameCasing,
+                        ImmutableList.of(Pair.of(sBlockFrames, 300), Pair.of(sBlockFrames, 305)),
+                        -1,
+                        (t, m) -> t.tierFrameCasing = m,
+                        t -> t.tierFrameCasing))
+                .addElement(
+                    'D',
+                    ofBlocksTiered(
+                        LargeSteamSifter::getTierPlatedCasing,
+                        ImmutableList.of(Pair.of(blockCustomMachineCasings, 0), Pair.of(sBlockCasings2, 0)),
+                        -1,
+                        (t, m) -> t.tierMaterialBlock = m,
+                        t -> t.tierMaterialBlock))
+                .addElement('E', ofBlockAnyMeta(Blocks.glass))
                 .build();
 
         }
@@ -184,27 +188,27 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        tierPipeCasing = -1;
+        tierMaterialBlock = -1;
         tierMachineCasing = -1;
         tierFrameCasing = -1;
         tierGearCasing = -1;
         tCountCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tierPipeCasing < 0 && tierMachineCasing < 0 && tierFrameCasing < 0 && tierGearCasing < 0) return false;
-        if (tierPipeCasing == 1 && tierMachineCasing == 1
+        if (tierMaterialBlock < 0 && tierMachineCasing < 0 && tierFrameCasing < 0 && tierGearCasing < 0) return false;
+        if (tierMaterialBlock == 1 && tierMachineCasing == 1
             && tierFrameCasing == 1
             && tierGearCasing == 1
-            && tCountCasing >= 55
+            && tCountCasing >= 45
             && checkHatches()) {
             tierMachine = 1;
             getCasingTextureID();
             updateHatchTexture();
             return true;
         }
-        if (tierPipeCasing == 2 && tierMachineCasing == 2
+        if (tierMaterialBlock == 2 && tierMachineCasing == 2
             && tierFrameCasing == 2
             && tierGearCasing == 2
-            && tCountCasing >= 55
+            && tCountCasing >= 45
             && checkHatches()) {
             tierMachine = 2;
             getCasingTextureID();
@@ -228,7 +232,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.extractorRecipes;
+        return RecipeMaps.sifterRecipes;
     }
 
     @Override
@@ -248,7 +252,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(0.9 * tierMachine)
+                    .setEUtDiscount(0.8 * tierMachine)
                     .setSpeedBoost(0.75 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
@@ -256,23 +260,25 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
 
     @Override
     public int getTierRecipes() {
-        return 2;
+        return 3;
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamExtractorRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_02)
+        tt.addMachineType(TextLocalization.LargeSteamSifterRecipeType)
+            .addInfo(TextLocalization.Tooltip_LargeSteamSifter_00)
+            .addInfo(TextLocalization.Tooltip_LargeSteamSifter_01)
+            .addInfo(TextLocalization.Tooltip_LargeSteamSifter_02)
             .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(5, 5, 5, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamExtractor_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamExtractor_Casing, 1)
+            .beginStructureBlock(5, 7, 5, false)
+            .addInputBus(TextLocalization.Tooltip_LargeSteamSifter_Casing, 1)
+            .addOutputBus(TextLocalization.Tooltip_LargeSteamSifter_Casing, 1)
+            .addInputHatch(TextLocalization.Tooltip_LargeSteamSifter_Casing, 1)
+            .addOutputHatch(TextLocalization.Tooltip_LargeSteamSifter_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
