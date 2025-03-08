@@ -1396,6 +1396,12 @@ public class TextLocalization {
 
     public static final String NameLargeForming = texter("Large Bender", "NameLargeForming");
     public static final String LargeFormingRecipeType = texter("Forming Press", "LargeFormingRecipeType");
+    public static final String Tooltip_LargeForming_00 = texter(
+        "500%% faster than using machines of the same voltage",
+        "Tooltip_LargeForming_00");
+    public static final String Tooltip_LargeForming_01 = texter(
+        "Only uses 80%% of the EU/t normally required",
+        "Tooltip_LargeForming_01");
     public static final String Tooltip_LargeForming_Casing = texter(
         "Any Inconel Reinforced Casing",
         "Tooltip_LargeForming_Casing");

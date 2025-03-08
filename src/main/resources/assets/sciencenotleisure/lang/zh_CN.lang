@@ -1195,6 +1195,8 @@ Tooltip_LargeArcSmelter_Casing=任意冶炼炉机械方块
 
 NameLargeForming=大型冲压机
 LargeFormingRecipeType=冲压机床
+Tooltip_LargeForming_00=比相同电压的机器快500%%
+Tooltip_LargeForming_01=只需要使用配方要求功率的80%%
 Tooltip_LargeForming_Casing=任意强化镍铬机械方块
 
 NameLargeElectrolyzer=大型电解槽
