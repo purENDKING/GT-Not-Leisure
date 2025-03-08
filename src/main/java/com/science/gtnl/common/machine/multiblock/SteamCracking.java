@@ -84,30 +84,10 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
                     ofChain(
                         buildSteamBigInput(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            SteamCracking::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildSteamInput(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            SteamCracking::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildHatchAdder(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
@@ -175,6 +155,7 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        tierMachine = 0;
         tierFireboxCasing = -1;
         tierMachineCasing = -1;
         tierPlatedCasing = -1;

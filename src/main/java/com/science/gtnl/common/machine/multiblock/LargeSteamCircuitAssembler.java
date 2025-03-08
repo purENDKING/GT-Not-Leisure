@@ -86,30 +86,10 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
                     ofChain(
                         buildSteamBigInput(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamCircuitAssembler::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildSteamInput(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamCircuitAssembler::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildHatchAdder(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
@@ -172,6 +152,7 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        tierMachine = 0;
         tierPipeCasing = -1;
         tierMachineCasing = -1;
         tCountCasing = 0;

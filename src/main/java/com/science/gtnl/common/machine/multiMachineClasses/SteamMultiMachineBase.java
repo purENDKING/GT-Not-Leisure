@@ -67,7 +67,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     protected int tierGearCasing = -1;
     protected int tierFrameCasing = -1;
     protected int tierMachineCasing = -1;
-    protected int tierMachine = 1;
+    protected int tierMachine = 0;
     protected int tCountCasing = 0;
     protected boolean isBroken = true;
     public ArrayList<CustomFluidHatch> mSteamBigInputFluids = new ArrayList<>();
@@ -162,7 +162,17 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     protected int getCasingTextureID() {
-        if (tierMachine == 2) return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        if (tierAdvancedCasing == 2 || tierBrickCasing == 2
+            || tierPlatedCasing == 2
+            || tierPipeCasing == 2
+            || tierFireboxCasing == 2
+            || tierMaterialBlock == 2
+            || tierGearCasing == 2
+            || tierFrameCasing == 2
+            || tierMachineCasing == 2
+            || tierMachine == 2) {
+            return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
+        }
         return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
     }
 

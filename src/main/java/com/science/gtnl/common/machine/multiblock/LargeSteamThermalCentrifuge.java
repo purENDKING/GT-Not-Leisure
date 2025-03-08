@@ -85,30 +85,10 @@ public class LargeSteamThermalCentrifuge extends SteamMultiMachineBase<LargeStea
                     ofChain(
                         buildSteamBigInput(LargeSteamThermalCentrifuge.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamThermalCentrifuge::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildSteamInput(LargeSteamThermalCentrifuge.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamThermalCentrifuge::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildHatchAdder(LargeSteamThermalCentrifuge.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
@@ -184,6 +164,7 @@ public class LargeSteamThermalCentrifuge extends SteamMultiMachineBase<LargeStea
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        tierMachine = 0;
         tierPipeCasing = -1;
         tierMachineCasing = -1;
         tierFrameCasing = -1;

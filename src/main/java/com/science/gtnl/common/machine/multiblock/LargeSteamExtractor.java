@@ -107,30 +107,10 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
                     ofChain(
                         buildSteamBigInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamExtractor::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildSteamInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamExtractor::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildHatchAdder(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
@@ -184,6 +164,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        tierMachine = 0;
         tierPipeCasing = -1;
         tierMachineCasing = -1;
         tierFrameCasing = -1;

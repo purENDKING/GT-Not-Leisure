@@ -84,30 +84,10 @@ public class LargeSteamAlloySmelter extends SteamMultiMachineBase<LargeSteamAllo
                     ofChain(
                         buildSteamBigInput(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamAlloySmelter::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildSteamInput(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
                             .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    x -> ++x.tCountCasing,
-                                    withChannel(
-                                        "tier",
-                                        ofBlocksTiered(
-                                            LargeSteamAlloySmelter::getTierMachineCasing,
-                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                                            -1,
-                                            (t, m) -> t.tierMachineCasing = m,
-                                            t -> t.tierMachineCasing)))),
+                            .build(),
                         buildHatchAdder(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
@@ -168,6 +148,7 @@ public class LargeSteamAlloySmelter extends SteamMultiMachineBase<LargeSteamAllo
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        tierMachine = 0;
         tierMachineCasing = -1;
         tierFireboxCasing = -1;
         tCountCasing = 0;
