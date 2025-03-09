@@ -217,7 +217,7 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.5 * tierMachine)
-                    .setSpeedBoost(0.5 / tierMachine);
+                    .setSpeedBoost(0.1 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
@@ -277,11 +277,11 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
     @Override
     public int getMaxParallelRecipes() {
         if (tierMachine == 1) {
-            return 64;
-        } else if (tierMachine == 2) {
             return 128;
+        } else if (tierMachine == 2) {
+            return 256;
         }
-        return 64;
+        return 128;
     }
 
     @Override
