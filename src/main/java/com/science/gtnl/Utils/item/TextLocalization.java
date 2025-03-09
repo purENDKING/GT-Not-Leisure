@@ -403,14 +403,29 @@ public class TextLocalization {
         "Only one energy hatch can be installed!",
         "Tooltip_GrandAssemblyLine_04");
     public static final String Tooltip_GrandAssemblyLine_05 = texter(
-        "If the power of a certain formula is greater than the maximum power of the energy warehouse, it will be skipped directly",
+        "Not compatible with laser energy hatch!",
         "Tooltip_GrandAssemblyLine_05");
     public static final String Tooltip_GrandAssemblyLine_06 = texter(
-        "If the total power of the formula is greater than the power of the energy warehouse, the total power will be halved and the time will be doubled",
+        "If the power of a certain formula is greater than the maximum power of the energy warehouse, it will be skipped directly",
         "Tooltip_GrandAssemblyLine_06");
     public static final String Tooltip_GrandAssemblyLine_07 = texter(
-        "If the power of the energy warehouse is greater than 4 times the total power of the formula, perform a lossy overclocking operation",
+        "If the total power of the formula is greater than the power of the energy warehouse, the total power will be halved and the time will be doubled",
         "Tooltip_GrandAssemblyLine_07");
+    public static final String Tooltip_GrandAssemblyLine_08 = texter(
+        "If the power of the energy warehouse is greater than 4 times the total power of the formula, perform a lossy overclocking operation",
+        "Tooltip_GrandAssemblyLine_08");
+    public static final String Tooltip_GrandAssemblyLine_09 = texter(
+        "Inserting programming circuits to limit the number of overclocking cycles allowed",
+        "Tooltip_GrandAssemblyLine_09");
+    public static final String Tooltip_GrandAssemblyLine_10 = texter(
+        "Install UIV and above parallel control cores to lift energy storage restrictions",
+        "Tooltip_GrandAssemblyLine_10");
+    public static final String Tooltip_GrandAssemblyLine_11 = texter(
+        "Install UMV and above parallel control cores to unlock §cperfect overclock§7",
+        "Tooltip_GrandAssemblyLine_11");
+    public static final String Tooltip_GrandAssemblyLine_12 = texter(
+        "Installing UXV and above parallel control cores will provide an additional 500%% power reduction and 2000%% acceleration (multiplicatively stacked)",
+        "Tooltip_GrandAssemblyLine_12");
     public static final String Tooltip_GrandAssemblyLine_Casing = texter(
         "Ang Advanced Computer Casing Or Reinforced Glass",
         "Tooltip_GrandAssemblyLine_Casing");

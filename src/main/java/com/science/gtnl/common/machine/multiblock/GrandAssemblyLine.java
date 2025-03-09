@@ -71,6 +71,7 @@ import gregtech.api.util.OverclockCalculator;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.IDualInputInventory;
 import tectech.thing.casing.BlockGTCasingsTT;
+import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssemblyLine>
     implements ISurvivalConstructable {
@@ -119,6 +120,11 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_05)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_06)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_07)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_08)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_09)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_10)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_11)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_12)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
@@ -210,7 +216,15 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         long totalNeedEUt = 0; // 累加的总功率
         int totalMaxProgresstime = 0; // 累加的最大时间
         int powerParallel = 0;
+        int CircuitOC = -1; // 电路板限制超频次数
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
+
+        for (ItemStack item : getAllStoredInputs()) {
+            if (item.getItem() == ItemList.Circuit_Integrated.getItem()) {
+                CircuitOC = item.getItemDamage();
+                break;
+            }
+        }
 
         // 遍历每个输入仓
         for (IDualInputInventory inventory : inputInventories) {
@@ -263,7 +277,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 ItemStack outputItem = recipe.mOutput.copy();
 
                 // 计算超频次数
-                long overclockCount = 0;
+                int overclockCount = 0;
                 long energyRatio = energyEU / recipe.mEUt; // EnergyEU 与 recipe.mEUt 的比值
                 long threshold = 1; // 初始阈值是 4^0 = 1
 
@@ -273,15 +287,19 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     threshold *= 4; // 阈值更新为 4^n
                 }
 
+                if (CircuitOC >= 0) {
+                    overclockCount = Math.min(overclockCount, CircuitOC);
+                }
+
                 // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
                 long adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount);
-                int adjustedTime = recipe.mDuration / (int) Math.pow(2, overclockCount);
+                int adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 12) ? 4 : 2, overclockCount);
 
                 // 检查功耗是否超过 int 的最大值或时间是否小于 1
                 while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
                     overclockCount--; // 减少超频次数
                     adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
-                    adjustedTime = recipe.mDuration / (int) Math.pow(2, overclockCount); // 重新计算时间
+                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 12) ? 4 : 2, overclockCount); // 重新计算时间
                 }
 
                 // 确保时间最小为 1
@@ -403,7 +421,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             }
 
             // 调整功率和时间以适配能源仓输入功率
-            long needEUt = (long) needEU / needTime;
+            long needEUt = needEU / needTime;
 
             while (needEU / needTime > energyEU) {
                 needEU /= 2;
@@ -424,7 +442,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                 // 更新 needEUt 和 needTime
                 needEUt *= 4;
-                needTime /= 2;
+                needTime /= (ParallelTier >= 12) ? 4 : 2;
             }
 
             // 累加总功率和最大时间
@@ -770,18 +788,25 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         useSingleAmp = true;
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        energyHatchTier = checkEnergyHatchTier();
+        ParallelTier = getParallelTier(aStack);
+
+        if (ParallelTier < 12) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
+            }
+            if (mEnergyHatches.size() > 1) return false;
+        }
 
         if (!mDualInputHatches.isEmpty()) {
             isDualInputHatch = true;
             if (!mInputBusses.isEmpty() || !mInputHatches.isEmpty()) return false;
         }
 
-        useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
-        energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
-        return mEnergyHatches.size() <= 1 && mDataAccessHatches.size() <= 1
-            && mMaintenanceHatches.size() <= 1
-            && mCasing >= 595;
+        return mDataAccessHatches.size() <= 1 && mMaintenanceHatches.size() <= 1 && mCasing >= 590;
     }
 
     @Override
@@ -964,8 +989,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.6 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) * ((ParallelTier >= 13) ? 0.2 : 1))
+                    .setSpeedBoost((0.6 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 0.05 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
