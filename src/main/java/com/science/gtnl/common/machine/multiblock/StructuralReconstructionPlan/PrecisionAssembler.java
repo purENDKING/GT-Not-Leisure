@@ -57,6 +57,7 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.common.tileentities.machines.IDualInputHatch;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
@@ -233,6 +234,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         for (MTEHatch h : mMaintenanceHatches) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mEnergyHatches) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mExoticEnergyHatches) h.updateTexture(getCasingTextureID());
+        for (IDualInputHatch h : mDualInputHatches) h.updateTexture(getCasingTextureID());
     }
 
     @Override
