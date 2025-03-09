@@ -46,6 +46,7 @@ import com.science.gtnl.common.machine.multiblock.LargeSteamCrusher;
 import com.science.gtnl.common.machine.multiblock.LargeSteamExtractor;
 import com.science.gtnl.common.machine.multiblock.LargeSteamExtruder;
 import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
+import com.science.gtnl.common.machine.multiblock.LargeSteamSifter;
 import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
 import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
@@ -101,7 +102,6 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamCompressor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamHammer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamOreWasher;
-import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamSifter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LuvKuangBiaoOneGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.MegaAlloyBlastSmelter;

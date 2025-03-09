@@ -25,15 +25,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
 import com.science.gtnl.common.hatch.CustomFluidHatch;
 
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.Textures;
-import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -42,6 +39,7 @@ import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
+import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.HatchElementBuilder;
 import gregtech.common.blocks.BlockCasings1;
@@ -139,15 +137,13 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     @Override
-    public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
-        final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
-        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
-            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
-        if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id),
-                aActive ? getFrontOverlayActive() : getFrontOverlay() };
-        }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
+    public GTRenderedTexture getFrontOverlay() {
+        return null;
+    }
+
+    @Override
+    public GTRenderedTexture getFrontOverlayActive() {
+        return null;
     }
 
     protected void updateHatchTexture() {
@@ -259,7 +255,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
 
     @Override
     public boolean addToMachineList(final IGregTechTileEntity aTileEntity, final int aBaseCasingIndex) {
-        super.addToMachineList(aTileEntity, aBaseCasingIndex);
+        boolean aDidAdd = super.addToMachineList(aTileEntity, aBaseCasingIndex);
+
         if (aTileEntity == null) {
             log("Invalid IGregTechTileEntity");
             return false;
@@ -270,12 +267,11 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             return false;
         }
 
-        boolean aDidAdd = false;
-
         if (aMetaTileEntity instanceof CustomFluidHatch) {
             log("Adding Steam Big Input Hatch");
             aDidAdd = addToMachineListInternal(mSteamBigInputFluids, aMetaTileEntity, aBaseCasingIndex);
         }
+
         return aDidAdd;
     }
 

@@ -4,29 +4,24 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofHatchAdder;
-import static gregtech.api.util.GTUtility.filterValidMTEs;
-import static gregtech.api.util.GTUtility.validMTEList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.SoundResource;
@@ -35,33 +30,22 @@ import gregtech.api.enums.VoidingMode;
 import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.fluid.IFluidStore;
-import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.metatileentity.implementations.MTEHatchOutput;
-import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
-import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.blocks.BlockCasings3;
-import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
-import gregtech.common.tileentities.machines.MTEHatchInputBusME;
-import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTESteamMultiBase;
 
-public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDistillationTower>
+public class PrimitiveDistillationTower extends SteamMultiMachineBase<PrimitiveDistillationTower>
     implements ISurvivalConstructable {
 
     public static final int CASING_INDEX = ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
@@ -73,7 +57,6 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
 
     public final List<List<MTEHatchOutput>> mOutputHatchesByLayer = new ArrayList<>();
     public int mHeight;
-    public int mCasing;
     public boolean mTopLayerFound;
 
     public PrimitiveDistillationTower(int aID, String aName, String aNameRegional) {
@@ -84,16 +67,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
         super(aName);
     }
 
-    public void updateHatchTexture() {
-        for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
-    }
-
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
     }
@@ -106,16 +80,6 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     @Override
     public boolean supportsVoidProtection() {
         return false;
-    }
-
-    @Override
-    public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
-        final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
-        if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
-                aActive ? getFrontOverlayActive() : getFrontOverlay() };
-        }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
     @Override
@@ -142,13 +106,21 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     }
 
     @Override
-    public GTRenderedTexture getFrontOverlay() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER);
-    }
-
-    @Override
-    public GTRenderedTexture getFrontOverlayActive() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER_ACTIVE);
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+        if (side == aFacing) {
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER_ACTIVE)
+                    .extFacing()
+                    .build() };
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_FRONT_DISTILLATION_TOWER)
+                    .extFacing()
+                    .build() };
+        }
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
     @Override
@@ -195,7 +167,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     }
 
     public void onCasingFound() {
-        mCasing++;
+        tCountCasing++;
     }
 
     public void onTopLayerFound(boolean aIsCasing) {
@@ -224,16 +196,6 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     }
 
     @Override
-    protected IAlignmentLimits getInitialAlignmentLimits() {
-        return (d, r, f) -> d.offsetY == 0 && r.isNotRotated() && !f.isVerticallyFliped();
-    }
-
-    @Override
-    public boolean isRotationChangeAllowed() {
-        return false;
-    }
-
-    @Override
     public IStructureDefinition<PrimitiveDistillationTower> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
             IHatchElement<PrimitiveDistillationTower> layeredOutputHatch = OutputHatch
@@ -247,6 +209,10 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamBigInput(PrimitiveDistillationTower.class)
+                            .casingIndex(((BlockCasings3) GregTechAPI.sBlockCasings3).getTextureIndex(14))
+                            .dot(1)
+                            .build(),
                         buildSteamInput(PrimitiveDistillationTower.class)
                             .casingIndex(((BlockCasings3) GregTechAPI.sBlockCasings3).getTextureIndex(14))
                             .dot(1)
@@ -302,7 +268,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
         mOutputHatchesByLayer.forEach(List::clear);
         mHeight = 1;
         mTopLayerFound = false;
-        mCasing = 0;
+        tCountCasing = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_BASE, 1, 0, 0)) return false;
 
@@ -319,12 +285,7 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
         }
         updateHatchTexture();
 
-        return mCasing >= 7 * (mHeight + 1) - 5 && mHeight == 6;
-    }
-
-    @Override
-    public int getMaxEfficiency(ItemStack aStack) {
-        return 10000;
+        return tCountCasing >= 7 * (mHeight + 1) - 5 && mHeight == 6;
     }
 
     @Override
@@ -385,158 +346,5 @@ public class PrimitiveDistillationTower extends MTESteamMultiBase<PrimitiveDisti
     @Override
     public SoundResource getProcessStartSound() {
         return SoundResource.GT_MACHINES_DISTILLERY_LOOP;
-    }
-
-    @Override
-    public ArrayList<ItemStack> getStoredInputs() {
-        ArrayList<ItemStack> rList = new ArrayList<>();
-        Map<GTUtility.ItemId, ItemStack> inputsFromME = new HashMap<>();
-        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
-            tHatch.mRecipeMap = getRecipeMap();
-            for (int i = tHatch.getBaseMetaTileEntity()
-                .getSizeInventory() - 1; i >= 0; i--) {
-                if (tHatch.getBaseMetaTileEntity()
-                    .getStackInSlot(i) != null) {
-                    rList.add(
-                        tHatch.getBaseMetaTileEntity()
-                            .getStackInSlot(i));
-                }
-            }
-        }
-        for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) {
-            if (tHatch instanceof MTEHatchCraftingInputME) {
-                continue;
-            }
-            tHatch.mRecipeMap = getRecipeMap();
-            IGregTechTileEntity tileEntity = tHatch.getBaseMetaTileEntity();
-            boolean isMEBus = tHatch instanceof MTEHatchInputBusME;
-            for (int i = tileEntity.getSizeInventory() - 1; i >= 0; i--) {
-                ItemStack itemStack = tileEntity.getStackInSlot(i);
-                if (itemStack != null) {
-                    if (isMEBus) {
-                        inputsFromME.put(GTUtility.ItemId.createNoCopy(itemStack), itemStack);
-                    } else {
-                        rList.add(itemStack);
-                    }
-                }
-            }
-        }
-
-        ItemStack stackInSlot1 = getStackInSlot(1);
-        if (stackInSlot1 != null && stackInSlot1.getUnlocalizedName()
-            .startsWith("gt.integrated_circuit")) rList.add(stackInSlot1);
-        if (!inputsFromME.isEmpty()) {
-            rList.addAll(inputsFromME.values());
-        }
-        return rList;
-    }
-
-    @Override
-    public ArrayList<ItemStack> getStoredOutputs() {
-        ArrayList<ItemStack> rList = new ArrayList<>();
-
-        if (mOutputBusses != null && !mOutputBusses.isEmpty()) {
-            for (MTEHatchOutputBus tHatch : validMTEList(mOutputBusses)) {
-                IGregTechTileEntity baseMetaTileEntity = tHatch.getBaseMetaTileEntity();
-                for (int i = baseMetaTileEntity.getSizeInventory() - 1; i >= 0; i--) {
-                    rList.add(baseMetaTileEntity.getStackInSlot(i));
-                }
-            }
-        }
-
-        if (mSteamOutputs != null && !mSteamOutputs.isEmpty()) {
-            for (MTEHatchSteamBusOutput tHatch : validMTEList(mSteamOutputs)) {
-                for (int i = tHatch.getBaseMetaTileEntity()
-                    .getSizeInventory() - 1; i >= 0; i--) {
-                    rList.add(
-                        tHatch.getBaseMetaTileEntity()
-                            .getStackInSlot(i));
-                }
-            }
-        }
-
-        return rList;
-    }
-
-    @Override
-    public List<ItemStack> getItemOutputSlots(ItemStack[] toOutput) {
-        List<ItemStack> ret = new ArrayList<>();
-
-        if (mOutputBusses != null && !mOutputBusses.isEmpty()) {
-            for (final MTEHatch tBus : validMTEList(mOutputBusses)) {
-                if (!(tBus instanceof MTEHatchOutputBusME)) {
-                    final IInventory tBusInv = tBus.getBaseMetaTileEntity();
-                    for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
-                        final ItemStack stackInSlot = tBus.getStackInSlot(i);
-
-                        if (stackInSlot == null && tBus instanceof IItemLockable lockable && lockable.isLocked()) {
-                            assert lockable.getLockedItem() != null;
-                            ItemStack fakeItemStack = lockable.getLockedItem()
-                                .copy();
-                            fakeItemStack.stackSize = 0;
-                            ret.add(fakeItemStack);
-                        } else {
-                            ret.add(stackInSlot);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (mSteamOutputs != null && !mSteamOutputs.isEmpty()) {
-            for (final MTEHatch tBus : validMTEList(mSteamOutputs)) {
-                final IInventory tBusInv = tBus.getBaseMetaTileEntity();
-                for (int i = 0; i < tBusInv.getSizeInventory(); i++) {
-                    ret.add(tBus.getStackInSlot(i));
-                }
-            }
-        }
-
-        return ret;
-    }
-
-    private boolean dumpItem(List<MTEHatchOutputBus> outputBuses, ItemStack itemStack, boolean restrictiveBusesOnly) {
-        for (MTEHatchOutputBus outputBus : outputBuses) {
-            if (restrictiveBusesOnly && !outputBus.isLocked()) {
-                continue;
-            }
-
-            if (outputBus.storeAll(itemStack)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean addOutput(ItemStack aStack) {
-        if (GTUtility.isStackInvalid(aStack)) return false;
-        aStack = GTUtility.copy(aStack);
-        boolean outputSuccess = true;
-        final List<MTEHatchOutputBus> filteredBuses = filterValidMTEs(mOutputBusses);
-        if (dumpItem(filteredBuses, aStack, true) || dumpItem(filteredBuses, aStack, false)) {
-            return true;
-        }
-
-        while (outputSuccess && aStack.stackSize > 0) {
-            outputSuccess = false;
-            ItemStack single = aStack.splitStack(1);
-            for (MTEHatchSteamBusOutput tHatch : validMTEList(mSteamOutputs)) {
-                if (!outputSuccess) {
-                    for (int i = tHatch.getSizeInventory() - 1; i >= 0 && !outputSuccess; i--) {
-                        if (tHatch.getBaseMetaTileEntity()
-                            .addStackToSlot(i, single)) outputSuccess = true;
-                    }
-                }
-            }
-            for (MTEHatchOutput tHatch : validMTEList(mOutputHatches)) {
-                if (!outputSuccess && tHatch.outputsItems()) {
-                    if (tHatch.getBaseMetaTileEntity()
-                        .addStackToSlot(1, single)) outputSuccess = true;
-                }
-            }
-        }
-        return outputSuccess;
     }
 }

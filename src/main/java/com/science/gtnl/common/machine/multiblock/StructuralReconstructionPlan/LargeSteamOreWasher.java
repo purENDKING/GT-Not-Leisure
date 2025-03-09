@@ -13,6 +13,7 @@ import javax.annotation.Nonnull;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -28,20 +29,24 @@ import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUITextures;
+import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.common.blocks.BlockCasings1;
+import gregtech.common.blocks.BlockCasings2;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 
 public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWasher> implements ISurvivalConstructable {
@@ -90,13 +95,21 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
     public static final int DEPTH_OFF_SET = 0;
 
     @Override
-    protected GTRenderedTexture getFrontOverlay() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER);
-    }
-
-    @Override
-    protected GTRenderedTexture getFrontOverlayActive() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER_ACTIVE);
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+            : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+        if (side == aFacing) {
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id), TextureFactory.builder()
+                .addIcon(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER_ACTIVE)
+                .extFacing()
+                .build() };
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id), TextureFactory.builder()
+                .addIcon(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER)
+                .extFacing()
+                .build() };
+        }
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
     @Override
