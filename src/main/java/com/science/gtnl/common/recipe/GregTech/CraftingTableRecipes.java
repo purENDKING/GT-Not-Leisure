@@ -316,5 +316,32 @@ public class CraftingTableRecipes implements IRecipePool {
             new Object[] { "ABA", "CDC", "ABA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1L),
                 'B', GTOreDictUnificator.get(OrePrefixes.pipeHuge, Materials.Bronze, 1L), 'C',
                 GTNLItemList.PrecisionSteamMechanism.get(1), 'D', GregtechItemList.Hatch_Input_Steam.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamCentrifuge.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                ItemList.Casing_Gearbox_Bronze.get(1), 'C', GTNLItemList.PrecisionSteamMechanism.get(1), 'D',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Bronze, 1L), 'E',
+                GregtechItemList.Controller_SteamCentrifugeMulti.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamHammer.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                new ItemStack(Blocks.anvil, 1), 'C', new ItemStack(Blocks.piston, 1), 'D',
+                GTNLItemList.PrecisionSteamMechanism.get(1), 'E',
+                GregtechItemList.Controller_SteamForgeHammerMulti.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamCompressor.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                new ItemStack(Blocks.anvil, 1), 'C', ItemList.Casing_Gearbox_Bronze.get(1), 'D',
+                MaterialsAlloy.TUMBAGA.getFrameBox(1), 'E', GregtechItemList.Controller_SteamCompressorMulti.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamSifter.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Bronze, 1L), 'C',
+                ItemList.Casing_Gearbox_Bronze.get(1), 'D', ItemList.Component_Filter.get(1), 'E',
+                MaterialsAlloy.TUMBAGA.getFrameBox(1) });
     }
 }
