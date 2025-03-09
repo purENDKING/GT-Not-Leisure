@@ -180,7 +180,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
         // 第一步：初始化参数
         int limit = 128; // limit 取批处理时间 128 tick
-        long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 16); // 能源仓最大输入功率
+        long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
 
         // 构建输入仓列表
@@ -410,7 +410,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 needTime *= 2;
             }
 
-            while ((needEU / needTime) * 16 < energyEU) {
+            while ((needEU / needTime) * 8 < energyEU) {
                 // 检查 needEUt 是否超过 Long.MAX_VALUE
                 if (needEUt > Long.MAX_VALUE / 4) {
                     needEUt = Long.MAX_VALUE;
