@@ -486,7 +486,7 @@ public class TextLocalization {
         "Simple Washer / Washer",
         "LargeSteamOreWasherRecipeType");
     public static final String Tooltip_LargeSteamOreWasher_00 = texter(
-        "167%% faster than using single block steam machines of the same extractor",
+        "200%% faster than using single block steam machines of the same extractor",
         "Tooltip_LargeSteamOreWasher_00");
     public static final String Tooltip_LargeSteamOreWasher_01 = texter(
         "Only consumes steam at 60%% of the L/s normally required",
