@@ -18,6 +18,8 @@ HatchCustomFluid_01=容量:
 HatchCustomFluid_02=允许的流体: 
 HatchCustomFluid_03=空
 
+BigSteamInputHatch=大型蒸汽仓
+
 SuperCraftingInputHatchME=超级样板输入总成(ME)
 SuperCraftingInputBusME=超级样板输入总线(ME)
 Tooltip_SuperCraftingInputHatchME_00=为多方块机器输入物品
@@ -1111,9 +1113,14 @@ Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。
 Tooltip_GrandAssemblyLine_02=不再需要按顺序输入物品
 Tooltip_GrandAssemblyLine_03=机器可进行跨配方处理！
 Tooltip_GrandAssemblyLine_04=只能安装一个能源仓！
-Tooltip_GrandAssemblyLine_05=如果某一配方功率大于能源仓最大功率，将会直接跳过
-Tooltip_GrandAssemblyLine_06=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
-Tooltip_GrandAssemblyLine_07=如果能源仓功率大于配方总功率 * 4，则执行有损超频
+Tooltip_GrandAssemblyLine_05=不支持激光仓！
+Tooltip_GrandAssemblyLine_06=如果某一配方功率大于能源仓最大功率，将会直接跳过
+Tooltip_GrandAssemblyLine_07=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
+Tooltip_GrandAssemblyLine_08=如果能源仓功率大于配方总功率 * 4，则执行有损超频
+Tooltip_GrandAssemblyLine_09=放入编程电路来限制可超频次数
+Tooltip_GrandAssemblyLine_10=安装UIV及以上的并行控制核心解除能源仓限制
+Tooltip_GrandAssemblyLine_11=安装UMV及以上的并行控制核心解锁§c无损超频§7
+Tooltip_GrandAssemblyLine_12=安装UXV及以上的并行控制核心将额外提供500%%的耗电减免和2000%%的加速(乘算叠加)
 Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
 
 NamePrecisionAssembler=精密组装机
@@ -1121,7 +1128,7 @@ PreciseAssemblerRecipeType=组装机 / 精密组装机
 PreciseAssembler_Mode_0=组装机
 PreciseAssembler_Mode_1=精密组装机
 Tooltip_PreciseAssembler_00=机械方块等级决定了能源仓最大等级, UHV机械方块解锁所有等级
-Tooltip_PreciseAssembler_01=并行数: 2 ^ 玻璃等级
+Tooltip_PreciseAssembler_01=并行数: 2 ^ 玻璃等级 + 精密电子单元机械方块等级 * 64
 Tooltip_PreciseAssembler_02=当精密电子单元机械方块等级为3时，开启§c无损超频§7
 Tooltip_PreciseAssembler_Casing=任意精密机械方块
 
@@ -1195,6 +1202,8 @@ Tooltip_LargeArcSmelter_Casing=任意冶炼炉机械方块
 
 NameLargeForming=大型冲压机
 LargeFormingRecipeType=冲压机床
+Tooltip_LargeForming_00=比相同电压的机器快500%%
+Tooltip_LargeForming_01=只需要使用配方要求功率的80%%
 Tooltip_LargeForming_Casing=任意强化镍铬机械方块
 
 NameLargeElectrolyzer=大型电解槽
@@ -1325,6 +1334,34 @@ Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
 Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械方块
 
+NameLargeSteamCentrifuge=大型蒸汽离心机
+LargeSteamCentrifugeRecipeType=离心机
+Tooltip_LargeSteamCentrifuge_00=比同等级的单方块离心机快30%%
+Tooltip_LargeSteamCentrifuge_01=仅消耗正常需求100%%的蒸汽
+Tooltip_LargeSteamCentrifuge_02=一次可处理多达16个物品
+Tooltip_LargeSteamCentrifuge_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamHammer=大型蒸汽锻造锤
+LargeSteamHammerRecipeType=锻造锤
+Tooltip_LargeSteamHammer_00=比同等级的单方块锻造锤快25%%
+Tooltip_LargeSteamHammer_01=仅消耗正常需求75%%的蒸汽
+Tooltip_LargeSteamHammer_02=一次可处理多达16个物品
+Tooltip_LargeSteamHammer_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamCompressor=大型蒸汽压缩机
+LargeSteamCompressorRecipeType=压缩机
+Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快25%%
+Tooltip_LargeSteamCompressor_01=仅消耗正常需求85%%的蒸汽
+Tooltip_LargeSteamCompressor_02=一次可处理多达16个物品
+Tooltip_LargeSteamCompressor_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamSifter=大型蒸汽筛选机
+LargeSteamSifterRecipeType=筛选机
+Tooltip_LargeSteamSifter_00=比同等级的单方块筛选机快25%%
+Tooltip_LargeSteamSifter_01=仅消耗正常需求80%%的蒸汽
+Tooltip_LargeSteamSifter_02=一次可处理多达16个物品
+Tooltip_LargeSteamSifter_Casing=任意镀铜砖块或脱氧钢机械方块
+
 NameLargeSteamExtruder=大型蒸汽压模机
 LargeSteamExtruderRecipeType=压模机
 Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机慢10%%
@@ -1390,17 +1427,18 @@ Tooltip_LapotronChip_01=可以用于迅速搭建基础基地
 Tooltip_LapotronChip_Casing=任意放射硅岩合金机械方块
 
 NameNeutroniumWireCutting=中子丝线切割机
+NeutroniumWireCuttingRecipeType=切割机
 
 NameLargeSteamCrusher=大型蒸汽破碎机
 LargeSteamCrusherRecipeType=研磨机
-Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快50%%
-Tooltip_LargeSteamCrusher_01=仅消耗正常需求125%%的蒸汽
-Tooltip_LargeSteamCrusher_02=一次可处理多达32个物品
+Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快80%%
+Tooltip_LargeSteamCrusher_01=仅消耗正常需求120%%的蒸汽
+Tooltip_LargeSteamCrusher_02=一次可处理多达64个物品
 Tooltip_LargeSteamCrusher_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtractor=大型蒸汽提取机
 LargeSteamExtractorRecipeType=提取机
-Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快133%%
+Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快25%%
 Tooltip_LargeSteamExtractor_01=仅消耗正常需求90%%的蒸汽
 Tooltip_LargeSteamExtractor_02=一次可处理多达16个物品
 Tooltip_LargeSteamExtractor_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1417,9 +1455,9 @@ Tooltip_ComponentAssembler_Casing=任意脱氧钢机械方块
 
 NameLargeSteamFurnace=大型蒸汽熔炉
 LargeSteamFurnaceRecipeType=熔炉
-Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快50%%
+Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快90%%
 Tooltip_LargeSteamFurnace_01=仅消耗正常需求50%%的蒸汽
-Tooltip_LargeSteamFurnace_02=一次可处理多达32个物品
+Tooltip_LargeSteamFurnace_02=一次可处理多达128个物品
 Tooltip_LargeSteamFurnace_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamAlloySmelter=大型蒸汽铸形炉
@@ -1433,7 +1471,7 @@ NameLargeSteamOreWasher=大型蒸汽洗矿机
 LargeSteamOreWasherRecipeType=洗矿机 / 简易洗矿池
 LargeSteamOreWasher_Mode_0=洗矿机
 LargeSteamOreWasher_Mode_1=简易洗矿池
-Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快167%%
+Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快95%%
 Tooltip_LargeSteamOreWasher_01=仅消耗正常需求60%%的蒸汽
 Tooltip_LargeSteamOreWasher_02=一次可处理多达32个物品
 Tooltip_LargeSteamOreWasher_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1575,12 +1613,8 @@ Tooltip_PetrochemicalPlant_Muffler=任意顶部压力抑制机械方块
 
 NameLargeCircuitAssembler=大型电路组装设施
 LargeCircuitAssemblerRecipeType=电路组装机
-Tooltip_LargeCircuitAssembler_00=每级电压并行加4
-Tooltip_LargeCircuitAssembler_01=初始并行为32
-Tooltip_LargeCircuitAssembler_02=比相同电压的单方块机器快160%%
-Tooltip_LargeCircuitAssembler_03=只需要使用配方要求功率的80%%
-Tooltip_LargeCircuitAssembler_04=玻璃等级限制了能源仓等级，UV玻璃解锁所有等级
-Tooltip_LargeCircuitAssembler_05=只能安装一个能源仓！
+Tooltip_LargeCircuitAssembler_00=玻璃等级限制了能源仓等级，UV玻璃解锁所有等级
+Tooltip_LargeCircuitAssembler_01=只能安装一个能源仓！
 Tooltip_LargeCircuitAssembler_Casing=任意多功能机械方块
 
 NameSmeltingMixingFurnace=合金搅拌炉
