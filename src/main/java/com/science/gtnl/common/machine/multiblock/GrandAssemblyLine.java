@@ -14,10 +14,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.IInventory;
@@ -68,6 +68,8 @@ import gregtech.api.util.GTUtility;
 import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.common.tileentities.machines.IDualInputHatch;
+import gregtech.common.tileentities.machines.IDualInputInventory;
 import tectech.thing.casing.BlockGTCasingsTT;
 
 public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssemblyLine>
@@ -87,6 +89,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     public static final int CASING_INDEX = BlockGTCasingsTT.textureOffset + 3;
     private static Textures.BlockIcons.CustomIcon ScreenOFF;
     private static Textures.BlockIcons.CustomIcon ScreenON;
+    private boolean isDualInputHatch = false;
+    private boolean useSingleAmp = true;
 
     public GrandAssemblyLine(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -175,303 +179,338 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 第一步：初始化参数
-        boolean isPollingMode = false; // 轮询模式，默认关闭
         int limit = 128; // limit 取批处理时间 128 tick
-        long energyEU = getMaxInputEnergy(); // 能源仓最大输入功率
+        long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 16); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
+
+        // 构建输入仓列表
+        ArrayList<IDualInputInventory> inputInventories = new ArrayList<>();
+
+        // 如果 isDualInputHatch 为 true，遍历每个槽位
+        if (isDualInputHatch) {
+            for (IDualInputHatch dualInputHatch : mDualInputHatches) {
+                Iterator<? extends IDualInputInventory> inventoryIterator = dualInputHatch.inventories();
+                while (inventoryIterator.hasNext()) {
+                    IDualInputInventory inventory = inventoryIterator.next();
+                    inputInventories.add(inventory); // 将每个槽位加入列表
+                }
+            }
+        } else {
+            // 非 DualInputHatch 模式，将常规输入仓/总线包装成 IDualInputInventory
+            IDualInputInventory wrappedInventory = new WrappedInventory(getAllStoredInputs(), getStoredFluids());
+            inputInventories.add(wrappedInventory);
+        }
+
+        // 执行配方处理逻辑
+        return processRecipeLogic(inputInventories, energyEU, maxParallel, limit);
+    }
+
+    private CheckRecipeResult processRecipeLogic(ArrayList<IDualInputInventory> inputInventories, long energyEU,
+        int maxParallel, int limit) {
+        long totalNeedEUt = 0; // 累加的总功率
+        int totalMaxProgresstime = 0; // 累加的最大时间
         int powerParallel = 0;
-        long needEUt = 0;
+        ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
 
-        // 获取所有输入物品和流体
-        ArrayList<ItemStack> allInputs = getStoredInputs();
-        ArrayList<FluidStack> allFluids = getStoredFluids();
+        // 遍历每个输入仓
+        for (IDualInputInventory inventory : inputInventories) {
+            // 获取当前输入仓的物品和流体
+            ItemStack[] itemInputs = inventory.getItemInputs();
+            FluidStack[] fluidInputs = inventory.getFluidInputs();
 
-        // 获取所有有效配方
-        List<GTRecipe.RecipeAssemblyLine> validRecipes = new ArrayList<>();
-        for (ItemStack tDataStick : getDataItems(2)) {
-            AssemblyLineUtils.LookupResult tLookupResult = AssemblyLineUtils
-                .findAssemblyLineRecipeFromDataStick(tDataStick, false);
+            // 如果当前输入仓没有物品或流体，跳过
+            if (itemInputs == null || fluidInputs == null || itemInputs.length == 0 || fluidInputs.length == 0) {
+                continue;
+            }
 
-            if (tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_HASH) {
-                GTRecipe.RecipeAssemblyLine tRecipe = tLookupResult.getRecipe();
-                if (tRecipe != null) {
-                    validRecipes.add(tRecipe);
+            // 将当前输入仓的物品和流体转换为列表
+            ArrayList<ItemStack> allInputs = new ArrayList<>(Arrays.asList(itemInputs));
+            ArrayList<FluidStack> allFluids = new ArrayList<>(Arrays.asList(fluidInputs));
+
+            // 获取所有有效配方
+            List<GTRecipe.RecipeAssemblyLine> validRecipes = new ArrayList<>();
+            for (ItemStack tDataStick : getDataItems(2)) {
+                AssemblyLineUtils.LookupResult tLookupResult = AssemblyLineUtils
+                    .findAssemblyLineRecipeFromDataStick(tDataStick, false);
+
+                if (tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_HASH) {
+                    GTRecipe.RecipeAssemblyLine tRecipe = tLookupResult.getRecipe();
+                    if (tRecipe != null) {
+                        validRecipes.add(tRecipe);
+                    }
+                }
+            }
+
+            if (validRecipes.isEmpty()) {
+                continue; // 当前输入仓没有有效配方，跳到下一个输入仓
+            }
+
+            // 第二步：提取输入输出物品和流体，计算超频次数，调整 mEUt 和 mDuration
+            List<GTRecipe.RecipeAssemblyLine> overclockedRecipes = new ArrayList<>();
+
+            // 按照 recipe.mEUt 从小到大排序
+            validRecipes.sort(Comparator.comparingInt(recipe -> recipe.mEUt));
+
+            for (GTRecipe.RecipeAssemblyLine recipe : validRecipes) {
+
+                // 提取输入输出物品和流体
+                ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
+                    .map(ItemStack::copy)
+                    .toArray(ItemStack[]::new);
+                FluidStack[] inputFluids = Arrays.stream(recipe.mFluidInputs)
+                    .map(FluidStack::copy)
+                    .toArray(FluidStack[]::new);
+                ItemStack outputItem = recipe.mOutput.copy();
+
+                // 计算超频次数
+                long overclockCount = 0;
+                long energyRatio = energyEU / recipe.mEUt; // EnergyEU 与 recipe.mEUt 的比值
+                long threshold = 1; // 初始阈值是 4^0 = 1
+
+                // 计算最大可能的超频次数
+                while (energyRatio >= threshold * 4) { // 判断是否可以进行下一次超频
+                    overclockCount++;
+                    threshold *= 4; // 阈值更新为 4^n
+                }
+
+                // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
+                long adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount);
+                int adjustedTime = recipe.mDuration / (int) Math.pow(2, overclockCount);
+
+                // 检查功耗是否超过 int 的最大值或时间是否小于 1
+                while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
+                    overclockCount--; // 减少超频次数
+                    adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
+                    adjustedTime = recipe.mDuration / (int) Math.pow(2, overclockCount); // 重新计算时间
+                }
+
+                // 确保时间最小为 1
+                adjustedTime = Math.max(1, adjustedTime);
+
+                // 构建超频后的临时配方
+                GTRecipe.RecipeAssemblyLine overclockedRecipe = new GTRecipe.RecipeAssemblyLine(
+                    recipe.mResearchItem, // 研究物品
+                    recipe.mResearchTime, // 研究时间
+                    inputItems, // 输入物品
+                    inputFluids, // 输入流体
+                    outputItem, // 输出物品
+                    adjustedTime, // 调整后的时间
+                    (int) Math.min(adjustedPower, Integer.MAX_VALUE), // 调整后的功率
+                    recipe.mOreDictAlt // 替代物品
+                );
+
+                overclockedRecipes.add(overclockedRecipe);
+            }
+
+            // 第三步：计算总耗电和时间
+            for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
+                // 计算总耗电
+                long totalEnergy = (long) recipe.mEUt * recipe.mDuration;
+
+                // 计算 d 变量时间
+                double d = (double) totalEnergy / energyEU;
+
+                // 根据 d 和 limit 调整功率和时间
+                int adjustedPower;
+                int adjustedTime;
+
+                if (d >= limit) {
+                    adjustedPower = (int) energyEU; // 直接取最大输入功率
+                    adjustedTime = (int) Math.max(limit, d); // 取 limit 和 d 的最大值
+                } else {
+                    adjustedPower = (int) ((energyEU * d) / limit); // 按比例调整功率
+                    adjustedTime = limit; // 取 limit
+                }
+
+                // 更新配方的功率和时间
+                recipe.mEUt = adjustedPower;
+                recipe.mDuration = adjustedTime;
+                powerParallel = (int) Math.floor(energyEU / recipe.mEUt);
+            }
+
+            // 第四步：处理配方并行逻辑
+            Map<GTRecipe.RecipeAssemblyLine, Integer> recipeParallelMap = new HashMap<>();
+            int remainingMaxParallel = maxParallel; // 剩余的最大并行数
+
+            // 标志变量，用于记录是否有至少一个配方的 recipeParallel 大于 0
+            boolean hasValidRecipe = false;
+
+            for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
+                // 计算物品并行数 (ItemParallel)
+                List<Integer> itemParallels = new ArrayList<>(); // 存储每个物品的并行数
+                for (ItemStack input : recipe.mInputs) {
+                    int available = getAvailableItemCount(input, allInputs); // 使用自定义方法
+                    int required = input.stackSize;
+                    int itemParallel = available / required; // 向下取整
+                    itemParallels.add(itemParallel);
+                }
+                int itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
+
+                // 计算流体并行数 (FluidParallel)
+                List<Integer> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数
+                for (FluidStack fluid : recipe.mFluidInputs) {
+                    int available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
+                    int required = fluid.amount;
+                    int fluidParallel = available / required; // 向下取整
+                    fluidParallels.add(fluidParallel);
+                }
+                int fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
+
+                // 取较小的并行数作为当前配方的并行数 (RecipeParallel)
+                int recipeParallel = Math.min(itemParallel, fluidParallel);
+
+                // 如果当前配方的并行数为 0，跳过此配方
+                if (recipeParallel == 0) {
+                    continue;
+                }
+
+                // 标记有至少一个有效配方
+                hasValidRecipe = true;
+
+                // 使用功率并行数限制 RecipeParallel
+                recipeParallel = Math.min(recipeParallel, powerParallel);
+
+                // 检查剩余的最大并行数
+                if (recipeParallel > remainingMaxParallel) {
+                    recipeParallel = remainingMaxParallel; // 如果超出剩余并行数，则设置为剩余并行数
+                }
+
+                // 更新剩余的最大并行数
+                remainingMaxParallel -= recipeParallel;
+
+                // 将当前配方的并行数添加到结果中
+                recipeParallelMap.put(recipe, recipeParallel);
+
+                if (remainingMaxParallel <= 0) {
+                    break; // 如果剩余并行数为 0，跳出循环
+                }
+            }
+
+            // 如果没有任何配方的 recipeParallel 大于 0，则跳过当前输入仓
+            if (!hasValidRecipe) {
+                continue;
+            }
+
+            // 第五步：计算总耗电和时间
+            long needEU = 0;
+            int needTime = 0;
+
+            for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
+                GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
+                int parallel = entry.getValue();
+                needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
+                needTime += recipe.mDuration;
+            }
+
+            // 调整功率和时间以适配能源仓输入功率
+            long needEUt = (long) needEU / needTime;
+
+            while (needEU / needTime > energyEU) {
+                needEU /= 2;
+                needTime *= 2;
+            }
+
+            while ((needEU / needTime) * 16 < energyEU) {
+                // 检查 needEUt 是否超过 Long.MAX_VALUE
+                if (needEUt > Long.MAX_VALUE / 4) {
+                    needEUt = Long.MAX_VALUE;
+                    break; // 如果超过上限，则设置为最大值并退出循环
+                }
+
+                // 检查 needTime 是否会低于 1
+                if (needTime / 2 < 1) {
+                    break; // 如果时间会低于 1，则退出循环
+                }
+
+                // 更新 needEUt 和 needTime
+                needEUt *= 4;
+                needTime /= 2;
+            }
+
+            // 累加总功率和最大时间
+            totalNeedEUt = needEUt;
+            totalMaxProgresstime = needTime;
+
+            // 第六步：生成输出物品并累加到总输出列表
+            for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
+                GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
+                int parallel = entry.getValue();
+
+                // 生成输出物品
+                ItemStack output = recipe.mOutput.copy();
+                output.stackSize *= parallel;
+
+                // 检查输出物品是否可以添加到输出列表
+                if (canOutputItem(output) && output.stackSize > 0) {
+                    totalOutputs.add(output);
+                } else {
+                    // 如果检查失败，返回 ITEM_OUTPUT_FULL
+                    return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
+                }
+            }
+
+            // 第七步：消耗输入的物品和流体
+            for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
+                GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
+                int parallel = entry.getValue();
+
+                // 消耗物品
+                for (ItemStack input : recipe.mInputs) {
+                    consumeItems(input, input.stackSize * parallel, allInputs); // 使用自定义方法
+                }
+
+                // 消耗流体
+                for (FluidStack fluid : recipe.mFluidInputs) {
+                    consumeFluids(fluid, fluid.amount * parallel, allFluids); // 使用自定义方法
                 }
             }
         }
 
-        if (validRecipes.isEmpty()) {
-            return CheckRecipeResultRegistry.NO_DATA_STICKS;
-        }
-
-        // 第二步：提取输入输出物品和流体，计算超频次数，调整 mEUt 和 mDuration
-        List<GTRecipe.RecipeAssemblyLine> overclockedRecipes = new ArrayList<>();
-
-        // 按照 recipe.mEUt 从小到大排序
-        validRecipes.sort(Comparator.comparingInt(recipe -> recipe.mEUt));
-
-        for (GTRecipe.RecipeAssemblyLine recipe : validRecipes) {
-            powerParallel = (int) Math.floor(energyEU / recipe.mEUt);
-
-            // 提取输入输出物品和流体
-            ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
-                .map(ItemStack::copy)
-                .toArray(ItemStack[]::new);
-            FluidStack[] inputFluids = Arrays.stream(recipe.mFluidInputs)
-                .map(FluidStack::copy)
-                .toArray(FluidStack[]::new);
-            ItemStack outputItem = recipe.mOutput.copy();
-
-            // 计算超频次数
-            long overclockCount = energyEU / (recipe.mEUt * 4L); // 超频次数
-            long adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 调整后的功率
-            int adjustedTime = recipe.mDuration / (int) Math.pow(2, overclockCount); // 调整后的时间
-
-            // 构建超频后的临时配方
-            GTRecipe.RecipeAssemblyLine overclockedRecipe = new GTRecipe.RecipeAssemblyLine(
-                recipe.mResearchItem, // 研究物品
-                recipe.mResearchTime, // 研究时间
-                inputItems, // 输入物品
-                inputFluids, // 输入流体
-                outputItem, // 输出物品
-                adjustedTime, // 调整后的时间
-                (int) Math.min(adjustedPower, Integer.MAX_VALUE), // 调整后的功率
-                recipe.mOreDictAlt // 替代物品
-            );
-
-            overclockedRecipes.add(overclockedRecipe);
-        }
-
-        // 第三步：计算总耗电和时间
-        for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
-            // 计算总耗电
-            long totalEnergy = (long) recipe.mEUt * recipe.mDuration;
-
-            // 计算 d 变量时间
-            double d = (double) totalEnergy / energyEU;
-
-            // 根据 d 和 limit 调整功率和时间
-            int adjustedPower;
-            int adjustedTime;
-
-            if (d >= limit) {
-                adjustedPower = (int) energyEU; // 直接取最大输入功率
-                adjustedTime = (int) Math.max(limit, d); // 取 limit 和 d 的最大值
-            } else {
-                adjustedPower = (int) ((energyEU * d) / limit); // 按比例调整功率
-                adjustedTime = limit; // 取 limit
-            }
-
-            // 更新配方的功率和时间
-            recipe.mEUt = adjustedPower;
-            recipe.mDuration = adjustedTime;
-        }
-
-        for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
-            // 复制输入和输出的物品和流体
-            ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
-                .map(ItemStack::copy)
-                .toArray(ItemStack[]::new);
-            ItemStack[] outputItems = new ItemStack[] { recipe.mOutput.copy() };
-            FluidStack[] inputFluids = Arrays.stream(recipe.mFluidInputs)
-                .map(FluidStack::copy)
-                .toArray(FluidStack[]::new);
-            FluidStack[] outputFluids = new FluidStack[0];
-
-            // 构建临时配方并添加到临时配方池
-            GTRecipe tempRecipe = GTValues.RA.stdBuilder()
-                .itemInputs(inputItems)
-                .itemOutputs(outputItems)
-                .fluidInputs(inputFluids)
-                .fluidOutputs(outputFluids)
-                .duration(recipe.mDuration)
-                .eut(recipe.mEUt)
-                // .noBuffer()
-                .build()
-                .orElse(null);
-
-            if (tempRecipe != null) {
-                RecipeRegister.GrandAssemblyLineRecipes.add(tempRecipe);
-            }
-        }
-
-        // 过滤掉需求功率大于能源仓最大功率的临时配方
-        List<GTRecipe> filteredTempRecipes = RecipeRegister.GrandAssemblyLineRecipes.getAllRecipes()
-            .stream()
-            .filter(recipe -> recipe.mEUt <= energyEU)
-            .collect(Collectors.toList());
-
-        if (filteredTempRecipes.isEmpty()) {
-            return CheckRecipeResultRegistry.insufficientPower(energyEU);
-        }
-
-        // 第五步：根据轮询模式处理配方所用并行检查逻辑
-        Map<GTRecipe, Integer> recipeParallelMap = new HashMap<>();
-        int remainingMaxParallel = 0; // 剩余的最大并行数
-
-        // 标志变量，用于记录是否有至少一个配方的 recipeParallel 大于 0
-        boolean hasValidRecipe = false;
-
-        for (GTRecipe recipe : filteredTempRecipes) {
-            // 计算功率并行数 (PowerParallel)
-            remainingMaxParallel = Math.min(powerParallel, maxParallel);
-
-            // 计算物品并行数 (ItemParallel)
-            List<Integer> itemParallels = new ArrayList<>(); // 存储每个物品的并行数
-            for (ItemStack input : recipe.mInputs) {
-                int available = getAvailableItemCount(input, allInputs); // 使用自定义方法
-                int required = input.stackSize;
-                int itemParallel = available / required; // 向下取整
-                itemParallels.add(itemParallel);
-            }
-            int itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
-
-            // 计算流体并行数 (FluidParallel)
-            List<Integer> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数
-            for (FluidStack fluid : recipe.mFluidInputs) {
-                int available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
-                int required = fluid.amount;
-                int fluidParallel = available / required; // 向下取整
-                fluidParallels.add(fluidParallel);
-            }
-            int fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
-
-            // 取较小的并行数作为当前配方的并行数 (RecipeParallel)
-            int recipeParallel = Math.min(itemParallel, fluidParallel);
-
-            // 如果当前配方的并行数为 0，跳过此配方
-            if (recipeParallel == 0) {
-                continue;
-            }
-
-            // 标记有至少一个有效配方
-            hasValidRecipe = true;
-
-            // 使用功率并行数限制 RecipeParallel
-            recipeParallel = Math.min(recipeParallel, powerParallel);
-
-            if (isPollingMode) {
-                // 轮询模式下，RecipeParallel 最大为 1
-                recipeParallel = Math.min(recipeParallel, 1);
-            }
-
-            // 检查剩余的最大并行数
-            if (recipeParallel > remainingMaxParallel) {
-                recipeParallel = remainingMaxParallel; // 如果超出剩余并行数，则设置为剩余并行数
-            }
-
-            // 更新剩余的最大并行数
-            remainingMaxParallel -= recipeParallel;
-
-            // 将当前配方的并行数添加到结果中
-            recipeParallelMap.put(recipe, recipeParallel);
-
-            if (remainingMaxParallel <= 0) {
-                break; // 如果剩余并行数为 0，跳出循环
-            }
-        }
-
-        // 如果没有任何配方的 recipeParallel 大于 0，则返回 NO_RECIPE
-        if (!hasValidRecipe) {
+        // 如果没有有效的配方，返回 NO_RECIPE
+        if (totalOutputs.isEmpty()) {
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
-        if (recipeParallelMap.isEmpty()) {
-            return CheckRecipeResultRegistry.NO_RECIPE;
-        }
-
-        // 第六步：计算总耗电和时间
-        long needEU = 0;
-        int needTime = 0;
-
-        for (Map.Entry<GTRecipe, Integer> entry : recipeParallelMap.entrySet()) {
-            GTRecipe recipe = entry.getKey();
-            int parallel = entry.getValue();
-            needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
-            needTime += recipe.mDuration;
-        }
-
-        // 调整功率和时间以适配能源仓输入功率
-        boolean isLoopCompleted = false; // 标志变量，表示循环是否成功执行并跳出
-        needEUt = (long) needEU / needTime;
-
-        while (needEU / needTime > energyEU) {
-            needEU /= 2;
-            needTime *= 2;
-            isLoopCompleted = true;
-        }
-
-        if (isLoopCompleted) {
-
-            double needEUtDouble = needEUt;
-            double needTimeDouble = needTime;
-
-            double adjustmentFactor = (double) energyEU / needEUt;
-
-            needEUtDouble *= adjustmentFactor;
-            needTimeDouble /= adjustmentFactor;
-
-            needEUt = (long) needEUtDouble;
-            needTime = (int) needTimeDouble;
-        }
-
-        while ((needEU / needTime) * 4 <= energyEU) {
-            if (needEUt >= Long.MAX_VALUE) {
-                needEUt = Long.MAX_VALUE;
-                break; // 打断循环
-            }
-
-            needEUt *= 4;
-            needTime /= 2;
-        }
-
-        // 第七步：生成输出物品并检查输出槽位
-        ArrayList<ItemStack> outputs = new ArrayList<>();
-        for (Map.Entry<GTRecipe, Integer> entry : recipeParallelMap.entrySet()) {
-            GTRecipe recipe = entry.getKey();
-            int parallel = entry.getValue();
-
-            ItemStack output = recipe.mOutputs[0].copy();
-            output.stackSize *= parallel;
-            if (canOutputItem(output) && output.stackSize > 0) {
-                outputs.add(output);
-            } else {
-                return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
-            }
-        }
-        mOutputItems = outputs.toArray(new ItemStack[0]);
-
-        // 第八步：消耗输入的物品和流体
-        for (Map.Entry<GTRecipe, Integer> entry : recipeParallelMap.entrySet()) {
-            GTRecipe recipe = entry.getKey();
-            int parallel = entry.getValue();
-
-            // 消耗物品
-            for (ItemStack input : recipe.mInputs) {
-                consumeItems(input, input.stackSize * parallel, allInputs); // 使用自定义方法
-            }
-
-            // 消耗流体
-            for (FluidStack fluid : recipe.mFluidInputs) {
-                consumeFluids(fluid, fluid.amount * parallel, allFluids); // 使用自定义方法
-            }
-        }
+        // 第八步：设置总输出物品
+        mOutputItems = totalOutputs.toArray(new ItemStack[0]);
 
         // 第九步：更新槽位
         updateSlots();
 
-        // 设置功率和时间
-        this.lEUt = -needEUt; // 使用调整后的总功率
-        this.mMaxProgresstime = needTime; // 使用调整后的时间
+        // 设置总功率和最大时间
+        this.lEUt = -totalNeedEUt; // 使用累加的总功率
+        this.mMaxProgresstime = totalMaxProgresstime; // 使用累加的最大时间
 
         // 更新效率
-        this.mEfficiency = (10000 - (getIdealStatus() - getRepairStatus()) * 1000);
+        this.mEfficiency = 10000;
         this.mEfficiencyIncrease = 10000;
 
         if (GTValues.D1) {
             GT_FML_LOGGER.info("Recipe successful");
         }
         return CheckRecipeResultRegistry.SUCCESSFUL;
+    }
+
+    // 包装常规输入仓/总线的实现
+    private static class WrappedInventory implements IDualInputInventory {
+
+        private final ArrayList<ItemStack> itemInputs;
+        private final ArrayList<FluidStack> fluidInputs;
+
+        public WrappedInventory(ArrayList<ItemStack> itemInputs, ArrayList<FluidStack> fluidInputs) {
+            this.itemInputs = itemInputs;
+            this.fluidInputs = fluidInputs;
+        }
+
+        @Override
+        public ItemStack[] getItemInputs() {
+            return itemInputs.toArray(new ItemStack[0]);
+        }
+
+        @Override
+        public FluidStack[] getFluidInputs() {
+            return fluidInputs.toArray(new FluidStack[0]);
+        }
     }
 
     // 自定义方法：获取可用物品数量
@@ -635,20 +674,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
     }
 
-    private long getMaxInputEnergy() {
-        long maxInputEnergy = 0;
-
-        // 遍历所有能源仓
-        for (MTEHatchEnergy energyHatch : mEnergyHatches) {
-            if (energyHatch != null && energyHatch.isValid()) {
-                // 获取单个能源仓的最大输入功率
-                maxInputEnergy += energyHatch.maxEUInput();
-            }
-        }
-
-        return maxInputEnergy;
-    }
-
     // 检查输出槽位是否已满
     private boolean canOutputItem(ItemStack output) {
         if (output == null || output.stackSize <= 0) {
@@ -741,9 +766,17 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         mCasing = 0;
         ParallelTier = 0;
         mDataAccessHatches.clear();
+        isDualInputHatch = false;
+        useSingleAmp = true;
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
+        if (!mDualInputHatches.isEmpty()) {
+            isDualInputHatch = true;
+            if (!mInputBusses.isEmpty() || !mInputHatches.isEmpty()) return false;
+        }
+
+        useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
         return mEnergyHatches.size() <= 1 && mDataAccessHatches.size() <= 1
@@ -753,10 +786,9 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps() / 4);
+        logic.setAmperageOC(false);
     }
 
     protected long getMachineVoltageLimit() {
