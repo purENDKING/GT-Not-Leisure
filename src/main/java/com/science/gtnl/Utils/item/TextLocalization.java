@@ -974,7 +974,7 @@ public class TextLocalization {
         "The level of the mechanical block determines the maximum level of the energy warehouse. UHV mechanical blocks unlock all levels.",
         "Tooltip_PreciseAssembler_00");
     public static final String Tooltip_PreciseAssembler_01 = texter(
-        "Parallel: 2 ^ Glass Level",
+        "Parallel: 2 ^ Glass Level + Precise Electronic Unit Casing tier * 64",
         "Tooltip_PreciseAssembler_01");
     public static final String Tooltip_PreciseAssembler_02 = texter(
         "When the Precise Electronic Unit Casing is at level 3, enable §cperfect overclock§7",
