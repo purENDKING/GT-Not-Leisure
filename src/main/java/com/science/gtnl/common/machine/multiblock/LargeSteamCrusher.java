@@ -228,11 +228,11 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
     @Override
     public int getMaxParallelRecipes() {
         if (tierMachine == 1) {
-            return 32;
-        } else if (tierMachine == 2) {
             return 64;
+        } else if (tierMachine == 2) {
+            return 128;
         }
-        return 32;
+        return 64;
     }
 
     @Override
@@ -257,8 +257,8 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(1.25 * tierMachine)
-                    .setSpeedBoost(0.5 / tierMachine);
+                    .setEUtDiscount(1.2 * tierMachine)
+                    .setSpeedBoost(0.2 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

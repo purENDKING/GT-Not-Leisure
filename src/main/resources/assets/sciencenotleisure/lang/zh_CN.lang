@@ -1426,14 +1426,14 @@ NeutroniumWireCuttingRecipeType=切割机
 
 NameLargeSteamCrusher=大型蒸汽破碎机
 LargeSteamCrusherRecipeType=研磨机
-Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快50%%
-Tooltip_LargeSteamCrusher_01=仅消耗正常需求125%%的蒸汽
-Tooltip_LargeSteamCrusher_02=一次可处理多达32个物品
+Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快80%%
+Tooltip_LargeSteamCrusher_01=仅消耗正常需求120%%的蒸汽
+Tooltip_LargeSteamCrusher_02=一次可处理多达64个物品
 Tooltip_LargeSteamCrusher_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtractor=大型蒸汽提取机
 LargeSteamExtractorRecipeType=提取机
-Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快133%%
+Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快25%%
 Tooltip_LargeSteamExtractor_01=仅消耗正常需求90%%的蒸汽
 Tooltip_LargeSteamExtractor_02=一次可处理多达16个物品
 Tooltip_LargeSteamExtractor_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1466,7 +1466,7 @@ NameLargeSteamOreWasher=大型蒸汽洗矿机
 LargeSteamOreWasherRecipeType=洗矿机 / 简易洗矿池
 LargeSteamOreWasher_Mode_0=洗矿机
 LargeSteamOreWasher_Mode_1=简易洗矿池
-Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快200%%
+Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快95%%
 Tooltip_LargeSteamOreWasher_01=仅消耗正常需求60%%的蒸汽
 Tooltip_LargeSteamOreWasher_02=一次可处理多达32个物品
 Tooltip_LargeSteamOreWasher_Casing=任意镀铜砖块或脱氧钢机械方块

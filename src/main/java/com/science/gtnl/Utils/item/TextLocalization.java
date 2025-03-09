@@ -486,7 +486,7 @@ public class TextLocalization {
         "Simple Washer / Washer",
         "LargeSteamOreWasherRecipeType");
     public static final String Tooltip_LargeSteamOreWasher_00 = texter(
-        "200%% faster than using single block steam machines of the same extractor",
+        "95%% faster than using single block steam machines of the same extractor",
         "Tooltip_LargeSteamOreWasher_00");
     public static final String Tooltip_LargeSteamOreWasher_01 = texter(
         "Only consumes steam at 60%% of the L/s normally required",
@@ -501,7 +501,7 @@ public class TextLocalization {
     public static final String NameLargeSteamCentrifuge = texter("Large Steam Centrifuge", "NameLargeSteamCentrifuge");
     public static final String LargeSteamCentrifugeRecipeType = texter("Centrifuge", "LargeSteamCentrifugeRecipeType");
     public static final String Tooltip_LargeSteamCentrifuge_00 = texter(
-        "133%% faster than using single block steam machines of the same centrifuge",
+        "25%% faster than using single block steam machines of the same centrifuge",
         "Tooltip_LargeSteamCentrifuge_00");
     public static final String Tooltip_LargeSteamCentrifuge_01 = texter(
         "Only consumes steam at 100%% of the L/s normally required",
@@ -516,7 +516,7 @@ public class TextLocalization {
     public static final String NameLargeSteamHammer = texter("Large Steam Hammer", "NameLargeSteamHammer");
     public static final String LargeSteamHammerRecipeType = texter("Hammer", "LargeSteamHammerRecipeType");
     public static final String Tooltip_LargeSteamHammer_00 = texter(
-        "133%% faster than using single block steam machines of the same Hammer",
+        "25%% faster than using single block steam machines of the same Hammer",
         "Tooltip_LargeSteamHammer_00");
     public static final String Tooltip_LargeSteamHammer_01 = texter(
         "Only consumes steam at 75%% of the L/s normally required",
@@ -531,7 +531,7 @@ public class TextLocalization {
     public static final String NameLargeSteamCompressor = texter("Large Steam Compressor", "NameLargeSteamCompressor");
     public static final String LargeSteamCompressorRecipeType = texter("Compressor", "LargeSteamCompressorRecipeType");
     public static final String Tooltip_LargeSteamCompressor_00 = texter(
-        "133%% faster than using single block steam machines of the same Compressor",
+        "25%% faster than using single block steam machines of the same Compressor",
         "Tooltip_LargeSteamCompressor_00");
     public static final String Tooltip_LargeSteamCompressor_01 = texter(
         "Only consumes steam at 85%% of the L/s normally required",
@@ -546,7 +546,7 @@ public class TextLocalization {
     public static final String NameLargeSteamSifter = texter("Large Steam Sifter", "NameLargeSteamSifter");
     public static final String LargeSteamSifterRecipeType = texter("Sifter", "LargeSteamSifterRecipeType");
     public static final String Tooltip_LargeSteamSifter_00 = texter(
-        "133%% faster than using single block steam machines of the same Sifter",
+        "25%% faster than using single block steam machines of the same Sifter",
         "Tooltip_LargeSteamSifter_00");
     public static final String Tooltip_LargeSteamSifter_01 = texter(
         "Only consumes steam at 80%% of the L/s normally required",
@@ -561,7 +561,7 @@ public class TextLocalization {
     public static final String NameLargeSteamExtractor = texter("Large Steam Extractor", "NameLargeSteamExtractor");
     public static final String LargeSteamExtractorRecipeType = texter("Extractor", "LargeSteamExtractorRecipeType");
     public static final String Tooltip_LargeSteamExtractor_00 = texter(
-        "133%% faster than using single block steam machines of the same extractor",
+        "25%% faster than using single block steam machines of the same extractor",
         "Tooltip_LargeSteamExtractor_00");
     public static final String Tooltip_LargeSteamExtractor_01 = texter(
         "Only consumes steam at 90%% of the L/s normally required",
@@ -576,13 +576,13 @@ public class TextLocalization {
     public static final String NameLargeSteamCrusher = texter("Large Steam Crusher", "NameLargeSteamCrusher");
     public static final String LargeSteamCrusherRecipeType = texter("Macerator", "LargeSteamCrusherRecipeType");
     public static final String Tooltip_LargeSteamCrusher_00 = texter(
-        "50%% faster than using single block steam machines of the same macerator",
+        "80%% faster than using single block steam machines of the same macerator",
         "Tooltip_LargeSteamCrusher_00");
     public static final String Tooltip_LargeSteamCrusher_01 = texter(
-        "Only consumes steam at 125%% of the L/s normally required",
+        "Only consumes steam at 120%% of the L/s normally required",
         "Tooltip_LargeSteamCrusher_01");
     public static final String Tooltip_LargeSteamCrusher_02 = texter(
-        "Processes up to 32 items at once",
+        "Processes up to 64 items at once",
         "Tooltip_LargeSteamCrusher_02");
     public static final String Tooltip_LargeSteamCrusher_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
