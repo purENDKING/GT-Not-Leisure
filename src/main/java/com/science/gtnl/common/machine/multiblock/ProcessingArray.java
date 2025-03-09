@@ -278,9 +278,10 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
 
     @Override
     public void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         logic.setAvailableVoltage(GTValues.V[tTier] * (mLastRecipeMap != null ? mLastRecipeMap.getAmperage() : 1));
-        logic.setAvailableAmperage(getMaxParallelRecipes());
-        logic.setAmperageOC(false);
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
     }
 
     public void setTierAndMult() {

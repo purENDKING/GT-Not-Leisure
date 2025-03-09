@@ -63,7 +63,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     protected void setProcessingLogicPower(ProcessingLogic logic) {
         boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
         logic.setAmperageOC(useSingleAmp);
     }
 

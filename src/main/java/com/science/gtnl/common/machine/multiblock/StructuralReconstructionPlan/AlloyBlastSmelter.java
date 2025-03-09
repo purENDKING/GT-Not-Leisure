@@ -196,7 +196,7 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
             @Nonnull
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
-                if (availableVoltage * 4 < recipe.mEUt) {
+                if (availableVoltage < recipe.mEUt) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return CheckRecipeResultRegistry.SUCCESSFUL;
@@ -218,5 +218,13 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
     @Override
     public int getMaxParallelRecipes() {
         return 16;
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+        logic.setAmperageOC(false);
     }
 }
