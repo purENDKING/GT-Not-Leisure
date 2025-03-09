@@ -285,7 +285,7 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.LargeSteamExtruder.get(1),
             new Object[] { "ABA", "CDC", "AAA", 'A', GregtechItemList.Casing_Machine_Custom_1.get(1), 'B',
                 ItemList.Casing_Gearbox_Bronze.get(1), 'C', GTNLItemList.PrecisionSteamMechanism.get(1), 'D',
-                new ItemStack(Blocks.piston, 1) });
+                "craftingPiston" });
 
         addCraftingRecipe(
             GTNLItemList.TungstensteelGearbox.get(1),
@@ -327,9 +327,8 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GTNLItemList.LargeSteamHammer.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
-                new ItemStack(Blocks.anvil, 1), 'C', new ItemStack(Blocks.piston, 1), 'D',
-                GTNLItemList.PrecisionSteamMechanism.get(1), 'E',
-                GregtechItemList.Controller_SteamForgeHammerMulti.get(1) });
+                new ItemStack(Blocks.anvil, 1), 'C', "craftingPiston", 'D', GTNLItemList.PrecisionSteamMechanism.get(1),
+                'E', GregtechItemList.Controller_SteamForgeHammerMulti.get(1) });
 
         addCraftingRecipe(
             GTNLItemList.LargeSteamCompressor.get(1),

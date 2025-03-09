@@ -624,7 +624,7 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.HumongousSolidifierHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.DebugEnergyHatch
-            .set(new DebugEnergyHatch(21507, "Debug Energy Hatch", TextLocalization.DebugEnergyHatch, 1));
+            .set(new DebugEnergyHatch(21507, "Debug Energy Hatch", TextLocalization.DebugEnergyHatch, 14));
         addItemTooltip(GTNLItemList.DebugEnergyHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.NinefoldInputHatchEV
