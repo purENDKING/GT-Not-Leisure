@@ -107,7 +107,9 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
-                                OutputBus)
+                                OutputBus,
+                                InputHatch,
+                                OutputHatch)
                             .buildAndChain(
                                 onElementPass(
                                     x -> ++x.tCountCasing,

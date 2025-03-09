@@ -501,7 +501,7 @@ public class TextLocalization {
     public static final String NameLargeSteamCentrifuge = texter("Large Steam Centrifuge", "NameLargeSteamCentrifuge");
     public static final String LargeSteamCentrifugeRecipeType = texter("Centrifuge", "LargeSteamCentrifugeRecipeType");
     public static final String Tooltip_LargeSteamCentrifuge_00 = texter(
-        "25%% faster than using single block steam machines of the same centrifuge",
+        "30%% faster than using single block steam machines of the same centrifuge",
         "Tooltip_LargeSteamCentrifuge_00");
     public static final String Tooltip_LargeSteamCentrifuge_01 = texter(
         "Only consumes steam at 100%% of the L/s normally required",
