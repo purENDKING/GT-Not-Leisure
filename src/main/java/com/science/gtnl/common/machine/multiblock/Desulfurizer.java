@@ -22,6 +22,7 @@ import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -29,6 +30,7 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
@@ -40,6 +42,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISurvivalConstructable {
 
+    private int energyHatchTier;
     private HeatingCoilLevel mHeatingCapacity;
     private int mLevel = 0;
     private int mCasing;
@@ -183,6 +186,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatch hatch : getExoticEnergyHatches()) {
             if (hatch instanceof MTEHatchEnergyTunnel) {
                 return false;
@@ -219,6 +223,29 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
                     .setMachineHeat((int) (getCoilLevel().getHeat() * 2));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     public HeatingCoilLevel getCoilLevel() {
