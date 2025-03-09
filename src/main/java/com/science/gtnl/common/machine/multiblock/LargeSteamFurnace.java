@@ -1,6 +1,6 @@
 package com.science.gtnl.common.machine.multiblock;
 
-import static bartworks.system.material.WerkstoffLoader.BWBlockCasingsAdvanced;
+import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
@@ -136,8 +136,7 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
                     'H',
                     ofBlocksTiered(
                         LargeSteamFurnace::getTierAdvancedCasing,
-                        ImmutableList
-                            .of(Pair.of(BWBlockCasingsAdvanced, 32066), Pair.of(BWBlockCasingsAdvanced, 32071)),
+                        ImmutableList.of(Pair.of(BWBlockCasings, 32066), Pair.of(BWBlockCasings, 32071)),
                         -1,
                         (t, m) -> t.tierAdvancedCasing = m,
                         t -> t.tierAdvancedCasing))
@@ -278,11 +277,11 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
     @Override
     public int getMaxParallelRecipes() {
         if (tierMachine == 1) {
-            return 32;
-        } else if (tierMachine == 2) {
             return 64;
+        } else if (tierMachine == 2) {
+            return 128;
         }
-        return 32;
+        return 64;
     }
 
     @Override

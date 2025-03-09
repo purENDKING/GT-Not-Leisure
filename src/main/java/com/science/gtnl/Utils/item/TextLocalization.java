@@ -1734,7 +1734,7 @@ public class TextLocalization {
         "Only consumes steam at 50%% of the L/s normally required",
         "Tooltip_LargeSteamFurnace_01");
     public static final String Tooltip_LargeSteamFurnace_02 = texter(
-        "Processes up to 32 items at once",
+        "Processes up to 64 items at once",
         "Tooltip_LargeSteamFurnace_02");
     public static final String Tooltip_LargeSteamFurnace_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",

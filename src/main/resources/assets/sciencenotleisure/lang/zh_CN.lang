@@ -1452,7 +1452,7 @@ NameLargeSteamFurnace=大型蒸汽熔炉
 LargeSteamFurnaceRecipeType=熔炉
 Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快50%%
 Tooltip_LargeSteamFurnace_01=仅消耗正常需求50%%的蒸汽
-Tooltip_LargeSteamFurnace_02=一次可处理多达32个物品
+Tooltip_LargeSteamFurnace_02=一次可处理多达64个物品
 Tooltip_LargeSteamFurnace_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamAlloySmelter=大型蒸汽铸形炉

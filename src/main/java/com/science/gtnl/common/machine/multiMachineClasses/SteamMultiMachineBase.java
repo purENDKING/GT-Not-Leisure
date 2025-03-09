@@ -1,6 +1,6 @@
 package com.science.gtnl.common.machine.multiMachineClasses;
 
-import static bartworks.system.material.WerkstoffLoader.BWBlockCasingsAdvanced;
+import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockFrames;
@@ -79,8 +79,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     protected static int getTierAdvancedCasing(Block block, int meta) {
-        if (block == BWBlockCasingsAdvanced && 32066 == meta) return 1;
-        if (block == BWBlockCasingsAdvanced && 32071 == meta) return 2;
+        if (block == BWBlockCasings && 32066 == meta) return 1;
+        if (block == BWBlockCasings && 32071 == meta) return 2;
         return 0;
     }
 
