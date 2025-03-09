@@ -864,23 +864,11 @@ public class TextLocalization {
         "Circuit Assembler",
         "LargeCircuitAssemblerRecipeType");
     public static final String Tooltip_LargeCircuitAssembler_00 = texter(
-        "Gains four parallel per voltage tier",
+        "Energy hatch limited by glass tier, UV Glass unlocks all",
         "Tooltip_LargeCircuitAssembler_00");
     public static final String Tooltip_LargeCircuitAssembler_01 = texter(
-        "Initial Parallel Behavior 32",
-        "Tooltip_LargeCircuitAssembler_01");
-    public static final String Tooltip_LargeCircuitAssembler_02 = texter(
-        "160%% faster than using single block machines of the same voltage",
-        "Tooltip_LargeCircuitAssembler_02");
-    public static final String Tooltip_LargeCircuitAssembler_03 = texter(
-        "Only uses 90%% of the EU/t normally required",
-        "Tooltip_LargeCircuitAssembler_03");
-    public static final String Tooltip_LargeCircuitAssembler_04 = texter(
-        "Energy hatch limited by glass tier, UV Glass unlocks all",
-        "Tooltip_LargeCircuitAssembler_04");
-    public static final String Tooltip_LargeCircuitAssembler_05 = texter(
         "Only one Energy Hatch!",
-        "Tooltip_LargeCircuitAssembler_05");
+        "Tooltip_LargeCircuitAssembler_01");
     public static final String Tooltip_LargeCircuitAssembler_Casing = texter(
         "Any Multi-Use Casing",
         "Tooltip_LargeCircuitAssembler_Casing");

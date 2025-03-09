@@ -5,13 +5,10 @@ import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings3Misc;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -19,7 +16,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.TAE;
@@ -28,22 +25,17 @@ import gregtech.api.enums.VoltageIndex;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
-import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
-import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTRecipe;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.OverclockCalculator;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
-public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssembler> implements ISurvivalConstructable {
+public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssembler>
+    implements ISurvivalConstructable {
 
-    public int mCasing;
     public byte glassTier = 0;
     public static IStructureDefinition<LargeCircuitAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
@@ -59,16 +51,6 @@ public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssemble
 
     public LargeCircuitAssembler(String aName) {
         super(aName);
-    }
-
-    @Override
-    public boolean isEnablePerfectOverclock() {
-        return false;
-    }
-
-    @Override
-    public float getSpeedBonus() {
-        return 1;
     }
 
     @Override
@@ -117,12 +99,12 @@ public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssemble
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeCircuitAssemblerRecipeType)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_00)
             .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_01)
-            .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_02)
-            .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_03)
-            .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_04)
-            .addInfo(TextLocalization.Tooltip_LargeCircuitAssembler_05)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -189,11 +171,13 @@ public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssemble
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         glassTier = 0;
+        ParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (glassTier < VoltageIndex.UV & mEnergyHatch.mTier > glassTier) {
                 return false;
@@ -206,59 +190,8 @@ public class LargeCircuitAssembler extends MultiMachineBase<LargeCircuitAssemble
             }
         }
 
+        ParallelTier = getParallelTier(aStack);
         if (this.mEnergyHatches.size() >= 2) return false;
         return mCasing >= 30;
-    }
-
-    @Override
-    public int getMaxParallelRecipes() {
-        return 32 + 4 * GTUtility.getTier(this.getMaxInputVoltage());
-    }
-
-    @Override
-    public ProcessingLogic createProcessingLogic() {
-        return new ProcessingLogic() {
-
-            @NotNull
-            @Override
-            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8)
-                    .setSpeedBoost(0.6);
-            }
-        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
-    }
-
-    @Override
-    public boolean getDefaultHasMaintenanceChecks() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldCheckMaintenance() {
-        return true;
-    }
-
-    @Override
-    public void checkMaintenance() {
-        if (!shouldCheckMaintenance()) return;
-
-        if (getRepairStatus() != getIdealStatus()) {
-            for (MTEHatchMaintenance tHatch : validMTEList(mMaintenanceHatches)) {
-                if (tHatch.mAuto) tHatch.autoMaintainance();
-                if (tHatch.mWrench) mWrench = true;
-                if (tHatch.mScrewdriver) mScrewdriver = true;
-                if (tHatch.mSoftHammer) mSoftHammer = true;
-                if (tHatch.mHardHammer) mHardHammer = true;
-                if (tHatch.mSolderingTool) mSolderingTool = true;
-                if (tHatch.mCrowbar) mCrowbar = true;
-
-                tHatch.mWrench = false;
-                tHatch.mScrewdriver = false;
-                tHatch.mSoftHammer = false;
-                tHatch.mHardHammer = false;
-                tHatch.mSolderingTool = false;
-                tHatch.mCrowbar = false;
-            }
-        }
     }
 }
