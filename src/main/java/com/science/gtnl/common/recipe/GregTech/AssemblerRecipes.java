@@ -1307,7 +1307,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 4L),
                 GTOreDictUnificator.get(OrePrefixes.cableGt02, Materials.Aluminium, 2L))
             .itemOutputs(GTNLItemList.EVParallelControllerCore.get(1))
-            .fluidInputs(Materials.HSSG.getMolten(1296))
+            .fluidInputs(Materials.TPV.getMolten(1296))
             .specialValue(0)
             .noOptimize()
             .duration(400)
@@ -1326,7 +1326,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 4L),
                 GTOreDictUnificator.get(OrePrefixes.cableGt02, Materials.Tungsten, 4L))
             .itemOutputs(GTNLItemList.IVParallelControllerCore.get(1))
-            .fluidInputs(Materials.TPV.getMolten(1296))
+            .fluidInputs(Materials.HSSG.getMolten(1296))
             .specialValue(0)
             .noOptimize()
             .duration(400)
