@@ -350,5 +350,15 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Bronze, 1L), 'C',
                 ItemList.Casing_Gearbox_Bronze.get(1), 'D', ItemList.Component_Filter.get(1), 'E',
                 MaterialsAlloy.TUMBAGA.getFrameBox(1) });
+
+        addCraftingRecipe(
+            GregtechItemList.Hatch_Input_Bus_Steam.get(1),
+            new Object[] { " A ", " B ", "   ", 'A', "craftingToolScrewdriver", 'B',
+                GregtechItemList.Hatch_Output_Bus_Steam });
+
+        addCraftingRecipe(
+            GregtechItemList.Hatch_Output_Bus_Steam.get(1),
+            new Object[] { " A ", " B ", "   ", 'A', "craftingToolScrewdriver", 'B',
+                GregtechItemList.Hatch_Input_Bus_Steam });
     }
 }
