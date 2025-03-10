@@ -1350,8 +1350,8 @@ Tooltip_LargeSteamHammer_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamCompressor=大型蒸汽压缩机
 LargeSteamCompressorRecipeType=压缩机
-Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快25%%
-Tooltip_LargeSteamCompressor_01=仅消耗正常需求85%%的蒸汽
+Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快50%%
+Tooltip_LargeSteamCompressor_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamCompressor_02=一次可处理多达16个物品
 Tooltip_LargeSteamCompressor_Casing=任意镀铜砖块或脱氧钢机械方块
 

@@ -546,10 +546,10 @@ public class TextLocalization {
     public static final String NameLargeSteamCompressor = texter("Large Steam Compressor", "NameLargeSteamCompressor");
     public static final String LargeSteamCompressorRecipeType = texter("Compressor", "LargeSteamCompressorRecipeType");
     public static final String Tooltip_LargeSteamCompressor_00 = texter(
-        "25%% faster than using single block steam machines of the same Compressor",
+        "50%% faster than using single block steam machines of the same Compressor",
         "Tooltip_LargeSteamCompressor_00");
     public static final String Tooltip_LargeSteamCompressor_01 = texter(
-        "Only consumes steam at 85%% of the L/s normally required",
+        "Only consumes steam at 80%% of the L/s normally required",
         "Tooltip_LargeSteamCompressor_01");
     public static final String Tooltip_LargeSteamCompressor_02 = texter(
         "Processes up to 16 items at once",
