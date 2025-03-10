@@ -168,7 +168,7 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
 
     @Override
     public int getMaxParallelRecipes() {
-        return 1;
+        return 16777216;
     }
 
     @Override
