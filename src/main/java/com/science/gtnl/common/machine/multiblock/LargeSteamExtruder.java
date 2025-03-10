@@ -217,7 +217,7 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
             && tierMaterialBlock == 1
             && tierBrickCasing == 1
             && tierPipeCasing == 1
-            && tCountCasing >= 50
+            && tCountCasing >= 45
             && checkHatches()) {
             tierMachine = 1;
             getCasingTextureID();
@@ -229,7 +229,7 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
             && tierMaterialBlock == 2
             && tierBrickCasing == 2
             && tierPipeCasing == 2
-            && tCountCasing >= 50
+            && tCountCasing >= 45
             && checkHatches()) {
             tierMachine = 2;
             getCasingTextureID();

@@ -354,11 +354,11 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GregtechItemList.Hatch_Input_Bus_Steam.get(1),
             new Object[] { " A ", " B ", "   ", 'A', "craftingToolScrewdriver", 'B',
-                GregtechItemList.Hatch_Output_Bus_Steam });
+                GregtechItemList.Hatch_Output_Bus_Steam.get(1) });
 
         addCraftingRecipe(
             GregtechItemList.Hatch_Output_Bus_Steam.get(1),
             new Object[] { " A ", " B ", "   ", 'A', "craftingToolScrewdriver", 'B',
-                GregtechItemList.Hatch_Input_Bus_Steam });
+                GregtechItemList.Hatch_Input_Bus_Steam.get(1) });
     }
 }

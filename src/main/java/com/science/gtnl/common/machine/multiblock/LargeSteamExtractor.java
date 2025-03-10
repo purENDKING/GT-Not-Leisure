@@ -130,8 +130,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
-                                OutputBus,
-                                InputHatch)
+                                OutputBus)
                             .buildAndChain(
                                 onElementPass(
                                     x -> ++x.tCountCasing,

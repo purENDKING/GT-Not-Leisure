@@ -591,13 +591,13 @@ public class TextLocalization {
     public static final String NameLargeSteamCrusher = texter("Large Steam Crusher", "NameLargeSteamCrusher");
     public static final String LargeSteamCrusherRecipeType = texter("Macerator", "LargeSteamCrusherRecipeType");
     public static final String Tooltip_LargeSteamCrusher_00 = texter(
-        "80%% faster than using single block steam machines of the same macerator",
+        "90%% faster than using single block steam machines of the same macerator",
         "Tooltip_LargeSteamCrusher_00");
     public static final String Tooltip_LargeSteamCrusher_01 = texter(
-        "Only consumes steam at 120%% of the L/s normally required",
+        "Only consumes steam at 80%% of the L/s normally required",
         "Tooltip_LargeSteamCrusher_01");
     public static final String Tooltip_LargeSteamCrusher_02 = texter(
-        "Processes up to 64 items at once",
+        "Processes up to 128 items at once",
         "Tooltip_LargeSteamCrusher_02");
     public static final String Tooltip_LargeSteamCrusher_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
