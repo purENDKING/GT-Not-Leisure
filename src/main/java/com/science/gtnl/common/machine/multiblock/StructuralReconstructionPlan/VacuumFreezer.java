@@ -23,11 +23,14 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
@@ -40,6 +43,7 @@ import gregtech.common.blocks.BlockCasings2;
 
 public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements ISurvivalConstructable {
 
+    private int energyHatchTier;
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(1);
     private int mCasing;
     private static IStructureDefinition<VacuumFreezer> STRUCTURE_DEFINITION = null;
@@ -176,8 +180,12 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
 
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && mCasing >= 135
-            && checkHatch();
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+            return false;
+        }
+
+        energyHatchTier = checkEnergyHatchTier();
+        return mCasing >= 135 && checkHatch();
     }
 
     @Override
@@ -199,6 +207,29 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
                     .setSpeedBoost(0.8);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @Override
