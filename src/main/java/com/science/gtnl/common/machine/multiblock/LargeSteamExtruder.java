@@ -243,11 +243,11 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
     @Override
     public int getMaxParallelRecipes() {
         if (tierMachine == 1) {
-            return 8;
-        } else if (tierMachine == 2) {
             return 16;
+        } else if (tierMachine == 2) {
+            return 32;
         }
-        return 8;
+        return 16;
     }
 
     @Override
@@ -272,8 +272,8 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(1.25 * tierMachine)
-                    .setSpeedBoost(1.1 / tierMachine);
+                    .setEUtDiscount(0.95 * tierMachine)
+                    .setSpeedBoost(0.9 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

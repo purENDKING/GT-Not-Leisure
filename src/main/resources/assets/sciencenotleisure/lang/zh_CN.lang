@@ -1364,8 +1364,8 @@ Tooltip_LargeSteamSifter_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtruder=大型蒸汽压模机
 LargeSteamExtruderRecipeType=压模机
-Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机慢10%%
-Tooltip_LargeSteamExtruder_01=仅消耗正常需求125%%的蒸汽
+Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机快10%%
+Tooltip_LargeSteamExtruder_01=仅消耗正常需求95%%的蒸汽
 Tooltip_LargeSteamExtruder_02=一次可处理多达8个物品
 Tooltip_LargeSteamExtruder_Casing=任意镀铜砖块或脱氧钢机械方块
 
