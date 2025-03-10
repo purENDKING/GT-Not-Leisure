@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -55,7 +54,6 @@ import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBas
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
-import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
@@ -185,7 +183,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 第一步：初始化参数
-        int limit = 128; // limit 取批处理时间 128 tick
+        int limit = 20; // limit 取批处理时间 20 tick
         long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
 
@@ -355,27 +353,41 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
             for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
                 // 计算物品并行数 (ItemParallel)
-                List<Integer> itemParallels = new ArrayList<>(); // 存储每个物品的并行数
+                List<Long> itemParallels = new ArrayList<>(); // 存储每个物品的并行数，使用 long
                 for (ItemStack input : recipe.mInputs) {
-                    int available = getAvailableItemCount(input, allInputs); // 使用自定义方法
+                    long available = getAvailableItemCount(input, allInputs); // 使用自定义方法
                     int required = input.stackSize;
-                    int itemParallel = available / required; // 向下取整
+                    long itemParallel = available / required; // 向下取整
                     itemParallels.add(itemParallel);
                 }
-                int itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
+                long itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
+
+                // 检查 itemParallel 是否超过 int 最大值
+                if (itemParallel > Integer.MAX_VALUE) {
+                    itemParallel = Integer.MAX_VALUE;
+                }
 
                 // 计算流体并行数 (FluidParallel)
-                List<Integer> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数
+                List<Long> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数，使用 long
                 for (FluidStack fluid : recipe.mFluidInputs) {
-                    int available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
+                    long available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
                     int required = fluid.amount;
-                    int fluidParallel = available / required; // 向下取整
+                    long fluidParallel = available / required; // 向下取整
                     fluidParallels.add(fluidParallel);
                 }
-                int fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
+                long fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
+
+                // 检查 fluidParallel 是否超过 int 最大值
+                if (fluidParallel > Integer.MAX_VALUE) {
+                    fluidParallel = Integer.MAX_VALUE;
+                }
+
+                // 最终结果转换为 int
+                int finalItemParallel = (int) itemParallel;
+                int finalFluidParallel = (int) fluidParallel;
 
                 // 取较小的并行数作为当前配方的并行数 (RecipeParallel)
-                int recipeParallel = Math.min(itemParallel, fluidParallel);
+                int recipeParallel = Math.min(finalItemParallel, finalFluidParallel);
 
                 // 如果当前配方的并行数为 0，跳过此配方
                 if (recipeParallel == 0) {
@@ -415,7 +427,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
                 GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
-                int parallel = entry.getValue();
+                long parallel = entry.getValue();
                 needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
                 needTime += recipe.mDuration;
             }
@@ -458,13 +470,16 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 ItemStack output = recipe.mOutput.copy();
                 output.stackSize *= parallel;
 
-                // 检查输出物品是否可以添加到输出列表
-                if (canOutputItem(output) && output.stackSize > 0) {
+                // 将输出物品添加到总输出列表
+                if (output.stackSize > 0) {
                     totalOutputs.add(output);
-                } else {
-                    // 如果检查失败，返回 ITEM_OUTPUT_FULL
-                    return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
                 }
+            }
+
+            // 检查总输出是否溢出
+            if (!totalOutputs.isEmpty() && !canOutputAll(totalOutputs.toArray(new ItemStack[0]))) {
+                // 如果溢出，返回
+                return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
             }
 
             // 第七步：消耗输入的物品和流体
@@ -690,33 +705,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 }
             }
         }
-    }
-
-    // 检查输出槽位是否已满
-    private boolean canOutputItem(ItemStack output) {
-        if (output == null || output.stackSize <= 0) {
-            return false; // 如果物品无效，直接返回 false
-        }
-
-        // 检查所有输出总线的槽位
-        for (MTEHatchOutputBus outputBus : validMTEList(mOutputBusses)) {
-            if (outputBus != null && outputBus.isValid()) {
-                IInventory inventory = outputBus.getBaseMetaTileEntity(); // 获取输出总线的物品栏
-
-                // 遍历物品栏的每个槽位
-                for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                    ItemStack slot = inventory.getStackInSlot(i); // 获取当前槽位的物品
-
-                    // 如果槽位为空或可以堆叠，返回 true
-                    if (slot == null
-                        || (slot.isItemEqual(output) && slot.stackSize + output.stackSize <= slot.getMaxStackSize())) {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false; // 如果没有找到合适的槽位，返回 false
     }
 
     @Override
