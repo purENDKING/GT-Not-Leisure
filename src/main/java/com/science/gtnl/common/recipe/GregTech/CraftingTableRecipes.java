@@ -312,6 +312,14 @@ public class CraftingTableRecipes implements IRecipePool {
                 new ItemStack(ItemLoader.KFCFamily, 1) });
 
         addCraftingRecipe(
+            new ItemStack(ItemLoader.KFCFamily, 1),
+            new Object[] { "ABA", "CDC", "EBE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
+                'B', GTModHandler.getModItem(PamsHarvestCraft.ID, "roastchickenItem", 1), 'C',
+                new ItemStack(Items.cooked_chicken, 1), 'D',
+                GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
+                GTModHandler.getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1) });
+
+        addCraftingRecipe(
             GTNLItemList.BigSteamInputHatch.get(1),
             new Object[] { "ABA", "CDC", "ABA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1L),
                 'B', GTOreDictUnificator.get(OrePrefixes.pipeHuge, Materials.Bronze, 1L), 'C',
