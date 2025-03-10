@@ -146,6 +146,16 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return null;
     }
 
+    @Override
+    public boolean supportsInputSeparation() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsBatchMode() {
+        return true;
+    }
+
     protected void updateHatchTexture() {
         for (MTEHatch h : mSteamInputs) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
