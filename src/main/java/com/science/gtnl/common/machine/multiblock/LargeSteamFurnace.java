@@ -8,6 +8,7 @@ import static gregtech.api.GregTechAPI.sBlockFrames;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
+import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
+import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
 
 public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> implements ISurvivalConstructable {
 
@@ -324,7 +326,23 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
     @NotNull
     public CheckRecipeResult checkProcessing() {
         ArrayList<ItemStack> tInputList = getAllStoredInputs();
-        if (tInputList.isEmpty()) return CheckRecipeResultRegistry.NO_RECIPE;
+        ArrayList<ItemStack> rList = new ArrayList<>();
+        for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
+            tHatch.mRecipeMap = getRecipeMap();
+            for (int i = tHatch.getBaseMetaTileEntity()
+                .getSizeInventory() - 1; i >= 0; i--) {
+                ItemStack stack = tHatch.getBaseMetaTileEntity()
+                    .getStackInSlot(i);
+                if (stack != null) {
+                    rList.add(stack);
+                }
+            }
+        }
+        tInputList.addAll(rList);
+
+        if (tInputList.isEmpty()) {
+            return CheckRecipeResultRegistry.NO_RECIPE;
+        }
 
         int fakeOriginalMaxParallel = 1;
         OverclockCalculator calculator = new OverclockCalculator().setEUt(getAverageInputVoltage())
