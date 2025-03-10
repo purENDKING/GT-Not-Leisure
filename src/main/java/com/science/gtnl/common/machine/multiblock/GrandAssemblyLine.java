@@ -547,8 +547,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     }
 
     // 自定义方法：获取可用物品数量
-    private int getAvailableItemCount(ItemStack required, ArrayList<ItemStack> allInputs) {
-        int count = 0;
+    private long getAvailableItemCount(ItemStack required, ArrayList<ItemStack> allInputs) {
+        long count = 0;
         Map<GTUtility.ItemId, ItemStack> inputsFromME = new HashMap<>();
 
         // 优先检查完全匹配的物品
@@ -608,8 +608,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     }
 
     // 自定义方法：获取可用流体数量
-    private int getAvailableFluidAmount(FluidStack required, ArrayList<FluidStack> allFluids) {
-        int amount = 0;
+    private long getAvailableFluidAmount(FluidStack required, ArrayList<FluidStack> allFluids) {
+        long amount = 0;
         Map<Fluid, FluidStack> inputsFromME = new HashMap<>();
 
         for (FluidStack fluid : allFluids) {
