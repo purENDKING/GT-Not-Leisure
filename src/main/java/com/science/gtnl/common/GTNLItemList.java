@@ -272,6 +272,7 @@ public enum GTNLItemList {
     LargeBoilerTitanium,
     LargeBoilerTungstenSteel,
 
+    LargeSteamFormingPress,
     LargeSteamSifter,
     ResourceCollectionModule,
     FuelRefiningComplex,
@@ -320,6 +321,10 @@ public enum GTNLItemList {
     WhiteNightGenerator,
     LargeSteamCircuitAssembler,
     GenerationEarthEngine,
+
+    LvSteamTurbine,
+    MvSteamTurbine,
+    HvSteamTurbine,
 
     BigSteamInputHatch,
     SuperDataAccessHatch,
