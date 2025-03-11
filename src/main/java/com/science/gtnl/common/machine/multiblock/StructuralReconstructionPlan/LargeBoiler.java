@@ -434,7 +434,7 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
 
         @Override
         public int getEUt() {
-            return 3200;
+            return 1600;
         }
 
         @Override
@@ -518,7 +518,7 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
 
         @Override
         public int getEUt() {
-            return 6400;
+            return 3200;
         }
 
         @Override
@@ -602,7 +602,7 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
 
         @Override
         public int getEUt() {
-            return 12800;
+            return 6400;
         }
 
         @Override
@@ -691,7 +691,7 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
 
         @Override
         int runtimeBoost(int mTime) {
-            return mTime * 16;
+            return mTime * 4;
         }
     }
 
