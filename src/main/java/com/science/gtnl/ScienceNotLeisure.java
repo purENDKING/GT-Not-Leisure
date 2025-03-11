@@ -6,6 +6,9 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
 import java.io.File;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -17,6 +20,7 @@ import com.science.gtnl.Utils.item.TextHandler;
 import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
+import com.science.gtnl.common.block.blocks.*;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
@@ -34,6 +38,7 @@ import com.science.gtnl.loader.RecipeLoaderServerStart;
 import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -47,6 +52,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 // after
@@ -158,12 +164,26 @@ public class ScienceNotLeisure {
             .register(SuperCraftingInputHatchME.class);
     }
 
+    public static Block playerDoll;
+
     @Mod.EventHandler
     public void midGame(FMLInitializationEvent event) {
         proxy.makeThingsPretty();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
+
+        playerDoll = new PlayerDoll();
+        GameRegistry.registerBlock(playerDoll, ItemPlayerDoll.class, "playerDoll");
+        GameRegistry.registerTileEntity(PlayerDollTileEntity.class, "playerDollTileEntity");
+
+        if (event.getSide()
+            .isClient()) {
+            // 注册方块渲染器
+            ClientRegistry.bindTileEntitySpecialRenderer(PlayerDollTileEntity.class, new PlayerDollRenderer());
+            // 注册物品渲染器
+            MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(playerDoll), new ItemPlayerDollRenderer());
+        }
 
         if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
             && ProgrammableHatches.isModLoaded()
