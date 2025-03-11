@@ -1453,6 +1453,19 @@ Tooltip_ComponentAssembler_04=玻璃等级限制了能源仓等级，UMV玻璃�
 Tooltip_ComponentAssembler_05=§o效率碾压其他组装机/装配线！
 Tooltip_ComponentAssembler_Casing=任意脱氧钢机械方块
 
+NameLargeBoilerBronze=大型青铜锅炉
+NameLargeBoilerSteel=大型钢锅炉
+NameLargeBoilerTitanium=大型钛锅炉
+NameLargeBoilerTungstenSteel=大型钨钢锅炉
+LargeBoilerRecipeType=锅炉
+Tooltip_LargeBoilerBronze_00=每块煤炭将以128000升/秒的速率产生共计256000升的蒸汽
+Tooltip_LargeBoilerSteel_00=每块煤炭将以256000升/秒的速率产生共计256000升的蒸汽
+Tooltip_LargeBoilerTitanium_00=每块煤炭将以512000升/秒的速率产生共计2048000升的蒸汽
+Tooltip_LargeBoilerTungstenSteel_00=每块煤炭将以512000升/秒的速率产生共计8192000升的蒸汽
+Tooltip_LargeBoiler_00=无需预热
+Tooltip_LargeBoiler_Casing_00=任意机械方块
+Tooltip_LargeBoiler_Casing_01=任意燃烧室机械方块
+
 NameLargeSteamFurnace=大型蒸汽熔炉
 LargeSteamFurnaceRecipeType=熔炉
 Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快90%%

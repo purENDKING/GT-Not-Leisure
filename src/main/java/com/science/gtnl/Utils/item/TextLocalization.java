@@ -588,6 +588,31 @@ public class TextLocalization {
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamExtractor_Casing");
 
+    public static final String NameLargeBoilerBronze = texter("Large Boiler Bronze", "NameLargeBoilerBronze");
+    public static final String NameLargeBoilerSteel = texter("Large Boiler Steel", "NameLargeBoilerSteel");
+    public static final String NameLargeBoilerTitanium = texter("Large Boiler Titanium", "NameLargeBoilerTitanium");
+    public static final String NameLargeBoilerTungstenSteel = texter(
+        "Large Boiler TungstenSteel",
+        "NameLargeBoilerTungstenSteel");
+    public static final String LargeBoilerRecipeType = texter("Boiler", "LargeBoilerRecipeType");
+    public static final String Tooltip_LargeBoilerBronze_00 = texter(
+        "Produces 256,000L of Steam with 1 Coal at 128,000L/s",
+        "Tooltip_LargeBoilerBronze_00");
+    public static final String Tooltip_LargeBoilerSteel_00 = texter(
+        "Produces 256,000L of Steam with 1 Coal at 128,000L/s",
+        "Tooltip_LargeBoilerSteel_00");
+    public static final String Tooltip_LargeBoilerTitanium_00 = texter(
+        "Produces 256,000L of Steam with 1 Coal at 128,000L/s",
+        "Tooltip_LargeBoilerTitanium_00");
+    public static final String Tooltip_LargeBoilerTungstenSteel_00 = texter(
+        "Produces 256,000L of Steam with 1 Coal at 128,000L/s",
+        "Tooltip_LargeBoilerTungstenSteel_00");
+    public static final String Tooltip_LargeBoiler_00 = texter("No preheating required", "Tooltip_LargeBoiler_00");
+    public static final String Tooltip_LargeBoiler_Casing_00 = texter("Ang Casing", "Tooltip_LargeBoiler_Casing_00");
+    public static final String Tooltip_LargeBoiler_Casing_01 = texter(
+        "Ang Firebox Casing",
+        "Tooltip_LargeBoiler_Casing_01");
+
     public static final String NameLargeSteamCrusher = texter("Large Steam Crusher", "NameLargeSteamCrusher");
     public static final String LargeSteamCrusherRecipeType = texter("Macerator", "LargeSteamCrusherRecipeType");
     public static final String Tooltip_LargeSteamCrusher_00 = texter(

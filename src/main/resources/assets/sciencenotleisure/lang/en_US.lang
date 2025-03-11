@@ -1350,8 +1350,8 @@ Tooltip_LargeSteamHammer_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamCompressor=大型蒸汽压缩机
 LargeSteamCompressorRecipeType=压缩机
-Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快25%%
-Tooltip_LargeSteamCompressor_01=仅消耗正常需求85%%的蒸汽
+Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快50%%
+Tooltip_LargeSteamCompressor_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamCompressor_02=一次可处理多达16个物品
 Tooltip_LargeSteamCompressor_Casing=任意镀铜砖块或脱氧钢机械方块
 
@@ -1364,8 +1364,8 @@ Tooltip_LargeSteamSifter_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtruder=大型蒸汽压模机
 LargeSteamExtruderRecipeType=压模机
-Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机慢10%%
-Tooltip_LargeSteamExtruder_01=仅消耗正常需求125%%的蒸汽
+Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机快10%%
+Tooltip_LargeSteamExtruder_01=仅消耗正常需求95%%的蒸汽
 Tooltip_LargeSteamExtruder_02=一次可处理多达8个物品
 Tooltip_LargeSteamExtruder_Casing=任意镀铜砖块或脱氧钢机械方块
 
@@ -1431,9 +1431,9 @@ NeutroniumWireCuttingRecipeType=切割机
 
 NameLargeSteamCrusher=大型蒸汽破碎机
 LargeSteamCrusherRecipeType=研磨机
-Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快80%%
-Tooltip_LargeSteamCrusher_01=仅消耗正常需求120%%的蒸汽
-Tooltip_LargeSteamCrusher_02=一次可处理多达64个物品
+Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快90%%
+Tooltip_LargeSteamCrusher_01=仅消耗正常需求80%%的蒸汽
+Tooltip_LargeSteamCrusher_02=一次可处理多达128个物品
 Tooltip_LargeSteamCrusher_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtractor=大型蒸汽提取机
@@ -1452,6 +1452,19 @@ Tooltip_ComponentAssembler_03=最多安装2个能源仓！
 Tooltip_ComponentAssembler_04=玻璃等级限制了能源仓等级，UMV玻璃解锁所有等级
 Tooltip_ComponentAssembler_05=§o效率碾压其他组装机/装配线！
 Tooltip_ComponentAssembler_Casing=任意脱氧钢机械方块
+
+NameLargeBoilerBronze=大型青铜锅炉
+NameLargeBoilerSteel=大型钢锅炉
+NameLargeBoilerTitanium=大型钛锅炉
+NameLargeBoilerTungstenSteel=大型钨钢锅炉
+LargeBoilerRecipeType=锅炉
+Tooltip_LargeBoilerBronze_00=每块煤炭将以128000升/秒的速率产生共计256000升的蒸汽
+Tooltip_LargeBoilerSteel_00=每块煤炭将以256000升/秒的速率产生共计256000升的蒸汽
+Tooltip_LargeBoilerTitanium_00=每块煤炭将以512000升/秒的速率产生共计2048000升的蒸汽
+Tooltip_LargeBoilerTungstenSteel_00=每块煤炭将以512000升/秒的速率产生共计8192000升的蒸汽
+Tooltip_LargeBoiler_00=无需预热
+Tooltip_LargeBoiler_Casing_00=任意机械方块
+Tooltip_LargeBoiler_Casing_01=任意燃烧室机械方块
 
 NameLargeSteamFurnace=大型蒸汽熔炉
 LargeSteamFurnaceRecipeType=熔炉

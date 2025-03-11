@@ -78,6 +78,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeAssembler;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeAutoclave;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeBender;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeBoiler;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeCanning;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeCentrifuge;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeChemicalBath;
@@ -548,6 +549,28 @@ public class MachineLoader {
         GTNLItemList.LargeSteamSifter
             .set(new LargeSteamSifter(21101, "LargeSteamSifter", TextLocalization.NameLargeSteamSifter));
         addItemTooltip(GTNLItemList.LargeSteamSifter.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.LargeBoilerBronze
+            .set(new LargeBoiler.LargeBoilerBronze(21102, "LargeBoilerBronze", TextLocalization.NameLargeBoilerBronze));
+        addItemTooltip(GTNLItemList.LargeBoilerBronze.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeBoilerSteel
+            .set(new LargeBoiler.LargeBoilerSteel(21103, "LargeBoilerSteel", TextLocalization.NameLargeBoilerSteel));
+        addItemTooltip(GTNLItemList.LargeBoilerSteel.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeBoilerTitanium.set(
+            new LargeBoiler.LargeBoilerTitanium(
+                21104,
+                "LargeBoilerTitanium",
+                TextLocalization.NameLargeBoilerTitanium));
+        addItemTooltip(GTNLItemList.LargeBoilerTitanium.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.LargeBoilerTungstenSteel.set(
+            new LargeBoiler.LargeBoilerTungstenSteel(
+                21105,
+                "LargeBoilerTungstenSteel",
+                TextLocalization.NameLargeBoilerTungstenSteel));
+        addItemTooltip(GTNLItemList.LargeBoilerTungstenSteel.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

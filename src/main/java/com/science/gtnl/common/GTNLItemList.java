@@ -267,6 +267,10 @@ public enum GTNLItemList {
     LargeSteamCentrifuge,
     LargeSteamHammer,
     LargeSteamCompressor,
+    LargeBoilerBronze,
+    LargeBoilerSteel,
+    LargeBoilerTitanium,
+    LargeBoilerTungstenSteel,
 
     LargeSteamSifter,
     ResourceCollectionModule,
