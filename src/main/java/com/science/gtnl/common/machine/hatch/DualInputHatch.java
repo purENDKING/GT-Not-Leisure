@@ -1,4 +1,4 @@
-package com.science.gtnl.common.hatch;
+package com.science.gtnl.common.machine.hatch;
 
 import java.util.Arrays;
 import java.util.Iterator;

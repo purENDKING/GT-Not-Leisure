@@ -1,4 +1,4 @@
-package com.science.gtnl.common.hatch;
+package com.science.gtnl.common.machine.hatch;
 
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;

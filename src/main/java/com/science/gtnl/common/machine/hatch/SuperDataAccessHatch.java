@@ -1,4 +1,4 @@
-package com.science.gtnl.common.hatch;
+package com.science.gtnl.common.machine.hatch;
 
 import java.lang.reflect.Field;
 

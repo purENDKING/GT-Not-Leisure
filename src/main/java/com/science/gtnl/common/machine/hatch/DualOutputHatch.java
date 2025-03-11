@@ -1,57 +1,54 @@
-package com.science.gtnl.common.hatch;
+package com.science.gtnl.common.machine.hatch;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_INPUT_HATCH_2x2;
+
+import javax.annotation.Nonnull;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
 
+import com.cleanroommc.modularui.utils.fluid.FluidStackTank;
 import com.gtnewhorizons.modularui.api.ModularUITextures;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
-import com.gtnewhorizons.modularui.common.fluid.FluidStackTank;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.science.gtnl.Utils.item.TextLocalization;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.modularui.IAddUIWidgets;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.implementations.MTEHatchMultiInput;
+import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTUtility;
 
-public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidgets {
+public class DualOutputHatch extends MTEHatchOutput implements IAddUIWidgets {
 
     private final FluidStack[] mStoredFluid;
     private final FluidStackTank[] fluidTanks;
     public final int mCapacityPer;
 
-    private static final String TEXTURE_OVERLAY_NINE_HATCH = "sciencenotleisure:OVERLAY_NINE_HATCH";
-    private static Textures.BlockIcons.CustomIcon face;
-
-    public NinefoldInputHatch(int aID, int aSlot, String aName, String aNameRegional, int aTier) {
+    public DualOutputHatch(int aID, int aSlot, String aName, String aNameRegional, int aTier) {
         super(
             aID,
-            aSlot,
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_NinefoldInputHatch_00, "",
-                TextLocalization.Tooltip_NinefoldInputHatch_02_00 + GTUtility.formatNumbers(aSlot)
-                    + TextLocalization.Tooltip_NinefoldInputHatch_02_01 });
+            new String[] { TextLocalization.Tooltip_DualOutputHatch_00, "",
+                TextLocalization.Tooltip_DualOutputHatch_02_00 + GTUtility.formatNumbers(aSlot)
+                    + TextLocalization.Tooltip_DualOutputHatch_02_01 },
+            4);
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
         mCapacityPer = getCapacityPerTank(aTier, aSlot);
-        mDescriptionArray[1] = TextLocalization.Tooltip_NinefoldInputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = TextLocalization.Tooltip_DualOutputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
-    public NinefoldInputHatch(String aName, int aSlot, int aTier, String[] aDescription, ITexture[][][] aTextures) {
+    public DualOutputHatch(String aName, int aSlot, int aTier, String[] aDescription, ITexture[][][] aTextures) {
         super(aName, aSlot, aTier, aDescription, aTextures);
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
@@ -63,59 +60,17 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
                 fluid -> mStoredFluid[index] = fluid,
                 mCapacityPer);
         }
-        mDescriptionArray[1] = TextLocalization.Tooltip_NinefoldInputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = TextLocalization.Tooltip_DualOutputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
     @Override
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new NinefoldInputHatch(mName, getMaxType(), mTier, mDescriptionArray, mTextures);
+        return new DualOutputHatch(mName, getMaxType(), mTier, mDescriptionArray, mTextures);
     }
 
-    @Override
-    public FluidStack[] getStoredFluid() {
-        return mStoredFluid;
-    }
-
-    @Override
-    public int getCapacityPerTank(int aTier, int aSlot) {
-        return (int) (2000L * (1L << (aTier - 1)));
-    }
-
-    @Override
-    public ITexture[] getTexturesActive(ITexture aBaseTexture) {
-        return new ITexture[] { aBaseTexture, TextureFactory.of(face) };
-    }
-
-    @Override
-    public ITexture[] getTexturesInactive(ITexture aBaseTexture) {
-        return new ITexture[] { aBaseTexture, TextureFactory.of(face) };
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister aBlockIconRegister) {
-        super.registerIcons(aBlockIconRegister);
-        face = new Textures.BlockIcons.CustomIcon(TEXTURE_OVERLAY_NINE_HATCH);
-    }
-
-    @Override
-    public boolean isValidSlot(int aIndex) {
-        return aIndex >= 9;
-    }
-
-    @Override
-    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
-        final int SLOT_NUMBER = 9;
-        final Pos2d[] positions = new Pos2d[] { new Pos2d(61, 16), new Pos2d(79, 16), new Pos2d(97, 16),
-            new Pos2d(61, 34), new Pos2d(79, 34), new Pos2d(97, 34), new Pos2d(61, 52), new Pos2d(79, 52),
-            new Pos2d(97, 52) };
-
-        for (int i = 0; i < SLOT_NUMBER; i++) {
-            builder.widget(
-                new FluidSlotWidget(fluidTanks[i]).setBackground(ModularUITextures.FLUID_SLOT)
-                    .setPos(positions[i]));
-        }
+    public int getMaxType() {
+        return mStoredFluid.length;
     }
 
     @Override
@@ -141,9 +96,12 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
         }
     }
 
-    @Override
-    public int getMaxType() {
-        return mStoredFluid.length;
+    public int getCapacityPerTank(int aTier, int aSlot) {
+        if (aSlot == 4) {
+            return (int) (2000L * (1L << aTier));
+        } else {
+            return (int) (2000L * (1L << (aTier - 1)));
+        }
     }
 
     @Override
@@ -154,78 +112,20 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
         return null;
     }
 
-    public FluidStack getFluid(int aSlot) {
-        if (mStoredFluid == null || aSlot < 0 || aSlot >= getMaxType()) return null;
-        return mStoredFluid[aSlot];
-    }
-
     @Override
-    public int getFluidAmount() {
-        if (getFluid() != null) {
-            return getFluid().amount;
+    public boolean canStoreFluid(@Nonnull FluidStack fluidStack) {
+        if (GTModHandler.isSteam(fluidStack)) {
+            if (!outputsSteam()) return false;
+        } else {
+            if (!outputsLiquids()) return false;
         }
-        return 0;
-    }
 
-    @Override
-    public int getCapacity() {
-        return mCapacityPer;
-    }
-
-    @Override
-    public int getFirstEmptySlot() {
-        for (int i = 0; i < mStoredFluid.length; i++) {
-            if (mStoredFluid[i] == null) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public boolean hasFluid(FluidStack aFluid) {
-        if (aFluid == null) return false;
-        for (FluidStack tFluid : mStoredFluid) {
-            if (aFluid.isFluidEqual(tFluid)) return true;
+        for (FluidStack slotFluid : mStoredFluid) {
+            if (slotFluid == null || GTUtility.areFluidsEqual(slotFluid, fluidStack)) {
+                return true;
+            }
         }
         return false;
-    }
-
-    @Override
-    public int getFluidSlot(FluidStack tFluid) {
-        if (tFluid == null) return -1;
-        for (int i = 0; i < mStoredFluid.length; i++) {
-            if (tFluid.equals(mStoredFluid[i])) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int getFluidAmount(FluidStack tFluid) {
-        int tSlot = getFluidSlot(tFluid);
-        if (tSlot != -1) {
-            return mStoredFluid[tSlot].amount;
-        }
-        return 0;
-    }
-
-    @Override
-    public void setFluid(FluidStack aFluid, int aSlot) {
-        if (aSlot < 0 || aSlot >= getMaxType()) return;
-        mStoredFluid[aSlot] = aFluid;
-    }
-
-    @Override
-    public void addFluid(FluidStack aFluid, int aSlot) {
-        if (aSlot < 0 || aSlot >= getMaxType()) return;
-        if (aFluid.equals(mStoredFluid[aSlot])) mStoredFluid[aSlot].amount += aFluid.amount;
-        if (mStoredFluid[aSlot] == null) mStoredFluid[aSlot] = aFluid.copy();
-    }
-
-    @Override
-    public void onPreTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        if (aBaseMetaTileEntity.isServerSide()) {
-            mFluid = getFluid();
-        }
-        super.onPreTick(aBaseMetaTileEntity, aTick);
     }
 
     @Override
@@ -304,13 +204,78 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
         return tRemove;
     }
 
-    @Override
-    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-        FluidTankInfo[] FTI = new FluidTankInfo[getMaxType()];
-        for (int i = 0; i < getMaxType(); i++) {
-            FTI[i] = new FluidTankInfo(mStoredFluid[i], mCapacityPer);
+    public int getFirstEmptySlot() {
+        for (int i = 0; i < mStoredFluid.length; i++) {
+            if (mStoredFluid[i] == null) return i;
         }
-        return FTI;
+        return -1;
+    }
+
+    public boolean hasFluid(FluidStack aFluid) {
+        if (aFluid == null) return false;
+        for (FluidStack tFluid : mStoredFluid) {
+            if (aFluid.isFluidEqual(tFluid)) return true;
+        }
+        return false;
+    }
+
+    public int getFluidSlot(FluidStack tFluid) {
+        if (tFluid == null) return -1;
+        for (int i = 0; i < mStoredFluid.length; i++) {
+            if (tFluid.equals(mStoredFluid[i])) return i;
+        }
+        return -1;
+    }
+
+    public int getFluidAmount(FluidStack tFluid) {
+        int tSlot = getFluidSlot(tFluid);
+        if (tSlot != -1) {
+            return mStoredFluid[tSlot].amount;
+        }
+        return 0;
+    }
+
+    public void setFluid(FluidStack aFluid, int aSlot) {
+        if (aSlot < 0 || aSlot >= getMaxType()) return;
+        mStoredFluid[aSlot] = aFluid;
+    }
+
+    public void addFluid(FluidStack aFluid, int aSlot) {
+        if (aSlot < 0 || aSlot >= getMaxType()) return;
+        if (aFluid.equals(mStoredFluid[aSlot])) mStoredFluid[aSlot].amount += aFluid.amount;
+        if (mStoredFluid[aSlot] == null) mStoredFluid[aSlot] = aFluid.copy();
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        int SLOT_NUMBER = this.fluidTanks.length;
+        final Pos2d[] positionsFour = new Pos2d[] { new Pos2d(70, 25), new Pos2d(88, 25), new Pos2d(70, 43),
+            new Pos2d(88, 43), };
+        final Pos2d[] positionsNine = new Pos2d[] { new Pos2d(61, 16), new Pos2d(79, 16), new Pos2d(97, 16),
+            new Pos2d(61, 34), new Pos2d(79, 34), new Pos2d(97, 34), new Pos2d(61, 52), new Pos2d(79, 52),
+            new Pos2d(97, 52) };
+
+        if (SLOT_NUMBER == 4) {
+            for (int i = 0; i < SLOT_NUMBER; i++) {
+                builder.widget(
+                    new FluidSlotWidget(fluidTanks[i]).setBackground(ModularUITextures.FLUID_SLOT)
+                        .setPos(positionsFour[i]));
+            }
+        } else {
+            for (int i = 0; i < SLOT_NUMBER; i++) {
+                builder.widget(
+                    new FluidSlotWidget(fluidTanks[i]).setBackground(ModularUITextures.FLUID_SLOT)
+                        .setPos(positionsNine[i]));
+            }
+        }
+    }
+
+    @Override
+    public void onPreTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide()) {
+            mFluid = getFluid();
+        }
+        super.onPreTick(aBaseMetaTileEntity, aTick);
     }
 
     @Override
@@ -325,4 +290,23 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
         super.onPostTick(aBaseMetaTileEntity, aTick);
     }
 
+    @Override
+    public boolean isValidSlot(int aIndex) {
+        return aIndex >= getMaxType();
+    }
+
+    @Override
+    public int getCapacity() {
+        return mCapacityPer;
+    }
+
+    @Override
+    public ITexture[] getTexturesActive(ITexture aBaseTexture) {
+        return new ITexture[] { aBaseTexture, TextureFactory.of(OVERLAY_INPUT_HATCH_2x2) };
+    }
+
+    @Override
+    public ITexture[] getTexturesInactive(ITexture aBaseTexture) {
+        return new ITexture[] { aBaseTexture, TextureFactory.of(OVERLAY_INPUT_HATCH_2x2) };
+    }
 }
