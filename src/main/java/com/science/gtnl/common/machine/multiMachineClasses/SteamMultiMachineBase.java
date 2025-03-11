@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
-import com.science.gtnl.common.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.metatileentity.IItemLockable;

@@ -41,7 +41,7 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
 import com.gtnewhorizons.modularui.common.widget.DynamicPositionedRow;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.science.gtnl.common.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.gui.modularui.GTUITextures;
