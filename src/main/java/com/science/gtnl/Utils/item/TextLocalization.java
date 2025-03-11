@@ -393,6 +393,10 @@ public class TextLocalization {
     public static final String Tooltip_SteamTurbine_02 = texter("Fuel Efficiency: ", "Tooltip_SteamTurbine_02");
     public static final String Tooltip_SteamTurbine_03 = texter("Fluid capacity: ", "Tooltip_SteamTurbine_03");
 
+    public static final String SteamAssemblerBronze = texter("Steam Assembler", "SteamAssemblerBronze");
+    public static final String SteamAssemblerSteel = texter("High Pressure Steam Assembler", "SteamAssemblerSteel");
+    public static final String Tooltip_SteamAssembler_00 = texter("Avengers, Assemble!", "Tooltip_SteamAssembler_00");
+
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(
         "Disordered Assembly Line",

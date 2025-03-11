@@ -130,6 +130,10 @@ Tooltip_SteamTurbine_01=基础效率: 2L蒸汽/EU
 Tooltip_SteamTurbine_02=燃料效率:
 Tooltip_SteamTurbine_03=流体容量: 
 
+SteamAssemblerBronze=蒸汽组装机
+SteamAssemblerSteel=高压蒸汽组装机
+Tooltip_SteamAssembler_00=复仇者们，集结！
+
 MetaCasing.0.name=测试机械方块
 MetaCasing.1.name=蒸汽装配机械方块
 MetaCasing.2.name=散热片

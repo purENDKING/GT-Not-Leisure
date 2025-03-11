@@ -8,6 +8,8 @@ import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
+import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
 import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.hatch.DebugEnergyHatch;
@@ -877,6 +879,14 @@ public class MachineLoader {
         GTNLItemList.HvSteamTurbine
             .set(new SteamTurbine(23003, "AdvancedSteamTurbineII", TextLocalization.HvSteamTurbine, 3));
         addItemTooltip(GTNLItemList.HvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamAssemblerBronze
+            .set(new SteamAssemblerBronze(23004, "SteamAssembler", TextLocalization.SteamAssemblerBronze));
+        addItemTooltip(GTNLItemList.SteamAssemblerBronze.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamAssemblerSteel
+            .set(new SteamAssemblerSteel(23005, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
+        addItemTooltip(GTNLItemList.SteamAssemblerSteel.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void loadMachinesPostInit() {
