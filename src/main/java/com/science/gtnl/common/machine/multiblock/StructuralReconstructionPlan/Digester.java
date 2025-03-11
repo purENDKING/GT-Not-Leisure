@@ -124,7 +124,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(5, 5, 5, true)
+            .beginStructureBlock(7, 4, 7, true)
             .addInputHatch(TextLocalization.Tooltip_Digester_Casing)
             .addOutputHatch(TextLocalization.Tooltip_Digester_Casing)
             .addInputBus(TextLocalization.Tooltip_Digester_Casing)
