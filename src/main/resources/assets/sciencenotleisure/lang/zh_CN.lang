@@ -122,6 +122,14 @@ HumongousInputBusMAX=巨型输入总线 (MAX)
 SuperDataAccessHatch=超级数据访问仓
 Tooltip_SuperDataAccessHatch_00=增加81个额外的格子以放置闪存
 
+LvSteamTurbine=基础蒸汽轮机
+MvSteamTurbine=进阶蒸汽轮机
+HvSteamTurbine=进阶蒸汽轮机 II
+Tooltip_SteamTurbine_00=将蒸汽转换为EU
+Tooltip_SteamTurbine_01=基础效率: 2L蒸汽/EU
+Tooltip_SteamTurbine_02=燃料效率:
+Tooltip_SteamTurbine_03=流体容量: 
+
 MetaCasing.0.name=测试机械方块
 MetaCasing.1.name=蒸汽装配机械方块
 MetaCasing.2.name=散热片
@@ -1472,6 +1480,13 @@ Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快90%%
 Tooltip_LargeSteamFurnace_01=仅消耗正常需求50%%的蒸汽
 Tooltip_LargeSteamFurnace_02=一次可处理多达128个物品
 Tooltip_LargeSteamFurnace_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamFormingPress=大型蒸汽冲压机床
+LargeSteamFormingPressRecipeType=冲压机床
+Tooltip_LargeSteamFormingPress_00=比同等级的单方块冲压机床快20%%
+Tooltip_LargeSteamFormingPress_01=仅消耗正常需求90%%的蒸汽
+Tooltip_LargeSteamFormingPress_02=一次可处理多达16个物品
+Tooltip_LargeSteamFormingPress_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamAlloySmelter=大型蒸汽铸形炉
 LargeSteamAlloySmelterRecipeType=合金炉

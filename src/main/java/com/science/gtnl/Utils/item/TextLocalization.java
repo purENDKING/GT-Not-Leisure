@@ -383,6 +383,16 @@ public class TextLocalization {
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCircuitAssembler_Casing");
 
+    public static final String LvSteamTurbine = texter("Basic Steam Turbine", "LvSteamTurbine");
+    public static final String MvSteamTurbine = texter("Advanced Steam Turbine", "MvSteamTurbine");
+    public static final String HvSteamTurbine = texter("Advanced Steam Turbine II", "HvSteamTurbine");
+    public static final String Tooltip_SteamTurbine_00 = texter("Converts Steam into EU", "Tooltip_SteamTurbine_00");
+    public static final String Tooltip_SteamTurbine_01 = texter(
+        "Base rate: 2L of Steam -> 1 EU",
+        "Tooltip_SteamTurbine_01");
+    public static final String Tooltip_SteamTurbine_02 = texter("Fuel Efficiency: ", "Tooltip_SteamTurbine_02");
+    public static final String Tooltip_SteamTurbine_03 = texter("Fluid capacity: ", "Tooltip_SteamTurbine_03");
+
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(
         "Disordered Assembly Line",
@@ -627,6 +637,25 @@ public class TextLocalization {
     public static final String Tooltip_LargeSteamCrusher_Casing = texter(
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCrusher_Casing");
+
+    public static final String NameLargeSteamFormingPress = texter(
+        "Large Steam Formin Press",
+        "NameLargeSteamFormingPress");
+    public static final String LargeSteamFormingPressRecipeType = texter(
+        "Forming Press",
+        "LargeSteamFormingPressRecipeType");
+    public static final String Tooltip_LargeSteamFormingPress_00 = texter(
+        "20%% faster than using single block steam machines of the same forming press",
+        "Tooltip_LargeSteamFormingPress_00");
+    public static final String Tooltip_LargeSteamFormingPress_01 = texter(
+        "Only consumes steam at 90%% of the L/s normally required",
+        "Tooltip_LargeSteamFormingPress_01");
+    public static final String Tooltip_LargeSteamFormingPress_02 = texter(
+        "Processes up to 16 items at once",
+        "Tooltip_LargeSteamFormingPress_02");
+    public static final String Tooltip_LargeSteamFormingPress_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamFormingPress_Casing");
 
     public static final String NameLargeSteamExtruder = texter("Large Steam Extruder", "NameLargeSteamExtruder");
     public static final String LargeSteamExtruderRecipeType = texter("Extruder", "LargeSteamExtruderRecipeType");
