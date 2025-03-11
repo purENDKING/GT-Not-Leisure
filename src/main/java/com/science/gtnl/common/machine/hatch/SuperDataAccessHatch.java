@@ -13,11 +13,12 @@ import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.modularui.IAddGregtechLogo;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 
-public class SuperDataAccessHatch extends MTEHatchDataAccess {
+public class SuperDataAccessHatch extends MTEHatchDataAccess implements IAddGregtechLogo {
 
     private ItemStack[] mInventory;
 
@@ -88,4 +89,7 @@ public class SuperDataAccessHatch extends MTEHatchDataAccess {
         }
         return null;
     }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {}
 }

@@ -230,12 +230,7 @@ public class DebugEnergyHatch extends MTEHatchEnergy implements IAddUIWidgets, I
     }
 
     @Override
-    public void addGregTechLogo(ModularWindow.Builder builder) {
-        builder.widget(
-            new DrawableWidget().setDrawable(GTUITextures.PICTURE_GT_LOGO_17x17_TRANSPARENT_GRAY)
-                .setSize(17, 17)
-                .setPos(113, 56));
-    }
+    public void addGregTechLogo(ModularWindow.Builder builder) {}
 
     @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
