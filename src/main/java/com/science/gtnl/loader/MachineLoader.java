@@ -5,19 +5,21 @@ import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemToolti
 import net.minecraft.item.ItemStack;
 
 import com.science.gtnl.Utils.AnimatedText;
+import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.hatch.CustomFluidHatch;
-import com.science.gtnl.common.hatch.DebugEnergyHatch;
-import com.science.gtnl.common.hatch.DualInputHatch;
-import com.science.gtnl.common.hatch.DualOutputHatch;
-import com.science.gtnl.common.hatch.HumongousInputBus;
-import com.science.gtnl.common.hatch.HumongousNinefoldInputHatch;
-import com.science.gtnl.common.hatch.HumongousSolidifierHatch;
-import com.science.gtnl.common.hatch.NinefoldInputHatch;
-import com.science.gtnl.common.hatch.SuperCraftingInputHatchME;
-import com.science.gtnl.common.hatch.SuperCraftingInputProxy;
-import com.science.gtnl.common.hatch.SuperDataAccessHatch;
+import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
+import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.DebugEnergyHatch;
+import com.science.gtnl.common.machine.hatch.DualInputHatch;
+import com.science.gtnl.common.machine.hatch.DualOutputHatch;
+import com.science.gtnl.common.machine.hatch.HumongousInputBus;
+import com.science.gtnl.common.machine.hatch.HumongousNinefoldInputHatch;
+import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
+import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
+import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
+import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
+import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
@@ -45,6 +47,7 @@ import com.science.gtnl.common.machine.multiblock.LargeSteamCircuitAssembler;
 import com.science.gtnl.common.machine.multiblock.LargeSteamCrusher;
 import com.science.gtnl.common.machine.multiblock.LargeSteamExtractor;
 import com.science.gtnl.common.machine.multiblock.LargeSteamExtruder;
+import com.science.gtnl.common.machine.multiblock.LargeSteamFormingPress;
 import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
 import com.science.gtnl.common.machine.multiblock.LargeSteamSifter;
 import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
@@ -122,6 +125,7 @@ import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import goodgenerator.util.CrackRecipeAdder;
+import gregtech.api.enums.Materials;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
@@ -572,6 +576,10 @@ public class MachineLoader {
                 TextLocalization.NameLargeBoilerTungstenSteel));
         addItemTooltip(GTNLItemList.LargeBoilerTungstenSteel.get(1), AnimatedText.SNL_SRP);
 
+        GTNLItemList.LargeSteamFormingPress.set(
+            new LargeSteamFormingPress(21106, "LargeSteamFormingPress", TextLocalization.NameLargeSteamFormingPress));
+        addItemTooltip(GTNLItemList.LargeSteamFormingPress.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -763,76 +771,8 @@ public class MachineLoader {
                 .getStackForm(1L));
         addItemTooltip(GTNLItemList.SuperCraftingInputProxy.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.QuadrupleOutputHatchEV.set(
-            new DualOutputHatch(22500, 4, "Quadruple Output Hatch EV", TextLocalization.QuadrupleOutputHatchEV, 4));
-        addItemTooltip(GTNLItemList.QuadrupleOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.NinefoldOutputHatchEV
-            .set(new DualOutputHatch(22501, 9, "Ninefold Output Hatch EV", TextLocalization.NinefoldOutputHatchEV, 4));
-        addItemTooltip(GTNLItemList.NinefoldOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusULV
-            .set(new HumongousInputBus(22502, "Humongous Input Bus ULV", TextLocalization.HumongousInputBusULV, 0));
-        addItemTooltip(GTNLItemList.HumongousInputBusULV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusLV
-            .set(new HumongousInputBus(22503, "Humongous Input Bus LV", TextLocalization.HumongousInputBusLV, 1));
-        addItemTooltip(GTNLItemList.HumongousInputBusLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusMV
-            .set(new HumongousInputBus(22504, "Humongous Input Bus MV", TextLocalization.HumongousInputBusMV, 2));
-        addItemTooltip(GTNLItemList.HumongousInputBusMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusHV
-            .set(new HumongousInputBus(22505, "Humongous Input Bus HV", TextLocalization.HumongousInputBusHV, 3));
-        addItemTooltip(GTNLItemList.HumongousInputBusHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusEV
-            .set(new HumongousInputBus(22506, "Humongous Input Bus EV", TextLocalization.HumongousInputBusEV, 4));
-        addItemTooltip(GTNLItemList.HumongousInputBusEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusIV
-            .set(new HumongousInputBus(22507, "Humongous Input Bus IV", TextLocalization.HumongousInputBusIV, 5));
-        addItemTooltip(GTNLItemList.HumongousInputBusIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusLuV
-            .set(new HumongousInputBus(22508, "Humongous Input Bus LuV", TextLocalization.HumongousInputBusLuV, 6));
-        addItemTooltip(GTNLItemList.HumongousInputBusLuV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusZPM
-            .set(new HumongousInputBus(22509, "Humongous Input Bus ZPM", TextLocalization.HumongousInputBusZPM, 7));
-        addItemTooltip(GTNLItemList.HumongousInputBusZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUV
-            .set(new HumongousInputBus(22510, "Humongous Input Bus UV", TextLocalization.HumongousInputBusUV, 8));
-        addItemTooltip(GTNLItemList.HumongousInputBusUV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUHV
-            .set(new HumongousInputBus(22511, "Humongous Input Bus UHV", TextLocalization.HumongousInputBusUHV, 9));
-        addItemTooltip(GTNLItemList.HumongousInputBusUHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUEV
-            .set(new HumongousInputBus(22512, "Humongous Input Bus UEV", TextLocalization.HumongousInputBusUEV, 10));
-        addItemTooltip(GTNLItemList.HumongousInputBusUEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUIV
-            .set(new HumongousInputBus(22513, "Humongous Input Bus UIV", TextLocalization.HumongousInputBusUIV, 11));
-        addItemTooltip(GTNLItemList.HumongousInputBusUIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUMV
-            .set(new HumongousInputBus(22514, "Humongous Input Bus UMV", TextLocalization.HumongousInputBusUMV, 12));
-        addItemTooltip(GTNLItemList.HumongousInputBusUMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusUXV
-            .set(new HumongousInputBus(22515, "Humongous Input Bus UXV", TextLocalization.HumongousInputBusUXV, 13));
-        addItemTooltip(GTNLItemList.HumongousInputBusUXV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        GTNLItemList.HumongousInputBusMAX
-            .set(new HumongousInputBus(22516, "Humongous Input Bus MAX", TextLocalization.HumongousInputBusMAX, 14));
-        addItemTooltip(GTNLItemList.HumongousInputBusMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
         GTNLItemList.SuperDataAccessHatch
-            .set(new SuperDataAccessHatch(22517, "Super Data Access Hatch", TextLocalization.SuperDataAccessHatch, 14));
+            .set(new SuperDataAccessHatch(21535, "Super Data Access Hatch", TextLocalization.SuperDataAccessHatch, 14));
         addItemTooltip(GTNLItemList.SuperDataAccessHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.BigSteamInputHatch.set(
@@ -845,7 +785,98 @@ public class MachineLoader {
                 TextLocalization.BigSteamInputHatch,
                 1));
         addItemTooltip(GTNLItemList.BigSteamInputHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+    }
 
+    public static void registerTestMachine() {
+        GTNLItemList.QuadrupleOutputHatchEV.set(
+            new DualOutputHatch(21700, 4, "Quadruple Output Hatch EV", TextLocalization.QuadrupleOutputHatchEV, 4));
+        addItemTooltip(GTNLItemList.QuadrupleOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.NinefoldOutputHatchEV
+            .set(new DualOutputHatch(21701, 9, "Ninefold Output Hatch EV", TextLocalization.NinefoldOutputHatchEV, 4));
+        addItemTooltip(GTNLItemList.NinefoldOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusULV
+            .set(new HumongousInputBus(21702, "Humongous Input Bus ULV", TextLocalization.HumongousInputBusULV, 0));
+        addItemTooltip(GTNLItemList.HumongousInputBusULV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusLV
+            .set(new HumongousInputBus(21703, "Humongous Input Bus LV", TextLocalization.HumongousInputBusLV, 1));
+        addItemTooltip(GTNLItemList.HumongousInputBusLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusMV
+            .set(new HumongousInputBus(21704, "Humongous Input Bus MV", TextLocalization.HumongousInputBusMV, 2));
+        addItemTooltip(GTNLItemList.HumongousInputBusMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusHV
+            .set(new HumongousInputBus(21705, "Humongous Input Bus HV", TextLocalization.HumongousInputBusHV, 3));
+        addItemTooltip(GTNLItemList.HumongousInputBusHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusEV
+            .set(new HumongousInputBus(21706, "Humongous Input Bus EV", TextLocalization.HumongousInputBusEV, 4));
+        addItemTooltip(GTNLItemList.HumongousInputBusEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusIV
+            .set(new HumongousInputBus(21707, "Humongous Input Bus IV", TextLocalization.HumongousInputBusIV, 5));
+        addItemTooltip(GTNLItemList.HumongousInputBusIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusLuV
+            .set(new HumongousInputBus(21708, "Humongous Input Bus LuV", TextLocalization.HumongousInputBusLuV, 6));
+        addItemTooltip(GTNLItemList.HumongousInputBusLuV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusZPM
+            .set(new HumongousInputBus(21709, "Humongous Input Bus ZPM", TextLocalization.HumongousInputBusZPM, 7));
+        addItemTooltip(GTNLItemList.HumongousInputBusZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUV
+            .set(new HumongousInputBus(21710, "Humongous Input Bus UV", TextLocalization.HumongousInputBusUV, 8));
+        addItemTooltip(GTNLItemList.HumongousInputBusUV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUHV
+            .set(new HumongousInputBus(21711, "Humongous Input Bus UHV", TextLocalization.HumongousInputBusUHV, 9));
+        addItemTooltip(GTNLItemList.HumongousInputBusUHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUEV
+            .set(new HumongousInputBus(21712, "Humongous Input Bus UEV", TextLocalization.HumongousInputBusUEV, 10));
+        addItemTooltip(GTNLItemList.HumongousInputBusUEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUIV
+            .set(new HumongousInputBus(21713, "Humongous Input Bus UIV", TextLocalization.HumongousInputBusUIV, 11));
+        addItemTooltip(GTNLItemList.HumongousInputBusUIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUMV
+            .set(new HumongousInputBus(21714, "Humongous Input Bus UMV", TextLocalization.HumongousInputBusUMV, 12));
+        addItemTooltip(GTNLItemList.HumongousInputBusUMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusUXV
+            .set(new HumongousInputBus(21715, "Humongous Input Bus UXV", TextLocalization.HumongousInputBusUXV, 13));
+        addItemTooltip(GTNLItemList.HumongousInputBusUXV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HumongousInputBusMAX
+            .set(new HumongousInputBus(21716, "Humongous Input Bus MAX", TextLocalization.HumongousInputBusMAX, 14));
+        addItemTooltip(GTNLItemList.HumongousInputBusMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+    }
+
+    public static void registerMTEWire() {
+        CrackRecipeAdder.registerWire(22001, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
+        MoreMaterialToolUtil.generateGTFluidPipes(Materials.Electrum, 22013, 1000, 2800, true);
+        // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
+        // true);
+        // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
+    }
+
+    public static void registerBasicMachine() {
+        GTNLItemList.LvSteamTurbine
+            .set(new SteamTurbine(23001, "BasicSteamTurbine", TextLocalization.LvSteamTurbine, 1));
+        addItemTooltip(GTNLItemList.LvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.MvSteamTurbine
+            .set(new SteamTurbine(23002, "AdvancedSteamTurbine", TextLocalization.MvSteamTurbine, 2));
+        addItemTooltip(GTNLItemList.MvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HvSteamTurbine
+            .set(new SteamTurbine(23003, "AdvancedSteamTurbineII", TextLocalization.HvSteamTurbine, 3));
+        addItemTooltip(GTNLItemList.HvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void loadMachinesPostInit() {
@@ -857,14 +888,11 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
-    public static void registerMTEWire() {
-        CrackRecipeAdder.registerWire(22701, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-    }
-
     public static void run() {
         Logger.INFO("GTNL Content | Registering MTE Block Machine.");
         registerMTEHatch();
         loadMachines();
         registerMTEWire();
+        registerBasicMachine();
     }
 }

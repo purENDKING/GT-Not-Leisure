@@ -364,8 +364,7 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GTNLItemList.LargeBoilerBronze.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Tin, 1L),
-                'B', GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Bronze, 1L), 'C',
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LV, 1L), 'D',
+                'B', GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Bronze, 1L), 'C', "circuitBasic", 'D',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Bronze, 1L), 'E',
                 ItemList.Casing_Firebox_Bronze.get(1) });
 
@@ -373,16 +372,14 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.LargeBoilerSteel.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A',
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Copper, 1L), 'B',
-                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'C',
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.MV, 1L), 'D',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'C', "circuitGood", 'D',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Steel, 1L), 'E',
                 ItemList.Casing_Firebox_Steel.get(1) });
 
         addCraftingRecipe(
             GTNLItemList.LargeBoilerTitanium.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L),
-                'B', GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Titanium, 1L), 'C',
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.HV, 1L), 'D',
+                'B', GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Titanium, 1L), 'C', "circuitAdvanced", 'D',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Titanium, 1L), 'E',
                 ItemList.Casing_Firebox_Titanium.get(1) });
 
@@ -390,9 +387,13 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.LargeBoilerTungstenSteel.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A',
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Aluminium, 1L), 'B',
-                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.TungstenSteel, 1L), 'C',
-                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 1L), 'D',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.TungstenSteel, 1L), 'C', "circuitData", 'D',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1L), 'E',
                 ItemList.Casing_Firebox_TungstenSteel.get(1) });
+
+        addCraftingRecipe(
+            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrum, 2L),
+            new Object[] { "AB ", "   ", "   ", 'A', GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 1L), 'B',
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silver, 1L) });
     }
 }
