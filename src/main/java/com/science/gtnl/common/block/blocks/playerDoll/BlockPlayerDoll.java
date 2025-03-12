@@ -9,10 +9,12 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.mojang.authlib.GameProfile;
 import com.science.gtnl.client.GTNLCreativeTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -53,34 +55,55 @@ public class BlockPlayerDoll extends BlockContainer {
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemstack) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
 
-            if (!itemstack.hasTagCompound() || !itemstack.getTagCompound()
-                .hasKey("SkullOwner")) {
-                tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
+        if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
+            // 检查 ItemStack 是否包含 SkullOwner 的 NBT 数据
+            if (itemstack.hasTagCompound()) {
+                NBTTagCompound nbt = itemstack.getTagCompound();
+                GameProfile profile = null;
+
+                if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
+                    // SkullOwner 是字符串，直接获取玩家名称
+                    String playerName = nbt.getString("SkullOwner");
+                    profile = new GameProfile(null, playerName);
+                } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
+                    // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
+                    NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
+                    profile = NBTUtil.func_152459_a(ownerTag);
+                }
+
+                if (profile != null) {
+                    tileEntityPlayerDoll.setSkullOwner(profile); // 设置 SkullOwner
+                } else {
+                    // 如果没有 SkullOwner 数据，则设置为放置方块的玩家
+                    tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
+                }
             } else {
-                tileEntityPlayerDoll.setSkullOwner(
-                    itemstack.getTagCompound()
-                        .getString("SkullOwner"));
+                // 如果没有 NBT 数据，则设置为放置方块的玩家
+                tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
             }
         }
-        int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if (l == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+        // 设置方块的朝向
+        int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        int metadata = 0;
+
+        switch (direction) {
+            case 0: // 南
+                metadata = 2;
+                break;
+            case 1: // 西
+                metadata = 5;
+                break;
+            case 2: // 北
+                metadata = 3;
+                break;
+            case 3: // 东
+                metadata = 4;
+                break;
         }
 
-        if (l == 1) {
-            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
-        }
-
-        if (l == 2) {
-            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
-        }
-
-        if (l == 3) {
-            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
-        }
+        world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
     }
 
     @Override
@@ -90,10 +113,16 @@ public class BlockPlayerDoll extends BlockContainer {
 
         if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
             ItemStack drop = new ItemStack(this);
-            NBTTagCompound nbt = new NBTTagCompound();
-            tileEntityPlayerDoll.writeToNBT(nbt); // 保存 TileEntity 数据
 
-            if (!nbt.hasNoTags()) {
+            // 获取 SkullOwner 的 GameProfile
+            GameProfile skullOwner = tileEntityPlayerDoll.getSkullOwner();
+
+            // 如果 SkullOwner 存在，保存到 NBT
+            if (skullOwner != null) {
+                NBTTagCompound nbt = new NBTTagCompound();
+                NBTTagCompound ownerTag = new NBTTagCompound();
+                NBTUtil.func_152460_a(ownerTag, skullOwner); // 将 GameProfile 写入 NBT
+                nbt.setTag("SkullOwner", ownerTag); // 保存到 SkullOwner 标签
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
             }
 
