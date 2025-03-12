@@ -17,7 +17,6 @@ import com.science.gtnl.Utils.item.TextHandler;
 import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
-import com.science.gtnl.common.block.blocks.*;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
