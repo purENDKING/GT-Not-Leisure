@@ -4,53 +4,75 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StringUtils;
 
+import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 
 public class TileEntityPlayerDoll extends TileEntity {
 
     private GameProfile skullOwner;
 
-    // 设置 SkullOwner（支持 GameProfile）
-    public void setSkullOwner(GameProfile profile) {
-        this.skullOwner = profile;
-        this.markDirty(); // 标记数据已修改
-    }
-
-    public void setSkullOwner(String playerName) {
-        if (playerName != null && !playerName.isEmpty()) {
-            // 获取玩家名对应的 UUID
-            GameProfile profile = MinecraftServer.getServer()
-                .func_152358_ax() // 获取 GameProfile 缓存
-                .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
-
-            if (profile != null) {
-                this.skullOwner = profile;
-                this.markDirty(); // 标记数据已修改
-            }
-        }
-    }
-
-    // 获取 SkullOwner
-    public GameProfile getSkullOwner() {
-        return skullOwner;
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        if (nbt.hasKey("SkullOwner", 10)) { // 检查是否存在 SkullOwner 的 NBT 数据
-            skullOwner = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner")); // 从 NBT 中读取 GameProfile
+        if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
+            this.skullOwner = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
+        } else if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
+            String playerName = nbt.getString("SkullOwner");
+            this.skullOwner = new GameProfile(null, playerName);
         }
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        if (skullOwner != null) {
-            NBTTagCompound profileTag = new NBTTagCompound();
-            NBTUtil.func_152460_a(profileTag, skullOwner); // 将 GameProfile 写入 NBT
-            nbt.setTag("SkullOwner", profileTag);
+        if (this.skullOwner != null) {
+            NBTTagCompound ownerTag = new NBTTagCompound();
+            NBTUtil.func_152460_a(ownerTag, this.skullOwner);
+            nbt.setTag("SkullOwner", ownerTag);
+        }
+    }
+
+    public GameProfile getSkullOwner() {
+        return skullOwner;
+    }
+
+    public void getGameProfileNull() {
+        this.skullOwner = null;
+        this.markDirty();
+    }
+
+    public void getGameProfile(GameProfile gameProfile) {
+        this.skullOwner = gameProfile;
+        this.getProfile();
+    }
+
+    public void getProfile() {
+        if (this.skullOwner != null && !StringUtils.isNullOrEmpty(this.skullOwner.getName())) {
+            if (!this.skullOwner.isComplete() || !this.skullOwner.getProperties()
+                .containsKey("textures")) {
+                GameProfile gameprofile = MinecraftServer.getServer()
+                    .func_152358_ax()
+                    .func_152655_a(this.skullOwner.getName());
+
+                if (gameprofile != null) {
+                    Property property = (Property) Iterables.getFirst(
+                        gameprofile.getProperties()
+                            .get("textures"),
+                        (Object) null);
+
+                    if (property == null) {
+                        gameprofile = MinecraftServer.getServer()
+                            .func_147130_as()
+                            .fillProfileProperties(gameprofile, true);
+                    }
+
+                    this.skullOwner = gameprofile;
+                    this.markDirty();
+                }
+            }
         }
     }
 }

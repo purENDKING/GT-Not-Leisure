@@ -44,14 +44,15 @@ public class ItemPlayerDoll extends ItemBlock {
                     }
 
                     if (profile != null) {
-                        tileEntityPlayerDoll.setSkullOwner(profile); // 设置 SkullOwner
+                        ((TileEntityPlayerDoll) tileEntity).getGameProfile(profile);
                     } else {
                         // 如果没有 SkullOwner 数据，则设置为放置方块的玩家
-                        tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
+                        String playerName = player.getCommandSenderName(); // 获取放置方块的玩家名字
+                        profile = new GameProfile(null, playerName); // 创建 GameProfile
+                        tileEntityPlayerDoll.getGameProfile(profile); // 调用 getGameProfile
                     }
                 } else {
-                    // 如果没有 NBT 数据，则设置为放置方块的玩家
-                    tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
+                    ((TileEntityPlayerDoll) tileEntity).getGameProfileNull();
                 }
             }
         }

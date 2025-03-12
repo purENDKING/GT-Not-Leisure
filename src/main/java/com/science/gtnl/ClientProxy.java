@@ -12,8 +12,8 @@ import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAn
 import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
+import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
-import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.ItemLoader;
 
@@ -41,8 +41,8 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerBlockHandler(new RenderExtremeAnvil());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtremeAnvil.class, new RenderExtremeAnvil());
 
-        new PlayerDollRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new PlayerDollRenderer());
+        new BlockPlayerDollRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new BlockPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
 
         LanguageManager.writePlaceholderStrings();

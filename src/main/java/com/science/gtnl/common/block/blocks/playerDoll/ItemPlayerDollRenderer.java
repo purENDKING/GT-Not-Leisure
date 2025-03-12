@@ -5,16 +5,20 @@ import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.mojang.authlib.properties.Property;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.relauncher.Side;
@@ -75,30 +79,36 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         ResourceLocation capeTexture = DEFAULT_CAPE;
 
         if (MainConfig.enableCustomPlayerDoll) {
+            GameProfile skullOwner = null;
 
-            // 从 ItemStack 中获取 SkullOwner 的 GameProfile
-            GameProfile profile = null;
             if (item.hasTagCompound()) {
                 NBTTagCompound nbt = item.getTagCompound();
+
+                // 检查 SkullOwner 数据
                 if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-                    // SkullOwner 是字符串，获取玩家名称并通过 SessionService 获取完整的 GameProfile
+                    // SkullOwner 是字符串，直接获取玩家名称
                     String playerName = nbt.getString("SkullOwner");
-                    profile = MinecraftServer.getServer()
-                        .func_152358_ax() // 获取 GameProfile 缓存
-                        .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
+                    skullOwner = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
-                    String playerName = nbt.getString("SkullOwner");
-                    profile = MinecraftServer.getServer()
-                        .func_152358_ax() // 获取 GameProfile 缓存
-                        .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
+                    NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
+                    skullOwner = NBTUtil.func_152459_a(ownerTag);
                 }
             }
 
+            if (skullOwner != null) {
+                skullOwner = getGameProfile(skullOwner); // 获取完整的 GameProfile
+            } else {
+                // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
+                String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                skullOwner = new GameProfile(null, playerName);
+                skullOwner = getGameProfile(skullOwner); // 获取完整的 GameProfile
+            }
+
             // 如果 GameProfile 有效，加载皮肤和披风纹理
-            if (profile != null) {
+            if (skullOwner != null) {
                 Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
-                    .func_152788_a(profile);
+                    .func_152788_a(skullOwner);
 
                 if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
                     skinTexture = minecraft.func_152342_ad()
@@ -112,18 +122,6 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                             textureMap.get(MinecraftProfileTexture.Type.CAPE),
                             MinecraftProfileTexture.Type.CAPE);
                 }
-            } else {
-                // 如果 SkullOwner 无效，使用默认皮肤和披风
-                skinTexture = minecraft.thePlayer.getLocationSkin();
-                capeTexture = minecraft.thePlayer.getLocationCape();
-            }
-
-            // 确保皮肤和披风纹理不为 null
-            if (skinTexture == null) {
-                skinTexture = DEFAULT_SKIN;
-            }
-            if (capeTexture == null) {
-                capeTexture = DEFAULT_CAPE;
             }
         }
 
@@ -149,6 +147,33 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         modelCustom.renderPart("cape");
 
         GL11.glPopMatrix();
+    }
+
+    private GameProfile getGameProfile(GameProfile profile) {
+        if (profile != null && !StringUtils.isNullOrEmpty(profile.getName())) {
+            if (!profile.isComplete() || !profile.getProperties()
+                .containsKey("textures")) {
+                GameProfile gameprofile = MinecraftServer.getServer()
+                    .func_152358_ax()
+                    .func_152655_a(profile.getName());
+
+                if (gameprofile != null) {
+                    Property property = (Property) Iterables.getFirst(
+                        gameprofile.getProperties()
+                            .get("textures"),
+                        (Object) null);
+
+                    if (property == null) {
+                        gameprofile = MinecraftServer.getServer()
+                            .func_147130_as()
+                            .fillProfileProperties(gameprofile, true);
+                    }
+
+                    return gameprofile;
+                }
+            }
+        }
+        return profile;
     }
 
     private void renderModelParts(String... partNames) {

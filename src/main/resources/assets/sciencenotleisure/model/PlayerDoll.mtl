@@ -1,6 +1,22 @@
-# Made in Blockbench 4.12.3
-newmtl m_6f8b256c-59aa-1106-6187-172df870970d
-map_Kd skin.png
-newmtl m_10f062fa-b22e-49fc-e6cf-ffcb3be19263
+# Blender 4.2.1 LTS MTL File: 'None'
+# www.blender.org
+
+newmtl m_7bad9166-8043-1854-2cc0-0d5f26e1c417
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 1
 map_Kd cape.png
-newmtl none
+
+newmtl m_b2d9a127-0125-1ab6-396b-443a9a8bcfa4
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+illum 1
+map_Kd skin.png
+map_d skin.png
