@@ -861,7 +861,7 @@ public class MachineLoader {
 
     public static void registerMTEWire() {
         CrackRecipeAdder.registerWire(22201, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-        MoreMaterialToolUtil.generateGTFluidPipes(Materials.Electrum, 22213, 1000, 2800, true);
+        MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22213, 1500, 2800, true);
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);

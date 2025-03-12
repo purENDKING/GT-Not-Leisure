@@ -395,5 +395,10 @@ public class CraftingTableRecipes implements IRecipePool {
             GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrum, 2L),
             new Object[] { "AB ", "   ", "   ", 'A', GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 1L), 'B',
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silver, 1L) });
+
+        addCraftingRecipe(
+            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrotine, 8L),
+            new Object[] { "AB ", "   ", "   ", 'A', GTOreDictUnificator.get(OrePrefixes.dust, Materials.Redstone, 1L), 'B',
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrum, 1L) });
     }
 }
