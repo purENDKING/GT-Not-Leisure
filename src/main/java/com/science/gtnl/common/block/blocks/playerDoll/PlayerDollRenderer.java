@@ -32,6 +32,8 @@ public class PlayerDollRenderer extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks) {
         if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
             String playerName = tileEntityPlayerDoll.getSkullOwner();
+            GL11.glPushMatrix();
+            GL11.glTranslated(x + 0.5, y, z + 0.5);
 
             // 如果玩家名称有效，加载皮肤和披风纹理
             if (playerName != null && !playerName.isEmpty()) {
@@ -54,22 +56,22 @@ public class PlayerDollRenderer extends TileEntitySpecialRenderer {
 
                 skinTexture = player.getLocationSkin();
 
-                // 检查是否有自定义的皮肤和披风
                 if (skinTexture == null) {
                     skinTexture = DEFAULT_SKIN;
                 }
             }
 
-            // 渲染逻辑
-            GL11.glPushMatrix();
-            GL11.glTranslated(x + 0.5, y, z + 0.5); // 将模型中心移动到方块中心
-
-            // 绑定皮肤和披风纹理
+            int orientation = tileEntity.getBlockMetadata();
+            if (orientation == 4) {
+                GL11.glRotatef(90, 0, 1, 0);
+            } else if (orientation == 5) {
+                GL11.glRotatef(-90, 0, 1, 0);
+            } else if (orientation == 3) {
+                GL11.glRotatef(180, 0, 1, 0);
+            }
+            GL11.glRotatef(180, 0, 1, 0);
             Minecraft.getMinecraft().renderEngine.bindTexture(skinTexture);
-
-            // 渲染模型
             model.renderAll();
-
             GL11.glPopMatrix();
         }
     }

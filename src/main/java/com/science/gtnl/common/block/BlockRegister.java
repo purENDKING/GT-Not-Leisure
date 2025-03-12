@@ -33,8 +33,8 @@ import com.science.gtnl.common.block.blocks.artificialStar.BlockArtificialStarRe
 import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialStar;
 import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
+import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDoll;
-import com.science.gtnl.common.block.blocks.playerDoll.PlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -74,7 +74,7 @@ public class BlockRegister {
         BlockArtificialStarRender = new BlockArtificialStarRender();
         GameRegistry.registerTileEntity(TileEntityArtificialStar.class, "BlockArtificialStarRender");
 
-        PlayerDoll = new PlayerDoll();
+        PlayerDoll = new BlockPlayerDoll();
         GameRegistry.registerBlock(PlayerDoll, ItemPlayerDoll.class, "playerDoll");
         GameRegistry.registerTileEntity(TileEntityPlayerDoll.class, "playerDollTileEntity");
 

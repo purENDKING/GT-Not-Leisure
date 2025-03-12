@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
@@ -17,9 +18,9 @@ import com.science.gtnl.client.GTNLCreativeTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PlayerDoll extends BlockContainer {
+public class BlockPlayerDoll extends BlockContainer {
 
-    public PlayerDoll() {
+    public BlockPlayerDoll() {
         super(Material.iron);
         this.setResistance(5f);
         this.setHardness(5f);
@@ -50,18 +51,35 @@ public class PlayerDoll extends BlockContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack itemstack) {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
 
-            if (!stack.hasTagCompound() || !stack.getTagCompound()
+            if (!itemstack.hasTagCompound() || !itemstack.getTagCompound()
                 .hasKey("SkullOwner")) {
-                tileEntityPlayerDoll.setSkullOwner(placer.getCommandSenderName());
+                tileEntityPlayerDoll.setSkullOwner(player.getCommandSenderName());
             } else {
                 tileEntityPlayerDoll.setSkullOwner(
-                    stack.getTagCompound()
+                    itemstack.getTagCompound()
                         .getString("SkullOwner"));
             }
+        }
+        int l = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+
+        if (l == 0) {
+            world.setBlockMetadataWithNotify(x, y, z, 2, 2);
+        }
+
+        if (l == 1) {
+            world.setBlockMetadataWithNotify(x, y, z, 5, 2);
+        }
+
+        if (l == 2) {
+            world.setBlockMetadataWithNotify(x, y, z, 3, 2);
+        }
+
+        if (l == 3) {
+            world.setBlockMetadataWithNotify(x, y, z, 4, 2);
         }
     }
 
@@ -91,5 +109,10 @@ public class PlayerDoll extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
         super.breakBlock(world, x, y, z, block, meta); // 先调用父类方法
         world.removeTileEntity(x, y, z); // 再移除 TileEntity
+    }
+
+    @Override
+    public int getRenderType() {
+        return -1;
     }
 }
