@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -58,42 +59,44 @@ public class PlayerDollRenderer extends TileEntitySpecialRenderer {
         }
         GL11.glRotatef(180, 0, 1, 0); // 默认旋转
 
-        // 获取 GameProfile
-        GameProfile profile = tileEntityPlayerDoll.getSkullOwner();
-
         // 初始化纹理
         ResourceLocation skinTexture = DEFAULT_SKIN;
         ResourceLocation capeTexture = DEFAULT_CAPE;
 
-        // 如果 GameProfile 有效，加载皮肤和披风纹理
-        if (profile != null) {
-            Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
-                .func_152788_a(profile);
+        if (MainConfig.enableCustomPlayerDoll) {
+            // 获取 GameProfile
+            GameProfile profile = tileEntityPlayerDoll.getSkullOwner();
 
-            if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
-                skinTexture = minecraft.func_152342_ad()
-                    .func_152792_a(
-                        textureMap.get(MinecraftProfileTexture.Type.SKIN),
-                        MinecraftProfileTexture.Type.SKIN);
-            }
-            if (textureMap.containsKey(MinecraftProfileTexture.Type.CAPE)) {
-                capeTexture = minecraft.func_152342_ad()
-                    .func_152792_a(
-                        textureMap.get(MinecraftProfileTexture.Type.CAPE),
-                        MinecraftProfileTexture.Type.CAPE);
-            }
-        } else {
-            // 如果 GameProfile 无效，使用默认纹理
-            skinTexture = minecraft.thePlayer.getLocationSkin();
-            capeTexture = minecraft.thePlayer.getLocationCape();
-        }
+            // 如果 GameProfile 有效，加载皮肤和披风纹理
+            if (profile != null) {
+                Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
+                    .func_152788_a(profile);
 
-        // 确保皮肤和披风纹理不为 null
-        if (skinTexture == null) {
-            skinTexture = DEFAULT_SKIN;
-        }
-        if (capeTexture == null) {
-            capeTexture = DEFAULT_CAPE;
+                if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
+                    skinTexture = minecraft.func_152342_ad()
+                        .func_152792_a(
+                            textureMap.get(MinecraftProfileTexture.Type.SKIN),
+                            MinecraftProfileTexture.Type.SKIN);
+                }
+                if (textureMap.containsKey(MinecraftProfileTexture.Type.CAPE)) {
+                    capeTexture = minecraft.func_152342_ad()
+                        .func_152792_a(
+                            textureMap.get(MinecraftProfileTexture.Type.CAPE),
+                            MinecraftProfileTexture.Type.CAPE);
+                }
+            } else {
+                // 如果 GameProfile 无效，使用默认纹理
+                skinTexture = minecraft.thePlayer.getLocationSkin();
+                capeTexture = minecraft.thePlayer.getLocationCape();
+            }
+
+            // 确保皮肤和披风纹理不为 null
+            if (skinTexture == null) {
+                skinTexture = DEFAULT_SKIN;
+            }
+            if (capeTexture == null) {
+                capeTexture = DEFAULT_CAPE;
+            }
         }
 
         // 绑定皮肤纹理并渲染模型

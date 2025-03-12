@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
+import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -69,58 +70,61 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                 break;
         }
 
-        // 从 ItemStack 中获取 SkullOwner 的 GameProfile
-        GameProfile profile = null;
-        if (item.hasTagCompound()) {
-            NBTTagCompound nbt = item.getTagCompound();
-            if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-                // SkullOwner 是字符串，获取玩家名称并通过 SessionService 获取完整的 GameProfile
-                String playerName = nbt.getString("SkullOwner");
-                profile = MinecraftServer.getServer()
-                    .func_152358_ax() // 获取 GameProfile 缓存
-                    .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
-            } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
-                // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
-                String playerName = nbt.getString("SkullOwner");
-                profile = MinecraftServer.getServer()
-                    .func_152358_ax() // 获取 GameProfile 缓存
-                    .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
-            }
-        }
-
         // 初始化纹理
         ResourceLocation skinTexture = DEFAULT_SKIN;
         ResourceLocation capeTexture = DEFAULT_CAPE;
 
-        // 如果 GameProfile 有效，加载皮肤和披风纹理
-        if (profile != null) {
-            Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
-                .func_152788_a(profile);
+        if (MainConfig.enableCustomPlayerDoll) {
 
-            if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
-                skinTexture = minecraft.func_152342_ad()
-                    .func_152792_a(
-                        textureMap.get(MinecraftProfileTexture.Type.SKIN),
-                        MinecraftProfileTexture.Type.SKIN);
+            // 从 ItemStack 中获取 SkullOwner 的 GameProfile
+            GameProfile profile = null;
+            if (item.hasTagCompound()) {
+                NBTTagCompound nbt = item.getTagCompound();
+                if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
+                    // SkullOwner 是字符串，获取玩家名称并通过 SessionService 获取完整的 GameProfile
+                    String playerName = nbt.getString("SkullOwner");
+                    profile = MinecraftServer.getServer()
+                        .func_152358_ax() // 获取 GameProfile 缓存
+                        .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
+                } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
+                    // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
+                    String playerName = nbt.getString("SkullOwner");
+                    profile = MinecraftServer.getServer()
+                        .func_152358_ax() // 获取 GameProfile 缓存
+                        .func_152655_a(playerName); // 从 Mojang API 或缓存中获取完整的 GameProfile
+                }
             }
-            if (textureMap.containsKey(MinecraftProfileTexture.Type.CAPE)) {
-                capeTexture = minecraft.func_152342_ad()
-                    .func_152792_a(
-                        textureMap.get(MinecraftProfileTexture.Type.CAPE),
-                        MinecraftProfileTexture.Type.CAPE);
-            }
-        } else {
-            // 如果 SkullOwner 无效，使用默认皮肤和披风
-            skinTexture = minecraft.thePlayer.getLocationSkin();
-            capeTexture = minecraft.thePlayer.getLocationCape();
-        }
 
-        // 确保皮肤和披风纹理不为 null
-        if (skinTexture == null) {
-            skinTexture = DEFAULT_SKIN;
-        }
-        if (capeTexture == null) {
-            capeTexture = DEFAULT_CAPE;
+            // 如果 GameProfile 有效，加载皮肤和披风纹理
+            if (profile != null) {
+                Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
+                    .func_152788_a(profile);
+
+                if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
+                    skinTexture = minecraft.func_152342_ad()
+                        .func_152792_a(
+                            textureMap.get(MinecraftProfileTexture.Type.SKIN),
+                            MinecraftProfileTexture.Type.SKIN);
+                }
+                if (textureMap.containsKey(MinecraftProfileTexture.Type.CAPE)) {
+                    capeTexture = minecraft.func_152342_ad()
+                        .func_152792_a(
+                            textureMap.get(MinecraftProfileTexture.Type.CAPE),
+                            MinecraftProfileTexture.Type.CAPE);
+                }
+            } else {
+                // 如果 SkullOwner 无效，使用默认皮肤和披风
+                skinTexture = minecraft.thePlayer.getLocationSkin();
+                capeTexture = minecraft.thePlayer.getLocationCape();
+            }
+
+            // 确保皮肤和披风纹理不为 null
+            if (skinTexture == null) {
+                skinTexture = DEFAULT_SKIN;
+            }
+            if (capeTexture == null) {
+                capeTexture = DEFAULT_CAPE;
+            }
         }
 
         // 绑定皮肤纹理并渲染模型
