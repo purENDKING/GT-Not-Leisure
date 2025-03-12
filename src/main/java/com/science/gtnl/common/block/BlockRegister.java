@@ -29,10 +29,13 @@ import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.DenserNeutronCo
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.DensestNeutronCollector;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.NeutronCollector;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.TileEntityNeutronCollector;
-import com.science.gtnl.common.block.Render.BlockLaserBeacon;
-import com.science.gtnl.common.block.Render.BlockStar;
-import com.science.gtnl.common.block.Render.TileEntityLaserBeacon;
-import com.science.gtnl.common.block.Render.TileStar;
+import com.science.gtnl.common.block.blocks.artificialStar.BlockArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialStar;
+import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
+import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
+import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDoll;
+import com.science.gtnl.common.block.blocks.playerDoll.PlayerDoll;
+import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gtPlusPlus.core.item.base.itemblock.ItemBlockMeta;
@@ -57,19 +60,23 @@ public class BlockRegister {
 
         ExtremeAnvil = new BlockExtremeAnvil().setBlockName("ExtremeAnvil");
         GameRegistry.registerBlock(ExtremeAnvil, "ExtremeAnvil");
-        GameRegistry.registerTileEntity(TileEntityExtremeAnvil.class, "ExtremeAnvil_TE");
+        GameRegistry.registerTileEntity(TileEntityExtremeAnvil.class, "ExtremeAnvilTileEntity");
 
         NeutronCollector = GameRegistry.registerBlock(new NeutronCollector(), "NeutronCollector");
         DenseNeutronCollector = GameRegistry.registerBlock(new DenseNeutronCollector(), "DenseNeutronCollector");
         DenserNeutronCollector = GameRegistry.registerBlock(new DenserNeutronCollector(), "DenserNeutronCollector");
         DensestNeutronCollector = GameRegistry.registerBlock(new DensestNeutronCollector(), "DensestNeutronCollector");
-        GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollector_TE");
+        GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollectorTileEntity");
 
         BlockSoulFarmland = new BlockSoulFarmland();
         GameRegistry.registerBlock(BlockSoulFarmland, "BlockSoulFarmland");
 
-        BlockStar = new BlockStar();
-        GameRegistry.registerTileEntity(TileStar.class, "RealArtificialStarRender");
+        BlockArtificialStarRender = new BlockArtificialStarRender();
+        GameRegistry.registerTileEntity(TileEntityArtificialStar.class, "BlockArtificialStarRender");
+
+        PlayerDoll = new PlayerDoll();
+        GameRegistry.registerBlock(PlayerDoll, ItemPlayerDoll.class, "playerDoll");
+        GameRegistry.registerTileEntity(TileEntityPlayerDoll.class, "playerDollTileEntity");
 
         BlockLaserBeacon = new BlockLaserBeacon();
         GameRegistry.registerTileEntity(TileEntityLaserBeacon.class, "BlockLaserBeacon");

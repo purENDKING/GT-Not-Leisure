@@ -1,9 +1,9 @@
-package com.science.gtnl.common.block.blocks;
+package com.science.gtnl.common.block.blocks.playerDoll;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class PlayerDollTileEntity extends TileEntity {
+public class TileEntityPlayerDoll extends TileEntity {
 
     private String SkullOwner;
 
@@ -18,16 +18,12 @@ public class PlayerDollTileEntity extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        if (nbt.hasKey("SkullOwner")) {
-            this.SkullOwner = nbt.getString("SkullOwner");
-        }
+        SkullOwner = nbt.getString("SkullOwner");
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        if (this.SkullOwner != null) {
-            nbt.setString("SkullOwner", this.SkullOwner);
-        }
+        nbt.setString("SkullOwner", SkullOwner);
     }
 }

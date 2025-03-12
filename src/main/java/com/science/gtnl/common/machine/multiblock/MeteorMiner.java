@@ -42,7 +42,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.Render.TileEntityLaserBeacon;
+import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.GregTechAPI;

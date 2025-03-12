@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.Render;
+package com.science.gtnl.common.block.blocks.artificialStar;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class StarRender implements ISimpleBlockRenderingHandler {
+public class ArtificialStarRender implements ISimpleBlockRenderingHandler {
 
     public static final int renderID = RenderingRegistry.getNextAvailableRenderId();
 
@@ -17,9 +17,9 @@ public class StarRender implements ISimpleBlockRenderingHandler {
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         if (modelID == renderID) {
             GL11.glPushMatrix();
-            // 创建一个 TileStar 实例并传递给 renderAsItem 方法
-            TileStar tileStar = new TileStar();
-            ((BlockStar) block).renderAsItem(tileStar);
+            // 创建一个 TileEntityArtificialStar 实例并传递给 renderAsItem 方法
+            TileEntityArtificialStar tileEntityArtificialStar = new TileEntityArtificialStar();
+            ((BlockArtificialStarRender) block).renderAsItem(tileEntityArtificialStar);
             GL11.glPopMatrix();
         }
     }

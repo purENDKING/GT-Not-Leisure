@@ -10,7 +10,7 @@ import com.science.gtnl.common.block.Casings.Glow.MetaBlockGlow;
 
 public class BasicBlocks {
 
-    public static Block BlockStar;
+    public static Block BlockArtificialStarRender;
     public static Block BlockLaserBeacon;
     public static Block BlockSoulFarmland;
     public static Block NeutronCollector;
@@ -18,6 +18,7 @@ public class BasicBlocks {
     public static Block DenserNeutronCollector;
     public static Block DensestNeutronCollector;
     public static Block ExtremeAnvil;
+    public static Block PlayerDoll;
     public static final Block MetaBlock = new MetaBlockBase("MetaBlock", "MetaBlock");
     public static final Block MetaBlockGlow = new MetaBlockGlow("MetaBlockGlow", "MetaBlockGlow");
     public static final Block MetaBlockGlass = new MetaBlockGlass("MetaBlockGlass", "MetaBlockGlass");

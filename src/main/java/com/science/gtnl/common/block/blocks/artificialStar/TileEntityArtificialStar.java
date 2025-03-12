@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.Render;
+package com.science.gtnl.common.block.blocks.artificialStar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
 
-public class TileStar extends TileEntity {
+public class TileEntityArtificialStar extends TileEntity {
 
     // 当前的旋转角度
     public double Rotation = 0;
@@ -34,7 +34,7 @@ public class TileStar extends TileEntity {
     // 纹理列表
     public final List<ResourceLocation> textures = new ArrayList<>();
 
-    public TileStar() {
+    public TileEntityArtificialStar() {
         models.add(RealArtificialStarRender.MODEL1);
         textures.add(RealArtificialStarRender.STARTEXTURE1);
     }

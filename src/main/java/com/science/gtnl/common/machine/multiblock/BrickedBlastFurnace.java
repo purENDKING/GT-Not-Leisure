@@ -40,8 +40,8 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
     private int mCasing;
     private static IStructureDefinition<BrickedBlastFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String LCA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/bricked_blast_furnace";
-    public static String[][] shape = StructureUtils.readStructureFromFile(LCA_STRUCTURE_FILE_PATH);
+    public static final String BBF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/bricked_blast_furnace";
+    public static String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 7;
     public final int verticalOffSet = 12;
     public final int depthOffSet = 0;

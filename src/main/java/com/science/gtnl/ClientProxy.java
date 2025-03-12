@@ -1,14 +1,20 @@
 package com.science.gtnl;
 
+import static com.science.gtnl.common.block.Casings.BasicBlocks.PlayerDoll;
+
+import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.science.gtnl.Utils.GuiEventHandler;
 import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.RenderExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAnvil;
-import com.science.gtnl.common.block.Render.MeteorMinerRenderer;
-import com.science.gtnl.common.block.Render.RealArtificialStarRender;
-import com.science.gtnl.common.block.Render.StarRender;
+import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
+import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
+import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
+import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderer;
+import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.ItemLoader;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -25,13 +31,21 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
+
         new RealArtificialStarRender();
+        RenderingRegistry.registerBlockHandler(new ArtificialStarRender());
+
         new MeteorMinerRenderer();
-        LanguageManager.writePlaceholderStrings();
-        RenderingRegistry.registerBlockHandler(new StarRender());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtremeAnvil.class, new RenderExtremeAnvil());
+
         extremeAnvilRenderType = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderExtremeAnvil());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtremeAnvil.class, new RenderExtremeAnvil());
+
+        new PlayerDollRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new PlayerDollRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
+
+        LanguageManager.writePlaceholderStrings();
     }
 
     @Override

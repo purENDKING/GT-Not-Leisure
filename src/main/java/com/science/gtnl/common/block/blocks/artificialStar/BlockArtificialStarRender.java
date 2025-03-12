@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.Render;
+package com.science.gtnl.common.block.blocks.artificialStar;
 
 import java.util.ArrayList;
 
@@ -21,9 +21,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockStar extends Block {
+public class BlockArtificialStarRender extends Block {
 
-    public BlockStar() {
+    public BlockArtificialStarRender() {
         super(Material.iron);
         this.setResistance(20f);
         this.setHardness(-1.0f);
@@ -80,7 +80,7 @@ public class BlockStar extends Block {
 
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
-        return new TileStar();
+        return new TileEntityArtificialStar();
     }
 
     @Override
@@ -90,14 +90,14 @@ public class BlockStar extends Block {
 
     @Override
     public int getRenderType() {
-        return StarRender.renderID;
+        return ArtificialStarRender.renderID;
     }
 
     @SideOnly(Side.CLIENT)
-    public void renderAsItem(TileStar tileStar) {
-        if (!tileStar.getModels()
+    public void renderAsItem(TileEntityArtificialStar tileEntityArtificialStar) {
+        if (!tileEntityArtificialStar.getModels()
             .isEmpty()) {
-            IModelCustom model = tileStar.getModels()
+            IModelCustom model = tileEntityArtificialStar.getModels()
                 .get(0);
             GL11.glPushMatrix();
             GL11.glDisable(GL11.GL_LIGHTING);
@@ -106,7 +106,7 @@ public class BlockStar extends Block {
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             Minecraft.getMinecraft()
                 .getTextureManager()
-                .bindTexture(tileStar.getTexture(0));
+                .bindTexture(tileEntityArtificialStar.getTexture(0));
             GL11.glScaled(0.25, 0.25, 0.25);
             model.renderAll();
             GL11.glDisable(GL11.GL_BLEND);

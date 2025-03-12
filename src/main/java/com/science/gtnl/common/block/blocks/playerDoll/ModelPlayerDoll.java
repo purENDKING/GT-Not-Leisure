@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.blocks;
+package com.science.gtnl.common.block.blocks.playerDoll;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;

@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.Render;
+package com.science.gtnl.common.block.blocks.laserBeacon;
 
 import net.minecraft.nbt.NBTTagCompound;
 

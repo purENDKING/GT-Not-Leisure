@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.Render;
+package com.science.gtnl.common.block.blocks.artificialStar;
 
 import java.util.List;
 
@@ -24,12 +24,12 @@ public class RealArtificialStarRender extends TileEntitySpecialRenderer {
         .loadModel(new ResourceLocation("sciencenotleisure:model/ArtificialStarRender.obj"));
 
     public RealArtificialStarRender() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileStar.class, this);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArtificialStar.class, this);
     }
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float timeSinceLastTick) {
-        if (!(tile instanceof TileStar star)) return;
+        if (!(tile instanceof TileEntityArtificialStar star)) return;
         final double size = star.size;
         GL11.glPushMatrix();
         GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
@@ -38,8 +38,8 @@ public class RealArtificialStarRender extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
-    public void renderStar(TileStar tileStar, double size) {
-        List<IModelCustom> models = tileStar.getModels();
+    public void renderStar(TileEntityArtificialStar tileEntityArtificialStar, double size) {
+        List<IModelCustom> models = tileEntityArtificialStar.getModels();
         for (int i = 0; i < models.size(); i++) {
             IModelCustom model = models.get(i);
             GL11.glPushMatrix();
@@ -47,7 +47,7 @@ public class RealArtificialStarRender extends TileEntitySpecialRenderer {
             GL11.glDisable(GL11.GL_CULL_FACE);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            this.bindTexture(tileStar.getTexture(i));
+            this.bindTexture(tileEntityArtificialStar.getTexture(i));
             GL11.glScaled(size, size, size);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240f, 240f);
             model.renderAll();
