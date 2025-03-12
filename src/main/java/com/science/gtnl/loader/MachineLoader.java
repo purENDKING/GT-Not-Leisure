@@ -860,8 +860,8 @@ public class MachineLoader {
     }
 
     public static void registerMTEWire() {
-        CrackRecipeAdder.registerWire(22001, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-        MoreMaterialToolUtil.generateGTFluidPipes(Materials.Electrum, 22013, 1000, 2800, true);
+        CrackRecipeAdder.registerWire(22201, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
+        MoreMaterialToolUtil.generateGTFluidPipes(Materials.Electrum, 22213, 1000, 2800, true);
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
@@ -869,23 +869,23 @@ public class MachineLoader {
 
     public static void registerBasicMachine() {
         GTNLItemList.LvSteamTurbine
-            .set(new SteamTurbine(23001, "BasicSteamTurbine", TextLocalization.LvSteamTurbine, 1));
+            .set(new SteamTurbine(22501, "BasicSteamTurbine", TextLocalization.LvSteamTurbine, 1));
         addItemTooltip(GTNLItemList.LvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.MvSteamTurbine
-            .set(new SteamTurbine(23002, "AdvancedSteamTurbine", TextLocalization.MvSteamTurbine, 2));
+            .set(new SteamTurbine(22502, "AdvancedSteamTurbine", TextLocalization.MvSteamTurbine, 2));
         addItemTooltip(GTNLItemList.MvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HvSteamTurbine
-            .set(new SteamTurbine(23003, "AdvancedSteamTurbineII", TextLocalization.HvSteamTurbine, 3));
+            .set(new SteamTurbine(22503, "AdvancedSteamTurbineII", TextLocalization.HvSteamTurbine, 3));
         addItemTooltip(GTNLItemList.HvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.SteamAssemblerBronze
-            .set(new SteamAssemblerBronze(23004, "SteamAssembler", TextLocalization.SteamAssemblerBronze));
+            .set(new SteamAssemblerBronze(22504, "SteamAssembler", TextLocalization.SteamAssemblerBronze));
         addItemTooltip(GTNLItemList.SteamAssemblerBronze.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.SteamAssemblerSteel
-            .set(new SteamAssemblerSteel(23005, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
+            .set(new SteamAssemblerSteel(22505, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
         addItemTooltip(GTNLItemList.SteamAssemblerSteel.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 

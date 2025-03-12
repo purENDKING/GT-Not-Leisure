@@ -17,7 +17,7 @@ public class MainConfig {
     public static boolean enableDeleteRecipe = true;
     public static boolean enableDebugMode = false;
     public static boolean enableInfinitySwordExplosion = true;
-    public static boolean enableCustomPlayerDoll = true;
+    public static boolean enableCustomPlayerDoll = false;
 
     public static boolean needSeedPacket = true;
 
