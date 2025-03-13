@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -81,9 +82,9 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD.withOffset(-1, -1, 2, 2))
                     .setPos(8, 8)
                     .setSize(77, 12))
-                .widget(new TextWidget("Player Name").setPos(88, 10))
+                .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_00")).setPos(88, 10))
                 .widget(
-                    new VanillaButtonWidget().setDisplayString("Confirm")
+                    new VanillaButtonWidget().setDisplayString(StatCollector.translateToLocal("Tooltip_PlayerDoll_01"))
                         .setOnClick((clickData, widget) -> {
                             textField.onRemoveFocus();
                             widget.getWindow()

@@ -127,7 +127,7 @@ MvSteamTurbine=进阶蒸汽轮机
 HvSteamTurbine=进阶蒸汽轮机 II
 Tooltip_SteamTurbine_00=将蒸汽转换为EU
 Tooltip_SteamTurbine_01=基础效率: 2L蒸汽/EU
-Tooltip_SteamTurbine_02=燃料效率:
+Tooltip_SteamTurbine_02=燃料效率: 
 Tooltip_SteamTurbine_03=流体容量: 
 
 SteamAssemblerBronze=蒸汽组装机
@@ -260,7 +260,10 @@ tile.Stargate_Coil_Compressed.9.name=压缩星门线圈-九重
 tile.LaserBeacon.name=激光诱导信标
 tile.RealArtificialStarRender.name=真·湮灭发电机渲染器
 tile.BlockSoulFarmland.name=灵魂耕地
+
 tile.playerDoll.name=玩偶
+Tooltip_PlayerDoll_00=设置玩家名
+Tooltip_PlayerDoll_01=确认
 
 tile.NeutronCollector.name=§b中子态素收集器
 tile.DenseNeutronCollector.name=§d致密中子态素收集器

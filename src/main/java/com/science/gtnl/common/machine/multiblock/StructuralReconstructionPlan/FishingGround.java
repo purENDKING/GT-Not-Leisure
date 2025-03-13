@@ -14,6 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -124,7 +125,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 2))))
-                .addElement('D', ofBlockAnyMeta(Blocks.water))
+                .addElement('D', ofChain(ofBlockAnyMeta(Blocks.water), ofBlockAnyMeta(Blocks.flowing_water), isAir()))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -148,9 +149,25 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             }
             if (getMaxInputAmps() > 64) return false;
         }
+        boolean isFlipped = this.getFlip()
+            .isHorizontallyFlipped();
+        StructureUtils.setStringBlockXZ(
+            aBaseMetaTileEntity,
+            horizontalOffSet,
+            verticalOffSet,
+            depthOffSet,
+            shape,
+            isFlipped,
+            "D",
+            Blocks.water);
 
         ParallelTier = getParallelTier(aStack);
         return mCasing >= 25;
+    }
+
+    @Override
+    protected IAlignmentLimits getInitialAlignmentLimits() {
+        return (d, r, f) -> d.offsetY == 0 && r.isNotRotated() && f.isNotFlipped();
     }
 
     @Override
