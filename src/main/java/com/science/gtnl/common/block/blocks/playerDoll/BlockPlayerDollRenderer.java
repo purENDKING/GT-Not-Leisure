@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -36,6 +37,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
+    private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
     public static final ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
     public static final ResourceLocation MODEL_RESOURCE = new ResourceLocation(
@@ -148,45 +150,82 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
     }
 
     /**
-     * 下载皮肤或披风文件到本地
+     * 下载皮肤或披风文件到本地，并检查玩家名和纹理哈希值的有效性
      */
     private void downloadTexture(MinecraftProfileTexture texture, MinecraftProfileTexture.Type type) {
+        // 检查纹理和玩家名是否有效
+        if (texture == null || StringUtils.isNullOrEmpty(texture.getHash())) {
+            return; // 如果无效，直接返回
+        }
+
+        // 获取目标目录
         File targetDir = type == MinecraftProfileTexture.Type.SKIN ? SKIN_DIR : CAPE_DIR;
         File targetFile = new File(targetDir, texture.getHash() + ".png");
 
-        if (!targetFile.exists()) {
-            try (InputStream in = new URL(texture.getUrl()).openStream();
-                FileOutputStream out = new FileOutputStream(targetFile)) {
-                byte[] buffer = new byte[8192];
-                int bytesRead;
-                while ((bytesRead = in.read(buffer)) != -1) {
-                    out.write(buffer, 0, bytesRead);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+        // 如果文件已存在，跳过下载
+        if (targetFile.exists()) {
+            return;
+        }
+
+        // 下载纹理文件
+        try (InputStream in = new URL(texture.getUrl()).openStream();
+            FileOutputStream out = new FileOutputStream(targetFile)) {
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     /**
-     * 检查本地是否存在对应的皮肤或披风文件，并上传到 OpenGL
+     * 检查本地是否存在对应的皮肤或披风文件，并上传到 OpenGL（仅上传一次）
+     * 如果纹理无效，返回默认纹理
      */
     private ResourceLocation getLocalTexture(MinecraftProfileTexture texture, MinecraftProfileTexture.Type type,
         ResourceLocation defaultTexture) {
+        // 检查纹理和玩家名是否有效
+        if (texture == null || StringUtils.isNullOrEmpty(texture.getHash())) {
+            return defaultTexture;
+        }
+
+        // 获取纹理的哈希值作为缓存的键
+        String textureHash = texture.getHash();
+
+        // 如果缓存中已存在该纹理的 ResourceLocation，直接返回
+        if (textureCache.containsKey(textureHash)) {
+            return textureCache.get(textureHash);
+        }
+
+        // 检查本地文件是否存在
         File targetDir = type == MinecraftProfileTexture.Type.SKIN ? SKIN_DIR : CAPE_DIR;
-        File targetFile = new File(targetDir, texture.getHash() + ".png");
+        File targetFile = new File(targetDir, textureHash + ".png");
 
         if (targetFile.exists()) {
             try {
+                // 读取本地文件
                 BufferedImage image = ImageIO.read(targetFile);
                 if (image != null) {
-                    int textureId = TextureUtil.uploadTextureImage(GL11.glGenTextures(), image); // 上传纹理到 OpenGL
-                    return new ResourceLocation("custom", "texture_" + textureId); // 返回自定义 ResourceLocation
+                    // 上传纹理到 OpenGL
+                    int textureId = TextureUtil.uploadTextureImage(GL11.glGenTextures(), image);
+
+                    // 创建自定义 ResourceLocation
+                    ResourceLocation textureLocation = new ResourceLocation("custom", "texture_" + textureId);
+
+                    // 将纹理 ID 缓存起来
+                    textureCache.put(textureHash, textureLocation);
+
+                    // 返回缓存的 ResourceLocation
+                    return textureLocation;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        // 如果文件不存在或读取失败，返回默认纹理
         return defaultTexture;
     }
 
@@ -207,20 +246,33 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
         }
     }
 
+    /**
+     * 获取完整的 GameProfile 信息，并检查玩家名的有效性
+     */
     private GameProfile getGameProfile(GameProfile profile) {
-        if (profile != null && !StringUtils.isNullOrEmpty(profile.getName())) {
-            if (!profile.isComplete() || !profile.getProperties()
-                .containsKey("textures")) {
+        // 检查玩家名是否有效
+        if (profile == null || !isValidUsername(profile.getName())) {
+            return profile; // 如果玩家名无效，直接返回原始 profile
+        }
+
+        // 检查 profile 是否完整，或者是否包含 textures 属性
+        if (!profile.isComplete() || !profile.getProperties()
+            .containsKey("textures")) {
+            try {
+                // 通过玩家名获取 GameProfile
                 GameProfile gameprofile = MinecraftServer.getServer()
                     .func_152358_ax()
                     .func_152655_a(profile.getName());
 
+                // 检查获取的 GameProfile 是否有效
                 if (gameprofile != null) {
+                    // 获取 textures 属性
                     Property property = (Property) Iterables.getFirst(
                         gameprofile.getProperties()
                             .get("textures"),
                         (Object) null);
 
+                    // 如果 textures 属性为空，尝试填充 profile 属性
                     if (property == null) {
                         gameprofile = MinecraftServer.getServer()
                             .func_147130_as()
@@ -229,9 +281,28 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
                     return gameprofile;
                 }
+            } catch (Exception e) {
+                if (MainConfig.enableDebugMode) {
+                    // 捕获异常并记录日志
+                    System.err.println("Failed to fetch GameProfile for username: " + profile.getName());
+                    e.printStackTrace();
+                }
             }
         }
+
+        // 如果 profile 已经完整或不需要更新，直接返回原始 profile
         return profile;
+    }
+
+    /**
+     * 检查玩家名是否有效
+     */
+    private boolean isValidUsername(String username) {
+        if (username == null || username.length() < 3 || username.length() > 16) {
+            return false; // 长度不符合要求
+        }
+        // 使用正则表达式检查合法字符
+        return username.matches("^[a-zA-Z0-9_\\-]+$");
     }
 
     private void renderModelParts(String... partNames) {
