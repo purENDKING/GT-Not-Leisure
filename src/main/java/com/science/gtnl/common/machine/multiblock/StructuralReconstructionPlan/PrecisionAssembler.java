@@ -32,6 +32,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
@@ -359,11 +360,13 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                updateHatchTexture();
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         updateHatchTexture();
@@ -377,9 +380,9 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty() && getMaxInputAmps() <= 2;
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
         logic.setAmperageOC(useSingleAmp);
     }
 

@@ -187,6 +187,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
 
+        if (energyEU <= 0) return CheckRecipeResultRegistry.POWER_OVERFLOW;
+
         // 构建输入仓列表
         ArrayList<IDualInputInventory> inputInventories = new ArrayList<>();
 
@@ -780,13 +782,13 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
 
-        if (ParallelTier < 12) {
+        if (ParallelTier < 12 && MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
                     return false;
                 }
             }
-            if (mEnergyHatches.size() > 1) return false;
+            if (mEnergyHatches.size() > 1 && getMaxInputAmps() > 64) return false;
         }
 
         if (!mDualInputHatches.isEmpty()) {
@@ -794,13 +796,15 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             if (!mInputBusses.isEmpty() || !mInputHatches.isEmpty()) return false;
         }
 
-        return mDataAccessHatches.size() <= 1 && mMaintenanceHatches.size() <= 1 && mCasing >= 590;
+        return mDataAccessHatches.size() <= 1 && mMaintenanceHatches.size() <= 1
+            && mCasing >= 590
+            && !mEnergyHatches.isEmpty();
     }
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps() / 4);
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps() / 4);
         logic.setAmperageOC(false);
     }
 

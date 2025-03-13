@@ -20,6 +20,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
@@ -187,10 +188,13 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         return mCasing >= 20 && getCoilLevel() != HeatingCoilLevel.None
@@ -227,9 +231,9 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty() && getMaxInputAmps() <= 2;
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
         logic.setAmperageOC(useSingleAmp);
     }
 

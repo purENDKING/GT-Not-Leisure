@@ -18,6 +18,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.util.BWUtil;
 import gregtech.api.enums.HeatingCoilLevel;
@@ -148,10 +149,13 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
             && mCasing >= 25) {
             ParallelTier = getParallelTier(aStack);
             energyHatchTier = checkEnergyHatchTier();
-            for (MTEHatch hatch : getExoticEnergyHatches()) {
-                if (hatch instanceof MTEHatchEnergyTunnel) {
-                    return false;
+            if (MainConfig.enableMachineAmpLimit) {
+                for (MTEHatch hatch : getExoticEnergyHatches()) {
+                    if (hatch instanceof MTEHatchEnergyTunnel) {
+                        return false;
+                    }
                 }
+                if (getMaxInputAmps() > 64) return false;
             }
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);

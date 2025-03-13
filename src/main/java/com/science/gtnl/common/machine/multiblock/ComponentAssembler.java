@@ -30,6 +30,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
@@ -62,6 +63,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
     public int casingTier;
     public byte glassTier = 0;
     public int casingAmount;
+    protected int energyHatchTier;
     public static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
     public static String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     public static final String STRUCTURE_PIECE_MAIN = "main";
@@ -233,8 +235,25 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        logic.setAvailableVoltage(getMaxInputEu());
-        logic.setAvailableAmperage(1);
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty() && getMaxInputAmps() <= 2;
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+        logic.setAmperageOC(useSingleAmp);
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @Override
@@ -309,11 +328,16 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
             }
         }
 
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        energyHatchTier = checkEnergyHatchTier();
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
+
         return casingAmount >= 50 && mEnergyHatches.size() <= 2 && mMaintenanceHatches.size() == 1;
     }
 

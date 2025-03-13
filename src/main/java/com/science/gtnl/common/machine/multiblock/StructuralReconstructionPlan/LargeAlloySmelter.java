@@ -20,6 +20,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Textures;
@@ -142,10 +143,13 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         if (mMaintenanceHatches.size() != 1 && mMufflerHatches.size() != 1) return false;

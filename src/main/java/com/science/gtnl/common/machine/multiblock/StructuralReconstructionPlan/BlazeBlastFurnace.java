@@ -24,6 +24,7 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.util.BWUtil;
 import cpw.mods.fml.relauncher.Side;
@@ -207,10 +208,13 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
         this.mHeatingCapacity = (int) getCoilLevel().getHeat() + 100 * (BWUtil.getTier(getMaxInputVoltage()) - 2);
 
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         return mCasing >= 50 && checkHatch();

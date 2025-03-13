@@ -25,6 +25,7 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -172,10 +173,13 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         ParallelTier = getParallelTier(aStack);

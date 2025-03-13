@@ -27,6 +27,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.config.MainConfig;
 
 import ggfab.api.GGFabRecipeMaps;
 import gregtech.api.enums.GTValues;
@@ -300,10 +301,13 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         ParallelTier = getParallelTier(aStack);
@@ -378,9 +382,9 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty() && getMaxInputAmps() <= 2;
         logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
+        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
         logic.setAmperageOC(useSingleAmp);
     }
 

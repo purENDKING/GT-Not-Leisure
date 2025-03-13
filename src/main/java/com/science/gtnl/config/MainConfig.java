@@ -18,6 +18,7 @@ public class MainConfig {
     public static boolean enableDebugMode = false;
     public static boolean enableInfinitySwordExplosion = true;
     public static boolean enableCustomPlayerDoll = true;
+    public static boolean enableMachineAmpLimit = true;
 
     public static boolean needSeedPacket = true;
 
@@ -117,6 +118,10 @@ public class MainConfig {
                 enableCustomPlayerDoll,
                 "Enable Custom Player Skin")
             .getBoolean(enableCustomPlayerDoll);
+
+        enableMachineAmpLimit = config
+            .get("Enable Machine Can't Use Laser Hatch", "enable", enableMachineAmpLimit, "Enable Amp Limit")
+            .getBoolean(enableMachineAmpLimit);
 
         if (config.hasChanged()) {
             config.save();

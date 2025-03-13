@@ -26,6 +26,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
+import com.science.gtnl.config.MainConfig;
 
 import bartworks.util.BWUtil;
 import gregtech.api.GregTechAPI;
@@ -165,10 +166,13 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
             ParallelTier = getParallelTier(aStack);
             energyHatchTier = checkEnergyHatchTier();
-            for (MTEHatch hatch : getExoticEnergyHatches()) {
-                if (hatch instanceof MTEHatchEnergyTunnel) {
-                    return false;
+            if (MainConfig.enableMachineAmpLimit) {
+                for (MTEHatch hatch : getExoticEnergyHatches()) {
+                    if (hatch instanceof MTEHatchEnergyTunnel) {
+                        return false;
+                    }
                 }
+                return getMaxInputAmps() <= 64;
             }
             return true;
         } else {

@@ -17,6 +17,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -162,10 +163,13 @@ public class RareEarthCentrifugal extends MultiMachineBase<RareEarthCentrifugal>
             return false;
         }
 
-        for (MTEHatch hatch : getExoticEnergyHatches()) {
-            if (hatch instanceof MTEHatchEnergyTunnel) {
-                return false;
+        if (MainConfig.enableMachineAmpLimit) {
+            for (MTEHatch hatch : getExoticEnergyHatches()) {
+                if (hatch instanceof MTEHatchEnergyTunnel) {
+                    return false;
+                }
             }
+            if (getMaxInputAmps() > 64) return false;
         }
 
         if (this.mEnergyHatches.size() > 2) return false;
