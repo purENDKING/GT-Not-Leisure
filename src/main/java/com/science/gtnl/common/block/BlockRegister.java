@@ -2,9 +2,7 @@ package com.science.gtnl.common.block;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.RESET;
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -19,8 +17,6 @@ import com.science.gtnl.common.block.Casings.Casing.MetaItemBlockCasing;
 import com.science.gtnl.common.block.Casings.Column.ItemBlockColumn;
 import com.science.gtnl.common.block.Casings.Glass.ItemBlockGlass;
 import com.science.gtnl.common.block.Casings.Glow.ItemBlockGlow;
-import com.science.gtnl.common.block.Casings.Special.BlocksStargate;
-import com.science.gtnl.common.block.Casings.Special.StargateMetaBlockBase;
 import com.science.gtnl.common.block.ReAvaritia.BlockSoulFarmland;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.BlockExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAnvil;
@@ -42,77 +38,77 @@ import gtPlusPlus.core.item.base.itemblock.ItemBlockMeta;
 
 public class BlockRegister {
 
-    public static Block StargateTier0 = new BlocksStargate(0);
-    public static Block StargateTier1 = new BlocksStargate(1);
-    public static Block StargateTier2 = new BlocksStargate(2);
-    public static Block StargateTier3 = new BlocksStargate(3);
-    public static Block StargateTier4 = new BlocksStargate(4);
-    public static Block StargateTier5 = new BlocksStargate(5);
-    public static Block StargateTier6 = new BlocksStargate(6);
-    public static Block StargateTier7 = new BlocksStargate(7);
-    public static Block StargateTier8 = new BlocksStargate(8);
-    public static Block StargateTier9 = new BlocksStargate(9);
-    public static Block Stargate_Coil_Compressed = new StargateMetaBlockBase(
-        "Stargate_Coil_Compressed",
-        new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
-
     public static void registryBlocks() {
 
-        ExtremeAnvil = new BlockExtremeAnvil().setBlockName("ExtremeAnvil");
-        GameRegistry.registerBlock(ExtremeAnvil, "ExtremeAnvil");
+        BasicBlocks.ExtremeAnvil = new BlockExtremeAnvil().setBlockName("ExtremeAnvil");
+        GameRegistry.registerBlock(BasicBlocks.ExtremeAnvil, "ExtremeAnvil");
         GameRegistry.registerTileEntity(TileEntityExtremeAnvil.class, "ExtremeAnvilTileEntity");
 
-        NeutronCollector = GameRegistry.registerBlock(new NeutronCollector(), "NeutronCollector");
-        DenseNeutronCollector = GameRegistry.registerBlock(new DenseNeutronCollector(), "DenseNeutronCollector");
-        DenserNeutronCollector = GameRegistry.registerBlock(new DenserNeutronCollector(), "DenserNeutronCollector");
-        DensestNeutronCollector = GameRegistry.registerBlock(new DensestNeutronCollector(), "DensestNeutronCollector");
+        BasicBlocks.NeutronCollector = GameRegistry.registerBlock(new NeutronCollector(), "NeutronCollector");
+        BasicBlocks.DenseNeutronCollector = GameRegistry
+            .registerBlock(new DenseNeutronCollector(), "DenseNeutronCollector");
+        BasicBlocks.DenserNeutronCollector = GameRegistry
+            .registerBlock(new DenserNeutronCollector(), "DenserNeutronCollector");
+        BasicBlocks.DensestNeutronCollector = GameRegistry
+            .registerBlock(new DensestNeutronCollector(), "DensestNeutronCollector");
         GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollectorTileEntity");
 
-        BlockSoulFarmland = new BlockSoulFarmland();
-        GameRegistry.registerBlock(BlockSoulFarmland, "BlockSoulFarmland");
+        BasicBlocks.BlockSoulFarmland = new BlockSoulFarmland();
+        GameRegistry.registerBlock(BasicBlocks.BlockSoulFarmland, "BlockSoulFarmland");
 
-        BlockArtificialStarRender = new BlockArtificialStarRender();
+        BasicBlocks.BlockArtificialStarRender = new BlockArtificialStarRender();
         GameRegistry.registerTileEntity(TileEntityArtificialStar.class, "BlockArtificialStarRender");
 
-        PlayerDoll = new BlockPlayerDoll();
-        GameRegistry.registerBlock(PlayerDoll, ItemPlayerDoll.class, "playerDoll");
+        BasicBlocks.PlayerDoll = new BlockPlayerDoll();
+        GameRegistry.registerBlock(BasicBlocks.PlayerDoll, ItemPlayerDoll.class, "playerDoll");
         GameRegistry.registerTileEntity(TileEntityPlayerDoll.class, "playerDollTileEntity");
 
-        BlockLaserBeacon = new BlockLaserBeacon();
+        BasicBlocks.BlockLaserBeacon = new BlockLaserBeacon();
         GameRegistry.registerTileEntity(TileEntityLaserBeacon.class, "BlockLaserBeacon");
 
-        GameRegistry.registerBlock(MetaBlock, ItemBlockBase.class, MetaBlock.getUnlocalizedName());
-        GameRegistry.registerBlock(MetaBlockGlow, ItemBlockGlow.class, MetaBlockGlow.getUnlocalizedName());
-        GameRegistry.registerBlock(MetaBlockGlass, ItemBlockGlass.class, MetaBlockGlass.getUnlocalizedName());
-        GameRegistry.registerBlock(MetaBlockColumn, ItemBlockColumn.class, MetaBlockColumn.getUnlocalizedName());
+        GameRegistry
+            .registerBlock(BasicBlocks.MetaBlock, ItemBlockBase.class, BasicBlocks.MetaBlock.getUnlocalizedName());
+        GameRegistry.registerBlock(
+            BasicBlocks.MetaBlockGlow,
+            ItemBlockGlow.class,
+            BasicBlocks.MetaBlockGlow.getUnlocalizedName());
+        GameRegistry.registerBlock(
+            BasicBlocks.MetaBlockGlass,
+            ItemBlockGlass.class,
+            BasicBlocks.MetaBlockGlass.getUnlocalizedName());
+        GameRegistry.registerBlock(
+            BasicBlocks.MetaBlockColumn,
+            ItemBlockColumn.class,
+            BasicBlocks.MetaBlockColumn.getUnlocalizedName());
 
         GameRegistry.registerBlock(
             BasicBlocks.MetaCasing,
             MetaItemBlockCasing.class,
             BasicBlocks.MetaCasing.getUnlocalizedName());
 
-        GameRegistry.registerBlock(StargateTier0, "StargateTier0");
-        GTNLItemList.StargateTier0.set(new ItemStack(StargateTier0));
-        GameRegistry.registerBlock(StargateTier1, "StargateTier1");
-        GTNLItemList.StargateTier1.set(new ItemStack(StargateTier1));
-        GameRegistry.registerBlock(StargateTier2, "StargateTier2");
-        GTNLItemList.StargateTier2.set(new ItemStack(StargateTier2));
-        GameRegistry.registerBlock(StargateTier3, "StargateTier3");
-        GTNLItemList.StargateTier3.set(new ItemStack(StargateTier3));
-        GameRegistry.registerBlock(StargateTier4, "StargateTier4");
-        GTNLItemList.StargateTier4.set(new ItemStack(StargateTier4));
-        GameRegistry.registerBlock(StargateTier5, "StargateTier5");
-        GTNLItemList.StargateTier5.set(new ItemStack(StargateTier5));
-        GameRegistry.registerBlock(StargateTier6, "StargateTier6");
-        GTNLItemList.StargateTier6.set(new ItemStack(StargateTier6));
-        GameRegistry.registerBlock(StargateTier7, "StargateTier7");
-        GTNLItemList.StargateTier7.set(new ItemStack(StargateTier7));
-        GameRegistry.registerBlock(StargateTier8, "StargateTier8");
-        GTNLItemList.StargateTier8.set(new ItemStack(StargateTier8));
-        GameRegistry.registerBlock(StargateTier9, "StargateTier9");
-        GTNLItemList.StargateTier9.set(new ItemStack(StargateTier9));
-        GameRegistry.registerBlock(Stargate_Coil_Compressed, ItemBlockMeta.class, "Stargate Coil Compressed");
-        GTNLItemList.Stargate_Coil_Compressed.set(new ItemStack(Stargate_Coil_Compressed));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier0, "StargateTier0");
+        GTNLItemList.StargateTier0.set(new ItemStack(BasicBlocks.StargateTier0));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier1, "StargateTier1");
+        GTNLItemList.StargateTier1.set(new ItemStack(BasicBlocks.StargateTier1));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier2, "StargateTier2");
+        GTNLItemList.StargateTier2.set(new ItemStack(BasicBlocks.StargateTier2));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier3, "StargateTier3");
+        GTNLItemList.StargateTier3.set(new ItemStack(BasicBlocks.StargateTier3));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier4, "StargateTier4");
+        GTNLItemList.StargateTier4.set(new ItemStack(BasicBlocks.StargateTier4));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier5, "StargateTier5");
+        GTNLItemList.StargateTier5.set(new ItemStack(BasicBlocks.StargateTier5));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier6, "StargateTier6");
+        GTNLItemList.StargateTier6.set(new ItemStack(BasicBlocks.StargateTier6));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier7, "StargateTier7");
+        GTNLItemList.StargateTier7.set(new ItemStack(BasicBlocks.StargateTier7));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier8, "StargateTier8");
+        GTNLItemList.StargateTier8.set(new ItemStack(BasicBlocks.StargateTier8));
+        GameRegistry.registerBlock(BasicBlocks.StargateTier9, "StargateTier9");
+        GTNLItemList.StargateTier9.set(new ItemStack(BasicBlocks.StargateTier9));
+        GameRegistry
+            .registerBlock(BasicBlocks.Stargate_Coil_Compressed, ItemBlockMeta.class, "Stargate Coil Compressed");
+        GTNLItemList.Stargate_Coil_Compressed.set(new ItemStack(BasicBlocks.Stargate_Coil_Compressed));
     }
 
     public static void registryBlockContainers() {
@@ -471,24 +467,24 @@ public class BlockRegister {
         registryBlockContainers();
     }
 
-    public static void registryOreDictionary() {
-        ItemStack GaiaGlass = new ItemStack(MetaBlockGlass, 1, 0);
-        ItemStack TerraGlass = new ItemStack(MetaBlockGlass, 1, 1);
-        ItemStack FusionGlass = new ItemStack(MetaBlockGlass, 1, 2);
-        ItemStack ExtremeAnvilBlock = new ItemStack(ExtremeAnvil, 1, 0);
+    public static void registryAnotherData() {
+        ItemStack GaiaGlass = new ItemStack(BasicBlocks.MetaBlockGlass, 1, 0);
+        ItemStack TerraGlass = new ItemStack(BasicBlocks.MetaBlockGlass, 1, 1);
+        ItemStack FusionGlass = new ItemStack(BasicBlocks.MetaBlockGlass, 1, 2);
+        ItemStack ExtremeAnvilBlock = new ItemStack(BasicBlocks.ExtremeAnvil, 1, 0);
         ItemStack Bedrock = new ItemStack(Blocks.bedrock, 1, 0);
         ItemStack EndPortal = new ItemStack(Blocks.end_portal, 1, 0);
         ItemStack EndPortalFrame = new ItemStack(Blocks.end_portal_frame, 1, 0);
         ItemStack CommandBlock = new ItemStack(Blocks.command_block, 1, 0);
 
         for (int LampMeta = 1; LampMeta <= 32; LampMeta++) {
-            ItemStack LampTier = new ItemStack(MetaBlockGlow, 1, LampMeta);
+            ItemStack LampTier = new ItemStack(BasicBlocks.MetaBlockGlow, 1, LampMeta);
             OreDictionary.registerOre("blockGlassHV", LampTier);
             OreDictionary.registerOre("blockGlass", LampTier);
         }
 
         for (int LampOffMeta = 3; LampOffMeta <= 34; LampOffMeta++) {
-            ItemStack LampOffTier = new ItemStack(MetaBlock, 1, LampOffMeta);
+            ItemStack LampOffTier = new ItemStack(BasicBlocks.MetaBlock, 1, LampOffMeta);
             OreDictionary.registerOre("blockGlassHV", LampOffTier);
             OreDictionary.registerOre("blockGlass", LampOffTier);
         }
@@ -501,5 +497,6 @@ public class BlockRegister {
         OreDictionary.registerOre("blockGlassUEV", GaiaGlass);
         OreDictionary.registerOre("blockGlassUV", TerraGlass);
         OreDictionary.registerOre("blockGlassUV", FusionGlass);
+
     }
 }

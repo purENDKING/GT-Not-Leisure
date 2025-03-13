@@ -8,6 +8,7 @@ import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
 import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
@@ -126,6 +127,7 @@ import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
 import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
 
+import bartworks.API.BorosilicateGlass;
 import goodgenerator.util.CrackRecipeAdder;
 import gregtech.api.enums.Materials;
 import gtPlusPlus.api.objects.Logger;
@@ -898,11 +900,28 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
+    public static void registerGlasses() {
+        BorosilicateGlass.registerGlass(BasicBlocks.PlayerDoll, 0, (byte) 12);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 12);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 1, (byte) 10);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 2, (byte) 8);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 8);
+
+        for (int LampMeta = 1; LampMeta <= 32; LampMeta++) {
+            BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlow, LampMeta, (byte) 3);
+        }
+
+        for (int LampOffMeta = 3; LampOffMeta <= 34; LampOffMeta++) {
+            BorosilicateGlass.registerGlass(BasicBlocks.MetaBlock, LampOffMeta, (byte) 3);
+        }
+    }
+
     public static void run() {
         Logger.INFO("GTNL Content | Registering MTE Block Machine.");
         registerMTEHatch();
         loadMachines();
         registerMTEWire();
         registerBasicMachine();
+        registerGlasses();
     }
 }
