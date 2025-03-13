@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
@@ -65,23 +67,38 @@ public class BlockPlayerDoll extends BlockContainer {
                 if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
                     // SkullOwner 是字符串，直接获取玩家名称
                     String playerName = nbt.getString("SkullOwner");
+                    if (playerName == null || playerName.isEmpty()) {
+                        // 如果玩家名称为空，使用默认名称
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    }
                     profile = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     profile = NBTUtil.func_152459_a(ownerTag);
+
+                    // 检查解析后的 GameProfile 是否有效
+                    if (profile != null && (profile.getName() == null || profile.getName()
+                        .isEmpty()) && profile.getId() == null) {
+                        // 如果 GameProfile 的 name 和 ID 都为空，使用默认名称
+                        profile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName()); // 默认名称
+                    }
                 }
 
                 if (profile != null) {
-                    ((TileEntityPlayerDoll) tileEntity).getGameProfile(profile);
+                    tileEntityPlayerDoll.getGameProfile(profile);
                 } else {
                     // 如果没有 SkullOwner 数据，则设置为放置方块的玩家
                     String playerName = player.getCommandSenderName(); // 获取放置方块的玩家名字
+                    if (playerName == null || playerName.isEmpty()) {
+                        // 如果玩家名称为空，使用默认名称
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    }
                     profile = new GameProfile(null, playerName); // 创建 GameProfile
                     tileEntityPlayerDoll.getGameProfile(profile); // 调用 getGameProfile
                 }
             } else {
-                ((TileEntityPlayerDoll) tileEntity).getGameProfileNull();
+                tileEntityPlayerDoll.getGameProfileNull();
             }
         }
 
@@ -108,8 +125,8 @@ public class BlockPlayerDoll extends BlockContainer {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> drops = new ArrayList<>();
+    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
+        // 获取 TileEntity
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
@@ -118,27 +135,33 @@ public class BlockPlayerDoll extends BlockContainer {
             // 获取 SkullOwner 的 GameProfile
             GameProfile skullOwner = tileEntityPlayerDoll.getSkullOwner();
 
-            // 如果 SkullOwner 存在，保存到 NBT
-            if (skullOwner != null) {
+            // 如果 SkullOwner 存在，保存玩家名称到 NBT
+            if (skullOwner != null && skullOwner.getName() != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
-                NBTTagCompound ownerTag = new NBTTagCompound();
-                NBTUtil.func_152460_a(ownerTag, skullOwner); // 将 GameProfile 写入 NBT
-                nbt.setTag("SkullOwner", ownerTag); // 保存到 SkullOwner 标签
+                String playerName = skullOwner.getName(); // 获取玩家名称
+                nbt.setString("SkullOwner", playerName); // 保存到 SkullOwner 标签
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
             }
 
-            drops.add(drop);
+            // 生成 ItemEntity
+            EntityItem itemEntity = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, drop);
+            world.spawnEntityInWorld(itemEntity); // 将 ItemEntity 加入世界
         } else {
-            drops.add(new ItemStack(this)); // 默认掉落
+            // 默认掉落物
+            ItemStack drop = new ItemStack(this);
+            EntityItem itemEntity = new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, drop);
+            world.spawnEntityInWorld(itemEntity); // 将 ItemEntity 加入世界
         }
 
-        return drops;
+        // 移除 TileEntity
+        super.breakBlock(world, x, y, z, block, meta);
+        world.removeTileEntity(x, y, z);
     }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-        super.breakBlock(world, x, y, z, block, meta); // 先调用父类方法
-        world.removeTileEntity(x, y, z); // 再移除 TileEntity
+    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+        // 返回空列表，因为掉落物在 breakBlock 中处理
+        return new ArrayList<>();
     }
 
     @Override

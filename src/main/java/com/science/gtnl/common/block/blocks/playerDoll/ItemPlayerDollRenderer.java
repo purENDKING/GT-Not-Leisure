@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -26,6 +27,7 @@ import net.minecraftforge.client.model.IModelCustom;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.properties.Property;
@@ -37,6 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class ItemPlayerDollRenderer implements IItemRenderer {
 
+    private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
     public static final ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
@@ -106,23 +109,32 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
 
                 // 检查 SkullOwner 数据
                 if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-                    // SkullOwner 是字符串，直接获取玩家名称
                     String playerName = nbt.getString("SkullOwner");
+                    if (playerName == null || playerName.isEmpty()) {
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    }
                     skullOwner = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
-                    // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     skullOwner = NBTUtil.func_152459_a(ownerTag);
                 }
+            } else {
+                // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
+                String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                if (playerName == null || playerName.isEmpty()) {
+                    playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                }
+                skullOwner = new GameProfile(null, playerName);
+                skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
             }
 
             if (skullOwner != null) {
-                skullOwner = getGameProfile(skullOwner); // 获取完整的 GameProfile
+                skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
             } else {
                 // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
                 String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                 skullOwner = new GameProfile(null, playerName);
-                skullOwner = getGameProfile(skullOwner); // 获取完整的 GameProfile
+                skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
             }
 
             // 如果 GameProfile 有效，加载皮肤和披风纹理
@@ -266,11 +278,17 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
 
     /**
      * 获取完整的 GameProfile 信息，并检查玩家名的有效性
+     * 如果捕获异常，清空物品的 NBT 数据并将玩家名加入黑名单
      */
-    private GameProfile getGameProfile(GameProfile profile) {
+    private GameProfile getGameProfile(GameProfile profile, ItemStack item) {
         // 检查玩家名是否有效
         if (profile == null || !isValidUsername(profile.getName())) {
             return profile; // 如果玩家名无效，直接返回原始 profile
+        }
+
+        // 检查玩家名是否在黑名单中
+        if (BLACKLISTED_GAMEPROFILE.contains(profile.getName())) {
+            return profile; // 如果玩家名在黑名单中，直接返回原始 profile
         }
 
         // 检查 profile 是否完整，或者是否包含 textures 属性
@@ -300,11 +318,23 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                     return gameprofile;
                 }
             } catch (Exception e) {
+                // 捕获异常，将玩家名加入黑名单
+                BLACKLISTED_GAMEPROFILE.add(profile.getName());
+
+                // 清空物品的 NBT 数据
+                if (item != null) {
+                    item.setTagCompound(null);
+                }
+
                 if (MainConfig.enableDebugMode) {
-                    // 捕获异常并记录日志
+                    // 记录日志
                     System.err.println("Failed to fetch GameProfile for username: " + profile.getName());
                     e.printStackTrace();
                 }
+
+                // 返回默认的 GameProfile（当前玩家）
+                String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                return new GameProfile(null, playerName);
             }
         }
 
