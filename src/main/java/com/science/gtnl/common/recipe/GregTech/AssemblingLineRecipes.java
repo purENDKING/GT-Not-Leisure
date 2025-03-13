@@ -6,7 +6,6 @@ import static gregtech.api.util.GTRecipeBuilder.*;
 import static gregtech.api.util.GTRecipeConstants.*;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -15,7 +14,6 @@ import net.minecraftforge.fluids.FluidStack;
 import com.dreammaster.block.BlockList;
 import com.science.gtnl.Utils.enums.TierEU;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
@@ -250,13 +248,13 @@ public class AssemblingLineRecipes implements IRecipePool {
             .addTo(AssemblyLine);
 
         GTValues.RA.stdBuilder()
-            .metadata(RESEARCH_ITEM, new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1))
+            .metadata(RESEARCH_ITEM, GTNLItemList.NeutronCollector.get(1))
             .metadata(RESEARCH_TIME, 114514 * SECONDS)
             .itemInputs(
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1),
+                GTNLItemList.NeutronCollector.get(1),
+                GTNLItemList.NeutronCollector.get(1),
+                GTNLItemList.NeutronCollector.get(1),
+                GTNLItemList.NeutronCollector.get(1),
                 ItemList.Electric_Motor_UHV.get(4L),
                 ItemList.Field_Generator_UHV.get(4L),
                 ItemList.Emitter_UHV.get(4L),
@@ -266,19 +264,19 @@ public class AssemblingLineRecipes implements IRecipePool {
                 GTModHandler.getModItem(Avaritia.ID, "Resource", 16, 5),
                 GTOreDictUnificator.get(OrePrefixes.wireGt08, Materials.SuperconductorUHV, 16L))
             .fluidInputs(Materials.CosmicNeutronium.getMolten(2304), Materials.Grade7PurifiedWater.getFluid(16000))
-            .itemOutputs(new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1))
+            .itemOutputs(GTNLItemList.DenseNeutronCollector.get(1))
             .eut(TierEU.RECIPE_UHV)
             .duration(60 * SECONDS)
             .addTo(AssemblyLine);
 
         GTValues.RA.stdBuilder()
-            .metadata(RESEARCH_ITEM, new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1))
+            .metadata(RESEARCH_ITEM, GTNLItemList.DenseNeutronCollector.get(1))
             .metadata(RESEARCH_TIME, 114514 * SECONDS)
             .itemInputs(
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenseNeutronCollector), 1),
+                GTNLItemList.DenseNeutronCollector.get(1),
+                GTNLItemList.DenseNeutronCollector.get(1),
+                GTNLItemList.DenseNeutronCollector.get(1),
+                GTNLItemList.DenseNeutronCollector.get(1),
                 ItemList.Electric_Motor_UHV.get(8L),
                 ItemList.Field_Generator_UHV.get(8L),
                 ItemList.Emitter_UHV.get(8L),
@@ -288,19 +286,19 @@ public class AssemblingLineRecipes implements IRecipePool {
                 GTModHandler.getModItem(Avaritia.ID, "Resource", 32, 5),
                 GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUHV, 16L))
             .fluidInputs(Materials.CosmicNeutronium.getMolten(4608), Materials.Grade7PurifiedWater.getFluid(32000))
-            .itemOutputs(new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1))
+            .itemOutputs(GTNLItemList.DenserNeutronCollector.get(1))
             .eut(TierEU.RECIPE_UHV)
             .duration(120 * SECONDS)
             .addTo(AssemblyLine);
 
         GTValues.RA.stdBuilder()
-            .metadata(RESEARCH_ITEM, new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1))
+            .metadata(RESEARCH_ITEM, GTNLItemList.DenserNeutronCollector.get(1))
             .metadata(RESEARCH_TIME, 114514 * SECONDS)
             .itemInputs(
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1),
-                new ItemStack(Item.getItemFromBlock(BasicBlocks.DenserNeutronCollector), 1),
+                GTNLItemList.DenserNeutronCollector.get(1),
+                GTNLItemList.DenserNeutronCollector.get(1),
+                GTNLItemList.DenserNeutronCollector.get(1),
+                GTNLItemList.DenserNeutronCollector.get(1),
                 ItemList.Electric_Motor_UEV.get(8L),
                 ItemList.Field_Generator_UEV.get(8L),
                 ItemList.Emitter_UEV.get(8L),
@@ -311,7 +309,7 @@ public class AssemblingLineRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUHV, 32L),
                 GregtechItemList.Laser_Lens_Special.get(1))
             .fluidInputs(Materials.CosmicNeutronium.getMolten(9216), Materials.Grade8PurifiedWater.getFluid(64000))
-            .itemOutputs(new ItemStack(Item.getItemFromBlock(BasicBlocks.DensestNeutronCollector), 1))
+            .itemOutputs(GTNLItemList.DensestNeutronCollector.get(1))
             .eut(TierEU.RECIPE_UEV)
             .duration(60 * SECONDS)
             .addTo(AssemblyLine);

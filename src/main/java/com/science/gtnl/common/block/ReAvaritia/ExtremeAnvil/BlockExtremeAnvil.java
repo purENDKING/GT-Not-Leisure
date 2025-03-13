@@ -20,7 +20,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.science.gtnl.ClientProxy;
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -34,6 +36,9 @@ public class BlockExtremeAnvil extends BlockFalling {
         setStepSound(Block.soundTypeAnvil);
         setHardness(10.0F);
         setResistance(2000.0F);
+        GameRegistry.registerBlock(this, ItemBlockExtrumeAnvil.class, getUnlocalizedName());
+        GameRegistry.registerTileEntity(TileEntityExtremeAnvil.class, "ExtremeAnvilTileEntity");
+        GTNLItemList.ExtremeAnvil.set(new ItemStack(this, 1));
     }
 
     private IIcon Icon;

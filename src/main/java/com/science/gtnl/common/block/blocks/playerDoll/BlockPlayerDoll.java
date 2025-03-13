@@ -18,7 +18,9 @@ import net.minecraft.world.World;
 
 import com.mojang.authlib.GameProfile;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,6 +33,8 @@ public class BlockPlayerDoll extends BlockContainer {
         this.setBlockName("playerDoll");
         this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 1.0F, 0.9F);
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureBlock);
+        GameRegistry.registerBlock(this, ItemBlockPlayerDoll.class, getUnlocalizedName());
+        GTNLItemList.PlayerDoll.set(new ItemStack(this, 1));
     }
 
     @Override

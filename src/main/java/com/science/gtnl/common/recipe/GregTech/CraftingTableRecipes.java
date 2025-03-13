@@ -400,5 +400,13 @@ public class CraftingTableRecipes implements IRecipePool {
             GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrotine, 8L),
             new Object[] { "AB ", "   ", "   ", 'A', GTOreDictUnificator.get(OrePrefixes.dust, Materials.Redstone, 1L),
                 'B', GTOreDictUnificator.get(OrePrefixes.dust, Materials.Electrum, 1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.PlayerDoll.get(1),
+            new Object[] { "ABC", "DEF", "GHI", 'A', new ItemStack(Blocks.wool, 1, 14), 'B',
+                new ItemStack(Blocks.wool, 1, 1), 'C', new ItemStack(Blocks.wool, 1, 4), 'D',
+                new ItemStack(Blocks.wool, 1, 0), 'E', new ItemStack(Blocks.iron_block, 1), 'F',
+                new ItemStack(Blocks.wool, 1, 5), 'G', new ItemStack(Blocks.wool, 1, 10), 'H',
+                new ItemStack(Blocks.wool, 1, 9), 'I', new ItemStack(Blocks.wool, 1, 11) });
     }
 }

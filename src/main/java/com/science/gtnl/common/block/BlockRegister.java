@@ -19,7 +19,6 @@ import com.science.gtnl.common.block.Casings.Glass.ItemBlockGlass;
 import com.science.gtnl.common.block.Casings.Glow.ItemBlockGlow;
 import com.science.gtnl.common.block.ReAvaritia.BlockSoulFarmland;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.BlockExtremeAnvil;
-import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.DenseNeutronCollector;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.DenserNeutronCollector;
 import com.science.gtnl.common.block.ReAvaritia.NeutronCollector.DensestNeutronCollector;
@@ -30,7 +29,6 @@ import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialS
 import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDoll;
-import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -40,31 +38,24 @@ public class BlockRegister {
 
     public static void registryBlocks() {
 
-        BasicBlocks.ExtremeAnvil = new BlockExtremeAnvil().setBlockName("ExtremeAnvil");
-        GameRegistry.registerBlock(BasicBlocks.ExtremeAnvil, "ExtremeAnvil");
-        GameRegistry.registerTileEntity(TileEntityExtremeAnvil.class, "ExtremeAnvilTileEntity");
+        BasicBlocks.ExtremeAnvil = new BlockExtremeAnvil();
 
-        BasicBlocks.NeutronCollector = GameRegistry.registerBlock(new NeutronCollector(), "NeutronCollector");
-        BasicBlocks.DenseNeutronCollector = GameRegistry
-            .registerBlock(new DenseNeutronCollector(), "DenseNeutronCollector");
-        BasicBlocks.DenserNeutronCollector = GameRegistry
-            .registerBlock(new DenserNeutronCollector(), "DenserNeutronCollector");
-        BasicBlocks.DensestNeutronCollector = GameRegistry
-            .registerBlock(new DensestNeutronCollector(), "DensestNeutronCollector");
+        BasicBlocks.NeutronCollector = new NeutronCollector();
+        BasicBlocks.DenseNeutronCollector = new DenseNeutronCollector();
+        BasicBlocks.DenserNeutronCollector = new DenserNeutronCollector();
+        BasicBlocks.DensestNeutronCollector = new DensestNeutronCollector();
         GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollectorTileEntity");
 
         BasicBlocks.BlockSoulFarmland = new BlockSoulFarmland();
-        GameRegistry.registerBlock(BasicBlocks.BlockSoulFarmland, "BlockSoulFarmland");
 
         BasicBlocks.BlockArtificialStarRender = new BlockArtificialStarRender();
-        GameRegistry.registerTileEntity(TileEntityArtificialStar.class, "BlockArtificialStarRender");
+        GameRegistry.registerTileEntity(TileEntityArtificialStar.class, "ArtificialStarRenderTileEntity");
 
         BasicBlocks.PlayerDoll = new BlockPlayerDoll();
-        GameRegistry.registerBlock(BasicBlocks.PlayerDoll, ItemPlayerDoll.class, "playerDoll");
         GameRegistry.registerTileEntity(TileEntityPlayerDoll.class, "playerDollTileEntity");
 
-        BasicBlocks.BlockLaserBeacon = new BlockLaserBeacon();
-        GameRegistry.registerTileEntity(TileEntityLaserBeacon.class, "BlockLaserBeacon");
+        BasicBlocks.LaserBeacon = new BlockLaserBeacon();
+        GameRegistry.registerTileEntity(TileEntityLaserBeacon.class, "LaserBeaconTileEntity");
 
         GameRegistry
             .registerBlock(BasicBlocks.MetaBlock, ItemBlockBase.class, BasicBlocks.MetaBlock.getUnlocalizedName());

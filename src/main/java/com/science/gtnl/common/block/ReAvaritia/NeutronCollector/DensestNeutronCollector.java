@@ -19,7 +19,9 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -35,6 +37,8 @@ public class DensestNeutronCollector extends BlockContainer {
         setBlockName("DensestNeutronCollector");
         setHarvestLevel("pickaxe", 3);
         this.setCreativeTab(GTNLCreativeTabs.ReAvaritia);
+        GameRegistry.registerBlock(this, ItemBlockDensestNeutronCollector.class, getUnlocalizedName());
+        GTNLItemList.DensestNeutronCollector.set(new ItemStack(this, 1));
     }
 
     @SideOnly(Side.CLIENT)

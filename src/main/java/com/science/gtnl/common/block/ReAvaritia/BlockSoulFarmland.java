@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -16,6 +17,9 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockSoulFarmland extends BlockFarmland {
 
@@ -29,6 +33,8 @@ public class BlockSoulFarmland extends BlockFarmland {
         this.setHardness(0.6F);
         this.setStepSound(soundTypeSand);
         this.setBlockTextureName("reavaritia:BlockSoulFarmland");
+        GameRegistry.registerBlock(this, ItemBlockSoulFarmland.class, getUnlocalizedName());
+        GTNLItemList.SoulFarmland.set(new ItemStack(this, 1));
     }
 
     @Override

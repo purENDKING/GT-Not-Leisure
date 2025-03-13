@@ -21,9 +21,9 @@ import com.gtnewhorizons.modularui.common.widget.textfield.TextFieldWidget;
 import gregtech.api.gui.modularui.GTUIInfos;
 import gregtech.api.gui.modularui.GTUITextures;
 
-public class ItemPlayerDoll extends ItemBlock implements IItemWithModularUI {
+public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI {
 
-    public ItemPlayerDoll(Block block) {
+    public ItemBlockPlayerDoll(Block block) {
         super(block);
         MinecraftForge.EVENT_BUS.register(this); // 注册事件监听器
     }
@@ -49,7 +49,7 @@ public class ItemPlayerDoll extends ItemBlock implements IItemWithModularUI {
      */
     @Override
     public ModularWindow createWindow(UIBuildContext buildContext, ItemStack stack) {
-        if (!(stack.getItem() instanceof ItemPlayerDoll)) return null;
+        if (!(stack.getItem() instanceof ItemBlockPlayerDoll)) return null;
         return new PlayerDollUIFactory(buildContext, stack).createWindow();
     }
 

@@ -13,7 +13,7 @@ import com.science.gtnl.common.block.Casings.Special.StargateMetaBlockBase;
 public class BasicBlocks {
 
     public static Block BlockArtificialStarRender;
-    public static Block BlockLaserBeacon;
+    public static Block LaserBeacon;
     public static Block BlockSoulFarmland;
     public static Block NeutronCollector;
     public static Block DenseNeutronCollector;

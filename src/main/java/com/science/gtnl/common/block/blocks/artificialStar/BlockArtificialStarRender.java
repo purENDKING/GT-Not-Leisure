@@ -17,6 +17,8 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.lwjgl.opengl.GL11;
 
+import com.science.gtnl.common.GTNLItemList;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +31,8 @@ public class BlockArtificialStarRender extends Block {
         this.setHardness(-1.0f);
         this.setBlockName("RealArtificialStarRender");
         this.setLightLevel(15.0f);
-        GameRegistry.registerBlock(this, getUnlocalizedName());
+        GameRegistry.registerBlock(this, ItemBlockArtificialStarRender.class, getUnlocalizedName());
+        GTNLItemList.ArtificialStarRender.set(new ItemStack(this, 1));
     }
 
     @Override
