@@ -2,6 +2,8 @@ package com.science.gtnl.common.block.blocks.playerDoll;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StringUtils;
@@ -32,6 +34,28 @@ public class TileEntityPlayerDoll extends TileEntity {
             NBTTagCompound ownerTag = new NBTTagCompound();
             NBTUtil.func_152460_a(ownerTag, this.skullOwner);
             nbt.setTag("SkullOwner", ownerTag);
+        }
+    }
+
+    /**
+     * 获取 TileEntity 的描述包，用于客户端和服务器同步数据
+     */
+    @Override
+    public Packet getDescriptionPacket() {
+        NBTTagCompound nbt = new NBTTagCompound();
+        this.writeToNBT(nbt); // 将 TileEntity 数据写入 NBT
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, nbt);
+    }
+
+    @Override
+    public void onDataPacket(net.minecraft.network.NetworkManager net,
+        net.minecraft.network.play.server.S35PacketUpdateTileEntity pkt) {
+        NBTTagCompound nbt = pkt.func_148857_g(); // 获取数据包中的 NBT 数据
+        if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
+            this.skullOwner = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
+        } else if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
+            String playerName = nbt.getString("SkullOwner");
+            this.skullOwner = new GameProfile(null, playerName);
         }
     }
 

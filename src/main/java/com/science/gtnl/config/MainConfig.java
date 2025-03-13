@@ -17,7 +17,7 @@ public class MainConfig {
     public static boolean enableDeleteRecipe = true;
     public static boolean enableDebugMode = false;
     public static boolean enableInfinitySwordExplosion = true;
-    public static boolean enableCustomPlayerDoll = false;
+    public static boolean enableCustomPlayerDoll = true;
 
     public static boolean needSeedPacket = true;
 
@@ -109,6 +109,14 @@ public class MainConfig {
                 enableInfinitySwordExplosion,
                 "Enable Create Explosion")
             .getBoolean(enableInfinitySwordExplosion);
+
+        enableCustomPlayerDoll = config
+            .get(
+                "Enable Custom Player Skin for Player Doll",
+                "enable",
+                enableCustomPlayerDoll,
+                "Enable Custom Player Skin")
+            .getBoolean(enableCustomPlayerDoll);
 
         if (config.hasChanged()) {
             config.save();
