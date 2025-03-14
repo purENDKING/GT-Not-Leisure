@@ -408,5 +408,43 @@ public class CraftingTableRecipes implements IRecipePool {
                 new ItemStack(Blocks.wool, 1, 0), 'E', new ItemStack(Blocks.iron_block, 1), 'F',
                 new ItemStack(Blocks.wool, 1, 5), 'G', new ItemStack(Blocks.wool, 1, 10), 'H',
                 new ItemStack(Blocks.wool, 1, 9), 'I', new ItemStack(Blocks.wool, 1, 11) });
+
+        addCraftingRecipe(
+            GTNLItemList.SteamAssemblerBronze.get(1),
+            new Object[] { "ABA", "BCB", "ABA", 'A',
+                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Bronze, 1L), 'B',
+                GTNLItemList.PrecisionSteamMechanism.get(1), 'C', ItemList.Casing_Gearbox_Bronze.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.SteamAssemblerSteel.get(1),
+            new Object[] { "AAA", "BCB", "DBD", 'A',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.WroughtIron, 1L), 'B',
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1L), 'C',
+                GTNLItemList.SteamAssemblerSteel.get(1), 'D',
+                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamFormingPress.get(1),
+            new Object[] { "ABA", "CDC", "ABA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                new ItemStack(Blocks.piston, 1), 'C', GTNLItemList.PrecisionSteamMechanism.get(1), 'D',
+                ItemList.Casing_Gearbox_Bronze.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LvSteamTurbine.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_LV.get(1), 'B', "circuitBasic", 'C',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'D', ItemList.Hull_LV.get(1), 'E',
+                GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Tin, 1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.MvSteamTurbine.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_MV.get(1), 'B', "circuitGood", 'C',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Aluminium, 1L), 'D', ItemList.Hull_MV.get(1), 'E',
+                GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.AnnealedCopper, 1L) });
+
+        addCraftingRecipe(
+            GTNLItemList.HvSteamTurbine.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_HV.get(1), 'B', "circuitAdvanced", 'C',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.StainlessSteel, 1L), 'D', ItemList.Hull_HV.get(1),
+                'E', GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Gold, 1L) });
     }
 }

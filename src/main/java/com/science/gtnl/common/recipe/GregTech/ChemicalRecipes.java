@@ -19,6 +19,7 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
+import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
 
 public class ChemicalRecipes implements IRecipePool {
 
@@ -597,6 +598,18 @@ public class ChemicalRecipes implements IRecipePool {
             .noOptimize()
             .duration(80)
             .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Lithium, 2),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Beryllium, 1))
+            .fluidInputs(Materials.Fluorine.getGas(4000))
+            .fluidOutputs(MaterialsNuclides.Li2BeF4.getFluidStack(1008))
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_IV)
             .addTo(mCR);
     }
 }

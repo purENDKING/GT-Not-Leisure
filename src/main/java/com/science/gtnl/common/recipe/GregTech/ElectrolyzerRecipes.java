@@ -14,11 +14,12 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.material.MaterialsElements;
+import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
 import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class ElectrolyzerRecipes implements IRecipePool {
 
-    final RecipeMap<?> electrolyzer = GTPPRecipeMaps.electrolyzerNonCellRecipes;
+    final RecipeMap<?> ENCR = GTPPRecipeMaps.electrolyzerNonCellRecipes;
 
     @Override
     public void loadRecipes() {
@@ -31,7 +32,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(840)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.NitronsoniumTetrafluoroborate.get(OrePrefixes.dust, 7))
@@ -44,7 +45,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(840)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs()
@@ -55,7 +56,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(640)
             .eut(30)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs()
@@ -66,7 +67,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(112)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs()
@@ -77,7 +78,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(72)
             .eut(30)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.PotassiumSulfate.get(OrePrefixes.dust, 7))
@@ -90,7 +91,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(168)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.AmmoniumChloride.get(OrePrefixes.dust, 6))
@@ -103,7 +104,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(48)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.PraseodymiumOxide.get(OrePrefixes.dust, 5))
@@ -113,7 +114,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(WerkstoffMaterialPool.LanthanumOxide.get(OrePrefixes.dust, 5))
@@ -123,7 +124,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.ScandiumOxide.get(OrePrefixes.dust, 5))
@@ -133,7 +134,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(WerkstoffMaterialPool.EuropiumIIIOxide.get(OrePrefixes.dust, 5))
@@ -143,7 +144,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.GadoliniumOxide.get(OrePrefixes.dust, 5))
@@ -153,7 +154,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.TerbiumOxide.get(OrePrefixes.dust, 5))
@@ -163,7 +164,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.DysprosiumOxide.get(OrePrefixes.dust, 5))
@@ -173,7 +174,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.HolmiumOxide.get(OrePrefixes.dust, 5))
@@ -183,7 +184,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.ErbiumOxide.get(OrePrefixes.dust, 5))
@@ -193,7 +194,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.ThuliumOxide.get(OrePrefixes.dust, 5))
@@ -203,7 +204,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.YtterbiumOxide.get(OrePrefixes.dust, 5))
@@ -213,7 +214,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialPool.LutetiumOxide.get(OrePrefixes.dust, 5))
@@ -223,7 +224,7 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(70)
             .eut(60)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
 
         RecipeBuilder.builder()
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 6))
@@ -233,6 +234,46 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .noOptimize()
             .duration(96)
             .eut(TierEU.RECIPE_MV)
-            .addTo(electrolyzer);
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uranium, 1))
+            .fluidInputs(MaterialsFluorides.URANIUM_HEXAFLUORIDE.getFluidStack(1000))
+            .fluidOutputs(Materials.Fluorine.getGas(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemOutputs(MaterialsElements.getInstance().NEPTUNIUM.getDust(1))
+            .fluidInputs(MaterialsFluorides.NEPTUNIUM_HEXAFLUORIDE.getFluidStack(1008))
+            .fluidOutputs(Materials.Fluorine.getGas(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemOutputs(MaterialsElements.getInstance().SELENIUM.getDust(1))
+            .fluidInputs(MaterialsFluorides.SELENIUM_HEXAFLUORIDE.getFluidStack(1008))
+            .fluidOutputs(Materials.Fluorine.getGas(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemOutputs(MaterialPool.Technetium.get(OrePrefixes.dust, 1))
+            .fluidInputs(MaterialsFluorides.TECHNETIUM_HEXAFLUORIDE.getFluidStack(1008))
+            .fluidOutputs(Materials.Fluorine.getGas(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
     }
 }

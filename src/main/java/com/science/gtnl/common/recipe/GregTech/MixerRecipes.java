@@ -17,7 +17,9 @@ import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.item.chemistry.AgriculturalChem;
 import gtPlusPlus.core.material.MaterialMisc;
+import gtPlusPlus.core.util.minecraft.FluidUtils;
 import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class MixerRecipes implements IRecipePool {
@@ -87,6 +89,18 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(200)
             .eut(TierEU.RECIPE_IV)
+            .addTo(MNCR);
+
+        RecipeBuilder.builder()
+            .itemInputs()
+            .fluidInputs(
+                FluidUtils.getFluidStack(AgriculturalChem.RedMud, 1000),
+                Materials.HydrochloricAcid.getFluid(4000))
+            .fluidOutputs(MaterialPool.NeutralisedRedMud.getFluidOrGas(2000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
             .addTo(MNCR);
 
     }
