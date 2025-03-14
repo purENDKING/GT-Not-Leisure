@@ -297,17 +297,17 @@ public class ItemRegister {
                     texter("§5EU Usage: -28%%", "tooltips.MAXParallelControllerCore_01"),
                     texter("§bParallel: 16777216", "tooltips.MAXParallelControllerCore_02") }));
 
-        GTNLItemList.NagaBook.set(initItem("§dRumor - Naga Book", 62));
-        GTNLItemList.TwilightForestBook.set(initItem("§6Urban legends - Twilight Forest Book", 63));
-        GTNLItemList.LichBook.set(initItem("Impurity - Lich Book", 64));
-        GTNLItemList.MinotaurBook.set(initItem("§cUrban Strange Tales - Minotaur Book", 65));
-        GTNLItemList.HydraBook.set(initItem("§dRumor - Hydra Book", 66));
-        GTNLItemList.KnightPhantomBook.set(initItem("§9Urban Diseases - Knight Phantom Book", 67));
-        GTNLItemList.UrGhastBook.set(initItem("§9Urban Diseases - Ur-Ghast Book", 68));
-        GTNLItemList.AlphaYetiBook.set(initItem("Impurity - Alpha Yeti Book", 69));
-        GTNLItemList.SnowQueenBook.set(initItem("§bCity Star - Snow Queen Book", 70));
-        GTNLItemList.FinalBook.set(initItem("§bCity Star - Final Book", 71));
-        GTNLItemList.GiantBook.set(initItem("§dRumor - Giant Book", 72));
+        GTNLItemList.NagaBook.set(initItem("§7Canard - Naga Book", 62));
+        GTNLItemList.TwilightForestBook.set(initItem("§bUrban legends - Twilight Forest Book", 63));
+        GTNLItemList.LichBook.set(initItem("§6Urban Myth - Lich Book", 64));
+        GTNLItemList.MinotaurBook.set(initItem("§9Urban Legend - Minotaur Book", 65));
+        GTNLItemList.HydraBook.set(initItem("§9Urban Legend - Hydra Book", 66));
+        GTNLItemList.KnightPhantomBook.set(initItem("§aUrban Plague - Knight Phantom Book", 67));
+        GTNLItemList.UrGhastBook.set(initItem("§aUrban Plague - Ur-Ghast Book", 68));
+        GTNLItemList.AlphaYetiBook.set(initItem("§aUrban Plague - Alpha Yeti Book", 69));
+        GTNLItemList.SnowQueenBook.set(initItem("§5Urban Nightmare - Snow Queen Book", 70));
+        GTNLItemList.FinalBook.set(initItem("§cImpurity - Final Book", 71));
+        GTNLItemList.GiantBook.set(initItem("§5Urban Nightmare - Giant Book", 72));
         GTNLItemList.ClayedGlowstone.set(initItem("Clayed Glowstone", 73));
         GTNLItemList.QuantumDisk.set(initItem("Quantum Disk", 74));
         GTNLItemList.NeutroniumBoule.set(
