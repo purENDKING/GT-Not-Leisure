@@ -304,7 +304,7 @@ public class CraftingTableRecipes implements IRecipePool {
 
         addCraftingRecipe(
             new ItemStack(ItemLoader.SatietyRing, 1),
-            new Object[] { "ABA", "CDC", "EFE", 'A', CustomItemList.CoinCookIII.get(1), 'B',
+            new Object[] { "ABA", "CDC", "EFE", 'A', CustomItemList.CoinCookII.get(1), 'B',
                 new ItemStack(Items.golden_apple, 1, 1), 'C',
                 GTModHandler.getModItem(ExtraUtilities.ID, "defoliageAxe", 1), 'D',
                 GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
@@ -420,7 +420,7 @@ public class CraftingTableRecipes implements IRecipePool {
             new Object[] { "AAA", "BCB", "DBD", 'A',
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.WroughtIron, 1L), 'B',
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1L), 'C',
-                GTNLItemList.SteamAssemblerSteel.get(1), 'D',
+                GTNLItemList.SteamAssemblerBronze.get(1), 'D',
                 GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L) });
 
         addCraftingRecipe(

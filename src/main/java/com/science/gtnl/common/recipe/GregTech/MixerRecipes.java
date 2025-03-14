@@ -92,7 +92,7 @@ public class MixerRecipes implements IRecipePool {
             .addTo(MNCR);
 
         RecipeBuilder.builder()
-            .itemInputs()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 1L))
             .fluidInputs(
                 FluidUtils.getFluidStack(AgriculturalChem.RedMud, 1000),
                 Materials.HydrochloricAcid.getFluid(4000))
