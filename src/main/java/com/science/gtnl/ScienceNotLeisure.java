@@ -59,6 +59,7 @@ import cpw.mods.fml.relauncher.Side;
         + "required-after:AWWayofTime;"
         + "required-after:BloodArsenal;"
         + "required-after:modularui;"
+        + "required-after:Botania;"
         + "after:GalacticraftCore;"
         + "required-after:bartworks;"
         + "after:miscutils;"
