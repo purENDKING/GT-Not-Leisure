@@ -4,6 +4,7 @@ import static com.science.gtnl.common.block.Casings.BasicBlocks.PlayerDoll;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GuiEventHandler;
 import com.science.gtnl.Utils.LanguageManager;
@@ -46,6 +47,8 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
 
         LanguageManager.writePlaceholderStrings();
+        MinecraftForge.EVENT_BUS.register(new ItemPlayerDollRenderer());
+        MinecraftForge.EVENT_BUS.register(new BlockPlayerDollRenderer());
     }
 
     @Override

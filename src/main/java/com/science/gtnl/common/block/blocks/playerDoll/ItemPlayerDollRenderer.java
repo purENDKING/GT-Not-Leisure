@@ -23,6 +23,7 @@ import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.event.world.WorldEvent;
 
 import org.lwjgl.opengl.GL11;
 
@@ -33,12 +34,14 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.properties.Property;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ItemPlayerDollRenderer implements IItemRenderer {
 
+    private static boolean offlineMode = false;
     private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
@@ -101,7 +104,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         ResourceLocation skinTexture = DEFAULT_SKIN;
         ResourceLocation capeTexture = DEFAULT_CAPE;
 
-        if (MainConfig.enableCustomPlayerDoll) {
+        if (MainConfig.enableCustomPlayerDoll && !offlineMode) {
             GameProfile skullOwner = null;
 
             if (item.hasTagCompound()) {
@@ -183,30 +186,43 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
      * 下载皮肤或披风文件到本地，并检查玩家名和纹理哈希值的有效性
      */
     private void downloadTexture(MinecraftProfileTexture texture, MinecraftProfileTexture.Type type) {
-        // 检查纹理和玩家名是否有效
         if (texture == null || StringUtils.isNullOrEmpty(texture.getHash())) {
-            return; // 如果无效，直接返回
+            return;
         }
 
-        // 获取目标目录
         File targetDir = type == MinecraftProfileTexture.Type.SKIN ? SKIN_DIR : CAPE_DIR;
         File targetFile = new File(targetDir, texture.getHash() + ".png");
 
-        // 如果文件已存在，跳过下载
         if (targetFile.exists()) {
             return;
         }
 
-        // 下载纹理文件
-        try (InputStream in = new URL(texture.getUrl()).openStream();
-            FileOutputStream out = new FileOutputStream(targetFile)) {
-            byte[] buffer = new byte[8192];
-            int bytesRead;
-            while ((bytesRead = in.read(buffer)) != -1) {
-                out.write(buffer, 0, bytesRead);
+        int maxRetries = 10;
+        int retryCount = 0;
+
+        while (retryCount < maxRetries) {
+            try (InputStream in = new URL(texture.getUrl()).openStream();
+                FileOutputStream out = new FileOutputStream(targetFile)) {
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+                return; // 下载成功
+            } catch (IOException e) {
+                retryCount++;
+                if (retryCount >= maxRetries) {
+                    System.err
+                        .println("Failed to download texture after " + maxRetries + " attempts: " + texture.getUrl());
+                    offlineMode = true; // 设置为离线模式
+                    return;
+                }
+                try {
+                    Thread.sleep(1000); // 等待 1 秒后重试
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -357,5 +373,10 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         for (String partName : partNames) {
             modelCustom.renderPart(partName);
         }
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        offlineMode = false; // 重置离线模式
     }
 }

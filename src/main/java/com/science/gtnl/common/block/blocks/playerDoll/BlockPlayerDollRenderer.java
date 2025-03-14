@@ -23,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
+import net.minecraftforge.event.world.WorldEvent;
 
 import org.lwjgl.opengl.GL11;
 
@@ -33,12 +34,14 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import com.mojang.authlib.properties.Property;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
+    private static boolean offlineMode = false;
     private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
@@ -84,54 +87,48 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             ResourceLocation skinTexture = DEFAULT_SKIN;
             ResourceLocation capeTexture = DEFAULT_CAPE;
 
-            if (MainConfig.enableCustomPlayerDoll) {
+            if (MainConfig.enableCustomPlayerDoll && !offlineMode) {
                 // 获取 TileEntity 的 NBT 数据
                 NBTTagCompound nbt = new NBTTagCompound();
-                tileEntity.writeToNBT(nbt); // 将 TileEntity 数据写入 NBT
+                tileEntity.writeToNBT(nbt);
                 GameProfile gameprofile = tileEntityPlayerDoll.getSkullOwner();
 
-                if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-                    // SkullOwner 是字符串，直接获取玩家名称
+                if (nbt.hasKey("SkullOwner", 8)) {
                     String playerName = nbt.getString("SkullOwner");
                     if (playerName == null || playerName.isEmpty()) {
-                        // 如果玩家名称为空，使用默认名称
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
                     gameprofile = new GameProfile(null, playerName);
-                } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
-                    // SkullOwner 是复合标签，使用 NBTUtil 解析 GameProfile
+                } else if (nbt.hasKey("SkullOwner", 10)) {
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     gameprofile = NBTUtil.func_152459_a(ownerTag);
 
-                    // 检查解析后的 GameProfile 是否有效
                     if (gameprofile != null && (gameprofile.getName() == null || gameprofile.getName()
                         .isEmpty()) && gameprofile.getId() == null) {
-                        // 如果 GameProfile 的 name 和 ID 都为空，使用默认名称
-                        gameprofile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName()); // 默认名称
+                        gameprofile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName());
                     }
                 }
 
                 if (gameprofile != null) {
-                    gameprofile = getGameProfile(gameprofile, tileEntity); // 获取完整的 GameProfile
+                    gameprofile = getGameProfile(gameprofile, tileEntity);
                 } else {
                     gameprofile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName());
-                    gameprofile = getGameProfile(gameprofile, tileEntity); // 获取完整的 GameProfile
+                    gameprofile = getGameProfile(gameprofile, tileEntity);
                 }
 
-                // 如果 GameProfile 有效，加载皮肤和披风纹理
                 if (gameprofile != null) {
                     Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textureMap = minecraft.func_152342_ad()
                         .func_152788_a(gameprofile);
 
                     if (textureMap.containsKey(MinecraftProfileTexture.Type.SKIN)) {
                         MinecraftProfileTexture skin = textureMap.get(MinecraftProfileTexture.Type.SKIN);
-                        downloadTexture(skin, MinecraftProfileTexture.Type.SKIN); // 下载皮肤
-                        skinTexture = getLocalTexture(skin, MinecraftProfileTexture.Type.SKIN, DEFAULT_SKIN); // 获取本地纹理
+                        downloadTexture(skin, MinecraftProfileTexture.Type.SKIN);
+                        skinTexture = getLocalTexture(skin, MinecraftProfileTexture.Type.SKIN, DEFAULT_SKIN);
                     }
                     if (textureMap.containsKey(MinecraftProfileTexture.Type.CAPE)) {
                         MinecraftProfileTexture cape = textureMap.get(MinecraftProfileTexture.Type.CAPE);
-                        downloadTexture(cape, MinecraftProfileTexture.Type.CAPE); // 下载披风
-                        capeTexture = getLocalTexture(cape, MinecraftProfileTexture.Type.CAPE, DEFAULT_CAPE); // 获取本地纹理
+                        downloadTexture(cape, MinecraftProfileTexture.Type.CAPE);
+                        capeTexture = getLocalTexture(cape, MinecraftProfileTexture.Type.CAPE, DEFAULT_CAPE);
                     }
                 }
             }
@@ -165,30 +162,43 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
      * 下载皮肤或披风文件到本地，并检查玩家名和纹理哈希值的有效性
      */
     private void downloadTexture(MinecraftProfileTexture texture, MinecraftProfileTexture.Type type) {
-        // 检查纹理和玩家名是否有效
         if (texture == null || StringUtils.isNullOrEmpty(texture.getHash())) {
-            return; // 如果无效，直接返回
+            return;
         }
 
-        // 获取目标目录
         File targetDir = type == MinecraftProfileTexture.Type.SKIN ? SKIN_DIR : CAPE_DIR;
         File targetFile = new File(targetDir, texture.getHash() + ".png");
 
-        // 如果文件已存在，跳过下载
         if (targetFile.exists()) {
             return;
         }
 
-        // 下载纹理文件
-        try (InputStream in = new URL(texture.getUrl()).openStream();
-            FileOutputStream out = new FileOutputStream(targetFile)) {
-            byte[] buffer = new byte[8192];
-            int bytesRead;
-            while ((bytesRead = in.read(buffer)) != -1) {
-                out.write(buffer, 0, bytesRead);
+        int maxRetries = 10;
+        int retryCount = 0;
+
+        while (retryCount < maxRetries) {
+            try (InputStream in = new URL(texture.getUrl()).openStream();
+                FileOutputStream out = new FileOutputStream(targetFile)) {
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+                return; // 下载成功
+            } catch (IOException e) {
+                retryCount++;
+                if (retryCount >= maxRetries) {
+                    System.err
+                        .println("Failed to download texture after " + maxRetries + " attempts: " + texture.getUrl());
+                    offlineMode = true; // 设置为离线模式
+                    return;
+                }
+                try {
+                    Thread.sleep(1000); // 等待 1 秒后重试
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -342,5 +352,10 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
         for (String partName : partNames) {
             modelCustom.renderPart(partName);
         }
+    }
+
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        offlineMode = false; // 重置离线模式
     }
 }
