@@ -239,6 +239,8 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         if (processingLogic == null) {
             return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;

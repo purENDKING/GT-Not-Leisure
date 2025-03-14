@@ -197,6 +197,8 @@ public class WoodDistillation extends GTMMultiMachineBase<WoodDistillation> impl
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         if (processingLogic == null) {
             return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;

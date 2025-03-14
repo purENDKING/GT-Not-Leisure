@@ -183,6 +183,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 第一步：初始化参数
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         int limit = 20; // limit 取批处理时间 20 tick
         long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数

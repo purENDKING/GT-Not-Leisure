@@ -405,4 +405,12 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
         }
         return 0;
     }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing_EM() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
+        return super.checkProcessing_EM();
+    }
 }

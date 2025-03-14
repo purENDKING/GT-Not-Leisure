@@ -2,6 +2,8 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static gregtech.api.util.GTUtility.validMTEList;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -13,6 +15,7 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
+import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.OverclockCalculator;
 
@@ -158,4 +161,13 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
             }
         }
     }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
+        return super.checkProcessing();
+    }
+
 }

@@ -220,6 +220,8 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         costingEU = BigInteger.ZERO;
         costingEUText = ZERO_STRING;
         prepareProcessing();

@@ -164,6 +164,8 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         ArrayList<ItemStack> tInputList = getAllStoredInputs();
         if (tInputList.isEmpty()) return CheckRecipeResultRegistry.NO_RECIPE;
 

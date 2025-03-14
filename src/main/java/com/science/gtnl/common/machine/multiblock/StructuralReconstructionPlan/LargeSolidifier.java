@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
@@ -401,6 +403,14 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
             tier = Math.max(tHatch.mTier, tier);
         }
         return tier;
+    }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
+        return super.checkProcessing();
     }
 
 }

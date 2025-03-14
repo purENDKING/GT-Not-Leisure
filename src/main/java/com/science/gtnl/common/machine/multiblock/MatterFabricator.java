@@ -170,6 +170,8 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
     @NotNull
     @Override
     public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
         boolean foundValidInput = false;
         long outputAmount = 0;
         final Item MatterBall = GameRegistry.findItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial");
