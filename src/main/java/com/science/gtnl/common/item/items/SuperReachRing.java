@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import baubles.api.BaubleType;
 import cpw.mods.fml.relauncher.Side;
@@ -20,6 +21,7 @@ public class SuperReachRing extends ItemBauble {
         this.setUnlocalizedName("SuperReachRing");
         this.setTextureName("sciencenotleisure:SuperReachRing");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
+        GTNLItemList.SuperReachRing.set(new ItemStack(this, 1));
     }
 
     @Override

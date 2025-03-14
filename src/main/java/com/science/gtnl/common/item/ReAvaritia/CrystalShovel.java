@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -33,6 +34,7 @@ public class CrystalShovel extends ItemSpade {
         this.setTextureName("reavaritia:CrystalShovel");
         this.setMaxDamage(8888);
         MinecraftForge.EVENT_BUS.register(this);
+        GTNLItemList.CrystalShovel.set(new ItemStack(this, 1));
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.science.gtnl.common.recipe.GregTech;
 
-import static com.science.gtnl.Mods.ScienceNotLeisure;
 import static com.science.gtnl.loader.IScriptLoader.missing;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.addCraftingRecipe;
@@ -11,13 +10,9 @@ import net.minecraft.item.ItemStack;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.recipe.IRecipePool;
 
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.MaterialsUEVplus;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.*;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.core.material.MaterialsAlloy;
@@ -168,7 +163,7 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTNLItemList.VibrantPhotovoltaicBlock.get(1), 'D', "circuitData" });
 
         addCraftingRecipe(
-            GTModHandler.getModItem(ScienceNotLeisure.ID, "TestItem", 1, 0),
+            GTNLItemList.TestItem.get(1),
             new Object[] { "ABA", "BCB", "ABA", 'A', GTModHandler.getModItem(Minecraft.ID, "golden_apple", 1, 1), 'B',
                 GTModHandler.getModItem(Botania.ID, "manaResource", 1, 9), 'C',
                 GTModHandler.getModItem(Minecraft.ID, "dragon_egg", 1) });
@@ -295,7 +290,7 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.TungstenSteel, 1L), 'E', "craftingToolWrench" });
 
         addCraftingRecipe(
-            new ItemStack(ItemLoader.RecordNewHorizons, 1),
+            GTNLItemList.RecordNewHorizons.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTModHandler.getModItem(SGCraft.ID, "stargateRing", 1, 0, missing),
                 'B', GTModHandler.getModItem(SGCraft.ID, "rfPowerUnit", 1, 0, missing), 'C',
                 GTModHandler.getModItem(SGCraft.ID, "stargateRing", 1, 1, missing), 'D',
@@ -303,16 +298,16 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTModHandler.getModItem(SGCraft.ID, "stargateBase", 1, 0, missing) });
 
         addCraftingRecipe(
-            new ItemStack(ItemLoader.SatietyRing, 1),
+            GTNLItemList.SatietyRing.get(1),
             new Object[] { "ABA", "CDC", "EFE", 'A', CustomItemList.CoinCookII.get(1), 'B',
                 new ItemStack(Items.golden_apple, 1, 1), 'C',
                 GTModHandler.getModItem(ExtraUtilities.ID, "defoliageAxe", 1), 'D',
                 GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
                 GTModHandler.getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1), 'F',
-                new ItemStack(ItemLoader.KFCFamily, 1) });
+                GTNLItemList.KFCFamily.get(1) });
 
         addCraftingRecipe(
-            new ItemStack(ItemLoader.KFCFamily, 1),
+            GTNLItemList.KFCFamily.get(1),
             new Object[] { "ABA", "CDC", "EBE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
                 'B', GTModHandler.getModItem(PamsHarvestCraft.ID, "roastchickenItem", 1), 'C',
                 new ItemStack(Items.cooked_chicken, 1), 'D',
@@ -442,9 +437,9 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.AnnealedCopper, 1L) });
 
         addCraftingRecipe(
-            GTNLItemList.HvSteamTurbine.get(1),
-            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_HV.get(1), 'B', "circuitAdvanced", 'C',
-                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.StainlessSteel, 1L), 'D', ItemList.Hull_HV.get(1),
-                'E', GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Gold, 1L) });
+            GTNLItemList.SuperReachRing.get(1),
+            new Object[] { "CB ", "BAB", " B ", 'A', GTModHandler.getModItem(Botania.ID, "reachRing", 1), 'B',
+                GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.GaiaSpirit, 1L), 'C',
+                GTModHandler.getModItem(Botania.ID, "lens", 1, 18) });
     }
 }

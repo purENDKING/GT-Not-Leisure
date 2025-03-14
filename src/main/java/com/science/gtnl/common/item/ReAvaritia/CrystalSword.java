@@ -21,6 +21,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -34,6 +35,7 @@ public class CrystalSword extends ItemSword {
         this.setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         this.setTextureName("reavaritia:CrystalSword");
         this.setMaxDamage(8888);
+        GTNLItemList.CrystalSword.set(new ItemStack(this, 1));
     }
 
     @Override

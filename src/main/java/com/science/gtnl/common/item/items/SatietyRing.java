@@ -8,6 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
@@ -19,6 +20,7 @@ public class SatietyRing extends Item implements IBauble {
         this.setUnlocalizedName("SatietyRing");
         this.setTextureName("sciencenotleisure:SatietyRing");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
+        GTNLItemList.SatietyRing.set(new ItemStack(this, 1));
     }
 
     @Override

@@ -33,6 +33,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -51,6 +52,7 @@ public class BlazeSword extends ItemSword {
         this.setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         this.setMaxDamage(7777);
         MinecraftForge.EVENT_BUS.register(this);
+        GTNLItemList.BlazeSword.set(new ItemStack(this, 1));
     }
 
     @SubscribeEvent

@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.ItemLoader;
 
 public class InfinityAxe extends ItemAxe {
@@ -40,6 +41,7 @@ public class InfinityAxe extends ItemAxe {
         setTextureName("reavaritia:InfinityAxe");
         setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         setMaxDamage(9999);
+        GTNLItemList.InfinityAxe.set(new ItemStack(this, 1));
     }
 
     @Override

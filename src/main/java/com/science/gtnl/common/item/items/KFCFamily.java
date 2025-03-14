@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -21,6 +22,7 @@ public class KFCFamily extends ItemFood {
         this.setUnlocalizedName("KFCFamily");
         this.setTextureName("sciencenotleisure:KFCFamily");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
+        GTNLItemList.KFCFamily.set(new ItemStack(this, 1));
     }
 
     @Override

@@ -30,6 +30,7 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -52,6 +53,7 @@ public class InfinityTotem extends Item implements IBauble {
         this.setMaxDamage(99);
         this.setMaxStackSize(1);
         MinecraftForge.EVENT_BUS.register(this);
+        GTNLItemList.InfinityTotem.set(new ItemStack(this, 1));
     }
 
     @Override

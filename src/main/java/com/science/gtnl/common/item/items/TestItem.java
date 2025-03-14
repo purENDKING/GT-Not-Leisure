@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -18,10 +19,10 @@ public class TestItem extends Item {
 
     public TestItem() {
         super();
-
         this.setUnlocalizedName("TestItem");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         this.setTextureName("sciencenotleisure:TestItem");
+        GTNLItemList.TestItem.set(new ItemStack(this, 1));
     }
 
     @Override

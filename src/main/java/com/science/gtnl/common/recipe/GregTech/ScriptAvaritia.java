@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.loader.IScriptLoader;
 
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
@@ -1954,7 +1953,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinitySword, 1),
+                GTNLItemList.InfinitySword.get(1),
                 "------AAA",
                 "-----ABBA",
                 "----ABCBA",
@@ -1973,13 +1972,13 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
                 'E',
-                new ItemStack(ItemLoader.BlazeSword, 1),
+                GTNLItemList.BlazeSword.get(1),
                 'F',
-                new ItemStack(ItemLoader.CrystalSword, 1));
+                GTNLItemList.CrystalSword.get(1));
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityAxe, 1),
+                GTNLItemList.InfinityAxe.get(1),
                 "---BBBB-A",
                 "--BBBBDD-",
                 "--BBBBDDB",
@@ -1998,13 +1997,13 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
                 'E',
-                new ItemStack(ItemLoader.BlazeAxe, 1),
+                GTNLItemList.BlazeAxe.get(1),
                 'F',
-                new ItemStack(ItemLoader.CrystalAxe, 1));
+                GTNLItemList.CrystalAxe.get(1));
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityPickaxe, 1),
+                GTNLItemList.InfinityPickaxe.get(1),
                 "--BBBBBBA",
                 "-BBBBBDDB",
                 "-----BDDB",
@@ -2023,13 +2022,13 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
                 'E',
-                new ItemStack(ItemLoader.BlazePickaxe, 1),
+                GTNLItemList.BlazePickaxe.get(1),
                 'F',
-                new ItemStack(ItemLoader.CrystalPickaxe, 1));
+                GTNLItemList.CrystalPickaxe.get(1));
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityShovel, 1),
+                GTNLItemList.InfinityShovel.get(1),
                 "------BBB",
                 "-----BBBB",
                 "-----BBBB",
@@ -2048,13 +2047,13 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
                 'E',
-                new ItemStack(ItemLoader.BlazeShovel, 1),
+                GTNLItemList.BlazeShovel.get(1),
                 'F',
-                new ItemStack(ItemLoader.CrystalShovel, 1));
+                GTNLItemList.CrystalShovel.get(1));
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityHoe, 1),
+                GTNLItemList.InfinityHoe.get(1),
                 "-BBBBBBBA",
                 "--BBBBDDB",
                 "-----ADBB",
@@ -2073,13 +2072,13 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(Avaritia.ID, "Crystal_Matrix", 1, 0, missing),
                 'E',
-                new ItemStack(ItemLoader.BlazeHoe, 1),
+                GTNLItemList.BlazeHoe.get(1),
                 'F',
-                new ItemStack(ItemLoader.CrystalHoe, 1));
+                GTNLItemList.CrystalHoe.get(1));
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityBucket, 1),
+                GTNLItemList.InfinityBucket.get(1),
                 "AA-----AA",
                 "AAB---BAA",
                 "ACCB-BCCA",
@@ -2100,7 +2099,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.InfinityTotem, 1),
+                GTNLItemList.InfinityTotem.get(1),
                 "---AAA---",
                 "D-AAAAA-D",
                 "-DABACAD-",
@@ -2125,7 +2124,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.BlazeSword, 1),
+                GTNLItemList.BlazeSword.get(1),
                 "-------CA",
                 "------CAC",
                 "--B--CAC-",
@@ -2150,7 +2149,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.BlazePickaxe, 1),
+                GTNLItemList.BlazePickaxe.get(1),
                 "--AAAAABB",
                 "-AAAAAABB",
                 "-----CBAA",
@@ -2173,7 +2172,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.BlazeAxe, 1),
+                GTNLItemList.BlazeAxe.get(1),
                 "---AAAAA-",
                 "--AAAAA--",
                 "--AAAAFA-",
@@ -2198,7 +2197,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.BlazeShovel, 1),
+                GTNLItemList.BlazeShovel.get(1),
                 "------AA-",
                 "-----AAAA",
                 "-----AAAA",
@@ -2221,7 +2220,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.BlazeHoe, 1),
+                GTNLItemList.BlazeHoe.get(1),
                 "--AAAAAA-",
                 "---AAAABB",
                 "-----CBBA",
@@ -2271,7 +2270,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.CrystalSword, 1),
+                GTNLItemList.CrystalSword.get(1),
                 "-------AB",
                 "------ABA",
                 "-B--ACBA-",
@@ -2292,7 +2291,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.CrystalPickaxe, 1),
+                GTNLItemList.CrystalPickaxe.get(1),
                 "-BBBBBBAD",
                 "--BC-ABCA",
                 "-----BBBB",
@@ -2313,7 +2312,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.CrystalAxe, 1),
+                GTNLItemList.CrystalAxe.get(1),
                 "---AAAA--",
                 "--ABBBBC-",
                 "--ABBBBA-",
@@ -2332,7 +2331,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.CrystalShovel, 1),
+                GTNLItemList.CrystalShovel.get(1),
                 "-----CCCA",
                 "----CBBBC",
                 "---CBBBBC",
@@ -2353,7 +2352,7 @@ public class ScriptAvaritia implements IScriptLoader {
 
         ExtremeCraftingManager.getInstance()
             .addExtremeShapedOreRecipe(
-                new ItemStack(ItemLoader.CrystalHoe, 1),
+                GTNLItemList.CrystalHoe.get(1),
                 "-CCCCCCA-",
                 "--CBBBBBA",
                 "---CCCDBC",

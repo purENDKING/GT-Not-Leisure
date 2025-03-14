@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.ItemLoader;
 
 public class InfinityHoe extends ItemHoe {
@@ -38,6 +39,7 @@ public class InfinityHoe extends ItemHoe {
         this.setCreativeTab(CreativeTabs.tabTools);
         setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         this.setMaxDamage(9999);
+        GTNLItemList.InfinityHoe.set(new ItemStack(this, 1));
     }
 
     @Override

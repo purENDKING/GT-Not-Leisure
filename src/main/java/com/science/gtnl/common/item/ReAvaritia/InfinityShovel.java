@@ -27,6 +27,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -47,6 +48,7 @@ public class InfinityShovel extends ItemSpade {
         this.setUnlocalizedName("InfinityShovel");
         this.setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         this.setTextureName("reavaritia:InfinityShovel");
+        GTNLItemList.InfinityShovel.set(new ItemStack(this, 1));
     }
 
     @Override

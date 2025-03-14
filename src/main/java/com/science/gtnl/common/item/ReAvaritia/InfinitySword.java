@@ -40,6 +40,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -69,6 +70,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
         setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         this.setMaxDamage(9999);
         MinecraftForge.EVENT_BUS.register(this);
+        GTNLItemList.InfinitySword.set(new ItemStack(this, 1));
     }
 
     @Override

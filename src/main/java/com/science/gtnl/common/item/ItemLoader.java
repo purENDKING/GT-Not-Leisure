@@ -1,7 +1,9 @@
 package com.science.gtnl.common.item;
 
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.ReAvaritia.BlazeAxe;
 import com.science.gtnl.common.item.ReAvaritia.BlazeHoe;
 import com.science.gtnl.common.item.ReAvaritia.BlazePickaxe;
@@ -82,6 +84,9 @@ public class ItemLoader {
         IRegistry(SuperReachRing, "SuperReachRing");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
+
+        GTNLItemList.RecordSus.set(new ItemStack(RecordSus, 1));
+        GTNLItemList.RecordNewHorizons.set(new ItemStack(RecordNewHorizons, 1));
 
     }
 

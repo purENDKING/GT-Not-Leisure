@@ -33,6 +33,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -55,8 +56,8 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
         setCreativeTab(CreativeTabs.tabTools);
         setCreativeTab(GTNLCreativeTabs.ReAvaritia);
         MinecraftForge.EVENT_BUS.register(this);
-
         registerFluidContainerData();
+        GTNLItemList.InfinityBucket.set(new ItemStack(this, 1));
     }
 
     private void registerFluidContainerData() {
