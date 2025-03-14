@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.Mods.TwistSpaceTechnology;
 import static com.science.gtnl.Utils.Utils.copyAmount;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.GTNLItemList.StellarConstructionFrameMaterial;
@@ -60,6 +61,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gtnhlanth.common.register.LanthItemList;
@@ -77,8 +79,14 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public static String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID DepletedExcitedNaquadahFuelRod;
     protected static GTNL_ItemID EnhancementCore;
+    protected static GTNL_ItemID Antimatter;
+    protected static GTNL_ItemID AntimatterFuelRod;
+    protected static GTNL_ItemID StrangeAnnihilationFuelRod;
     protected static long MaxOfDepletedExcitedNaquadahFuelRod;
     protected static long MaxOfEnhancementCore;
+    protected static long MaxOfAntimatter;
+    protected static long MaxOfAntimatterFuelRod;
+    protected static long MaxOfStrangeAnnihilationFuelRod;
     public String ownerName;
     public UUID ownerUUID;
     public long storageEU = 0;
@@ -114,6 +122,16 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));
         MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
         MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
+        if (TwistSpaceTechnology.isModLoaded()) {
+            Antimatter = GTNL_ItemID.createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 14));
+            AntimatterFuelRod = GTNL_ItemID
+                .createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 16));
+            StrangeAnnihilationFuelRod = GTNL_ItemID
+                .createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 29));
+            MaxOfAntimatter = 3;
+            MaxOfAntimatterFuelRod = 1024;
+            MaxOfStrangeAnnihilationFuelRod = 32768;
+        }
     }
 
     @Override
@@ -193,6 +211,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         // consume fuel and generate EU
         boolean flag = false;
         long recoveryAmount = 0;
+        long recoveryAmountTST = 0;
         // * Integer.MAX_VALUE
         currentOutputEU = 0;
         for (ItemStack items : getStoredInputs()) {
@@ -203,6 +222,19 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
                 currentOutputEU += MaxOfEnhancementCore * items.stackSize;
                 // recoveryAmount += items.stackSize;
                 flag = true;
+            } else if (TwistSpaceTechnology.isModLoaded()) {
+                if (Antimatter.equalItemStack(items)) {
+                    currentOutputEU += MaxOfAntimatter * items.stackSize;
+                    flag = true;
+                } else if (AntimatterFuelRod.equalItemStack(items)) {
+                    currentOutputEU += MaxOfAntimatterFuelRod * items.stackSize;
+                    recoveryAmountTST += items.stackSize;
+                    flag = true;
+                } else if (StrangeAnnihilationFuelRod.equalItemStack(items)) {
+                    currentOutputEU += MaxOfStrangeAnnihilationFuelRod * items.stackSize;
+                    recoveryAmountTST += items.stackSize;
+                    flag = true;
+                }
             }
             items.stackSize = 0;
         }
@@ -237,9 +269,15 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
             if (recoveryAmount > 0) {
                 mOutputItems = getRecovers(recoveryAmount);
             }
+            if (recoveryAmountTST > 0 && TwistSpaceTechnology.isModLoaded()) {
+                mOutputItems = getRecoversTST(recoveryAmountTST);
+            }
         } else if (XSTR.XSTR_INSTANCE.nextInt(1000) < recoveryChance) {
             if (recoveryAmount > 0) {
                 mOutputItems = getRecovers(recoveryAmount);
+            }
+            if (recoveryAmountTST > 0 && TwistSpaceTechnology.isModLoaded()) {
+                mOutputItems = getRecoversTST(recoveryAmountTST);
             }
         }
 
@@ -268,6 +306,24 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
             if (remainder > 0) r[stack] = copyAmount(remainder, t);
             return r;
         }
+    }
+
+    protected ItemStack[] getRecoversTST(long amount) {
+        if (amount <= Integer.MAX_VALUE && TwistSpaceTechnology.isModLoaded()) {
+            return new ItemStack[] {
+                GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", Integer.MAX_VALUE, 17) };
+        } else if (TwistSpaceTechnology.isModLoaded()) {
+            int stack = (int) (amount / Integer.MAX_VALUE);
+            int remainder = (int) (amount % Integer.MAX_VALUE);
+            ItemStack[] r = new ItemStack[remainder > 0 ? stack + 1 : stack];
+            ItemStack t = GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", Integer.MAX_VALUE, 17);
+            for (int i = 0; i < stack; i++) {
+                r[i] = t.copy();
+            }
+            if (remainder > 0) r[stack] = copyAmount(remainder, t);
+            return r;
+        }
+        return new ItemStack[] { new ItemStack(Blocks.dirt, 1) };
     }
 
     // Artificial Star Output multiplier
