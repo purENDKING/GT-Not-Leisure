@@ -54,6 +54,8 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     public static final String VDF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/vacuum_drying_furnace";
     private static final int MACHINEMODE_VACUUMFURNACE = 0;
     private static final int MACHINEMODE_DEHYDRATOR = 1;
+    private static final int MACHINEMODE_COLD_TRAP = 2;
+    private static final int MACHINEMODE_NUCLEAR_SALT = 3;
     private HeatingCoilLevel mCoilLevel;
     private int mHeatingCapacity = 0;
     public final int horizontalOffSet = 1;
@@ -98,27 +100,36 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return (machineMode == MACHINEMODE_VACUUMFURNACE) ? GTPPRecipeMaps.vacuumFurnaceRecipes
-            : GTPPRecipeMaps.chemicalDehydratorNonCellRecipes;
+        return switch (machineMode) {
+            case 1 -> GTPPRecipeMaps.chemicalDehydratorNonCellRecipes;
+            case 2 -> GTPPRecipeMaps.coldTrapRecipes;
+            case 3 -> GTPPRecipeMaps.nuclearSaltProcessingPlantRecipes;
+            default -> GTPPRecipeMaps.vacuumFurnaceRecipes;
+        };
     }
 
     @Nonnull
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
-        return Arrays.asList(GTPPRecipeMaps.chemicalDehydratorNonCellRecipes, GTPPRecipeMaps.vacuumFurnaceRecipes);
+        return Arrays.asList(
+            GTPPRecipeMaps.chemicalDehydratorNonCellRecipes,
+            GTPPRecipeMaps.vacuumFurnaceRecipes,
+            GTPPRecipeMaps.coldTrapRecipes,
+            GTPPRecipeMaps.nuclearSaltProcessingPlantRecipes);
     }
 
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.VacuumDryingFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_00)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_01)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_00)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_01)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_02)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -158,6 +169,8 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
         machineModeIcons.clear();
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_STEAM);
         machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_FLUID);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_METAL);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_WASHPLANT);
     }
 
     @Override
@@ -181,7 +194,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
 
     @Override
     public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
-        this.machineMode = (byte) ((this.machineMode + 1) % 2);
+        this.machineMode = (byte) ((this.machineMode + 1) % 4);
         GTUtility
             .sendChatToPlayer(aPlayer, StatCollector.translateToLocal("VacuumDryingFurnace_Mode_" + this.machineMode));
     }
@@ -202,7 +215,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                     .setHeatOC(true)
                     .setHeatDiscount(false)
                     .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

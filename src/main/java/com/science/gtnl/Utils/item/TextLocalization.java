@@ -432,10 +432,10 @@ public class TextLocalization {
         "Inserting programming circuits to limit the number of overclocking cycles allowed",
         "Tooltip_GrandAssemblyLine_09");
     public static final String Tooltip_GrandAssemblyLine_10 = texter(
-        "Install UIV and above parallel control cores to lift energy storage restrictions",
+        "Install UEV and above parallel control cores to lift energy storage restrictions",
         "Tooltip_GrandAssemblyLine_10");
     public static final String Tooltip_GrandAssemblyLine_11 = texter(
-        "Install UMV and above parallel control cores to unlock §cperfect overclock§7",
+        "Install UIV and above parallel control cores to unlock §cperfect overclock§7",
         "Tooltip_GrandAssemblyLine_11");
     public static final String Tooltip_GrandAssemblyLine_12 = texter(
         "Installing UXV and above parallel control cores will provide an additional 500%% power reduction and 2000%% acceleration (multiplicatively stacked)",
@@ -1056,6 +1056,9 @@ public class TextLocalization {
     public static final String Tooltip_VacuumDryingFurnace_02 = texter(
         "After each voltage level exceeds MV, the temperature will increase by 100K",
         "Tooltip_VacuumDryingFurnace_02");
+    public static final String Tooltip_VacuumDryingFurnace_03 = texter(
+        "When the recipe is a Cold Trap or Nuclear Salt Processing Plant, an additional 1000%% acceleration is provided (multiplied and added)",
+        "Tooltip_VacuumDryingFurnace_03");
     public static final String Tooltip_VacuumDryingFurnace_Casing = texter(
         "Any Vacuum Casing",
         "Tooltip_VacuumDryingFurnace_Casing");
