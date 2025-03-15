@@ -27,6 +27,7 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
 
     private GameProfile skullOwner;
     private String skinHttp;
+    private boolean enableElytra;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -39,6 +40,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
         if (nbt.hasKey("SkinHttp", 8)) {
             this.skinHttp = nbt.getString("SkinHttp");
+        }
+        if (nbt.hasKey("enableElytra")) {
+            enableElytra = nbt.getBoolean("enableElytra");
         }
     }
 
@@ -53,6 +57,7 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         if (this.skinHttp != null) {
             nbt.setString("SkinHttp", this.skinHttp);
         }
+        nbt.setBoolean("enableElytra", enableElytra);
     }
 
     /**
@@ -77,6 +82,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
         if (nbt.hasKey("SkinHttp", 8)) {
             this.skinHttp = nbt.getString("SkinHttp");
+        }
+        if (nbt.hasKey("enableElytra")) {
+            enableElytra = nbt.getBoolean("enableElytra");
         }
     }
 
@@ -104,6 +112,14 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
 
     public void setSkinHttp(String skinHttp) {
         this.skinHttp = skinHttp;
+    }
+
+    public boolean getEnableElytra() {
+        return enableElytra;
+    }
+
+    public void setEnableElytra(boolean enableElytra) {
+        this.enableElytra = enableElytra;
     }
 
     public void getProfile() {

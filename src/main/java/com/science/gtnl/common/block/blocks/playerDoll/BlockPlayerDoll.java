@@ -74,6 +74,15 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     tileEntityPlayerDoll.setSkinHttp(skinHttp); // 将 SkinHttp 存储到 TileEntity
                 }
 
+                // 检查是否存在 enableElytra 布尔值
+                if (nbt.hasKey("enableElytra", 1)) { // 1 表示 NBTTagByte
+                    boolean enableElytra = nbt.getBoolean("enableElytra");
+                    tileEntityPlayerDoll.setEnableElytra(enableElytra); // 将 enableElytra 存储到 TileEntity
+                }
+
+                boolean enableElytra = tileEntityPlayerDoll.getEnableElytra();
+                nbt.setBoolean("enableElytra", enableElytra);
+
                 // 处理 SkullOwner 数据
                 if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
                     // SkullOwner 是字符串，直接获取玩家名称
@@ -151,6 +160,8 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                 NBTTagCompound nbt = new NBTTagCompound();
                 String playerName = skullOwner.getName(); // 获取玩家名称
                 nbt.setString("SkullOwner", playerName); // 保存到 SkullOwner 标签
+                boolean enableElytra = tileEntityPlayerDoll.getEnableElytra();
+                nbt.setBoolean("enableElytra", enableElytra);
 
                 // 检查 TileEntity 中是否存在 SkinHttp 数据
                 if (tileEntityPlayerDoll.hasSkinHttp()) {
@@ -161,6 +172,8 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
             } else if (tileEntityPlayerDoll.hasSkinHttp()) {
                 // 如果只有 SkinHttp 数据，保存到 NBT
                 NBTTagCompound nbt = new NBTTagCompound();
+                boolean enableElytra = tileEntityPlayerDoll.getEnableElytra();
+                nbt.setBoolean("enableElytra", enableElytra);
                 nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
             }

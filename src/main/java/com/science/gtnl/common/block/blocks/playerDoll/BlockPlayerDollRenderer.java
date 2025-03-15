@@ -43,14 +43,24 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
     private static boolean offlineMode = false;
+    private static boolean isSteveModel = false; // 默认为 false，表示使用 Alex 模型
     private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
     private static final Set<String> BLACKLISTED_SKIN_URLS = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
     public static final ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
-    public static final ResourceLocation MODEL_RESOURCE = new ResourceLocation(
-        "sciencenotleisure:model/PlayerDoll.obj");
-    public static final IModelCustom modelCustom = AdvancedModelLoader.loadModel(MODEL_RESOURCE);
+    public static final ResourceLocation MODEL_STEVE = new ResourceLocation(
+        "sciencenotleisure:model/PlayerDollSteve.obj");
+    public static final ResourceLocation MODEL_ALEX = new ResourceLocation(
+        "sciencenotleisure:model/PlayerDollAlex.obj");
+    public static final ResourceLocation MODEL_STEVE_ELYTRA = new ResourceLocation(
+        "sciencenotleisure:model/PlayerDollSteve.obj");
+    public static final ResourceLocation MODEL_ALEX_ELYTRA = new ResourceLocation(
+        "sciencenotleisure:model/PlayerDollAlexElytra.obj");
+    public static final IModelCustom modelSteve = AdvancedModelLoader.loadModel(MODEL_STEVE);
+    public static final IModelCustom modelAlex = AdvancedModelLoader.loadModel(MODEL_ALEX);
+    public static final IModelCustom modelSteveElytra = AdvancedModelLoader.loadModel(MODEL_STEVE_ELYTRA);
+    public static final IModelCustom modelAlexElytra = AdvancedModelLoader.loadModel(MODEL_ALEX_ELYTRA);
 
     private static final File SKIN_DIR = new File("config/GTNotLeisure/skin");
     private static final File CAPE_DIR = new File("config/GTNotLeisure/cape");
@@ -98,31 +108,88 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             // 检查是否存在 SkinHttp 字符串
             if (nbt.hasKey("SkinHttp", 8)) { // 8 表示 NBTTagString
                 String skinHttp = nbt.getString("SkinHttp");
+                boolean enableElytra = false;
+                if (nbt.hasKey("enableElytra")) {
+                    enableElytra = nbt.getBoolean("enableElytra");
+                }
+
                 if (!StringUtils.isNullOrEmpty(skinHttp)) {
                     // 尝试下载并缓存皮肤
                     skinTexture = downloadAndCacheCustomSkin(skinHttp);
                     if (skinTexture != null) {
                         // 如果下载成功，绑定纹理并渲染模型
                         bindTexture(skinTexture);
-                        renderModelParts(
-                            "Body",
-                            "Body_Layer",
-                            "Hat",
-                            "Hat_Layer",
-                            "Head",
-                            "Left_Arm",
-                            "Left_Arm_Layer",
-                            "Left_Leg",
-                            "Left_Leg_Layer",
-                            "Right_Arm",
-                            "Right_Arm_Layer",
-                            "Right_Leg",
-                            "Right_Leg_Layer");
-
-                        // 绑定披风纹理并渲染披风部分
-                        bindTexture(capeTexture);
-                        modelCustom.renderPart("cape");
-
+                        if (isSteveModel) {
+                            if (enableElytra) {
+                                modelSteveElytra.renderPart("Body");
+                                modelSteveElytra.renderPart("Body_Layer");
+                                modelSteveElytra.renderPart("Hat");
+                                modelSteveElytra.renderPart("Hat_Layer");
+                                modelSteveElytra.renderPart("Head");
+                                modelSteveElytra.renderPart("Left_Arm");
+                                modelSteveElytra.renderPart("Left_Arm_Layer");
+                                modelSteveElytra.renderPart("Left_Leg");
+                                modelSteveElytra.renderPart("Left_Leg_Layer");
+                                modelSteveElytra.renderPart("Right_Arm");
+                                modelSteveElytra.renderPart("Right_Arm_Layer");
+                                modelSteveElytra.renderPart("Right_Leg");
+                                modelSteveElytra.renderPart("Right_Leg_Layer");
+                                bindTexture(capeTexture);
+                                modelSteveElytra.renderPart("ElytraRight");
+                                modelSteveElytra.renderPart("ElytraLeft");
+                            } else {
+                                modelSteve.renderPart("Body");
+                                modelSteve.renderPart("Body_Layer");
+                                modelSteve.renderPart("Hat");
+                                modelSteve.renderPart("Hat_Layer");
+                                modelSteve.renderPart("Head");
+                                modelSteve.renderPart("Left_Arm");
+                                modelSteve.renderPart("Left_Arm_Layer");
+                                modelSteve.renderPart("Left_Leg");
+                                modelSteve.renderPart("Left_Leg_Layer");
+                                modelSteve.renderPart("Right_Arm");
+                                modelSteve.renderPart("Right_Arm_Layer");
+                                modelSteve.renderPart("Right_Leg");
+                                modelSteve.renderPart("Right_Leg_Layer");
+                                bindTexture(capeTexture);
+                                modelSteve.renderPart("cape");
+                            }
+                        } else {
+                            if (enableElytra) {
+                                modelAlexElytra.renderPart("Body");
+                                modelAlexElytra.renderPart("Body_Layer");
+                                modelAlexElytra.renderPart("Hat");
+                                modelAlexElytra.renderPart("Hat_Layer");
+                                modelAlexElytra.renderPart("Head");
+                                modelAlexElytra.renderPart("Left_Arm");
+                                modelAlexElytra.renderPart("Left_Arm_Layer");
+                                modelAlexElytra.renderPart("Left_Leg");
+                                modelAlexElytra.renderPart("Left_Leg_Layer");
+                                modelAlexElytra.renderPart("Right_Arm");
+                                modelAlexElytra.renderPart("Right_Arm_Layer");
+                                modelAlexElytra.renderPart("Right_Leg");
+                                modelAlexElytra.renderPart("Right_Leg_Layer");
+                                bindTexture(capeTexture);
+                                modelAlexElytra.renderPart("ElytraRight");
+                                modelAlexElytra.renderPart("ElytraLeft");
+                            } else {
+                                modelAlex.renderPart("Body");
+                                modelAlex.renderPart("Body_Layer");
+                                modelAlex.renderPart("Hat");
+                                modelAlex.renderPart("Hat_Layer");
+                                modelAlex.renderPart("Head");
+                                modelAlex.renderPart("Left_Arm");
+                                modelAlex.renderPart("Left_Arm_Layer");
+                                modelAlex.renderPart("Left_Leg");
+                                modelAlex.renderPart("Left_Leg_Layer");
+                                modelAlex.renderPart("Right_Arm");
+                                modelAlex.renderPart("Right_Arm_Layer");
+                                modelAlex.renderPart("Right_Leg");
+                                modelAlex.renderPart("Right_Leg_Layer");
+                                bindTexture(capeTexture);
+                                modelAlex.renderPart("cape");
+                            }
+                        }
                         GL11.glPopMatrix();
                         return; // 直接返回，不再执行后续逻辑
                     }
@@ -184,29 +251,84 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
                 }
             }
 
-            if (skinTexture == null) {}
+            boolean enableElytra = false;
+            if (nbt.hasKey("enableElytra")) {
+                enableElytra = nbt.getBoolean("enableElytra");
+            }
 
             // 绑定皮肤纹理并渲染模型
             bindTexture(skinTexture);
-            renderModelParts(
-                "Body",
-                "Body_Layer",
-                "Hat",
-                "Hat_Layer",
-                "Head",
-                "Left_Arm",
-                "Left_Arm_Layer",
-                "Left_Leg",
-                "Left_Leg_Layer",
-                "Right_Arm",
-                "Right_Arm_Layer",
-                "Right_Leg",
-                "Right_Leg_Layer");
-
-            // 绑定披风纹理并渲染披风部分
-            bindTexture(capeTexture);
-            modelCustom.renderPart("cape");
-
+            if (isSteveModel) {
+                if (enableElytra) {
+                    modelSteveElytra.renderPart("Body");
+                    modelSteveElytra.renderPart("Body_Layer");
+                    modelSteveElytra.renderPart("Hat");
+                    modelSteveElytra.renderPart("Hat_Layer");
+                    modelSteveElytra.renderPart("Head");
+                    modelSteveElytra.renderPart("Left_Arm");
+                    modelSteveElytra.renderPart("Left_Arm_Layer");
+                    modelSteveElytra.renderPart("Left_Leg");
+                    modelSteveElytra.renderPart("Left_Leg_Layer");
+                    modelSteveElytra.renderPart("Right_Arm");
+                    modelSteveElytra.renderPart("Right_Arm_Layer");
+                    modelSteveElytra.renderPart("Right_Leg");
+                    modelSteveElytra.renderPart("Right_Leg_Layer");
+                    bindTexture(capeTexture);
+                    modelSteveElytra.renderPart("ElytraRight");
+                    modelSteveElytra.renderPart("ElytraLeft");
+                } else {
+                    modelSteve.renderPart("Body");
+                    modelSteve.renderPart("Body_Layer");
+                    modelSteve.renderPart("Hat");
+                    modelSteve.renderPart("Hat_Layer");
+                    modelSteve.renderPart("Head");
+                    modelSteve.renderPart("Left_Arm");
+                    modelSteve.renderPart("Left_Arm_Layer");
+                    modelSteve.renderPart("Left_Leg");
+                    modelSteve.renderPart("Left_Leg_Layer");
+                    modelSteve.renderPart("Right_Arm");
+                    modelSteve.renderPart("Right_Arm_Layer");
+                    modelSteve.renderPart("Right_Leg");
+                    modelSteve.renderPart("Right_Leg_Layer");
+                    bindTexture(capeTexture);
+                    modelSteve.renderPart("cape");
+                }
+            } else {
+                if (enableElytra) {
+                    modelAlexElytra.renderPart("Body");
+                    modelAlexElytra.renderPart("Body_Layer");
+                    modelAlexElytra.renderPart("Hat");
+                    modelAlexElytra.renderPart("Hat_Layer");
+                    modelAlexElytra.renderPart("Head");
+                    modelAlexElytra.renderPart("Left_Arm");
+                    modelAlexElytra.renderPart("Left_Arm_Layer");
+                    modelAlexElytra.renderPart("Left_Leg");
+                    modelAlexElytra.renderPart("Left_Leg_Layer");
+                    modelAlexElytra.renderPart("Right_Arm");
+                    modelAlexElytra.renderPart("Right_Arm_Layer");
+                    modelAlexElytra.renderPart("Right_Leg");
+                    modelAlexElytra.renderPart("Right_Leg_Layer");
+                    bindTexture(capeTexture);
+                    modelAlexElytra.renderPart("ElytraRight");
+                    modelAlexElytra.renderPart("ElytraLeft");
+                } else {
+                    modelAlex.renderPart("Body");
+                    modelAlex.renderPart("Body_Layer");
+                    modelAlex.renderPart("Hat");
+                    modelAlex.renderPart("Hat_Layer");
+                    modelAlex.renderPart("Head");
+                    modelAlex.renderPart("Left_Arm");
+                    modelAlex.renderPart("Left_Arm_Layer");
+                    modelAlex.renderPart("Left_Leg");
+                    modelAlex.renderPart("Left_Leg_Layer");
+                    modelAlex.renderPart("Right_Arm");
+                    modelAlex.renderPart("Right_Arm_Layer");
+                    modelAlex.renderPart("Right_Leg");
+                    modelAlex.renderPart("Right_Leg_Layer");
+                    bindTexture(capeTexture);
+                    modelAlex.renderPart("cape");
+                }
+            }
             GL11.glPopMatrix();
         }
     }
@@ -284,6 +406,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
     /**
      * 检查文件是否为有效的 JPG 或 PNG 图片，并且分辨率不超过 1024x1024
+     * 同时检查图片的从左到右54像素，从上到下20像素处是否有颜色，如果为透明使用Alex模型，否则使用Steve模型
      */
     private boolean isValidImage(File file) {
         try (InputStream in = new FileInputStream(file)) {
@@ -324,7 +447,14 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
                 return false;
             }
 
-            return true; // 是有效的图片文件，且分辨率符合要求
+            // 检查图片的从左到右54像素，从上到下20像素处是否有颜色
+            int pixel = image.getRGB(54, 20);
+            boolean isTransparent = (pixel >> 24) == 0x00;
+
+            // 根据透明度决定使用 Alex 或 Steve 模型
+            isSteveModel = !isTransparent; // 如果不透明，使用 Steve 模型；否则使用 Alex 模型
+
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -559,12 +689,6 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
         }
         // 使用正则表达式检查合法字符
         return username.matches("^[a-zA-Z0-9_\\-]+$");
-    }
-
-    private void renderModelParts(String... partNames) {
-        for (String partName : partNames) {
-            modelCustom.renderPart(partName);
-        }
     }
 
     @SubscribeEvent

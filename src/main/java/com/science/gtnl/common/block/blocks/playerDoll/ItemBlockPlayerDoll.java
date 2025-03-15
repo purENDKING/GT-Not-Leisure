@@ -95,6 +95,22 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setSize(197, 12))
                 .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_02")).setPos(208, 28)); // 新标签
 
+            // 输入框：用于输入鞘翅渲染状态（0 或 1）
+            TextFieldWidget elytraStateField = new TextFieldWidget();
+            builder.widget(
+                elytraStateField.setGetter(() -> getEnableElytra(getCurrentItem()) ? "1" : "0")
+                    .setSetter(value -> {
+                        // 将输入值转换为 boolean
+                        boolean enableElytra = "1".equals(value);
+                        setEnableElytra(getCurrentItem(), enableElytra);
+                    })
+                    .setTextColor(Color.WHITE.dark(1))
+                    .setTextAlignment(Alignment.CenterLeft)
+                    .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD.withOffset(-1, -1, 2, 2))
+                    .setPos(64, 48)
+                    .setSize(36, 12))
+                .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_03")).setPos(105, 50));
+
             // 确认按钮
             builder.widget(
                 new VanillaButtonWidget().setDisplayString(StatCollector.translateToLocal("Tooltip_PlayerDoll_01"))
@@ -157,6 +173,30 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                 stack.setTagCompound(nbt = new NBTTagCompound());
             }
             nbt.setString("SkinHttp", skinHttp);
+        }
+
+        /**
+         * 获取 enableElytra
+         */
+        private boolean getEnableElytra(ItemStack stack) {
+            if (stack.hasTagCompound()) {
+                NBTTagCompound nbt = stack.getTagCompound();
+                if (nbt.hasKey("enableElytra", 1)) { // 1 表示 Boolean 类型
+                    return nbt.getBoolean("enableElytra");
+                }
+            }
+            return false; // 默认值
+        }
+
+        /**
+         * 设置 enableElytra
+         */
+        private void setEnableElytra(ItemStack stack, boolean enableElytra) {
+            NBTTagCompound nbt = stack.getTagCompound();
+            if (nbt == null) {
+                stack.setTagCompound(nbt = new NBTTagCompound());
+            }
+            nbt.setBoolean("enableElytra", enableElytra);
         }
 
         /**
