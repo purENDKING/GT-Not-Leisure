@@ -340,7 +340,7 @@ public class UvKuangBiaoThreeGiantNuclearFusionReactor
                     'C',
                     buildHatchAdder(UvKuangBiaoThreeGiantNuclearFusionReactor.class).casingIndex(CASING_INDEX)
                         .dot(1)
-                        .atLeast(InputHatch, OutputHatch, Energy.or(ExoticEnergy))
+                        .atLeast(InputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 8))))
                 .addElement('D', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
                 .addElement('E', ofFrame(Materials.Tungsten))
