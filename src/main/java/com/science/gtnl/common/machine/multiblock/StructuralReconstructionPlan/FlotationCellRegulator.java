@@ -161,7 +161,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
                     'D',
                     buildHatchAdder(FlotationCellRegulator.class).casingIndex(CASING_INDEX)
                         .dot(1)
-                        .atLeast(InputBus, InputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 2))))
                 .addElement('E', ofBlock(blockCasings3Misc, 1))
                 .addElement('F', ofBlock(blockSpecialMultiCasings, 9))
