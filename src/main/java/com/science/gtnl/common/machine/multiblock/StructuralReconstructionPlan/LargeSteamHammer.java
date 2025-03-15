@@ -53,10 +53,10 @@ public class LargeSteamHammer extends SteamMultiMachineBase<LargeSteamHammer> im
         return TextLocalization.LargeSteamHammerRecipeType;
     }
 
-    public static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamHammer> STRUCTURE_DEFINITION = null;
-    public static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_hammer";
-    public static String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
+    private static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_hammer";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
 
     public LargeSteamHammer(String aName) {
         super(aName);
