@@ -176,7 +176,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                         skullOwner = new GameProfile(null, playerName);
                     } else if (!isValidUsername(skullOwner.getName())) {
                         // 如果玩家名不合法，使用默认值
-                        skullOwner = new GameProfile(null, "DefaultPlayer");
+                        skullOwner = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName());
                     }
                 } else {
                     // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
