@@ -140,6 +140,8 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             return false;
         }
 
+        if (mCasing < 25) return false;
+
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
@@ -162,7 +164,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             Blocks.water);
 
         ParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return true;
     }
 
     @Override

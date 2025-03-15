@@ -150,7 +150,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
                             .build(),
                         onElementPass(e -> e.mCasing++, ofBlock(sBlockReinforced, 2))))
                 .addElement('F', ofBlockAnyMeta(Blocks.sponge))
-                .addElement('G', ofBlockAnyMeta(Blocks.water))
+                .addElement('G', ofChain(isAir(), ofBlockAnyMeta(Blocks.flowing_water), ofBlockAnyMeta(Blocks.water)))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -321,10 +321,24 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
-        return this.mCasing >= 19 && this.mRadHatches.size() <= 1
-            && this.mOutputHatches.size() == 1
-            && !this.mInputHatches.isEmpty()
-            && !this.mEnergyHatches.isEmpty();
+        if (mCasing < 19 && this.mRadHatches.size() > 1
+            && this.mOutputHatches.size() != 1
+            && this.mInputHatches.isEmpty()
+            && this.mEnergyHatches.isEmpty()) return false;
+
+        boolean isFlipped = this.getFlip()
+            .isHorizontallyFlipped();
+        StructureUtils.setStringBlockXZ(
+            aBaseMetaTileEntity,
+            horizontalOffSet,
+            verticalOffSet,
+            depthOffSet,
+            shape,
+            isFlipped,
+            "G",
+            Blocks.water);
+
+        return true;
     }
 
     private int reCalculateFluidAmmount() {
