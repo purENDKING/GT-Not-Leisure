@@ -441,5 +441,12 @@ public class CraftingTableRecipes implements IRecipePool {
             new Object[] { "CB ", "BAB", " B ", 'A', GTModHandler.getModItem(Botania.ID, "reachRing", 1), 'B',
                 GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.GaiaSpirit, 1L), 'C',
                 GTModHandler.getModItem(Botania.ID, "lens", 1, 18) });
+
+        addCraftingRecipe(
+            GregtechItemList.Hatch_Reservoir.get(1),
+            new Object[] { "ABA", "BCB", "DDD", 'A',
+                GTModHandler.getModItem(IndustrialCraft2.ID, "blockAlloyGlass", 1, 0, missing), 'B',
+                new ItemStack(Items.water_bucket, 1), 'C', ItemList.Hull_LV.get(1), 'D',
+                new ItemStack(Items.diamond, 1) });
     }
 }
