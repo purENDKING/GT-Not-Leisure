@@ -69,8 +69,8 @@ public class SteamTurbine extends MTEBasicGenerator {
     public int getEfficiency() {
         return switch (this.mTier) {
             case 1 -> 100; // 600 / 6 = 100
-            case 2 -> 65; // 600 / 9.23 ≈ 65
-            case 3 -> 30; // 600 / 20 = 30
+            case 2 -> 80; // 600 / 9.23 ≈ 65
+            case 3 -> 60; // 600 / 20 = 30
             default -> 100; // 默认值
         };
     }
