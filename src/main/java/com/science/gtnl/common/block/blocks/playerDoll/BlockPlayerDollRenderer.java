@@ -129,23 +129,26 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
                 }
             }
 
-            // 如果 SkinHttp 不存在或下载失败，继续处理现有逻辑
             if (MainConfig.enableCustomPlayerDoll && !offlineMode) {
                 GameProfile gameprofile = tileEntityPlayerDoll.getSkullOwner();
 
-                if (nbt.hasKey("SkullOwner", 8)) {
+                if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
                     String playerName = nbt.getString("SkullOwner");
                     if (playerName == null || playerName.isEmpty()) {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
                     gameprofile = new GameProfile(null, playerName);
-                } else if (nbt.hasKey("SkullOwner", 10)) {
+                } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     gameprofile = NBTUtil.func_152459_a(ownerTag);
 
-                    if (gameprofile != null && (gameprofile.getName() == null || gameprofile.getName()
+                    if (gameprofile == null || (gameprofile.getName() == null || gameprofile.getName()
                         .isEmpty()) && gameprofile.getId() == null) {
-                        gameprofile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName());
+                        String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                        if (playerName == null || playerName.isEmpty()) {
+                            playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                        }
+                        gameprofile = new GameProfile(null, playerName);
                     }
                 }
 

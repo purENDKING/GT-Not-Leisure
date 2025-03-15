@@ -158,16 +158,34 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                     if (playerName == null || playerName.isEmpty()) {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
+                    if (playerName == null || playerName.isEmpty()) {
+                        playerName = "DefaultPlayer"; // 提供默认值
+                    }
                     skullOwner = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     skullOwner = NBTUtil.func_152459_a(ownerTag);
+                    if (skullOwner == null || (skullOwner.getName() == null && skullOwner.getId() == null)) {
+                        String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                        if (playerName == null || playerName.isEmpty()) {
+                            playerName = "DefaultPlayer"; // 提供默认值
+                        }
+                        skullOwner = new GameProfile(null, playerName);
+                    }
+                } else {
+                    // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
+                    String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    if (playerName == null || playerName.isEmpty()) {
+                        playerName = "DefaultPlayer"; // 提供默认值
+                    }
+                    skullOwner = new GameProfile(null, playerName);
+                    skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
                 }
             } else {
-                // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
+                // 如果没有 NBT 数据，使用默认玩家（当前玩家）
                 String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                 if (playerName == null || playerName.isEmpty()) {
-                    playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    playerName = "DefaultPlayer"; // 提供默认值
                 }
                 skullOwner = new GameProfile(null, playerName);
                 skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
