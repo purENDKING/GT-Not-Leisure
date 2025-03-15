@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -81,7 +80,7 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     String playerName = nbt.getString("SkullOwner");
                     if (playerName == null || playerName.isEmpty()) {
                         // 如果玩家名称为空，使用默认名称
-                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                        playerName = player.getCommandSenderName(); // 使用放置方块的玩家名称
                     }
                     profile = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
@@ -93,7 +92,7 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     if (profile != null && (profile.getName() == null || profile.getName()
                         .isEmpty()) && profile.getId() == null) {
                         // 如果 GameProfile 的 name 和 ID 都为空，使用默认名称
-                        profile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName()); // 默认名称
+                        profile = new GameProfile(null, player.getCommandSenderName()); // 默认名称
                     }
                 }
 
@@ -104,7 +103,7 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     String playerName = player.getCommandSenderName(); // 获取放置方块的玩家名字
                     if (playerName == null || playerName.isEmpty()) {
                         // 如果玩家名称为空，使用默认名称
-                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                        playerName = player.getCommandSenderName();
                     }
                     profile = new GameProfile(null, playerName); // 创建 GameProfile
                     tileEntityPlayerDoll.getGameProfile(profile); // 调用 getGameProfile
