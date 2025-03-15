@@ -793,7 +793,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             if (mEnergyHatches.size() > 1 && getMaxInputAmps() > 64) return false;
         }
 
-        if (mEnergyHatches.isEmpty() || mExoticEnergyHatches.isEmpty()) return false;
+        if (mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) return false;
 
         if (!mDualInputHatches.isEmpty()) {
             isDualInputHatch = true;
