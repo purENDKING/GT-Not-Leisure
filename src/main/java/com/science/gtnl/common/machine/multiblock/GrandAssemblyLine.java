@@ -784,7 +784,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         energyHatchTier = checkEnergyHatchTier();
         ParallelTier = getParallelTier(aStack);
 
-        if (ParallelTier < 11 && MainConfig.enableMachineAmpLimit) {
+        if (ParallelTier < 10 && MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
                     return false;
