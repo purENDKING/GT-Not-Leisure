@@ -542,6 +542,21 @@ public class TextLocalization {
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCentrifuge_Casing");
 
+    public static final String NameLargeSteamMixer = texter("Large Steam Mixer", "NameLargeSteamMixer");
+    public static final String LargeSteamMixerRecipeType = texter("Mixer", "LargeSteamMixerRecipeType");
+    public static final String Tooltip_LargeSteamMixer_00 = texter(
+        "50%% slower than using single block steam machines of the same mixer",
+        "Tooltip_LargeSteamMixer_00");
+    public static final String Tooltip_LargeSteamMixer_01 = texter(
+        "Processes up to 8 items at once",
+        "Tooltip_LargeSteamMixer_01");
+    public static final String Tooltip_LargeSteamMixer_02 = texter(
+        "Insert stainless steel gears into the controller to unlock the HV recipe",
+        "Tooltip_LargeSteamMixer_02");
+    public static final String Tooltip_LargeSteamMixer_Casing = texter(
+        "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
+        "Tooltip_LargeSteamMixer_Casing");
+
     public static final String NameLargeSteamHammer = texter("Large Steam Hammer", "NameLargeSteamHammer");
     public static final String LargeSteamHammerRecipeType = texter("Hammer", "LargeSteamHammerRecipeType");
     public static final String Tooltip_LargeSteamHammer_00 = texter(

@@ -448,5 +448,12 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTModHandler.getModItem(IndustrialCraft2.ID, "blockAlloyGlass", 1, 0, missing), 'B',
                 new ItemStack(Items.water_bucket, 1), 'C', ItemList.Hull_LV.get(1), 'D',
                 new ItemStack(Items.diamond, 1) });
+
+        addCraftingRecipe(
+            GTNLItemList.LargeSteamMixer.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Casing_BronzePlatedBricks.get(1), 'B',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'C',
+                GTNLItemList.PrecisionSteamMechanism.get(1), 'D', ItemList.Casing_Gearbox_Bronze.get(1), 'E',
+                GregtechItemList.Controller_SteamMixerMulti.get(1) });
     }
 }

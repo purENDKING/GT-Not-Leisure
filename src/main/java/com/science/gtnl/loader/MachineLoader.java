@@ -108,6 +108,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamCentrifuge;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamCompressor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamHammer;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamMixer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSteamOreWasher;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeWiremill;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LuvKuangBiaoOneGiantNuclearFusionReactor;
@@ -583,6 +584,10 @@ public class MachineLoader {
         GTNLItemList.LargeSteamFormingPress.set(
             new LargeSteamFormingPress(21106, "LargeSteamFormingPress", TextLocalization.NameLargeSteamFormingPress));
         addItemTooltip(GTNLItemList.LargeSteamFormingPress.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.LargeSteamMixer
+            .set(new LargeSteamMixer(21107, "LargeSteamMixer", TextLocalization.NameLargeSteamMixer));
+        addItemTooltip(GTNLItemList.LargeSteamMixer.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

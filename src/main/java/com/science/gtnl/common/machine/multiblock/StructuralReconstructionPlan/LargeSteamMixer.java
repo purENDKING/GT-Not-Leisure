@@ -1,18 +1,15 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
+import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import javax.annotation.Nonnull;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -27,85 +24,68 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.SoundResource;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.Textures;
-import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 
-public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWasher> implements ISurvivalConstructable {
-
-    private static final int MACHINEMODE_OREWASH = 0;
-    private static final int MACHINEMODE_SIMPLEWASH = 1;
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static IStructureDefinition<LargeSteamOreWasher> STRUCTURE_DEFINITION = null;
-    private static final String LSC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_ore_washer";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(LSC_STRUCTURE_FILE_PATH);
+public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> implements ISurvivalConstructable {
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new LargeSteamOreWasher(this.mName);
-    }
-
-    @Override
-    public RecipeMap<?> getRecipeMap() {
-        if (machineMode == MACHINEMODE_SIMPLEWASH) {
-            return GTPPRecipeMaps.simpleWasherRecipes;
-        }
-        return RecipeMaps.oreWasherRecipes;
-    }
-
-    @NotNull
-    @Override
-    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
-        return Arrays.asList(GTPPRecipeMaps.simpleWasherRecipes, RecipeMaps.oreWasherRecipes);
+        return new LargeSteamMixer(this.mName);
     }
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamOreWasherRecipeType;
+        return TextLocalization.LargeSteamMixerRecipeType;
     }
 
-    public LargeSteamOreWasher(String aName) {
+    private static boolean enableHVRecipe = false;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static IStructureDefinition<LargeSteamMixer> STRUCTURE_DEFINITION = null;
+    private static final String LSMi_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_mixer";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(LSMi_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 3;
+    private static final int VERTICAL_OFF_SET = 3;
+    private static final int DEPTH_OFF_SET = 0;
+
+    public LargeSteamMixer(String aName) {
         super(aName);
     }
 
-    public LargeSteamOreWasher(int aID, String aName, String aNameRegional) {
+    public LargeSteamMixer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
-
-    private static final int HORIZONTAL_OFF_SET = 4;
-    private static final int VERTICAL_OFF_SET = 4;
-    private static final int DEPTH_OFF_SET = 0;
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
-        int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
+        int id = tierMachine >= 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
             : ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
         if (side == aFacing) {
             if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id), TextureFactory.builder()
-                .addIcon(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER_ACTIVE)
+                .addIcon(TexturesGtBlock.oMCDIndustrialMixerActive)
                 .extFacing()
                 .build() };
             return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id), TextureFactory.builder()
-                .addIcon(Textures.BlockIcons.OVERLAY_FRONT_STEAM_WASHER)
+                .addIcon(TexturesGtBlock.oMCDIndustrialMixer)
                 .extFacing()
                 .build() };
         }
@@ -113,34 +93,35 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
     }
 
     @Override
-    public IStructureDefinition<LargeSteamOreWasher> getStructureDefinition() {
+    public IStructureDefinition<LargeSteamMixer> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<LargeSteamOreWasher>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<LargeSteamMixer>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement(
                     'A',
                     ofChain(
-                        buildSteamBigInput(LargeSteamOreWasher.class).casingIndex(getCasingTextureID())
+                        buildSteamBigInput(LargeSteamMixer.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),
-                        buildSteamInput(LargeSteamOreWasher.class).casingIndex(getCasingTextureID())
+                        buildSteamInput(LargeSteamMixer.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),
-                        buildHatchAdder(LargeSteamOreWasher.class).casingIndex(getCasingTextureID())
+                        buildHatchAdder(LargeSteamMixer.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .atLeast(
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
                                 OutputBus,
-                                InputHatch)
+                                InputHatch,
+                                OutputHatch)
                             .buildAndChain(
                                 onElementPass(
                                     x -> ++x.tCountCasing,
                                     withChannel(
                                         "tier",
                                         ofBlocksTiered(
-                                            LargeSteamOreWasher::getTierMachineCasing,
+                                            LargeSteamMixer::getTierMachineCasing,
                                             ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
                                             -1,
                                             (t, m) -> t.tierMachineCasing = m,
@@ -148,12 +129,36 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
                 .addElement(
                     'B',
                     ofBlocksTiered(
-                        LargeSteamOreWasher::getTierPipeCasing,
+                        LargeSteamMixer::getTierGearCasing,
+                        ImmutableList.of(Pair.of(sBlockCasings2, 2), Pair.of(sBlockCasings2, 3)),
+                        -1,
+                        (t, m) -> t.tierGearCasing = m,
+                        t -> t.tierGearCasing))
+                .addElement(
+                    'C',
+                    ofBlocksTiered(
+                        LargeSteamMixer::getTierPipeCasing,
                         ImmutableList.of(Pair.of(sBlockCasings2, 12), Pair.of(sBlockCasings2, 13)),
                         -1,
                         (t, m) -> t.tierPipeCasing = m,
                         t -> t.tierPipeCasing))
-                .addElement('C', ofBlockAnyMeta(Blocks.glass))
+                .addElement(
+                    'D',
+                    ofBlocksTiered(
+                        LargeSteamMixer::getTierFireboxCasing,
+                        ImmutableList.of(Pair.of(sBlockCasings3, 13), Pair.of(sBlockCasings3, 14)),
+                        -1,
+                        (t, m) -> t.tierFireboxCasing = m,
+                        t -> t.tierFireboxCasing))
+                .addElement('E', ofBlockAnyMeta(Blocks.glass))
+                .addElement(
+                    'F',
+                    ofBlocksTiered(
+                        LargeSteamMixer::getTierAdvancedCasing,
+                        ImmutableList.of(Pair.of(BWBlockCasings, 32066), Pair.of(BWBlockCasings, 32071)),
+                        -1,
+                        (t, m) -> t.tierAdvancedCasing = m,
+                        t -> t.tierAdvancedCasing))
                 .build();
 
         }
@@ -189,21 +194,39 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tierMachine = 0;
-        tierPipeCasing = -1;
         tierMachineCasing = -1;
+        tierGearCasing = -1;
+        tierPipeCasing = -1;
+        tierFireboxCasing = -1;
+        tierAdvancedCasing = -1;
         tCountCasing = 0;
+        enableHVRecipe = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tierPipeCasing < 0 && tierMachineCasing < 0) return false;
-        if (tierPipeCasing == 1 && tierMachineCasing == 1 && tCountCasing >= 195 && checkHatches()) {
+        if (tierMachineCasing < 0 && tierGearCasing < 0
+            && tierPipeCasing < 0
+            && tierFireboxCasing < 0
+            && tierAdvancedCasing < 0) return false;
+        if (tierMachineCasing == 1 && tierGearCasing == 1
+            && tierPipeCasing == 1
+            && tierFireboxCasing == 1
+            && tierAdvancedCasing == 1
+            && tCountCasing >= 60
+            && checkHatches()) {
             tierMachine = 1;
             getCasingTextureID();
             updateHatchTexture();
             return true;
         }
-        if (tierPipeCasing == 2 && tierMachineCasing == 2 && tCountCasing >= 195 && checkHatches()) {
+        if (tierMachineCasing == 2 && tierGearCasing == 2
+            && tierPipeCasing == 2
+            && tierFireboxCasing == 2
+            && tierAdvancedCasing == 2
+            && tCountCasing >= 60
+            && checkHatches()) {
             tierMachine = 2;
             getCasingTextureID();
             updateHatchTexture();
+            enableHVRecipe = getUpgradeTier(aStack);
             return true;
         }
         getCasingTextureID();
@@ -214,11 +237,17 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
     @Override
     public int getMaxParallelRecipes() {
         if (tierMachine == 1) {
-            return 32;
+            return 8;
         } else if (tierMachine == 2) {
-            return 64;
+            if (enableHVRecipe) return 32;
+            return 16;
         }
-        return 32;
+        return 8;
+    }
+
+    @Override
+    public RecipeMap<?> getRecipeMap() {
+        return GTPPRecipeMaps.mixerNonCellRecipes;
     }
 
     @Override
@@ -238,61 +267,47 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(0.6 * tierMachine)
-                    .setSpeedBoost(0.05 / tierMachine);
+                    .setEUtDiscount(tierMachine + (enableHVRecipe ? 1 : 0))
+                    .setSpeedBoost(1.5 / tierMachine - (enableHVRecipe ? 0.25 : 0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override
     public int getTierRecipes() {
-        return 2;
+        return tierMachine + (enableHVRecipe ? 1 : 0);
+    }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        enableHVRecipe = getUpgradeTier(controllerItem);
+        return super.checkProcessing();
+    }
+
+    public boolean getUpgradeTier(ItemStack inventory) {
+        if (inventory == null) return false;
+        return inventory.isItemEqual(GTOreDictUnificator.get(OrePrefixes.gearGt, Materials.StainlessSteel, 1L));
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamOreWasherRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_02)
+        tt.addMachineType(TextLocalization.LargeSteamMixerRecipeType)
+            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_00)
+            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_01)
+            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_02)
             .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(9, 5, 9, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamOreWasher_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamOreWasher_Casing, 1)
+            .beginStructureBlock(7, 7, 7, false)
+            .addInputBus(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
+            .addOutputBus(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
+            .addInputHatch(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
+            .addOutputHatch(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
             .toolTipFinisher();
         return tt;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_STEAM_WASHER_LOOP;
-    }
-
-    @Override
-    public boolean supportsMachineModeSwitch() {
-        return true;
-    }
-
-    @Override
-    public int nextMachineMode() {
-        if (machineMode == MACHINEMODE_OREWASH) return MACHINEMODE_SIMPLEWASH;
-        else return MACHINEMODE_OREWASH;
-    }
-
-    @Override
-    public void setMachineModeIcons() {
-        machineModeIcons.clear();
-        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_WASHPLANT);
-        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_SIMPLEWASHER);
-    }
-
-    @Override
-    public String getMachineModeName() {
-        return StatCollector.translateToLocal("LargeSteamOreWasher_Mode_" + machineMode);
     }
 }
