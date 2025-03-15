@@ -137,18 +137,26 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
                     if (playerName == null || playerName.isEmpty()) {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
+                    // 检查玩家名的合法性
+                    if (!isValidUsername(playerName)) {
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
+                    }
                     gameprofile = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     gameprofile = NBTUtil.func_152459_a(ownerTag);
-
+                    // 检查 GameProfile 的合法性
                     if (gameprofile == null || (gameprofile.getName() == null || gameprofile.getName()
                         .isEmpty()) && gameprofile.getId() == null) {
                         String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
-                        if (playerName == null || playerName.isEmpty()) {
+                        // 检查玩家名的合法性
+                        if (!isValidUsername(playerName)) {
                             playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                         }
                         gameprofile = new GameProfile(null, playerName);
+                    } else if (!isValidUsername(gameprofile.getName())) {
+                        // 如果玩家名不合法，使用默认值
+                        gameprofile = new GameProfile(null, Minecraft.getMinecraft().thePlayer.getCommandSenderName());
                     }
                 }
 
@@ -395,8 +403,6 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             } catch (IOException e) {
                 retryCount++;
                 if (retryCount >= maxRetries) {
-                    System.err
-                        .println("Failed to download texture after " + maxRetries + " attempts: " + texture.getUrl());
                     offlineMode = true; // 设置为离线模式
                     return;
                 }

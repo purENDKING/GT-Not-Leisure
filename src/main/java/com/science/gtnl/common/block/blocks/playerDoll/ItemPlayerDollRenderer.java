@@ -158,25 +158,32 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                     if (playerName == null || playerName.isEmpty()) {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
-                    if (playerName == null || playerName.isEmpty()) {
-                        playerName = "DefaultPlayer"; // 提供默认值
+                    // 检查玩家名的合法性
+                    if (!isValidUsername(playerName)) {
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
                     skullOwner = new GameProfile(null, playerName);
                 } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     skullOwner = NBTUtil.func_152459_a(ownerTag);
+                    // 检查 GameProfile 的合法性
                     if (skullOwner == null || (skullOwner.getName() == null && skullOwner.getId() == null)) {
                         String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
-                        if (playerName == null || playerName.isEmpty()) {
-                            playerName = "DefaultPlayer"; // 提供默认值
+                        // 检查玩家名的合法性
+                        if (!isValidUsername(playerName)) {
+                            playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                         }
                         skullOwner = new GameProfile(null, playerName);
+                    } else if (!isValidUsername(skullOwner.getName())) {
+                        // 如果玩家名不合法，使用默认值
+                        skullOwner = new GameProfile(null, "DefaultPlayer");
                     }
                 } else {
                     // 如果没有 SkullOwner 数据，使用默认玩家（当前玩家）
                     String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
-                    if (playerName == null || playerName.isEmpty()) {
-                        playerName = "DefaultPlayer"; // 提供默认值
+                    // 检查玩家名的合法性
+                    if (!isValidUsername(playerName)) {
+                        playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
                     skullOwner = new GameProfile(null, playerName);
                     skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
@@ -272,8 +279,6 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
             } catch (IOException e) {
                 retryCount++;
                 if (retryCount >= maxRetries) {
-                    System.err
-                        .println("Failed to download texture after " + maxRetries + " attempts: " + texture.getUrl());
                     offlineMode = true; // 设置为离线模式
                     return;
                 }

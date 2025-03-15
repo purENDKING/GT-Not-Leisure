@@ -78,7 +78,6 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setSetter(value -> setSkullOwner(getCurrentItem(), value))
                     .setTextColor(Color.WHITE.dark(1))
                     .setTextAlignment(Alignment.CenterLeft)
-                    .setFocusOnGuiOpen(true)
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD.withOffset(-1, -1, 2, 2))
                     .setPos(8, 8)
                     .setSize(77, 12))
