@@ -197,7 +197,6 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             modelCustom.renderPart("cape");
 
             GL11.glPopMatrix();
-            GL11.glEnable(GL11.GL_BLEND);
         }
     }
 
