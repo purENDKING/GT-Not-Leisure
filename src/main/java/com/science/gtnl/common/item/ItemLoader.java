@@ -81,7 +81,6 @@ public class ItemLoader {
         IRegistry(MatterCluster, "MatterCluster");
         IRegistry(KFCFamily, "KFCFamily");
         IRegistry(SatietyRing, "SatietyRing");
-        IRegistry(SuperReachRing, "SuperReachRing");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 

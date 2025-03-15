@@ -18,6 +18,7 @@ import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
+import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
@@ -122,6 +123,7 @@ public class ScienceNotLeisure {
         proxy.postInit(event);
         EIGBucketLoader.LoadEIGBuckets();
         MachineLoader.loadMachinesPostInit();
+        ItemLoader.registerItems();
     }
 
     @Mod.EventHandler

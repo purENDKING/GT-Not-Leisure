@@ -17,8 +17,7 @@ import vazkii.botania.common.item.equipment.bauble.ItemBauble;
 public class SuperReachRing extends ItemBauble {
 
     public SuperReachRing() {
-        super(SUPER_REACH_RING);
-        this.setUnlocalizedName("SuperReachRing");
+        super("SuperReachRing");
         this.setTextureName("sciencenotleisure:SuperReachRing");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         GTNLItemList.SuperReachRing.set(new ItemStack(this, 1));
@@ -38,8 +37,6 @@ public class SuperReachRing extends ItemBauble {
     public BaubleType getBaubleType(ItemStack arg0) {
         return BaubleType.RING;
     }
-
-    public static final String SUPER_REACH_RING = "SuperReachRing";
 
     @Override
     public String getUnlocalizedNameInefficiently(ItemStack p_77657_1_) {
