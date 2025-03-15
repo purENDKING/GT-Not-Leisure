@@ -262,8 +262,11 @@ tile.RealArtificialStarRender.name=真·湮灭发电机渲染器
 tile.BlockSoulFarmland.name=灵魂耕地
 
 tile.playerDoll.name=玩偶
-Tooltip_PlayerDoll_00=设置玩家名
+Tooltip_PlayerDoll_00=设置正版玩家名
 Tooltip_PlayerDoll_01=确认
+Tooltip_PlayerDoll_02=设置在线皮肤链接
+Waila_TileEntityPlayerDoll_00=当前玩偶在线皮肤链接: 
+Waila_TileEntityPlayerDoll_01=当前玩偶正版玩家名: 
 
 tile.NeutronCollector.name=§b中子态素收集器
 tile.DenseNeutronCollector.name=§d致密中子态素收集器
@@ -1353,6 +1356,13 @@ Tooltip_LargeSteamCircuitAssembler_01=仅消耗正常需求125%%的蒸汽
 Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
 Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械方块
+
+NameLargeSteamMixer=大型蒸汽搅拌机
+LargeSteamMixerRecipeType=搅拌机
+Tooltip_LargeSteamMixer_00=比同等级的单方块搅拌机慢50%%
+Tooltip_LargeSteamMixer_01=一次可处理多达8个物品
+Tooltip_LargeSteamMixer_02=在控制器内放入不锈钢齿轮来解锁HV配方
+Tooltip_LargeSteamMixer_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamCentrifuge=大型蒸汽离心机
 LargeSteamCentrifugeRecipeType=离心机

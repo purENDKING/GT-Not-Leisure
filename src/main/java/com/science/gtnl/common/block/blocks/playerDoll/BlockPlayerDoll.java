@@ -23,8 +23,9 @@ import com.science.gtnl.common.GTNLItemList;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.interfaces.tileentity.IGregtechWailaProvider;
 
-public class BlockPlayerDoll extends BlockContainer {
+public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaProvider {
 
     public BlockPlayerDoll() {
         super(Material.iron);
@@ -63,11 +64,18 @@ public class BlockPlayerDoll extends BlockContainer {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         if (tileEntity instanceof TileEntityPlayerDoll tileEntityPlayerDoll) {
-            // 检查 ItemStack 是否包含 SkullOwner 的 NBT 数据
+            // 检查 ItemStack 是否包含 NBT 数据
             if (itemstack.hasTagCompound()) {
                 NBTTagCompound nbt = itemstack.getTagCompound();
                 GameProfile profile = null;
 
+                // 检查是否存在 SkinHttp 字符串
+                if (nbt.hasKey("SkinHttp", 8)) { // 8 表示 NBTTagString
+                    String skinHttp = nbt.getString("SkinHttp");
+                    tileEntityPlayerDoll.setSkinHttp(skinHttp); // 将 SkinHttp 存储到 TileEntity
+                }
+
+                // 处理 SkullOwner 数据
                 if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
                     // SkullOwner 是字符串，直接获取玩家名称
                     String playerName = nbt.getString("SkullOwner");
@@ -144,6 +152,17 @@ public class BlockPlayerDoll extends BlockContainer {
                 NBTTagCompound nbt = new NBTTagCompound();
                 String playerName = skullOwner.getName(); // 获取玩家名称
                 nbt.setString("SkullOwner", playerName); // 保存到 SkullOwner 标签
+
+                // 检查 TileEntity 中是否存在 SkinHttp 数据
+                if (tileEntityPlayerDoll.hasSkinHttp()) {
+                    nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
+                }
+
+                drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
+            } else if (tileEntityPlayerDoll.hasSkinHttp()) {
+                // 如果只有 SkinHttp 数据，保存到 NBT
+                NBTTagCompound nbt = new NBTTagCompound();
+                nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
             }
 

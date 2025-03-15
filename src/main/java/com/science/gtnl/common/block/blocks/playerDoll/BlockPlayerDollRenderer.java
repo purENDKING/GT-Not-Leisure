@@ -1,10 +1,7 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,6 +40,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
     private static boolean offlineMode = false;
     private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
+    private static final Set<String> BLACKLISTED_SKIN_URLS = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
     public static final ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
@@ -52,11 +50,13 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
     private static final File SKIN_DIR = new File("config/GTNotLeisure/skin");
     private static final File CAPE_DIR = new File("config/GTNotLeisure/cape");
+    private static final File CUSTOM_DIR = new File("config/GTNotLeisure/custom");
 
     static {
         // 确保目录存在
         if (!SKIN_DIR.exists()) SKIN_DIR.mkdirs();
         if (!CAPE_DIR.exists()) CAPE_DIR.mkdirs();
+        if (!CUSTOM_DIR.exists()) CUSTOM_DIR.mkdirs();
     }
 
     @Override
@@ -87,10 +87,46 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             ResourceLocation skinTexture = DEFAULT_SKIN;
             ResourceLocation capeTexture = DEFAULT_CAPE;
 
+            // 获取 TileEntity 的 NBT 数据
+            NBTTagCompound nbt = new NBTTagCompound();
+            tileEntity.writeToNBT(nbt);
+
+            // 检查是否存在 SkinHttp 字符串
+            if (nbt.hasKey("SkinHttp", 8)) { // 8 表示 NBTTagString
+                String skinHttp = nbt.getString("SkinHttp");
+                if (!StringUtils.isNullOrEmpty(skinHttp)) {
+                    // 尝试下载并缓存皮肤
+                    skinTexture = downloadAndCacheCustomSkin(skinHttp);
+                    if (skinTexture != null) {
+                        // 如果下载成功，绑定纹理并渲染模型
+                        bindTexture(skinTexture);
+                        renderModelParts(
+                            "Body",
+                            "Body_Layer",
+                            "Hat",
+                            "Hat_Layer",
+                            "Head",
+                            "Left_Arm",
+                            "Left_Arm_Layer",
+                            "Left_Leg",
+                            "Left_Leg_Layer",
+                            "Right_Arm",
+                            "Right_Arm_Layer",
+                            "Right_Leg",
+                            "Right_Leg_Layer");
+
+                        // 绑定披风纹理并渲染披风部分
+                        bindTexture(capeTexture);
+                        modelCustom.renderPart("cape");
+
+                        GL11.glPopMatrix();
+                        return; // 直接返回，不再执行后续逻辑
+                    }
+                }
+            }
+
+            // 如果 SkinHttp 不存在或下载失败，继续处理现有逻辑
             if (MainConfig.enableCustomPlayerDoll && !offlineMode) {
-                // 获取 TileEntity 的 NBT 数据
-                NBTTagCompound nbt = new NBTTagCompound();
-                tileEntity.writeToNBT(nbt);
                 GameProfile gameprofile = tileEntityPlayerDoll.getSkullOwner();
 
                 if (nbt.hasKey("SkullOwner", 8)) {
@@ -133,6 +169,8 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
                 }
             }
 
+            if (skinTexture == null) {}
+
             // 绑定皮肤纹理并渲染模型
             bindTexture(skinTexture);
             renderModelParts(
@@ -157,6 +195,168 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             GL11.glPopMatrix();
             GL11.glEnable(GL11.GL_BLEND);
         }
+    }
+
+    /**
+     * 下载并缓存自定义皮肤
+     */
+    private ResourceLocation downloadAndCacheCustomSkin(String skinHttp) {
+
+        // 生成唯一的文件名（使用 URL 的哈希值）
+        String fileName = Integer.toHexString(skinHttp.hashCode()) + ".png";
+        File targetFile = new File(CUSTOM_DIR, fileName);
+
+        // 如果文件已经存在，直接返回缓存的纹理
+        if (targetFile.exists()) {
+            return getLocalTextureFromFile(targetFile);
+        }
+
+        if (BLACKLISTED_SKIN_URLS.contains(skinHttp)) {
+            return null;
+        }
+
+        // 检查 skinHttp 是否为空或空白
+        if (skinHttp == null || skinHttp.trim()
+            .isEmpty()) {
+            return null;
+        }
+
+        // 检查 skinHttp 是否以 "http" 开头（不区分大小写）
+        if (!skinHttp.trim()
+            .toLowerCase()
+            .startsWith("http")) {
+            return null;
+        }
+
+        // 尝试下载皮肤
+        int maxRetries = 10;
+        int retryCount = 0;
+
+        while (retryCount < maxRetries) {
+            try (InputStream in = new URL(skinHttp).openStream();
+                FileOutputStream out = new FileOutputStream(targetFile)) {
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+
+                // 检查下载的文件是否为有效的 JPG 或 PNG 图片
+                if (isValidImage(targetFile)) {
+                    return getLocalTextureFromFile(targetFile); // 下载成功，返回纹理
+                } else {
+                    // 如果不是有效的图片，删除文件并将链接加入黑名单
+                    targetFile.delete();
+                    BLACKLISTED_SKIN_URLS.add(skinHttp); // 加入黑名单
+                    return null;
+                }
+            } catch (IOException e) {
+                retryCount++;
+                if (retryCount >= maxRetries) {
+                    // 下载失败，将链接加入黑名单
+                    BLACKLISTED_SKIN_URLS.add(skinHttp);
+                    return null; // 下载失败，返回默认皮肤
+                }
+                try {
+                    Thread.sleep(1000); // 等待 1 秒后重试
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return null; // 下载失败，返回默认皮肤
+    }
+
+    /**
+     * 检查文件是否为有效的 JPG 或 PNG 图片，并且分辨率不超过 1024x1024
+     */
+    private boolean isValidImage(File file) {
+        try (InputStream in = new FileInputStream(file)) {
+            // 读取文件的前 8 个字节（用于检查文件头）
+            byte[] header = new byte[8];
+            if (in.read(header) != 8) {
+                return false; // 文件太小，无法判断
+            }
+
+            // 检查 PNG 文件头
+            boolean isPng = header[0] == (byte) 0x89 && header[1] == (byte) 0x50
+                && header[2] == (byte) 0x4E
+                && header[3] == (byte) 0x47
+                && header[4] == (byte) 0x0D
+                && header[5] == (byte) 0x0A
+                && header[6] == (byte) 0x1A
+                && header[7] == (byte) 0x0A;
+
+            // 检查 JPG 文件头
+            boolean isJpg = header[0] == (byte) 0xFF && header[1] == (byte) 0xD8 && header[2] == (byte) 0xFF;
+
+            // 如果不是有效的图片文件，直接返回 false
+            if (!isPng && !isJpg) {
+                return false;
+            }
+
+            // 读取图片的分辨率
+            BufferedImage image = ImageIO.read(file);
+            if (image == null) {
+                return false; // 无法读取图片
+            }
+
+            int width = image.getWidth();
+            int height = image.getHeight();
+
+            // 检查分辨率是否超过 1024x1024
+            if (width > 1024 || height > 1024) {
+                return false;
+            }
+
+            return true; // 是有效的图片文件，且分辨率符合要求
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 从本地文件获取纹理，并上传到 OpenGL（仅上传一次）
+     * 如果纹理无效，返回 null
+     */
+    private ResourceLocation getLocalTextureFromFile(File file) {
+        // 检查文件是否有效
+        if (file == null || !file.exists()) {
+            return null;
+        }
+
+        // 获取文件名作为缓存的键
+        String fileName = file.getName();
+
+        // 如果缓存中已存在该纹理的 ResourceLocation，直接返回
+        if (textureCache.containsKey(fileName)) {
+            return textureCache.get(fileName);
+        }
+
+        try {
+            // 读取本地文件
+            BufferedImage image = ImageIO.read(file);
+            if (image != null) {
+                // 上传纹理到 OpenGL
+                int textureId = TextureUtil.uploadTextureImage(GL11.glGenTextures(), image);
+
+                // 创建自定义 ResourceLocation
+                ResourceLocation textureLocation = new ResourceLocation("custom", "texture_" + textureId);
+
+                // 将纹理 ID 缓存起来
+                textureCache.put(fileName, textureLocation);
+
+                // 返回缓存的 ResourceLocation
+                return textureLocation;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 如果文件不存在或读取失败，返回 null
+        return null;
     }
 
     /**

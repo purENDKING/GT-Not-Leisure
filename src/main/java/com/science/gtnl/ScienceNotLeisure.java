@@ -17,6 +17,7 @@ import com.science.gtnl.Utils.item.TextHandler;
 import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
+import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
@@ -37,17 +38,13 @@ import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
-import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
+import mcp.mobius.waila.api.IWailaRegistrar;
 
 // after
 @Mod(
@@ -188,5 +185,19 @@ public class ScienceNotLeisure {
         }
         RecipeLoaderServerStart.loadRecipesServerStart();
         MainConfig.needSeedPacket = false;
+    }
+
+    public void init() {
+        // 注册 WAILA 提供者
+        FMLInterModComms.sendMessage(
+            "Waila",
+            "register",
+            "com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll.register");
+    }
+
+    public static void register(IWailaRegistrar registrar) {
+        // 注册 TileEntityPlayerDoll 的 WAILA 提供者
+        registrar.registerBodyProvider(new TileEntityPlayerDoll(), TileEntityPlayerDoll.class);
+        registrar.registerNBTProvider(new TileEntityPlayerDoll(), TileEntityPlayerDoll.class);
     }
 }
