@@ -441,6 +441,12 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.AnnealedCopper, 1L) });
 
         addCraftingRecipe(
+            GTNLItemList.HvSteamTurbine.get(1),
+            new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_HV.get(1), 'B', "circuitAdvanced", 'C',
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.StainlessSteel, 1L), 'D', ItemList.Hull_HV.get(1),
+                'E', GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Gold, 1L) });
+
+        addCraftingRecipe(
             GTNLItemList.SuperReachRing.get(1),
             new Object[] { "CB ", "BAB", " B ", 'A', GTModHandler.getModItem(Botania.ID, "reachRing", 1), 'B',
                 GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.GaiaSpirit, 1L), 'C',
