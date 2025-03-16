@@ -74,6 +74,12 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     tileEntityPlayerDoll.setSkinHttp(skinHttp); // 将 SkinHttp 存储到 TileEntity
                 }
 
+                // 检查是否存在 CapeHttp 字符串
+                if (nbt.hasKey("CapeHttp", 8)) { // 8 表示 NBTTagString
+                    String capeHttp = nbt.getString("CapeHttp");
+                    tileEntityPlayerDoll.setCapeHttp(capeHttp); // 将 CapeHttp 存储到 TileEntity
+                }
+
                 // 检查是否存在 enableElytra 布尔值
                 if (nbt.hasKey("enableElytra", 1)) { // 1 表示 NBTTagByte
                     boolean enableElytra = nbt.getBoolean("enableElytra");
@@ -168,13 +174,23 @@ public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaPro
                     nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
                 }
 
+                // 检查 TileEntity 中是否存在 CapeHttp 数据
+                if (tileEntityPlayerDoll.hasCapeHttp()) {
+                    nbt.setString("CapeHttp", tileEntityPlayerDoll.getCapeHttp()); // 保存到 CapeHttp 标签
+                }
+
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
-            } else if (tileEntityPlayerDoll.hasSkinHttp()) {
-                // 如果只有 SkinHttp 数据，保存到 NBT
+            } else if (tileEntityPlayerDoll.hasSkinHttp() || tileEntityPlayerDoll.hasCapeHttp()) {
+                // 如果只有 SkinHttp 或 CapeHttp 数据，保存到 NBT
                 NBTTagCompound nbt = new NBTTagCompound();
                 boolean enableElytra = tileEntityPlayerDoll.getEnableElytra();
                 nbt.setBoolean("enableElytra", enableElytra);
-                nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
+                if (tileEntityPlayerDoll.hasSkinHttp()) {
+                    nbt.setString("SkinHttp", tileEntityPlayerDoll.getSkinHttp()); // 保存到 SkinHttp 标签
+                }
+                if (tileEntityPlayerDoll.hasCapeHttp()) {
+                    nbt.setString("CapeHttp", tileEntityPlayerDoll.getCapeHttp()); // 保存到 CapeHttp 标签
+                }
                 drop.setTagCompound(nbt); // 将 NBT 数据保存到 ItemStack
             }
 

@@ -27,6 +27,7 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
 
     private GameProfile skullOwner;
     private String skinHttp;
+    private String capeHttp;
     private boolean enableElytra;
 
     @Override
@@ -40,6 +41,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
         if (nbt.hasKey("SkinHttp", 8)) {
             this.skinHttp = nbt.getString("SkinHttp");
+        }
+        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 读取
+            this.capeHttp = nbt.getString("CapeHttp");
         }
         if (nbt.hasKey("enableElytra")) {
             enableElytra = nbt.getBoolean("enableElytra");
@@ -56,6 +60,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
         if (this.skinHttp != null) {
             nbt.setString("SkinHttp", this.skinHttp);
+        }
+        if (this.capeHttp != null) { // 新增 CapeHttp 写入
+            nbt.setString("CapeHttp", this.capeHttp);
         }
         nbt.setBoolean("enableElytra", enableElytra);
     }
@@ -82,6 +89,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
         if (nbt.hasKey("SkinHttp", 8)) {
             this.skinHttp = nbt.getString("SkinHttp");
+        }
+        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 同步
+            this.capeHttp = nbt.getString("CapeHttp");
         }
         if (nbt.hasKey("enableElytra")) {
             enableElytra = nbt.getBoolean("enableElytra");
@@ -112,6 +122,18 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
 
     public void setSkinHttp(String skinHttp) {
         this.skinHttp = skinHttp;
+    }
+
+    public boolean hasCapeHttp() { // 新增 CapeHttp 检查
+        return capeHttp != null && !capeHttp.isEmpty();
+    }
+
+    public String getCapeHttp() { // 新增 CapeHttp 获取
+        return capeHttp;
+    }
+
+    public void setCapeHttp(String capeHttp) { // 新增 CapeHttp 设置
+        this.capeHttp = capeHttp;
     }
 
     public boolean getEnableElytra() {
@@ -168,12 +190,12 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         final NBTTagCompound nbt = accessor.getNBTData();
 
         // 根据配置显示 Skull Owner
-        if (config.getConfig("showSkullOwner") && nbt.hasKey("SkullOwner", 10)) {
+        if (nbt.hasKey("SkullOwner", 10)) {
             currentTip.add(
                 EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
                     + EnumChatFormatting.GOLD
                     + NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner")));
-        } else if (config.getConfig("showSkullOwner") && nbt.hasKey("SkullOwner", 8)) {
+        } else if (nbt.hasKey("SkullOwner", 8)) {
             currentTip.add(
                 EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
                     + EnumChatFormatting.GOLD
@@ -181,11 +203,19 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
         }
 
         // 根据配置显示 Skin URL
-        if (config.getConfig("showSkinHttp") && nbt.hasKey("SkinHttp", 8)) {
+        if (nbt.hasKey("SkinHttp", 8)) {
             currentTip.add(
                 EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
                     + EnumChatFormatting.GOLD
                     + nbt.getString("SkinHttp"));
+        }
+
+        // 根据配置显示 Cape URL
+        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 显示
+            currentTip.add(
+                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_02")
+                    + EnumChatFormatting.GOLD
+                    + nbt.getString("CapeHttp"));
         }
 
         return currentTip;
@@ -209,6 +239,9 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
 
         if (this.skinHttp != null) {
             tag.setString("SkinHttp", this.skinHttp);
+        }
+        if (this.capeHttp != null) { // 新增 CapeHttp 写入
+            tag.setString("CapeHttp", this.capeHttp);
         }
         return tag;
     }

@@ -68,7 +68,7 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
         }
 
         public ModularWindow createWindow() {
-            ModularWindow.Builder builder = ModularWindow.builder(300, 79); // 增加窗口高度以容纳新文本框
+            ModularWindow.Builder builder = ModularWindow.builder(300, 97); // 增加窗口高度以容纳新文本框
             builder.setBackground(ModularUITextures.VANILLA_BACKGROUND);
 
             // 输入框：用于输入玩家名
@@ -95,6 +95,18 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setSize(197, 12))
                 .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_02")).setPos(208, 28)); // 新标签
 
+            // 输入框：用于输入 HTTP 链接
+            TextFieldWidget capeHttpField = new TextFieldWidget();
+            builder.widget(
+                capeHttpField.setGetter(() -> getCapeHttp(getCurrentItem()))
+                    .setSetter(value -> setCapeHttp(getCurrentItem(), value))
+                    .setTextColor(Color.WHITE.dark(1))
+                    .setTextAlignment(Alignment.CenterLeft)
+                    .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD.withOffset(-1, -1, 2, 2))
+                    .setPos(8, 44)
+                    .setSize(197, 12))
+                .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_04")).setPos(208, 46)); // 新标签
+
             // 输入框：用于输入鞘翅渲染状态（0 或 1）
             TextFieldWidget elytraStateField = new TextFieldWidget();
             builder.widget(
@@ -107,9 +119,9 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setTextColor(Color.WHITE.dark(1))
                     .setTextAlignment(Alignment.CenterLeft)
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD.withOffset(-1, -1, 2, 2))
-                    .setPos(64, 48)
+                    .setPos(64, 66)
                     .setSize(36, 12))
-                .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_03")).setPos(105, 50));
+                .widget(new TextWidget(StatCollector.translateToLocal("Tooltip_PlayerDoll_03")).setPos(105, 68));
 
             // 确认按钮
             builder.widget(
@@ -117,11 +129,12 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                     .setOnClick((clickData, widget) -> {
                         playerNameField.onRemoveFocus();
                         skinHttpField.onRemoveFocus();
+                        capeHttpField.onRemoveFocus();
                         widget.getWindow()
                             .tryClose();
                     })
                     .setSynced(false, false)
-                    .setPos(8, 44)
+                    .setPos(8, 62)
                     .setSize(48, 20));
 
             return builder.build();
@@ -173,6 +186,30 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
                 stack.setTagCompound(nbt = new NBTTagCompound());
             }
             nbt.setString("SkinHttp", skinHttp);
+        }
+
+        /**
+         * 获取 CapeHttp
+         */
+        private String getCapeHttp(ItemStack stack) {
+            if (stack.hasTagCompound()) {
+                NBTTagCompound nbt = stack.getTagCompound();
+                if (nbt.hasKey("CapeHttp", 8)) { // 8 表示 String 类型
+                    return nbt.getString("CapeHttp");
+                }
+            }
+            return "";
+        }
+
+        /**
+         * 设置 CapeHttp
+         */
+        private void setCapeHttp(ItemStack stack, String skinHttp) {
+            NBTTagCompound nbt = stack.getTagCompound();
+            if (nbt == null) {
+                stack.setTagCompound(nbt = new NBTTagCompound());
+            }
+            nbt.setString("CapeHttp", skinHttp);
         }
 
         /**

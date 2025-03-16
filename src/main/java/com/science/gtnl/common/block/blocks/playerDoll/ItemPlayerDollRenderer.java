@@ -46,6 +46,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
     private static boolean isSteveModel = false; // 默认为 false，表示使用 Alex 模型
     private static final Set<String> BLACKLISTED_GAMEPROFILE = Sets.newConcurrentHashSet();
     private static final Set<String> BLACKLISTED_SKIN_URLS = Sets.newConcurrentHashSet();
+    private static final Set<String> BLACKLISTED_CAPE_URLS = Sets.newConcurrentHashSet();
     private final Map<String, ResourceLocation> textureCache = new HashMap<>();
     public static final ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
     public static final ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
@@ -64,13 +65,15 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
 
     private static final File SKIN_DIR = new File("config/GTNotLeisure/skin");
     private static final File CAPE_DIR = new File("config/GTNotLeisure/cape");
-    private static final File CUSTOM_DIR = new File("config/GTNotLeisure/custom");
+    private static final File CUSTOM_SKIN_DIR = new File("config/GTNotLeisure/custom_skin");
+    private static final File CUSTOM_CAPE_DIR = new File("config/GTNotLeisure/custom_cape");
 
     static {
         // 确保目录存在
         if (!SKIN_DIR.exists()) SKIN_DIR.mkdirs();
         if (!CAPE_DIR.exists()) CAPE_DIR.mkdirs();
-        if (!CUSTOM_DIR.exists()) CUSTOM_DIR.mkdirs();
+        if (!CUSTOM_SKIN_DIR.exists()) CUSTOM_SKIN_DIR.mkdirs();
+        if (!CUSTOM_CAPE_DIR.exists()) CUSTOM_CAPE_DIR.mkdirs();
     }
 
     @Override
@@ -126,6 +129,15 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                 boolean enableElytra = false;
                 if (nbt.hasKey("enableElytra")) {
                     enableElytra = nbt.getBoolean("enableElytra");
+                }
+                if (nbt.hasKey("CapeHttp", 8)) {
+                    String capeHttp = nbt.getString("CapeHttp");
+                    if (!StringUtils.isNullOrEmpty(capeHttp)) {
+                        capeTexture = downloadAndCacheCustomCape(capeHttp);
+                    }
+                    if (capeTexture == null) {
+                        capeTexture = DEFAULT_CAPE;
+                    }
                 }
 
                 if (!StringUtils.isNullOrEmpty(skinHttp)) {
@@ -220,7 +232,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                 NBTTagCompound nbt = item.getTagCompound();
 
                 // 检查 SkullOwner 数据
-                if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
+                if (nbt != null && nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
                     String playerName = nbt.getString("SkullOwner");
                     if (playerName == null || playerName.isEmpty()) {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
@@ -230,7 +242,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                         playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                     }
                     skullOwner = new GameProfile(null, playerName);
-                } else if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
+                } else if (nbt != null && nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
                     NBTTagCompound ownerTag = nbt.getCompoundTag("SkullOwner");
                     skullOwner = NBTUtil.func_152459_a(ownerTag);
                     // 检查 GameProfile 的合法性
@@ -259,7 +271,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
                 // 如果没有 NBT 数据，使用默认玩家（当前玩家）
                 String playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                 if (playerName == null || playerName.isEmpty()) {
-                    playerName = "DefaultPlayer"; // 提供默认值
+                    playerName = Minecraft.getMinecraft().thePlayer.getCommandSenderName();
                 }
                 skullOwner = new GameProfile(null, playerName);
                 skullOwner = getGameProfile(skullOwner, item); // 获取完整的 GameProfile
@@ -296,6 +308,16 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         NBTTagCompound nbt = item.getTagCompound();
         if (nbt != null && nbt.hasKey("enableElytra")) {
             enableElytra = nbt.getBoolean("enableElytra");
+        }
+
+        if (nbt != null && nbt.hasKey("CapeHttp", 8)) {
+            String capeHttp = nbt.getString("CapeHttp");
+            if (!StringUtils.isNullOrEmpty(capeHttp)) {
+                capeTexture = downloadAndCacheCustomCape(capeHttp);
+            }
+            if (capeTexture == null) {
+                capeTexture = DEFAULT_CAPE;
+            }
         }
 
         // 绑定皮肤纹理并渲染模型
@@ -423,7 +445,7 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
 
         // 生成唯一的文件名（使用 URL 的哈希值）
         String fileName = Integer.toHexString(skinHttp.hashCode()) + ".png";
-        File targetFile = new File(CUSTOM_DIR, fileName);
+        File targetFile = new File(CUSTOM_SKIN_DIR, fileName);
 
         // 如果文件已经存在，直接返回缓存的纹理
         if (targetFile.exists()) {
@@ -485,6 +507,76 @@ public class ItemPlayerDollRenderer implements IItemRenderer {
         }
 
         return null; // 下载失败，返回默认皮肤
+    }
+
+    /**
+     * 下载并缓存自定义披风
+     */
+    private ResourceLocation downloadAndCacheCustomCape(String capeHttp) {
+        // 生成唯一的文件名（使用 URL 的哈希值）
+        String fileName = Integer.toHexString(capeHttp.hashCode()) + ".png";
+        File targetFile = new File(CUSTOM_CAPE_DIR, fileName);
+
+        // 如果文件已经存在，直接返回缓存的纹理
+        if (targetFile.exists()) {
+            return getLocalTextureFromFile(targetFile);
+        }
+
+        if (BLACKLISTED_CAPE_URLS.contains(capeHttp)) {
+            return null;
+        }
+
+        // 检查 capeHttp 是否为空或空白
+        if (capeHttp == null || capeHttp.trim()
+            .isEmpty()) {
+            return null;
+        }
+
+        // 检查 capeHttp 是否以 "http" 开头（不区分大小写）
+        if (!capeHttp.trim()
+            .toLowerCase()
+            .startsWith("http")) {
+            return null;
+        }
+
+        // 尝试下载披风
+        int maxRetries = 10;
+        int retryCount = 0;
+
+        while (retryCount < maxRetries) {
+            try (InputStream in = new URL(capeHttp).openStream();
+                FileOutputStream out = new FileOutputStream(targetFile)) {
+                byte[] buffer = new byte[8192];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, bytesRead);
+                }
+
+                // 检查下载的文件是否为有效的 JPG 或 PNG 图片
+                if (isValidImage(targetFile)) {
+                    return getLocalTextureFromFile(targetFile); // 下载成功，返回纹理
+                } else {
+                    // 如果不是有效的图片，删除文件并将链接加入黑名单
+                    targetFile.delete();
+                    BLACKLISTED_CAPE_URLS.add(capeHttp); // 加入黑名单
+                    return null;
+                }
+            } catch (IOException e) {
+                retryCount++;
+                if (retryCount >= maxRetries) {
+                    // 下载失败，将链接加入黑名单
+                    BLACKLISTED_CAPE_URLS.add(capeHttp);
+                    return null; // 下载失败，返回默认披风
+                }
+                try {
+                    Thread.sleep(1000); // 等待 1 秒后重试
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
+
+        return null; // 下载失败，返回默认披风
     }
 
     /**
