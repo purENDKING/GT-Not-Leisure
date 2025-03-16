@@ -252,7 +252,55 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 if (tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_HASH) {
                     GTRecipe.RecipeAssemblyLine tRecipe = tLookupResult.getRecipe();
                     if (tRecipe != null) {
+                        // 处理 mInputs 和 mOreDictAlt
+                        ItemStack[] tInputs = tRecipe.mInputs;
+                        ItemStack[][] tOreDictAlt = tRecipe.mOreDictAlt;
+
+                        // 生成原始配方
                         validRecipes.add(tRecipe);
+
+                        // 生成替代配方（如果存在替代物品）
+                        if (tOreDictAlt != null) {
+                            // 收集每个槽位的替代物品列表
+                            List<List<ItemStack>> slotAlternatives = new ArrayList<>();
+                            for (int i = 0; i < tInputs.length; i++) {
+                                if (tInputs[i] != null && i < tOreDictAlt.length
+                                    && tOreDictAlt[i] != null
+                                    && tOreDictAlt[i].length > 0) {
+                                    // 将当前槽位的替代物品加入列表
+                                    List<ItemStack> alternatives = new ArrayList<>();
+                                    for (ItemStack altItem : tOreDictAlt[i]) {
+                                        if (altItem != null) {
+                                            alternatives.add(altItem);
+                                        }
+                                    }
+                                    slotAlternatives.add(alternatives);
+                                } else {
+                                    // 如果没有替代物品，则使用原始输入物品
+                                    List<ItemStack> alternatives = new ArrayList<>();
+                                    alternatives.add(tInputs[i]);
+                                    slotAlternatives.add(alternatives);
+                                }
+                            }
+
+                            // 生成所有可能的组合
+                            List<ItemStack[]> allCombinations = generateCombinations(slotAlternatives);
+
+                            // 为每个组合生成一个配方
+                            for (ItemStack[] combination : allCombinations) {
+                                GTRecipe.RecipeAssemblyLine tAltRecipe = new GTRecipe.RecipeAssemblyLine(
+                                    tRecipe.mResearchItem, // 研究物品
+                                    tRecipe.mResearchTime, // 研究时间
+                                    combination, // 替换后的输入物品
+                                    tRecipe.mFluidInputs, // 输入流体
+                                    tRecipe.mOutput, // 输出物品
+                                    tRecipe.mDuration, // 时间
+                                    tRecipe.mEUt, // 功率
+                                    tOreDictAlt // 替代物品
+                                );
+                                validRecipes.add(tAltRecipe);
+                            }
+                        }
                     }
                 }
             }
@@ -987,5 +1035,28 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     .setSpeedBoost((0.6 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 0.05 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    // 辅助方法：生成所有可能的组合
+    private List<ItemStack[]> generateCombinations(List<List<ItemStack>> slotAlternatives) {
+        List<ItemStack[]> result = new ArrayList<>();
+        generateCombinationsHelper(slotAlternatives, 0, new ItemStack[slotAlternatives.size()], result);
+        return result;
+    }
+
+    // 递归辅助方法：生成组合
+    private void generateCombinationsHelper(List<List<ItemStack>> slotAlternatives, int index, ItemStack[] current,
+        List<ItemStack[]> result) {
+        if (index == slotAlternatives.size()) {
+            // 当前组合完成，加入结果列表
+            result.add(Arrays.copyOf(current, current.length));
+            return;
+        }
+
+        // 遍历当前槽位的所有替代物品
+        for (ItemStack altItem : slotAlternatives.get(index)) {
+            current[index] = altItem;
+            generateCombinationsHelper(slotAlternatives, index + 1, current, result);
+        }
     }
 }
