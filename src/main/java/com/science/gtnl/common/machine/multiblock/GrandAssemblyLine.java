@@ -216,7 +216,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     private CheckRecipeResult processRecipeLogic(ArrayList<IDualInputInventory> inputInventories, long energyEU,
         int maxParallel, int limit) {
         long totalNeedEUt = 0; // 累加的总功率
-        int totalMaxProgresstime = 0; // 累加的最大时间
+        int totalMaxProgressTime = 0; // 累加的最大时间
         int powerParallel = 0;
         int CircuitOC = -1; // 电路板限制超频次数
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
@@ -261,44 +261,51 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                         // 生成替代配方（如果存在替代物品）
                         if (tOreDictAlt != null) {
-                            // 收集每个槽位的替代物品列表
-                            List<List<ItemStack>> slotAlternatives = new ArrayList<>();
-                            for (int i = 0; i < tInputs.length; i++) {
-                                if (tInputs[i] != null && i < tOreDictAlt.length
-                                    && tOreDictAlt[i] != null
-                                    && tOreDictAlt[i].length > 0) {
-                                    // 将当前槽位的替代物品加入列表
-                                    List<ItemStack> alternatives = new ArrayList<>();
-                                    for (ItemStack altItem : tOreDictAlt[i]) {
-                                        if (altItem != null) {
-                                            alternatives.add(altItem);
+                            // 遍历每个替代组（i从1开始，因为0是原始物品）
+                            for (int i = 1; i < tOreDictAlt.length; i++) {
+                                ItemStack[] altItems = tOreDictAlt[i];
+                                if (altItems != null && altItems.length > 0) {
+                                    // 检查替代物品是否与原始物品的矿辞相同
+                                    boolean hasValidAlternatives = false;
+                                    for (ItemStack altItem : altItems) {
+                                        if (altItem != null && !OreDictionary.itemMatches(tInputs[i], altItem, false)) {
+                                            hasValidAlternatives = true;
+                                            break;
                                         }
                                     }
-                                    slotAlternatives.add(alternatives);
-                                } else {
-                                    // 如果没有替代物品，则使用原始输入物品
-                                    List<ItemStack> alternatives = new ArrayList<>();
-                                    alternatives.add(tInputs[i]);
-                                    slotAlternatives.add(alternatives);
+
+                                    // 如果有有效地替代物品，生成替代配方
+                                    if (hasValidAlternatives) {
+                                        // 复制原始输入物品
+                                        ItemStack[] newInputs = Arrays.copyOf(tInputs, tInputs.length);
+
+                                        // 替换为当前组的替代物品
+                                        for (int j = 0; j < newInputs.length; j++) {
+                                            if (j < tOreDictAlt.length && tOreDictAlt[j] != null
+                                                && tOreDictAlt[j].length > i - 1) {
+                                                // 使用当前组的替代物品（i）
+                                                ItemStack altItem = tOreDictAlt[j][i - 1]; // i从1开始
+                                                if (altItem != null
+                                                    && !OreDictionary.itemMatches(tInputs[j], altItem, false)) {
+                                                    newInputs[j] = altItem;
+                                                }
+                                            }
+                                        }
+
+                                        // 生成替代配方
+                                        GTRecipe.RecipeAssemblyLine tAltRecipe = new GTRecipe.RecipeAssemblyLine(
+                                            tRecipe.mResearchItem, // 研究物品
+                                            tRecipe.mResearchTime, // 研究时间
+                                            newInputs, // 替换后的输入物品
+                                            tRecipe.mFluidInputs, // 输入流体
+                                            tRecipe.mOutput, // 输出物品
+                                            tRecipe.mDuration, // 时间
+                                            tRecipe.mEUt, // 功率
+                                            tOreDictAlt // 替代物品
+                                        );
+                                        validRecipes.add(tAltRecipe);
+                                    }
                                 }
-                            }
-
-                            // 生成所有可能的组合
-                            List<ItemStack[]> allCombinations = generateCombinations(slotAlternatives);
-
-                            // 为每个组合生成一个配方
-                            for (ItemStack[] combination : allCombinations) {
-                                GTRecipe.RecipeAssemblyLine tAltRecipe = new GTRecipe.RecipeAssemblyLine(
-                                    tRecipe.mResearchItem, // 研究物品
-                                    tRecipe.mResearchTime, // 研究时间
-                                    combination, // 替换后的输入物品
-                                    tRecipe.mFluidInputs, // 输入流体
-                                    tRecipe.mOutput, // 输出物品
-                                    tRecipe.mDuration, // 时间
-                                    tRecipe.mEUt, // 功率
-                                    tOreDictAlt // 替代物品
-                                );
-                                validRecipes.add(tAltRecipe);
                             }
                         }
                     }
@@ -399,35 +406,71 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             // 第四步：处理配方并行逻辑
             Map<GTRecipe.RecipeAssemblyLine, Integer> recipeParallelMap = new HashMap<>();
             int remainingMaxParallel = maxParallel; // 剩余的最大并行数
-
-            // 标志变量，用于记录是否有至少一个配方的 recipeParallel 大于 0
             boolean hasValidRecipe = false;
 
+            // 初始化模拟消耗的上下文
+            Map<GTUtility.ItemId, Integer> itemAllocated = new HashMap<>();
+            Map<Fluid, Integer> fluidAllocated = new HashMap<>();
+
             for (GTRecipe.RecipeAssemblyLine recipe : overclockedRecipes) {
-                // 计算物品并行数 (ItemParallel)
-                List<Long> itemParallels = new ArrayList<>(); // 存储每个物品的并行数，使用 long
-                for (ItemStack input : recipe.mInputs) {
-                    long available = getAvailableItemCount(input, allInputs); // 使用自定义方法
+                // 提取所需的物品和流体
+                ItemStack[] requiredItems = recipe.mInputs;
+                FluidStack[] requiredFluids = recipe.mFluidInputs;
+
+                // 计算物品并行数 (ItemParallel)，考虑已分配的数量和矿辞匹配
+                long itemParallel = Long.MAX_VALUE;
+                for (ItemStack input : requiredItems) {
                     int required = input.stackSize;
-                    long itemParallel = available / required; // 向下取整
-                    itemParallels.add(itemParallel);
+                    if (required <= 0) continue;
+
+                    // 获取矿辞名称
+                    int[] oreIDs = OreDictionary.getOreIDs(input);
+                    long available = 0;
+
+                    // 如果有矿辞，检查所有匹配矿辞的物品
+                    if (oreIDs.length > 0) {
+                        for (int oreID : oreIDs) {
+                            String oreName = OreDictionary.getOreName(oreID);
+                            List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
+
+                            // 遍历所有匹配矿辞的物品
+                            for (ItemStack oreDictItem : oreDictItems) {
+                                GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(oreDictItem);
+                                long availableOriginal = getAvailableItemCount(oreDictItem, allInputs);
+                                long allocated = itemAllocated.getOrDefault(itemId, 0);
+                                available += Math.max(0, availableOriginal - allocated);
+                            }
+                        }
+                    } else {
+                        // 如果没有矿辞，直接检查原始物品
+                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                        long availableOriginal = getAvailableItemCount(input, allInputs);
+                        long allocated = itemAllocated.getOrDefault(itemId, 0);
+                        available = Math.max(0, availableOriginal - allocated);
+                    }
+
+                    // 计算当前物品的并行数
+                    long parallelForItem = available / required;
+                    itemParallel = Math.min(itemParallel, parallelForItem);
                 }
-                long itemParallel = Collections.min(itemParallels); // 取所有物品并行数的最小值
 
                 // 检查 itemParallel 是否超过 int 最大值
                 if (itemParallel > Integer.MAX_VALUE) {
                     itemParallel = Integer.MAX_VALUE;
                 }
 
-                // 计算流体并行数 (FluidParallel)
-                List<Long> fluidParallels = new ArrayList<>(); // 存储每个流体的并行数，使用 long
-                for (FluidStack fluid : recipe.mFluidInputs) {
-                    long available = getAvailableFluidAmount(fluid, allFluids); // 使用自定义方法
+                // 计算流体并行数 (FluidParallel)，考虑已分配的数量
+                long fluidParallel = Long.MAX_VALUE;
+                for (FluidStack fluid : requiredFluids) {
+                    Fluid fluidType = fluid.getFluid();
+                    long availableOriginal = getAvailableFluidAmount(fluid, allFluids);
+                    long allocated = fluidAllocated.getOrDefault(fluidType, 0);
+                    long available = Math.max(0, availableOriginal - allocated);
                     int required = fluid.amount;
-                    long fluidParallel = available / required; // 向下取整
-                    fluidParallels.add(fluidParallel);
+                    if (required <= 0) continue;
+                    long parallelForFluid = available / required;
+                    fluidParallel = Math.min(fluidParallel, parallelForFluid);
                 }
-                long fluidParallel = Collections.min(fluidParallels); // 取所有流体并行数的最小值
 
                 // 检查 fluidParallel 是否超过 int 最大值
                 if (fluidParallel > Integer.MAX_VALUE) {
@@ -441,14 +484,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 // 取较小的并行数作为当前配方的并行数 (RecipeParallel)
                 int recipeParallel = Math.min(finalItemParallel, finalFluidParallel);
 
-                // 如果当前配方的并行数为 0，跳过此配方
-                if (recipeParallel == 0) {
-                    continue;
-                }
-
-                // 标记有至少一个有效配方
-                hasValidRecipe = true;
-
                 // 使用功率并行数限制 RecipeParallel
                 recipeParallel = Math.min(recipeParallel, powerParallel);
 
@@ -457,18 +492,69 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     recipeParallel = remainingMaxParallel; // 如果超出剩余并行数，则设置为剩余并行数
                 }
 
+                if (recipeParallel <= 0) {
+                    continue; // 跳过并行数为0的情况
+                }
+
+                // 更新模拟消耗的上下文
+                for (ItemStack input : requiredItems) {
+                    int required = input.stackSize * recipeParallel;
+
+                    // 获取矿辞名称
+                    int[] oreIDs = OreDictionary.getOreIDs(input);
+                    if (oreIDs.length > 0) {
+                        // 如果有矿辞，优先消耗匹配矿辞的物品
+                        for (int oreID : oreIDs) {
+                            String oreName = OreDictionary.getOreName(oreID);
+                            List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
+
+                            // 遍历所有匹配矿辞的物品
+                            for (ItemStack oreDictItem : oreDictItems) {
+                                GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(oreDictItem);
+                                int consumed = (int) Math.min(
+                                    required,
+                                    getAvailableItemCount(oreDictItem, allInputs)
+                                        - itemAllocated.getOrDefault(itemId, 0));
+                                if (consumed > 0) {
+                                    itemAllocated.put(itemId, itemAllocated.getOrDefault(itemId, 0) + consumed);
+                                    required -= consumed;
+                                }
+                                if (required <= 0) break;
+                            }
+                            if (required <= 0) break;
+                        }
+                    } else {
+                        // 如果没有矿辞，直接消耗原始物品
+                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                        int consumed = (int) Math.min(
+                            required,
+                            getAvailableItemCount(input, allInputs) - itemAllocated.getOrDefault(itemId, 0));
+                        if (consumed > 0) {
+                            itemAllocated.put(itemId, itemAllocated.getOrDefault(itemId, 0) + consumed);
+                            required -= consumed;
+                        }
+                    }
+                }
+
+                for (FluidStack fluid : requiredFluids) {
+                    Fluid fluidType = fluid.getFluid();
+                    int consumed = fluid.amount * recipeParallel;
+                    fluidAllocated.put(fluidType, fluidAllocated.getOrDefault(fluidType, 0) + consumed);
+                }
+
                 // 更新剩余的最大并行数
                 remainingMaxParallel -= recipeParallel;
 
                 // 将当前配方的并行数添加到结果中
                 recipeParallelMap.put(recipe, recipeParallel);
+                hasValidRecipe = true;
 
                 if (remainingMaxParallel <= 0) {
                     break; // 如果剩余并行数为 0，跳出循环
                 }
             }
 
-            // 如果没有任何配方的 recipeParallel 大于 0，则跳过当前输入仓
+            // 如果没有有效的配方，则跳过当前输入仓
             if (!hasValidRecipe) {
                 continue;
             }
@@ -511,7 +597,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
             // 累加总功率和最大时间
             totalNeedEUt = needEUt;
-            totalMaxProgresstime = needTime;
+            totalMaxProgressTime = needTime;
 
             // 第六步：生成输出物品并累加到总输出列表
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
@@ -564,7 +650,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
         // 设置总功率和最大时间
         this.lEUt = -totalNeedEUt; // 使用累加的总功率
-        this.mMaxProgresstime = totalMaxProgresstime; // 使用累加的最大时间
+        this.mMaxProgresstime = totalMaxProgressTime; // 使用累加的最大时间
 
         // 更新效率
         this.mEfficiency = 10000;
@@ -1035,28 +1121,5 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     .setSpeedBoost((0.6 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 0.05 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
-    }
-
-    // 辅助方法：生成所有可能的组合
-    private List<ItemStack[]> generateCombinations(List<List<ItemStack>> slotAlternatives) {
-        List<ItemStack[]> result = new ArrayList<>();
-        generateCombinationsHelper(slotAlternatives, 0, new ItemStack[slotAlternatives.size()], result);
-        return result;
-    }
-
-    // 递归辅助方法：生成组合
-    private void generateCombinationsHelper(List<List<ItemStack>> slotAlternatives, int index, ItemStack[] current,
-        List<ItemStack[]> result) {
-        if (index == slotAlternatives.size()) {
-            // 当前组合完成，加入结果列表
-            result.add(Arrays.copyOf(current, current.length));
-            return;
-        }
-
-        // 遍历当前槽位的所有替代物品
-        for (ItemStack altItem : slotAlternatives.get(index)) {
-            current[index] = altItem;
-            generateCombinationsHelper(slotAlternatives, index + 1, current, result);
-        }
     }
 }
