@@ -866,14 +866,6 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.HumongousInputBusMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
-    public static void registerMTEWire() {
-        CrackRecipeAdder.registerWire(22001, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-        MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22013, 2000, 2800, true);
-        // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
-        // true);
-        // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
-    }
-
     public static void registerBasicMachine() {
         GTNLItemList.LvSteamTurbine
             .set(new SteamTurbine(22501, "BasicSteamTurbine", TextLocalization.LvSteamTurbine, 1));
@@ -894,6 +886,14 @@ public class MachineLoader {
         GTNLItemList.SteamAssemblerSteel
             .set(new SteamAssemblerSteel(22505, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
         addItemTooltip(GTNLItemList.SteamAssemblerSteel.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+    }
+
+    public static void registerMTEWire() {
+        CrackRecipeAdder.registerWire(22506, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
+        MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22519, 2000, 2800, true);
+        // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
+        // true);
+        // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
     }
 
     public static void loadMachinesPostInit() {
