@@ -23,6 +23,7 @@ import com.science.gtnl.common.item.ReAvaritia.InfinitySword;
 import com.science.gtnl.common.item.ReAvaritia.InfinityTotem;
 import com.science.gtnl.common.item.ReAvaritia.MatterCluster;
 import com.science.gtnl.common.item.items.KFCFamily;
+import com.science.gtnl.common.item.items.RejectionRing;
 import com.science.gtnl.common.item.items.SatietyRing;
 import com.science.gtnl.common.item.items.SuperReachRing;
 import com.science.gtnl.common.item.items.TestItem;
@@ -54,6 +55,7 @@ public class ItemLoader {
     public static Item MatterCluster = new MatterCluster();
     public static Item KFCFamily = new KFCFamily(20, 20, true);
     public static Item SatietyRing = new SatietyRing();
+    public static Item RejectionRing = new RejectionRing();
     public static Item SuperReachRing = new SuperReachRing();
     public static Item RecordSus = new ItemRecord("sus");
     public static Item RecordNewHorizons = new ItemRecord("newhorizons");
@@ -81,6 +83,7 @@ public class ItemLoader {
         IRegistry(MatterCluster, "MatterCluster");
         IRegistry(KFCFamily, "KFCFamily");
         IRegistry(SatietyRing, "SatietyRing");
+        IRegistry(RejectionRing, "RejectionRing");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 

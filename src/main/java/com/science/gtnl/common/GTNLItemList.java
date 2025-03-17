@@ -188,6 +188,7 @@ public enum GTNLItemList {
     KFCFamily,
     SatietyRing,
     SuperReachRing,
+    RejectionRing,
     RecordSus,
     RecordNewHorizons,
 
