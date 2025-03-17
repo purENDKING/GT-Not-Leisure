@@ -1898,5 +1898,21 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_ZPM)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                tectech.thing.CustomItemList.eM_Hollow.get(2),
+                GTModHandler.getModItem(DraconicEvolution.ID, "draconicCore", 1),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.DraconiumAwakened, 4),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Mytryl, 4),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Plutonium, 4),
+                GTOreDictUnificator.get(OrePrefixes.plateDense, Materials.Quantium, 4),
+                ItemList.Field_Generator_UV.get(2),
+                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 1))
+            .itemOutputs(GTNLItemList.DimensionallyStableCasing.get(1))
+            .fluidInputs(MaterialsElements.STANDALONE.DRAGON_METAL.getFluidStack(576))
+            .duration(100)
+            .eut(TierEU.RECIPE_UHV)
+            .addTo(As);
+
     }
 }

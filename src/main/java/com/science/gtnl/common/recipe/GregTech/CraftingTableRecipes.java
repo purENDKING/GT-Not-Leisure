@@ -303,18 +303,13 @@ public class CraftingTableRecipes implements IRecipePool {
 
         addCraftingRecipe(
             GTNLItemList.SatietyRing.get(1),
-            new Object[] { "ABA", "CDC", "EFE", 'A', CustomItemList.CoinCookII.get(1), 'B',
-                new ItemStack(Items.golden_apple, 1, 1), 'C',
-                GTModHandler.getModItem(ExtraUtilities.ID, "defoliageAxe", 1), 'D',
-                GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
-                GTModHandler.getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1), 'F',
-                GTNLItemList.KFCFamily.get(1) });
+            new Object[] { "AAA", "ABA", "AAA", 'A', new ItemStack(Items.golden_apple, 1, 1), 'B',
+                GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing) });
 
         addCraftingRecipe(
             GTNLItemList.KFCFamily.get(1),
-            new Object[] { "ABA", "CDC", "EBE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
-                'B', GTModHandler.getModItem(PamsHarvestCraft.ID, "roastchickenItem", 1), 'C',
-                new ItemStack(Items.cooked_chicken, 1), 'D',
+            new Object[] { "AAA", "CDC", "EEE", 'A', GTModHandler.getModItem(PamsHarvestCraft.ID, "hotwingsItem", 1),
+                'C', new ItemStack(Items.cooked_chicken, 1), 'D',
                 GTModHandler.getModItem(Thaumcraft.ID, "ItemBaubleBlanks", 1, 1, missing), 'E',
                 GTModHandler.getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1) });
 
