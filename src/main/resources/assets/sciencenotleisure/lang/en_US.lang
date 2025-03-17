@@ -262,8 +262,13 @@ tile.RealArtificialStarRender.name=真·湮灭发电机渲染器
 tile.BlockSoulFarmland.name=灵魂耕地
 
 tile.playerDoll.name=玩偶
-Tooltip_PlayerDoll_00=设置玩家名
+Tooltip_PlayerDoll_00=设置正版玩家名
 Tooltip_PlayerDoll_01=确认
+Tooltip_PlayerDoll_02=设置在线皮肤链接
+Tooltip_PlayerDoll_03=切换鞘翅渲染，0为false，1为true
+Tooltip_PlayerDoll_04=设置在线披风链接
+Waila_TileEntityPlayerDoll_00=当前玩偶在线皮肤链接: 
+Waila_TileEntityPlayerDoll_01=当前玩偶正版玩家名: 
 
 tile.NeutronCollector.name=§b中子态素收集器
 tile.DenseNeutronCollector.name=§d致密中子态素收集器
@@ -467,6 +472,8 @@ Tooltip_KFCFamily_00=§o疯狂星期四, v我50!
 gtnl.potion.perfect_physique=完美体魄
 
 item.SatietyRing.name=饱食指环
+item.SuperReachRing.name=超级触物指环
+item.RejectionRing.name=排斥指环
 
 item.CrystalSword.name=§d双锋裂界之剑
 Tooltip_CrystalSword_00=§8§o锋刃所向，裂界无阻；剑影所至，敌影无存。
@@ -970,6 +977,24 @@ fluid.molten.naquadriawaste=超能硅岩废液
 fluid.molten.periodicium=錭錤錶
 fluid.molten.stargate=星门
 
+gt.blockmachines.wire.stargate.01.name=1x星门导线
+gt.blockmachines.wire.stargate.02.name=2x星门导线
+gt.blockmachines.wire.stargate.04.name=4x星门导线
+gt.blockmachines.wire.stargate.08.name=8x星门导线
+gt.blockmachines.wire.stargate.12.name=12x星门导线
+gt.blockmachines.wire.stargate.16.name=16x星门导线
+gt.blockmachines.cable.stargate.01.name=1x星门线缆
+gt.blockmachines.cable.stargate.02.name=2x星门线缆
+gt.blockmachines.cable.stargate.04.name=4x星门线缆
+gt.blockmachines.cable.stargate.08.name=8x星门线缆
+gt.blockmachines.cable.stargate.12.name=12x星门线缆
+gt.blockmachines.cable.stargate.16.name=16x星门线缆
+gt.blockmachines.gt_pipe_blue_alloy.name=%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_huge.name=巨型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_large.name=大型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_small.name=小型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_tiny.name=微型%material流体管道
+
 tooltip.lamp.noglow=无光照
 tooltip.lamp.borderless=无边框
 
@@ -1353,6 +1378,13 @@ Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
 Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械方块
 
+NameLargeSteamMixer=大型蒸汽搅拌机
+LargeSteamMixerRecipeType=搅拌机
+Tooltip_LargeSteamMixer_00=比同等级的单方块搅拌机慢50%%
+Tooltip_LargeSteamMixer_01=一次可处理多达8个物品
+Tooltip_LargeSteamMixer_02=在控制器内放入不锈钢齿轮来解锁HV配方
+Tooltip_LargeSteamMixer_Casing=任意镀铜砖块或脱氧钢机械方块
+
 NameLargeSteamCentrifuge=大型蒸汽离心机
 LargeSteamCentrifugeRecipeType=离心机
 Tooltip_LargeSteamCentrifuge_00=比同等级的单方块离心机快30%%
@@ -1730,6 +1762,14 @@ IndustrialArcaneAssembler_Mode_1=工业注魔矩阵
 Tooltip_IndustrialArcaneAssembler_00=§d§o通过强大的科技手段，我们终于掌握了那无比神秘的魔法
 Tooltip_IndustrialArcaneAssembler_01=固定并行为2147483647
 Tooltip_IndustrialArcaneAssembler_02=需要在控制器放入魔导源质存储元件来成型！
+Tooltip_IndustrialArcaneAssembler_03=12x 超维度机械方块
+Tooltip_IndustrialArcaneAssembler_04=189x 维度注入机械方块
+Tooltip_IndustrialArcaneAssembler_05=7337x 加热管道
+Tooltip_IndustrialArcaneAssembler_06=51008x 抗热三元金属机械方块
+Tooltip_IndustrialArcaneAssembler_07=11667x 无尽强化硼玻璃方块
+Tooltip_IndustrialArcaneAssembler_08=2913x 万用无尽注能玻璃
+Tooltip_IndustrialArcaneAssembler_09=3446x 量子玻璃
+Tooltip_IndustrialArcaneAssembler_10=824x 信标
 Tooltip_EnergeticIndustrialArcaneAssembler_Casing=任意超维度机械方块
 
 NameLibraryOfRuina=§e废墟图书馆
@@ -1744,6 +1784,15 @@ Tooltip_LibraryOfRuina_05=§8§o无用，不灭，隐秘
 Tooltip_LibraryOfRuina_06=§8§o正于此地，愿您找到想要的书。
 Tooltip_LibraryOfRuina_07=需要在控制器内放入暮色传送门激活水晶
 Tooltip_LibraryOfRuina_08=机器可进行§c无损超频§7
+Tooltip_LibraryOfRuina_09=7869x 抗热三元金属机械方块
+Tooltip_LibraryOfRuina_10=3883x 太空电梯支持结构方块
+Tooltip_LibraryOfRuina_11=2159x 超高密度空间弯曲机械方块
+Tooltip_LibraryOfRuina_12=2515x 聚变玻璃
+Tooltip_LibraryOfRuina_13=737x 重力稳定机械方块
+Tooltip_LibraryOfRuina_14=936x 加速器屏蔽机械方块
+Tooltip_LibraryOfRuina_15=578x 维度稳定机械方块
+Tooltip_LibraryOfRuina_16=174x 压缩机机械方块
+Tooltip_LibraryOfRuina_Casing=任意加速器屏蔽机械方块
 
 NameEnergeticPhotovoltaicPowerStation=充能光伏电站
 NameAdvancedPhotovoltaicPowerStation=高级光伏电站
