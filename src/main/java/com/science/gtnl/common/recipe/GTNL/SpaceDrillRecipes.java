@@ -5421,7 +5421,7 @@ public class SpaceDrillRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(9),
+                GTUtility.getIntegratedCircuit(18),
                 GTUtility.copyAmountUnsafe(
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
@@ -5436,7 +5436,7 @@ public class SpaceDrillRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(9),
+                GTUtility.getIntegratedCircuit(18),
                 GTUtility.copyAmountUnsafe(
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
@@ -6163,7 +6163,7 @@ public class SpaceDrillRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                CI.getNumberedAdvancedCircuit(9),
+                CI.getNumberedAdvancedCircuit(18),
                 GTUtility.copyAmountUnsafe(
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))
@@ -6179,7 +6179,7 @@ public class SpaceDrillRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                CI.getNumberedAdvancedCircuit(9),
+                CI.getNumberedAdvancedCircuit(18),
                 GTUtility.copyAmountUnsafe(
                     0,
                     new ItemStack(IGItems.MiningDrones, 1, ItemMiningDrones.DroneTiers.UXV.ordinal())))

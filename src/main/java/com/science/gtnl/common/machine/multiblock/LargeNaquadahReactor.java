@@ -21,6 +21,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -107,7 +108,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     'C',
                     buildHatchAdder(LargeNaquadahReactor.class).casingIndex(CASING_INDEX)
                         .dot(1)
-                        .atLeast(InputHatch, Dynamo.or(DynamoMulti), Maintenance)
+                        .atLeast(InputHatch, OutputHatch, Dynamo.or(DynamoMulti), Maintenance)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 10))))
                 .addElement('D', ofBlock(sBlockCasingsTT, 0))
                 .addElement('E', ofFrame(Materials.Naquadria))
@@ -148,7 +149,6 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing_EM() {
-
         boolean fuelTierI = false;
         boolean fuelTierII = false;
         boolean hydrogen = false;
@@ -205,6 +205,11 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
+
+                    // 生成耗尽燃料并直接赋值给 mOutputFluids
+                    mOutputFluids[0] = new FluidStack(
+                        FluidRegistry.getFluid("naquadah based liquid fuel mki (depleted)"),
+                        16 * multiplier);
                 } else if (oxygenPlasma) {
                     int fuelAvailable = getFluidAmount("naquadah based liquid fuel mki");
                     int oxyPlasmaAvailable = getFluidAmount("plasma.oxygen");
@@ -222,6 +227,11 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
+
+                    // 生成耗尽燃料并直接赋值给 mOutputFluids
+                    mOutputFluids[0] = new FluidStack(
+                        FluidRegistry.getFluid("naquadah based liquid fuel mki (depleted)"),
+                        160 * multiplier);
                 }
             } else if (fuelTierII) {
                 if (hydrogen) {
@@ -235,12 +245,15 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    // 尝试消耗液体
                     boolean success = drainFluid("naquadah based liquid fuel mkii", 16 * multiplier)
                         && drainFluid("hydrogen", 80 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
+
+                    mOutputFluids[0] = new FluidStack(
+                        FluidRegistry.getFluid("naquadah based liquid fuel mkii (depleted)"),
+                        16 * multiplier);
                 } else if (nitrogenPlasma) {
                     int fuelAvailable = getFluidAmount("naquadah based liquid fuel mkii");
                     int nitroPlasmaAvailable = getFluidAmount("plasma.nitrogen");
@@ -252,12 +265,15 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    // 尝试消耗液体
                     boolean success = drainFluid("naquadah based liquid fuel mkii", 160 * multiplier)
                         && drainFluid("plasma.nitrogen", 40 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
+
+                    mOutputFluids[0] = new FluidStack(
+                        FluidRegistry.getFluid("naquadah based liquid fuel mkii (depleted)"),
+                        160 * multiplier);
                 }
             }
         } catch (Exception e) {

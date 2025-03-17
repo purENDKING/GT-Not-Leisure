@@ -275,7 +275,7 @@ public class RecipeRegister {
 
     public static final RecipeMap<RecipeMapBackend> NaquadahReactorRecipes = RecipeMapBuilder
         .of("gtnl.recipe.NaquadahReactorRecipes")
-        .maxIO(0, 0, 2, 0)
+        .maxIO(0, 0, 2, 1)
         .dontUseProgressBar()
         .neiSpecialInfoFormatter(NaquadahReactorSpecialValue.INSTANCE)
         .neiHandlerInfo(

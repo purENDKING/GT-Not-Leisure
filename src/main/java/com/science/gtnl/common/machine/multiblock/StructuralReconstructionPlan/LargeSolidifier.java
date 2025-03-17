@@ -153,6 +153,16 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
 
             RecipeMap<?> currentRecipeMap = RecipeMaps.fluidSolidifierRecipes;
 
+            @Override
+            protected RecipeMap<?> preProcess() {
+                lastRecipeMap = currentRecipeMap;
+
+                if (maxParallelSupplier != null) {
+                    maxParallel = maxParallelSupplier.get();
+                }
+                return currentRecipeMap;
+            }
+
             @NotNull
             @Override
             public CheckRecipeResult process() {
