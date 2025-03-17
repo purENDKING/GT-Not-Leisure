@@ -875,6 +875,30 @@ public class TextLocalization {
     public static final String Tooltip_IndustrialArcaneAssembler_02 = texter(
         "Need to put Thaumometric Essentia Cell in the controller to framing!",
         "Tooltip_IndustrialArcaneAssembler_02");
+    public static final String Tooltip_IndustrialArcaneAssembler_03 = texter(
+        "12x Dimensionally Transcendent Casing",
+        "Tooltip_IndustrialArcaneAssembler_03");
+    public static final String Tooltip_IndustrialArcaneAssembler_04 = texter(
+        "189x Dimensional Injection Casing",
+        "Tooltip_IndustrialArcaneAssembler_04");
+    public static final String Tooltip_IndustrialArcaneAssembler_05 = texter(
+        "7337x Heating Duct",
+        "Tooltip_IndustrialArcaneAssembler_05");
+    public static final String Tooltip_IndustrialArcaneAssembler_06 = texter(
+        "51008x Heat-Resistant Trinium Plated Casing",
+        "Tooltip_IndustrialArcaneAssembler_06");
+    public static final String Tooltip_IndustrialArcaneAssembler_07 = texter(
+        "11667x Infinity Reinforced Borosilicate Glass Block",
+        "Tooltip_IndustrialArcaneAssembler_07");
+    public static final String Tooltip_IndustrialArcaneAssembler_08 = texter(
+        "2913x Omni-Purpose Infinity Fused Glass",
+        "Tooltip_IndustrialArcaneAssembler_08");
+    public static final String Tooltip_IndustrialArcaneAssembler_09 = texter(
+        "3446x Quantum Glass",
+        "Tooltip_IndustrialArcaneAssembler_09");
+    public static final String Tooltip_IndustrialArcaneAssembler_10 = texter(
+        "824x Beacon",
+        "Tooltip_IndustrialArcaneAssembler_10");
     public static final String Tooltip_EnergeticIndustrialArcaneAssembler_Casing = texter(
         "Any Dimensionally Transcendent Casing",
         "Tooltip_EnergeticIndustrialArcaneAssembler_Casing");
@@ -1879,8 +1903,30 @@ public class TextLocalization {
     public static final String Tooltip_LibraryOfRuina_08 = texter(
         "It gains §cperfect overclock§7",
         "Tooltip_LibraryOfRuina_08");
+    public static final String Tooltip_LibraryOfRuina_09 = texter(
+        "7869x Heat-Resistant Trinium Plated Casing",
+        "Tooltip_LibraryOfRuina_09");
+    public static final String Tooltip_LibraryOfRuina_10 = texter(
+        "3883x Space Elevator Support Structure",
+        "Tooltip_LibraryOfRuina_10");
+    public static final String Tooltip_LibraryOfRuina_11 = texter(
+        "2159x Extreme Density Space-Bending Casing",
+        "Tooltip_LibraryOfRuina_11");
+    public static final String Tooltip_LibraryOfRuina_12 = texter("2519x Fusion Glass", "Tooltip_LibraryOfRuina_12");
+    public static final String Tooltip_LibraryOfRuina_13 = texter(
+        "737x Gravity Stabilization Casing",
+        "Tooltip_LibraryOfRuina_13");
+    public static final String Tooltip_LibraryOfRuina_14 = texter(
+        "936x Shielded Accelerator Casing",
+        "Tooltip_LibraryOfRuina_14");
+    public static final String Tooltip_LibraryOfRuina_15 = texter(
+        "578x Dimensionally Stable Casing",
+        "Tooltip_LibraryOfRuina_15");
+    public static final String Tooltip_LibraryOfRuina_16 = texter(
+        "174x Electric Compressor Casing",
+        "Tooltip_LibraryOfRuina_16");
     public static final String Tooltip_LibraryOfRuina_Casing = texter(
-        "Any Frost Proof Machine Casing",
+        "Any  Shielded Accelerator Casing",
         "Tooltip_LibraryOfRuina_Casing");
 
     public static final String NameColdIceFreezer = texter("Cold Ice Freezer", "NameColdIceFreezer");
