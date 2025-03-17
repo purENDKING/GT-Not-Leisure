@@ -28,7 +28,7 @@ public class LanguageManager {
         addStringLocalization("gt.blockmachines.cable.stargate.12.name", "12x星门线缆");
         addStringLocalization("gt.blockmachines.cable.stargate.16.name", "16x星门线缆");
         addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy.name", "%material流体管道");
-        addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy_huge.name", "%巨型material流体管道");
+        addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy_huge.name", "巨型%material流体管道");
         addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy_large.name", "大型%material流体管道");
         addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy_small.name", "小型%material流体管道");
         addStringLocalization("gt.blockmachines.gt_pipe_blue_alloy_tiny.name", "微型%material流体管道");

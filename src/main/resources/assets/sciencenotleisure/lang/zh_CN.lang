@@ -976,6 +976,24 @@ fluid.molten.naquadriawaste=超能硅岩废液
 fluid.molten.periodicium=錭錤錶
 fluid.molten.stargate=星门
 
+gt.blockmachines.wire.stargate.01.name=1x星门导线
+gt.blockmachines.wire.stargate.02.name=2x星门导线
+gt.blockmachines.wire.stargate.04.name=4x星门导线
+gt.blockmachines.wire.stargate.08.name=8x星门导线
+gt.blockmachines.wire.stargate.12.name=12x星门导线
+gt.blockmachines.wire.stargate.16.name=16x星门导线
+gt.blockmachines.cable.stargate.01.name=1x星门线缆
+gt.blockmachines.cable.stargate.02.name=2x星门线缆
+gt.blockmachines.cable.stargate.04.name=4x星门线缆
+gt.blockmachines.cable.stargate.08.name=8x星门线缆
+gt.blockmachines.cable.stargate.12.name=12x星门线缆
+gt.blockmachines.cable.stargate.16.name=16x星门线缆
+gt.blockmachines.gt_pipe_blue_alloy.name=%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_huge.name=巨型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_large.name=大型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_small.name=小型%material流体管道
+gt.blockmachines.gt_pipe_blue_alloy_tiny.name=微型%material流体管道
+
 tooltip.lamp.noglow=无光照
 tooltip.lamp.borderless=无边框
 
