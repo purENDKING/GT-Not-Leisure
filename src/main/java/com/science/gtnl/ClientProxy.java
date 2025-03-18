@@ -17,6 +17,7 @@ import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.ItemLoader;
+import com.science.gtnl.common.render.TwilightSwordModelRender;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -45,6 +46,7 @@ public class ClientProxy extends CommonProxy {
         new BlockPlayerDollRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new BlockPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
+        MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
         LanguageManager.writePlaceholderStrings();
         MinecraftForge.EVENT_BUS.register(new ItemPlayerDollRenderer());

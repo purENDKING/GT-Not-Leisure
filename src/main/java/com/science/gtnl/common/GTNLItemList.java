@@ -210,6 +210,7 @@ public enum GTNLItemList {
     InfinitySword,
     InfinityTotem,
     MatterCluster,
+    TwilightSword,
 
     FortifyGlowstone,
     GaiaGlass,
