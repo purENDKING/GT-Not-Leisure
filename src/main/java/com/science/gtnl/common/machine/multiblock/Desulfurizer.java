@@ -121,7 +121,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
         tt.addMachineType(TextLocalization.DesulfurizerRecipeType)
             .addInfo(TextLocalization.Tooltip_Desulfurizer_00)
             .addInfo(TextLocalization.Tooltip_Desulfurizer_01)
-            .addInfo(TextLocalization.Tooltip_Desulfurizer_02)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)

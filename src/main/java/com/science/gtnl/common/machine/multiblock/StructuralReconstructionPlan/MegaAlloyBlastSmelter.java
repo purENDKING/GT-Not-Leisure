@@ -108,7 +108,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
             .addInfo(TextLocalization.Tooltip_MegaAlloyBlastSmelter_03)
             .addInfo(TextLocalization.Tooltip_MegaAlloyBlastSmelter_04)
             .addInfo(TextLocalization.Tooltip_MegaAlloyBlastSmelter_05)
-            .addInfo(TextLocalization.Tooltip_MegaAlloyBlastSmelter_06)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)

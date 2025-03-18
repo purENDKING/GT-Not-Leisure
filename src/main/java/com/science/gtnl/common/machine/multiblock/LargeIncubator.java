@@ -104,7 +104,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
             .addInfo(TextLocalization.Tooltip_LargeIncubator_02)
             .addInfo(TextLocalization.Tooltip_LargeIncubator_03)
             .addInfo(TextLocalization.Tooltip_LargeIncubator_04)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_05)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .beginStructureBlock(13, 9, 13, false)
             .addMaintenanceHatch(TextLocalization.Tooltip_LargeIncubator_Casing, 1)

@@ -123,7 +123,7 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_02)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

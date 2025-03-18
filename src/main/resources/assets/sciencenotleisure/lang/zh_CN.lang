@@ -7,9 +7,8 @@ AppliedEnergistics2=应用能源2
 
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
+Tooltip_PerfectOverclock=机器可进行§c无损超频§7
 
-Waila.General.WirelessMode=无线模式
-Waila.General.CurrentEuCost=当前EU消耗
 OverclockType.Description.01=每次超频时, 耗时除以
 OverclockType.Description.02=耗电乘以
 
@@ -1012,6 +1011,19 @@ Tooltip_GTMMultiMachine_02=初始并行为8
 Tooltip_GTMMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
 Tooltip_GTMMultiMachine_04=支持§9Tec§1Tech§r多安能源仓！
 
+Tooltip_WirelessEnergyMultiMachine_00=比相同电压的机器快1000%%
+Tooltip_WirelessEnergyMultiMachine_01=只需要使用配方要求功率的40%%
+Tooltip_WirelessEnergyMultiMachine_02=初始并行为8
+Tooltip_WirelessEnergyMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
+Tooltip_WirelessEnergyMultiMachine_04=并行控制核心将额外提供16倍的并行！
+Tooltip_WirelessEnergyMultiMachine_05=加速由加算改为乘算，每级提供75%%的加速
+Tooltip_WirelessEnergyMultiMachine_06=无线模式下支持跨配方并行
+Tooltip_WirelessEnergyMultiMachine_07=机器可进行§c无损超频§7
+Tooltip_WirelessEnergyMultiMachine_08=无线模式固定运行时间为%%stick
+Tooltip_WirelessEnergyMultiMachine_09=不安装能源仓将自动进入无线模式
+Waila.General.WirelessMode=无线模式
+Waila.General.CurrentEuCost=当前EU消耗
+
 NameFuelRefiningComplex=燃料精炼复合体
 FuelRefiningComplexRecipeType=燃料精炼复合体
 gtnl.recipe.FuelRefiningComplexRecipes=燃料精炼复合体
@@ -1038,7 +1050,6 @@ Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01=比同等级聚变反应堆快2
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02=只需要使用配方要求功率的400%%
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03=无需消耗配方启动能量，但你仍然需要相应的启动能量来开机
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04=储能上限: 
-Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05=机器可进行§c无损超频§7
 Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00=当配方需求电压超过§dLuV§r§7时，无法进行聚变
 Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_00=当配方需求电压超过§bZPM§r§7时，无法进行聚变
 Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00=当配方需求电压超过§2UV§r§7时，无法进行聚变
@@ -1057,7 +1068,6 @@ gtnl.recipe.IsaMillRecipes=湿法碾磨
 IsaMillRecipeType=湿法碾磨
 Tooltip_IsaMill_00=工业级湿法碾磨
 Tooltip_IsaMill_01=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
-Tooltip_IsaMill_02=机器可进行§c无损超频§7
 Tooltip_IsaMill_Casing=任意艾萨研磨外围机械方块
 Interaction_DESCRIPTION_Index_700=需要铝研磨球
 Interaction_DESCRIPTION_Index_701=需要皂石研磨球
@@ -1066,7 +1076,6 @@ NameFlotationCellRegulator=工业浮选机
 gtnl.recipe.CellRegulatorRecipes=浮选
 FlotationCellRegulatorRecipeType=浮选
 Tooltip_FlotationCellRegulator_00=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
-Tooltip_FlotationCellRegulator_01=机器可进行§c无损超频§7
 Tooltip_FlotationCellRegulator_Casing=任意哈斯特洛伊合金-X结构方块
 
 NameVacuumDryingFurnace=真空干燥炉
@@ -1241,7 +1250,6 @@ LargeArcSmelter_Mode_0=电弧炉
 LargeArcSmelter_Mode_1=等离子电弧炉
 Tooltip_LargeArcSmelter_00=比相同电压的机器快250%%
 Tooltip_LargeArcSmelter_01=只需要使用配方要求功率的80%%
-Tooltip_LargeArcSmelter_02=机器可进行§c无损超频§7
 Tooltip_LargeArcSmelter_Casing=任意冶炼炉机械方块
 
 NameLargeForming=大型冲压机
@@ -1285,7 +1293,6 @@ LargeCanning_Mode_0=流体装罐机
 LargeCanning_Mode_1=装罐机
 Tooltip_LargeCanning_00=比相同电压的机器快333%%
 Tooltip_LargeCanning_01=只需要使用配方要求功率的50%%
-Tooltip_LargeCanning_02=机器可进行§c无损超频§7
 Tooltip_LargeCanning_Casing=任意洗矿厂机械方块
 
 NameLargeExtractor=大型提取机
@@ -1312,7 +1319,6 @@ NameFishingGround=渔场
 gtnl.recipe.FishingGroundRecipes=渔场
 FishingGroundRecipeType=渔场
 Tooltip_FishingGround_00=把珠海渔场和藻类农场结合在一起!
-Tooltip_FishingGround_01=机器可进行§c无损超频§7
 Tooltip_FishingGround_Casing=任意哈斯特洛伊-X结构方块
 
 NameLargeEngravingLaser=大型激光蚀刻机
@@ -1341,7 +1347,6 @@ Tooltip_ReactionFurnace_Casing=任意强化镀铱机械方块
 NameElementCopying=元素复制机
 gtnl.recipe.ElementCopyingRecipes=元素复制
 ElementCopyingRecipeType=元素复制
-Tooltip_ElementCopying_00=机器可进行§c无损超频§7
 Tooltip_ElementCopying_Casing=任意分子机械方块
 
 NameHandOfJohnDavisonRockefeller=洛克菲勒之手
@@ -1479,6 +1484,14 @@ Tooltip_LapotronChip_Casing=任意放射硅岩合金机械方块
 
 NameNeutroniumWireCutting=中子丝线切割机
 NeutroniumWireCuttingRecipeType=切割机
+Tooltip_NeutroniumWireCutting_00=每级玻璃等级额外提供5%%的加速和耗电减免(乘算叠加)
+Tooltip_NeutroniumWireCutting_Casing=任意超能硅岩强化无菌净水厂机械方块
+
+NameCrackerHub=裂解反应枢纽
+CrackerHubRecipeType=石油裂化机
+Tooltip_CrackerHub_00=线圈等级每高出2级，产出+10%%
+Tooltip_CrackerHub_01=每级玻璃等级额外提供5%%的加速和耗电减免(乘算叠加)
+Tooltip_CrackerHub_Casing=任意放射硅岩合金机械方块
 
 NameLargeSteamCrusher=大型蒸汽破碎机
 LargeSteamCrusherRecipeType=研磨机
@@ -1621,7 +1634,6 @@ gtnl.recipe.DesulfurizerRecipes=脱硫
 DesulfurizerRecipeType=脱硫
 Tooltip_Desulfurizer_00=每提升一个线圈等级，并行加8
 Tooltip_Desulfurizer_01=每提升一个线圈等级，处理速度提升10%%
-Tooltip_Desulfurizer_02=机器可进行§c无损超频§7
 Tooltip_Desulfurizer_Casing=任意洁净不锈钢机械方块
 
 NameDigester=煮解池
@@ -1646,7 +1658,6 @@ Tooltip_LargeIncubator_01=只需要使用配方要求功率的60%%
 Tooltip_LargeIncubator_02=不再需要保持输出仓半满
 Tooltip_LargeIncubator_03=无视玻璃等级要求和精确剂量要求
 Tooltip_LargeIncubator_04=并行数：4 * 培养皿数量 + 2 * 电压等级 * 玻璃等级
-Tooltip_LargeIncubator_05=机器可进行§c无损超频§7
 Tooltip_LargeIncubator_Radio_Hatch=放射仓
 Tooltip_LargeIncubator_Casing=任意塑料混凝土方块
 
@@ -1669,7 +1680,6 @@ Tooltip_MegaAlloyBlastSmelter_02=每超过配方温度900K，耗能均将乘以9
 Tooltip_MegaAlloyBlastSmelter_03=每级玻璃等级将额外提供2%%概率的双倍产出！
 Tooltip_MegaAlloyBlastSmelter_04=每级线圈等级额外提供2%%的耗电减免和2%%的加速！
 Tooltip_MegaAlloyBlastSmelter_05=超过MV后的每一级电压，都会将温度提高100K
-Tooltip_MegaAlloyBlastSmelter_06=机器可进行§c无损超频§7
 Tooltip_MegaAlloyBlastSmelter_Casing=任意冶炼炉机械方块
 
 NamePetrochemicalPlant=石化工厂
@@ -1677,8 +1687,7 @@ gtnl.recipe.PetrochemicalPlantRecipes=石化工厂
 PetrochemicalPlantRecipeType=石化工厂
 Tooltip_PetrochemicalPlant_00=每提升一个线圈等级，并行加16
 Tooltip_PetrochemicalPlant_01=最终产出：配方输出 * 线圈等级 * 电压等级 * 10
-Tooltip_PetrochemicalPlant_02=机器可进行§c无损超频§7
-Tooltip_PetrochemicalPlant_03=§c§l随着技术的精进，提取不应只有一点点
+Tooltip_PetrochemicalPlant_02=§c§l随着技术的精进，提取不应只有一点点
 Tooltip_PetrochemicalPlant_Casing=任意压力抑制机械方块
 Tooltip_PetrochemicalPlant_Muffler=任意顶部压力抑制机械方块
 
@@ -1720,7 +1729,6 @@ NameChemicalPlant=化工厂
 ChemicalPlantRecipeType=化学反应釜
 Tooltip_ChemicalPlant_00=线圈等级每高出白铜一级能耗与速度x5%%
 Tooltip_ChemicalPlant_01=并行数不高于512
-Tooltip_ChemicalPlant_02=机器可进行§c无损超频§7
 Tooltip_ChemicalPlant_Casing=任意化学惰性机械方块
 
 NameVacuumFreezer=真空冷冻机
@@ -1783,7 +1791,6 @@ Tooltip_LibraryOfRuina_04=§8§o满腹稀世书籍
 Tooltip_LibraryOfRuina_05=§8§o无用，不灭，隐秘
 Tooltip_LibraryOfRuina_06=§8§o正于此地，愿您找到想要的书。
 Tooltip_LibraryOfRuina_07=需要在控制器内放入暮色传送门激活水晶
-Tooltip_LibraryOfRuina_08=机器可进行§c无损超频§7
 Tooltip_LibraryOfRuina_09=7869x 抗热三元金属机械方块
 Tooltip_LibraryOfRuina_10=3883x 太空电梯支持结构方块
 Tooltip_LibraryOfRuina_11=2159x 超高密度空间弯曲机械方块

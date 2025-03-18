@@ -111,7 +111,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         tt.addMachineType(TextLocalization.ChemicalPlantRecipeType)
             .addInfo(TextLocalization.Tooltip_ChemicalPlant_00)
             .addInfo(TextLocalization.Tooltip_ChemicalPlant_01)
-            .addInfo(TextLocalization.Tooltip_ChemicalPlant_02)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)

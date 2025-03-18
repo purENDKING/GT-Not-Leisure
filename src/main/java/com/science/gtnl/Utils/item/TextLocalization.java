@@ -11,6 +11,9 @@ public class TextLocalization {
     public static final String Tooltip_Tectech_Hatch = texter(
         "Support §9Tec§1Tech §rLaser Hatch!",
         "Tooltip_Tectech_Hatch");
+    public static final String Tooltip_PerfectOverclock = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_PerfectOverclock");
 
     public static final String Tooltip_Testitem_00 = texter("If you see this tooltip", "Tooltip_Testitem_00");
     public static final String Tooltip_Testitem_01 = texter("Welcome to GT Not Leisure!", "Tooltip_Testitem_01");
@@ -146,9 +149,6 @@ public class TextLocalization {
             + EnumChatFormatting.GRAY
             + " hologram projector to build the main structure.",
         "BLUE_PRINT_INFO");
-
-    public static final String Waila_WirelessMode = texter("Wireless Mode", "Waila.General.WirelessMode");
-    public static final String Waila_CurrentEuCost = texter("Current EU Cost", "Waila.General.CurrentEuCost");
 
     public static final String mNoMobsToolTip = GTLanguageManager
         .addStringLocalization("gt.nomobspawnsonthisblock", "Mobs cannot Spawn on this Block");
@@ -509,6 +509,24 @@ public class TextLocalization {
         "Neutronium Wire Cutting",
         "NameNeutroniumWireCutting");
     public static final String NeutroniumWireCuttingRecipeType = texter("Cutting", "NeutroniumWireCuttingRecipeType");
+    public static final String Tooltip_NeutroniumWireCutting_00 = texter(
+        "Each level of glass grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_NeutroniumWireCutting_00");
+    public static final String Tooltip_NeutroniumWireCutting_Casing = texter(
+        "Ang Naquadria-Reinforced Water Plant Casing",
+        "Tooltip_NeutroniumWireCutting_Casing");
+
+    public static final String NameCrackerHub = texter("Cracker Hub", "NameCrackerHub");
+    public static final String CrackerHubRecipeType = texter("Oil Cracker", "CrackerHubRecipeType");
+    public static final String Tooltip_CrackerHub_00 = texter(
+        "For every 2-level increase in coil level, the output +10%%",
+        "Tooltip_CrackerHub_00");
+    public static final String Tooltip_CrackerHub_01 = texter(
+        "Each level of glass grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_CrackerHub_01");
+    public static final String Tooltip_CrackerHub_Casing = texter(
+        "Ang Radiant Naquadah Alloy Casing",
+        "Tooltip_CrackerHub_Casing");
 
     public static final String NameLargeSteamOreWasher = texter("Large Steam Ore Washer", "NameLargeSteamOreWasher");
     public static final String LargeSteamOreWasherRecipeType = texter(
@@ -749,9 +767,6 @@ public class TextLocalization {
     public static final String Tooltip_Desulfurizer_01 = texter(
         "Gains 10%% speed bonus per coil tier",
         "Tooltip_Desulfurizer_01");
-    public static final String Tooltip_Desulfurizer_02 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_Desulfurizer_02");
     public static final String Tooltip_Desulfurizer_Casing = texter(
         "Any Clean Stainless Steel Machine Casing",
         "Tooltip_Desulfurizer_Casing");
@@ -799,9 +814,6 @@ public class TextLocalization {
     public static final String Tooltip_ChemicalPlant_01 = texter(
         "Max parallels does not exceed 512",
         "Tooltip_ChemicalPlant_01");
-    public static final String Tooltip_ChemicalPlant_02 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_ChemicalPlant_02");
     public static final String Tooltip_ChemicalPlant_Casing = texter(
         "Any Chemically Inert Machine Casing",
         "Tooltip_ChemicalPlant_Casing");
@@ -835,9 +847,6 @@ public class TextLocalization {
     public static final String Tooltip_LargeIncubator_04 = texter(
         "Parallel: 4 * Number of Petri Dishes + 2 * Voltage Level * Glass Grade",
         "Tooltip_LargeIncubator_04");
-    public static final String Tooltip_LargeIncubator_05 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_LargeIncubator_05");
     public static final String Tooltip_LargeIncubator_Radio_Hatch = texter(
         "Radio Hatch",
         "Tooltip_LargeIncubator_Radio_Hatch");
@@ -1044,9 +1053,6 @@ public class TextLocalization {
     public static final String Tooltip_LargeCanning_01 = texter(
         "Only uses 50%% of the EU/t normally required",
         "Tooltip_LargeCanning_01");
-    public static final String Tooltip_LargeCanning_02 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_LargeCanning_02");
     public static final String Tooltip_LargeCanning_Casing = texter(
         "Any Wash Plant Casing",
         "Tooltip_LargeCanning_Casing");
@@ -1215,9 +1221,6 @@ public class TextLocalization {
     public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 = texter(
         "Energy storage upper limit: ",
         "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04");
-    public static final String Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05");
     public static final String Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00 = texter(
         "If the recipe requires a voltage tier over §dLuV§r§7 , you can't do it either",
         "Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00");
@@ -1339,9 +1342,6 @@ public class TextLocalization {
 
     public static final String NameElementCopying = texter("Element Copying", "NameElementCopying");
     public static final String ElementCopyingRecipeType = texter("Element Copying", "ElementCopyingRecipeType");
-    public static final String Tooltip_ElementCopying_00 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_ElementCopying_00");
     public static final String Tooltip_ElementCopying_Casing = texter(
         "Any Molecular Casing",
         "Tooltip_ElementCopying_Casing");
@@ -1372,9 +1372,6 @@ public class TextLocalization {
     public static final String Tooltip_FlotationCellRegulator_00 = texter(
         "Energy hatch limited by glass tier, UHV Glass unlocks all",
         "Tooltip_FlotationCellRegulator_00");
-    public static final String Tooltip_FlotationCellRegulator_01 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_FlotationCellRegulator_01");
     public static final String Tooltip_FlotationCellRegulator_Casing = texter(
         "Any Hastelloy-X Structural Block",
         "Tooltip_FlotationCellRegulator_Casing");
@@ -1384,9 +1381,6 @@ public class TextLocalization {
     public static final String Tooltip_FishingGround_00 = texter(
         "Combine Algae Farm and Zhuhai - Fishing Port together!",
         "Tooltip_FishingGround_00");
-    public static final String Tooltip_FishingGround_01 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_FishingGround_01");
     public static final String Tooltip_FishingGround_Casing = texter(
         "Any Hastelloy-X Structural Block",
         "Tooltip_FishingGround_Casing");
@@ -1397,7 +1391,6 @@ public class TextLocalization {
     public static final String Tooltip_IsaMill_01 = texter(
         "Energy hatch limited by glass tier, UHV Glass unlocks all",
         "Tooltip_IsaMill_01");
-    public static final String Tooltip_IsaMill_02 = texter("It gains §cperfect overclock§7", "Tooltip_IsaMill_02");
     public static final String Tooltip_IsaMill_Casing = texter("Any IsaMill Exterior Casing", "Tooltip_IsaMill_Casing");
 
     public static final String NameAlloyBlastSmelter = texter("Alloy Blast Smelter", "NameAlloyBlastSmelter");
@@ -1453,9 +1446,6 @@ public class TextLocalization {
     public static final String Tooltip_MegaAlloyBlastSmelter_05 = texter(
         "After each voltage level exceeds MV, the temperature will increase by 100K",
         "Tooltip_MegaAlloyBlastSmelter_05");
-    public static final String Tooltip_MegaAlloyBlastSmelter_06 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_MegaAlloyBlastSmelter_06");
     public static final String Tooltip_MegaAlloyBlastSmelter_Casing = texter(
         "Any Blast Smelter Casing Block",
         "Tooltip_MegaAlloyBlastSmelter_Casing");
@@ -1540,9 +1530,6 @@ public class TextLocalization {
     public static final String Tooltip_LargeArcSmelter_01 = texter(
         "Only uses 80%% of the EU/t normally required",
         "Tooltip_LargeArcSmelter_01");
-    public static final String Tooltip_LargeArcSmelter_02 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_LargeArcSmelter_02");
     public static final String Tooltip_LargeArcSmelter_Casing = texter(
         "Any Blast Smelter Casing Block",
         "Tooltip_LargeArcSmelter_Casing");
@@ -1597,6 +1584,39 @@ public class TextLocalization {
         "Support §9Tec§1Tech §rAdditional Amp Hatch!",
         "Tooltip_GTMMultiMachine_04");
 
+    public static final String Tooltip_WirelessEnergyMultiMachine_00 = texter(
+        "1000%% faster than using machines of the same voltage",
+        "Tooltip_WirelessEnergyMultiMachine_00");
+    public static final String Tooltip_WirelessEnergyMultiMachine_01 = texter(
+        "Only uses 40%% of the EU/t normally required",
+        "Tooltip_WirelessEnergyMultiMachine_01");
+    public static final String Tooltip_WirelessEnergyMultiMachine_02 = texter(
+        "It can run 8x recipes at most",
+        "Tooltip_WirelessEnergyMultiMachine_02");
+    public static final String Tooltip_WirelessEnergyMultiMachine_03 = texter(
+        "Insert the parallel control core into the controller to increase the maximum parallelism and reduce power consumption!",
+        "Tooltip_WirelessEnergyMultiMachine_03");
+    public static final String Tooltip_WirelessEnergyMultiMachine_04 = texter(
+        "Parallel control core will provide an additional 16 times more parallel!",
+        "Tooltip_WirelessEnergyMultiMachine_04");
+    public static final String Tooltip_WirelessEnergyMultiMachine_05 = texter(
+        "Acceleration changed from additive to multiplicative, providing 75%% acceleration per level",
+        "Tooltip_WirelessEnergyMultiMachine_05");
+    public static final String Tooltip_WirelessEnergyMultiMachine_06 = texter(
+        "Support cross recipe parallel operation in wireless mode",
+        "Tooltip_WirelessEnergyMultiMachine_06");
+    public static final String Tooltip_WirelessEnergyMultiMachine_07 = texter(
+        "It gains §cperfect overclock§7",
+        "Tooltip_WirelessEnergyMultiMachine_07");
+    public static final String Tooltip_WirelessEnergyMultiMachine_08 = texter(
+        "The fixed running time of wireless mode is %%s tick",
+        "Tooltip_WirelessEnergyMultiMachine_08");
+    public static final String Tooltip_WirelessEnergyMultiMachine_09 = texter(
+        "If the energy storage unit is not installed, it will automatically enter wireless mode",
+        "Tooltip_WirelessEnergyMultiMachine_09");
+    public static final String Waila_WirelessMode = texter("Wireless Mode", "Waila.General.WirelessMode");
+    public static final String Waila_CurrentEuCost = texter("Current EU Cost", "Waila.General.CurrentEuCost");
+
     public static final String NameDraconicFusionCrafting = texter(
         "Draconic Fusion Crafting",
         "NameDraconicFusionCrafting");
@@ -1642,11 +1662,8 @@ public class TextLocalization {
         "Final output : Recipe output * Coil level * Voltage tier * 10",
         "Tooltip_PetrochemicalPlant_01");
     public static final String Tooltip_PetrochemicalPlant_02 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_PetrochemicalPlant_02");
-    public static final String Tooltip_PetrochemicalPlant_03 = texter(
         "With the advancement of technology, extraction should no longer be minimal",
-        "Tooltip_PetrochemicalPlant_03");
+        "Tooltip_PetrochemicalPlant_02");
     public static final String Tooltip_PetrochemicalPlant_Casing = texter(
         "Any Pressure Containment Casing",
         "Tooltip_PetrochemicalPlant_Casing");
@@ -1900,9 +1917,6 @@ public class TextLocalization {
     public static final String Tooltip_LibraryOfRuina_07 = texter(
         "Need Put Quick and Dirty Portal Generator in the Controller Slot",
         "Tooltip_LibraryOfRuina_07");
-    public static final String Tooltip_LibraryOfRuina_08 = texter(
-        "It gains §cperfect overclock§7",
-        "Tooltip_LibraryOfRuina_08");
     public static final String Tooltip_LibraryOfRuina_09 = texter(
         "7869x Heat-Resistant Trinium Plated Casing",
         "Tooltip_LibraryOfRuina_09");

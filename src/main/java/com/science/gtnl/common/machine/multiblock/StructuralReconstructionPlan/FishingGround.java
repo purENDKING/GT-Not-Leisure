@@ -96,7 +96,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.FishingGroundRecipeType)
             .addInfo(TextLocalization.Tooltip_FishingGround_00)
-            .addInfo(TextLocalization.Tooltip_FishingGround_01)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)

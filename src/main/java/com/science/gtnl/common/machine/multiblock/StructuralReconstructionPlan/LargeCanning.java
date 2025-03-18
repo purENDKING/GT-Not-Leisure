@@ -186,7 +186,7 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_LargeCanning_02)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

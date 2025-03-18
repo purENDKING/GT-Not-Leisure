@@ -81,7 +81,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         tt.addMachineType(TextLocalization.IsaMillRecipeType)
             .addInfo(TextLocalization.Tooltip_IsaMill_00)
             .addInfo(TextLocalization.Tooltip_IsaMill_01)
-            .addInfo(TextLocalization.Tooltip_IsaMill_02)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)

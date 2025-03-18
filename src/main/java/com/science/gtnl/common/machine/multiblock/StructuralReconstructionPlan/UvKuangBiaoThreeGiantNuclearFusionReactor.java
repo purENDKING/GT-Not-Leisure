@@ -152,7 +152,7 @@ public class UvKuangBiaoThreeGiantNuclearFusionReactor
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03)
             .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 + "640M EU")
             .addInfo(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_05)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
