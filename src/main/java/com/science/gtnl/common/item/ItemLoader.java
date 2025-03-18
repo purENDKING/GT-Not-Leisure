@@ -22,7 +22,11 @@ import com.science.gtnl.common.item.ReAvaritia.InfinityShovel;
 import com.science.gtnl.common.item.ReAvaritia.InfinitySword;
 import com.science.gtnl.common.item.ReAvaritia.InfinityTotem;
 import com.science.gtnl.common.item.ReAvaritia.MatterCluster;
-import com.science.gtnl.common.item.items.*;
+import com.science.gtnl.common.item.items.KFCFamily;
+import com.science.gtnl.common.item.items.RejectionRing;
+import com.science.gtnl.common.item.items.SatietyRing;
+import com.science.gtnl.common.item.items.SuperReachRing;
+import com.science.gtnl.common.item.items.TestItem;
 import com.science.gtnl.common.item.items.TwilightSword;
 
 import cpw.mods.fml.common.registry.GameRegistry;
