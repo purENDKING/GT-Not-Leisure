@@ -28,6 +28,7 @@ import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.CheatOreProcessingFactory;
 import com.science.gtnl.common.machine.multiblock.ComponentAssembler;
+import com.science.gtnl.common.machine.multiblock.CrackerHub;
 import com.science.gtnl.common.machine.multiblock.DecayHastener;
 import com.science.gtnl.common.machine.multiblock.Desulfurizer;
 import com.science.gtnl.common.machine.multiblock.DraconicFusionCrafting;
@@ -588,6 +589,9 @@ public class MachineLoader {
         GTNLItemList.LargeSteamMixer
             .set(new LargeSteamMixer(21107, "LargeSteamMixer", TextLocalization.NameLargeSteamMixer));
         addItemTooltip(GTNLItemList.LargeSteamMixer.get(1), AnimatedText.SNL_SRP);
+
+        GTNLItemList.CrackerHub.set(new CrackerHub(21108, "CrackerHub", TextLocalization.NameCrackerHub));
+        addItemTooltip(GTNLItemList.CrackerHub.get(1), AnimatedText.SNL_QYZG);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
