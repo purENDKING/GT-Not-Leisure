@@ -229,7 +229,8 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         return true;
     }
 
-    protected int getCasingTextureID() {
+    @Override
+    public int getCasingTextureID() {
         return CASING_INDEX;
     }
 
@@ -289,16 +290,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         } else {
             return 128;
         }
-    }
-
-    @Override
-    public boolean isEnablePerfectOverclock() {
-        return true;
-    }
-
-    @Override
-    public float getSpeedBonus() {
-        return 1;
     }
 
     @Nonnull

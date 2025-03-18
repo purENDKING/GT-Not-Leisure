@@ -45,11 +45,11 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -59,7 +59,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     implements IWirelessEnergyHatchInformation {
 
     protected GTRecipe lastRecipeToBuffer;
-
     public byte mGlassTier = 0;
     public static final int HORIZONTAL_OFF_SET = 8;
     public static final int VERTICAL_OFF_SET = 14;
@@ -78,16 +77,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     public SmeltingMixingFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
-    }
-
-    @Override
-    protected boolean isEnablePerfectOverclock() {
-        return true;
-    }
-
-    @Override
-    protected float getSpeedBonus() {
-        return 1;
     }
 
     @Override
@@ -119,22 +108,27 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         for (MTEHatch h : mInputBusses) h.updateTexture(CASING_INDEX);
     }
 
-    protected GTRenderedTexture LCgetFrontOverlay() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_DTPF_OFF);
-    }
-
-    protected GTRenderedTexture LCgetFrontOverlayActive() {
-        return new GTRenderedTexture(Textures.BlockIcons.OVERLAY_DTPF_ON);
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+        if (side == aFacing) {
+            if (aActive) return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_DTPF_ON)
+                    .extFacing()
+                    .build() };
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(Textures.BlockIcons.OVERLAY_DTPF_OFF)
+                    .extFacing()
+                    .build() };
+        }
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
     @Override
-    public ITexture[] getTexture(final IGregTechTileEntity aBaseMetaTileEntity, final ForgeDirection side,
-        final ForgeDirection facing, final int aColorIndex, final boolean aActive, final boolean aRedstone) {
-        if (side == facing) {
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX),
-                aActive ? LCgetFrontOverlayActive() : LCgetFrontOverlay() };
-        }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX) };
+    public int getCasingTextureID() {
+        return CASING_INDEX;
     }
 
     @Override

@@ -97,6 +97,11 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     }
 
     @Override
+    public float getSpeedBonus() {
+        return 1;
+    }
+
+    @Override
     public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
         int z) {
         super.getWailaNBTData(player, tile, tag, world, x, y, z);
@@ -120,6 +125,11 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     }
 
     @Override
+    protected boolean isEnablePerfectOverclock() {
+        return true;
+    }
+
+    @Override
     protected ProcessingLogic createProcessingLogic() {
         return new GTNLProcessingLogic() {
 
@@ -129,9 +139,7 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
 
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(
-                    isEnablePerfectOverclock() ? OverclockType.PerfectOverclock : OverclockType.NormalOverclock);
-
+                setOverclockType(OverclockType.PerfectOverclock);
                 return super.process();
             }
 
@@ -140,7 +148,7 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
                     : super.createOverclockCalculator(recipe).setEUtDiscount(0.4 - (ParallelTier / 50.0))
-                        .setSpeedBoost(0.4 - (ParallelTier / 200.0));
+                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
@@ -155,7 +163,7 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         } else {
             logic.setAvailableVoltage(getAverageInputVoltage());
             logic.setAvailableAmperage(getMaxInputAmps());
-            logic.setAmperageOC(mExoticEnergyHatches.size() > 0 || mEnergyHatches.size() != 1);
+            logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
         }
     }
 
@@ -280,6 +288,8 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         return result;
     }
 
+    public abstract int getCasingTextureID();
+
     protected void prepareProcessing() {}
 
     protected void setupWirelessProcessingPowerLogic(ProcessingLogic logic) {
@@ -287,6 +297,13 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         logic.setAvailableVoltage(Long.MAX_VALUE);
         logic.setAvailableAmperage(1);
         logic.setAmperageOC(false);
+    }
+
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
     }
 
     public int getExtraEUCostMultiplier() {

@@ -23,6 +23,7 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.misc.OverclockType;
 
 import bartworks.API.BorosilicateGlass;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -34,13 +35,11 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
-import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
@@ -50,7 +49,6 @@ import tectech.thing.casing.TTCasingsContainer;
 public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<NeutroniumWireCutting>
     implements IWirelessEnergyHatchInformation {
 
-    public GTRecipe lastRecipeToBuffer;
     public byte mGlassTier = 0;
     public static final int HORIZONTAL_OFF_SET = 3;
     public static final int VERTICAL_OFF_SET = 10;
@@ -70,16 +68,6 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     }
 
     @Override
-    public boolean isEnablePerfectOverclock() {
-        return false;
-    }
-
-    @Override
-    public float getSpeedBonus() {
-        return 1;
-    }
-
-    @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new NeutroniumWireCutting(this.mName);
     }
@@ -88,27 +76,34 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.NeutroniumWireCuttingRecipeType)
+            .addInfo(TextLocalization.Tooltip_NeutroniumWireCutting_00)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
+            .addInfo(
+                String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, getWirelessModeProcessingTime()))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
             .beginStructureBlock(177, 121, 177, true)
-            .addInputBus(TextLocalization.Tooltip_LapotronChip_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LapotronChip_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_LapotronChip_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_LapotronChip_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_LapotronChip_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LapotronChip_Casing, 1)
+            .addInputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
+            .addOutputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
+            .addInputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
+            .addOutputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
+            .addEnergyHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
+            .addMaintenanceHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
 
-    public void updateHatchTexture() {
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-    }
-
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(13);
     }
@@ -150,7 +145,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
                 .addElement(
                     'L',
                     buildHatchAdder(NeutroniumWireCutting.class)
-                        .atLeast(InputBus, OutputBus, InputHatch, Energy, Energy.or(ExoticEnergy))
+                        .atLeast(InputBus, OutputBus, InputHatch, Energy.or(ExoticEnergy))
                         .casingIndex(((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings9, 12))))
@@ -202,7 +197,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
         tCountCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing <= 100 && !checkHatches()) {
+        if (tCountCasing <= 900 && !checkHatches()) {
             updateHatchTexture();
             return false;
         }
@@ -211,43 +206,38 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     }
 
     @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new GTNLProcessingLogic() {
+
+            @NotNull
+            @Override
+            public CheckRecipeResult process() {
+
+                setEuModifier(getEuModifier());
+                setSpeedBonus(getSpeedBonus());
+                setOverclockType(OverclockType.PerfectOverclock);
+                return super.process();
+            }
+
+            @Nonnull
+            @Override
+            protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
+                return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
+                    : super.createOverclockCalculator(recipe)
+                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
+                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
+            }
+        }.setMaxParallelSupplier(this::getLimitedMaxParallel);
+    }
+
+    @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeMaps.cutterRecipes;
     }
 
     @Override
-    public ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
-
-            @Nonnull
-            @Override
-            public OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                if (wirelessMode) {
-                    return OverclockCalculator.ofNoOverclock(recipe);
-                } else {
-                    return super.createOverclockCalculator(recipe);
-                }
-            }
-
-            @NotNull
-            @Override
-            public CheckRecipeResult process() {
-                setEuModifier(0.6);
-                setSpeedBonus(0.4);
-                return super.process();
-            }
-
-        }.setMaxParallelSupplier(this::getLimitedMaxParallel);
-    }
-
-    @Override
     public int getWirelessModeProcessingTime() {
         return 128;
-    }
-
-    @Override
-    public int getMaxParallelRecipes() {
-        return ((mGlassTier * 64 + GTUtility.getTier(this.getMaxInputVoltage())) ^ 4);
     }
 
     @Override
@@ -260,22 +250,6 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         mGlassTier = aNBT.getByte("mGlassTier");
-    }
-
-    @Override
-    public String[] getInfoData() {
-        final String running = (this.mMaxProgresstime > 0 ? "Machine running" : "Machine stopped");
-        final String maintenance = (this.getIdealStatus() == this.getRepairStatus() ? "No Maintenance issues"
-            : "Needs Maintenance");
-        String tSpecialText;
-
-        if (lastRecipeToBuffer != null && lastRecipeToBuffer.mOutputs[0].getDisplayName() != null) {
-            tSpecialText = "Currently processing: " + lastRecipeToBuffer.mOutputs[0].getDisplayName();
-        } else {
-            tSpecialText = "Currently processing: Nothing";
-        }
-
-        return new String[] { "Industrial Cutting Factory", running, maintenance, tSpecialText };
     }
 
 }
