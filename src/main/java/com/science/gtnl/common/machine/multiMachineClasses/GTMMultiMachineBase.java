@@ -2,6 +2,11 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static gregtech.api.util.GTUtility.validMTEList;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
@@ -168,6 +173,26 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
         ItemStack controllerItem = getControllerSlot();
         this.ParallelTier = getParallelTier(controllerItem);
         return super.checkProcessing();
+    }
+
+    @Override
+    public long getMaxInputAmps() {
+        return getMaxInputAmpsHatch(getExoticAndNormalEnergyHatchList());
+    }
+
+    public static long getMaxInputAmpsHatch(Collection<? extends MTEHatch> hatches) {
+        List<Long> ampsList = new ArrayList<>();
+        for (MTEHatch tHatch : validMTEList(hatches)) {
+            long currentAmp = tHatch.getBaseMetaTileEntity()
+                .getInputAmperage();
+            ampsList.add(currentAmp);
+        }
+
+        if (ampsList.isEmpty()) {
+            return 0L;
+        }
+
+        return Collections.max(ampsList);
     }
 
 }

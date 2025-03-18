@@ -6,8 +6,7 @@ import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.api.util.GTUtility.validMTEList;
 
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.*;
 
 import javax.annotation.Nonnull;
 
@@ -404,5 +403,25 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     @Override
     protected SoundResource getActivitySoundLoop() {
         return SoundResource.GT_MACHINES_ADV_FREEZER_LOOP;
+    }
+
+    @Override
+    public long getMaxInputAmps() {
+        return getMaxInputAmpsHatch(getExoticAndNormalEnergyHatchList());
+    }
+
+    public static long getMaxInputAmpsHatch(Collection<? extends MTEHatch> hatches) {
+        List<Long> ampsList = new ArrayList<>();
+        for (MTEHatch tHatch : validMTEList(hatches)) {
+            long currentAmp = tHatch.getBaseMetaTileEntity()
+                .getInputAmperage();
+            ampsList.add(currentAmp);
+        }
+
+        if (ampsList.isEmpty()) {
+            return 0L;
+        }
+
+        return Collections.max(ampsList);
     }
 }
