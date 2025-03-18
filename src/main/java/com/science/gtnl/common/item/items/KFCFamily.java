@@ -22,6 +22,7 @@ public class KFCFamily extends ItemFood {
         this.setUnlocalizedName("KFCFamily");
         this.setTextureName("sciencenotleisure:KFCFamily");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
+        this.setAlwaysEdible();
         GTNLItemList.KFCFamily.set(new ItemStack(this, 1));
     }
 
@@ -29,7 +30,7 @@ public class KFCFamily extends ItemFood {
     protected void onFoodEaten(ItemStack stack, World world, EntityPlayer player) {
         super.onFoodEaten(stack, world, player);
         if (!world.isRemote) {
-            player.addPotionEffect(new PotionEffect(187, 12000, 1));
+            player.addPotionEffect(new PotionEffect(187, 86400 * 20, 1));
         }
     }
 
