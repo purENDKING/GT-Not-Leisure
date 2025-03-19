@@ -46,6 +46,7 @@ public class TwilightSword extends ItemSword {
         VOID
     }
 
+    private Map<UUID, Integer> cooldownMap = new HashMap<>();
     private DamageType currentDamageType = DamageType.PHYSICAL;
     private int attackCount = 0;
     private Map<UUID, Long> rightClickTimes = new HashMap<>();
@@ -61,7 +62,6 @@ public class TwilightSword extends ItemSword {
         this.setMaxStackSize(1);
     }
 
-    // 右键开始使用物品
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
@@ -76,42 +76,62 @@ public class TwilightSword extends ItemSword {
         }
     }
 
-    // 攻击处理核心逻辑
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
+        super.onUpdate(stack, world, entity, slot, isSelected);
+
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
+            UUID playerId = player.getUniqueID();
+
+            int cooldown = cooldownMap.getOrDefault(playerId, 0);
+            if (cooldown > 0) {
+                cooldownMap.put(playerId, cooldown - 1);
+            }
+
+            if (player.getCurrentEquippedItem() == stack && player.swingProgress == 0.5F
+                && !world.isRemote
+                && cooldown <= 0) {
+                playSoundIfReady(world, player);
+            }
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void playSoundIfReady(World world, EntityPlayer player) {
+        UUID playerId = player.getUniqueID();
+        world.playSoundAtEntity(player, "sciencenotleisure:twilight.sword.attack", 1, 1);
+        cooldownMap.put(playerId, 50);
+    }
+
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        // 切换伤害类型
         currentDamageType = DamageType.values()[attackCount++ % 4];
 
-        // 强制暴击
         float baseDamage = TWILIGHT_MATERIALS[0].getDamageVsEntity() * (attacker.getHealth() < 10 ? 2 : 1);
-        float finalDamage = baseDamage * 1.5f; // 暴击加成
+        float finalDamage = baseDamage * 1.5f;
 
-        // 应用无视无敌帧的伤害
         applyBypassInvulnerabilityDamage(target, finalDamage, currentDamageType);
 
-        // 添加随机负面效果
         addRandomEffect(target);
         return true;
     }
 
     private void applyBypassInvulnerabilityDamage(EntityLivingBase target, float damage, DamageType type) {
         if (target instanceof EntityPlayer && ((EntityPlayer) target).capabilities.isCreativeMode) {
-            // 创造模式玩家不受伤害
             return;
         }
 
-        // 直接修改实体的生命值，绕过无敌帧
         float newHealth = target.getHealth() - damage;
         if (newHealth <= 0) {
             target.setHealth(0);
-            target.onDeath(DamageSourceTwilight.getDamageSource(type)); // 使用自定义伤害来源
+            target.onDeath(DamageSourceTwilight.getDamageSource(type));
         } else {
             target.setHealth(newHealth);
         }
 
-        // 触发伤害效果（如击退、音效等）
-        target.hurtResistantTime = 0; // 重置无敌帧
-        target.attackEntityFrom(DamageSourceTwilight.getDamageSource(type), 0.0F); // 触发伤害事件但不应用伤害
+        target.hurtResistantTime = 0;
+        target.attackEntityFrom(DamageSourceTwilight.getDamageSource(type), 0.0F);
     }
 
     public static class DamageSourceTwilight extends DamageSource {
@@ -131,7 +151,6 @@ public class TwilightSword extends ItemSword {
             return true;
         }
 
-        // 新增方法：根据伤害类型获取对应的 DamageSource
         public static DamageSource getDamageSource(DamageType type) {
             switch (type) {
                 case EXPLOSIVE:
@@ -148,7 +167,6 @@ public class TwilightSword extends ItemSword {
         }
     }
 
-    // 玩家状态更新
     @SubscribeEvent
     public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event) {
         if (event.entityLiving instanceof EntityPlayer) {
@@ -174,7 +192,6 @@ public class TwilightSword extends ItemSword {
 
     private void reflectProjectile(Entity projectile) {
         if (projectile instanceof IProjectile && !projectile.isDead) {
-            // 反转运动方向并重置存活时间
             projectile.motionX *= -1.5;
             projectile.motionY *= -0.5;
             projectile.motionZ *= -1.5;
@@ -184,7 +201,6 @@ public class TwilightSword extends ItemSword {
         }
     }
 
-    // 辅助方法
     private boolean isHoldingSword(EntityPlayer player) {
         return player.getHeldItem() != null && player.getHeldItem()
             .getItem() instanceof TwilightSword;
@@ -210,11 +226,12 @@ public class TwilightSword extends ItemSword {
 
     private void applyBuffs(EntityPlayer player) {
         int duration = 1200;
-        player.addPotionEffect(new PotionEffect(Potion.resistance.id, duration, 3));
-        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, duration, 3));
-        player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, duration, 3));
-        player.addPotionEffect(new PotionEffect(Potion.regeneration.id, duration, 3));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 3));
+        player.addPotionEffect(new PotionEffect(Potion.resistance.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.regeneration.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, duration, 10));
         player.addPotionEffect(new PotionEffect(Potion.jump.id, duration, 1));
         player.clearActivePotions();
     }
@@ -231,7 +248,7 @@ public class TwilightSword extends ItemSword {
 
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return 720000; // 最长使用时间
+        return 720000;
     }
 
     @Override

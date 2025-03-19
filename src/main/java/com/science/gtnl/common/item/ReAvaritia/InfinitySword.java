@@ -133,7 +133,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
                 player.getFoodStats()
                     .addStats(20, 20.0F);
 
-                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 200, 255));
+                player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1200, 255));
                 if (player.posY < 0) {
                     player.setPositionAndUpdate(player.posX, 255, player.posZ);
                 }

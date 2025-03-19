@@ -1,4 +1,13 @@
 {
+  "twilight.sword.attack": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "twilight.sword.attack",
+        "stream": false
+      }
+    ]
+  },
   "totem.enable": {
     "category": "player",
     "sounds": [
