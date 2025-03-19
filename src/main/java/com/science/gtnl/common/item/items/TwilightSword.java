@@ -9,14 +9,19 @@ import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -46,10 +51,9 @@ public class TwilightSword extends ItemSword {
         VOID
     }
 
-    private Map<UUID, Integer> cooldownMap = new HashMap<>();
-    private DamageType currentDamageType = DamageType.PHYSICAL;
+    private final Map<UUID, Integer> cooldownMap = new HashMap<>();
     private int attackCount = 0;
-    private Map<UUID, Long> rightClickTimes = new HashMap<>();
+    private final Map<UUID, Long> rightClickTimes = new HashMap<>();
 
     public TwilightSword() {
         super(TWILIGHT_MATERIALS[0]);
@@ -80,8 +84,7 @@ public class TwilightSword extends ItemSword {
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
         super.onUpdate(stack, world, entity, slot, isSelected);
 
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
+        if (entity instanceof EntityPlayer player) {
             UUID playerId = player.getUniqueID();
 
             int cooldown = cooldownMap.getOrDefault(playerId, 0);
@@ -92,6 +95,21 @@ public class TwilightSword extends ItemSword {
             if (player.getCurrentEquippedItem() == stack && player.swingProgress == 0.5F
                 && !world.isRemote
                 && cooldown <= 0) {
+                MovingObjectPosition rayTraceResult = rayTrace(player, false, true);
+
+                if (rayTraceResult != null && rayTraceResult.entityHit != null) {
+                    Entity hitEntity = rayTraceResult.entityHit;
+
+                    EntityLivingBase target = (EntityLivingBase) hitEntity;
+
+                    target.attackEntityFrom(
+                        DamageSource.causePlayerDamage(player),
+                        TWILIGHT_MATERIALS[0].getDamageVsEntity());
+
+                    hitEntity(stack, target, player);
+
+                }
+
                 playSoundIfReady(world, player);
             }
         }
@@ -106,7 +124,7 @@ public class TwilightSword extends ItemSword {
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        currentDamageType = DamageType.values()[attackCount++ % 4];
+        DamageType currentDamageType = DamageType.values()[attackCount++ % 4];
 
         float baseDamage = TWILIGHT_MATERIALS[0].getDamageVsEntity() * (attacker.getHealth() < 10 ? 2 : 1);
         float finalDamage = baseDamage * 1.5f;
@@ -152,25 +170,18 @@ public class TwilightSword extends ItemSword {
         }
 
         public static DamageSource getDamageSource(DamageType type) {
-            switch (type) {
-                case EXPLOSIVE:
-                    return EXPLOSIVE;
-                case MAGIC:
-                    return MAGIC;
-                case PHYSICAL:
-                    return PHYSICAL;
-                case VOID:
-                    return VOID;
-                default:
-                    return PHYSICAL;
-            }
+            return switch (type) {
+                case EXPLOSIVE -> EXPLOSIVE;
+                case MAGIC -> MAGIC;
+                case VOID -> VOID;
+                default -> PHYSICAL;
+            };
         }
     }
 
     @SubscribeEvent
     public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entityLiving;
+        if (event.entityLiving instanceof EntityPlayer player) {
             if (isHoldingSword(player)) {
                 applyBuffs(player);
                 clearProjectiles(player);
@@ -178,11 +189,9 @@ public class TwilightSword extends ItemSword {
         }
     }
 
-    // 弹射物免疫处理
     @SubscribeEvent
     public void onProjectileHit(LivingAttackEvent event) {
-        if (event.entityLiving instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entityLiving;
+        if (event.entityLiving instanceof EntityPlayer player) {
             if (isHoldingSword(player) && event.source.isProjectile()) {
                 event.setCanceled(true);
                 reflectProjectile(event.source.getEntity());
@@ -266,5 +275,84 @@ public class TwilightSword extends ItemSword {
         toolTip.add(StatCollector.translateToLocal("Tooltip_TwilightSword_08"));
         toolTip.add(StatCollector.translateToLocal("Tooltip_TwilightSword_09"));
         toolTip.add(StatCollector.translateToLocal("Tooltip_TwilightSword_10"));
+    }
+
+    public static MovingObjectPosition rayTrace(final EntityPlayer p, final boolean hitBlocks,
+        final boolean hitEntities) {
+        final World w = p.getEntityWorld();
+
+        final float f = 1.0F;
+        float f1 = p.prevRotationPitch + (p.rotationPitch - p.prevRotationPitch) * f;
+        final float f2 = p.prevRotationYaw + (p.rotationYaw - p.prevRotationYaw) * f;
+        final double d0 = p.prevPosX + (p.posX - p.prevPosX) * f;
+        final double d1 = p.prevPosY + (p.posY - p.prevPosY) * f + 1.62D - p.yOffset;
+        final double d2 = p.prevPosZ + (p.posZ - p.prevPosZ) * f;
+        final Vec3 vec3 = Vec3.createVectorHelper(d0, d1, d2);
+        final float f3 = MathHelper.cos(-f2 * 0.017453292F - (float) Math.PI);
+        final float f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
+        final float f5 = -MathHelper.cos(-f1 * 0.017453292F);
+        final float f6 = MathHelper.sin(-f1 * 0.017453292F);
+        final float f7 = f4 * f5;
+        final float f8 = f3 * f5;
+        final double d3 = 100.0D;
+
+        final Vec3 vec31 = vec3.addVector(f7 * d3, f6 * d3, f8 * d3);
+
+        final AxisAlignedBB bb = AxisAlignedBB
+            .getBoundingBox(
+                Math.min(vec3.xCoord, vec31.xCoord),
+                Math.min(vec3.yCoord, vec31.yCoord),
+                Math.min(vec3.zCoord, vec31.zCoord),
+                Math.max(vec3.xCoord, vec31.xCoord),
+                Math.max(vec3.yCoord, vec31.yCoord),
+                Math.max(vec3.zCoord, vec31.zCoord))
+            .expand(16, 16, 16);
+
+        Entity entity = null;
+        double closest = 9999999.0D;
+        if (hitEntities) {
+            final List list = w.getEntitiesWithinAABBExcludingEntity(p, bb);
+
+            for (Object o : list) {
+                final Entity entity1 = (Entity) o;
+
+                if (!entity1.isDead && entity1 != p && !(entity1 instanceof EntityItem)) {
+                    if (entity1.isEntityAlive()) {
+                        if (entity1.riddenByEntity == p) {
+                            continue;
+                        }
+
+                        f1 = 0.3F;
+                        final AxisAlignedBB boundingBox = entity1.boundingBox.expand(f1, f1, f1);
+                        final MovingObjectPosition movingObjectPosition = boundingBox.calculateIntercept(vec3, vec31);
+
+                        if (movingObjectPosition != null) {
+                            final double nd = vec3.squareDistanceTo(movingObjectPosition.hitVec);
+
+                            if (nd < closest) {
+                                entity = entity1;
+                                closest = nd;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        MovingObjectPosition pos = null;
+        Vec3 vec = null;
+
+        if (hitBlocks) {
+            vec = Vec3.createVectorHelper(d0, d1, d2);
+            pos = w.rayTraceBlocks(vec3, vec31, true);
+        }
+
+        if (entity != null && pos != null && pos.hitVec.squareDistanceTo(vec) > closest) {
+            pos = new MovingObjectPosition(entity);
+        } else if (entity != null && pos == null) {
+            pos = new MovingObjectPosition(entity);
+        }
+
+        return pos;
     }
 }

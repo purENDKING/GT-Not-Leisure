@@ -29,12 +29,12 @@ public class EntityArrowCustom extends EntityArrow {
         if (player == null) return;
 
         AxisAlignedBB area = AxisAlignedBB.getBoundingBox(
-            player.posX - 20,
-            player.posY - 20,
-            player.posZ - 20,
-            player.posX + 20,
-            player.posY + 20,
-            player.posZ + 20);
+            player.posX - 50,
+            player.posY - 50,
+            player.posZ - 50,
+            player.posX + 50,
+            player.posY + 50,
+            player.posZ + 50);
 
         List<Entity> targets = world.getEntitiesWithinAABBExcludingEntity(player, area);
 
