@@ -18,6 +18,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -55,6 +56,7 @@ public class TwilightSword extends ItemSword {
         this.setTextureName("sciencenotleisure:TwilightSword");
         setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         setMaxDamage(9999);
+        MinecraftForge.EVENT_BUS.register(this);
         GTNLItemList.TwilightSword.set(new ItemStack(this, 1));
         this.setMaxStackSize(1);
     }
@@ -84,39 +86,34 @@ public class TwilightSword extends ItemSword {
         float baseDamage = TWILIGHT_MATERIALS[0].getDamageVsEntity() * (attacker.getHealth() < 10 ? 2 : 1);
         float finalDamage = baseDamage * 1.5f; // 暴击加成
 
-        // 应用无视创造的伤害
-        applyCreativeBypassDamage(target, finalDamage, currentDamageType);
+        // 应用无视无敌帧的伤害
+        applyBypassInvulnerabilityDamage(target, finalDamage, currentDamageType);
 
         // 添加随机负面效果
         addRandomEffect(target);
         return true;
     }
 
-    // 自定义伤害应用方法
-    private void applyCreativeBypassDamage(EntityLivingBase target, float damage, DamageType type) {
+    private void applyBypassInvulnerabilityDamage(EntityLivingBase target, float damage, DamageType type) {
         if (target instanceof EntityPlayer && ((EntityPlayer) target).capabilities.isCreativeMode) {
-            // 强制设置生命值
-            target.setHealth(target.getHealth() - damage);
-        } else {
-            // 根据类型应用不同伤害来源
-            switch (type) {
-                case EXPLOSIVE:
-                    target.attackEntityFrom(DamageSourceTwilight.EXPLOSIVE, damage);
-                    break;
-                case MAGIC:
-                    target.attackEntityFrom(DamageSourceTwilight.MAGIC, damage);
-                    break;
-                case PHYSICAL:
-                    target.attackEntityFrom(DamageSourceTwilight.PHYSICAL, damage);
-                    break;
-                case VOID:
-                    target.attackEntityFrom(DamageSourceTwilight.VOID, damage);
-                    break;
-            }
+            // 创造模式玩家不受伤害
+            return;
         }
+
+        // 直接修改实体的生命值，绕过无敌帧
+        float newHealth = target.getHealth() - damage;
+        if (newHealth <= 0) {
+            target.setHealth(0);
+            target.onDeath(DamageSourceTwilight.getDamageSource(type)); // 使用自定义伤害来源
+        } else {
+            target.setHealth(newHealth);
+        }
+
+        // 触发伤害效果（如击退、音效等）
+        target.hurtResistantTime = 0; // 重置无敌帧
+        target.attackEntityFrom(DamageSourceTwilight.getDamageSource(type), 0.0F); // 触发伤害事件但不应用伤害
     }
 
-    // 自定义伤害来源
     public static class DamageSourceTwilight extends DamageSource {
 
         public static final DamageSource EXPLOSIVE = new DamageSourceTwilight("twilight_explosive").setExplosion();
@@ -132,6 +129,22 @@ public class TwilightSword extends ItemSword {
         @Override
         public boolean isUnblockable() {
             return true;
+        }
+
+        // 新增方法：根据伤害类型获取对应的 DamageSource
+        public static DamageSource getDamageSource(DamageType type) {
+            switch (type) {
+                case EXPLOSIVE:
+                    return EXPLOSIVE;
+                case MAGIC:
+                    return MAGIC;
+                case PHYSICAL:
+                    return PHYSICAL;
+                case VOID:
+                    return VOID;
+                default:
+                    return PHYSICAL;
+            }
         }
     }
 
@@ -181,27 +194,27 @@ public class TwilightSword extends ItemSword {
         int effect = new Random().nextInt(4);
         switch (effect) {
             case 0:
-                target.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 0));
+                target.addPotionEffect(new PotionEffect(Potion.blindness.id, 100, 5));
                 break;
             case 1:
-                target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 0));
+                target.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 5));
                 break;
             case 2:
-                target.addPotionEffect(new PotionEffect(Potion.wither.id, 100, 0));
+                target.addPotionEffect(new PotionEffect(Potion.wither.id, 100, 5));
                 break;
             case 3:
-                target.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 0));
+                target.addPotionEffect(new PotionEffect(Potion.weakness.id, 100, 5));
                 break;
         }
     }
 
     private void applyBuffs(EntityPlayer player) {
-        int duration = 20;
+        int duration = 1200;
         player.addPotionEffect(new PotionEffect(Potion.resistance.id, duration, 3));
         player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, duration, 3));
         player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, duration, 3));
         player.addPotionEffect(new PotionEffect(Potion.regeneration.id, duration, 3));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 0));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 3));
         player.addPotionEffect(new PotionEffect(Potion.jump.id, duration, 1));
         player.clearActivePotions();
     }
