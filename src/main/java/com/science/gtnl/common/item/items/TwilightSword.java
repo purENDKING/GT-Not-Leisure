@@ -9,6 +9,8 @@ import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -100,16 +102,23 @@ public class TwilightSword extends ItemSword {
                 if (rayTraceResult != null && rayTraceResult.entityHit != null) {
                     Entity hitEntity = rayTraceResult.entityHit;
 
-                    EntityLivingBase target = (EntityLivingBase) hitEntity;
-
-                    target.attackEntityFrom(
-                        DamageSource.causePlayerDamage(player),
-                        TWILIGHT_MATERIALS[0].getDamageVsEntity());
-
-                    hitEntity(stack, target, player);
-
+                    if (hitEntity instanceof EntityLivingBase) {
+                        // 处理普通生物
+                        EntityLivingBase target = (EntityLivingBase) hitEntity;
+                        target.attackEntityFrom(
+                            DamageSource.causePlayerDamage(player),
+                            TWILIGHT_MATERIALS[0].getDamageVsEntity());
+                        hitEntity(stack, target, player);
+                    } else if (hitEntity instanceof EntityDragonPart) {
+                        // 处理末影龙的部分
+                        EntityDragonPart dragonPart = (EntityDragonPart) hitEntity;
+                        EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj; // 获取末影龙本体
+                        dragon.attackEntityFrom(
+                            DamageSource.causePlayerDamage(player),
+                            TWILIGHT_MATERIALS[0].getDamageVsEntity());
+                        hitEntity(stack, dragon, player); // 将伤害传递给末影龙本体
+                    }
                 }
-
                 playSoundIfReady(world, player);
             }
         }

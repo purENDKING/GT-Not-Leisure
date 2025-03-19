@@ -35,7 +35,7 @@ public class SatietyRing extends Item implements IBauble {
     @Override
     public void onWornTick(ItemStack itemstack, EntityLivingBase player) {
         player.addPotionEffect(new PotionEffect(Potion.field_76443_y.id, 200, 255));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 200, 255));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1200, 255));
 
         if (player instanceof EntityPlayer entityPlayer) {
             entityPlayer.getFoodStats()
