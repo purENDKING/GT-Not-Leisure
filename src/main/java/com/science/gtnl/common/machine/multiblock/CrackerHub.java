@@ -194,7 +194,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
             return false;
         }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        return true;
+        return mMufflerHatches.size() == 16;
     }
 
     @Override

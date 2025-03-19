@@ -92,7 +92,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(177, 121, 177, true)
+            .beginStructureBlock(31, 14, 15, true)
             .addInputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addOutputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addInputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
