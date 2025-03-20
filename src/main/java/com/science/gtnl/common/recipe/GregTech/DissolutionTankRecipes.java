@@ -20,11 +20,11 @@ public class DissolutionTankRecipes implements IRecipePool {
     public void loadRecipes() {
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 1),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 3))
-            .fluidInputs(Materials.NitricAcid.getFluid(100), Materials.Water.getFluid(900))
-            .fluidOutputs(MaterialPool.RareEarthHydroxides.getFluidOrGas(1000))
-            .metadata(DISSOLUTION_TANK_RATIO, 1)
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 30))
+            .fluidInputs(Materials.Water.getFluid(9000), Materials.NitricAcid.getFluid(1000))
+            .fluidOutputs(MaterialPool.RareEarthHydroxides.getFluidOrGas(10000))
+            .metadata(DISSOLUTION_TANK_RATIO, 9)
             .specialValue(0)
             .noOptimize()
             .duration(50)
