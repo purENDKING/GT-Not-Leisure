@@ -38,7 +38,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TwilightSword extends ItemSword {
+public class TwilightSword extends ItemSword implements playSound {
 
     public static final Item.ToolMaterial[] TWILIGHT_MATERIALS = {
         EnumHelper.addToolMaterial("TWILIGHT_EXPLOSIVE", 3, 9999, 14.0F, 30.0F, 30),
@@ -125,7 +125,8 @@ public class TwilightSword extends ItemSword {
     }
 
     @SideOnly(Side.CLIENT)
-    private void playSoundIfReady(World world, EntityPlayer player) {
+    @Override
+    public void playSoundIfReady(World world, EntityPlayer player) {
         UUID playerId = player.getUniqueID();
         world.playSoundAtEntity(player, "sciencenotleisure:twilight.sword.attack", 1, 1);
         cooldownMap.put(playerId, 50);
