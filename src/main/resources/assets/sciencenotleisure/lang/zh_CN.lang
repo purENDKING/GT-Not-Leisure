@@ -266,8 +266,12 @@ Tooltip_PlayerDoll_01=确认
 Tooltip_PlayerDoll_02=设置在线皮肤链接
 Tooltip_PlayerDoll_03=切换鞘翅渲染，0为false，1为true
 Tooltip_PlayerDoll_04=设置在线披风链接
-Waila_TileEntityPlayerDoll_00=当前玩偶在线皮肤链接: 
-Waila_TileEntityPlayerDoll_01=当前玩偶正版玩家名: 
+Waila_TileEntityPlayerDoll_00=正版玩家名: 
+Waila_TileEntityPlayerDoll_01=在线皮肤链接: 
+Waila_TileEntityPlayerDoll_02=在线披风链接: 
+Waila_TileEntityPlayerDoll_03=鞘翅渲染: 
+Waila_TileEntityPlayerDoll_03_On=开
+Waila_TileEntityPlayerDoll_03_Off=关
 
 tile.NeutronCollector.name=§b中子态素收集器
 tile.DenseNeutronCollector.name=§d致密中子态素收集器

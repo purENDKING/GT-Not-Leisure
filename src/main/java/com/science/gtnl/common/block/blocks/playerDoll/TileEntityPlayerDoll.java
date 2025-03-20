@@ -1,34 +1,23 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
-import java.util.List;
-
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringUtils;
-import net.minecraft.world.World;
 
 import com.google.common.collect.Iterables;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataProvider;
+public class TileEntityPlayerDoll extends TileEntity {
 
-public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvider {
-
-    private GameProfile skullOwner;
-    private String skinHttp;
-    private String capeHttp;
-    private boolean enableElytra;
+    public GameProfile skullOwner;
+    public String skinHttp;
+    public String capeHttp;
+    public boolean enableElytra;
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
@@ -169,80 +158,5 @@ public class TileEntityPlayerDoll extends TileEntity implements IWailaDataProvid
                 }
             }
         }
-    }
-
-    // === Waila compat ===
-
-    @Override
-    public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return null; // 默认返回 null，使用 WAILA 的默认行为
-    }
-
-    @Override
-    public List<String> getWailaHead(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
-        return currentTip; // 默认不修改头部信息
-    }
-
-    @Override
-    public List<String> getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
-        final NBTTagCompound nbt = accessor.getNBTData();
-
-        // 根据配置显示 Skull Owner
-        if (nbt.hasKey("SkullOwner", 10)) {
-            currentTip.add(
-                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
-                    + EnumChatFormatting.GOLD
-                    + NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner")));
-        } else if (nbt.hasKey("SkullOwner", 8)) {
-            currentTip.add(
-                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
-                    + EnumChatFormatting.GOLD
-                    + nbt.getString("SkullOwner"));
-        }
-
-        // 根据配置显示 Skin URL
-        if (nbt.hasKey("SkinHttp", 8)) {
-            currentTip.add(
-                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
-                    + EnumChatFormatting.GOLD
-                    + nbt.getString("SkinHttp"));
-        }
-
-        // 根据配置显示 Cape URL
-        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 显示
-            currentTip.add(
-                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_02")
-                    + EnumChatFormatting.GOLD
-                    + nbt.getString("CapeHttp"));
-        }
-
-        return currentTip;
-    }
-
-    @Override
-    public List<String> getWailaTail(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
-        return currentTip; // 默认不修改尾部信息
-    }
-
-    @Override
-    public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x,
-        int y, int z) {
-        // 将 TileEntity 数据写入 NBT
-        if (this.skullOwner != null) {
-            NBTTagCompound ownerTag = new NBTTagCompound();
-            NBTUtil.func_152460_a(ownerTag, this.skullOwner);
-            tag.setTag("SkullOwner", ownerTag);
-        }
-
-        if (this.skinHttp != null) {
-            tag.setString("SkinHttp", this.skinHttp);
-        }
-        if (this.capeHttp != null) { // 新增 CapeHttp 写入
-            tag.setString("CapeHttp", this.capeHttp);
-        }
-        return tag;
     }
 }
