@@ -22,17 +22,18 @@ import com.science.gtnl.common.GTNLItemList;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.interfaces.tileentity.IGregtechWailaProvider;
 
-public class BlockPlayerDoll extends BlockContainer implements IGregtechWailaProvider {
+public class BlockPlayerDoll extends BlockContainer {
 
     public BlockPlayerDoll() {
         super(Material.iron);
-        this.setResistance(5f);
+        this.setResistance(99999999f);
         this.setHardness(5f);
         this.setBlockName("playerDoll");
         this.setBlockBounds(0.1F, 0.0F, 0.1F, 0.9F, 1.0F, 0.9F);
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureBlock);
+        this.setLightLevel(1f);
+        this.setStepSound(soundTypeGlass);
         GameRegistry.registerBlock(this, ItemBlockPlayerDoll.class, getUnlocalizedName());
         GTNLItemList.PlayerDoll.set(new ItemStack(this, 1));
     }

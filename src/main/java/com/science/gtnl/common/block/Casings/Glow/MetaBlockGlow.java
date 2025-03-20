@@ -31,7 +31,7 @@ public class MetaBlockGlow extends Block {
 
     public MetaBlockGlow() {
         this(Material.iron);
-        this.setLightLevel(150);
+        this.setLightLevel(1);
         this.setHardness(1.0F);
         this.setResistance(5.0F);
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureBlock);

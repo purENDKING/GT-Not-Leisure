@@ -36,37 +36,6 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
         IWailaConfigHandler config) {
         final NBTTagCompound tag = accessor.getNBTData();
 
-        if (tag.hasKey("SkinHttp", 8)) {
-            String skinUrl = tag.getString("SkinHttp");
-            if (!StringUtils.isNullOrEmpty(skinUrl)) {
-                currentTip.add(
-                    EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
-                        + EnumChatFormatting.GOLD
-                        + skinUrl);
-            }
-        } else {
-            if (tag.hasKey("SkullOwner", 10)) {
-                NBTTagCompound ownerTag = tag.getCompoundTag("SkullOwner");
-                GameProfile profile = NBTUtil.func_152459_a(ownerTag);
-                if (profile != null && !StringUtils.isNullOrEmpty(profile.getName())) {
-                    currentTip.add(
-                        EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
-                            + EnumChatFormatting.GOLD
-                            + profile.getName());
-                }
-            } else {
-                if (tag.hasKey("SkullOwner", 8)) {
-                    String playerName = tag.getString("SkullOwner");
-                    if (!StringUtils.isNullOrEmpty(playerName)) {
-                        currentTip.add(
-                            EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
-                                + EnumChatFormatting.GOLD
-                                + playerName);
-                    }
-                }
-            }
-        }
-
         if (tag.hasKey("CapeHttp", 8)) {
             String capeUrl = tag.getString("CapeHttp");
             if (!StringUtils.isNullOrEmpty(capeUrl)) {
@@ -86,6 +55,40 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
                     + EnumChatFormatting.GOLD
                     + elytraStatus);
         }
+
+        if (tag.hasKey("SkinHttp", 8)) {
+            String skinUrl = tag.getString("SkinHttp");
+            if (!StringUtils.isNullOrEmpty(skinUrl)) {
+                currentTip.add(
+                    EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_01")
+                        + EnumChatFormatting.GOLD
+                        + skinUrl);
+                return currentTip;
+            }
+        }
+
+        if (tag.hasKey("SkullOwner", 10)) {
+            NBTTagCompound ownerTag = tag.getCompoundTag("SkullOwner");
+            GameProfile profile = NBTUtil.func_152459_a(ownerTag);
+            if (profile != null && !StringUtils.isNullOrEmpty(profile.getName())) {
+                currentTip.add(
+                    EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
+                        + EnumChatFormatting.GOLD
+                        + profile.getName());
+                return currentTip;
+            }
+        }
+
+        if (tag.hasKey("SkullOwner", 8)) {
+            String playerName = tag.getString("SkullOwner");
+            if (!StringUtils.isNullOrEmpty(playerName)) {
+                currentTip.add(
+                    EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
+                        + EnumChatFormatting.GOLD
+                        + playerName);
+            }
+        }
+
         return currentTip;
     }
 
