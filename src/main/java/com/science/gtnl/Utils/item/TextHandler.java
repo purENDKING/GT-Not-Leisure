@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.Utils.language.LanguageUtil0;
 
 public class TextHandler {
 
@@ -56,20 +55,6 @@ public class TextHandler {
     public static String texter(String aTextLine) {
         String aKey = "Auto." + aTextLine + ".text";
         return texter(aTextLine, aKey);
-    }
-
-    /**
-     * Init LangMap.
-     *
-     * @param isInDevMode The signal of whether in development mode.
-     */
-    public static void initLangMap(Boolean isInDevMode) {
-        if (isInDevMode) {
-            /* Parse the .lang in LangMap */
-            LangMap = LanguageUtil0.parseLangFile("en_US");
-            // LangMapBackUp = new HashMap<String, String>(LangMap);
-        }
-
     }
 
     /**

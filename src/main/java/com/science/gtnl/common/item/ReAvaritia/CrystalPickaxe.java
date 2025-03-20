@@ -18,13 +18,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class CrystalPickaxe extends ItemPickaxe {
+public class CrystalPickaxe extends ItemPickaxe implements SubtitleDisplay {
 
     public static final ToolMaterial CRYSTAL = EnumHelper.addToolMaterial("CRYSTAL", 32, 8888, 9999F, 8.0F, 22);
 
@@ -83,7 +84,8 @@ public class CrystalPickaxe extends ItemPickaxe {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle(String messageKey) {
+    @Override
+    public void showSubtitle(String messageKey) {
         String localized = StatCollector.translateToLocal(messageKey);
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
 

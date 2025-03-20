@@ -27,6 +27,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -34,7 +35,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 
-public class InfinityPickaxe extends ItemPickaxe {
+public class InfinityPickaxe extends ItemPickaxe implements SubtitleDisplay {
 
     private static final ToolMaterial INFINITY = EnumHelper.addToolMaterial("INFINITY", 32, 9999, 9999F, 49.0F, 200);
     public static final Material[] MATERIALS = new Material[] { Material.rock, Material.iron, Material.ice,
@@ -139,7 +140,8 @@ public class InfinityPickaxe extends ItemPickaxe {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle(String messageKey) {
+    @Override
+    public void showSubtitle(String messageKey) {
         String localized = StatCollector.translateToLocal(messageKey);
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
         Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);

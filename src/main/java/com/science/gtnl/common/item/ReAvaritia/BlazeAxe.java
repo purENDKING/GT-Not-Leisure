@@ -29,6 +29,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.world.BlockEvent;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -36,7 +37,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlazeAxe extends ItemAxe {
+public class BlazeAxe extends ItemAxe implements SubtitleDisplay {
 
     private static final Random random = new Random();
     public static final ToolMaterial BLAZE = EnumHelper.addToolMaterial("BLAZE", 32, 7777, 9999F, 33.0F, 22);
@@ -141,7 +142,8 @@ public class BlazeAxe extends ItemAxe {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle(String messageKey) {
+    @Override
+    public void showSubtitle(String messageKey) {
         String localized = StatCollector.translateToLocal(messageKey);
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
         Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);

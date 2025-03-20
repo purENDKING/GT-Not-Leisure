@@ -39,6 +39,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import org.lwjgl.opengl.GL11;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.config.MainConfig;
@@ -55,7 +56,7 @@ import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
 
-public class InfinitySword extends ItemSword implements ICosmicRenderItem {
+public class InfinitySword extends ItemSword implements ICosmicRenderItem, SubtitleDisplay {
 
     private static final long COOLDOWN = 1000; // 1000 ms = 1 second
     private static final ToolMaterial INFINITY = EnumHelper.addToolMaterial("INFINITY", 32, 9999, 9999F, 9999F, 200);
@@ -103,7 +104,8 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle(String message) {
+    @Override
+    public void showSubtitle(String message) {
         IChatComponent text = new ChatComponentText(EnumChatFormatting.WHITE + message);
         Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
     }

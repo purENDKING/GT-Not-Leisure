@@ -29,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -42,7 +43,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
-public class InfinityTotem extends Item implements IBauble {
+public class InfinityTotem extends Item implements IBauble, SubtitleDisplay {
 
     public InfinityTotem() {
         this.setUnlocalizedName("InfinityTotem");
@@ -74,6 +75,7 @@ public class InfinityTotem extends Item implements IBauble {
     }
 
     @SideOnly(Side.CLIENT)
+    @Override
     public void showSubtitle() {
         String localized = TextLocalization.Tooltip_InfinityTotem_Enable;
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);

@@ -20,13 +20,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class CrystalSword extends ItemSword {
+public class CrystalSword extends ItemSword implements SubtitleDisplay {
 
     public CrystalSword() {
         super(EnumHelper.addToolMaterial("CRYSTAL", 3, 8888, 8.0F, 48.0F, 10));
@@ -195,7 +196,8 @@ public class CrystalSword extends ItemSword {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showSubtitle(String messageKey, long cooldown) {
+    @Override
+    public void showSubtitle(String messageKey, long cooldown) {
         String message = cooldown > 0 ? messageKey : I18n.format(messageKey);
         ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + message);
         Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
