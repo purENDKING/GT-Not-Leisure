@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.Casings.Special;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
@@ -30,9 +31,14 @@ public class CrushingWheelsEventHandler {
             int y = (int) player.posY - 1;
             int z = (int) Math.floor(player.posZ);
 
-            if (world.getBlock(x, y, z) == GTNLItemList.CrushingWheels.getBlock()) {
-                if (player.ticksExisted % DAMAGE_INTERVAL == 0) {
-                    player.attackEntityFrom(DamageSource.generic, 5.0F);
+            Block block = world.getBlock(x, y, z);
+            int meta = world.getBlockMetadata(x, y, z);
+
+            if (block == GTNLItemList.CrushingWheels.getBlock()) {
+                if (meta == 2) {
+                    if (player.ticksExisted % DAMAGE_INTERVAL == 0) {
+                        player.attackEntityFrom(DamageSource.generic, 5.0F);
+                    }
                 }
             }
         }

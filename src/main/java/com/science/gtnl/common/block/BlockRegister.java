@@ -487,7 +487,7 @@ public class BlockRegister {
         OreDictionary.registerOre("neutronUnbreak", ExtremeAnvilBlock);
         OreDictionary.registerOre("blockGlassUEV", GaiaGlass);
         OreDictionary.registerOre("blockGlassUV", TerraGlass);
-        OreDictionary.registerOre("blockGlassUV", FusionGlass);
+        OreDictionary.registerOre("blockGlassZPM", FusionGlass);
 
     }
 }
