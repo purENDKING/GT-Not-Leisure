@@ -148,7 +148,7 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
                     : super.createOverclockCalculator(recipe).setEUtDiscount(0.4 - (ParallelTier / 50.0))
-                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier));
+                        .setSpeedBoost(1.0 / 10.0 * Math.pow(0.75, ParallelTier));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }

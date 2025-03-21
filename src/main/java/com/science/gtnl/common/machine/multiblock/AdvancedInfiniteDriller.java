@@ -326,7 +326,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
         startRecipeProcessing();
 
         if (this.excessFuel > 2000 && mProgresstime != 0 && mProgresstime % 20 == 0) {
-            this.excessFuel += (int) Math.floor(this.excessFuel / 2000);
+            this.excessFuel += (int) Math.floor(this.excessFuel / 2000.0);
         }
 
         if (this.excessFuel > 10000) {
