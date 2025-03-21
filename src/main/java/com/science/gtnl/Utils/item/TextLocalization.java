@@ -854,6 +854,55 @@ public class TextLocalization {
         "Any Plascrete Block",
         "Tooltip_LargeIncubator_Casing");
 
+    public static final String NameAdvancedInfiniteDriller = texter(
+        "Advanced Infinite Driller",
+        "NameAdvancedInfiniteDriller");
+    public static final String AdvancedInfiniteDrillerRecipeType = texter(
+        "Advanced Infinite Driller",
+        "AdvancedInfiniteDrillerRecipeType");
+    public static final String Tooltip_AdvancedInfiniteDriller_00 = texter(
+        "Ruthlessly extracts every drop of the planet's blood using dimensional technology and indestructible drill bits",
+        "Tooltip_AdvancedInfiniteDriller_00");
+    public static final String Tooltip_AdvancedInfiniteDriller_01 = texter(
+        "A more advanced infinite fluid drilling machine",
+        "Tooltip_AdvancedInfiniteDriller_01");
+    public static final String Tooltip_AdvancedInfiniteDriller_02 = texter(
+        "Can extract fluids more efficiently. However, the drill requires a certain temperature to start, which can be achieved by injecting Pyrotheum",
+        "Tooltip_AdvancedInfiniteDriller_02");
+    public static final String Tooltip_AdvancedInfiniteDriller_03 = texter(
+        "Only infinite drill bits can be placed",
+        "Tooltip_AdvancedInfiniteDriller_03");
+    public static final String Tooltip_AdvancedInfiniteDriller_04 = texter(
+        "The drill generates heat based on its working temperature. Heat generation formula: (Temperature / 2000)",
+        "Tooltip_AdvancedInfiniteDriller_04");
+    public static final String Tooltip_AdvancedInfiniteDriller_05 = texter(
+        "Efficiency increases with temperature. However, if the temperature exceeds a critical value, the drill bit will melt",
+        "Tooltip_AdvancedInfiniteDriller_05");
+    public static final String Tooltip_AdvancedInfiniteDriller_06 = texter(
+        "Different fluids can be injected to cool down the drill. Available coolants are listed below. Cooling consumes 200B / 5t",
+        "Tooltip_AdvancedInfiniteDriller_06");
+    public static final String Tooltip_AdvancedInfiniteDriller_07 = texter(
+        "Distilled Water: 1K",
+        "Tooltip_AdvancedInfiniteDriller_07");
+    public static final String Tooltip_AdvancedInfiniteDriller_08 = texter(
+        "Liquid Oxygen: 2K",
+        "Tooltip_AdvancedInfiniteDriller_08");
+    public static final String Tooltip_AdvancedInfiniteDriller_09 = texter(
+        "Liquid Helium: 4K",
+        "Tooltip_AdvancedInfiniteDriller_09");
+    public static final String Tooltip_AdvancedInfiniteDriller_10 = texter(
+        "Pyrotheum consumption formula: (Current Temperature ^ 1.3)",
+        "Tooltip_AdvancedInfiniteDriller_10");
+    public static final String Tooltip_AdvancedInfiniteDriller_11 = texter(
+        "Place the corresponding dimensional marker cubes to extract fluids, supports multiple!",
+        "Tooltip_AdvancedInfiniteDriller_11");
+    public static final String Tooltip_AdvancedInfiniteDriller_Casing = texter(
+        "Any Radiant Naquadah Alloy Casing",
+        "Tooltip_AdvancedInfiniteDriller_Casing");
+    public static final String Info_AdvancedInfiniteDriller_00 = texter(
+        "Current Temperature: ",
+        "Info_AdvancedInfiniteDriller_00");
+
     public static final String NameVacuumFreezer = texter("Vacuum Freezer", "NameVacuumFreezer");
     public static final String VacuumFreezerRecipeType = texter("Vacuum Freezer", "VacuumFreezerRecipeType");
     public static final String Tooltip_VacuumFreezer_00 = texter(

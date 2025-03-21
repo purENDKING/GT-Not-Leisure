@@ -309,6 +309,7 @@ public enum GTNLItemList {
     LargeBoilerTungstenSteel,
     LargeSteamMixer,
 
+    AdvancedInfiniteDriller,
     CrackerHub,
     LargeSteamFormingPress,
     LargeSteamSifter,

@@ -23,6 +23,7 @@ import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
+import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
@@ -593,6 +594,13 @@ public class MachineLoader {
         GTNLItemList.CrackerHub.set(new CrackerHub(21108, "CrackerHub", TextLocalization.NameCrackerHub));
         addItemTooltip(GTNLItemList.CrackerHub.get(1), AnimatedText.SNL_QYZG);
 
+        GTNLItemList.AdvancedInfiniteDriller.set(
+            new AdvancedInfiniteDriller(
+                21109,
+                "AdvancedInfiniteDriller",
+                TextLocalization.NameAdvancedInfiniteDriller));
+        addItemTooltip(GTNLItemList.AdvancedInfiniteDriller.get(1), AnimatedText.SNL_QYZG);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -911,10 +919,9 @@ public class MachineLoader {
 
     public static void registerGlasses() {
         BorosilicateGlass.registerGlass(BasicBlocks.PlayerDoll, 0, (byte) 12);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 12);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 1, (byte) 10);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 2, (byte) 8);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 8);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 10);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 1, (byte) 8);
+        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 2, (byte) 7);
 
         for (int LampMeta = 1; LampMeta <= 32; LampMeta++) {
             BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlow, LampMeta, (byte) 3);
