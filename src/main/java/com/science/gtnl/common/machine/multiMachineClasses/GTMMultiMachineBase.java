@@ -63,7 +63,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.6 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
