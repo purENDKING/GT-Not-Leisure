@@ -178,7 +178,7 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.001, 1 / 5 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.001, 1.0 / 5.0 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

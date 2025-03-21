@@ -64,7 +64,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
-    public static String[][] shape = StructureUtils.readStructureFromFile(D_STRUCTURE_FILE_PATH);;
+    public static String[][] shape = StructureUtils.readStructureFromFile(D_STRUCTURE_FILE_PATH);
 
     public Digester(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
