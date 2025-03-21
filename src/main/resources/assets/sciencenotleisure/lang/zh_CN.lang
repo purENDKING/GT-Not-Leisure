@@ -1028,7 +1028,7 @@ Tooltip_GTMMultiMachine_02=初始并行为8
 Tooltip_GTMMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
 Tooltip_GTMMultiMachine_04=支持§9Tec§1Tech§r多安能源仓！
 
-Tooltip_WirelessEnergyMultiMachine_00=比相同电压的机器快1000%%
+Tooltip_WirelessEnergyMultiMachine_00=比相同电压的机器快900%%
 Tooltip_WirelessEnergyMultiMachine_01=只需要使用配方要求功率的40%%
 Tooltip_WirelessEnergyMultiMachine_02=初始并行为8
 Tooltip_WirelessEnergyMultiMachine_03=在控制器内放入并行控制核心来提升最大并行数和减少耗电！
@@ -1051,7 +1051,7 @@ Tooltip_LargeHammer_Casing=任意强化镍铬机械方块
 
 NameDraconicFusionCrafting=神龙聚合装置
 DraconicFusionCraftingRecipeType=聚合装置
-Tooltip_DraconicFusionCrafting_00=比龙研聚合装置快200%%
+Tooltip_DraconicFusionCrafting_00=比龙研聚合装置快100%%
 Tooltip_DraconicFusionCrafting_01=只需要使用配方要求功率的50%%
 Tooltip_DraconicFusionCrafting_02=当机械方块等级超过4时开启§c无损超频§7
 Tooltip_DraconicFusionCrafting_Casing=任意背景辐射吸收机械方块
@@ -1063,7 +1063,7 @@ NameUhvKuangBiaoFourGiantNuclearFusionReactor=狂飙四号巨型聚变反应堆�
 NameUevKuangBiaoFiveGiantNuclearFusionReactor=狂飙五号巨型聚变反应堆控制电脑
 KuangBiaoOneGiantNuclearFusionReactorRecipeType=聚变反应堆
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00=§r它所模拟的，是亘古不变的光芒
-Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01=比同等级聚变反应堆快200%%
+Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01=比同等级聚变反应堆快100%%
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02=只需要使用配方要求功率的400%%
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03=无需消耗配方启动能量，但你仍然需要相应的启动能量来开机
 Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04=储能上限: 
@@ -1071,7 +1071,7 @@ Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_00=当配方需求电压超过�
 Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_00=当配方需求电压超过§bZPM§r§7时，无法进行聚变
 Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00=当配方需求电压超过§2UV§r§7时，无法进行聚变
 Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_00=当配方需求电压超过§4UHV§r§7时，无法进行聚变
-Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00=比同等级聚变反应堆快500%%
+Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_00=比同等级聚变反应堆快250%%
 Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_01=只需要使用配方要求功率的50%%
 Tooltip_UevKuangBiaoFiveGiantNuclearFusionReactor_02=当配方需求电压超过§5UXV§r§7时，无法进行聚变
 Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing=任意LuV机械方块
@@ -1126,7 +1126,7 @@ GT5U.gui.text.no_mining_drone=§7未找到采矿无人机
 
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
-Tooltip_LargeMixer_00=比相同电压的机器快333%%
+Tooltip_LargeMixer_00=比相同电压的机器快233%%
 Tooltip_LargeMixer_01=只需要使用配方要求功率的80%%
 Tooltip_LargeMixer_Casing=任意储罐拓展方块
 
@@ -1134,7 +1134,7 @@ NameLargeDistillery=大型分馏蒸馏厂
 LargeDistilleryRecipeType=蒸馏塔 / 蒸馏室
 LargeDistillery_Mode_0=蒸馏塔
 LargeDistillery_Mode_1=蒸馏室
-Tooltip_LargeDistillery_00=比相同电压的机器快333%%
+Tooltip_LargeDistillery_00=比相同电压的机器快233%%
 Tooltip_LargeDistillery_01=只需要使用配方要求功率的50%%
 Tooltip_LargeDistillery_Casing=任意储罐拓展方块
 
@@ -1144,12 +1144,12 @@ Tooltip_LargeMacerationTower_Casing=任意坚实铱锇机械方块
 
 NameLargeSiftingFunnel=大型筛选漏斗
 LargeSiftingFunnelRecipeType=筛选机
-Tooltip_LargeSiftingFunnel_00=比相同电压的机器快500%%
+Tooltip_LargeSiftingFunnel_00=比相同电压的机器快400%%
 Tooltip_LargeSiftingFunnel_Casing=任意离心机机械方块
 
 NameLargeCutter=大型切割机
 LargeCutterRecipeType=切割机 / 切片机
-Tooltip_LargeCutter_00=比相同电压的机器快200%%
+Tooltip_LargeCutter_00=比相同电压的机器快100%%
 Tooltip_LargeCutter_01=只需要使用配方要求功率的50%%
 Tooltip_LargeCutter_Casing=任意切割机框架
 LargeCutter_Mode_0=切割机
@@ -1190,7 +1190,7 @@ Tooltip_GrandAssemblyLine_08=如果能源仓功率大于配方总功率 * 4，�
 Tooltip_GrandAssemblyLine_09=放入编程电路来限制可超频次数
 Tooltip_GrandAssemblyLine_10=安装UEV及以上的并行控制核心解除能源仓限制
 Tooltip_GrandAssemblyLine_11=安装UIV及以上的并行控制核心解锁§c无损超频§7
-Tooltip_GrandAssemblyLine_12=安装UXV及以上的并行控制核心将额外提供500%%的耗电减免和2000%%的加速(乘算叠加)
+Tooltip_GrandAssemblyLine_12=安装UXV及以上的并行控制核心将额外提供500%%的耗电减免和1900%%的加速(乘算叠加)
 Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
 
 NamePrecisionAssembler=精密组装机
@@ -1221,7 +1221,7 @@ NameLargePacker=大型打包机
 LargePackerRecipeType=打包机 / 解包器
 LargePacker_Mode_0=打包机
 LargePacker_Mode_1=解包器
-Tooltip_LargePacker_00=比相同电压的机器快500%%
+Tooltip_LargePacker_00=比相同电压的机器快400%%
 Tooltip_LargePacker_01=只需要使用配方要求功率的50%%
 Tooltip_LargePacker_Casing=任意强化钨钢机械方块
 
@@ -1245,19 +1245,19 @@ Tooltip_LargeMaterialPress_Casing=任意强化镍铬机械方块
 
 NameLargeWiremill=大型线材工厂
 LargeWiremillRecipeType=线缆轧机
-Tooltip_LargeWiremill_00=比相同电压的机器快200%%
+Tooltip_LargeWiremill_00=比相同电压的机器快100%%
 Tooltip_LargeWiremill_01=只需要使用配方要求功率的60%%
 Tooltip_LargeWiremill_Casing=任意强化镍铬机械方块
 
 NameLargeBender=大型卷板机
 LargeBenderRecipeType=卷板机
-Tooltip_LargeBender_00=比相同电压的机器快500%%
+Tooltip_LargeBender_00=比相同电压的机器快100%%
 Tooltip_LargeBender_01=只需要使用配方要求功率的80%%
 Tooltip_LargeBender_Casing=任意强化镍铬机械方块
 
 NameLargeExtruder=大型压模机
 LargeExtruderRecipeType=压模机
-Tooltip_LargeExtruder_00=比相同电压的机器快500%%
+Tooltip_LargeExtruder_00=比相同电压的机器快100%%
 Tooltip_LargeExtruder_01=只需要使用配方要求功率的80%%
 Tooltip_LargeExtruder_Casing=任意强化镍铬机械方块
 
@@ -1265,19 +1265,19 @@ NameLargeArcSmelter=大型电弧炉
 LargeArcSmelterRecipeType=电弧炉 / 等离子电弧炉
 LargeArcSmelter_Mode_0=电弧炉
 LargeArcSmelter_Mode_1=等离子电弧炉
-Tooltip_LargeArcSmelter_00=比相同电压的机器快250%%
+Tooltip_LargeArcSmelter_00=比相同电压的机器快150%%
 Tooltip_LargeArcSmelter_01=只需要使用配方要求功率的80%%
 Tooltip_LargeArcSmelter_Casing=任意冶炼炉机械方块
 
 NameLargeForming=大型冲压机
 LargeFormingRecipeType=冲压机床
-Tooltip_LargeForming_00=比相同电压的机器快500%%
+Tooltip_LargeForming_00=比相同电压的机器快400%%
 Tooltip_LargeForming_01=只需要使用配方要求功率的80%%
 Tooltip_LargeForming_Casing=任意强化镍铬机械方块
 
 NameLargeElectrolyzer=大型电解槽
 LargeElectrolyzerRecipeType=电解机
-Tooltip_LargeElectrolyzer_00=比相同电压的机器快200%%
+Tooltip_LargeElectrolyzer_00=比相同电压的机器快100%%
 Tooltip_LargeElectrolyzer_01=只需要使用配方要求功率的80%%
 Tooltip_LargeElectrolyzer_Casing=任意电解机机械方块
 
@@ -1292,7 +1292,7 @@ LargeChemicalBathRecipeType=洗矿池 / 简易洗矿池 / 化学浸洗机
 LargeChemicalBath_Mode_0=洗矿池
 LargeChemicalBath_Mode_1=简易洗矿池
 LargeChemicalBath_Mode_2=化学浸洗机
-Tooltip_LargeChemicalBath_00=比相同电压的机器快500%%
+Tooltip_LargeChemicalBath_00=比相同电压的机器快400%%
 Tooltip_LargeChemicalBath_01=只需要使用配方要求功率的80%%
 Tooltip_LargeChemicalBath_Casing=任意洗矿厂机械方块
 
@@ -1308,7 +1308,7 @@ NameLargeCanning=大型装罐机
 LargeCanningRecipeType=流体装罐机 / 装罐机
 LargeCanning_Mode_0=流体装罐机
 LargeCanning_Mode_1=装罐机
-Tooltip_LargeCanning_00=比相同电压的机器快333%%
+Tooltip_LargeCanning_00=比相同电压的机器快233%%
 Tooltip_LargeCanning_01=只需要使用配方要求功率的50%%
 Tooltip_LargeCanning_Casing=任意洗矿厂机械方块
 
@@ -1316,7 +1316,7 @@ NameLargeExtractor=大型提取机
 LargeExtractorRecipeType=提取机 / 流体提取机
 LargeExtractor_Mode_0=提取机
 LargeExtractor_Mode_1=流体提取机
-Tooltip_LargeExtractor_00=比相同电压的机器快250%%
+Tooltip_LargeExtractor_00=比相同电压的机器快150%%
 Tooltip_LargeExtractor_01=只需要使用配方要求功率的60%%
 Tooltip_LargeExtractor_Casing=任意洗矿厂机械方块
 
@@ -1340,7 +1340,7 @@ Tooltip_FishingGround_Casing=任意哈斯特洛伊-X结构方块
 
 NameLargeEngravingLaser=大型激光蚀刻机
 LargeEngravingLaserRecipeType=激光蚀刻机
-Tooltip_LargeEngravingLaser_00=比相同电压的机器快200%%
+Tooltip_LargeEngravingLaser_00=比相同电压的机器快100%%
 Tooltip_LargeEngravingLaser_01=只需要使用配方要求功率的80%%
 Tooltip_LargeEngravingLaser_02=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
 Tooltip_LargeEngravingLaser_Casing=任意激光抑制机械方块
@@ -1394,7 +1394,7 @@ Tooltip_BrickBlastFurnace_Casing_04=16x 镀铜砖块
 
 NameLargeSteamCircuitAssembler=大型蒸汽电路组装机
 LargeSteamCircuitAssemblerRecipeType=电路组装机
-Tooltip_LargeSteamCircuitAssembler_00=比同等级的单方块组装机快25%%
+Tooltip_LargeSteamCircuitAssembler_00=比同等级的单方块组装机快11%%
 Tooltip_LargeSteamCircuitAssembler_01=仅消耗正常需求125%%的蒸汽
 Tooltip_LargeSteamCircuitAssembler_02=一次可处理多达16个物品
 Tooltip_LargeSteamCircuitAssembler_03=原始科技！
@@ -1402,42 +1402,42 @@ Tooltip_LargeSteamCircuitAssembler_Casing=任意镀铜砖块或脱氧钢机械�
 
 NameLargeSteamMixer=大型蒸汽搅拌机
 LargeSteamMixerRecipeType=搅拌机
-Tooltip_LargeSteamMixer_00=比同等级的单方块搅拌机慢50%%
+Tooltip_LargeSteamMixer_00=比同等级的单方块搅拌机慢33%%
 Tooltip_LargeSteamMixer_01=一次可处理多达8个物品
 Tooltip_LargeSteamMixer_02=在控制器内放入不锈钢齿轮来解锁HV配方
 Tooltip_LargeSteamMixer_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamCentrifuge=大型蒸汽离心机
 LargeSteamCentrifugeRecipeType=离心机
-Tooltip_LargeSteamCentrifuge_00=比同等级的单方块离心机快30%%
+Tooltip_LargeSteamCentrifuge_00=比同等级的单方块离心机快43%%
 Tooltip_LargeSteamCentrifuge_01=仅消耗正常需求100%%的蒸汽
 Tooltip_LargeSteamCentrifuge_02=一次可处理多达16个物品
 Tooltip_LargeSteamCentrifuge_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamHammer=大型蒸汽锻造锤
 LargeSteamHammerRecipeType=锻造锤
-Tooltip_LargeSteamHammer_00=比同等级的单方块锻造锤快25%%
+Tooltip_LargeSteamHammer_00=比同等级的单方块锻造锤快33%%
 Tooltip_LargeSteamHammer_01=仅消耗正常需求75%%的蒸汽
 Tooltip_LargeSteamHammer_02=一次可处理多达16个物品
 Tooltip_LargeSteamHammer_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamCompressor=大型蒸汽压缩机
 LargeSteamCompressorRecipeType=压缩机
-Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快50%%
+Tooltip_LargeSteamCompressor_00=比同等级的单方块压缩机快100%%
 Tooltip_LargeSteamCompressor_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamCompressor_02=一次可处理多达16个物品
 Tooltip_LargeSteamCompressor_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamSifter=大型蒸汽筛选机
 LargeSteamSifterRecipeType=筛选机
-Tooltip_LargeSteamSifter_00=比同等级的单方块筛选机快25%%
+Tooltip_LargeSteamSifter_00=比同等级的单方块筛选机快33%%
 Tooltip_LargeSteamSifter_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamSifter_02=一次可处理多达16个物品
 Tooltip_LargeSteamSifter_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtruder=大型蒸汽压模机
 LargeSteamExtruderRecipeType=压模机
-Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机快10%%
+Tooltip_LargeSteamExtruder_00=比同等级的单方块压模机快11%%
 Tooltip_LargeSteamExtruder_01=仅消耗正常需求95%%的蒸汽
 Tooltip_LargeSteamExtruder_02=一次可处理多达8个物品
 Tooltip_LargeSteamExtruder_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1512,14 +1512,14 @@ Tooltip_CrackerHub_Casing=任意放射硅岩合金机械方块
 
 NameLargeSteamCrusher=大型蒸汽破碎机
 LargeSteamCrusherRecipeType=研磨机
-Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快90%%
+Tooltip_LargeSteamCrusher_00=比同等级的单方块研磨机快900%%
 Tooltip_LargeSteamCrusher_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamCrusher_02=一次可处理多达128个物品
 Tooltip_LargeSteamCrusher_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamExtractor=大型蒸汽提取机
 LargeSteamExtractorRecipeType=提取机
-Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快25%%
+Tooltip_LargeSteamExtractor_00=比同等级的单方块提取机快33%%
 Tooltip_LargeSteamExtractor_01=仅消耗正常需求90%%的蒸汽
 Tooltip_LargeSteamExtractor_02=一次可处理多达16个物品
 Tooltip_LargeSteamExtractor_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1566,21 +1566,21 @@ Info_AdvancedInfiniteDriller_00=当前温度:
 
 NameLargeSteamFurnace=大型蒸汽熔炉
 LargeSteamFurnaceRecipeType=熔炉
-Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快90%%
+Tooltip_LargeSteamFurnace_00=比同等级的单方块熔炉快900%%
 Tooltip_LargeSteamFurnace_01=仅消耗正常需求50%%的蒸汽
 Tooltip_LargeSteamFurnace_02=一次可处理多达128个物品
 Tooltip_LargeSteamFurnace_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamFormingPress=大型蒸汽冲压机床
 LargeSteamFormingPressRecipeType=冲压机床
-Tooltip_LargeSteamFormingPress_00=比同等级的单方块冲压机床快20%%
+Tooltip_LargeSteamFormingPress_00=比同等级的单方块冲压机床快25%%
 Tooltip_LargeSteamFormingPress_01=仅消耗正常需求90%%的蒸汽
 Tooltip_LargeSteamFormingPress_02=一次可处理多达16个物品
 Tooltip_LargeSteamFormingPress_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamAlloySmelter=大型蒸汽铸形炉
 LargeSteamAlloySmelterRecipeType=合金炉
-Tooltip_LargeSteamAlloySmelter_00=比同等级的单方块合金炉快30%%
+Tooltip_LargeSteamAlloySmelter_00=比同等级的单方块合金炉快43%%
 Tooltip_LargeSteamAlloySmelter_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamAlloySmelter_02=一次可处理多达16个物品
 Tooltip_LargeSteamAlloySmelter_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1589,14 +1589,14 @@ NameLargeSteamOreWasher=大型蒸汽洗矿机
 LargeSteamOreWasherRecipeType=洗矿机 / 简易洗矿池
 LargeSteamOreWasher_Mode_0=洗矿机
 LargeSteamOreWasher_Mode_1=简易洗矿池
-Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快95%%
+Tooltip_LargeSteamOreWasher_00=比同等级的单方块洗矿机快1900%%
 Tooltip_LargeSteamOreWasher_01=仅消耗正常需求60%%的蒸汽
 Tooltip_LargeSteamOreWasher_02=一次可处理多达32个物品
 Tooltip_LargeSteamOreWasher_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamThermalCentrifuge=大型蒸汽热力离心机
 LargeSteamThermalCentrifugeRecipeType=热力离心
-Tooltip_LargeSteamThermalCentrifuge_00=比同等级的单方块热力离心机快75%%
+Tooltip_LargeSteamThermalCentrifuge_00=比同等级的单方块热力离心机快300%%
 Tooltip_LargeSteamThermalCentrifuge_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamThermalCentrifuge_02=一次可处理多达32个物品
 Tooltip_LargeSteamThermalCentrifuge_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1610,7 +1610,7 @@ Tooltip_SteamCracking_Casing=任意镀铜砖块或脱氧钢机械方块
 
 NameLargeSteamChemicalBath=大型蒸汽化学浸洗机
 LargeSteamChemicalBathRecipeType=化学浸洗机
-Tooltip_LargeSteamChemicalBath_00=比同等级的单方块化学浸洗机快80%%
+Tooltip_LargeSteamChemicalBath_00=比同等级的单方块化学浸洗机快25%%
 Tooltip_LargeSteamChemicalBath_01=仅消耗正常需求80%%的蒸汽
 Tooltip_LargeSteamChemicalBath_02=一次可处理多达16个物品
 Tooltip_LargeSteamChemicalBath_Casing=任意镀铜砖块或脱氧钢机械方块
@@ -1687,7 +1687,7 @@ Tooltip_Incubator_Casing=任意塑料混凝土方块
 
 NameLargeIncubator=大型培养缸
 LargeIncubatorRecipeType=细菌培养缸
-Tooltip_LargeIncubator_00=比相同电压的单方块机器快500%%
+Tooltip_LargeIncubator_00=比相同电压的单方块机器快400%%
 Tooltip_LargeIncubator_01=只需要使用配方要求功率的60%%
 Tooltip_LargeIncubator_02=不再需要保持输出仓半满
 Tooltip_LargeIncubator_03=无视玻璃等级要求和精确剂量要求
@@ -1708,7 +1708,7 @@ Tooltip_AlloyBlastSmelter_Casing=任意冶炼炉机械方块
 
 NameMegaAlloyBlastSmelter=巨型合金冶炼炉
 MegaAlloyBlastSmelterRecipeType=合金冶炼炉
-Tooltip_MegaAlloyBlastSmelter_00=比合金冶炼炉快200%%
+Tooltip_MegaAlloyBlastSmelter_00=比合金冶炼炉快100%%
 Tooltip_MegaAlloyBlastSmelter_01=只需要使用配方要求功率的80%%
 Tooltip_MegaAlloyBlastSmelter_02=每超过配方温度900K，耗能均将乘以95%%（不计超频）
 Tooltip_MegaAlloyBlastSmelter_03=每级玻璃等级将额外提供2%%概率的双倍产出！
@@ -1745,7 +1745,7 @@ Tooltip_ProcessingArray_01=在控制器GUI中放置至多64个GT单方块机器
 Tooltip_ProcessingArray_02=请注意，供电为其内机器耗电总和
 Tooltip_ProcessingArray_03=使用螺丝刀启用独立输入总线功能
 Tooltip_ProcessingArray_04=对特定机器无效
-Tooltip_ProcessingArray_05=比相同电压的单方块机器快111%%
+Tooltip_ProcessingArray_05=比相同电压的单方块机器快11%%
 Tooltip_ProcessingArray_06=只需要使用配方要求功率的(100 - 线圈等级 * 3)%%
 Tooltip_ProcessingArray_07=并行数：单方块GT机器数量 * 2 + 电压等级 * 4 + 线圈等级 * 4
 Tooltip_ProcessingArray_08=能源仓等级不可高过控制器GUI内的GT单方块机器等级+4!
@@ -1767,7 +1767,7 @@ Tooltip_ChemicalPlant_Casing=任意化学惰性机械方块
 
 NameVacuumFreezer=真空冷冻机
 VacuumFreezerRecipeType=真空冷冻机
-Tooltip_VacuumFreezer_00=比原版的真空冷冻机快125%%
+Tooltip_VacuumFreezer_00=比原版的真空冷冻机快25%%
 Tooltip_VacuumFreezer_01=并行数 = 8 + 2 * 电压等级
 Tooltip_VacuumFreezer_02=支持两次免费的§c无损超频§7!
 Tooltip_VacuumFreezer_Casing=任意防冻机械方块
@@ -1775,7 +1775,7 @@ Tooltip_VacuumFreezer_Casing=任意防冻机械方块
 NameBlazeBlastFurnace=烈焰高炉
 FluidBlazeInputHatch=烈焰输入仓
 BlazeBlastFurnaceRecipeType=工业高炉
-Tooltip_BlazeBlastFurnace_00=比工业高炉快200%%！
+Tooltip_BlazeBlastFurnace_00=比工业高炉快100%%！
 Tooltip_BlazeBlastFurnace_01=最大并行数固定为64
 Tooltip_BlazeBlastFurnace_02=在控制器内放入炽骨立方将并行提高到256
 Tooltip_BlazeBlastFurnace_03=需每秒提供10x配方电压等级^2的熔融烈焰
@@ -1788,7 +1788,7 @@ Tooltip_BlazeBlastFurnace_Casing_02=顶部中心炽焱高炉机械方块
 NameColdIceFreezer=寒冰冷冻机
 FluidIceInputHatch=碎冰输入仓
 ColdIceFreezerRecipeType=凛冰冷冻机
-Tooltip_ColdIceFreezer_00=比真空冷冻机快200%%！
+Tooltip_ColdIceFreezer_00=比真空冷冻机快100%%！
 Tooltip_ColdIceFreezer_01=只需要使用配方要求功率的80%%
 Tooltip_ColdIceFreezer_02=最大并行数固定为128
 Tooltip_ColdIceFreezer_03=需每秒提供10x配方电压等级^2的碎冰
@@ -1935,7 +1935,7 @@ Tooltip_MegaBlastFurnace_00=每超过配方温度900K，耗能均将乘以95%%�
 Tooltip_MegaBlastFurnace_01=每超过配方温度1800K，将进行一次无损超频
 Tooltip_MegaBlastFurnace_02=超过MV后的每一级电压，都会将温度提高100K
 Tooltip_MegaBlastFurnace_03=并行数 = 4 * 并行控制核心提供的并行
-Tooltip_MegaBlastFurnace_04=比工业高炉快500%%
+Tooltip_MegaBlastFurnace_04=比工业高炉快400%%
 Tooltip_MegaBlastFurnace_Casing_00=任意冶炼炉机械方块
 Tooltip_MegaBlastFurnace_Casing_01=回收气体，任意脱氧钢机械方块
 Tooltip_MegaBlastFurnace_Casing_02=顶部中心放射硅岩合金机械方块

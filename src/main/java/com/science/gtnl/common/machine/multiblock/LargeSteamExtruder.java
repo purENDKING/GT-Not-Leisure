@@ -273,7 +273,7 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.95 * tierMachine)
-                    .setSpeedBoost(0.9 / tierMachine);
+                    .setSpeedBoost(1/1.11 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

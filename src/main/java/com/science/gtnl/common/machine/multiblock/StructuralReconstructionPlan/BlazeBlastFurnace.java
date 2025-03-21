@@ -325,7 +325,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
                     .setMachineHeat(BlazeBlastFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(true)
-                    .setSpeedBoost(0.5);
+                    .setSpeedBoost(1/2);
             }
 
             @Override

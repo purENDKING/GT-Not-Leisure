@@ -192,7 +192,7 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.4 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/2.5 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -170,7 +170,7 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.3 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/3.33 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

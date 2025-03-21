@@ -214,8 +214,8 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                 return super.createOverclockCalculator(recipe).setMachineHeat(VacuumDryingFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

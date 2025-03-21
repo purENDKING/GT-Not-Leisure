@@ -167,7 +167,7 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.3 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/3.33 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

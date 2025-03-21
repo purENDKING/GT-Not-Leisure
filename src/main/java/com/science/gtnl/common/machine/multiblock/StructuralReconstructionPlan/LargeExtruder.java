@@ -124,7 +124,7 @@ public class LargeExtruder extends GTMMultiMachineBase<LargeExtruder> implements
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 0.5 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.05, 1/2 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
