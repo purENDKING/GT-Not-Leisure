@@ -268,7 +268,7 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(tierMachine + (enableHVRecipe ? 1 : 0))
-                    .setSpeedBoost(1/0.67 / tierMachine - (enableHVRecipe ? 0.25 : 0));
+                    .setSpeedBoost(1 / 0.67 / tierMachine - (enableHVRecipe ? 0.25 : 0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

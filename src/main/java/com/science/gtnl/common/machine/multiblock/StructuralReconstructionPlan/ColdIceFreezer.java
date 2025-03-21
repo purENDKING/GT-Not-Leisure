@@ -234,7 +234,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new ProcessingLogic().setSpeedBonus(1/2)
+        return new ProcessingLogic().setSpeedBonus(1 / 2)
             .setEuModifier(0.8)
             .setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

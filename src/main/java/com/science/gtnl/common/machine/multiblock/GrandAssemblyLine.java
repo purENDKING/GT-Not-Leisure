@@ -1118,7 +1118,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0) * ((ParallelTier >= 13) ? 0.2 : 1))
-                    .setSpeedBoost((1/1.67 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 1/20 : 1));
+                    .setSpeedBoost((1 / 1.67 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 1 / 20 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

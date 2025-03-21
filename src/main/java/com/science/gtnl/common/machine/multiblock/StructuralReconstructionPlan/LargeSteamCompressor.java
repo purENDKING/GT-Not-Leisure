@@ -246,7 +246,7 @@ public class LargeSteamCompressor extends SteamMultiMachineBase<LargeSteamCompre
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.8 * tierMachine)
-                    .setSpeedBoost(1/2 / tierMachine);
+                    .setSpeedBoost(1 / 2 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

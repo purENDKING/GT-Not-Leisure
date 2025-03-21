@@ -216,7 +216,7 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(1.25 * tierMachine)
-                    .setSpeedBoost(1/1.11 / tierMachine);
+                    .setSpeedBoost(1 / 1.11 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

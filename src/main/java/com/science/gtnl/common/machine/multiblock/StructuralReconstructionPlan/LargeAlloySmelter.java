@@ -166,7 +166,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0) - (getCoilLevel().getTier() / 50.0))
-                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0) - (getCoilLevel().getTier() / 50.0));
+                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0) - (getCoilLevel().getTier() / 50.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

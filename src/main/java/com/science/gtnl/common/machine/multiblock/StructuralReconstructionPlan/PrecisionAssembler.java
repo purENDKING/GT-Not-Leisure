@@ -429,7 +429,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8)
-                    .setSpeedBoost(1/1.67);
+                    .setSpeedBoost(1 / 1.67);
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
