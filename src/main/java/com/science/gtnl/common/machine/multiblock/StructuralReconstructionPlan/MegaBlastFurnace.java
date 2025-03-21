@@ -226,7 +226,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                     .setHeatOC(true)
                     .setHeatDiscount(false)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.005, 1/5 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.005, 1 / 5 - (ParallelTier / 200.0)));
             }
 
             @Override

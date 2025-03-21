@@ -248,7 +248,7 @@ public class LargeSteamCentrifuge extends SteamMultiMachineBase<LargeSteamCentri
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(tierMachine)
-                    .setSpeedBoost(1/1.43 / tierMachine);
+                    .setSpeedBoost(1 / 1.43 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

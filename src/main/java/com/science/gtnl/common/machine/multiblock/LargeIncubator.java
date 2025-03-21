@@ -226,7 +226,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
                     .setEUtDiscount(0.6)
-                    .setSpeedBoost(1/5);
+                    .setSpeedBoost(1 / 5);
             }
 
             @NotNull

@@ -247,7 +247,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
                     : super.createOverclockCalculator(recipe)
                         .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
-                        .setSpeedBoost(1/10 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
+                        .setSpeedBoost(1 / 10 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }

@@ -264,7 +264,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
             @Override
             public CheckRecipeResult process() {
                 setEuModifier(0.9);
-                setSpeedBonus(1/1.11 - (3.0 * getCoilLevel().getTier()) / 100);
+                setSpeedBonus(1 / 1.11 - (3.0 * getCoilLevel().getTier()) / 100);
                 return super.process();
             }
 

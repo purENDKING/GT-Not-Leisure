@@ -227,7 +227,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

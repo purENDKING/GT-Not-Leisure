@@ -242,7 +242,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.9 * tierMachine)
-                    .setSpeedBoost(1/1.33 / tierMachine);
+                    .setSpeedBoost(1 / 1.33 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

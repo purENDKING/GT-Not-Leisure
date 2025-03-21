@@ -160,7 +160,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.6 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 1/2.5 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.05, 1 / 2.5 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

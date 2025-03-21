@@ -306,7 +306,7 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(4 - (ParallelTier / 12.5))
-                    .setSpeedBoost(1/2 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 / 2 - (ParallelTier / 200.0));
             }
 
             @NotNull

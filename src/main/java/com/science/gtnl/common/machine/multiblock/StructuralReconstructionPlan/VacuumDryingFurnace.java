@@ -215,7 +215,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                     .setHeatOC(true)
                     .setHeatDiscount(false)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
+                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

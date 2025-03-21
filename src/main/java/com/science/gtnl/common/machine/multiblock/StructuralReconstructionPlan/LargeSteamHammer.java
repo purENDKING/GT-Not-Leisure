@@ -245,7 +245,7 @@ public class LargeSteamHammer extends SteamMultiMachineBase<LargeSteamHammer> im
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
                     .setEUtDiscount(0.75 * tierMachine)
-                    .setSpeedBoost(1/1.33 / tierMachine);
+                    .setSpeedBoost(1 / 1.33 / tierMachine);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
