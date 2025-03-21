@@ -188,7 +188,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
                         .setEUtDiscount(0.5 - (ParallelTier / 50.0))
                         .setSpeedBoost(0.5 - (ParallelTier / 200.0));
                 } else return super.createOverclockCalculator(recipe).setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.5 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/2 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

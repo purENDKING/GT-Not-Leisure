@@ -168,7 +168,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.6 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.5 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/2 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

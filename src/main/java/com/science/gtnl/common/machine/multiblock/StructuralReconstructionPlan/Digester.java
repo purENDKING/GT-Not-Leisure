@@ -230,7 +230,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
                     .setHeatDiscount(true)
                     .enablePerfectOC()
                     .setEUtDiscount(0.8 - ((ParallelTier + mHeatingCapacity / 1800.0) / 50.0))
-                    .setSpeedBoost(0.6 - ((ParallelTier + mHeatingCapacity / 1800.0) / 200.0));
+                    .setSpeedBoost(1/1.67 - ((ParallelTier + mHeatingCapacity / 1800.0) / 200.0));
             }
 
             @Override

@@ -180,7 +180,7 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.6 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1/1.67 - (ParallelTier / 200.0));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

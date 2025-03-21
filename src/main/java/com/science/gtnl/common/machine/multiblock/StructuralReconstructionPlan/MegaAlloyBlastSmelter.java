@@ -230,7 +230,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
                     .setEUtDiscount(Math.max(0.005, 0.8 - (ParallelTier / 50.0)))
-                    .setSpeedBoost(Math.max(0.005, 0.5 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.005, 1/2 - (ParallelTier / 200.0)));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
