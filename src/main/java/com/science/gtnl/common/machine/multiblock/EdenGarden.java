@@ -129,15 +129,18 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     public final int depthOffSet = 10;
     public static IStructureDefinition<EdenGarden> STRUCTURE_DEFINITION = null;
 
-    protected boolean isEnablePerfectOverclock() {
+    @Override
+    public boolean isEnablePerfectOverclock() {
         return true;
     }
 
-    protected int getMaxParallelRecipes() {
+    @Override
+    public int getMaxParallelRecipes() {
         return 1;
     }
 
-    protected float getSpeedBonus() {
+    @Override
+    public float getSpeedBonus() {
         return 1F;
     }
 
