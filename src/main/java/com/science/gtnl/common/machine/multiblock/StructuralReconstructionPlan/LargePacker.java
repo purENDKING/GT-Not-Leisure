@@ -180,7 +180,7 @@ public class LargePacker extends GTMMultiMachineBase<LargePacker> implements ISu
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 1.0 / 5.0 - (ParallelTier / 200.0)));
+                    .setSpeedBoost(Math.max(0.05, 1.0 / 6.0 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

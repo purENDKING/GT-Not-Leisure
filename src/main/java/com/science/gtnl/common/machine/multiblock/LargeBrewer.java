@@ -12,6 +12,9 @@ import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.OverclockCalculator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -42,6 +45,7 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
+import org.jetbrains.annotations.NotNull;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISurvivalConstructable {
@@ -114,7 +118,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeBrewerRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_LargeBrewer_00)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
@@ -244,5 +248,18 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
             env,
             false,
             true);
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost( 1.0 / 2.25 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 }

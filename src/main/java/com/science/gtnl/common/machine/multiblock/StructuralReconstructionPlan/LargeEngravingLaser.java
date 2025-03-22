@@ -208,7 +208,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 2.0 - (ParallelTier / 200.0));
+                    .setSpeedBoost(Math.max(0.05, 1.0 / 3.5 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -122,14 +122,14 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.VacuumDryingFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_00)
             .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_01)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_02)
             .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_03)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_04)
+            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_05)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -214,8 +214,8 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                 return super.createOverclockCalculator(recipe).setMachineHeat(VacuumDryingFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
+                    .setEUtDiscount(0.6 - (ParallelTier / 50.0))
+                    .setSpeedBoost(1 / 2.5 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

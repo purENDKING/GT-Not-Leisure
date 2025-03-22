@@ -227,7 +227,7 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 2.0 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1.0 / 3.25 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

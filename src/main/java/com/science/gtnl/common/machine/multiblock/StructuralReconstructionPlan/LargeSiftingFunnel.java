@@ -92,7 +92,7 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeSiftingFunnelRecipeType)
             .addInfo(TextLocalization.Tooltip_LargeSiftingFunnel_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_LargeSiftingFunnel_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
@@ -177,7 +177,7 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.6 - (ParallelTier / 50.0))
                     .setSpeedBoost(Math.max(0.001, 1.0 / 5.0 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

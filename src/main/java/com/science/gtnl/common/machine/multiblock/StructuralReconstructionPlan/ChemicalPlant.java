@@ -221,7 +221,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         } else {
             maxRecipes = (int) Math.pow(4, ParallelTier - 3);
         }
-        return Math.min(maxRecipes, 512);
+        return Math.min(maxRecipes, 1024);
     }
 
     public void setCoilLevel(HeatingCoilLevel aCoilLevel) {
