@@ -110,7 +110,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
         tt.addMachineType(TextLocalization.LargeAssemblerRecipeType)
             .addInfo(TextLocalization.Tooltip_LargeAssembler_00)
             .addInfo(TextLocalization.Tooltip_LargeAssembler_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_LargeAssembler_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
@@ -227,7 +227,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 / 3.0 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -180,7 +180,7 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 / 2.0 - (ParallelTier / 200.0));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
@@ -269,7 +269,7 @@ public class LargeSolidifier extends MTEExtendedPowerMultiBlockBase<LargeSolidif
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeSolidifierRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_LargeSolidifier_00)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)

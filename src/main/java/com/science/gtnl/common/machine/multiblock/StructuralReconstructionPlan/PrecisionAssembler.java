@@ -150,11 +150,11 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.PreciseAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_00)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_01)
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_02)
+            .addInfo(TextLocalization.Tooltip_PreciseAssembler_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -429,7 +429,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8)
-                    .setSpeedBoost(1 / 1.67);
+                    .setSpeedBoost(1 / 2.25);
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

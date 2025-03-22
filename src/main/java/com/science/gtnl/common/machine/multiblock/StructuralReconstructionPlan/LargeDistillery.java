@@ -426,7 +426,7 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 3.33 - (ParallelTier / 200.0));
+                    .setSpeedBoost(Math.max(0.05, 1.0 / 4.0 - (ParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
