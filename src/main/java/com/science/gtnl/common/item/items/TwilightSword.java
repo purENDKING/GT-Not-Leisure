@@ -245,12 +245,12 @@ public class TwilightSword extends ItemSword implements playSound {
 
     private void applyBuffs(EntityPlayer player) {
         int duration = 1200;
-        player.addPotionEffect(new PotionEffect(Potion.resistance.id, duration, 5));
-        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, duration, 5));
+        player.addPotionEffect(new PotionEffect(Potion.resistance.id, duration, 2));
+        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, duration, 1));
         player.addPotionEffect(new PotionEffect(Potion.regeneration.id, duration, 5));
-        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 5));
-        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, duration, 5));
-        player.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, duration, 10));
+        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, duration, 1));
+        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, duration, 1));
+        player.addPotionEffect(new PotionEffect(Potion.field_76444_x.id, duration, 9));
         player.addPotionEffect(new PotionEffect(Potion.jump.id, duration, 1));
         player.clearActivePotions();
     }
