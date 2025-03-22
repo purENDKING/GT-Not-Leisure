@@ -3,7 +3,6 @@ package com.science.gtnl.common.recipe.GTNL;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
@@ -142,7 +141,7 @@ public class MolecularTransformerRecipes implements IRecipePool {
             .addTo(MTR);
 
         RecipeBuilder.builder()
-            .itemInputs(new ItemStack(Blocks.skull, 1, 2))
+            .itemInputs(new ItemStack(Items.skull, 2, 1))
             .itemOutputs(new ItemStack(Items.nether_star, 1))
             .specialValue(0)
             .noOptimize()
