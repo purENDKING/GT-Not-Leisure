@@ -478,6 +478,13 @@ item.SatietyRing.name=饱食指环
 item.SuperReachRing.name=超级触物指环
 item.RejectionRing.name=排斥指环
 
+item.InfinityFuelRod.name=燃料棒(无尽)
+item.InfinityFuelRodDepleted.name=枯竭燃料棒(无尽)
+info.fuelRod.tooltip.0=耐久:%d/%d
+info.fuelRod.tooltip.1=具有MOX特性 | MOX系数: %d
+info.fuelRod.tooltip.2=基础产热(heta/s): %d/%d/%d
+info.fuelRod.tooltip.3=基础发电功率(EU/t): %d/%d/%d
+
 item.TwilightSword.name=§6薄暝
 Tooltip_TwilightSword_00=§6§o大鸟那永不闭合的眼睛
 Tooltip_TwilightSword_01=§b§o高鸟那能衡量一切的罪恶的天平
@@ -1761,7 +1768,7 @@ Tooltip_EnergyInfuser_Casing=任意分子机械方块
 
 NameChemicalPlant=化工厂
 ChemicalPlantRecipeType=化学反应釜
-Tooltip_ChemicalPlant_00=线圈等级每高出白铜一级能耗与速度x5%%
+Tooltip_ChemicalPlant_00=线圈等级每高出白铜一级能耗与速度乘以95%%
 Tooltip_ChemicalPlant_01=并行数不高于512
 Tooltip_ChemicalPlant_Casing=任意化学惰性机械方块
 

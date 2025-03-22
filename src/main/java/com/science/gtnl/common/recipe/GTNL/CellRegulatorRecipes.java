@@ -1,9 +1,8 @@
 package com.science.gtnl.common.recipe.GTNL;
 
-import static com.science.gtnl.common.item.items.MilledOre.NaquadahEnrichedFlotationFroth;
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
-import static gtPlusPlus.core.item.chemistry.MilledOreProcessing.*;
 
+import com.science.gtnl.common.item.items.MilledOre;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -12,6 +11,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gtPlusPlus.core.item.chemistry.GenericChem;
+import gtPlusPlus.core.item.chemistry.MilledOreProcessing;
 import gtPlusPlus.core.material.Material;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
@@ -29,8 +29,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 25000))
-            .fluidOutputs(FluidUtils.getFluidStack(NickelFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 25000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.NickelFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_IV)
             .addTo(CRR);
@@ -39,8 +39,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 35000))
-            .fluidOutputs(FluidUtils.getFluidStack(PlatinumFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 35000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.PlatinumFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -49,8 +49,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 64), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 140000))
-            .fluidOutputs(FluidUtils.getFluidStack(NaquadahEnrichedFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 140000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOre.NaquadahEnrichedFlotationFroth, 1000))
             .duration(8 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -59,8 +59,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 18000))
-            .fluidOutputs(FluidUtils.getFluidStack(AlmandineFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 18000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.AlmandineFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_IV)
             .addTo(CRR);
@@ -69,8 +69,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 12000))
-            .fluidOutputs(FluidUtils.getFluidStack(ChalcopyriteFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 12000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.ChalcopyriteFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_IV)
             .addTo(CRR);
@@ -79,8 +79,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 28000))
-            .fluidOutputs(FluidUtils.getFluidStack(GrossularFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 28000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.GrossularFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -89,8 +89,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 8000))
-            .fluidOutputs(FluidUtils.getFluidStack(PyropeFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 8000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.PyropeFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_IV)
             .addTo(CRR);
@@ -99,8 +99,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 35000))
-            .fluidOutputs(FluidUtils.getFluidStack(SpessartineFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 35000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.SpessartineFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -109,8 +109,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 14000))
-            .fluidOutputs(FluidUtils.getFluidStack(SphaleriteFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 14000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.SphaleriteFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -119,8 +119,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mPotassiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 14000))
-            .fluidOutputs(FluidUtils.getFluidStack(PentlanditeFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 14000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.PentlanditeFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -129,8 +129,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 30000))
-            .fluidOutputs(FluidUtils.getFluidStack(MonaziteFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 30000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.MonaziteFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_LuV)
             .addTo(CRR);
@@ -139,8 +139,8 @@ public class CellRegulatorRecipes implements IRecipePool {
         FlotationRecipeHandler.registerOreType(aMat);
         GTValues.RA.stdBuilder()
             .itemInputs(ItemUtils.getSimpleStack(GenericChem.mSodiumEthylXanthate, 32), aMat.getMilled(64))
-            .fluidInputs(FluidUtils.getFluidStack(PineOil, 13000))
-            .fluidOutputs(FluidUtils.getFluidStack(RedstoneFlotationFroth, 1000))
+            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PineOil, 13000))
+            .fluidOutputs(FluidUtils.getFluidStack(MilledOreProcessing.RedstoneFlotationFroth, 1000))
             .duration(4 * MINUTES)
             .eut(TierEU.RECIPE_IV)
             .addTo(CRR);
