@@ -22,6 +22,8 @@ import com.science.gtnl.common.item.ReAvaritia.InfinityShovel;
 import com.science.gtnl.common.item.ReAvaritia.InfinitySword;
 import com.science.gtnl.common.item.ReAvaritia.InfinityTotem;
 import com.science.gtnl.common.item.ReAvaritia.MatterCluster;
+import com.science.gtnl.common.item.items.FuelRod.FuelRod;
+import com.science.gtnl.common.item.items.FuelRod.FuelRodDepleted;
 import com.science.gtnl.common.item.items.KFCFamily;
 import com.science.gtnl.common.item.items.RejectionRing;
 import com.science.gtnl.common.item.items.SatietyRing;
@@ -62,7 +64,23 @@ public class ItemLoader {
     public static Item RecordSus = new ItemRecord("sus");
     public static Item RecordNewHorizons = new ItemRecord("newhorizons");
 
+    public static Item InfinityFuelRodDepleted = new FuelRodDepleted("InfinityFuelRodDepleted", 2000);
+    public static Item InfinityFuelRod = new FuelRod(
+        "InfinityFuelRod",
+        1,
+        491520,
+        500,
+        15000,
+        160000,
+        70F,
+        new ItemStack(InfinityFuelRodDepleted, 1));
+
     public static void registerItems() {
+
+        GTNLItemList.RecordSus.set(new ItemStack(RecordSus, 1));
+        GTNLItemList.RecordNewHorizons.set(new ItemStack(RecordNewHorizons, 1));
+        GTNLItemList.InfinityFuelRodDepleted.set(new ItemStack(InfinityFuelRodDepleted, 1));
+        GTNLItemList.InfinityFuelRod.set(new ItemStack(InfinityFuelRod, 1));
 
         IRegistry(TestItem, "TestItem");
         IRegistry(CrystalPickaxe, "CrystalPickaxe");
@@ -90,8 +108,8 @@ public class ItemLoader {
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 
-        GTNLItemList.RecordSus.set(new ItemStack(RecordSus, 1));
-        GTNLItemList.RecordNewHorizons.set(new ItemStack(RecordNewHorizons, 1));
+        IRegistry(InfinityFuelRodDepleted, "InfinityFuelRodDepleted");
+        IRegistry(InfinityFuelRod, "InfinityFuelRod");
 
     }
 

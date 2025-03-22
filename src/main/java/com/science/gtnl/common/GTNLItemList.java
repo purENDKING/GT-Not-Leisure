@@ -192,6 +192,9 @@ public enum GTNLItemList {
     RecordSus,
     RecordNewHorizons,
 
+    InfinityFuelRod,
+    InfinityFuelRodDepleted,
+
     BlazeAxe,
     BlazeHoe,
     BlazePickaxe,
