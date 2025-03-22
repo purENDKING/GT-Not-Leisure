@@ -12,14 +12,13 @@ import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
-import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.util.GTRecipe;
-import gregtech.api.util.OverclockCalculator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -38,14 +37,16 @@ import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
-import org.jetbrains.annotations.NotNull;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISurvivalConstructable {
@@ -258,7 +259,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost( 1.0 / 2.25 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1.0 / 2.25 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

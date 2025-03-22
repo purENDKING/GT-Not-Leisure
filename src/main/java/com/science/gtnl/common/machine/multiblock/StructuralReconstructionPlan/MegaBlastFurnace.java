@@ -159,6 +159,11 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     }
 
     @Override
+    public boolean isEnablePerfectOverclock() {
+        return ParallelTier >= 9;
+    }
+
+    @Override
     public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
         float aX, float aY, float aZ) {
         if (!aPlayer.isSneaking()) {

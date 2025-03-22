@@ -1914,5 +1914,15 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_UHV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Casing_StableTitanium.get(1),
+                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Titanium, 2),
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Titanium, 4))
+            .itemOutputs(ItemList.Casing_EngineIntake.get(4))
+            .duration(100)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
     }
 }

@@ -32,6 +32,7 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.Utils.loadingUtils.SubtitleDisplay;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.item.items.playSound;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -43,7 +44,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "Baubles")
-public class InfinityTotem extends Item implements IBauble, SubtitleDisplay {
+public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, playSound {
 
     public InfinityTotem() {
         this.setUnlocalizedName("InfinityTotem");
@@ -84,7 +85,8 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay {
     }
 
     @SideOnly(Side.CLIENT)
-    public void playerSound(EntityPlayer player) {
+    @Override
+    public void playSoundIfReady(EntityPlayer player) {
         player.worldObj.playSoundAtEntity(player, "sciencenotleisure:totem.enable", 1.0F, 1.0F);
     }
 
@@ -170,7 +172,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay {
                     triggerNormalEffect(player.worldObj, player, stack);
                 }
                 showSubtitle();
-                playerSound(player);
+                playSoundIfReady(player);
             }
         }
     }

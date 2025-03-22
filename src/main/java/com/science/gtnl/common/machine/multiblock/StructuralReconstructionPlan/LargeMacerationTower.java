@@ -6,11 +6,10 @@ import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
-import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.util.GTRecipe;
-import gregtech.api.util.OverclockCalculator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -25,14 +24,16 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings4;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
-import org.jetbrains.annotations.NotNull;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTower> implements ISurvivalConstructable {
