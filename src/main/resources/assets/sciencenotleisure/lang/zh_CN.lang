@@ -1318,7 +1318,7 @@ Tooltip_LargeAutoclave_Casing=任意洗矿厂机械方块
 
 NameLargeSolidifier=大型固化阵列
 LargeSolidifierRecipeType=流体固化器 / 工具铸形机
-Tooltip_LargeSolidifier_00=比相同电压的机器快100%%
+Tooltip_LargeSolidifier_00=比相同电压的机器快300%%
 Tooltip_LargeSolidifier_Casing=任意洗矿厂机械方块
 
 NameLargeCanning=大型装罐机

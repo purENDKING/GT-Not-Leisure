@@ -1249,7 +1249,7 @@ public class TextLocalization {
         "Fluid Solidifier / Tool Casting Machine",
         "LargeSolidifierRecipeType");
     public static final String Tooltip_LargeSolidifier_00 = texter(
-        "100%% faster than using machines of the same voltage",
+        "300%% faster than using machines of the same voltage",
         "Tooltip_LargeSolidifier_00");
     public static final String Tooltip_LargeSolidifier_Casing = texter(
         "Any Wash Plant Casing",
