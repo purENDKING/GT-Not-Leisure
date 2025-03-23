@@ -459,5 +459,12 @@ public class CraftingTableRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'C',
                 GTNLItemList.PrecisionSteamMechanism.get(1), 'D', ItemList.Casing_Gearbox_Bronze.get(1), 'E',
                 GregtechItemList.Controller_SteamMixerMulti.get(1) });
+
+        addCraftingRecipe(
+            GTNLItemList.ElectricBlastFurnace.get(1),
+            new Object[] { "ABA", "CDC", "ECE", 'A', ItemList.Robot_Arm_HV.get(1), 'B',
+                ItemList.Machine_Multi_BlastFurnace.get(1), 'C', "circuitData", 'D',
+                ItemList.Casing_CleanStainlessSteel.get(1), 'E',
+                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L) });
     }
 }

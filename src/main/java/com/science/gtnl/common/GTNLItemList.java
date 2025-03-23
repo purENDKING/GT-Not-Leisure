@@ -311,6 +311,7 @@ public enum GTNLItemList {
     LargeBoilerTitanium,
     LargeBoilerTungstenSteel,
     LargeSteamMixer,
+    ElectricBlastFurnace,
 
     AdvancedInfiniteDriller,
     CrackerHub,

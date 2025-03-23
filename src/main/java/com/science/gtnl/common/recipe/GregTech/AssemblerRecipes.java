@@ -1924,5 +1924,17 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_LV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Machine_Multi_BlastFurnace.get(1),
+                ItemList.Robot_Arm_HV.get(2),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 3L),
+                ItemList.Casing_CleanStainlessSteel.get(1),
+                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 2L))
+            .itemOutputs(GTNLItemList.ElectricBlastFurnace.get(1))
+            .duration(600)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(As);
+
     }
 }

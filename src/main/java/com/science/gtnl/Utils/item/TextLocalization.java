@@ -2152,11 +2152,37 @@ public class TextLocalization {
         "Any Blast Smelter Casing Block",
         "Tooltip_MegaBlastFurnace_Casing_00");
     public static final String Tooltip_MegaBlastFurnace_Casing_01 = texter(
-        "Gasses, Any Solid Steel Machine Casing",
-        "Tooltip_MegaBlastFurnace_Casing_01");
-    public static final String Tooltip_MegaBlastFurnace_Casing_02 = texter(
         "Top center Radiant Naquadah Alloy Casing",
-        "Tooltip_MegaBlastFurnace_Casing_02");
+        "Tooltip_MegaBlastFurnace_Casing_01");
+
+    public static final String NameElectricBlastFurnace = texter("Electric Blast Furnace", "NameElectricBlastFurnace");
+    public static final String Tooltip_ElectricBlastFurnaceRecipeType = texter(
+        "Electric Blast Furnace",
+        "Tooltip_ElectricBlastFurnaceRecipeType");
+    public static final String Tooltip_ElectricBlastFurnace_00 = texter(
+        "25%% faster than Blast Furnace",
+        "Tooltip_ElectricBlastFurnace_00");
+    public static final String Tooltip_ElectricBlastFurnace_01 = texter(
+        "Only uses 90%% of the EU/t normally required",
+        "Tooltip_ElectricBlastFurnace_01");
+    public static final String Tooltip_ElectricBlastFurnace_02 = texter(
+        "Every time the formula temperature exceeds 900K, the energy consumption will be multiplied by 95%% (excluding overclocking)",
+        "Tooltip_ElectricBlastFurnace_02");
+    public static final String Tooltip_ElectricBlastFurnace_03 = texter(
+        "Every time the formula temperature exceeds 1800K, a non-destructive overclocking will be performed",
+        "Tooltip_ElectricBlastFurnace_03");
+    public static final String Tooltip_ElectricBlastFurnace_04 = texter(
+        "After each voltage level exceeds MV, the temperature will increase by 100K",
+        "Tooltip_ElectricBlastFurnace_04");
+    public static final String Tooltip_ElectricBlastFurnace_05 = texter(
+        "For each increase in voltage level or coil level, two more items can be processed during each operation",
+        "Tooltip_ElectricBlastFurnace_05");
+    public static final String Tooltip_ElectricBlastFurnace_Casing_00 = texter(
+        "Any Heat Proof Machine Casing",
+        "Tooltip_ElectricBlastFurnace_Casing_00");
+    public static final String Tooltip_ElectricBlastFurnace_Casing_01 = texter(
+        "Top center Grate Machine Casing",
+        "Tooltip_ElectricBlastFurnace_Casing_01");
 
     public static final String NameWhiteNightGenerator = texter("White Night Generator", "NameWhiteNightGenerator");
     public static final String Tooltip_WhiteNightGenerator_MachineType = texter(
