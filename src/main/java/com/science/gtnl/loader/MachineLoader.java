@@ -75,6 +75,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.B
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ColdIceFreezer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.Digester;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ElectricBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ElectricImplosionCompressor;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.EnergyInfuser;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.FishingGround;
@@ -600,6 +601,10 @@ public class MachineLoader {
                 "AdvancedInfiniteDriller",
                 TextLocalization.NameAdvancedInfiniteDriller));
         addItemTooltip(GTNLItemList.AdvancedInfiniteDriller.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.ElectricBlastFurnace
+            .set(new ElectricBlastFurnace(21110, "ElectricBlastFurnace", TextLocalization.NameElectricBlastFurnace));
+        addItemTooltip(GTNLItemList.ElectricBlastFurnace.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

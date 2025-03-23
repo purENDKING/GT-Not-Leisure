@@ -1956,8 +1956,18 @@ Tooltip_MegaBlastFurnace_02=超过MV后的每一级电压，都会将温度提�
 Tooltip_MegaBlastFurnace_03=并行数 = 4 * 并行控制核心提供的并行
 Tooltip_MegaBlastFurnace_04=比工业高炉快400%%
 Tooltip_MegaBlastFurnace_Casing_00=任意冶炼炉机械方块
-Tooltip_MegaBlastFurnace_Casing_01=回收气体，任意脱氧钢机械方块
-Tooltip_MegaBlastFurnace_Casing_02=顶部中心放射硅岩合金机械方块
+Tooltip_MegaBlastFurnace_Casing_01=顶部中心放射硅岩合金机械方块
+
+NameElectricBlastFurnace=电力工业高炉
+Tooltip_ElectricBlastFurnaceRecipeType=工业高炉
+Tooltip_ElectricBlastFurnace_00=比工业高炉快25%%
+Tooltip_ElectricBlastFurnace_01=只需要使用配方要求功率的90%%
+Tooltip_ElectricBlastFurnace_02=每超过配方温度900K，耗能均将乘以95%%（不计超频）
+Tooltip_ElectricBlastFurnace_03=每超过配方温度1800K，将进行一次无损超频
+Tooltip_ElectricBlastFurnace_04=超过MV后的每一级电压，都会将温度提高100K
+Tooltip_ElectricBlastFurnace_05=每提升一个电压等级或线圈等级，每次运行可以多处理两个物品
+Tooltip_ElectricBlastFurnace_Casing_00=任意隔热机械方块
+Tooltip_ElectricBlastFurnace_Casing_01=顶部中心格栅机械方块
 
 NameWhiteNightGenerator=白夜发电机
 Tooltip_WhiteNightGenerator_MachineType=§d§l紫罗兰的洗礼
