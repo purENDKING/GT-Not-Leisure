@@ -109,6 +109,8 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.ChemicalPlantRecipeType)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_ChemicalPlant_00)
             .addInfo(TextLocalization.Tooltip_ChemicalPlant_01)
             .addInfo(TextLocalization.Tooltip_PerfectOverclock)
@@ -207,8 +209,8 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(1 - (getCoilLevel().getTier() - 1) * 0.05)
-                    .setSpeedBoost(1 - (getCoilLevel().getTier() - 1) * 0.05);
+                    .setEUtDiscount(0.8 * Math.pow(0.95, getCoilLevel().getTier()))
+                    .setSpeedBoost(1 / 1.67 * Math.pow(0.95, getCoilLevel().getTier()));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
