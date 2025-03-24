@@ -2191,10 +2191,10 @@ public class TextLocalization {
         "Platinum Based Metal Processing",
         "PlatinumBasedTreatmentRecipes");
     public static final String Tooltip_PlatinumBasedTreatment_00 = texter(
-        "Liberate countless Gregs from the fiery crucible of Platinum Processing",
+        "§oLiberate countless Gregs from the fiery crucible of Platinum Processing",
         "Tooltip_PlatinumBasedTreatment_00");
     public static final String Tooltip_PlatinumBasedTreatment_01 = texter(
-        "The Coveted Single-Step Platinum Processing of Countless Aspirants",
+        "§oThe Coveted Single-Step Platinum Processing of Countless Aspirants",
         "Tooltip_PlatinumBasedTreatment_01");
     public static final String Tooltip_PlatinumBasedTreatment_02 = texter(
         "Base Parallelism: 8",
@@ -2203,7 +2203,10 @@ public class TextLocalization {
         "Recipe time & energy reduced by 5% per coil tier",
         "Tooltip_PlatinumBasedTreatment_03");
     public static final String Tooltip_PlatinumBasedTreatment_04 = texter(
-        "Glass tier caps energy hatch tier, +4 parallelism per voltage tier",
+        "Energy hatch limited by glass tier, UHV Glass unlocks all",
+        "Tooltip_PlatinumBasedTreatment_04");
+    public static final String Tooltip_PlatinumBasedTreatment_05 = texter(
+        "Each time the voltage level is increased, the parallelism increases by +4",
         "Tooltip_PlatinumBasedTreatment_04");
     public static final String Tooltip_PlatinumBasedTreatment_Casing_00 = texter(
         "Any Multi-Functional Machine Block",

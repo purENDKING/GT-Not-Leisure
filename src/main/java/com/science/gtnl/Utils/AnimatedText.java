@@ -45,18 +45,21 @@ public class AnimatedText {
     public static final Supplier<String> SNL_QYZG = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
         + ": "
         + AnimatedText.QYZG.get();
-    public static final Supplier<String> SNL_NLXCJH = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
-        + ": "
-        + AnimatedText.NLXCJH.get();
-    public static final Supplier<String> SNL_TOTTO = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
-        + ": "
-        + AnimatedText.TOTTO.get();
     public static final Supplier<String> SNL_QYZG_SRP = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
         + ": "
         + AnimatedText.QYZG.get()
         + RESET
         + " X "
         + AnimatedText.STRUCTURAL_RECONSTRUCTION_PLAN.get();
+    public static final Supplier<String> SNL_NLXCJH = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
+        + ": "
+        + AnimatedText.NLXCJH.get();
+    public static final Supplier<String> SNL_TOTTO = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
+        + ": "
+        + AnimatedText.TOTTO.get();
+    public static final Supplier<String> SNL_PBTR = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
+        + ": "
+        + AnimatedText.PBTR.get();
 
     public static final Supplier<String> SCIENCE_NOT_LEISURE = chain(
         text(TextLocalization.Adder),
@@ -295,6 +298,19 @@ public class AnimatedText {
         text(" X "),
         animatedText(
             "伊甸生态园 by 茯角",
+            1,
+            100,
+            LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GREEN + OBFUSCATED + BOLD + UNDERLINE,
+            AQUA + OBFUSCATED + BOLD + UNDERLINE,
+            BLUE + OBFUSCATED + BOLD + UNDERLINE));
+
+    public static final Supplier<String> PBTR = chain(
+        animatedText(
+            "zero_CM VS Fen'sorbed",
             1,
             100,
             LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,

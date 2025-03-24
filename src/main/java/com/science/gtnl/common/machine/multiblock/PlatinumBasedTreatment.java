@@ -121,6 +121,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
             .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_02)
             .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_03)
             .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_04)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_05)
             .addInfo(TextLocalization.Tooltip_PerfectOverclock)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()

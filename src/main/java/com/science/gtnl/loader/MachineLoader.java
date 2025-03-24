@@ -1,6 +1,6 @@
 package com.science.gtnl.loader;
 
-import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 
 import net.minecraft.item.ItemStack;
 
@@ -558,7 +558,7 @@ public class MachineLoader {
 
         GTNLItemList.PlatinumBasedTreatment.set(
             new PlatinumBasedTreatment(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
-        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_PBTR);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

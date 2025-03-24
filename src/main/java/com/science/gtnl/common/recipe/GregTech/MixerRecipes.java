@@ -103,5 +103,15 @@ public class MixerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_MV)
             .addTo(MNCR);
 
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 1L))
+            .itemOutputs(GTNLItemList.PlatinumBasedTreatment.get(1))
+            .fluidInputs()
+            .specialValue(0)
+            .noOptimize()
+            .duration(27648000)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(MNCR);
+
     }
 }

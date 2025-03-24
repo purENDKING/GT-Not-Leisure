@@ -1955,6 +1955,7 @@ Tooltip_MegaBlastFurnace_01=For every 1800K above the recipe temperature, it wil
 Tooltip_MegaBlastFurnace_02=For every voltage level above MV, temperature will increase by 100K
 Tooltip_MegaBlastFurnace_03=Parallelism = 4 * parallelism provided by the parallel control core
 Tooltip_MegaBlastFurnace_04=400%% faster than the Industrial Blast Furnace
+Tooltip_MegaBlastFurnace_05=Install a UHV or higher Parallel Control Core to unlock §cperfect overclock§7
 Tooltip_MegaBlastFurnace_Casing_00=Any Smelting Furnace Mechanical Block
 Tooltip_MegaBlastFurnace_Casing_01=Top center radioactive silicon alloy mechanical block
 
@@ -1968,6 +1969,18 @@ Tooltip_ElectricBlastFurnace_04=For every voltage level above MV, temperature wi
 Tooltip_ElectricBlastFurnace_05=For every increase in voltage level or coil level, it can process two more items per run
 Tooltip_ElectricBlastFurnace_Casing_00=Any Heat-Insulated Mechanical Block
 Tooltip_ElectricBlastFurnace_Casing_01=Top center grating mechanical block
+
+NamePlatinumBasedTreatment=Platinum Group Industry Integration Hub
+PlatinumBasedTreatmentRecipes=Single-Step Platinum Processing
+gtnl.recipe.PlatinumBasedTreatmentRecipes=Single-Step Platinum Processing
+Tooltip_PlatinumBasedTreatment_00=§oSave millions of Gregs from the depths of platinum processing
+Tooltip_PlatinumBasedTreatment_01=§oThe single-step platinum processing that countless newcomers have been longing for
+Tooltip_PlatinumBasedTreatment_02=Initial parallelism is 8
+Tooltip_PlatinumBasedTreatment_03=For each level of coil upgrade, recipe time and power consumption are reduced by 5%%
+Tooltip_PlatinumBasedTreatment_04=Energy hatch limited by glass tier, UHV Glass unlocks all
+Tooltip_PlatinumBasedTreatment_05=Each time the voltage level is increased, the parallelism increases by +4
+Tooltip_PlatinumBasedTreatment_Casing_00=Any multifunctional machine block
+Tooltip_PlatinumBasedTreatment_Casing_01=Refer to the multiblock structure projection for muffler hatch placement
 
 NameWhiteNightGenerator=White Night Generator
 Tooltip_WhiteNightGenerator_MachineType=§d§lViolet Baptism
