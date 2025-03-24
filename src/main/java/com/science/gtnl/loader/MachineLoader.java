@@ -606,6 +606,10 @@ public class MachineLoader {
             .set(new ElectricBlastFurnace(21110, "ElectricBlastFurnace", TextLocalization.NameElectricBlastFurnace));
         addItemTooltip(GTNLItemList.ElectricBlastFurnace.get(1), AnimatedText.SNL_SRP);
 
+        GTNLItemList.PlatinumBasedTreatment
+            .set(new ElectricBlastFurnace(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
+        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_SRP);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,

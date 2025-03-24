@@ -2184,6 +2184,35 @@ public class TextLocalization {
         "Top center Grate Machine Casing",
         "Tooltip_ElectricBlastFurnace_Casing_01");
 
+    public static final String NamePlatinumBasedTreatment = texter("Platinum Based Treatment", "NamePlatinumBasedTreatment");
+    public static final String Tooltip_PlatinumBasedTreatmentRecipeType = texter(
+        "Platinum Based Metal Processing",
+        "Tooltip_PlatinumBasedTreatmentRecipeType");
+    public static final String Tooltip_PlatinumBasedTreatment_00 = texter(
+        "Liberate countless Gregs from the fiery crucible of Platinum Processing",
+        "Tooltip_PlatinumBasedTreatment_00");
+    public static final String Tooltip_PlatinumBasedTreatment_01 = texter(
+        "The Coveted Single-Step Platinum Processing of Countless Aspirants",
+        "Tooltip_PlatinumBasedTreatment_01");
+    public static final String Tooltip_PlatinumBasedTreatment_02 = texter(
+        "Base Parallelism: 8",
+        "Tooltip_PlatinumBasedTreatment_02");
+    public static final String Tooltip_PlatinumBasedTreatment_03 = texter(
+        "Recipe time & energy reduced by 5% per coil tier",
+        "Tooltip_PlatinumBasedTreatment_03");
+    public static final String Tooltip_PlatinumBasedTreatment_04 = texter(
+        "Glass tier caps energy hatch tier, +4 parallelism per voltage tier",
+        "Tooltip_PlatinumBasedTreatment_04");
+    public static final String Tooltip_PlatinumBasedTreatment_05 = texter(
+        "Non-destructive overclocking enabled",
+        "Tooltip_PlatinumBasedTreatment_05");
+    public static final String Tooltip_PlatinumBasedTreatment_Casing_00 = texter(
+        "Any Multi-Functional Machine Block",
+        "Tooltip_PlatinumBasedTreatment_Casing_00");
+    public static final String Tooltip_PlatinumBasedTreatment_Casing_01 = texter(
+        "Muffler Hatches: See Multiblock Preview for placement",
+        "Tooltip_PlatinumBasedTreatment_Casing_01");
+
     public static final String NameWhiteNightGenerator = texter("White Night Generator", "NameWhiteNightGenerator");
     public static final String Tooltip_WhiteNightGenerator_MachineType = texter(
         "§d§lBaptism of Violet",
