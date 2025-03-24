@@ -2,13 +2,40 @@ package com.science.gtnl.Utils;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 
+import java.util.Arrays;
 import java.util.function.Supplier;
-
-import net.minecraft.util.StatCollector;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 
 public class AnimatedText {
+
+    /**
+     * 构建文本链并生成彩色动画文本。
+     * 只有最后一个文本会应用动画效果，前面的文本会作为普通文本拼接。
+     *
+     * @param texts 可变参数，传入多个文本（最后一个为彩色文本）
+     * @return 动画文本的 Supplier
+     */
+    @SafeVarargs
+    public static Supplier<String> buildTextWithAnimatedEnd(Supplier<String>... texts) {
+        if (texts == null || texts.length == 0) {
+            throw new IllegalArgumentException("至少需要传入一个文本");
+        }
+        Supplier<String> prefixText = chain(Arrays.copyOf(texts, texts.length - 1));
+        Supplier<String> lastText = texts[texts.length - 1];
+        Supplier<String> animatedText = animatedText(
+            lastText.get(),
+            1,
+            80,
+            RED,
+            GOLD,
+            YELLOW,
+            GREEN,
+            AQUA,
+            BLUE,
+            LIGHT_PURPLE);
+        return chain(prefixText, animatedText);
+    }
 
     public static final Supplier<String> SNL_EDEN_GARDEN = () -> AnimatedText.SCIENCE_NOT_LEISURE.get()
         + AnimatedText.EDEN_GARDEN.get();
@@ -277,83 +304,4 @@ public class AnimatedText {
             GREEN + OBFUSCATED + BOLD + UNDERLINE,
             AQUA + OBFUSCATED + BOLD + UNDERLINE,
             BLUE + OBFUSCATED + BOLD + UNDERLINE));
-
-    public static final Supplier<String> NEW_HORIZONS_COIL_0 = chain(
-        animatedText(
-            "179,769,313,486,231,590,772,930,519,078,902,473,361,797,697,894,230,657,273,430,081,",
-            1,
-            80,
-            RED,
-            GOLD,
-            YELLOW,
-            GREEN,
-            AQUA,
-            BLUE,
-            LIGHT_PURPLE));
-
-    public static final Supplier<String> NEW_HORIZONS_COIL_1 = chain(
-        animatedText(
-            "157,732,675,805,500,963,132,708,477,322,407,536,021,120,113,879,871,393,357,658,789,",
-            1,
-            80,
-            GOLD,
-            YELLOW,
-            GREEN,
-            AQUA,
-            BLUE,
-            LIGHT_PURPLE,
-            RED));
-
-    public static final Supplier<String> NEW_HORIZONS_COIL_2 = chain(
-        animatedText(
-            "768,814,416,622,492,847,430,639,474,124,377,767,893,424,865,485,276,302,219,601,246,",
-            1,
-            80,
-            YELLOW,
-            GREEN,
-            AQUA,
-            BLUE,
-            LIGHT_PURPLE,
-            RED,
-            GOLD));
-
-    public static final Supplier<String> NEW_HORIZONS_COIL_3 = chain(
-        animatedText(
-            "094,119,453,082,952,085,005,768,838,150,682,342,462,881,473,913,110,540,827,237,163,",
-            1,
-            80,
-            GREEN,
-            AQUA,
-            BLUE,
-            LIGHT_PURPLE,
-            RED,
-            GOLD,
-            YELLOW));
-
-    public static final Supplier<String> NEW_HORIZONS_COIL_4 = chain(
-        animatedText(
-            "350,510,684,586,298,239,947,245,938,479,716,304,835,356,329,624,224,137,216",
-            1,
-            80,
-            AQUA,
-            BLUE,
-            LIGHT_PURPLE,
-            RED,
-            GOLD,
-            YELLOW,
-            GREEN),
-        text(RESET + StatCollector.translateToLocal("gt.coilunittooltip")));
-
-    public static final Supplier<String> zeroCM = chain(
-        animatedText(
-            "Most machine recipe by zero_CM",
-            1,
-            100,
-            LIGHT_PURPLE + BOLD + OBFUSCATED,
-            RED + BOLD + OBFUSCATED,
-            GOLD + OBFUSCATED + BOLD,
-            YELLOW + OBFUSCATED + BOLD,
-            GREEN + OBFUSCATED + BOLD,
-            AQUA + OBFUSCATED + BOLD,
-            BLUE + OBFUSCATED + BOLD));
 }

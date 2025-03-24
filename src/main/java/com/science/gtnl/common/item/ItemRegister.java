@@ -1,6 +1,7 @@
 package com.science.gtnl.common.item;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.text;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.item.BasicItems.MetaItem;
 import static com.science.gtnl.common.item.ItemAdder.initItem;
@@ -336,7 +337,9 @@ public class ItemRegister {
         registryItems();
         registryItemContainers();
 
-        addItemTooltip(new ItemStack(ItemLoader.SatietyRing, 1), AnimatedText.zeroCM);
+        addItemTooltip(
+            new ItemStack(ItemLoader.SatietyRing, 1),
+            AnimatedText.buildTextWithAnimatedEnd(text("Most machine recipe by zero_CM")));
     }
 
     public static void registryOreDictionary() {
