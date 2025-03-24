@@ -314,6 +314,7 @@ public enum GTNLItemList {
     ElectricBlastFurnace,
 
     AdvancedInfiniteDriller,
+    PlatinumBasedTreatment,
     CrackerHub,
     LargeSteamFormingPress,
     LargeSteamSifter,
