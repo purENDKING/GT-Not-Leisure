@@ -121,6 +121,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_02)
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_03)
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_04)
+            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_05)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()

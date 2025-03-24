@@ -1,6 +1,19 @@
 package com.science.gtnl.common.machine.multiblock;
 
-import bartworks.util.BWUtil;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.Textures.BlockIcons.*;
+import static gregtech.api.util.GTStructureUtility.*;
+import static gregtech.api.util.GTUtility.validMTEList;
+import static gtPlusPlus.core.block.ModBlocks.*;
+
+import javax.annotation.Nonnull;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
@@ -8,6 +21,9 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.recipe.RecipeRegister;
+
+import bartworks.API.BorosilicateGlass;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.enums.*;
@@ -19,29 +35,12 @@ import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import bartworks.API.BorosilicateGlass;
-
-import javax.annotation.Nonnull;
-
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.Textures.BlockIcons.*;
-import static gregtech.api.util.GTStructureUtility.*;
-import static gregtech.api.util.GTUtility.validMTEList;
-import static gtPlusPlus.core.block.ModBlocks.*;
 
 public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatment> implements ISurvivalConstructable {
 
@@ -57,7 +56,6 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
     public final int horizontalOffSet = 7;
     public final int verticalOffSet = 15;
     public final int depthOffSet = 0;
-
 
     public PlatinumBasedTreatment(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -93,7 +91,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                 .addElement('E', ofBlock(sBlockCasings10, 14))
                 .addElement('F', ofBlock(sBlockCasings4, 0))
                 .addElement('G', ofBlock(sBlockCasings4, 1))
-                .addElement('H', ofBlock(sBlockCasings5, 0))
+                .addElement('H', ofCoil(PlatinumBasedTreatment::setCoilLevel, PlatinumBasedTreatment::getCoilLevel))
                 .addElement('I', ofBlock(sBlockCasings8, 0))
                 .addElement('J', ofBlock(sBlockCasings8, 1))
                 .addElement('K', ofFrame(Materials.BlackSteel))
@@ -104,7 +102,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                     'O',
                     buildHatchAdder(PlatinumBasedTreatment.class).casingIndex(TAE.getIndexFromPage(2, 2))
                         .dot(1)
-                        .atLeast(InputHatch, InputBus, OutputHatch,OutputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(InputHatch, InputBus, OutputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 2))))
                 .addElement('P', ofBlock(blockCasingsMisc, 0))
                 .addElement('Q', ofBlock(blockCasingsMisc, 5))
@@ -117,24 +115,25 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.Tooltip_ElectricBlastFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_00)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_01)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_02)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_03)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_04)
-            .addInfo(TextLocalization.Tooltip_ElectricBlastFurnace_05)
+        tt.addMachineType(TextLocalization.PlatinumBasedTreatmentRecipes)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_00)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_01)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_02)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_03)
+            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_04)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
             .beginStructureBlock(15, 17, 18, true)
-            .addInputHatch(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addOutputHatch(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addInputBus(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addOutputBus(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addEnergyHatch(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addMaintenanceHatch(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_00)
-            .addMufflerHatch(TextLocalization.Tooltip_ElectricBlastFurnace_Casing_01)
+            .addInputHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addOutputHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addInputBus(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addOutputBus(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addEnergyHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addMaintenanceHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
+            .addMufflerHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_01)
             .toolTipFinisher();
         return tt;
     }
@@ -206,11 +205,9 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe)
-                    .setEUtDiscount(1.0 - getCoilLevel().getTier() * 0.05)
+                return super.createOverclockCalculator(recipe).setEUtDiscount(1.0 - getCoilLevel().getTier() * 0.05)
                     .setSpeedBoost(1.0 - getCoilLevel().getTier() * 0.05);
             }
-
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
@@ -266,7 +263,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.blastFurnaceRecipes;
+        return RecipeRegister.PlatinumBasedTreatmentRecipes;
     }
 
     @Override

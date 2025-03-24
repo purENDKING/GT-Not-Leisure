@@ -1195,15 +1195,14 @@ Tooltip_GrandAssemblyLine_00=§r§l让亨利·福特也黯然失色。
 Tooltip_GrandAssemblyLine_01=§r以惊人的速度组装硬件。
 Tooltip_GrandAssemblyLine_02=不再需要按顺序输入物品
 Tooltip_GrandAssemblyLine_03=机器可进行跨配方处理！
-Tooltip_GrandAssemblyLine_04=只能安装一个能源仓！
-Tooltip_GrandAssemblyLine_05=不支持激光仓！
-Tooltip_GrandAssemblyLine_06=如果某一配方功率大于能源仓最大功率，将会直接跳过
-Tooltip_GrandAssemblyLine_07=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
-Tooltip_GrandAssemblyLine_08=如果能源仓功率大于配方总功率 * 4，则执行有损超频
-Tooltip_GrandAssemblyLine_09=放入编程电路来限制可超频次数
-Tooltip_GrandAssemblyLine_10=安装UEV及以上的并行控制核心解除能源仓限制
-Tooltip_GrandAssemblyLine_11=安装UIV及以上的并行控制核心解锁§c无损超频§7
-Tooltip_GrandAssemblyLine_12=安装UXV及以上的并行控制核心将额外提供500%%的耗电减免和1900%%的加速(乘算叠加)
+Tooltip_GrandAssemblyLine_04=默认只能安装一个普通或多安能源仓！(小于64安)
+Tooltip_GrandAssemblyLine_05=如果某一配方功率大于能源仓最大功率，将会直接跳过
+Tooltip_GrandAssemblyLine_06=如果配方总功率大于能源仓功率，则总功率减半，时间加倍
+Tooltip_GrandAssemblyLine_07=如果能源仓功率大于配方总功率 * 4，则执行有损超频
+Tooltip_GrandAssemblyLine_08=放入编程电路来限制可超频次数
+Tooltip_GrandAssemblyLine_09=安装UEV及以上的并行控制核心解除能源仓限制
+Tooltip_GrandAssemblyLine_10=安装UIV及以上的并行控制核心解锁§c无损超频§7
+Tooltip_GrandAssemblyLine_11=安装UXV及以上的并行控制核心将额外提供500%%的耗电减免和1900%%的加速(乘算叠加)
 Tooltip_GrandAssemblyLine_Casing=任意进阶电子计算机械方块或防爆玻璃
 
 NamePrecisionAssembler=精密组装机
@@ -1955,6 +1954,7 @@ Tooltip_MegaBlastFurnace_01=每超过配方温度1800K，将进行一次无损�
 Tooltip_MegaBlastFurnace_02=超过MV后的每一级电压，都会将温度提高100K
 Tooltip_MegaBlastFurnace_03=并行数 = 4 * 并行控制核心提供的并行
 Tooltip_MegaBlastFurnace_04=比工业高炉快400%%
+Tooltip_MegaBlastFurnace_05=安装UHV及以上的并行控制核心解锁§c无损超频§7
 Tooltip_MegaBlastFurnace_Casing_00=任意冶炼炉机械方块
 Tooltip_MegaBlastFurnace_Casing_01=顶部中心放射硅岩合金机械方块
 
@@ -1970,13 +1970,13 @@ Tooltip_ElectricBlastFurnace_Casing_00=任意隔热机械方块
 Tooltip_ElectricBlastFurnace_Casing_01=顶部中心格栅机械方块
 
 NamePlatinumBasedTreatment=铂族工业统合枢纽
-Tooltip_PlatinumBasedTreatmentRecipeType=单步铂处理
+PlatinumBasedTreatmentRecipes=单步铂处理
+gtnl.recipe.PlatinumBasedTreatmentRecipes=单步铂处理
 Tooltip_PlatinumBasedTreatment_00=拯救万千格雷人于铂处理的水深火热之中
 Tooltip_PlatinumBasedTreatment_01=无数萌新盼望的单步铂处理
 Tooltip_PlatinumBasedTreatment_02=初始并行为8
-Tooltip_PlatinumBasedTreatment_03=线圈等级每提高一级，配方时间和耗电减少5%
+Tooltip_PlatinumBasedTreatment_03=线圈等级每提高一级，配方时间和耗电减少5%%
 Tooltip_PlatinumBasedTreatment_04=玻璃等级限制能源仓等级，电压每提高一级并行+4
-Tooltip_PlatinumBasedTreatment_05=拥有无损超频
 Tooltip_PlatinumBasedTreatment_Casing_00=任意多功能机械方块
 Tooltip_PlatinumBasedTreatment_Casing_01=消声仓位置请参考多方块结构投影
 

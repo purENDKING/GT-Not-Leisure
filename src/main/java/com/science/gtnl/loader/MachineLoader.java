@@ -23,53 +23,7 @@ import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
-import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
-import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
-import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
-import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
-import com.science.gtnl.common.machine.multiblock.CheatOreProcessingFactory;
-import com.science.gtnl.common.machine.multiblock.ComponentAssembler;
-import com.science.gtnl.common.machine.multiblock.CrackerHub;
-import com.science.gtnl.common.machine.multiblock.DecayHastener;
-import com.science.gtnl.common.machine.multiblock.Desulfurizer;
-import com.science.gtnl.common.machine.multiblock.DraconicFusionCrafting;
-import com.science.gtnl.common.machine.multiblock.EdenGarden;
-import com.science.gtnl.common.machine.multiblock.ElementCopying;
-import com.science.gtnl.common.machine.multiblock.EnergeticPhotovoltaicPowerStation;
-import com.science.gtnl.common.machine.multiblock.FuelRefiningComplex;
-import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
-import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
-import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
-import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
-import com.science.gtnl.common.machine.multiblock.LapotronChip;
-import com.science.gtnl.common.machine.multiblock.LargeBrewer;
-import com.science.gtnl.common.machine.multiblock.LargeCircuitAssembler;
-import com.science.gtnl.common.machine.multiblock.LargeIncubator;
-import com.science.gtnl.common.machine.multiblock.LargeNaquadahReactor;
-import com.science.gtnl.common.machine.multiblock.LargeSteamAlloySmelter;
-import com.science.gtnl.common.machine.multiblock.LargeSteamChemicalBath;
-import com.science.gtnl.common.machine.multiblock.LargeSteamCircuitAssembler;
-import com.science.gtnl.common.machine.multiblock.LargeSteamCrusher;
-import com.science.gtnl.common.machine.multiblock.LargeSteamExtractor;
-import com.science.gtnl.common.machine.multiblock.LargeSteamExtruder;
-import com.science.gtnl.common.machine.multiblock.LargeSteamFormingPress;
-import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
-import com.science.gtnl.common.machine.multiblock.LargeSteamSifter;
-import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
-import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
-import com.science.gtnl.common.machine.multiblock.MatterFabricator;
-import com.science.gtnl.common.machine.multiblock.MeteorMiner;
-import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
-import com.science.gtnl.common.machine.multiblock.NineIndustrialMultiMachine;
-import com.science.gtnl.common.machine.multiblock.PetrochemicalPlant;
-import com.science.gtnl.common.machine.multiblock.PrimitiveDistillationTower;
-import com.science.gtnl.common.machine.multiblock.ProcessingArray;
-import com.science.gtnl.common.machine.multiblock.RareEarthCentrifugal;
-import com.science.gtnl.common.machine.multiblock.ReactionFurnace;
-import com.science.gtnl.common.machine.multiblock.RealArtificialStar;
-import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
-import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
-import com.science.gtnl.common.machine.multiblock.SteamCracking;
+import com.science.gtnl.common.machine.multiblock.*;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
@@ -125,10 +79,6 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.U
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumDryingFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ZpmKuangBiaoTwoGiantNuclearFusionReactor;
-import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
-import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
-import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
-import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import bartworks.API.BorosilicateGlass;
@@ -606,9 +556,9 @@ public class MachineLoader {
             .set(new ElectricBlastFurnace(21110, "ElectricBlastFurnace", TextLocalization.NameElectricBlastFurnace));
         addItemTooltip(GTNLItemList.ElectricBlastFurnace.get(1), AnimatedText.SNL_SRP);
 
-        GTNLItemList.PlatinumBasedTreatment
-            .set(new ElectricBlastFurnace(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
-        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_SRP);
+        GTNLItemList.PlatinumBasedTreatment.set(
+            new PlatinumBasedTreatment(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
+        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

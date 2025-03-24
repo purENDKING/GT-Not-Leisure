@@ -6,28 +6,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
-import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
-import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
-import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
-import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
-import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
-import com.science.gtnl.common.recipe.GTNL.IsaMillRecipes;
-import com.science.gtnl.common.recipe.GTNL.ManaInfusionRecipes;
-import com.science.gtnl.common.recipe.GTNL.MatterFabricatorRecipes;
-import com.science.gtnl.common.recipe.GTNL.MolecularTransformerRecipes;
-import com.science.gtnl.common.recipe.GTNL.NaquadahReactorRecipes;
-import com.science.gtnl.common.recipe.GTNL.NatureSpiritArrayRecipes;
-import com.science.gtnl.common.recipe.GTNL.PetrochemicalPlantRecipes;
-import com.science.gtnl.common.recipe.GTNL.PortalToAlfheimRecipes;
-import com.science.gtnl.common.recipe.GTNL.RareEarthCentrifugalRecipes;
-import com.science.gtnl.common.recipe.GTNL.ReFusionReactorRecipes;
-import com.science.gtnl.common.recipe.GTNL.RealArtificialStarRecipes;
-import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
-import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
-import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
-import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
-import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
+import com.science.gtnl.common.recipe.GTNL.*;
 import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AssemblerRecipes;
@@ -87,7 +66,8 @@ public class RecipeLoader {
             new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
             new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
-            new SpaceAssemblerRecipes(), new FormingPressRecipes(), new PCBFactoryRecipes() };
+            new SpaceAssemblerRecipes(), new FormingPressRecipes(), new PCBFactoryRecipes(),
+            new PlatinumBasedTreatmentRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();
