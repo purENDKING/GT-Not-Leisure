@@ -51,17 +51,17 @@ import gregtech.common.blocks.BlockCasings1;
 public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatment> implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    public byte glassTier = 0;
+    private byte glassTier = 0;
     private int energyHatchTier;
     private static IStructureDefinition<PlatinumBasedTreatment> STRUCTURE_DEFINITION = null;
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String PBT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/platinum_based_treatment";
-    public static final int CASING_INDEX = TAE.getIndexFromPage(2, 2);
-    public static String[][] shape = StructureUtils.readStructureFromFile(PBT_STRUCTURE_FILE_PATH);
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String PBT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/platinum_based_treatment";
+    private static final int CASING_INDEX = TAE.getIndexFromPage(2, 2);
+    private static final String[][] shape = StructureUtils.readStructureFromFile(PBT_STRUCTURE_FILE_PATH);
     private int mCasing;
-    public final int horizontalOffSet = 7;
-    public final int verticalOffSet = 15;
-    public final int depthOffSet = 0;
+    private final int horizontalOffSet = 7;
+    private final int verticalOffSet = 15;
+    private final int depthOffSet = 0;
 
     public PlatinumBasedTreatment(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -106,7 +106,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                 .addElement('N', ofBlock(blockCasings2Misc, 11))
                 .addElement(
                     'O',
-                    buildHatchAdder(PlatinumBasedTreatment.class).casingIndex(TAE.getIndexFromPage(2, 2))
+                    buildHatchAdder(PlatinumBasedTreatment.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, InputBus, OutputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 2))))
@@ -251,7 +251,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
             return false;
         }
         energyHatchTier = checkEnergyHatchTier();
