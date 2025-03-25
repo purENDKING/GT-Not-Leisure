@@ -2,6 +2,8 @@ package com.science.gtnl.common.machine.basicMachine;
 
 import static gregtech.api.enums.Textures.BlockIcons.*;
 
+import net.minecraftforge.fluids.FluidStack;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
@@ -14,6 +16,7 @@ import com.gtnewhorizons.modularui.common.widget.ProgressBar;
 import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.SoundResource;
+import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -22,6 +25,7 @@ import gregtech.api.recipe.BasicUIProperties;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 
 public class SteamAssemblerSteel extends MTEBasicMachineSteel {
@@ -168,5 +172,21 @@ public class SteamAssemblerSteel extends MTEBasicMachineSteel {
     @Override
     public int getCapacity() {
         return 1000;
+    }
+
+    @Override
+    public int checkRecipe() {
+        GTRecipe tRecipe = getRecipeMap().findRecipeQuery()
+            .items(getAllInputs())
+            .fluids(getFillableStack())
+            .voltage(TierEU.MV)
+            .find();
+        if ((tRecipe != null) && (canOutput(tRecipe.mOutputs))
+            && (tRecipe.isRecipeInputEqual(true, new FluidStack[] { getFillableStack() }, getAllInputs()))) {
+            this.mOutputItems[0] = tRecipe.getOutput(0);
+            calculateCustomOverclock(tRecipe);
+            return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
+        }
+        return DID_NOT_FIND_RECIPE;
     }
 }
