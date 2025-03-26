@@ -90,6 +90,18 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         tt.addMachineType(TextLocalization.SmeltingMixingFurnaceRecipeType)
             .addInfo(TextLocalization.Tooltip_SmeltingMixingFurnace_00)
             .addInfo(TextLocalization.Tooltip_SmeltingMixingFurnace_01)
+            .addInfo(TextLocalization.Tooltip_SmeltingMixingFurnace_02)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
+            .addInfo(
+                String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, getWirelessModeProcessingTime()))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -276,7 +288,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     @Override
     public int getWirelessModeProcessingTime() {
-        return 1024;
+        return 200;
     }
 
     @Override
