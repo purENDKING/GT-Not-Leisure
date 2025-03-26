@@ -1759,6 +1759,12 @@ public class TextLocalization {
     public static final String SmeltingMixingFurnaceRecipeType = texter(
         "Smelting Mixing Furnace",
         "SmeltingMixingFurnaceRecipeType");
+    public static final String Tooltip_SmeltingMixingFurnace_00 = texter(
+        "§9§lManipulate substances in an extremely efficient manner",
+        "Tooltip_SmeltingMixingFurnace_00");
+    public static final String Tooltip_SmeltingMixingFurnace_01 = texter(
+        "§9§lFree the production of alloys from the constraints of smelting",
+        "Tooltip_SmeltingMixingFurnace_01");
     public static final String Tooltip_SmeltingMixingFurnace_Casing = texter(
         "Any High Power Casing",
         "Tooltip_SmeltingMixingFurnace_Casing");

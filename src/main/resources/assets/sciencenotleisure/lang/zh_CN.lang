@@ -1755,6 +1755,8 @@ SmeltingMixingFurnaceRecipeType=合金搅拌
 gtnl.recipe.SmeltingMixingFurnaceRecipes=合金搅拌
 SmeltingMixingFurnace_Mode_0=合金搅拌
 SmeltingMixingFurnace_Mode_1=超维度等离子锻炉
+Tooltip_SmeltingMixingFurnace_00=§9§l以极高效的方式操纵物质
+Tooltip_SmeltingMixingFurnace_01=§9§l使合金的制作摆脱冶炼的桎梏
 Tooltip_SmeltingMixingFurnace_Casing=任意超能机械方块
 
 NameProcessingArrayGTNL=处理阵列：重生
