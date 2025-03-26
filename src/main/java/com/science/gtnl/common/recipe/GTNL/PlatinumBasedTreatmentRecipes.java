@@ -60,11 +60,10 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(225, WerkstoffLoader.PTResidue.get(OrePrefixes.dust, 1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 21),
                 MaterialMisc.SODIUM_NITRATE.getDust(49),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 32),
                 GTUtility.copyAmountUnsafe(233, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 140))
             .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 140),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 36),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 42),
                 WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 47),
                 WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 168),
@@ -74,10 +73,9 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 35),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 35))
             .fluidInputs(
-                Materials.Oxygen.getGas(32000),
-                Materials.Hydrogen.getGas(1159000),
-                Materials.Chlorine.getGas(284000),
-                Materials.SaltWater.getGas(23000))
+                Materials.Oxygen.getGas(78000),
+                Materials.Hydrogen.getGas(1182000),
+                Materials.Chlorine.getGas(248000))
             .fluidOutputs(Materials.Ammonia.getGas(46000))
             .specialValue(0)
             .noOptimize()
@@ -92,7 +90,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(100, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 60))
             .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 60),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 40),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 18),
                 WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 72),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 30),
@@ -101,9 +99,9 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 15),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 15))
             .fluidInputs(
-                Materials.SaltWater.getGas(10000),
-                Materials.Hydrogen.getGas(477000),
-                Materials.Chlorine.getGas(87000))
+                Materials.Oxygen.getGas(10000),
+                Materials.Hydrogen.getGas(497000),
+                Materials.Chlorine.getGas(127000))
             .fluidOutputs()
             .specialValue(0)
             .noOptimize()
@@ -157,8 +155,8 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
             .fluidInputs(
                 Materials.Hydrogen.getGas(130000),
                 Materials.CarbonMonoxide.getGas(64000),
-                Materials.Ammonia.getGas(288000))
-            .fluidOutputs(Materials.Ammonia.getGas(64000), Materials.Ethylene.getGas(64000))
+                Materials.Ammonia.getGas(224000))
+            .fluidOutputs(Materials.Ethylene.getGas(64000))
             .specialValue(0)
             .noOptimize()
             .duration(2400)
@@ -173,8 +171,8 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 WerkstoffLoader.PDAmmonia.getFluidOrGas(90000),
                 Materials.Hydrogen.getGas(130000),
                 Materials.CarbonMonoxide.getGas(64000),
-                Materials.Ammonia.getGas(198000))
-            .fluidOutputs(Materials.Ammonia.getGas(64000), Materials.Ethylene.getGas(64000))
+                Materials.Ammonia.getGas(134000))
+            .fluidOutputs(Materials.Ethylene.getGas(64000))
             .specialValue(0)
             .noOptimize()
             .duration(2400)
