@@ -538,6 +538,7 @@ item.InfinityHoe.name=Hoe of Earth's Rebirth
 item.InfinityShovel.name=Shovel of Planet Devourer
 Tooltip_Infinity_Mode_1=Switch to Normal Mode
 Tooltip_Infinity_Mode_2=Switch to Area Mode
+damage.gtnl.infinity=%1$s was shattered by the power of the stars
 
 item.InfinityBucket.name=§6Bucket of the Distant Sea
 Tooltip_InfinityBucket_00=§8§oDevours everything…

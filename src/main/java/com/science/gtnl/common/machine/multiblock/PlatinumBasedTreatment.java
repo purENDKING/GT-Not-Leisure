@@ -251,7 +251,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
         energyHatchTier = checkEnergyHatchTier();

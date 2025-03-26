@@ -12,6 +12,8 @@ public class PortalToAlfheimExplosion implements IProcess {
     public static final DamageSource EXPLOSION = new DamageSource("damage.gtnl.PortalToAlfheimExplode").setExplosion()
         .setDamageBypassesArmor()
         .setDamageIsAbsolute()
+        .setFireDamage()
+        .setProjectile()
         .setDamageAllowedInCreativeMode()
         .setMagicDamage();
 

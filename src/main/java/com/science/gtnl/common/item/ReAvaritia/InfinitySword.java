@@ -1,5 +1,6 @@
 package com.science.gtnl.common.item.ReAvaritia;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.IIcon;
@@ -51,7 +51,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.avaritia.DamageSourceInfinitySword;
 import fox.spiteful.avaritia.LudicrousText;
-import fox.spiteful.avaritia.achievements.Achievements;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
@@ -62,6 +61,13 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     private static final ToolMaterial INFINITY = EnumHelper.addToolMaterial("INFINITY", 32, 9999, 9999F, 9999F, 200);
     private IIcon cosmicMask;
     private IIcon pommel;
+    public static final DamageSource INFINITY_DAMAGE = new DamageSource("damage.gtnl.infinity").setExplosion()
+        .setDamageBypassesArmor()
+        .setDamageIsAbsolute()
+        .setFireDamage()
+        .setProjectile()
+        .setDamageAllowedInCreativeMode()
+        .setMagicDamage();
 
     public InfinitySword() {
         super(INFINITY);
@@ -78,8 +84,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     public boolean hitEntity(ItemStack stack, EntityLivingBase victim, EntityLivingBase attacker) {
         if (attacker.worldObj.isRemote) return true;
 
-        if (victim instanceof EntityPlayer) {
-            EntityPlayer targetPlayer = (EntityPlayer) victim;
+        if (victim instanceof EntityPlayer targetPlayer) {
 
             boolean wearingInfinityArmor = false;
             for (ItemStack armorStack : targetPlayer.inventory.armorInventory) {
@@ -93,14 +98,62 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             }
 
             if (wearingInfinityArmor) {
-                targetPlayer.setHealth(targetPlayer.getHealth() - 4.0F);
+                targetPlayer.setHealth(targetPlayer.getHealth() - 20.0F);
                 return true;
             } else {
+                // 将玩家的盔甲栏和主手的物品变成掉落物
+                dropInventoryItems(targetPlayer);
 
+                // 施加无限伤害
                 applyInfinityDamage(victim, attacker);
             }
         }
         return true;
+    }
+
+    private void dropInventoryItems(EntityPlayer player) {
+        if (player.worldObj.isRemote) {
+            return;
+        }
+
+        for (int i = 0; i < player.inventory.armorInventory.length; i++) {
+            ItemStack armorStack = player.inventory.armorInventory[i];
+            if (armorStack != null) {
+                if (armorStack.hasTagCompound()) {
+                    if (armorStack.getTagCompound()
+                        .hasKey("Energy")) {
+                        armorStack.getTagCompound()
+                            .setInteger("Energy", 0);
+                    }
+                    if (armorStack.getTagCompound()
+                        .hasKey("charge")) {
+                        armorStack.getTagCompound()
+                            .setDouble("charge", 0.0);
+                    }
+                }
+
+                EntityItem entityItem = new EntityItem(
+                    player.worldObj,
+                    player.posX,
+                    player.posY,
+                    player.posZ,
+                    armorStack.copy());
+
+                // 生成掉落物实体
+                player.worldObj.spawnEntityInWorld(entityItem);
+
+                // 清空玩家装备栏
+                player.inventory.armorInventory[i] = null;
+
+                // 标记库存为脏数据
+                player.inventory.markDirty();
+
+                // 更新容器（如果需要）
+                if (player.openContainer != null) {
+                    player.openContainer.detectAndSendChanges();
+                }
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -112,8 +165,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerUpdate(LivingEvent.LivingUpdateEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
                 if (player.isBurning()) {
@@ -164,10 +216,66 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     }
 
     private void applyInfinityDamage(EntityLivingBase target, EntityLivingBase attacker) {
-        DamageSource src = new DamageSourceInfinitySword(attacker).setDamageBypassesArmor();
-        target.attackEntityFrom(src, Float.POSITIVE_INFINITY);
+
+        if (target instanceof EntityPlayer playerTarget) {
+            for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
+                ItemStack armorStack = playerTarget.inventory.armorInventory[i];
+                if (armorStack != null) {
+                    if (armorStack.hasTagCompound()) {
+                        if (armorStack.getTagCompound()
+                            .hasKey("Energy")) {
+                            armorStack.getTagCompound()
+                                .setInteger("Energy", 0);
+                        }
+                        if (armorStack.getTagCompound()
+                            .hasKey("charge")) {
+                            armorStack.getTagCompound()
+                                .setDouble("charge", 0.0);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 使用玩家作为来源的伤害
+        target.attackEntityFrom(getAdminKill(), Float.POSITIVE_INFINITY);
+        DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) attacker);
+        target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+
+        // 使用 Infinity Sword 的特殊伤害
+        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
+
+        // 施加所有其他类型的伤害
+        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
+
+        // 设置目标血量为 0
         target.setHealth(0);
-        target.onDeath(src);
+
+        // 触发目标的死亡事件
+        target.onDeath(INFINITY_DAMAGE);
+
+        // 直接删除目标实体
+        target.worldObj.removeEntity(target);
+        if (target instanceof EntityPlayer playerTarget) {
+            if (!playerTarget.worldObj.isRemote) {
+                playerTarget.setDead();
+                playerTarget.worldObj.updateEntity(playerTarget);
+            }
+        }
     }
 
     @Override
@@ -178,8 +286,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
             for (Entity entity : entities) {
                 // 处理掉落物
-                if (entity instanceof EntityItem) {
-                    EntityItem item = (EntityItem) entity;
+                if (entity instanceof EntityItem item) {
 
                     double centerX = player.posX;
                     double centerY = player.posY + (player.height / 2.0);
@@ -189,8 +296,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 }
 
                 // 处理经验球
-                if (entity instanceof EntityXPOrb) {
-                    EntityXPOrb xpOrb = (EntityXPOrb) entity;
+                if (entity instanceof EntityXPOrb xpOrb) {
 
                     // 将经验球传送到玩家中心
                     double centerX = player.posX;
@@ -259,9 +365,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     private void handlePlayerTarget(EntityPlayer target, EntityPlayer attacker, World world) {
         if (LudicrousItems.isInfinite(target)) {
-            target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 4.0F);
+            target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 20.0F);
 
-            float newHealth = target.getHealth() - 4.0F;
+            float newHealth = target.getHealth() - 20.0F;
             if (newHealth <= 0) {
                 target.setHealth(0);
                 target.onDeath(DamageSource.causePlayerDamage(attacker));
@@ -278,20 +384,67 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     }
 
     private void applyDoubleSweepDamage(EntityLivingBase target, EntityPlayer attacker) {
+        if (!attacker.isSneaking() && target instanceof EntityPlayer) {
+            return;
+        }
+
+        if (target instanceof EntityPlayer playerTarget) {
+            for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
+                ItemStack armorStack = playerTarget.inventory.armorInventory[i];
+                if (armorStack != null) {
+                    if (armorStack.hasTagCompound()) {
+                        if (armorStack.getTagCompound()
+                            .hasKey("Energy")) {
+                            armorStack.getTagCompound()
+                                .setInteger("Energy", 0);
+                        }
+                        if (armorStack.getTagCompound()
+                            .hasKey("charge")) {
+                            armorStack.getTagCompound()
+                                .setDouble("charge", 0.0);
+                        }
+                    }
+                }
+            }
+        }
+
         DamageSource playerSource = DamageSource.causePlayerDamage(attacker);
         target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(getAdminKill(), Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
 
-        DamageSource originalSource = new DamageSourceInfinitySword(attacker).setDamageBypassesArmor();
-        target.attackEntityFrom(originalSource, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
 
         target.setHealth(0);
-        target.onDeath(originalSource);
+
+        target.onDeath(INFINITY_DAMAGE);
+        target.worldObj.removeEntity(target);
+
+        if (target instanceof EntityPlayer playerTarget) {
+            if (!playerTarget.worldObj.isRemote) {
+                playerTarget.setDead();
+                playerTarget.worldObj.updateEntity(playerTarget);
+            }
+        }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerAttacked(LivingAttackEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
             if (player.isUsingItem() && player.getHeldItem() != null
                 && player.getHeldItem()
                     .getItem() == this) {
@@ -300,10 +453,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerDeath(LivingDeathEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
                 event.setCanceled(true); // 取消死亡事件
@@ -314,16 +466,38 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if (!entity.worldObj.isRemote && entity instanceof EntityPlayer) {
-            EntityPlayer victim = (EntityPlayer) entity;
+        if (!entity.worldObj.isRemote && entity instanceof EntityPlayer victim) {
+
             if (victim.capabilities.isCreativeMode && !victim.isDead
                 && victim.getHealth() > 0
                 && !LudicrousItems.isInfinite(victim)) {
-                victim.func_110142_aN()
-                    .func_94547_a(new DamageSourceInfinitySword(player), victim.getHealth(), victim.getHealth());
+
+                DamageSource playerSource = DamageSource.causePlayerDamage(player);
+                victim.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+
+                victim.attackEntityFrom(new DamageSourceInfinitySword(player), Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+
+                victim.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
+                victim.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
+
                 victim.setHealth(0);
-                victim.onDeath(new EntityDamageSource("infinity", player));
-                player.addStat(Achievements.creative_kill, 1);
+
+                victim.onDeath(INFINITY_DAMAGE);
+                victim.worldObj.removeEntity(victim);
+
                 return true;
             }
         }
@@ -411,8 +585,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void interceptLudicrousEvents(LivingDeathEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
             if (LudicrousItems.isInfinite(player)) {
                 event.setCanceled(true);
             }
@@ -452,6 +625,18 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 ModelBiped playerModel = event.renderer.modelBipedMain;
                 playerModel.bipedHead.rotateAngleX = 0;
             }
+        }
+    }
+
+    public static DamageSource getAdminKill() {
+        try {
+            Class<?> clazz = Class.forName("com.brandon3055.draconicevolution.common.items.armor.CustomArmorHandler");
+            Field field = clazz.getDeclaredField("ADMIN_KILL");
+            field.setAccessible(true);
+            return (DamageSource) field.get(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

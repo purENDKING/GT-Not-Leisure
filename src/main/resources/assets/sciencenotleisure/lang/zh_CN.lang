@@ -538,6 +538,7 @@ item.InfinityHoe.name=地蕴复生之锄
 item.InfinityShovel.name=星球吞噬之铲
 Tooltip_Infinity_Mode_1=切换到 普通模式
 Tooltip_Infinity_Mode_2=切换到 范围模式
+damage.gtnl.infinity=%1$s 被星空的力量击碎了
 
 item.InfinityBucket.name=§6远海鲸吞之桶
 Tooltip_InfinityBucket_00=§8§o吞噬一切…
