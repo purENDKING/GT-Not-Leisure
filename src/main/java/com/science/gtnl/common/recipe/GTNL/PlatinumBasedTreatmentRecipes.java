@@ -20,6 +20,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
     @Override
     public void loadRecipes() {
 
+        // 铂金属粉处理
         RecipeBuilder.builder()
             .itemInputs(
                 GTUtility.copyAmountUnsafe(100, WerkstoffLoader.PTMetallicPowder.get(OrePrefixes.dust, 1)),
@@ -51,6 +52,133 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
             .noOptimize()
             .duration(12000)
             .eut(TierEU.RECIPE_IV)
+            .addTo(PBTR);
+
+        // 铂渣粉处理
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.copyAmountUnsafe(225, WerkstoffLoader.PTResidue.get(OrePrefixes.dust, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 21),
+                MaterialMisc.SODIUM_NITRATE.getDust(49),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 32),
+                GTUtility.copyAmountUnsafe(233, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 140))
+            .itemOutputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 140),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 42),
+                WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 47),
+                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 168),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 70),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 7),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 28),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 35),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 35))
+            .fluidInputs(
+                Materials.Oxygen.getGas(32000),
+                Materials.Hydrogen.getGas(1159000),
+                Materials.Chlorine.getGas(284000),
+                Materials.SaltWater.getGas(23000))
+            .fluidOutputs(Materials.Ammonia.getGas(46000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(6000)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(PBTR);
+
+        // 浸出渣处理
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.copyAmountUnsafe(100, WerkstoffLoader.LeachResidue.get(OrePrefixes.dust, 1)),
+                GTUtility.copyAmountUnsafe(100, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 60))
+            .itemOutputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 60),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 18),
+                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 72),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 30),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 3),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 15),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 15))
+            .fluidInputs(
+                Materials.SaltWater.getGas(10000),
+                Materials.Hydrogen.getGas(477000),
+                Materials.Chlorine.getGas(87000))
+            .fluidOutputs()
+            .specialValue(0)
+            .noOptimize()
+            .duration(6000)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(PBTR);
+
+        // 稀有金属渣粉处理
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.copyAmountUnsafe(40, WerkstoffLoader.IrOsLeachResidue.get(OrePrefixes.dust, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 40))
+            .itemOutputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 20),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 2),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 8),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 10))
+            .fluidInputs(Materials.Hydrogen.getGas(30000), Materials.Chlorine.getGas(48000))
+            .fluidOutputs()
+            .specialValue(0)
+            .noOptimize()
+            .duration(2400)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(PBTR);
+
+        // 铱金属渣粉处理
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrLeachResidue.get(OrePrefixes.dust, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 40))
+            .itemOutputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 20),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 8),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 10))
+            .fluidInputs(Materials.Hydrogen.getGas(8000), Materials.Chlorine.getGas(40000))
+            .fluidOutputs()
+            .specialValue(0)
+            .noOptimize()
+            .duration(3000)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(PBTR);
+
+        // 钯金属粉处理
+        RecipeBuilder.builder()
+            .itemInputs(GTUtility.copyAmountUnsafe(90, WerkstoffLoader.PDMetallicPowder.get(OrePrefixes.dust, 1)))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 64))
+            .fluidInputs(
+                Materials.Hydrogen.getGas(130000),
+                Materials.CarbonMonoxide.getGas(64000),
+                Materials.Ammonia.getGas(288000))
+            .fluidOutputs(Materials.Ammonia.getGas(64000), Materials.Ethylene.getGas(64000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(2400)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(PBTR);
+
+        // 富钯氨处理
+        RecipeBuilder.builder()
+            .itemInputs()
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 64))
+            .fluidInputs(
+                WerkstoffLoader.PDAmmonia.getFluidOrGas(90000),
+                Materials.Hydrogen.getGas(130000),
+                Materials.CarbonMonoxide.getGas(64000),
+                Materials.Ammonia.getGas(198000))
+            .fluidOutputs(Materials.Ammonia.getGas(64000), Materials.Ethylene.getGas(64000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(2400)
+            .eut(TierEU.RECIPE_LuV)
             .addTo(PBTR);
     }
 }

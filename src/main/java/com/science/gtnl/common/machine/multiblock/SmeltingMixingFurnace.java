@@ -88,6 +88,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.SmeltingMixingFurnaceRecipeType)
+            .addInfo(TextLocalization.Tooltip_SmeltingMixingFurnace_00)
+            .addInfo(TextLocalization.Tooltip_SmeltingMixingFurnace_01)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
