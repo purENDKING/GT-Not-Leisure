@@ -125,8 +125,8 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
             .fluidOutputs()
             .specialValue(0)
             .noOptimize()
-            .duration(2400)
-            .eut(TierEU.RECIPE_LuV)
+            .duration(1500)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(PBTR);
 
         // 铱金属渣粉处理
@@ -144,8 +144,8 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
             .fluidOutputs()
             .specialValue(0)
             .noOptimize()
-            .duration(3000)
-            .eut(TierEU.RECIPE_IV)
+            .duration(1500)
+            .eut(TierEU.RECIPE_ZPM)
             .addTo(PBTR);
 
         // 钯金属粉处理
