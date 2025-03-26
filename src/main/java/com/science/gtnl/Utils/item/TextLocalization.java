@@ -397,6 +397,8 @@ public class TextLocalization {
     public static final String SteamAssemblerSteel = texter("High Pressure Steam Assembler", "SteamAssemblerSteel");
     public static final String Tooltip_SteamAssembler_00 = texter("Avengers, Assemble!", "Tooltip_SteamAssembler_00");
 
+    public static final String ManaTank = texter("Mana Tank", "ManaTank");
+
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(
         "Disordered Assembly Line",
@@ -1757,7 +1759,7 @@ public class TextLocalization {
         "Smelting Mixing Furnace",
         "NameSmeltingMixingFurnace");
     public static final String SmeltingMixingFurnaceRecipeType = texter(
-        "Smelting Mixing Furnace",
+        "Smelting Mixing Furnace / Dimensionally Transcendent Plasma Forge",
         "SmeltingMixingFurnaceRecipeType");
     public static final String Tooltip_SmeltingMixingFurnace_00 = texter(
         "§9§lManipulate substances in an extremely efficient manner",
@@ -1765,6 +1767,9 @@ public class TextLocalization {
     public static final String Tooltip_SmeltingMixingFurnace_01 = texter(
         "§9§lFree the production of alloys from the constraints of smelting",
         "Tooltip_SmeltingMixingFurnace_01");
+    public static final String Tooltip_SmeltingMixingFurnace_02 = texter(
+        "Place the Transdimensional Alignment Matrix into the controller to enable the Dimensionally Transcendent Plasma Forge recipe.",
+        "Tooltip_SmeltingMixingFurnace_02");
     public static final String Tooltip_SmeltingMixingFurnace_Casing = texter(
         "Any High Power Casing",
         "Tooltip_SmeltingMixingFurnace_Casing");

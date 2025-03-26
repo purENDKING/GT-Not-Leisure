@@ -9,6 +9,7 @@ import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
+import com.science.gtnl.common.machine.basicMachine.ManaTank;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
 import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
@@ -908,6 +909,9 @@ public class MachineLoader {
         GTNLItemList.SteamAssemblerSteel
             .set(new SteamAssemblerSteel(22505, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
         addItemTooltip(GTNLItemList.SteamAssemblerSteel.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaTank.set(new ManaTank(22524, "ManaTank", TextLocalization.ManaTank));
+        addItemTooltip(GTNLItemList.ManaTank.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWire() {

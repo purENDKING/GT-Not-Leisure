@@ -371,6 +371,7 @@ public enum GTNLItemList {
     HvSteamTurbine,
     SteamAssemblerBronze,
     SteamAssemblerSteel,
+    ManaTank,
 
     BigSteamInputHatch,
     SuperDataAccessHatch,
