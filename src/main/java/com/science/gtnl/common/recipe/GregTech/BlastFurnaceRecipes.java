@@ -35,5 +35,16 @@ public class BlastFurnaceRecipes implements IRecipePool {
             .metadata(COIL_HEAT, 10000)
             .addTo(BFR);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Europium, 1),
+                GTUtility.getIntegratedCircuit(11))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Europium, 1))
+            .fluidInputs(Materials.Helium.getGas(1000))
+            .duration(120)
+            .eut(TierEU.RECIPE_IV)
+            .metadata(COIL_HEAT, 8300)
+            .addTo(BFR);
+
     }
 }

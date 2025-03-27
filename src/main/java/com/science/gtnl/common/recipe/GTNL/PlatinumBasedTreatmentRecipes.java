@@ -1,5 +1,7 @@
 package com.science.gtnl.common.recipe.GTNL;
 
+import net.minecraftforge.fluids.FluidRegistry;
+
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -23,31 +25,31 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
         // 铂金属粉处理
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.copyAmountUnsafe(100, WerkstoffLoader.PTMetallicPowder.get(OrePrefixes.dust, 1)),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 7),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 15),
-                GTUtility.copyAmountUnsafe(74, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 45),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumHydroxide, 21),
-                MaterialMisc.SODIUM_NITRATE.getDust(15))
+                GTUtility.copyAmountUnsafe(192, WerkstoffLoader.PTMetallicPowder.get(OrePrefixes.dust, 1)),
+                GTUtility.copyAmountUnsafe(175, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sulfur, 13),
+                GTUtility.copyAmountUnsafe(137, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
+                GTUtility.copyAmountUnsafe(148, MaterialMisc.SODIUM_NITRATE.getDust(1)))
             .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 18),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 5),
-                GTUtility.copyAmountUnsafe(72, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 1)),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 29),
-                WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 15),
-                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 54),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 23),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 3),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 9),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 11),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 11))
+                GTUtility.copyAmountUnsafe(138, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 1)),
+                GTUtility.copyAmountUnsafe(176, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
+                WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 29),
+                GTUtility.copyAmountUnsafe(99, WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 42),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 5),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 17),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 21),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 21),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 17),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 9))
             .fluidInputs(
-                Materials.Oxygen.getGas(176000),
-                Materials.Hydrogen.getGas(561000),
-                Materials.Chlorine.getGas(89000),
-                Materials.Ammonia.getGas(86000))
-            .fluidOutputs(Materials.Ethylene.getGas(29000))
+                Materials.Oxygen.getGas(488000),
+                Materials.Hydrogen.getGas(773800),
+                Materials.Ammonia.getGas(42000))
+            .fluidOutputs(
+                Materials.Ethylene.getGas(176000),
+                Materials.Chlorine.getGas(158000),
+                FluidRegistry.getFluidStack("steam", 14000))
             .specialValue(0)
             .noOptimize()
             .duration(12000)
