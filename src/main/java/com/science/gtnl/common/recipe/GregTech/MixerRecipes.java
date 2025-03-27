@@ -11,6 +11,7 @@ import com.science.gtnl.common.recipe.IRecipePool;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
@@ -19,7 +20,9 @@ import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.item.chemistry.AgriculturalChem;
 import gtPlusPlus.core.material.MaterialMisc;
+import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class MixerRecipes implements IRecipePool {
@@ -101,6 +104,31 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(100)
             .eut(TierEU.RECIPE_MV)
+            .addTo(MNCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(
+                ItemList.Machine_Multi_BlastFurnace.get(6),
+                GregtechItemList.Industrial_Sifter.get(3),
+                ItemList.Distillation_Tower.get(2),
+                ItemList.LargeFluidExtractor.get(1),
+                ItemList.Machine_Multi_Solidifier.get(2),
+                GregtechItemList.Controller_IndustrialFluidHeater.get(1),
+                GregtechItemList.Industrial_Electrolyzer.get(4),
+                GregtechItemList.Industrial_Mixer.get(3),
+                ItemList.Machine_Multi_LargeChemicalReactor.get(25))
+            .itemOutputs(GTNLItemList.PlatinumBasedTreatment.get(1))
+            .fluidInputs(
+                MaterialsAlloy.MARAGING250.getFluidStack(288),
+                MaterialsAlloy.INCONEL_792.getFluidStack(288),
+                Materials.Titanium.getMolten(1152),
+                Materials.StainlessSteel.getMolten(1728),
+                Materials.Iridium.getMolten(9216),
+                Materials.Osmium.getMolten(9216))
+            .specialValue(0)
+            .noOptimize()
+            .duration(27648000)
+            .eut(TierEU.RECIPE_LV)
             .addTo(MNCR);
 
     }

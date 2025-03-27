@@ -1,6 +1,6 @@
 package com.science.gtnl.loader;
 
-import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 
 import net.minecraft.item.ItemStack;
 
@@ -9,6 +9,7 @@ import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
+import com.science.gtnl.common.machine.basicMachine.ManaTank;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
 import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
@@ -19,6 +20,7 @@ import com.science.gtnl.common.machine.hatch.DualOutputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousInputBus;
 import com.science.gtnl.common.machine.hatch.HumongousNinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
+import com.science.gtnl.common.machine.hatch.ManaDynamoHatch;
 import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
@@ -62,6 +64,7 @@ import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
 import com.science.gtnl.common.machine.multiblock.NineIndustrialMultiMachine;
 import com.science.gtnl.common.machine.multiblock.PetrochemicalPlant;
+import com.science.gtnl.common.machine.multiblock.PlatinumBasedTreatment;
 import com.science.gtnl.common.machine.multiblock.PrimitiveDistillationTower;
 import com.science.gtnl.common.machine.multiblock.ProcessingArray;
 import com.science.gtnl.common.machine.multiblock.RareEarthCentrifugal;
@@ -606,9 +609,9 @@ public class MachineLoader {
             .set(new ElectricBlastFurnace(21110, "ElectricBlastFurnace", TextLocalization.NameElectricBlastFurnace));
         addItemTooltip(GTNLItemList.ElectricBlastFurnace.get(1), AnimatedText.SNL_SRP);
 
-        GTNLItemList.PlatinumBasedTreatment
-            .set(new ElectricBlastFurnace(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
-        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_SRP);
+        GTNLItemList.PlatinumBasedTreatment.set(
+            new PlatinumBasedTreatment(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
+        addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_PBTR);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
@@ -907,11 +910,30 @@ public class MachineLoader {
         GTNLItemList.SteamAssemblerSteel
             .set(new SteamAssemblerSteel(22505, "HighPressureSteamAssembler", TextLocalization.SteamAssemblerSteel));
         addItemTooltip(GTNLItemList.SteamAssemblerSteel.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaTank.set(new ManaTank(22524, "ManaTank", TextLocalization.ManaTank));
+        addItemTooltip(GTNLItemList.ManaTank.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchLV
+            .set(new ManaDynamoHatch(22525, "ManaDynamoHatchLV", TextLocalization.ManaDynamoHatchLV, 1, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchHV
+            .set(new ManaDynamoHatch(22526, "ManaDynamoHatchHV", TextLocalization.ManaDynamoHatchHV, 3, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchIV
+            .set(new ManaDynamoHatch(22527, "ManaDynamoHatchIV", TextLocalization.ManaDynamoHatchIV, 5, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchZPM
+            .set(new ManaDynamoHatch(22528, "ManaDynamoHatchZPM", TextLocalization.ManaDynamoHatchZPM, 7, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWire() {
         CrackRecipeAdder.registerWire(22506, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-        MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22519, 2000, 2800, true);
+        MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22519, 4000, 3000, true);
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);

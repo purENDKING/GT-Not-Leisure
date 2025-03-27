@@ -397,6 +397,36 @@ public class TextLocalization {
     public static final String SteamAssemblerSteel = texter("High Pressure Steam Assembler", "SteamAssemblerSteel");
     public static final String Tooltip_SteamAssembler_00 = texter("Avengers, Assemble!", "Tooltip_SteamAssembler_00");
 
+    public static final String ManaTank = texter("Mana Tank", "ManaTank");
+    public static final String Tooltip_ManaTank_00 = texter(
+        "Mana can be drawn from nearby mana pools and mana flowers",
+        "Tooltip_ManaTank_00");
+    public static final String Tooltip_ManaTank_01 = texter(
+        "If an Eternal Mana Pool is detected, it will be filled instantly",
+        "Tooltip_ManaTank_01");
+    public static final String Tooltip_ManaTank_02 = texter("Conversion ratio is 1:1", "Tooltip_ManaTank_02");
+    public static final String Tooltip_ManaTank_03 = texter(
+        "Right-click with the screwdriver to switch modes",
+        "Tooltip_ManaTank_03");
+
+    public static final String ManaDynamoHatchLV = texter("Mana Dynamo Hatch (LV)", "ManaDynamoHatchLV");
+    public static final String ManaDynamoHatchHV = texter("Mana Dynamo Hatch (HV)", "ManaDynamoHatchHV");
+    public static final String ManaDynamoHatchIV = texter("Mana Dynamo Hatch (IV)", "ManaDynamoHatchIV");
+    public static final String ManaDynamoHatchZPM = texter("Mana Dynamo Hatch (ZPM)", "ManaDynamoHatchZPM");
+    public static final String Tooltip_ManaDynamoHatch_00 = texter(
+        "Mana can be drawn from nearby mana pools and mana flowers",
+        "Tooltip_ManaDynamoHatch_00");
+    public static final String Tooltip_ManaDynamoHatch_01 = texter(
+        "Converts Mana into EU",
+        "Tooltip_ManaDynamoHatch_01");
+    public static final String Tooltip_ManaDynamoHatch_02 = texter(
+        "Base rate: 100L of Mana -> 1 EU",
+        "Tooltip_ManaDynamoHatch_02");
+    public static final String Tooltip_ManaDynamoHatch_03 = texter("Fluid capacity: ", "Tooltip_ManaDynamoHatch_03");
+    public static final String Tooltip_ManaDynamoHatch_04 = texter(
+        "Right-click with the screwdriver to switch modes",
+        "Tooltip_ManaDynamoHatch_04");
+
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(
         "Disordered Assembly Line",
@@ -414,32 +444,29 @@ public class TextLocalization {
         "The machine can perform cross recipe processing!",
         "Tooltip_GrandAssemblyLine_03");
     public static final String Tooltip_GrandAssemblyLine_04 = texter(
-        "Only one energy hatch can be installed!",
+        "By default,only one energy hatch or Amp Hatch can be installed!(Less than 64A)",
         "Tooltip_GrandAssemblyLine_04");
     public static final String Tooltip_GrandAssemblyLine_05 = texter(
-        "Not compatible with laser energy hatch!",
+        "If the power of a certain formula is greater than the maximum power of the energy warehouse, it will be skipped directly",
         "Tooltip_GrandAssemblyLine_05");
     public static final String Tooltip_GrandAssemblyLine_06 = texter(
-        "If the power of a certain formula is greater than the maximum power of the energy warehouse, it will be skipped directly",
+        "If the total power of the formula is greater than the power of the energy warehouse, the total power will be halved and the time will be doubled",
         "Tooltip_GrandAssemblyLine_06");
     public static final String Tooltip_GrandAssemblyLine_07 = texter(
-        "If the total power of the formula is greater than the power of the energy warehouse, the total power will be halved and the time will be doubled",
+        "If the power of the energy warehouse is greater than 4 times the total power of the formula, perform a lossy overclocking operation",
         "Tooltip_GrandAssemblyLine_07");
     public static final String Tooltip_GrandAssemblyLine_08 = texter(
-        "If the power of the energy warehouse is greater than 4 times the total power of the formula, perform a lossy overclocking operation",
+        "Inserting programming circuits to limit the number of overclocking cycles allowed",
         "Tooltip_GrandAssemblyLine_08");
     public static final String Tooltip_GrandAssemblyLine_09 = texter(
-        "Inserting programming circuits to limit the number of overclocking cycles allowed",
+        "Install UEV and above parallel control cores to lift energy storage restrictions",
         "Tooltip_GrandAssemblyLine_09");
     public static final String Tooltip_GrandAssemblyLine_10 = texter(
-        "Install UEV and above parallel control cores to lift energy storage restrictions",
+        "Install UIV and above parallel control cores to unlock §cperfect overclock§7",
         "Tooltip_GrandAssemblyLine_10");
     public static final String Tooltip_GrandAssemblyLine_11 = texter(
-        "Install UIV and above parallel control cores to unlock §cperfect overclock§7",
-        "Tooltip_GrandAssemblyLine_11");
-    public static final String Tooltip_GrandAssemblyLine_12 = texter(
         "Installing UXV and above parallel control cores will provide an additional 500%% power reduction and 1900%% acceleration (multiplicatively stacked)",
-        "Tooltip_GrandAssemblyLine_12");
+        "Tooltip_GrandAssemblyLine_11");
     public static final String Tooltip_GrandAssemblyLine_Casing = texter(
         "Ang Advanced Computer Casing Or Reinforced Glass",
         "Tooltip_GrandAssemblyLine_Casing");
@@ -1760,8 +1787,17 @@ public class TextLocalization {
         "Smelting Mixing Furnace",
         "NameSmeltingMixingFurnace");
     public static final String SmeltingMixingFurnaceRecipeType = texter(
-        "Smelting Mixing Furnace",
+        "Smelting Mixing Furnace / Dimensionally Transcendent Plasma Forge",
         "SmeltingMixingFurnaceRecipeType");
+    public static final String Tooltip_SmeltingMixingFurnace_00 = texter(
+        "§9§lManipulate substances in an extremely efficient manner",
+        "Tooltip_SmeltingMixingFurnace_00");
+    public static final String Tooltip_SmeltingMixingFurnace_01 = texter(
+        "§9§lFree the production of alloys from the constraints of smelting",
+        "Tooltip_SmeltingMixingFurnace_01");
+    public static final String Tooltip_SmeltingMixingFurnace_02 = texter(
+        "Place the Transdimensional Alignment Matrix into the controller to enable the Dimensionally Transcendent Plasma Forge recipe.",
+        "Tooltip_SmeltingMixingFurnace_02");
     public static final String Tooltip_SmeltingMixingFurnace_Casing = texter(
         "Any High Power Casing",
         "Tooltip_SmeltingMixingFurnace_Casing");
@@ -2148,6 +2184,9 @@ public class TextLocalization {
     public static final String Tooltip_MegaBlastFurnace_04 = texter(
         "400%% faster than Blast Furnace",
         "Tooltip_MegaBlastFurnace_04");
+    public static final String Tooltip_MegaBlastFurnace_05 = texter(
+        "Install UHV and above parallel control cores to unlock §cperfect overclock§7",
+        "Tooltip_MegaBlastFurnace_05");
     public static final String Tooltip_MegaBlastFurnace_Casing_00 = texter(
         "Any Blast Smelter Casing Block",
         "Tooltip_MegaBlastFurnace_Casing_00");
@@ -2184,15 +2223,17 @@ public class TextLocalization {
         "Top center Grate Machine Casing",
         "Tooltip_ElectricBlastFurnace_Casing_01");
 
-    public static final String NamePlatinumBasedTreatment = texter("Platinum Based Treatment", "NamePlatinumBasedTreatment");
-    public static final String Tooltip_PlatinumBasedTreatmentRecipeType = texter(
+    public static final String NamePlatinumBasedTreatment = texter(
+        "Platinum Based Treatment",
+        "NamePlatinumBasedTreatment");
+    public static final String PlatinumBasedTreatmentRecipes = texter(
         "Platinum Based Metal Processing",
-        "Tooltip_PlatinumBasedTreatmentRecipeType");
+        "PlatinumBasedTreatmentRecipes");
     public static final String Tooltip_PlatinumBasedTreatment_00 = texter(
-        "Liberate countless Gregs from the fiery crucible of Platinum Processing",
+        "§oLiberate countless Gregs from the fiery crucible of Platinum Processing",
         "Tooltip_PlatinumBasedTreatment_00");
     public static final String Tooltip_PlatinumBasedTreatment_01 = texter(
-        "The Coveted Single-Step Platinum Processing of Countless Aspirants",
+        "§oThe Coveted Single-Step Platinum Processing of Countless Aspirants",
         "Tooltip_PlatinumBasedTreatment_01");
     public static final String Tooltip_PlatinumBasedTreatment_02 = texter(
         "Base Parallelism: 8",
@@ -2201,11 +2242,11 @@ public class TextLocalization {
         "Recipe time & energy reduced by 5% per coil tier",
         "Tooltip_PlatinumBasedTreatment_03");
     public static final String Tooltip_PlatinumBasedTreatment_04 = texter(
-        "Glass tier caps energy hatch tier, +4 parallelism per voltage tier",
+        "Energy hatch limited by glass tier, UHV Glass unlocks all",
         "Tooltip_PlatinumBasedTreatment_04");
     public static final String Tooltip_PlatinumBasedTreatment_05 = texter(
-        "Non-destructive overclocking enabled",
-        "Tooltip_PlatinumBasedTreatment_05");
+        "Each time the voltage level is increased, the parallelism increases by +4",
+        "Tooltip_PlatinumBasedTreatment_04");
     public static final String Tooltip_PlatinumBasedTreatment_Casing_00 = texter(
         "Any Multi-Functional Machine Block",
         "Tooltip_PlatinumBasedTreatment_Casing_00");

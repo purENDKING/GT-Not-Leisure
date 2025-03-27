@@ -1,7 +1,7 @@
 package com.science.gtnl.common.block;
 
-import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.RESET;
-import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.addItemTooltip;
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
+import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.text;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -110,11 +110,26 @@ public class BlockRegister {
                 "NewHorizonsCoil",
                 1,
                 new String[] { RESET + StatCollector.translateToLocal("gt.coilheattooltip") }));
-        addItemTooltip(GTNLItemList.NewHorizonsCoil.get(1), AnimatedText.NEW_HORIZONS_COIL_0);
-        addItemTooltip(GTNLItemList.NewHorizonsCoil.get(1), AnimatedText.NEW_HORIZONS_COIL_1);
-        addItemTooltip(GTNLItemList.NewHorizonsCoil.get(1), AnimatedText.NEW_HORIZONS_COIL_2);
-        addItemTooltip(GTNLItemList.NewHorizonsCoil.get(1), AnimatedText.NEW_HORIZONS_COIL_3);
-        addItemTooltip(GTNLItemList.NewHorizonsCoil.get(1), AnimatedText.NEW_HORIZONS_COIL_4);
+        addItemTooltip(
+            GTNLItemList.NewHorizonsCoil.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(
+                text("179,769,313,486,231,590,772,930,519,078,902,473,361,797,697,894,230,657,273,430,081,")));
+        addItemTooltip(
+            GTNLItemList.NewHorizonsCoil.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(
+                text("157,732,675,805,500,963,132,708,477,322,407,536,021,120,113,879,871,393,357,658,789,")));
+        addItemTooltip(
+            GTNLItemList.NewHorizonsCoil.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(
+                text("768,814,416,622,492,847,430,639,474,124,377,767,893,424,865,485,276,302,219,601,246,")));
+        addItemTooltip(
+            GTNLItemList.NewHorizonsCoil.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(
+                text("094,119,453,082,952,085,005,768,838,150,682,342,462,881,473,913,110,540,827,237,163,")));
+        addItemTooltip(
+            GTNLItemList.NewHorizonsCoil.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(
+                text("350,510,684,586,298,239,947,245,938,479,716,304,835,356,329,624,224,137,216")));
 
         GTNLItemList.StargateCoil.set(ItemBlockBase.initMetaBlock("StargateCoil", 2));
         GTNLItemList.BlackLampOff.set(

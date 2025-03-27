@@ -371,7 +371,7 @@ public enum GTNLItemList {
     HvSteamTurbine,
     SteamAssemblerBronze,
     SteamAssemblerSteel,
-
+    ManaTank,
     BigSteamInputHatch,
     SuperDataAccessHatch,
     FluidManaInputHatch,
@@ -424,7 +424,11 @@ public enum GTNLItemList {
     DualInputHatchUIV,
     DualInputHatchUMV,
     DualInputHatchUXV,
-    DualInputHatchMAX;
+    DualInputHatchMAX,
+    ManaDynamoHatchLV,
+    ManaDynamoHatchHV,
+    ManaDynamoHatchIV,
+    ManaDynamoHatchZPM;
 
     public boolean mHasNotBeenSet;
     public boolean mDeprecated;

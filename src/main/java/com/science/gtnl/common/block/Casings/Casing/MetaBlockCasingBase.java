@@ -17,7 +17,7 @@ import gregtech.api.util.GTUtility;
  */
 public abstract class MetaBlockCasingBase extends MetaCasingBase implements ICasing {
 
-    public static final byte TEXTURE_PAGE_INDEX = 115;
+    public static final byte TEXTURE_PAGE_INDEX = 116;
 
     static {
         GTUtility.addTexturePage(TEXTURE_PAGE_INDEX);

@@ -122,7 +122,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_09)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_10)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_11)
-            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_12)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)

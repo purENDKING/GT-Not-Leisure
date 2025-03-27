@@ -343,4 +343,15 @@ public class RecipeRegister {
                 .setMaxRecipesPerPage(1))
         .disableOptimize()
         .build();
+
+    public static RecipeMap<RecipeMapBackend> PlatinumBasedTreatmentRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.PlatinumBasedTreatmentRecipes")
+        .maxIO(8, 12, 4, 4)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .frontend(GeneralFrontend::new)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.PlatinumBasedTreatment.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
 }
