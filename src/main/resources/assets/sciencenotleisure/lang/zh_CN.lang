@@ -21,6 +21,22 @@ ManaTank=魔力缸
 Tooltip_ManaTank_00=抽取附近魔力池的魔力
 Tooltip_ManaTank_01=如果检查到永恒魔力池，将直接填满
 Tooltip_ManaTank_02=转换比例为1 : 1
+Tooltip_ManaTank_03=使用螺丝刀右键来切换模式
+Mode_ManaTank_00=从魔力池抽取魔力到魔力缸
+Mode_ManaTank_01=从魔力缸抽取魔力到魔力池
+
+ManaDynamoHatchLV=稀释魔力动力仓
+ManaDynamoHatchHV=魔力动力仓
+ManaDynamoHatchIV=神话动力仓
+ManaDynamoHatchZPM=盖亚动力仓
+Tooltip_ManaDynamoHatch_00=将魔力转换为EU
+Tooltip_ManaDynamoHatch_01=可以从附近的魔力池和魔力花抽取魔力
+Tooltip_ManaDynamoHatch_02=基础效率: 2mana / EU
+Tooltip_ManaDynamoHatch_03=流体容量: 
+Tooltip_ManaDynamoHatch_04=使用螺丝刀右键来切换模式
+Mode_ManaDynamoHatch_00=从魔力能源仓抽取魔力到魔力池
+Mode_ManaDynamoHatch_01=从魔力池抽取魔力到魔力能源仓
+Info_ManaDynamoHatch_00=存储魔力: 
 
 BigSteamInputHatch=大型蒸汽仓
 
@@ -1486,7 +1502,7 @@ gtnl.recipe.RecombinationFusionReactorRecipes=重聚变反应堆
 gtnl.recipe.GenerationEarthEngineRecipeType=重聚变反应堆
 Tooltip_GenerationEarthEngine_00=尽管多年过去了，它仍然屹立不倒
 Tooltip_GenerationEarthEngine_01=人类技术巅峰之作！
-Tooltip_GenerationEarthEngine_Casing=任意批处理机械方块
+Tooltip_GenerationEarthEngine_Casing=任意批量生产框架
 
 NameBloodSoulSacrificialArray=血魂祭祀阵
 gtnl.recipe.BloodSoulTradingRecipes=血魂交易

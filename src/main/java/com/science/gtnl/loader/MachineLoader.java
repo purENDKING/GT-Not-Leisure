@@ -20,6 +20,7 @@ import com.science.gtnl.common.machine.hatch.DualOutputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousInputBus;
 import com.science.gtnl.common.machine.hatch.HumongousNinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
+import com.science.gtnl.common.machine.hatch.ManaDynamoHatch;
 import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
@@ -912,6 +913,22 @@ public class MachineLoader {
 
         GTNLItemList.ManaTank.set(new ManaTank(22524, "ManaTank", TextLocalization.ManaTank));
         addItemTooltip(GTNLItemList.ManaTank.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchLV
+            .set(new ManaDynamoHatch(22525, "ManaDynamoHatchLV", TextLocalization.ManaDynamoHatchLV, 1, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchHV
+            .set(new ManaDynamoHatch(22526, "ManaDynamoHatchHV", TextLocalization.ManaDynamoHatchHV, 3, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchIV
+            .set(new ManaDynamoHatch(22527, "ManaDynamoHatchIV", TextLocalization.ManaDynamoHatchIV, 5, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaDynamoHatchZPM
+            .set(new ManaDynamoHatch(22528, "ManaDynamoHatchZPM", TextLocalization.ManaDynamoHatchZPM, 7, 16));
+        addItemTooltip(GTNLItemList.ManaDynamoHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWire() {

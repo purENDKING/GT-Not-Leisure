@@ -398,6 +398,34 @@ public class TextLocalization {
     public static final String Tooltip_SteamAssembler_00 = texter("Avengers, Assemble!", "Tooltip_SteamAssembler_00");
 
     public static final String ManaTank = texter("Mana Tank", "ManaTank");
+    public static final String Tooltip_ManaTank_00 = texter(
+        "Extract mana from nearby mana pools",
+        "Tooltip_ManaTank_00");
+    public static final String Tooltip_ManaTank_01 = texter(
+        "If an Eternal Mana Pool is detected, it will be filled instantly",
+        "Tooltip_ManaTank_01");
+    public static final String Tooltip_ManaTank_02 = texter("Conversion ratio is 1:1", "Tooltip_ManaTank_02");
+    public static final String Tooltip_ManaTank_03 = texter(
+        "Right-click with the screwdriver to switch modes",
+        "Tooltip_ManaTank_03");
+
+    public static final String ManaDynamoHatchLV = texter("Mana Dynamo Hatch (LV)", "ManaDynamoHatchLV");
+    public static final String ManaDynamoHatchHV = texter("Mana Dynamo Hatch (HV)", "ManaDynamoHatchHV");
+    public static final String ManaDynamoHatchIV = texter("Mana Dynamo Hatch (IV)", "ManaDynamoHatchIV");
+    public static final String ManaDynamoHatchZPM = texter("Mana Dynamo Hatch (ZPM)", "ManaDynamoHatchZPM");
+    public static final String Tooltip_ManaDynamoHatch_00 = texter(
+        "Mana can be drawn from nearby mana pools and mana flowers",
+        "Tooltip_ManaDynamoHatch_00");
+    public static final String Tooltip_ManaDynamoHatch_01 = texter(
+        "Converts Mana into EU",
+        "Tooltip_ManaDynamoHatch_01");
+    public static final String Tooltip_ManaDynamoHatch_02 = texter(
+        "Base rate: 100L of Mana -> 1 EU",
+        "Tooltip_ManaDynamoHatch_02");
+    public static final String Tooltip_ManaDynamoHatch_03 = texter("Fluid capacity: ", "Tooltip_ManaDynamoHatch_03");
+    public static final String Tooltip_ManaDynamoHatch_04 = texter(
+        "Right-click with the screwdriver to switch modes",
+        "Tooltip_ManaDynamoHatch_04");
 
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(

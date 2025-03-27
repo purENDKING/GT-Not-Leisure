@@ -6,12 +6,14 @@ import static gregtech.api.util.GTUtility.formatNumbers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -19,7 +21,12 @@ import net.minecraftforge.fluids.FluidStack;
 import com.gtnewhorizons.modularui.api.math.Alignment;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
-import com.gtnewhorizons.modularui.common.widget.*;
+import com.gtnewhorizons.modularui.common.widget.CycleButtonWidget;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
+import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
+import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.gui.modularui.GTUITextures;
@@ -30,18 +37,21 @@ import gregtech.api.util.GTLanguageManager;
 import gregtech.api.util.GTUtility;
 import gregtech.common.gui.modularui.widget.FluidLockWidget;
 import gregtech.common.tileentities.storage.MTEDigitalTankBase;
+import vazkii.botania.api.subtile.ManaHelper;
+import vazkii.botania.api.subtile.SubTileEntity;
+import vazkii.botania.api.subtile.SubTileGenerating;
+import vazkii.botania.common.block.tile.TileSpecialFlower;
 import vazkii.botania.common.block.tile.mana.TilePool;
 
 public class ManaTank extends MTEDigitalTankBase {
 
+    private boolean isLiquidizerMode = true;
+    private static final int MANA_POOL_RADIUS = 5;
+    private static final int MANA_FLOWER_RADIUS = 6;
     private static FluidStack fluidMana;
 
     public ManaTank(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional, 10);
-    }
-
-    public ManaTank(String aName, String aDescription, ITexture[][][] aTextures) {
-        super(aName, 10, aDescription, aTextures);
     }
 
     public ManaTank(String aName, String[] aDescription, ITexture[][][] aTextures) {
@@ -57,7 +67,7 @@ public class ManaTank extends MTEDigitalTankBase {
     public String[] getInfoData() {
 
         if (mFluid == null) {
-            return new String[] { EnumChatFormatting.BLUE + "Super Tank" + EnumChatFormatting.RESET, "Stored Fluid:",
+            return new String[] { EnumChatFormatting.BLUE + "Mana Tank" + EnumChatFormatting.RESET, "Stored Fluid:",
                 EnumChatFormatting.GOLD + "No Fluid" + EnumChatFormatting.RESET,
                 EnumChatFormatting.GREEN + "0 L"
                     + EnumChatFormatting.RESET
@@ -67,7 +77,7 @@ public class ManaTank extends MTEDigitalTankBase {
                     + " L"
                     + EnumChatFormatting.RESET };
         }
-        return new String[] { EnumChatFormatting.BLUE + "Super Tank" + EnumChatFormatting.RESET, "Stored Fluid:",
+        return new String[] { EnumChatFormatting.BLUE + "Mana Tank" + EnumChatFormatting.RESET, "Stored Fluid:",
             EnumChatFormatting.GOLD + mFluid.getLocalizedName() + EnumChatFormatting.RESET,
             EnumChatFormatting.GREEN + GTUtility.formatNumbers(mFluid.amount)
                 + " L"
@@ -81,9 +91,10 @@ public class ManaTank extends MTEDigitalTankBase {
 
     @Override
     public void addAdditionalTooltipInformation(ItemStack stack, List<String> tooltip) {
-        tooltip.add(StatCollector.translateToLocalFormatted("Tooltip_ManaTank_00"));
-        tooltip.add(StatCollector.translateToLocalFormatted("Tooltip_ManaTank_01"));
-        tooltip.add(StatCollector.translateToLocalFormatted("Tooltip_ManaTank_02"));
+        tooltip.add(TextLocalization.Tooltip_ManaTank_00);
+        tooltip.add(TextLocalization.Tooltip_ManaTank_01);
+        tooltip.add(TextLocalization.Tooltip_ManaTank_02);
+        tooltip.add(TextLocalization.Tooltip_ManaTank_03);
         if (stack.hasTagCompound()
             && (stack.stackTagCompound.hasKey("mFluid") || stack.stackTagCompound.hasKey("lockedFluidName"))) {
             final FluidStack tContents = FluidStack
@@ -113,6 +124,14 @@ public class ManaTank extends MTEDigitalTankBase {
     }
 
     @Override
+    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ,
+        ItemStack aTool) {
+        isLiquidizerMode = !isLiquidizerMode;
+        GTUtility
+            .sendChatToPlayer(aPlayer, StatCollector.translateToLocal("Mode_ManaTank_0" + (isLiquidizerMode ? 0 : 1)));
+    }
+
+    @Override
     public void setItemNBT(NBTTagCompound aNBT) {
         if (mFluid != null && mFluid.amount >= 0) {
             aNBT.setTag("mFluid", mFluid.writeToNBT(new NBTTagCompound()));
@@ -135,6 +154,7 @@ public class ManaTank extends MTEDigitalTankBase {
         aNBT.setBoolean("mVoidFluidFull", this.mVoidFluidFull);
         aNBT.setBoolean("mLockFluid", mLockFluid);
         aNBT.setString("lockedFluidName", lockedFluidName);
+        aNBT.setBoolean("isLiquidizerMode", isLiquidizerMode);
         aNBT.setBoolean("mAllowInputFromOutputSide", this.mAllowInputFromOutputSide);
     }
 
@@ -145,6 +165,7 @@ public class ManaTank extends MTEDigitalTankBase {
         mVoidFluidPart = aNBT.getBoolean("mVoidOverflow");
         mVoidFluidFull = aNBT.getBoolean("mVoidFluidFull");
         mLockFluid = aNBT.getBoolean("mLockFluid");
+        isLiquidizerMode = aNBT.getBoolean("isLiquidizerMode");
         setLockedFluidName(aNBT.getString("lockedFluidName"));
         mAllowInputFromOutputSide = aNBT.getBoolean("mAllowInputFromOutputSide");
     }
@@ -237,84 +258,119 @@ public class ManaTank extends MTEDigitalTankBase {
         super.onPostTick(aBaseMetaTileEntity, aTick);
         if (aBaseMetaTileEntity.isClientSide()) return;
 
-        // 获取以仓室为中心，XYZ轴半径5格内的所有魔力池
-        List<TilePool> pools = findManaPoolsInRange(aBaseMetaTileEntity);
-        if (pools.isEmpty()) return; // 如果没有魔力池，则不执行任何操作
+        if (aBaseMetaTileEntity.isAllowedToWork() && aTick % 128 == 0) {
+            List<TilePool> pools = findManaPoolsInRange(aBaseMetaTileEntity);
+            List<SubTileGenerating> flowers = findGeneratingFlowersInRange(aBaseMetaTileEntity);
 
-        // 检查是否存在 meta 为1的魔力池
-        for (TilePool pool : pools) {
-            if (isDropMetaValid(pool)) {
-                // 如果 meta 为1，直接填满仓室并返回
-                fillChamberToMax();
-                return;
+            if (!flowers.isEmpty()) {
+                processFlowerManaTransfer(flowers);
             }
-        }
 
-        // 如果没有 meta 为1的魔力池，则遍历所有魔力池并逐个填充
-        for (TilePool pool : pools) {
-            if (pool.getCurrentMana() > 0) { // 跳过魔力为0的魔力池
-                transferManaFromPool(pool);
-            }
-        }
-    }
-
-    /**
-     * 检查魔力池的掉落物的 meta 是否为 1
-     */
-    private boolean isDropMetaValid(TilePool pool) {
-        int meta = pool.getBlockMetadata(); // 获取魔力池的 meta 值
-        return meta == 1; // 检查 meta 是否为 1
-    }
-
-    /**
-     * 将仓室的 Mana 直接填满到最大值
-     */
-    private void fillChamberToMax() {
-        int targetMana = getCapacity(); // 获取仓室的最大容量
-        int currentMana = getFluidAmount(); // 获取当前仓室中的 Mana 量
-        if (currentMana < targetMana) {
-            int manaToAdd = targetMana - currentMana;
-            // 创建对应的流体堆栈并填充到仓室
-            FluidStack fluidStack = createFluidStack(manaToAdd);
-            fill(fluidStack, true);
-        }
-    }
-
-    /**
-     * 从魔力池中抽取魔力并填充到仓室
-     */
-    private void transferManaFromPool(TilePool pool) {
-        int currentMana = pool.getCurrentMana(); // 获取魔力池的当前 Mana 量
-        int fluidAmount = getFluidAmount(); // 获取仓室中的当前 Mana 量
-
-        if (currentMana > 0) {
-            // 计算需要抽取的 Mana 量
-            int manaToTransfer = Math.min(currentMana, getCapacity() - fluidAmount);
-            if (manaToTransfer > 0) {
-                // 创建对应的流体堆栈
-                FluidStack fluidStack = createFluidStack(manaToTransfer);
-                // 将流体填充到仓室
-                int filledAmount = fill(fluidStack, true);
-                if (filledAmount > 0) {
-                    // 从魔力池中抽取对应的 Mana
-                    pool.recieveMana(-filledAmount * 10);
+            if (!pools.isEmpty()) {
+                if (isLiquidizerMode) {
+                    for (TilePool pool : pools) {
+                        if (isDropMetaValid(pool)) {
+                            fillChamberToMax();
+                            return;
+                        }
+                    }
+                    transferManaToChamber(pools);
+                } else {
+                    transferFluidToPools(pools);
                 }
             }
         }
     }
 
-    /**
-     * 创建流体堆栈
-     */
+    private boolean isDropMetaValid(TilePool pool) {
+        int meta = pool.getBlockMetadata();
+        return meta == 1;
+    }
+
+    private void fillChamberToMax() {
+        int targetMana = getCapacity();
+        int currentMana = getFluidAmount();
+        if (currentMana < targetMana) {
+            int manaToAdd = targetMana - currentMana;
+            FluidStack fluidStack = createFluidStack(manaToAdd);
+            fill(fluidStack, true);
+        }
+    }
+
+    private void transferManaToChamber(List<TilePool> pools) {
+        int fluidAmount = getFluidAmount();
+        int capacity = getCapacity();
+
+        for (TilePool pool : pools) {
+            if (isDropMetaValid(pool)) continue;
+
+            int currentMana = pool.getCurrentMana();
+            if (currentMana <= 0) continue;
+
+            int manaToTransfer = Math.min(currentMana, capacity - fluidAmount);
+            if (manaToTransfer <= 0) continue;
+
+            FluidStack fluidStack = createFluidStack(manaToTransfer);
+            int filledAmount = fill(fluidStack, true);
+            if (filledAmount > 0) {
+                pool.recieveMana(-filledAmount);
+            }
+        }
+    }
+
+    private void transferFluidToPools(List<TilePool> pools) {
+        int fluidAmount = getFluidAmount();
+
+        for (TilePool pool : pools) {
+            if (isDropMetaValid(pool)) continue;
+
+            int availableSpace = pool.getAvailableSpaceForMana();
+
+            if (availableSpace <= 0) continue;
+
+            int fluidToTransfer = Math.min(fluidAmount, availableSpace);
+            if (fluidToTransfer <= 0) continue;
+
+            FluidStack drainedStack = drain(fluidToTransfer, true);
+            if (drainedStack != null && drainedStack.amount > 0) {
+                pool.recieveMana(drainedStack.amount);
+            }
+        }
+    }
+
+    private void processFlowerManaTransfer(List<SubTileGenerating> flowers) {
+        int currentAmount = getFluidAmount();
+        int capacity = getCapacity();
+
+        for (SubTileGenerating flower : flowers) {
+            int flowerMana = ManaHelper.getMana(flower);
+            if (flowerMana <= 0) continue;
+
+            int transferAmount = Math.min(flowerMana, capacity - currentAmount);
+            if (transferAmount <= 0) continue;
+
+            ManaHelper.setMana(flower, flowerMana - transferAmount);
+
+            FluidStack fluidStack = createFluidStack(transferAmount);
+            int filledAmount = fill(fluidStack, true);
+
+            if (filledAmount > 0) {
+                currentAmount += filledAmount;
+            }
+
+            TileEntity supertile = ManaHelper.getSupertile(flower);
+            if (supertile != null) {
+                flower.sync();
+            }
+        }
+    }
+
     private static FluidStack createFluidStack(int amount) {
         var c = fluidMana.copy();
         c.amount = amount;
         return c;
     }
 
-    /**
-     * 查找以仓室为中心，XYZ轴半径5格内的所有魔力池
-     */
     private List<TilePool> findManaPoolsInRange(IGregTechTileEntity aBaseMetaTileEntity) {
         World world = aBaseMetaTileEntity.getWorld();
         int x = aBaseMetaTileEntity.getXCoord();
@@ -323,18 +379,41 @@ public class ManaTank extends MTEDigitalTankBase {
 
         List<TilePool> pools = new ArrayList<>();
 
-        // 遍历以仓室为中心，XYZ轴半径5格内的所有 TileEntity
-        for (int dx = -5; dx <= 5; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -5; dz <= 5; dz++) {
+        for (int dx = -MANA_POOL_RADIUS; dx <= MANA_POOL_RADIUS; dx++) {
+            for (int dy = -MANA_POOL_RADIUS; dy <= MANA_POOL_RADIUS; dy++) {
+                for (int dz = -MANA_POOL_RADIUS; dz <= MANA_POOL_RADIUS; dz++) {
                     TileEntity te = world.getTileEntity(x + dx, y + dy, z + dz);
                     if (te instanceof TilePool pool) {
-                        pools.add(pool); // 将魔力池添加到列表中
+                        pools.add(pool);
                     }
                 }
             }
         }
         return pools;
+    }
+
+    private List<SubTileGenerating> findGeneratingFlowersInRange(IGregTechTileEntity aBaseMetaTileEntity) {
+        World world = aBaseMetaTileEntity.getWorld();
+        int x = aBaseMetaTileEntity.getXCoord();
+        int y = aBaseMetaTileEntity.getYCoord();
+        int z = aBaseMetaTileEntity.getZCoord();
+
+        List<SubTileGenerating> flowers = new ArrayList<>();
+
+        for (int dx = -MANA_FLOWER_RADIUS; dx <= MANA_FLOWER_RADIUS; dx++) {
+            for (int dy = -MANA_FLOWER_RADIUS; dy <= MANA_FLOWER_RADIUS; dy++) {
+                for (int dz = -MANA_FLOWER_RADIUS; dz <= MANA_FLOWER_RADIUS; dz++) {
+                    TileEntity te = world.getTileEntity(x + dx, y + dy, z + dz);
+                    if (te instanceof TileSpecialFlower flowerTile) {
+                        SubTileEntity subTile = flowerTile.getSubTile();
+                        if (subTile instanceof SubTileGenerating) {
+                            flowers.add((SubTileGenerating) subTile);
+                        }
+                    }
+                }
+            }
+        }
+        return flowers;
     }
 
     @Override

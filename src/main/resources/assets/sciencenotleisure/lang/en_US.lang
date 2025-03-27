@@ -18,9 +18,25 @@ HatchCustomFluid_02=Allowed fluids:
 HatchCustomFluid_03=Empty
 
 ManaTank=Mana Tank
-Tooltip_ManaTank_00=Extracts mana from nearby mana pools
-Tooltip_ManaTank_01=If an infinite mana pool is detected, it will be filled directly
+Tooltip_ManaTank_00=Extract mana from nearby mana pools
+Tooltip_ManaTank_01=If an Eternal Mana Pool is detected, it will be filled directly
 Tooltip_ManaTank_02=Conversion ratio is 1:1
+Tooltip_ManaTank_03=Use screwdriver right-click to toggle modes
+Mode_ManaTank_00=Extract mana from mana pools to Mana Tank
+Mode_ManaTank_01=Extract mana from Mana Tank to mana pools
+
+ManaDynamoHatchLV=Diluted Mana Dynamo Hatch
+ManaDynamoHatchHV=Mana Dynamo Hatch
+ManaDynamoHatchIV=Mythical Dynamo Hatch
+ManaDynamoHatchZPM=Gaia Dynamo Hatch
+Tooltip_ManaDynamoHatch_00=Convert mana to EU
+Tooltip_ManaDynamoHatch_01=Can extract mana from nearby mana pools and mana flowers
+Tooltip_ManaDynamoHatch_02=Base efficiency: 2 mana/EU
+Tooltip_ManaDynamoHatch_03=Fluid capacity:
+Tooltip_ManaDynamoHatch_04=Use screwdriver right-click to toggle modes
+Mode_ManaDynamoHatch_00=Extract mana from Mana Dynamo Hatch to mana pools
+Mode_ManaDynamoHatch_01=Extract mana from mana pools to Mana Dynamo Hatch
+Info_ManaDynamoHatch_00=Mana storage:
 
 BigSteamInputHatch=Large Steam Hatch
 
