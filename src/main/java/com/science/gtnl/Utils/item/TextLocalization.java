@@ -399,7 +399,7 @@ public class TextLocalization {
 
     public static final String ManaTank = texter("Mana Tank", "ManaTank");
     public static final String Tooltip_ManaTank_00 = texter(
-        "Extract mana from nearby mana pools",
+        "Mana can be drawn from nearby mana pools and mana flowers",
         "Tooltip_ManaTank_00");
     public static final String Tooltip_ManaTank_01 = texter(
         "If an Eternal Mana Pool is detected, it will be filled instantly",

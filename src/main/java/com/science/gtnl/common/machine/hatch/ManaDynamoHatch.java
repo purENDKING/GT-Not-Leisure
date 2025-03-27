@@ -38,7 +38,7 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
     private boolean isLiquidizerMode = true;
     private static final int MANA_POOL_RADIUS = 2;
     private static final int MANA_FLOWER_RADIUS = 6;
-    private static final int MANA_TO_EU_RATE = 2;
+    private static final int MANA_TO_EU_RATE = 20;
     private static int mAmp;
 
     public ManaDynamoHatch(int aID, String aName, String aNameRegional, int aTier, int aAmp) {
@@ -108,20 +108,17 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
 
             FluidStack currentManaStack = getFillableStack();
             if (currentManaStack != null && currentManaStack.amount > 0) {
-                int currentMana = currentManaStack.amount;
+                long currentMana = currentManaStack.amount;
 
                 long maxEUStore = maxEUStore();
                 long currentEU = aBaseMetaTileEntity.getUniversalEnergyStored();
                 long availableSpace = maxEUStore - currentEU;
 
                 if (availableSpace > 0) {
-                    int euToGenerate = (int) Math.min(currentMana / MANA_TO_EU_RATE, availableSpace);
-                    if (euToGenerate > 0) {
-                        int manaToConsume = euToGenerate * MANA_TO_EU_RATE;
-                        drain(manaToConsume, true);
-                        aBaseMetaTileEntity.increaseStoredEnergyUnits(euToGenerate, true);
-
-                    }
+                    long euToGenerate = Math.min(currentMana * MANA_TO_EU_RATE, availableSpace);
+                    long manaToConsume = euToGenerate / MANA_TO_EU_RATE;
+                    drain((int) manaToConsume, true);
+                    aBaseMetaTileEntity.increaseStoredEnergyUnits(euToGenerate, true);
                 }
             }
         }
