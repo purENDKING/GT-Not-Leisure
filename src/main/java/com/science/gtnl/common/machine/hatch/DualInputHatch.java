@@ -455,11 +455,6 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
     }
 
     @Override
-    public boolean isValidSlot(int aIndex) {
-        return true;
-    }
-
-    @Override
     public int getGUIWidth() {
         return super.getGUIWidth() + 9 * (mTier - 1);
     }

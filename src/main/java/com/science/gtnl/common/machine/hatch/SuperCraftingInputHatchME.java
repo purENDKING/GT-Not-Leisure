@@ -687,11 +687,6 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
     }
 
     @Override
-    public boolean isValidSlot(int aIndex) {
-        return true;
-    }
-
-    @Override
     public int getGUIWidth() {
         return super.getGUIWidth() + 16;
     }
