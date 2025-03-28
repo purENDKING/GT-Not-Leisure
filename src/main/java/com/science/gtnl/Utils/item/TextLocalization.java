@@ -2246,13 +2246,35 @@ public class TextLocalization {
         "Tooltip_PlatinumBasedTreatment_04");
     public static final String Tooltip_PlatinumBasedTreatment_05 = texter(
         "Each time the voltage level is increased, the parallelism increases by +4",
-        "Tooltip_PlatinumBasedTreatment_04");
+        "Tooltip_PlatinumBasedTreatment_05");
     public static final String Tooltip_PlatinumBasedTreatment_Casing_00 = texter(
         "Any Multi-Functional Machine Block",
         "Tooltip_PlatinumBasedTreatment_Casing_00");
     public static final String Tooltip_PlatinumBasedTreatment_Casing_01 = texter(
         "Muffler Hatches: See Multiblock Preview for placement",
         "Tooltip_PlatinumBasedTreatment_Casing_01");
+
+    public static final String NameShallowChemicalCoupling = texter(
+        "Shallow Chemical Coupling",
+        "NameShallowChemicalCoupling");
+    public static final String ShallowChemicalCouplingRecipes = texter(
+        "Shallow Chemical Coupling",
+        "ShallowChemicalCouplingRecipes");
+    public static final String Tooltip_ShallowChemicalCoupling_00 = texter(
+        "§oLMolecular Control Reactor Integrator",
+        "Tooltip_ShallowChemicalCoupling_00");
+    public static final String Tooltip_ShallowChemicalCoupling_01 = texter(
+        "§oDirect Molecular Bond Control Bypasses Multi-Step Reactions",
+        "Tooltip_ShallowChemicalCoupling_01");
+    public static final String Tooltip_ShallowChemicalCoupling_02 = texter(
+        "Recipe time & energy reduced by 15% per coil tier",
+        "Tooltip_ShallowChemicalCoupling_02");
+    public static final String Tooltip_ShallowChemicalCoupling_03 = texter(
+        "Energy hatch limited by glass tier, UHV Glass unlocks all",
+        "Tooltip_ShallowChemicalCoupling_03");
+    public static final String Tooltip_ShallowChemicalCoupling_Casing_00 = texter(
+        "Any Chemical Protection Machine Block",
+        "Tooltip_ShallowChemicalCoupling_Casing_00");
 
     public static final String NameWhiteNightGenerator = texter("White Night Generator", "NameWhiteNightGenerator");
     public static final String Tooltip_WhiteNightGenerator_MachineType = texter(

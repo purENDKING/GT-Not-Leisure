@@ -2007,6 +2007,15 @@ Tooltip_PlatinumBasedTreatment_05=Each time the voltage level is increased, the 
 Tooltip_PlatinumBasedTreatment_Casing_00=Any multifunctional machine block
 Tooltip_PlatinumBasedTreatment_Casing_01=Refer to the multiblock structure projection for muffler hatch placement
 
+NameShallowChemicalCoupling=Shallow Chemical Coupling
+ShallowChemicalCouplingRecipes=Shallow Chemical Coupling
+gtnl.recipe.ShallowChemicalCouplingRecipes=Shallow Chemical Coupling
+Tooltip_ShallowChemicalCoupling_00=§oLMolecular Control Reactor Integrator
+Tooltip_ShallowChemicalCoupling_01=§oDirect Molecular Bond Control Bypasses Multi-Step Reactions
+Tooltip_ShallowChemicalCoupling_02=Recipe time & energy reduced by 15% per coil tier
+Tooltip_ShallowChemicalCoupling_03=Energy hatch limited by glass tier, UHV Glass unlocks all
+Tooltip_ShallowChemicalCoupling_Casing_00=Any Chemical Protection Machine Block
+
 NameWhiteNightGenerator=White Night Generator
 Tooltip_WhiteNightGenerator_MachineType=§d§lViolet Baptism
 Tooltip_WhiteNightGenerator_00=§f§l§oRise, my servants, and sing to welcome my arrival.
