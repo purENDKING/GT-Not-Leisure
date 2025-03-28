@@ -1951,7 +1951,7 @@ public class TextLocalization {
         "§eComponent Assembly Line Casing §rmax tier is UV",
         "Tooltip_ComponentAssembler_01");
     public static final String Tooltip_ComponentAssembler_02 = texter(
-        "Overclocking is not supported",
+        "Overclocking is supported",
         "Tooltip_ComponentAssembler_02");
     public static final String Tooltip_ComponentAssembler_03 = texter(
         "Up to 2 energy hatches at most!",
