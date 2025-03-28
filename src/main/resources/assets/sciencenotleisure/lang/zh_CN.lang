@@ -1190,11 +1190,11 @@ LargeCutter_Mode_0=切割机
 LargeCutter_Mode_1=切片机
 
 NameLargeBrewer=大型酿造厂
-LargeBrewerRecipeType=酿造室 / 发酵槽 / 流体加热器
+LargeBrewerRecipeType=酿造室 / 流体加热器 / 发酵槽
 Tooltip_LargeBrewer_00=比相同电压的机器快125%%
 LargeBrewer_Mode_0=酿造室
-LargeBrewer_Mode_1=发酵槽
-LargeBrewer_Mode_2=流体加热器
+LargeBrewer_Mode_1=流体加热器
+LargeBrewer_Mode_2=发酵槽
 Tooltip_LargeBrewer_Casing=任意焦炉机械方块
 
 NameLargeNaquadahReactor=大型硅岩反应堆
@@ -2000,7 +2000,7 @@ gtnl.recipe.PlatinumBasedTreatmentRecipes=单步铂处理
 Tooltip_PlatinumBasedTreatment_00=§o拯救千万格雷人于铂处理的水深火热之中
 Tooltip_PlatinumBasedTreatment_01=§o无数萌新盼望的单步铂处理
 Tooltip_PlatinumBasedTreatment_02=初始并行为8
-Tooltip_PlatinumBasedTreatment_03=线圈等级每提高一级，配方时间和耗电减少5%
+Tooltip_PlatinumBasedTreatment_03=线圈等级每提高一级，配方时间和耗电减少5%%
 Tooltip_PlatinumBasedTreatment_04=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
 Tooltip_PlatinumBasedTreatment_05=电压每提高一级，并行 +4
 Tooltip_PlatinumBasedTreatment_Casing_00=任意多功能机械方块
@@ -2011,10 +2011,10 @@ ShallowChemicalCouplingRecipes=浅层化学耦合
 gtnl.recipe.ShallowChemicalCouplingRecipes=浅层化学耦合
 Tooltip_ShallowChemicalCoupling_00=§o基于分子层面操控的化学反应设备
 Tooltip_ShallowChemicalCoupling_01=§o通过直接操控分子化学键来避免繁杂的多步化学反应
-Tooltip_ShallowChemicalCoupling_02=线圈等级每提高一级，配方时间和耗电减少15%
-Tooltip_ShallowChemicalCoupling_03=玻璃等级限制了能源仓等级，UHV玻璃解锁所有等级
+Tooltip_ShallowChemicalCoupling_02=线圈等级每提高一级，配方时间和耗电乘以85%%
+Tooltip_ShallowChemicalCoupling_03=玻璃等级限制了能源仓等级，UEV玻璃解锁所有等级
+Tooltip_ShallowChemicalCoupling_04=海珀珍线圈解锁§c无损超频§7
 Tooltip_ShallowChemicalCoupling_Casing_00=任意化学防护机械方块
-
 
 NameWhiteNightGenerator=白夜发电机
 Tooltip_WhiteNightGenerator_MachineType=§d§l紫罗兰的洗礼

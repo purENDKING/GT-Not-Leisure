@@ -72,6 +72,7 @@ import com.science.gtnl.common.machine.multiblock.RareEarthCentrifugal;
 import com.science.gtnl.common.machine.multiblock.ReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.RealArtificialStar;
 import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
+import com.science.gtnl.common.machine.multiblock.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
@@ -109,7 +110,6 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeMaterialPress;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeMixer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargePacker;
-import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargePyrolyseOven;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSiftingFunnel;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSolidifier;
@@ -616,7 +616,10 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_PBTR);
 
         ShallowChemicalCoupling.set(
-            new ShallowChemicalCoupling(21112, "ShallowChemicalCoupling", TextLocalization.NameShallowChemicalCoupling));
+            new ShallowChemicalCoupling(
+                21112,
+                "ShallowChemicalCoupling",
+                TextLocalization.NameShallowChemicalCoupling));
         addItemTooltip(GTNLItemList.ShallowChemicalCoupling.get(1), AnimatedText.SNL_PBTR);
 
         GTNLItemList.CheatOreProcessingFactory.set(

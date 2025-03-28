@@ -2239,7 +2239,7 @@ public class TextLocalization {
         "Base Parallelism: 8",
         "Tooltip_PlatinumBasedTreatment_02");
     public static final String Tooltip_PlatinumBasedTreatment_03 = texter(
-        "Recipe time & energy reduced by 5% per coil tier",
+        "Recipe time & energy reduced by 5%% per coil tier",
         "Tooltip_PlatinumBasedTreatment_03");
     public static final String Tooltip_PlatinumBasedTreatment_04 = texter(
         "Energy hatch limited by glass tier, UHV Glass unlocks all",
@@ -2267,11 +2267,14 @@ public class TextLocalization {
         "§oDirect Molecular Bond Control Bypasses Multi-Step Reactions",
         "Tooltip_ShallowChemicalCoupling_01");
     public static final String Tooltip_ShallowChemicalCoupling_02 = texter(
-        "Recipe time & energy reduced by 15% per coil tier",
+        "Recipe time & energy multiply by 85%% per coil tier",
         "Tooltip_ShallowChemicalCoupling_02");
     public static final String Tooltip_ShallowChemicalCoupling_03 = texter(
-        "Energy hatch limited by glass tier, UHV Glass unlocks all",
+        "Energy hatch limited by glass tier, UEV Glass unlocks all",
         "Tooltip_ShallowChemicalCoupling_03");
+    public static final String Tooltip_ShallowChemicalCoupling_04 = texter(
+        "Hypogen coil unlocking §cperfect overclock§7",
+        "Tooltip_ShallowChemicalCoupling_04");
     public static final String Tooltip_ShallowChemicalCoupling_Casing_00 = texter(
         "Any Chemical Protection Machine Block",
         "Tooltip_ShallowChemicalCoupling_Casing_00");
