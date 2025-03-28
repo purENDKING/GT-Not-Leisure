@@ -84,8 +84,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                 .addElement(
                     'A',
                     buildHatchAdder(ShallowChemicalCoupling.class).casingIndex(CASING_INDEX)
-                        .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .dot(1)
+                        .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(MetaCasing, 19))))
                 .addElement(
                     'B',
@@ -113,6 +113,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_01)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_02)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_03)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
@@ -194,7 +196,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
+                return super.createOverclockCalculator(recipe)
+                    .setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(ShallowChemicalCoupling.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
@@ -238,7 +241,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
         energyHatchTier = checkEnergyHatchTier();
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UV & mEnergyHatch.mTier > glassTier) {
+            if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
                 return false;
             }
         }
