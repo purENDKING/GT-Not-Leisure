@@ -1,6 +1,7 @@
 package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
+import static com.science.gtnl.common.GTNLItemList.ShallowChemicalCoupling;
 
 import net.minecraft.item.ItemStack;
 
@@ -108,6 +109,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.L
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeMaterialPress;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeMixer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargePacker;
+import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargePyrolyseOven;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSiftingFunnel;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.LargeSolidifier;
@@ -612,6 +614,10 @@ public class MachineLoader {
         GTNLItemList.PlatinumBasedTreatment.set(
             new PlatinumBasedTreatment(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
         addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_PBTR);
+
+        ShallowChemicalCoupling.set(
+            new ShallowChemicalCoupling(21112, "ShallowChemicalCoupling", TextLocalization.NameShallowChemicalCoupling));
+        addItemTooltip(GTNLItemList.ShallowChemicalCoupling.get(1), AnimatedText.SNL_PBTR);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

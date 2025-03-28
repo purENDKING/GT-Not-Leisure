@@ -354,4 +354,16 @@ public class RecipeRegister {
                 .setMaxRecipesPerPage(1))
         .disableOptimize()
         .build();
+
+    public static RecipeMap<RecipeMapBackend> ShallowChemicalCouplingRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.ShallowChemicalCouplingRecipes")
+        .maxIO(16, 16, 16, 16)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .frontend(GeneralFrontend::new)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.ShallowChemicalCoupling.get(1))
+                .setMaxRecipesPerPage(1))
+        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
+        .disableOptimize()
+        .build();
 }

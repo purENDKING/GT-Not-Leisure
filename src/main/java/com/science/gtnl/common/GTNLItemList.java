@@ -318,6 +318,7 @@ public enum GTNLItemList {
     CrackerHub,
     LargeSteamFormingPress,
     LargeSteamSifter,
+    ShallowChemicalCoupling,
     ResourceCollectionModule,
     FuelRefiningComplex,
     GrandAssemblyLine,
