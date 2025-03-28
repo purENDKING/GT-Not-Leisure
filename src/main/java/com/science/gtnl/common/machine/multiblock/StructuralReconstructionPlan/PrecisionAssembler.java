@@ -419,7 +419,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                         return CheckRecipeResultRegistry.insufficientMachineTier(recipe.mSpecialValue);
                     }
                 }
-                if (availableVoltage < recipe.mEUt) {
+                if (availableVoltage * 4 < recipe.mEUt) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return CheckRecipeResultRegistry.SUCCESSFUL;
