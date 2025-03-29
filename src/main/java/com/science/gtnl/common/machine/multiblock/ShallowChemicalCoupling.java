@@ -23,7 +23,10 @@ import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.BorosilicateGlass;
-import gregtech.api.enums.*;
+import gregtech.api.enums.HeatingCoilLevel;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.Textures;
+import gregtech.api.enums.VoltageIndex;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
