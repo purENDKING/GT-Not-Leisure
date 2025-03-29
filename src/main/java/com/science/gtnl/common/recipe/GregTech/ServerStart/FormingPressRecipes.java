@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.GregTech;
+package com.science.gtnl.common.recipe.GregTech.ServerStart;
 
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;

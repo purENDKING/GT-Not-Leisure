@@ -15,6 +15,7 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.loader.IScriptLoader;
 
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
+import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
@@ -1483,7 +1484,7 @@ public class ScriptAvaritia implements IScriptLoader {
                 'D',
                 getModItem(GregTech.ID, "gt.metaitem.01", 1, 32701, missing),
                 'E',
-                getModItem(GregTech.ID, "gt.metaitem.01", 1, 32709, missing),
+                ItemList.Circuit_Integrated_Good.get(1),
                 'F',
                 getModItem(IndustrialCraft2.ID, "itemPartCircuitAdv", 1, 0, missing),
                 'G',

@@ -51,7 +51,6 @@ import com.science.gtnl.common.recipe.GregTech.DragonEvolutionFusionCraftingReci
 import com.science.gtnl.common.recipe.GregTech.ElectrolyzerRecipes;
 import com.science.gtnl.common.recipe.GregTech.FluidExtraction;
 import com.science.gtnl.common.recipe.GregTech.FluidExtractorRecipes;
-import com.science.gtnl.common.recipe.GregTech.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.FusionReactorRecipes;
 import com.science.gtnl.common.recipe.GregTech.LaserEngraverRecipes;
 import com.science.gtnl.common.recipe.GregTech.MixerRecipes;
@@ -88,8 +87,7 @@ public class RecipeLoader {
             new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
             new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
-            new SpaceAssemblerRecipes(), new FormingPressRecipes(), new PCBFactoryRecipes(),
-            new PlatinumBasedTreatmentRecipes() };
+            new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();
