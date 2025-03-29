@@ -52,7 +52,7 @@ public class FusionReactorRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .fluidInputs(Materials.Molybdenum.getMolten(144), Materials.Palladium.getMolten(144))
-            .fluidOutputs(MaterialPool.Actinium.getMolten(288))
+            .fluidOutputs(new FluidStack(MaterialsElements.getInstance().RADIUM.getFluid(), 288))
             .duration(32)
             .eut(TierEU.RECIPE_LuV)
             .metadata(FUSION_THRESHOLD, 200000000)
