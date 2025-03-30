@@ -294,7 +294,10 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         return ItemGenericChemBase.getMaxBallDurability(aStack);
     }
 
-    private ItemStack findMillingBall() {
+    private ItemStack findMillingBall(int recipeReq) {
+        final Item MillingBall = GameRegistry.findItem(GTPlusPlus.ID, "item.BasicGenericChemItem");
+        final ItemStack AluminaMillingBall = new ItemStack(MillingBall, 1, 7);
+        final ItemStack SoapstoneMillingBall = new ItemStack(MillingBall, 1, 8);
         if (mMillingBallBuses.size() != 1) {
             return null;
         }
@@ -304,12 +307,22 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
             if (!aAvailableItems.isEmpty()) {
                 for (ItemStack aBall : aAvailableItems) {
                     if (aBall != null) {
-                        return aBall;
+                        switch (recipeReq) {
+                            case 1:
+                                if (aBall.isItemEqual(AluminaMillingBall)) {
+                                    return aBall;
+                                }
+                                break;
+                            case 2:
+                                if (aBall.isItemEqual(SoapstoneMillingBall)) {
+                                    return aBall;
+                                }
+                                break;
+                        }
                     }
                 }
             }
         }
-
         return null;
     }
 
@@ -340,37 +353,20 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
     public ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
-            final Item MillingBall = GameRegistry.findItem(GTPlusPlus.ID, "item.BasicGenericChemItem");
-
             ItemStack millingBall;
-            final ItemStack AluminaMillingBall = new ItemStack(MillingBall, 1, 7);
-            final ItemStack SoapstoneMillingBall = new ItemStack(MillingBall, 1, 8);
 
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+
                 int recipeReq = recipe.getMetadataOrDefault(IsaMillTierKey.INSTANCE, 0);
-                millingBall = findMillingBall();
+                millingBall = findMillingBall(recipeReq);
 
                 if (millingBall == null) {
-                    return SimpleCheckRecipeResult.ofFailure("no_milling_ball");
+                    return SimpleCheckRecipeResult.ofFailure("no_milling_ball ");
                 }
 
-                ItemStack requiredBall = null;
-                switch (recipeReq) {
-                    case 1:
-                        requiredBall = AluminaMillingBall;
-                        break;
-                    case 2:
-                        requiredBall = SoapstoneMillingBall;
-                        break;
-                }
-
-                if (requiredBall != null && millingBall.isItemEqual(requiredBall)) {
-                    return CheckRecipeResultRegistry.SUCCESSFUL;
-                }
-
-                return super.validateRecipe(recipe);
+                return CheckRecipeResultRegistry.SUCCESSFUL;
             }
 
             @NotNull
