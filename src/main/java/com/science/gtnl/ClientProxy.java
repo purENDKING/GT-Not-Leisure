@@ -48,7 +48,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
-        LanguageManager.writePlaceholderStrings();
+        LanguageManager.init();
         MinecraftForge.EVENT_BUS.register(new ItemPlayerDollRenderer());
         MinecraftForge.EVENT_BUS.register(new BlockPlayerDollRenderer());
     }
