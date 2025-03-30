@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Special;
+package com.science.gtnl.common.recipe.Special.OreDictionary;
 
 import static com.science.gtnl.loader.IScriptLoader.missing;
 import static gregtech.api.enums.Mods.Botania;

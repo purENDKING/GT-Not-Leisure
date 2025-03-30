@@ -63,7 +63,7 @@ import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
 import com.science.gtnl.common.recipe.IRecipePool;
-import com.science.gtnl.common.recipe.Special.PortalToAlfheimOreRecipes;
+import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRecipes;
 import com.science.gtnl.common.recipe.Thaumcraft.InfusionCraftingRecipesPool;
 import com.science.gtnl.common.recipe.Thaumcraft.ShapedArcaneCraftingRecipesPool;
 
