@@ -22,6 +22,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("AssLineRemover.GTRecipeBuilderHook_Mixin");
         mixins.add("AssLineRemover.ForGTPreLoadHook_Mixin");
         mixins.add("AssLineRemover.TTAssLineBuilderHook_Mixin");
+        mixins.add("BartworkLoad_Mixin");
         return mixins;
     }
 

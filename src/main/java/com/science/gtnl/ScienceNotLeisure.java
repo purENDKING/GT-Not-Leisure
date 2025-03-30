@@ -12,9 +12,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.science.gtnl.Utils.PlayerJoinHandler;
 import com.science.gtnl.Utils.item.TextHandler;
-import com.science.gtnl.Utils.recipes.SyncRecipesPacket;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
@@ -25,14 +23,12 @@ import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.recipe.Special.CheatRecipes;
-import com.science.gtnl.common.recipe.Special.RemoveRecipes;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoader;
 import com.science.gtnl.loader.RecipeLoaderRunnable;
-import com.science.gtnl.loader.RecipeLoaderServerStart;
 import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;
@@ -43,13 +39,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
-import cpw.mods.fml.common.eventhandler.EventPriority;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 
 // after
 @Mod(
@@ -84,14 +75,6 @@ public class ScienceNotLeisure {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     public static Configuration config;
-    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
-    /**
-     * <li>The signal of whether in Development Mode.
-     * <li>Keep care to set 'false' when dev complete.
-     */
-    public static final boolean isInDevMode = false;
-
     public static String DevResource = "";
 
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
@@ -134,7 +117,7 @@ public class ScienceNotLeisure {
 
         new LazyStaticsInitLoader().initStaticsOnCompleteInit();
 
-        TextHandler.serializeLangMap(isInDevMode);
+        TextHandler.serializeLangMap(MainConfig.enableDebugMode);
     }
 
     @Mod.EventHandler
@@ -152,10 +135,6 @@ public class ScienceNotLeisure {
         proxy.preInit(event);
         MaterialLoader.load();
         new RecipeLoaderRunnable().run();
-        network.registerMessage(SyncRecipesPacket.Handler.class, SyncRecipesPacket.class, 0, Side.CLIENT);
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new PlayerJoinHandler());
 
         AEApi.instance()
             .registries()
@@ -181,16 +160,5 @@ public class ScienceNotLeisure {
                 .bus()
                 .register(new CheatRecipes());
         }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    @Mod.EventHandler
-    public void serverStarted(FMLServerStartedEvent event) {
-        MainConfig.needSeedPacket = true;
-        if (MainConfig.enableDeleteRecipe) {
-            RemoveRecipes.removeRecipes();
-        }
-        RecipeLoaderServerStart.loadRecipesServerStart();
-        MainConfig.needSeedPacket = false;
     }
 }

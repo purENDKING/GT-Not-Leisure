@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.science.gtnl.ScienceNotLeisure;
+import com.science.gtnl.config.MainConfig;
 
 public class TextHandler {
 
@@ -20,7 +21,7 @@ public class TextHandler {
         /**
          * If not in Dev mode , return vanilla forge method directly.
          */
-        if (ScienceNotLeisure.isInDevMode) {
+        if (MainConfig.enableDebugMode) {
             if (LangMap.get(aKey) == null) {
                 ScienceNotLeisure.LOG.info("Texter get a new key - TextLine: " + aKey + " - " + aTextLine);
                 LangMapNeedToWrite.put(aKey, aTextLine);
@@ -36,7 +37,7 @@ public class TextHandler {
 
     public static String texterButKey(String aTextLine, String aKey) {
 
-        if (ScienceNotLeisure.isInDevMode) {
+        if (MainConfig.enableDebugMode) {
             if (LangMap.get(aKey) == null) {
                 ScienceNotLeisure.LOG.info("Texter get a new key - TextLine: " + aKey + " - " + aTextLine);
                 LangMapNeedToWrite.put(aKey, aTextLine);
