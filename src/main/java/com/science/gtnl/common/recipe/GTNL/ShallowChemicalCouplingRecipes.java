@@ -22,12 +22,15 @@ import static gregtech.api.util.GTRecipeConstants.UniversalChemical;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
+import goodgenerator.items.GGMaterial;
 import gregtech.api.recipe.RecipeMap;
+import gtPlusPlus.core.util.minecraft.ItemUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.Fluid;
 
 import com.dreammaster.gthandler.CustomItemList;
 
@@ -1206,7 +1209,317 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     .eut(2004322)
                     .addTo(SCCR);
 
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.Potassiumdichromate.getDust(1),
+                    Materials.Copper.getDust(1),
+                    Materials.Zinc.getDust(9)
+                )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(54000),
+                    Materials.Dimethylbenzene.getFluid(9000),
+                    Materials.SulfuricAcid.getFluid(9000),
+                    Materials.Ammonia.getGas(18000),
+                    Materials.Chlorobenzene.getFluid(18000),
+                    Materials.NitrationMixture.getFluid(36000)
+                )
+                .itemOutputs()
+                .fluidOutputs(
+                    Materials.Polybenzimidazole.getMolten(9000),
+                    Materials.HydrochloricAcid.getFluid(18000)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(130773)
+                .addTo(SCCR);
 
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.Carbon.getDust(2),
+                    Materials.Silicon.getDust(1)
+                )
+                .fluidInputs(
+                    Materials.Hydrogen.getGas(8000),
+                    Materials.Chlorine.getGas(4000),
+                    Materials.Water.getFluid(1000)
+                )
+                .itemOutputs()
+                .fluidOutputs(
+                    Materials.HydrochloricAcid.getFluid(6000),
+                    Materials.DilutedHydrochloricAcid.getFluid(6000),
+                    Materials.Silicone.getMolten(1296)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(116442)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.Sulfur.getDust(1)
+                )
+                .fluidInputs(
+                    Materials.Benzene.getFluid(216),
+                    Materials.Ethylene.getGas(216),
+                    Materials.Butadiene.getGas(648),
+                    Materials.Oxygen.getGas(6000)
+                )
+                .itemOutputs()
+                .fluidOutputs(
+                    Materials.StyreneButadieneRubber.getMolten(1296),
+                    Materials.Hydrogen.getGas(144)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(121446)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.Sodium.getDust(2),
+                    Materials.Sulfur.getDust(1)
+                    )
+                .fluidInputs(
+                    Materials.Chlorine.getGas(4000),
+                    Materials.Benzene.getFluid(1000),
+                    Materials.Oxygen.getGas(8000)
+                )
+                .itemOutputs(
+                    Materials.Salt.getDust(4)
+                )
+                .fluidOutputs(
+                    Materials.HydrochloricAcid.getFluid(2000),
+                    Materials.PolyphenyleneSulfide.getMolten(1500)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(107663)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)
+                    )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(20000),
+                    Materials.Ethylene.getGas(4000),
+                    Materials.Acetone.getFluid(4500)
+                    )
+                .itemOutputs(
+                    )
+                .fluidOutputs(
+                    Materials.AdvancedGlue.getFluid(7500),
+                    Materials.Water.getFluid(2000)
+                    )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(110446)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.SodiumHydroxide.getDust(9)
+                    )
+                .fluidInputs(
+                    Materials.Acetone.getFluid(1000),
+                    Materials.Phenol.getFluid(2000),
+                    Materials.Propene.getGas(2000),
+                    Materials.Chlorine.getGas(8000),
+                    Materials.Water.getFluid(2000)
+                )
+                .itemOutputs(
+                )
+                .fluidOutputs(
+                    Materials.Epoxid.getMolten(1000),
+                    Materials.HydrochloricAcid.getFluid(3000),
+                    Materials.SaltWater.getFluid(4000)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(114514)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)
+                    )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(7000),
+                    Materials.Hydrogen.getGas(4000),
+                    Materials.Fluorine.getGas(4000),
+                    Materials.Chlorine.getGas(12000),
+                    Materials.Methane.getGas(2000)
+                )
+                .itemOutputs(
+                )
+                .fluidOutputs(
+                    Materials.HydrochloricAcid.getFluid(12000),
+                    Materials.Polytetrafluoroethylene.getMolten(1500)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(126043)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    Materials.Sulfur.getDust(1)
+                    )
+                .fluidInputs(
+                    Materials.Ethanol.getFluid(3000),
+                    Materials.Oxygen.getGas(24000)
+                )
+                .itemOutputs(
+                )
+                .fluidOutputs(
+                    Materials.Plastic.getFluid(4500)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(97763)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)
+                    )
+                .fluidInputs(
+                    Materials.Ethanol.getFluid(2000)
+                )
+                .itemOutputs(
+                )
+                .fluidOutputs(
+                    GGMaterial.ether.getFluidOrGas(1000),
+                    Materials.Water.getFluid(1000)
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(120 * SECONDS + 10 * TICKS)
+                .eut(97203)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 40),
+                    ItemUtils.getItemStackOfAmountFromOreDict("platePlastic", 4),
+                    Materials.Sulfur.getDust(2),
+                    Materials.Iron.getDust(1)
+                    )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(6000),
+                    Materials.Water.getFluid(2000),
+                    Materials.Chlorine.getGas(3000)
+                )
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(4L)
+                )
+                .fluidOutputs(
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(72 * SECONDS)
+                .eut(84206)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 32),
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.PolyvinylChloride, 1),
+                    Materials.Sulfur.getDust(1),
+                    Materials.Iron.getDust(1)
+                )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(3000),
+                    Materials.Water.getFluid(1000),
+                    Materials.Chlorine.getGas(3000)
+                )
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(4L)
+                )
+                .fluidOutputs(
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(72 * SECONDS)
+                .eut(84206)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 56),
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polytetrafluoroethylene, 2),
+                    Materials.Sulfur.getDust(1),
+                    Materials.Iron.getDust(2)
+                )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(3000),
+                    Materials.Water.getFluid(1000),
+                    Materials.Chlorine.getGas(6000)
+                )
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(8L)
+                )
+                .fluidOutputs(
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(72 * SECONDS)
+                .eut(84206)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 104),
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polybenzimidazole, 2),
+                    Materials.Sulfur.getDust(1),
+                    Materials.Iron.getDust(4)
+                )
+                .fluidInputs(
+                    Materials.Oxygen.getGas(3000),
+                    Materials.Water.getFluid(1000),
+                    Materials.Chlorine.getGas(12000)
+                )
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(16L)
+                )
+                .fluidOutputs(
+                )
+                .specialValue(3800)
+                .noOptimize()
+                .metadata(COIL_HEAT, 3800)
+                .duration(72 * SECONDS)
+                .eut(84206)
+                .addTo(SCCR);
         }
     }
 }

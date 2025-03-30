@@ -1001,5 +1001,60 @@ public class AssemblingLineRecipes implements IRecipePool {
             .duration(60 * SECONDS)
             .addTo(AssemblyLine);
 
+        /*GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GTNLItemList.ChemicalPlant.get(1))
+            .metadata(RESEARCH_TIME, 12 * HOURS)
+            .itemInputs(
+                GTNLItemList.ChemicalPlant.get(16),
+                new ItemStack(ItemRegistry.megaMachines[3].getItem(), 16, 13366),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.ZPM, 32),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorZPM, 64L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Naquadah, 16),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 6),
+                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 8),
+                ItemList.Field_Generator_ZPM.get(8),
+                ItemList.Electric_Pump_ZPM.get(16),
+                ItemList.Emitter_ZPM.get(16),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 48)
+            )
+            .fluidInputs(
+                Materials.Grade4PurifiedWater.getFluid(64000),
+                Materials.Polybenzimidazole.getMolten(4608),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(16000)
+            )
+            .itemOutputs(GTNLItemList.ShallowChemicalCoupling.get(1))
+            .eut(TierEU.RECIPE_ZPM)
+            .duration(30 * SECONDS)
+            .addTo(AssemblyLine);*/
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GTNLItemList.ChemicalPlant.get(1),
+            12000,
+            16,
+            (int) TierEU.RECIPE_ZPM,
+            1,
+            new Object[]{
+                GTNLItemList.ChemicalPlant.get(16),
+                new ItemStack(ItemRegistry.megaMachines[3].getItem(), 16, 13366),
+                new Object[] { OrePrefixes.circuit.get(Materials.ZPM), 32 },
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorZPM, 64L),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Naquadah, 16),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 6),
+                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 8),
+                ItemList.Field_Generator_ZPM.get(8),
+                ItemList.Electric_Pump_ZPM.get(16),
+                ItemList.Emitter_ZPM.get(16),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 48)
+            },
+            new FluidStack[]{
+                Materials.Grade4PurifiedWater.getFluid(64000),
+                Materials.Polybenzimidazole.getMolten(4608),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(16000)
+            },
+            GTNLItemList.ShallowChemicalCoupling.get(1),
+            2400,
+            (int) TierEU.RECIPE_ZPM
+
+        );
     }
 }

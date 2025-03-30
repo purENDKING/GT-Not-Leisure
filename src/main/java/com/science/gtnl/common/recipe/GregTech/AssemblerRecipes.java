@@ -1936,5 +1936,23 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_HV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                ItemList.Casing_Chemically_Inert.get(1),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Naquadah, 1L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 6),
+                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.NetherStar, 4),
+                ItemList.Electric_Pump_ZPM.get(8)
+            )
+            .fluidInputs(
+                Materials.SuperCoolant.getFluid(8000)
+            )
+            .itemOutputs(
+                GTNLItemList.ChemicallyResistantCasing.get(1)
+            )
+            .fluidOutputs()
+            .duration(50)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
     }
 }
