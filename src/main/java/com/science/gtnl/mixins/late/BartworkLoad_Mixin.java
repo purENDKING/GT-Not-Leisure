@@ -13,7 +13,7 @@ import bartworks.MainMod;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(MainMod.class)
-public abstract class BartworkLoad_Mixin {
+public class BartworkLoad_Mixin {
 
     @Inject(method = "runOnPlayerJoined(ZZ)V", at = @At("TAIL"), remap = false)
     private static void onRunOnPlayerJoined(boolean classicMode, boolean disableExtraGasRecipes, CallbackInfo ci) {
