@@ -182,8 +182,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
-                    .setMachineHeat(ShallowChemicalCoupling.this.mHeatingCapacity)
-                    .setHeatOC(true)
+                    .setMachineHeat(ShallowChemicalCoupling.this.mHeatingCapacity).setHeatOC(true)
                     .setHeatDiscount(false)
                     .setEUtDiscount(1.0 * getCoilLevel().getTier() * 0.85)
                     .setSpeedBoost(1.0 * getCoilLevel().getTier() * 0.85);

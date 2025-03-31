@@ -1048,7 +1048,6 @@ public class AssemblingLineRecipes implements IRecipePool {
             GTNLItemList.ShallowChemicalCoupling.get(1),
             2400,
             (int) TierEU.RECIPE_ZPM
-
         );
     }
 }
