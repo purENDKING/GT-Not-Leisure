@@ -242,8 +242,7 @@ public class InfinityAxe extends ItemAxe {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof ItemStackWrapper)) return false;
-            ItemStackWrapper that = (ItemStackWrapper) o;
+            if (!(o instanceof ItemStackWrapper that)) return false;
             return damage == that.damage && Item.getIdFromItem(item) == Item.getIdFromItem(that.item);
         }
 
@@ -266,8 +265,7 @@ public class InfinityAxe extends ItemAxe {
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof BlockPos)) return false;
-            BlockPos blockPos = (BlockPos) o;
+            if (!(o instanceof BlockPos blockPos)) return false;
             return x == blockPos.x && y == blockPos.y && z == blockPos.z;
         }
 

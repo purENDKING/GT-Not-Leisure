@@ -44,7 +44,7 @@ public class CrystalHoe extends ItemHoe {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
+    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
         toolTip.add(TextLocalization.Tooltip_CrystalHoe_00);
     }
@@ -146,8 +146,7 @@ public class CrystalHoe extends ItemHoe {
 
     private void applyGrowth(World world, int x, int y, int z) {
         Block block = world.getBlock(x, y, z);
-        if (block instanceof IGrowable) {
-            IGrowable growable = (IGrowable) block;
+        if (block instanceof IGrowable growable) {
             if (growable.func_149851_a(world, x, y, z, world.isRemote)) {
                 for (int i = 0; i < 3; i++) {
                     if (growable.func_149852_a(world, world.rand, x, y, z)) {

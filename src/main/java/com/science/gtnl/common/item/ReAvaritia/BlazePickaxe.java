@@ -52,7 +52,7 @@ public class BlazePickaxe extends ItemPickaxe implements SubtitleDisplay {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
+    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
         toolTip.add(TextLocalization.Tooltip_BlazePickaxe_00);
     }

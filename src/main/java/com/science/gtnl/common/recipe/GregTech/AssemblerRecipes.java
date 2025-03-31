@@ -1946,8 +1946,9 @@ public class AssemblerRecipes implements IRecipePool {
             .fluidInputs(Materials.SuperCoolant.getFluid(8000))
             .itemOutputs(GTNLItemList.ChemicallyResistantCasing.get(1))
             .fluidOutputs()
-            .duration(60)
+            .duration(50)
             .eut(TierEU.RECIPE_LV)
             .addTo(As);
+
     }
 }

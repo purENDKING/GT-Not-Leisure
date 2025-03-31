@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Special;
+package com.science.gtnl.common.recipe.Special.OreDictionary;
 
 import net.minecraft.item.ItemStack;
 

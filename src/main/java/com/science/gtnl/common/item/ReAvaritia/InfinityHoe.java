@@ -241,8 +241,7 @@ public class InfinityHoe extends ItemHoe {
 
     private void applyGrowth(World world, int x, int y, int z) {
         Block block = world.getBlock(x, y, z);
-        if (block instanceof IGrowable) {
-            IGrowable growable = (IGrowable) block;
+        if (block instanceof IGrowable growable) {
             if (growable.func_149851_a(world, x, y, z, false)) {
                 for (int i = 0; i < 3; i++) {
                     if (growable.func_149852_a(world, world.rand, x, y, z)) {

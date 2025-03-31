@@ -1371,6 +1371,28 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 106,
         TextureSet.SET_FLUID);
 
+    public static final Werkstoff SmallBaka = new Werkstoff(
+        new short[] { 65, 105, 225 },
+        "SmallBaka",
+        subscriptNumbers("C6H5N3O2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 107,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff LargeBaka = new Werkstoff(
+        new short[] { 106, 90, 205 },
+        "LargeBaka",
+        subscriptNumbers("C6H5-NDs2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 108,
+        TextureSet.SET_FLUID);
+
     public static final Werkstoff Periodicium = new Werkstoff(
         new short[] { 60, 74, 243 },
         "Periodicium",

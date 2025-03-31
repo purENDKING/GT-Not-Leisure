@@ -1,7 +1,7 @@
 package com.science.gtnl.loader;
 
-import com.science.gtnl.common.recipe.Special.PortalToAlfheimOreRecipes;
-import com.science.gtnl.common.recipe.Special.WoodDistillationRecipes;
+import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRecipes;
+import com.science.gtnl.common.recipe.Special.OreDictionary.WoodDistillationRecipes;
 
 import gregtech.api.util.GTLog;
 
