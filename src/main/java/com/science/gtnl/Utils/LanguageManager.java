@@ -97,7 +97,7 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.Bohrium, "𬭛");
         addWerkstoffLocalization(MaterialPool.Hassium, "𬭶");
         addWerkstoffLocalization(MaterialPool.Meitnerium, "鿏");
-        addWerkstoffLocalization(MaterialPool.Darmstadtium, "𫟼");
+        addWerkstoffLocalization(MaterialPool.Darmstadtium, "\uD86D\uDFFC");
         addWerkstoffLocalization(MaterialPool.Roentgenium, "𬬭");
         addWerkstoffLocalization(MaterialPool.Copernicium, "鿔");
         addWerkstoffLocalization(MaterialPool.Moscovium, "镆");
@@ -123,6 +123,8 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.EnrichedNaquadahWaste, "富集硅岩废液");
         addWerkstoffLocalization(MaterialPool.RadonCrackedEnrichedNaquadah, "加氡裂化富集硅岩");
         addWerkstoffLocalization(MaterialPool.NaquadriaWaste, "超能硅岩废液");
+        addWerkstoffLocalization(MaterialPool.SmallBaka, "硝苯氮");
+        addWerkstoffLocalization(MaterialPool.LargeBaka, "\uD86D\uDFFC苯氮");
         addWerkstoffLocalization(MaterialPool.Periodicium, "錭錤錶");
         addWerkstoffLocalization(MaterialPool.Stargate, "星门");
 

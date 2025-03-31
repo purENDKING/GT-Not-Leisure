@@ -18,7 +18,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
@@ -58,11 +57,9 @@ public class BlazeSword extends ItemSword {
     @SubscribeEvent
     public void onEntityDrop(LivingDropsEvent event) {
         if (event.entity instanceof EntitySkeleton) {
-            EntitySkeleton skeleton = (EntitySkeleton) event.entity;
             Entity attacker = event.source.getEntity();
 
-            if (attacker instanceof EntityPlayer) {
-                EntityPlayer player = (EntityPlayer) attacker;
+            if (attacker instanceof EntityPlayer player) {
                 ItemStack heldItem = player.getHeldItem();
 
                 if (heldItem != null && heldItem.getItem() == this) {
@@ -101,16 +98,6 @@ public class BlazeSword extends ItemSword {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack stack) {
-        return 72000;
-    }
-
-    @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
-        return EnumAction.block;
-    }
-
-    @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
         playerIn.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 40, 1));
     }
@@ -122,7 +109,7 @@ public class BlazeSword extends ItemSword {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
+    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
         toolTip.add(TextLocalization.Tooltip_BlazeSword_00);
     }
@@ -141,10 +128,6 @@ public class BlazeSword extends ItemSword {
             this.accelerationX = look.xCoord * 0.1;
             this.accelerationY = look.yCoord * 0.1;
             this.accelerationZ = look.zCoord * 0.1;
-        }
-
-        public EntityBlazeFireball(World world) {
-            super(world);
         }
 
         @Override
@@ -172,8 +155,7 @@ public class BlazeSword extends ItemSword {
                 }
             }
 
-            if (mop.entityHit != null && mop.entityHit instanceof EntityLivingBase) {
-                EntityLivingBase target = (EntityLivingBase) mop.entityHit;
+            if (mop.entityHit != null && mop.entityHit instanceof EntityLivingBase target) {
 
                 if (target instanceof EntityEnderman) {
                     ((EntityEnderman) target).setAttackTarget((EntityLivingBase) shootingEntity);

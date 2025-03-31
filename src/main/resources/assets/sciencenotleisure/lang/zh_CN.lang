@@ -690,6 +690,8 @@ bw.werkstoff.25103.name=加氟裂化硅岩
 bw.werkstoff.25104.name=富集硅岩废液
 bw.werkstoff.25105.name=加氡裂化富集硅岩
 bw.werkstoff.25106.name=超能硅岩废液
+bw.werkstoff.25107.name=硝苯氮
+bw.werkstoff.25108.name=𫟼苯氮
 bw.werkstoff.25200.name=錭錤錶
 bw.werkstoff.25201.name=星门
 
@@ -799,6 +801,8 @@ Material.fluorinecrackednaquadah=加氟裂化硅岩
 Material.enrichednaquadahwaste=富集硅岩废液
 Material.radoncrackedenrichednaquadah=加氡裂化富集硅岩
 Material.naquadriawaste=超能硅岩废液
+Material.smallbaka=硝苯氮
+Material.largebaka=𫟼苯氮
 Material.periodicium=錭錤錶
 Material.stargate=星门
 
@@ -909,6 +913,8 @@ fluid.fluorinecrackednaquadah=加氟裂化硅岩
 fluid.enrichednaquadahwaste=富集硅岩废液
 fluid.radoncrackedenrichednaquadah=加氡裂化富集硅岩
 fluid.naquadriawaste=超能硅岩废液
+fluid.smallbaka=硝苯氮
+fluid.largebaka=𫟼苯氮
 fluid.periodicium=錭錤錶
 fluid.stargate=星门
 
@@ -1019,6 +1025,8 @@ fluid.molten.fluorinecrackednaquadah=加氟裂化硅岩
 fluid.molten.enrichednaquadahwaste=富集硅岩废液
 fluid.molten.radoncrackedenrichednaquadah=加氡裂化富集硅岩
 fluid.molten.naquadriawaste=超能硅岩废液
+fluid.molten.smallbaka=硝苯氮
+fluid.molten.largebaka=𫟼苯氮
 fluid.molten.periodicium=錭錤錶
 fluid.molten.stargate=星门
 

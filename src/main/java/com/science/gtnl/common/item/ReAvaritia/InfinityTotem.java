@@ -65,7 +65,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
+    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
         toolTip.add(TextLocalization.Tooltip_InfinityTotem_00);
     }
@@ -92,8 +92,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onLivingUpdate(LivingUpdateEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
 
             // 检查玩家物品栏中的 InfinityTotem
             for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
@@ -140,8 +139,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onLivingDeath(LivingDeathEvent event) {
-        if (event.entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.entity;
+        if (event.entity instanceof EntityPlayer player) {
 
             // 检查玩家物品栏中的 InfinityTotem
             ItemStack stack = getTotemFromPlayer(player);

@@ -272,7 +272,7 @@ public class TwilightSword extends ItemSword implements playSound {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
+    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
         toolTip.add(StatCollector.translateToLocal("Tooltip_TwilightSword_00"));
         toolTip.add(StatCollector.translateToLocal("Tooltip_TwilightSword_01"));

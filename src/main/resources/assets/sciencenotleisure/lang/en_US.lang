@@ -690,6 +690,8 @@ bw.werkstoff.25103.name=Fluorine Cracked Naquadah
 bw.werkstoff.25104.name=Enriched Naquadah Waste
 bw.werkstoff.25105.name=Radon Cracked Enriched Naquadah
 bw.werkstoff.25106.name=Naquadriah Waste
+bw.werkstoff.25107.name=Small Baka
+bw.werkstoff.25108.name=Large Baka
 bw.werkstoff.25200.name=Periodicium
 bw.werkstoff.25201.name=Stargate
 
@@ -799,6 +801,8 @@ Material.fluorinecrackednaquadah=Fluorine Cracked Naquadah
 Material.enrichednaquadahwaste=Enriched Naquadah Waste
 Material.radoncrackedenrichednaquadah=Radon Cracked Enriched Naquadah
 Material.naquadriawaste=Naquadriah Waste
+Material.smallbaka=Small Baka
+Material.largebaka=Large Baka
 Material.periodicium=Periodicium
 Material.stargate=Stargate
 
@@ -909,6 +913,8 @@ fluid.fluorinecrackednaquadah=Fluorine-Cracked Naquadah
 fluid.enrichednaquadahwaste=Enriched Naquadah Waste
 fluid.radoncrackedenrichednaquadah=Radon-Cracked Enriched Naquadah
 fluid.naquadriawaste=Naquadria Waste
+fluid.smallbaka=Small Baka
+fluid.largebaka=Large Baka
 fluid.periodicium=Periodicium
 fluid.stargate=Stargate
 
@@ -1019,6 +1025,8 @@ fluid.molten.fluorinecrackednaquadah=Molten Fluorine-Cracked Naquadah
 fluid.molten.enrichednaquadahwaste=Molten Enriched Naquadah Waste
 fluid.molten.radoncrackedenrichednaquadah=Molten Radon-Cracked Enriched Naquadah
 fluid.molten.naquadriawaste=Molten Naquadria Waste
+fluid.molten.smallbaka=Small Baka
+fluid.molten.largebaka=Large Baka
 fluid.molten.periodicium=Molten Periodicium
 fluid.molten.stargate=Molten Stargate
 

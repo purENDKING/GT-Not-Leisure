@@ -27,8 +27,8 @@ public class TestItem extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List toolTip,
-        final boolean advancedToolTips) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
+        boolean advancedToolTips) {
 
         toolTip.add(TextLocalization.Tooltip_Testitem_00);
         toolTip.add(TextLocalization.Tooltip_Testitem_01);

@@ -72,7 +72,7 @@ public class CrystalAxe extends ItemAxe {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean advanced) {
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean advanced) {
         list.add(TextLocalization.Tooltip_CrystalAxe_00);
     }
 

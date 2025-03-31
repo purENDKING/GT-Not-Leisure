@@ -1,6 +1,7 @@
 package com.science.gtnl.common.recipe.GregTech;
 
 import static com.science.gtnl.Utils.Utils.setStackSize;
+import static gregtech.api.enums.Mods.IndustrialCraft2;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -610,6 +611,29 @@ public class ChemicalRecipes implements IRecipePool {
             .noOptimize()
             .duration(200)
             .eut(TierEU.RECIPE_IV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs()
+            .fluidInputs(
+                Materials.NitricAcid.getFluid(3000),
+                Materials.Benzene.getFluid(1000),
+                Materials.Hydrogen.getGas(5000))
+            .fluidOutputs(Materials.Water.getFluid(4000), MaterialPool.SmallBaka.getFluidOrGas(1000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(20)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.Plastic, 1))
+            .itemOutputs(GTModHandler.getModItem(IndustrialCraft2.ID, "blockITNT", 32))
+            .fluidInputs(MaterialPool.SmallBaka.getFluidOrGas(2000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_HV)
             .addTo(mCR);
     }
 }
