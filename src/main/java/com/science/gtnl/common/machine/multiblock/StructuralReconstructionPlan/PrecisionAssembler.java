@@ -392,11 +392,13 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         logic.setAmperageOC(useSingleAmp);
     }
 
-    protected long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
+    public long getMachineVoltageLimit() {
+        if (machineTier < 0) return 0;
+        if (machineTier >= 9) return GTValues.V[energyHatchTier];
+        else return GTValues.V[Math.min(machineTier, energyHatchTier)];
     }
 
-    protected int checkEnergyHatchTier() {
+    public int checkEnergyHatchTier() {
         int tier = 0;
         for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
             tier = Math.max(tHatch.mTier, tier);
@@ -419,7 +421,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                         return CheckRecipeResultRegistry.insufficientMachineTier(recipe.mSpecialValue);
                     }
                 }
-                if (availableVoltage * 4 < recipe.mEUt) {
+                if (availableVoltage < recipe.mEUt) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return CheckRecipeResultRegistry.SUCCESSFUL;
