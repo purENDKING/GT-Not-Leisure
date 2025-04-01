@@ -13,6 +13,7 @@ import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.common.items.CombType;
@@ -36,8 +37,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -49,8 +50,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -62,8 +63,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -75,8 +76,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -88,8 +89,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -101,8 +102,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -114,8 +115,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -127,8 +128,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -140,8 +141,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -153,8 +154,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -166,8 +167,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -179,8 +180,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -192,8 +193,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -205,8 +206,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -218,8 +219,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -231,8 +232,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -244,8 +245,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -257,8 +258,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -270,8 +271,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -283,8 +284,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -296,8 +297,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -309,8 +310,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -322,8 +323,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -335,8 +336,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -348,8 +349,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -361,8 +362,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -374,8 +375,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -387,8 +388,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -400,8 +401,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -413,8 +414,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -426,8 +427,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -439,8 +440,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -452,8 +453,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -465,8 +466,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -478,8 +479,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -491,8 +492,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -504,8 +505,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -517,8 +518,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3500)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3500)
-                .duration(6 * SECONDS + 10 * TICKS)
-                .eut(103)
+                .duration(2 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -530,8 +531,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3602)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3602)
-                .duration(9 * SECONDS + 10 * TICKS)
-                .eut(391)
+                .duration(4 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_HV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -543,8 +544,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3602)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3602)
-                .duration(9 * SECONDS + 10 * TICKS)
-                .eut(391)
+                .duration(4 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_HV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -556,8 +557,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3602)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3602)
-                .duration(9 * SECONDS + 10 * TICKS)
-                .eut(391)
+                .duration(4 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_HV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -569,8 +570,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3602)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3602)
-                .duration(9 * SECONDS + 10 * TICKS)
-                .eut(391)
+                .duration(4 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_MV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -582,8 +583,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -595,8 +596,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -608,8 +609,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -621,8 +622,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -634,8 +635,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -647,8 +648,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -660,8 +661,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(3900)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3900)
-                .duration(11 * SECONDS + 10 * TICKS)
-                .eut(1543)
+                .duration(6 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_EV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -673,8 +674,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -686,8 +687,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -699,8 +700,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -712,8 +713,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -725,8 +726,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -738,8 +739,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -751,8 +752,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(4300)
                 .noOptimize()
                 .metadata(COIL_HEAT, 4300)
-                .duration(13 * SECONDS)
-                .eut(6151)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -764,8 +765,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -777,8 +778,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -790,8 +791,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -803,8 +804,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -816,8 +817,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -829,8 +830,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -842,8 +843,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -855,8 +856,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -868,8 +869,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -881,8 +882,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -894,8 +895,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -907,8 +908,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -920,8 +921,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(5200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 5200)
-                .duration(14 * SECONDS + 10 * TICKS)
-                .eut(24583)
+                .duration(7 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_IV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -933,8 +934,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(6100)
                 .noOptimize()
                 .metadata(COIL_HEAT, 6100)
-                .duration(16 * SECONDS + 10 * TICKS)
-                .eut(98311)
+                .duration(8 * SECONDS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -946,8 +947,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(6100)
                 .noOptimize()
                 .metadata(COIL_HEAT, 6100)
-                .duration(16 * SECONDS + 10 * TICKS)
-                .eut(98311)
+                .duration(8 * SECONDS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -959,8 +960,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(6100)
                 .noOptimize()
                 .metadata(COIL_HEAT, 6100)
-                .duration(16 * SECONDS + 10 * TICKS)
-                .eut(98311)
+                .duration(8 * SECONDS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -972,8 +973,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(6100)
                 .noOptimize()
                 .metadata(COIL_HEAT, 6100)
-                .duration(16 * SECONDS + 10 * TICKS)
-                .eut(98311)
+                .duration(8 * SECONDS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -985,8 +986,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(6100)
                 .noOptimize()
                 .metadata(COIL_HEAT, 6100)
-                .duration(16 * SECONDS + 10 * TICKS)
-                .eut(98311)
+                .duration(8 * SECONDS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -998,8 +999,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(7200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 7200)
-                .duration(18 * SECONDS + 10 * TICKS)
-                .eut(473611)
+                .duration(8 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1011,8 +1012,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(7200)
                 .noOptimize()
                 .metadata(COIL_HEAT, 7200)
-                .duration(18 * SECONDS + 10 * TICKS)
-                .eut(473611)
+                .duration(8 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_LuV)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1024,8 +1025,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .specialValue(8000)
                 .noOptimize()
                 .metadata(COIL_HEAT, 8000)
-                .duration(60 * SECONDS + 10 * TICKS)
-                .eut(2004322)
+                .duration(8 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1041,13 +1042,14 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Ammonia.getGas(18000),
                     Materials.Chlorobenzene.getFluid(18000),
                     Materials.NitrationMixture.getFluid(36000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(Materials.Polybenzimidazole.getMolten(9000), Materials.HydrochloricAcid.getFluid(18000))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(130773)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1059,16 +1061,17 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Hydrogen.getGas(8000),
                     Materials.Chlorine.getGas(4000),
                     Materials.Water.getFluid(1000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(
                     Materials.HydrochloricAcid.getFluid(6000),
                     Materials.DilutedHydrochloricAcid.getFluid(6000),
                     Materials.Silicone.getMolten(1296))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(116442)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1080,13 +1083,14 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Ethylene.getGas(216),
                     Materials.Butadiene.getGas(648),
                     Materials.Oxygen.getGas(6000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(Materials.StyreneButadieneRubber.getMolten(1296), Materials.Hydrogen.getGas(144))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(121446)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1098,13 +1102,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Chlorine.getGas(4000),
                     Materials.Benzene.getFluid(1000),
                     Materials.Oxygen.getGas(8000))
-                .itemOutputs(Materials.Salt.getDust(4))
+                .itemOutputs(
+                    Materials.Salt.getDust(4),
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(Materials.HydrochloricAcid.getFluid(2000), Materials.PolyphenyleneSulfide.getMolten(1500))
+                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(107663)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1113,13 +1120,14 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(20000),
                     Materials.Ethylene.getGas(4000),
                     Materials.Acetone.getFluid(4500))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(Materials.AdvancedGlue.getFluid(7500), Materials.Water.getFluid(2000))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(110446)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1132,16 +1140,17 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Propene.getGas(2000),
                     Materials.Chlorine.getGas(8000),
                     Materials.Water.getFluid(2000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(
                     Materials.Epoxid.getMolten(1000),
                     Materials.HydrochloricAcid.getFluid(3000),
                     Materials.SaltWater.getFluid(4000))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(114514)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1152,15 +1161,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Fluorine.getGas(4000),
                     Materials.Chlorine.getGas(12000),
                     Materials.Methane.getGas(2000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(
                     Materials.HydrochloricAcid.getFluid(12000),
                     Materials.Polytetrafluoroethylene.getMolten(1500))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(126043)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1168,25 +1178,27 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
                     Materials.Sulfur.getDust(1))
                 .fluidInputs(Materials.Ethanol.getFluid(3000), Materials.Oxygen.getGas(24000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(Materials.Plastic.getFluid(4500))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(97763)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
                 .itemInputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidInputs(Materials.Ethanol.getFluid(2000))
-                .itemOutputs()
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs(GGMaterial.ether.getFluidOrGas(1000), Materials.Water.getFluid(1000))
+                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(120 * SECONDS + 10 * TICKS)
-                .eut(97203)
+                .duration(30 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1200,13 +1212,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(6000),
                     Materials.Water.getFluid(2000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(4L),
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs()
+                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(72 * SECONDS)
-                .eut(84206)
+                .duration(24 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1220,13 +1235,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(4L),
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs()
+                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(72 * SECONDS)
-                .eut(84206)
+                .duration(24 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1240,13 +1258,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(6000))
-                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(8L))
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(8L),
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs()
+                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(72 * SECONDS)
-                .eut(84206)
+                .duration(24 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
@@ -1260,13 +1281,16 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(12000))
-                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(16L))
+                .itemOutputs(
+                    ItemList.Circuit_Board_Plastic_Advanced.get(16L),
+                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
                 .fluidOutputs()
+                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
-                .duration(72 * SECONDS)
-                .eut(84206)
+                .duration(24 * SECONDS + 10 * TICKS)
+                .eut(TierEU.RECIPE_ZPM)
                 .addTo(SCCR);
         }
     }
