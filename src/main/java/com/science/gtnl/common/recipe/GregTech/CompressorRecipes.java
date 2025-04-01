@@ -12,11 +12,14 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.recipe.metadata.CompressionTierKey;
 import gregtech.api.util.GTUtility;
 
 public class CompressorRecipes implements IRecipePool {
 
+    final CompressionTierKey COMPRESSION_TIER = CompressionTierKey.INSTANCE;
     final RecipeMap<?> NCR = RecipeMaps.neutroniumCompressorRecipes;
+    final RecipeMap<?> CR = RecipeMaps.compressorRecipes;
 
     @Override
     public void loadRecipes() {
@@ -35,6 +38,6 @@ public class CompressorRecipes implements IRecipePool {
             .noOptimize()
             .duration(300)
             .eut(TierEU.RECIPE_LV)
-            .addTo(NCR);
+            .addTo(CR);
     }
 }

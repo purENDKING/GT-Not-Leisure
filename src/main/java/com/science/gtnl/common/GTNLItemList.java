@@ -15,7 +15,11 @@ import com.science.gtnl.client.GTNLCreativeTabs;
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.IItemContainer;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.util.*;
+import gregtech.api.util.GTLanguageManager;
+import gregtech.api.util.GTLog;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 
 @SuppressWarnings("unused")
 public enum GTNLItemList implements IItemContainer {

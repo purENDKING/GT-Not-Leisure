@@ -10,7 +10,7 @@ import com.science.gtnl.loader.RecipeLoaderServerStart;
 import bartworks.MainMod;
 
 @SuppressWarnings("UnusedMixin")
-@Mixin(MainMod.class)
+@Mixin(value = MainMod.class, remap = false)
 public class BartworkLoad_Return_Mixin {
 
     @Inject(method = "runOnPlayerJoined(ZZ)V", at = @At("RETURN"), remap = false)

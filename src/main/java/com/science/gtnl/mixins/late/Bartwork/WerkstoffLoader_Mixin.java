@@ -10,7 +10,7 @@ import bartworks.system.material.WerkstoffLoader;
 import gregtech.api.enums.OrePrefixes;
 
 @SuppressWarnings("UnusedMixin")
-@Mixin(WerkstoffLoader.class)
+@Mixin(value = WerkstoffLoader.class, remap = false)
 public abstract class WerkstoffLoader_Mixin {
 
     @Inject(

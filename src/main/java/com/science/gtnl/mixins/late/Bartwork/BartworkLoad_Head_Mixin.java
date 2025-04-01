@@ -11,7 +11,7 @@ import com.science.gtnl.config.MainConfig;
 import bartworks.MainMod;
 
 @SuppressWarnings("UnusedMixin")
-@Mixin(MainMod.class)
+@Mixin(value = MainMod.class, remap = false)
 public class BartworkLoad_Head_Mixin {
 
     @Inject(method = "runOnPlayerJoined(ZZ)V", at = @At("HEAD"), remap = false)
