@@ -34,7 +34,7 @@ public class VacuumFurnaceRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 64),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 32),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadria, 64),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Indium, 32),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Indium, 64),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Trinium, 32),
                 GGMaterial.extremelyUnstableNaquadah.get(OrePrefixes.dust, 2))
             .fluidInputs(FluidUtils.getFluidStack(MilledOre.NaquadahEnrichedFlotationFroth, 4000))
@@ -51,27 +51,8 @@ public class VacuumFurnaceRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 64),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 32),
                 WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 32),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 32),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 32),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tellurium, 16),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 48),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Cobalt, 32))
-            .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PlatinumFlotationFroth, 4000))
-            .fluidOutputs(FluidUtils.getFluidStack(AgriculturalChem.RedMud, 200), FluidUtils.getWater(2000))
-            .noOptimize()
-            .eut(TierEU.RECIPE_LuV)
-            .metadata(COIL_HEAT, 5500)
-            .duration(2400)
-            .addTo(VFR);
-
-        GTValues.RA.stdBuilder()
-            .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 64),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 32),
-                WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 32),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 32),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 32),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 16),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 16),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tellurium, 16),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 48),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Cobalt, 32))
