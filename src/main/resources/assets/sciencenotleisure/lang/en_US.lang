@@ -175,6 +175,8 @@ MetaCasing.17.name=Gaia Stabilization Field Machine Block
 MetaCasing.18.name=Super Energy Core
 MetaCasing.19.name=Chemical Protection Machine Block
 MetaCasing.20.name=Super Energy Machine Block
+MetaCasing.21.name=Steamgate Ring Block
+MetaCasing.22.name=Steamgate Chevron Block
 
 MetaBlock.0.name=Test Block
 MetaBlock.1.name=§dNew Horizons Coil
@@ -479,6 +481,8 @@ tooltips.HighlyAdvancedSoc_00=Highly Advanced System on Chip
 MetaItem.79.name=Zinc-Iron-Aluminum-Chlorine Mixed Catalyst
 MetaItem.80.name=Black Light
 tooltips.BlackLight_00=§8Long-wave§dUV§8light source
+MetaItem.81.name=Steamgate Dialing Device
+tooltips.SteamgateDialingDevice_00=Links steamgates for teleportation.
 
 item.TestItem.name=Test Item
 Tooltip_Testitem_00=If you see this Tooltip
@@ -1274,6 +1278,15 @@ LargePacker_Mode_1=Unpacker
 Tooltip_LargePacker_00=500%% faster than machines of the same voltage  
 Tooltip_LargePacker_01=Only requires 50%% of the recipe's power demand  
 Tooltip_LargePacker_Casing=Any reinforced tungsten steel machine block  
+
+NameSteamgate=Steamgate Base Block
+Tooltip_Steamgate_00=§b§oImpossible machine.
+Tooltip_Steamgate_01=Must be linked to another steamgate with a Steamgate Dialing Device.
+Tooltip_Steamgate_02=Left click to save steamgate data. Right click to link to another steamgate.
+Tooltip_Steamgate_03=Right click a linked steamgate to teleport.
+Tooltip_Steamgate_04=Saved Steamgate Dialing Data
+Tooltip_Steamgate_05=Steamgate dialed successfully
+Tooltip_Steamgate_06=Steamgate could not be dialed
 
 NameLargeAlloySmelter=Large Alloy Smelter  
 LargeAlloySmelterRecipeType=Alloy Smelter  

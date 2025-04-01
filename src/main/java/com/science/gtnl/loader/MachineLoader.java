@@ -75,6 +75,7 @@ import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
 import com.science.gtnl.common.machine.multiblock.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
+import com.science.gtnl.common.machine.multiblock.Steamgate;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
@@ -615,12 +616,16 @@ public class MachineLoader {
             new PlatinumBasedTreatment(21111, "PlatinumBasedTreatment", TextLocalization.NamePlatinumBasedTreatment));
         addItemTooltip(GTNLItemList.PlatinumBasedTreatment.get(1), AnimatedText.SNL_PBTR);
 
-        ShallowChemicalCoupling.set(
+        GTNLItemList.ShallowChemicalCoupling.set(
             new ShallowChemicalCoupling(
                 21112,
                 "ShallowChemicalCoupling",
                 TextLocalization.NameShallowChemicalCoupling));
         addItemTooltip(GTNLItemList.ShallowChemicalCoupling.get(1), AnimatedText.SNL_PBTR);
+
+        GTNLItemList.Steamgate.set(new Steamgate(21113, "Steamgate", TextLocalization.NameSteamgate));
+        addItemTooltip(GTNLItemList.Steamgate.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        addItemTooltip(GTNLItemList.Steamgate.get(1), AnimatedText.SteamgateCredits);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(

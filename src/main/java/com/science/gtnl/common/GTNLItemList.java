@@ -1,6 +1,7 @@
 package com.science.gtnl.common;
 
 import static gregtech.api.enums.GTValues.NI;
+import static gregtech.api.enums.GTValues.W;
 
 import java.util.Locale;
 
@@ -12,13 +13,12 @@ import com.science.gtnl.Utils.Utils;
 import com.science.gtnl.client.GTNLCreativeTabs;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.interfaces.IItemContainer;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
-import gregtech.api.util.GTLanguageManager;
-import gregtech.api.util.GTLog;
-import gregtech.api.util.GTUtility;
+import gregtech.api.util.*;
 
 @SuppressWarnings("unused")
-public enum GTNLItemList {
+public enum GTNLItemList implements IItemContainer {
 
     StargateCoil,
     StargateTier0,
@@ -101,6 +101,8 @@ public enum GTNLItemList {
     HyperCore,
     ChemicallyResistantCasing,
     UltraPoweredCasing,
+    SteamgateRingBlock,
+    SteamgateChevronBlock,
 
     TrollFace,
     DepletedExcitedNaquadahFuelRod,
@@ -183,6 +185,7 @@ public enum GTNLItemList {
     HighlyAdvancedSoc,
     ZnFeAlClCatalyst,
     BlackLight,
+    SteamgateDialingDevice,
 
     TestItem,
     KFCFamily,
@@ -316,6 +319,7 @@ public enum GTNLItemList {
     LargeSteamMixer,
     ElectricBlastFurnace,
 
+    Steamgate,
     AdvancedInfiniteDriller,
     PlatinumBasedTreatment,
     CrackerHub,
@@ -464,15 +468,16 @@ public enum GTNLItemList {
         return Block.getBlockFromItem(getItem());
     }
 
-    public ItemStack get(int aAmount, Object... aReplacements) {
+    @Override
+    public ItemStack get(long aAmount, Object... aReplacements) {
         sanityCheck();
         // if invalid, return a replacements
         if (Utils.isStackInvalid(mStack)) {
             GTLog.out.println("Object in the ItemList is null at:");
             new NullPointerException().printStackTrace(GTLog.out);
-            return Utils.copyAmount(aAmount, TestMetaBlock01_0.get(1));
+            return Utils.copyAmount(Math.toIntExact(aAmount), TestMetaBlock01_0.get(1));
         }
-        return Utils.copyAmount(aAmount, mStack);
+        return Utils.copyAmount(Math.toIntExact(aAmount), mStack);
     }
 
     public int getMeta() {
@@ -551,6 +556,100 @@ public enum GTNLItemList {
 
         rStack.setStackDisplayName(GTLanguageManager.addStringLocalization(tKey, aDisplayName));
         return GTUtility.copyAmount(aAmount, rStack);
+    }
+
+    @Override
+    public boolean isStackEqual(Object aStack) {
+        return isStackEqual(aStack, false, false);
+    }
+
+    @Override
+    public boolean isStackEqual(Object aStack, boolean aWildcard, boolean aIgnoreNBT) {
+        if (mDeprecated && !mWarned) {
+            new Exception(this + " is now deprecated").printStackTrace(GTLog.err);
+            // warn only once
+            mWarned = true;
+        }
+        if (GTUtility.isStackInvalid(aStack)) return false;
+        return GTUtility.areUnificationsEqual((ItemStack) aStack, aWildcard ? getWildcard(1) : get(1), aIgnoreNBT);
+    }
+
+    @Override
+    public ItemStack getWildcard(long aAmount, Object... aReplacements) {
+        sanityCheck();
+        if (GTUtility.isStackInvalid(mStack)) return GTUtility.copyAmount(aAmount, aReplacements);
+        return GTUtility.copyAmountAndMetaData(aAmount, W, GTOreDictUnificator.get(mStack));
+    }
+
+    @Override
+    public ItemStack getUndamaged(long aAmount, Object... aReplacements) {
+        sanityCheck();
+        if (GTUtility.isStackInvalid(mStack)) return GTUtility.copyAmount(aAmount, aReplacements);
+        return GTUtility.copyAmountAndMetaData(aAmount, 0, GTOreDictUnificator.get(mStack));
+    }
+
+    @Override
+    public ItemStack getAlmostBroken(long aAmount, Object... aReplacements) {
+        sanityCheck();
+        if (GTUtility.isStackInvalid(mStack)) return GTUtility.copyAmount(aAmount, aReplacements);
+        return GTUtility.copyAmountAndMetaData(aAmount, mStack.getMaxDamage() - 1, GTOreDictUnificator.get(mStack));
+    }
+
+    @Override
+    public ItemStack getWithName(long aAmount, String aDisplayName, Object... aReplacements) {
+        ItemStack rStack = get(1, aReplacements);
+        if (GTUtility.isStackInvalid(rStack)) return NI;
+
+        // CamelCase alphanumeric words from aDisplayName
+        StringBuilder tCamelCasedDisplayNameBuilder = new StringBuilder();
+        final String[] tDisplayNameWords = aDisplayName.split("\\W");
+        for (String tWord : tDisplayNameWords) {
+            if (!tWord.isEmpty()) tCamelCasedDisplayNameBuilder.append(
+                tWord.substring(0, 1)
+                    .toUpperCase(Locale.US));
+            if (tWord.length() > 1) tCamelCasedDisplayNameBuilder.append(
+                tWord.substring(1)
+                    .toLowerCase(Locale.US));
+        }
+        if (tCamelCasedDisplayNameBuilder.length() == 0) {
+            // CamelCased DisplayName is empty, so use hash of aDisplayName
+            tCamelCasedDisplayNameBuilder.append(((Long) (long) aDisplayName.hashCode()));
+        }
+
+        // Construct a translation key from UnlocalizedName and CamelCased DisplayName
+        final String tKey = rStack.getUnlocalizedName() + ".with." + tCamelCasedDisplayNameBuilder + ".name";
+
+        rStack.setStackDisplayName(GTLanguageManager.addStringLocalization(tKey, aDisplayName));
+        return GTUtility.copyAmount(aAmount, rStack);
+    }
+
+    @Override
+    public ItemStack getWithCharge(long aAmount, int aEnergy, Object... aReplacements) {
+        ItemStack rStack = get(1, aReplacements);
+        if (GTUtility.isStackInvalid(rStack)) return null;
+        GTModHandler.chargeElectricItem(rStack, aEnergy, Integer.MAX_VALUE, true, false);
+        return GTUtility.copyAmount(aAmount, rStack);
+    }
+
+    @Override
+    public ItemStack getWithDamage(long aAmount, long aMetaValue, Object... aReplacements) {
+        sanityCheck();
+        if (GTUtility.isStackInvalid(mStack)) return GTUtility.copyAmount(aAmount, aReplacements);
+        return GTUtility.copyAmountAndMetaData(aAmount, aMetaValue, GTOreDictUnificator.get(mStack));
+    }
+
+    @Override
+    public IItemContainer registerOre(Object... aOreNames) {
+        sanityCheck();
+        for (Object tOreName : aOreNames) GTOreDictUnificator.registerOre(tOreName, get(1));
+        return this;
+    }
+
+    @Override
+    public IItemContainer registerWildcardAsOre(Object... aOreNames) {
+        sanityCheck();
+        for (Object tOreName : aOreNames) GTOreDictUnificator.registerOre(tOreName, getWildcard(1));
+        return this;
     }
 
 }

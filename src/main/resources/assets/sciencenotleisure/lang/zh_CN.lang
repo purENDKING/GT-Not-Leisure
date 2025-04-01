@@ -175,6 +175,8 @@ MetaCasing.17.name=盖亚稳定力场机械方块
 MetaCasing.18.name=超能核心
 MetaCasing.19.name=化学防护机械方块
 MetaCasing.20.name=超能机械方块
+MetaCasing.21.name=蒸汽之门外环方块
+MetaCasing.22.name=蒸汽之门导标方块
 
 MetaBlock.0.name=测试方块
 MetaBlock.1.name=§d新视野线圈
@@ -479,6 +481,8 @@ tooltips.HighlyAdvancedSoc_00=高度先进芯片级系统
 MetaItem.79.name=锌-铁-铝-氯混合催化剂
 MetaItem.80.name=黑光灯
 tooltips.BlackLight_00=§8长波§d紫外线§8光源
+MetaItem.81.name=蒸汽之门拨号装置
+tooltips.SteamgateDialingDevice_00=连接蒸汽之门以进行传送
 
 item.TestItem.name=测试物品
 Tooltip_Testitem_00=如果你看到了这个Tooltip
@@ -1274,6 +1278,15 @@ LargePacker_Mode_1=解包器
 Tooltip_LargePacker_00=比相同电压的机器快500%%
 Tooltip_LargePacker_01=只需要使用配方要求功率的50%%
 Tooltip_LargePacker_Casing=任意强化钨钢机械方块
+
+NameSteamgate=蒸汽之门基础方块
+Tooltip_Steamgate_00=§b§o不可思议的机器。
+Tooltip_Steamgate_01=必须使用蒸汽之门拨号装置连接到另一座蒸汽之门。
+Tooltip_Steamgate_02=左键单击以保存蒸汽之门数据。右键单击以连接到另一座蒸汽之门。
+Tooltip_Steamgate_03=右键单击已连接的蒸汽之门以进行传送。
+Tooltip_Steamgate_04=已保存蒸汽之门数据
+Tooltip_Steamgate_05=成功拨号到蒸汽之门
+Tooltip_Steamgate_06=无法拨号到蒸汽之门
 
 NameLargeAlloySmelter=大型合金炉
 LargeAlloySmelterRecipeType=合金炉

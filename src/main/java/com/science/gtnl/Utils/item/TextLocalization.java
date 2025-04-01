@@ -702,6 +702,18 @@ public class TextLocalization {
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCrusher_Casing");
 
+    public static final String NameSteamgate = texter("Steamgate Base Block", "NameSteamgate");
+    public static final String Tooltip_Steamgate_00 = texter("§b§oImpossible machine.", "Tooltip_Steamgate_00");
+    public static final String Tooltip_Steamgate_01 = texter(
+        "Must be linked to another steamgate with a Steamgate Dialing Device.",
+        "Tooltip_Steamgate_01");
+    public static final String Tooltip_Steamgate_02 = texter(
+        "Left click to save steamgate data. Right click to link to another steamgate.",
+        "Tooltip_Steamgate_02");
+    public static final String Tooltip_Steamgate_03 = texter(
+        "Right click a linked steamgate to teleport.",
+        "Tooltip_Steamgate_03");
+
     public static final String NameLargeSteamFormingPress = texter(
         "Large Steam Formin Press",
         "NameLargeSteamFormingPress");

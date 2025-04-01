@@ -5,6 +5,10 @@ import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+import net.minecraft.util.EnumChatFormatting;
+
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.science.gtnl.Utils.item.TextLocalization;
 
 public class AnimatedText {
@@ -320,4 +324,126 @@ public class AnimatedText {
             GREEN + OBFUSCATED + BOLD + UNDERLINE,
             AQUA + OBFUSCATED + BOLD + UNDERLINE,
             BLUE + OBFUSCATED + BOLD + UNDERLINE));
+
+    public static final String AuthorHighPressureRaven = "" + EnumChatFormatting.WHITE
+        + "High"
+        + EnumChatFormatting.GRAY
+        + "Pres"
+        + EnumChatFormatting.DARK_GRAY
+        + "sure"
+        + EnumChatFormatting.LIGHT_PURPLE
+        + "Raven";
+
+    public static final Supplier<String> SteamgateCredits = chain(
+        text(EnumChatFormatting.WHITE + "Created By:\n"),
+        getAuthorSerenibyssLetter("S", 30, 3, LIGHT_PURPLE, 11, WHITE, 25, AQUA),
+        getAuthorSerenibyssLetter("t", 30, 12, AQUA, 18, LIGHT_PURPLE, 29, WHITE),
+        getAuthorSerenibyssLetter("e", 30, 0, WHITE, 10, LIGHT_PURPLE, 20, AQUA),
+        getAuthorSerenibyssLetter("a", 30, 9, LIGHT_PURPLE, 17, AQUA, 22, WHITE),
+        getAuthorSerenibyssLetter("m", 30, 6, WHITE, 14, AQUA, 27, LIGHT_PURPLE),
+        getAuthorSerenibyssLetter("i", 30, 1, AQUA, 15, WHITE, 21, LIGHT_PURPLE),
+        getAuthorSerenibyssLetter("b", 30, 13, WHITE, 19, LIGHT_PURPLE, 23, WHITE),
+        getAuthorSerenibyssLetter("y", 30, 2, AQUA, 8, LIGHT_PURPLE, 24, WHITE),
+        getAuthorSerenibyssLetter("s", 30, 5, AQUA, 16, WHITE, 26, LIGHT_PURPLE),
+        getAuthorSerenibyssLetter("s", 30, 4, LIGHT_PURPLE, 7, WHITE, 28, AQUA),
+        text("\n"),
+        animatedText(
+            "Brass",
+            0,
+            500,
+            GOLD + BOLD,
+            DARK_GREEN + BOLD,
+            GOLD + BOLD,
+            DARK_GREEN + BOLD,
+            DARK_GREEN + OBFUSCATED + BOLD),
+        animatedText(
+            "Noccles",
+            0,
+            500,
+            DARK_GREEN + BOLD,
+            GOLD + BOLD,
+            DARK_GREEN + BOLD,
+            GOLD + BOLD,
+            DARK_GREEN + OBFUSCATED + BOLD),
+        text(
+            "\n" + EnumChatFormatting.LIGHT_PURPLE
+                + EnumChatFormatting.ITALIC
+                + "Steam"
+                + EnumChatFormatting.WHITE
+                + EnumChatFormatting.ITALIC
+                + "Is"
+                + EnumChatFormatting.LIGHT_PURPLE
+                + EnumChatFormatting.ITALIC
+                + "The"
+                + EnumChatFormatting.WHITE
+                + EnumChatFormatting.ITALIC
+                + "Number\n"),
+        chain(
+            createPipeBluezLetter(0),
+            createPipeBluezLetter(1),
+            createPipeBluezLetter(2),
+            createPipeBluezLetter(3),
+            createPipeBluezLetter(4),
+            createPipeBluezLetter(5),
+            createPipeBluezLetter(6),
+            createPipeBluezLetter(7),
+            createPipeBluezLetter(8)),
+        text("\n" + AuthorHighPressureRaven + "\n"),
+        text(EnumChatFormatting.GOLD + "Gear" + EnumChatFormatting.DARK_PURPLE + "ix"));
+
+    private static Supplier<String> getAuthorSerenibyssLetter(String letter, int length, Object... switchParams) {
+        int[] switchIntervals = new int[switchParams.length / 2];
+        String[] colors = new String[switchParams.length / 2];
+        for (int i = 0; i < switchParams.length; i += 2) {
+            switchIntervals[i / 2] = (int) switchParams[i];
+            colors[i / 2] = (String) switchParams[i + 1];
+        }
+
+        String[] colorAlternator = new String[length];
+        int index = switchIntervals[0];
+        int switchIndex = 0;
+        boolean obfuscated = false;
+        do {
+            String color;
+            if (ArrayUtils.contains(switchIntervals, index)) {
+                obfuscated = true;
+                color = colors[switchIndex] + ITALIC + OBFUSCATED;
+            } else if (obfuscated) {
+                obfuscated = false;
+                switchIndex++;
+                if (switchIndex == colors.length) switchIndex = 0;
+                color = colors[switchIndex] + ITALIC;
+            } else {
+                color = colors[switchIndex] + ITALIC;
+            }
+            colorAlternator[index] = color;
+            index++;
+            if (index == length) index = 0;
+        } while (index != switchIntervals[0]);
+
+        return animatedText(letter, 1, 250, colorAlternator);
+    }
+
+    private static Supplier<String> createPipeBluezLetter(int letterIndex) {
+        char[] letters = "PipeBluez".toCharArray();
+        String[] colors = { WHITE, WHITE, WHITE, WHITE, AQUA, DARK_AQUA, BLUE, DARK_BLUE, DARK_BLUE };
+        int[] order = new int[] { 0, 6, 3, 8, 5, 7, 2, 4, 1 };
+        int length = letters.length * 5 * 4;
+        String letter = Character.toString(letters[letterIndex]);
+
+        String[] colorAlternator = new String[length];
+        int index = 0;
+        int orderIndex = 0;
+        do {
+            String color = colors[Math.floorMod(letterIndex - order[orderIndex], colors.length)];
+            if ((index + 1) % 4 == 0) {
+                color = color + OBFUSCATED;
+                orderIndex++;
+            }
+            colorAlternator[index] = color;
+            index++;
+            if (orderIndex > 8) orderIndex = 0;
+        } while (index != length);
+        return animatedText(letter, 1, 250, colorAlternator);
+    }
 }

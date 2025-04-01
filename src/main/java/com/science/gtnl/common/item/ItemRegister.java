@@ -331,6 +331,11 @@ public class ItemRegister {
                 "Black Light",
                 80,
                 new String[] { texter("§8long-wave §dultraviolet §8light source", "tooltips.BlackLight_00") }));
+        GTNLItemList.SteamgateDialingDevice.set(
+            initItem(
+                "Steamgate Dialing Device",
+                81,
+                new String[] { texter("Links steamgates for teleportation.", "tooltips.SteamgateDialingDevice_00") }));
     }
 
     public static void registry() {

@@ -470,6 +470,10 @@ public class BlockRegister {
                 .initMetaBlockCasing("Chemically Resistant Casing", (byte) 19, BasicBlocks.MetaCasing));
         GTNLItemList.UltraPoweredCasing
             .set(MetaBlockConstructors.initMetaBlockCasing("Ultra Powered Casing", (byte) 20, BasicBlocks.MetaCasing));
+        GTNLItemList.SteamgateRingBlock
+            .set(MetaBlockConstructors.initMetaBlockCasing("Steamgate Ring Block", (byte) 21, BasicBlocks.MetaCasing));
+        GTNLItemList.SteamgateChevronBlock.set(
+            MetaBlockConstructors.initMetaBlockCasing("Steamgate Chevron Block", (byte) 22, BasicBlocks.MetaCasing));
     }
 
     public static void registry() {
