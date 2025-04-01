@@ -2279,7 +2279,7 @@ public class TextLocalization {
         "§oDirect Molecular Bond Control Bypasses Multi-Step Reactions",
         "Tooltip_ShallowChemicalCoupling_01");
     public static final String Tooltip_ShallowChemicalCoupling_02 = texter(
-        "Recipe time & energy multiply by 85%% per coil tier",
+        "Recipe time & energy multiply by 75%% per coil tier",
         "Tooltip_ShallowChemicalCoupling_02");
     public static final String Tooltip_ShallowChemicalCoupling_03 = texter(
         "Energy hatch limited by glass tier, UEV Glass unlocks all",

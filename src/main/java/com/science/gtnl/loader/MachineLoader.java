@@ -621,7 +621,7 @@ public class MachineLoader {
                 21112,
                 "ShallowChemicalCoupling",
                 TextLocalization.NameShallowChemicalCoupling));
-        addItemTooltip(GTNLItemList.ShallowChemicalCoupling.get(1), AnimatedText.SNL_PBTR);
+        addItemTooltip(GTNLItemList.ShallowChemicalCoupling.get(1), AnimatedText.SNL_SCCR);
 
         GTNLItemList.Steamgate.set(new Steamgate(21113, "Steamgate", TextLocalization.NameSteamgate));
         addItemTooltip(GTNLItemList.Steamgate.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
