@@ -1058,6 +1058,8 @@ gt.blockmachines.gt_pipe_blue_alloy_huge.name=Huge %material Fluid Pipe
 gt.blockmachines.gt_pipe_blue_alloy_large.name=Large %material Fluid Pipe
 gt.blockmachines.gt_pipe_blue_alloy_small.name=Small %material Fluid Pipe
 gt.blockmachines.gt_pipe_blue_alloy_tiny.name=Tiny %material Fluid Pipe
+bw.itemtype.plateSuperdense=Superdense %material Plate
+bw.itemtype.nanite=%material Nanites
 
 tooltip.lamp.noglow=No Glow
 tooltip.lamp.borderless=Borderless

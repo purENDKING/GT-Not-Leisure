@@ -12,6 +12,7 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.Utils.item.TextHandler;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
@@ -134,6 +135,7 @@ public class ScienceNotLeisure {
         BlazeSword.registerEntity();
         proxy.preInit(event);
         MaterialLoader.load();
+        LanguageManager.init();
         new RecipeLoaderRunnable().run();
 
         AEApi.instance()

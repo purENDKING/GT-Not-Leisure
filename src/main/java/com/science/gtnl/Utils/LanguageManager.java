@@ -155,6 +155,8 @@ public class LanguageManager {
         addStringLocalization("gt.blockmachines.cable.stargate.08.name", "8x星门线缆");
         addStringLocalization("gt.blockmachines.cable.stargate.12.name", "12x星门线缆");
         addStringLocalization("gt.blockmachines.cable.stargate.16.name", "16x星门线缆");
+        addStringLocalization("bw.itemtype.plateSuperdense", "超致密%material板");
+        addStringLocalization("bw.itemtype.nanite", "%material纳米蜂群");
     }
 
     public static void addWerkstoffLocalization(Werkstoff aWerkstoff, String localizedName) {

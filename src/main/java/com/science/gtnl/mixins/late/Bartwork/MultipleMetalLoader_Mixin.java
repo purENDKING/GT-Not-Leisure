@@ -33,11 +33,11 @@ public abstract class MultipleMetalLoader_Mixin {
                 .duration(
                     (int) Math.max(
                         werkstoff.getStats()
-                            .getMass(),
+                            .getMass() * 4,
                         1L))
                 .eut(
                     werkstoff.getStats()
-                        .getMass() > 128 ? TierEU.RECIPE_HV : TierEU.RECIPE_MV)
+                        .getMass() > 128 ? TierEU.RECIPE_IV : TierEU.RECIPE_EV)
                 .addTo(RecipeMaps.compressorRecipes);
         }
     }

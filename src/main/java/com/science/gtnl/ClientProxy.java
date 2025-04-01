@@ -7,7 +7,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GuiEventHandler;
-import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.RenderExtremeAnvil;
 import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAnvil;
 import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
@@ -48,7 +47,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
-        LanguageManager.init();
         MinecraftForge.EVENT_BUS.register(new ItemPlayerDollRenderer());
         MinecraftForge.EVENT_BUS.register(new BlockPlayerDollRenderer());
     }

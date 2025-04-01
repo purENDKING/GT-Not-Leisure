@@ -1058,6 +1058,8 @@ gt.blockmachines.gt_pipe_blue_alloy_huge.name=巨型%material流体管道
 gt.blockmachines.gt_pipe_blue_alloy_large.name=大型%material流体管道
 gt.blockmachines.gt_pipe_blue_alloy_small.name=小型%material流体管道
 gt.blockmachines.gt_pipe_blue_alloy_tiny.name=微型%material流体管道
+bw.itemtype.plateSuperdense=超致密%material板
+bw.itemtype.nanite=%material纳米蜂群
 
 tooltip.lamp.noglow=无光照
 tooltip.lamp.borderless=无边框
