@@ -3,12 +3,14 @@ package com.science.gtnl.common.block;
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.text;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.science.gtnl.Utils.AnimatedText;
+import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.Base.ItemBlockBase;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
@@ -30,9 +32,11 @@ import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
+import com.science.gtnl.common.item.items.SaplingBrickuoia;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gtPlusPlus.core.item.base.itemblock.ItemBlockMeta;
+import gtPlusPlus.core.util.minecraft.ItemUtils;
 
 public class BlockRegister {
 
@@ -504,5 +508,24 @@ public class BlockRegister {
         OreDictionary.registerOre("blockGlassUV", TerraGlass);
         OreDictionary.registerOre("blockGlassZPM", FusionGlass);
 
+    }
+
+    public static Block SaplingBrickuoia;
+
+    public static void registerTreeBrickuoia() {
+        SaplingBrickuoia = new SaplingBrickuoia();
+        GTNLItemList.SaplingBrickuoia.set(new ItemStack(SaplingBrickuoia, 1));
+        SaplingBrickuoia.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
+        addItemTooltip(
+            GTNLItemList.SaplingBrickuoia.get(1),
+            () -> StatCollector.translateToLocal("Tooltip_GiantBrickuoiaSapling_00"));
+        addItemTooltip(
+            GTNLItemList.SaplingBrickuoia.get(1),
+            () -> StatCollector.translateToLocal("Tooltip_GiantBrickuoiaSapling_01"));
+        addItemTooltip(GTNLItemList.SaplingBrickuoia.get(1), () -> "");
+        addItemTooltip(
+            GTNLItemList.SaplingBrickuoia.get(1),
+            () -> StatCollector.translateToLocal("Tooltip_GiantBrickuoiaSapling_02"));
+        ItemUtils.addItemToOreDictionary(ItemUtils.getSimpleStack(SaplingBrickuoia), "treeSapling", true);
     }
 }

@@ -22,6 +22,7 @@ import com.science.gtnl.common.item.ReAvaritia.InfinityShovel;
 import com.science.gtnl.common.item.ReAvaritia.InfinitySword;
 import com.science.gtnl.common.item.ReAvaritia.InfinityTotem;
 import com.science.gtnl.common.item.ReAvaritia.MatterCluster;
+import com.science.gtnl.common.item.items.FakeItemSiren;
 import com.science.gtnl.common.item.items.FuelRod.FuelRod;
 import com.science.gtnl.common.item.items.FuelRod.FuelRodDepleted;
 import com.science.gtnl.common.item.items.KFCFamily;
@@ -37,6 +38,7 @@ public class ItemLoader {
 
     private ItemLoader() {}
 
+    public static Item FakeItemSiren = new FakeItemSiren();
     public static Item TestItem = new TestItem();
     public static Item CrystalSword = new CrystalSword();
     public static Item CrystalAxe = new CrystalAxe();
@@ -82,6 +84,7 @@ public class ItemLoader {
         GTNLItemList.InfinityFuelRodDepleted.set(new ItemStack(InfinityFuelRodDepleted, 1));
         GTNLItemList.InfinityFuelRod.set(new ItemStack(InfinityFuelRod, 1));
 
+        IRegistry(FakeItemSiren, "FakeItemSiren");
         IRegistry(TestItem, "TestItem");
         IRegistry(CrystalPickaxe, "CrystalPickaxe");
         IRegistry(CrystalHoe, "CrystalHoe");

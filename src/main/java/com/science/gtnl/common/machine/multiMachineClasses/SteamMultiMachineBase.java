@@ -4,6 +4,8 @@ import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockFrames;
+import static gregtech.api.enums.Mods.GregTech;
+import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -25,9 +27,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
+import com.gtnewhorizons.modularui.api.drawable.ItemDrawable;
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 
 import gregtech.api.GregTechAPI;
@@ -47,6 +58,7 @@ import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
+import gtPlusPlus.core.util.minecraft.FluidUtils;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteamBusInput;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.MTEHatchCustomFluidBase;
@@ -69,6 +81,10 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     protected int tCountCasing = 0;
     protected boolean isBroken = true;
     public ArrayList<CustomFluidHatch> mSteamBigInputFluids = new ArrayList<>();
+    private int uiSteamStored = 0;
+    private int uiSteamCapacity = 0;
+    private int uiSteamStoredOfAllTypes = 0;
+    public static final UITexture STEAM_GAUGE_BG = UITexture.fullImage(GregTech.ID, "gui/background/steam_dial");
 
     public SteamMultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -508,6 +524,34 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return false;
     }
 
+    public int getTotalSteamCapacity() {
+        int aSteam = 0;
+        for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) {
+            aSteam += tHatch.getRealCapacity();
+        }
+        for (CustomFluidHatch tHatch : validMTEList(mSteamBigInputFluids)) {
+            aSteam += tHatch.getRealCapacity();
+        }
+        return aSteam;
+    }
+
+    private int getTotalSteamStoredOfAnyType() {
+        int aSteam = 0;
+        for (FluidStack aFluid : this.getStoredFluids()) {
+            if (aFluid == null) continue;
+            for (SteamTypes type : SteamTypes.VALUES) {
+                if (aFluid.getFluid() == type.fluid) {
+                    aSteam += aFluid.amount;
+                }
+            }
+        }
+        return aSteam;
+    }
+
+    protected SteamTypes getSteamType() {
+        return SteamTypes.STEAM;
+    }
+
     @Override
     public boolean addOutput(ItemStack aStack) {
         if (GTUtility.isStackInvalid(aStack)) return false;
@@ -562,11 +606,61 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return (d, r, f) -> d.offsetY == 0 && r.isNotRotated();
     }
 
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamCapacity, val -> uiSteamCapacity = val));
+        builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStored, val -> uiSteamStored = val));
+        builder.widget(
+            new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStoredOfAnyType, val -> uiSteamStoredOfAllTypes = val));
+
+        builder.widget(
+            new DrawableWidget().setDrawable(STEAM_GAUGE_BG)
+                .dynamicTooltip(() -> {
+                    List<String> ret = new ArrayList<>();
+                    ret.add(getSteamType().name + ": " + uiSteamStored + "/" + uiSteamCapacity + "L");
+                    if (uiSteamStored == 0 && uiSteamStoredOfAllTypes != 0) {
+                        ret.add(EnumChatFormatting.RED + "Found steam of wrong type!");
+                    }
+                    return ret;
+                })
+                .setTooltipShowUpDelay(TOOLTIP_DELAY)
+                .setUpdateTooltipEveryTick(true)
+                .setSize(64, 42)
+                .setPos(-64, 100));
+
+        builder.widget(
+            new DrawableWidget().setDrawable(new CircularGaugeDrawable(() -> (float) uiSteamStored / uiSteamCapacity))
+                .setPos(-64 + 21, 100 + 21)
+                .setSize(18, 4));
+
+        builder.widget(
+            new ItemDrawable(GTNLItemList.FakeItemSiren.get(1)).asWidget()
+                .setPos(-64 + 21 - 7, 100 - 20)
+                .setEnabled(w -> uiSteamStored == 0));
+    }
+
     protected static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamBigInput(
         Class<T> typeToken) {
         return buildHatchAdder(typeToken).adder(SteamMultiMachineBase::addToMachineList)
             .hatchIds(22518)
             .shouldReject(t -> !t.mSteamBigInputFluids.isEmpty());
+    }
+
+    protected enum SteamTypes {
+
+        STEAM("Steam", FluidUtils.getSteam(1)
+            .getFluid());
+
+        static final SteamTypes[] VALUES = values();
+
+        final String name;
+        final Fluid fluid;
+
+        SteamTypes(String name, Fluid fluid) {
+            this.name = name;
+            this.fluid = fluid;
+        }
     }
 
 }

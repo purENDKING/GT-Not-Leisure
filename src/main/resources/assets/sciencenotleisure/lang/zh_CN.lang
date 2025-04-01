@@ -294,6 +294,11 @@ Waila_TileEntityPlayerDoll_03=鞘翅渲染:
 Waila_TileEntityPlayerDoll_03_On=开
 Waila_TileEntityPlayerDoll_03_Off=关
 
+tile.blockGiantBrickuoiaSapling.name=§c巨型红砖树苗
+Tooltip_GiantBrickuoiaSapling_00=§o你们的科学家过于专注于‘能不能做到’,
+Tooltip_GiantBrickuoiaSapling_01=§o而没有停下来思考‘是否应该去做’
+Tooltip_GiantBrickuoiaSapling_02=§r§f作者: High§7Pres§8sure§dRaven
+
 tile.NeutronCollector.name=§b中子态素收集器
 tile.DenseNeutronCollector.name=§d致密中子态素收集器
 tile.DenserNeutronCollector.name=§6高致密中子态素收集器
@@ -505,6 +510,8 @@ info.fuelRod.tooltip.0=耐久:%d/%d
 info.fuelRod.tooltip.1=具有MOX特性 | MOX系数: %d
 info.fuelRod.tooltip.2=基础产热(heta/s): %d/%d/%d
 info.fuelRod.tooltip.3=基础发电功率(EU/t): %d/%d/%d
+
+item.FakeItemSiren.name=警报器
 
 item.TwilightSword.name=§6薄暝
 Tooltip_TwilightSword_00=§6§o大鸟那永不闭合的眼睛

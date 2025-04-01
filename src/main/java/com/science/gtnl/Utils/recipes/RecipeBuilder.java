@@ -9,7 +9,9 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMetadataKey;
 import gregtech.api.recipe.metadata.IRecipeMetadataStorage;
 import gregtech.api.recipe.metadata.RecipeMetadataStorage;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.extensions.ArrayExt;
 
 public class RecipeBuilder {
 
@@ -17,6 +19,9 @@ public class RecipeBuilder {
         return new RecipeBuilder();
     }
 
+    protected ItemStack[] inputsBasic = new ItemStack[0];
+    protected Object[] inputsOreDict;
+    protected ItemStack[][] alts;
     public ItemStack[] inputItems = new ItemStack[0];
     public ItemStack[] outputItems = new ItemStack[0];
     public FluidStack[] inputFluids = new FluidStack[0];
@@ -82,6 +87,20 @@ public class RecipeBuilder {
     public RecipeBuilder specialValue(int specialValue) {
         this.specialValue = specialValue;
         return this;
+    }
+
+    public RecipeBuilder itemInputsAllowNulls(ItemStack... inputs) {
+        if (skip) return this;
+        inputsBasic = fix(inputs, false);
+        inputsOreDict = null;
+        alts = null;
+        inputItems = inputsBasic;
+        return this;
+    }
+
+    private static ItemStack[] fix(ItemStack[] inputs, boolean aUnsafe) {
+        return GTOreDictUnificator
+            .setStackArray(true, aUnsafe, ArrayExt.withoutTrailingNulls(inputs, ItemStack[]::new));
     }
 
     public RecipeBuilder noOptimize() {

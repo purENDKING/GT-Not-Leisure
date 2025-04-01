@@ -191,9 +191,12 @@ public enum GTNLItemList {
     RejectionRing,
     RecordSus,
     RecordNewHorizons,
+    FakeItemSiren,
 
     InfinityFuelRod,
     InfinityFuelRodDepleted,
+
+    SaplingBrickuoia,
 
     BlazeAxe,
     BlazeHoe,

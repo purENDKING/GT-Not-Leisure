@@ -29,6 +29,7 @@ import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
 import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
+import com.science.gtnl.common.recipe.GTNL.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
@@ -89,7 +90,7 @@ public class RecipeLoader {
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
             new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
             new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
-            new ShallowChemicalCouplingRecipes() };
+            new ShallowChemicalCouplingRecipes(), new SteamGateAssemblerRecipes() };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();

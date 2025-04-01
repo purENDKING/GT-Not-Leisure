@@ -769,7 +769,7 @@ public class AssemblerRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(6),
+                GTUtility.getIntegratedCircuit(4),
                 GTOreDictUnificator.get(OrePrefixes.gearGt, Materials.StainlessSteel, 2L),
                 ItemList.Casing_SolidSteel.get(1L),
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.StainlessSteel, 1L),

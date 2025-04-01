@@ -20,6 +20,7 @@ public class MaterialLoader {
         ItemRegister.registryOreDictionary();
         BlockRegister.registry();
         BlockRegister.registryAnotherData();
+        BlockRegister.registerTreeBrickuoia();
 
         WerkstoffAdderRegistry.addWerkstoffAdder(new MaterialPool());
 

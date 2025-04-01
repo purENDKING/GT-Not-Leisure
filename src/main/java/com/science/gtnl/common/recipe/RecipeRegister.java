@@ -366,4 +366,18 @@ public class RecipeRegister {
         .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .disableOptimize()
         .build();
+
+    public static final RecipeMap<RecipeMapBackend> steamGateAssemblerRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.steamgateassembler")
+        .maxIO(81, 1, 0, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_COMPRESS)
+        .slotOverlaysSteam(
+            (index, isFluid, isOutput, isSpecial) -> !isFluid && !isOutput ? GTUITextures.OVERLAY_SLOT_COMPRESSOR_STEAM
+                : null)
+        .progressBarSteam(GTUITextures.PROGRESSBAR_COMPRESS_STEAM)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.SteamAssemblerBronze.get(1))
+                .setMaxRecipesPerPage(1))
+        .frontend(SteamGateAssemblerFrontend::new)
+        .build();
 }

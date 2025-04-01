@@ -294,6 +294,11 @@ Waila_TileEntityPlayerDoll_03=Elytra Rendering:
 Waila_TileEntityPlayerDoll_03_On=On
 Waila_TileEntityPlayerDoll_03_Off=Off
 
+tile.blockGiantBrickuoiaSapling.name=§cGiant Brickuoia Sapling
+Tooltip_GiantBrickuoiaSapling_00=§oYour scientists were so preoccupied with whether they could,
+Tooltip_GiantBrickuoiaSapling_01=§othey didn’t stop to think if they should
+Tooltip_GiantBrickuoiaSapling_02=§r§fAuthor: High§7Pres§8sure§dRaven
+
 tile.NeutronCollector.name=§bNeutronium Collector
 tile.DenseNeutronCollector.name=§dDense Neutronium Collector
 tile.DenserNeutronCollector.name=§6Denser Neutronium Collector
@@ -505,6 +510,8 @@ info.fuelRod.tooltip.0=Durability:%d/%d
 info.fuelRod.tooltip.1=Has MOX properties | MOX Coefficient: %d
 info.fuelRod.tooltip.2=Base Heat Output (heta/s): %d/%d/%d
 info.fuelRod.tooltip.3=Base Power Output (EU/t): %d/%d/%d
+
+item.FakeItemSiren.name=Siren
 
 item.TwilightSword.name=§6Twilight
 Tooltip_TwilightSword_00=§6§oThe never-closing eye of the big bird
