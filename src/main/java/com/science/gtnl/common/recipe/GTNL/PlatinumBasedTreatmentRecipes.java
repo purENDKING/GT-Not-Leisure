@@ -71,9 +71,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 15),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 6),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 15))
-            .fluidInputs(
-                Materials.Oxygen.getGas(2000),
-                Materials.Hydrogen.getGas(300000))
+            .fluidInputs(Materials.Oxygen.getGas(2000), Materials.Hydrogen.getGas(300000))
             .fluidOutputs(
                 Materials.Ammonia.getGas(20000),
                 Materials.Chlorine.getGas(183000),
@@ -98,8 +96,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 4),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 10))
-            .fluidInputs(
-                Materials.Hydrogen.getGas(187000))
+            .fluidInputs(Materials.Hydrogen.getGas(187000))
             .fluidOutputs(
                 FluidRegistry.getFluidStack("steam", 6000),
                 Materials.Chlorine.getGas(132000),
@@ -112,19 +109,15 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
 
         // 稀有金属渣粉处理
         RecipeBuilder.builder()
-            .itemInputs(
-                GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrOsLeachResidue.get(OrePrefixes.dust, 1)))
+            .itemInputs(GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrOsLeachResidue.get(OrePrefixes.dust, 1)))
             .itemOutputs(
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 1),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 5),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 2),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 5))
-            .fluidInputs(
-                Materials.Hydrogen.getGas(25000))
-            .fluidOutputs(
-                Materials.Oxygen.getGas(4000),
-                Materials.Chlorine.getGas(2000))
+            .fluidInputs(Materials.Hydrogen.getGas(25000))
+            .fluidOutputs(Materials.Oxygen.getGas(4000), Materials.Chlorine.getGas(2000))
             .specialValue(0)
             .noOptimize()
             .duration(1500)

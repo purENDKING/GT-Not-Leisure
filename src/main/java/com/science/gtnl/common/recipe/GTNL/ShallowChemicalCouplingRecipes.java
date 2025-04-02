@@ -1100,8 +1100,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Chlorine.getGas(4000),
                     Materials.Benzene.getFluid(1000),
                     Materials.Oxygen.getGas(8000))
-                .itemOutputs(
-                    Materials.Salt.getDust(4))
+                .itemOutputs(Materials.Salt.getDust(4))
                 .fluidOutputs(Materials.HydrochloricAcid.getFluid(2000), Materials.PolyphenyleneSulfide.getMolten(1500))
                 .specialValue(3800)
                 .noOptimize()
@@ -1203,8 +1202,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(6000),
                     Materials.Water.getFluid(2000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(4L))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
                 .fluidOutputs()
                 .specialValue(3800)
                 .noOptimize()
@@ -1224,8 +1222,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(4L))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
                 .fluidOutputs()
                 .specialValue(3800)
                 .noOptimize()
@@ -1245,8 +1242,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(6000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(8L))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(8L))
                 .fluidOutputs()
                 .specialValue(3800)
                 .noOptimize()
@@ -1266,8 +1262,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(12000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(16L))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(16L))
                 .fluidOutputs()
                 .specialValue(3800)
                 .noOptimize()
