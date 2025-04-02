@@ -212,7 +212,7 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Coke Oven")
+        tt.addMachineType(getMachineType())
             .addInfo("Works more efficiently than a clay oven")
             .addInfo("Every 5 seconds of continuous working it gets 1% faster, up to 600%")
             .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Poggers")

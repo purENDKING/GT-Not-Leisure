@@ -65,6 +65,10 @@ public class AnimatedText {
         + ": "
         + AnimatedText.PBTR.get();
 
+    public static final Supplier<String> SNL_SCCR = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
+        + ": "
+        + AnimatedText.SCCR.get();
+
     public static final Supplier<String> SCIENCE_NOT_LEISURE = chain(
         text(TextLocalization.Adder),
         animatedText("Science Not Leisure", 1, 80, RED, GOLD, YELLOW, GREEN, AQUA, BLUE, LIGHT_PURPLE));
@@ -109,7 +113,7 @@ public class AnimatedText {
             "犰狳重工",
             1,
             80,
-            YELLOW + BOLD + OBFUSCATED + UNDERLINE + ITALIC,
+            YELLOW + BOLD + UNDERLINE + ITALIC,
             GOLD + ITALIC,
             GOLD + ITALIC,
             GOLD + ITALIC,
@@ -141,7 +145,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "轮",
             1,
@@ -152,7 +156,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "新",
             1,
@@ -163,7 +167,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "城",
             1,
@@ -171,7 +175,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "计",
             1,
@@ -182,7 +186,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "划",
             1,
@@ -191,7 +195,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             " b",
             1,
@@ -200,7 +204,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "y ",
             1,
@@ -211,7 +215,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "咸",
             1,
@@ -222,7 +226,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "到",
             1,
@@ -232,7 +236,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "老",
             1,
@@ -242,7 +246,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "时",
             1,
@@ -252,7 +256,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "变",
             1,
@@ -262,7 +266,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "成",
             1,
@@ -272,7 +276,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+            YELLOW + BOLD + UNDERLINE),
         animatedText(
             "鱼",
             1,
@@ -282,7 +286,7 @@ public class AnimatedText {
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
             GOLD + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE));
+            YELLOW + BOLD + UNDERLINE));
 
     public static final Supplier<String> TOTTO = chain(
         text("Author: "),
@@ -290,40 +294,159 @@ public class AnimatedText {
             "Totto",
             1,
             100,
-            LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,
-            RED + BOLD + OBFUSCATED + UNDERLINE,
-            GOLD + OBFUSCATED + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
-            GREEN + OBFUSCATED + BOLD + UNDERLINE,
-            AQUA + OBFUSCATED + BOLD + UNDERLINE,
-            BLUE + OBFUSCATED + BOLD + UNDERLINE));
+            LIGHT_PURPLE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GREEN + BOLD + UNDERLINE,
+            AQUA + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE));
 
     public static final Supplier<String> EDEN_GARDEN = chain(
         text(" X "),
         animatedText(
-            "伊甸生态园 by 茯角",
+            "伊甸生态园",
+            1,
+            120,
+            LIGHT_PURPLE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GREEN + BOLD + UNDERLINE,
+            AQUA + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE),
+        animatedText(
+            " by ",
             1,
             100,
-            LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,
-            RED + BOLD + OBFUSCATED + UNDERLINE,
-            GOLD + OBFUSCATED + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
-            GREEN + OBFUSCATED + BOLD + UNDERLINE,
-            AQUA + OBFUSCATED + BOLD + UNDERLINE,
-            BLUE + OBFUSCATED + BOLD + UNDERLINE));
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE),
+        animatedText(
+            "茯角",
+            1,
+            40,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE));
 
     public static final Supplier<String> PBTR = chain(
         animatedText(
             "zero_CM VS Fen'sorbed",
             1,
             100,
-            LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,
-            RED + BOLD + OBFUSCATED + UNDERLINE,
-            GOLD + OBFUSCATED + BOLD + UNDERLINE,
-            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
-            GREEN + OBFUSCATED + BOLD + UNDERLINE,
-            AQUA + OBFUSCATED + BOLD + UNDERLINE,
-            BLUE + OBFUSCATED + BOLD + UNDERLINE));
+            LIGHT_PURPLE + BOLD + UNDERLINE,
+            RED + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GREEN + BOLD + UNDERLINE,
+            AQUA + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE));
+
+    public static final Supplier<String> SCCR = chain(
+        animatedText(
+            "zero_CM",
+            1,
+            50,
+            RED + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GREEN + BOLD + UNDERLINE,
+            DARK_GREEN + BOLD + UNDERLINE,
+            AQUA + BOLD + UNDERLINE,
+            BLUE + BOLD + UNDERLINE,
+            DARK_PURPLE + BOLD + UNDERLINE,
+            LIGHT_PURPLE + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            WHITE + BOLD + UNDERLINE,
+            BLACK + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE));
 
     public static final String AuthorHighPressureRaven = "" + EnumChatFormatting.WHITE
         + "High"
@@ -355,7 +478,7 @@ public class AnimatedText {
             DARK_GREEN + BOLD,
             GOLD + BOLD,
             DARK_GREEN + BOLD,
-            DARK_GREEN + OBFUSCATED + BOLD),
+            DARK_GREEN + BOLD),
         animatedText(
             "Noccles",
             0,
@@ -364,7 +487,7 @@ public class AnimatedText {
             GOLD + BOLD,
             DARK_GREEN + BOLD,
             GOLD + BOLD,
-            DARK_GREEN + OBFUSCATED + BOLD),
+            DARK_GREEN + BOLD),
         text(
             "\n" + EnumChatFormatting.LIGHT_PURPLE
                 + EnumChatFormatting.ITALIC
@@ -407,7 +530,7 @@ public class AnimatedText {
             String color;
             if (ArrayUtils.contains(switchIntervals, index)) {
                 obfuscated = true;
-                color = colors[switchIndex] + ITALIC + OBFUSCATED;
+                color = colors[switchIndex] + ITALIC;
             } else if (obfuscated) {
                 obfuscated = false;
                 switchIndex++;
@@ -437,7 +560,6 @@ public class AnimatedText {
         do {
             String color = colors[Math.floorMod(letterIndex - order[orderIndex], colors.length)];
             if ((index + 1) % 4 == 0) {
-                color = color + OBFUSCATED;
                 orderIndex++;
             }
             colorAlternator[index] = color;

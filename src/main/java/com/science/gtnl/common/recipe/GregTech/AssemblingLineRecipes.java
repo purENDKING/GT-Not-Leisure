@@ -1012,7 +1012,6 @@ public class AssemblingLineRecipes implements IRecipePool {
                 new Object[] { OrePrefixes.circuit.get(Materials.ZPM), 32 },
                 GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorZPM, 64L),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Naquadah, 16),
-                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 6),
                 GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 8), ItemList.Field_Generator_ZPM.get(8),
                 ItemList.Electric_Pump_ZPM.get(16), ItemList.Emitter_ZPM.get(16),
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 48) },

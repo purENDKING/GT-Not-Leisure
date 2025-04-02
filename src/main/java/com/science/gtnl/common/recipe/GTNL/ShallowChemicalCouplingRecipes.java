@@ -16,6 +16,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 import gregtech.common.items.CombType;
 import gregtech.loaders.misc.GTBees;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
@@ -1031,7 +1032,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.Potassiumdichromate.getDust(1),
                     Materials.Copper.getDust(1),
                     Materials.Zinc.getDust(9))
@@ -1042,9 +1043,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Ammonia.getGas(18000),
                     Materials.Chlorobenzene.getFluid(18000),
                     Materials.NitrationMixture.getFluid(36000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(Materials.Polybenzimidazole.getMolten(9000), Materials.HydrochloricAcid.getFluid(18000))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1054,19 +1054,18 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.Carbon.getDust(2),
                     Materials.Silicon.getDust(1))
                 .fluidInputs(
                     Materials.Hydrogen.getGas(8000),
                     Materials.Chlorine.getGas(4000),
                     Materials.Water.getFluid(1000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(
                     Materials.HydrochloricAcid.getFluid(6000),
                     Materials.DilutedHydrochloricAcid.getFluid(6000),
                     Materials.Silicone.getMolten(1296))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1076,16 +1075,15 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.Sulfur.getDust(1))
                 .fluidInputs(
                     Materials.Benzene.getFluid(216),
                     Materials.Ethylene.getGas(216),
                     Materials.Butadiene.getGas(648),
                     Materials.Oxygen.getGas(6000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(Materials.StyreneButadieneRubber.getMolten(1296), Materials.Hydrogen.getGas(144))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1095,18 +1093,15 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.Sodium.getDust(2),
                     Materials.Sulfur.getDust(1))
                 .fluidInputs(
                     Materials.Chlorine.getGas(4000),
                     Materials.Benzene.getFluid(1000),
                     Materials.Oxygen.getGas(8000))
-                .itemOutputs(
-                    Materials.Salt.getDust(4),
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs(Materials.Salt.getDust(4))
                 .fluidOutputs(Materials.HydrochloricAcid.getFluid(2000), Materials.PolyphenyleneSulfide.getMolten(1500))
-                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1115,14 +1110,13 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemInputs(GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)))
                 .fluidInputs(
                     Materials.Oxygen.getGas(20000),
                     Materials.Ethylene.getGas(4000),
                     Materials.Acetone.getFluid(4500))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(Materials.AdvancedGlue.getFluid(7500), Materials.Water.getFluid(2000))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1132,7 +1126,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.SodiumHydroxide.getDust(9))
                 .fluidInputs(
                     Materials.Acetone.getFluid(1000),
@@ -1140,12 +1134,11 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Propene.getGas(2000),
                     Materials.Chlorine.getGas(8000),
                     Materials.Water.getFluid(2000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(
                     Materials.Epoxid.getMolten(1000),
                     Materials.HydrochloricAcid.getFluid(3000),
                     Materials.SaltWater.getFluid(4000))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1154,18 +1147,17 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemInputs(GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)))
                 .fluidInputs(
                     Materials.Oxygen.getGas(7000),
                     Materials.Hydrogen.getGas(4000),
                     Materials.Fluorine.getGas(4000),
                     Materials.Chlorine.getGas(12000),
                     Materials.Methane.getGas(2000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(
                     Materials.HydrochloricAcid.getFluid(12000),
                     Materials.Polytetrafluoroethylene.getMolten(1500))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1175,12 +1167,11 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     Materials.Sulfur.getDust(1))
                 .fluidInputs(Materials.Ethanol.getFluid(3000), Materials.Oxygen.getGas(24000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(Materials.Plastic.getFluid(4500))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1189,11 +1180,10 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .addTo(SCCR);
 
             RecipeBuilder.builder()
-                .itemInputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemInputs(GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)))
                 .fluidInputs(Materials.Ethanol.getFluid(2000))
-                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs()
                 .fluidOutputs(GGMaterial.ether.getFluidOrGas(1000), Materials.Water.getFluid(1000))
-                .outputChances(9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1203,7 +1193,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 40),
                     ItemUtils.getItemStackOfAmountFromOreDict("platePlastic", 4),
                     Materials.Sulfur.getDust(2),
@@ -1212,11 +1202,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(6000),
                     Materials.Water.getFluid(2000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(4L),
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
                 .fluidOutputs()
-                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1226,7 +1213,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 32),
                     GTOreDictUnificator.get(OrePrefixes.plate, Materials.PolyvinylChloride, 1),
                     Materials.Sulfur.getDust(1),
@@ -1235,11 +1222,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(3000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(4L),
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(4L))
                 .fluidOutputs()
-                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1249,7 +1233,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 56),
                     GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polytetrafluoroethylene, 2),
                     Materials.Sulfur.getDust(1),
@@ -1258,11 +1242,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(6000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(8L),
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(8L))
                 .fluidOutputs()
-                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)
@@ -1272,7 +1253,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4)),
                     ItemUtils.getItemStackOfAmountFromOreDict("foilCopper", 104),
                     GTOreDictUnificator.get(OrePrefixes.plate, Materials.Polybenzimidazole, 2),
                     Materials.Sulfur.getDust(1),
@@ -1281,11 +1262,8 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                     Materials.Oxygen.getGas(3000),
                     Materials.Water.getFluid(1000),
                     Materials.Chlorine.getGas(12000))
-                .itemOutputs(
-                    ItemList.Circuit_Board_Plastic_Advanced.get(16L),
-                    GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 4))
+                .itemOutputs(ItemList.Circuit_Board_Plastic_Advanced.get(16L))
                 .fluidOutputs()
-                .outputChances(10000, 9500)
                 .specialValue(3800)
                 .noOptimize()
                 .metadata(COIL_HEAT, 3800)

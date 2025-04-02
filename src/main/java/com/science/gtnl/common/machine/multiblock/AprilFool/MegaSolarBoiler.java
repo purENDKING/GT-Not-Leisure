@@ -244,7 +244,7 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Solar Boiler")
+        tt.addMachineType(getMachineType())
             .addInfo("Maybe an Eye of Harmony could provide enough silver for this monstrosity")
             .addInfo("Produces 96.000 L/s of Steam")
             .addInfo(
