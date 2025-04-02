@@ -5,9 +5,11 @@ import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import net.minecraft.util.EnumChatFormatting;
+
 import org.apache.commons.lang3.ArrayUtils;
+
+import com.science.gtnl.Utils.item.TextLocalization;
 
 public class AnimatedText {
 
@@ -340,8 +342,7 @@ public class AnimatedText {
             RED + BOLD + OBFUSCATED + UNDERLINE,
             BLUE + BOLD + OBFUSCATED + UNDERLINE,
             RED + BOLD + OBFUSCATED + UNDERLINE,
-            BLUE + BOLD + OBFUSCATED + UNDERLINE)
-        );
+            BLUE + BOLD + OBFUSCATED + UNDERLINE));
 
     public static final Supplier<String> PBTR = chain(
         animatedText(
@@ -457,8 +458,7 @@ public class AnimatedText {
             GOLD + OBFUSCATED + BOLD + UNDERLINE,
             GOLD + OBFUSCATED + BOLD + UNDERLINE,
             YELLOW + OBFUSCATED + BOLD + UNDERLINE,
-            GOLD + OBFUSCATED + BOLD + UNDERLINE
-            ));
+            GOLD + OBFUSCATED + BOLD + UNDERLINE));
 
     public static final String AuthorHighPressureRaven = "" + EnumChatFormatting.WHITE
         + "High"
