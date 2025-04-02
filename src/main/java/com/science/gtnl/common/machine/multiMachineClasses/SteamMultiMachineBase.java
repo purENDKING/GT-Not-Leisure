@@ -11,7 +11,11 @@ import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;

@@ -147,7 +147,11 @@ import goodgenerator.util.CrackRecipeAdder;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
 import gregtech.api.render.TextureFactory;
-import gregtech.common.covers.*;
+import gregtech.common.covers.CoverConveyor;
+import gregtech.common.covers.CoverFluidRegulator;
+import gregtech.common.covers.CoverPump;
+import gregtech.common.covers.CoverSteamRegulator;
+import gregtech.common.covers.CoverSteamValve;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
