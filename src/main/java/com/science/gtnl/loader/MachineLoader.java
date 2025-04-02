@@ -31,8 +31,19 @@ import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.AprilFool.HighPressureSteamFusionReactor;
+import com.science.gtnl.common.machine.multiblock.AprilFool.MegaSolarBoiler;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamCactusWonder;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamCarpenter;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamExtractinator;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamFusionReactor;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamGateAssembler;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamInfernalCokeOven;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamLavaMaker;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamManufacturer;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamMegaCompressor;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamRockBreaker;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamWoodcutter;
 import com.science.gtnl.common.machine.multiblock.AprilFool.Steamgate;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
@@ -647,6 +658,44 @@ public class MachineLoader {
             .set(new SteamMegaCompressor(21115, "SteamMegaCompressor", TextLocalization.NameSteamMegaCompressor));
         addItemTooltip(GTNLItemList.SteamMegaCompressor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
+        GTNLItemList.MegaSolarBoiler.set(new MegaSolarBoiler(21116, "MegaSolarBoiler", "MegaSolarBoiler"));
+        addItemTooltip(GTNLItemList.MegaSolarBoiler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamCactusWonder.set(new SteamCactusWonder(21117, "SteamCactusWonder", "SteamCactusWonder"));
+        addItemTooltip(GTNLItemList.SteamCactusWonder.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamCarpenter.set(new SteamCarpenter(21118, "SteamCarpenter", "SteamCarpenter"));
+        addItemTooltip(GTNLItemList.SteamCarpenter.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamLavaMaker.set(new SteamLavaMaker(21119, "SteamLavaMaker", "SteamLavaMaker"));
+        addItemTooltip(GTNLItemList.SteamLavaMaker.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamManufacturer.set(new SteamManufacturer(21120, "SteamManufacturer", "SteamManufacturer"));
+        addItemTooltip(GTNLItemList.SteamManufacturer.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamRockBreaker.set(new SteamRockBreaker(21121, "SteamRockBreaker", "SteamRockBreaker"));
+        addItemTooltip(GTNLItemList.SteamRockBreaker.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamWoodcutter.set(new SteamWoodcutter(21122, "SteamWoodcutter", "SteamWoodcutter"));
+        addItemTooltip(GTNLItemList.SteamWoodcutter.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamExtractinator.set(new SteamExtractinator(21123, "SteamExtractinator", "SteamExtractinator"));
+        addItemTooltip(GTNLItemList.SteamExtractinator.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamFusionReactor.set(new SteamFusionReactor(21124, "SteamFusionReactor", "SteamFusionReactor"));
+        addItemTooltip(GTNLItemList.SteamFusionReactor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.HighPressureSteamFusionReactor.set(
+            new HighPressureSteamFusionReactor(
+                21125,
+                "HighPressureSteamFusionReactor",
+                "HighPressureSteamFusionReactor"));
+        addItemTooltip(GTNLItemList.HighPressureSteamFusionReactor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamInfernalCokeOven
+            .set(new SteamInfernalCokeOven(21126, "SteamInfernalCokeOven", "SteamInfernalCokeOven"));
+        addItemTooltip(GTNLItemList.SteamInfernalCokeOven.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -975,10 +1024,12 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.ManaDynamoHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
-    public static void registerMTEWire() {
+    public static void registerMTEWireAndPipe() {
         CrackRecipeAdder.registerWire(22506, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
         MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22519, 4000, 3000, true);
         CrackRecipeAdder.registerPipe(22529, MaterialPool.CompressedSteam, 250000, 10000, true);
+        CrackRecipeAdder.registerPipe(22534, MaterialPool.Stronze, 15000, 10000, true);
+        CrackRecipeAdder.registerPipe(22539, MaterialPool.Breel, 10000, 10000, true);
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
@@ -1040,7 +1091,7 @@ public class MachineLoader {
         Logger.INFO("GTNL Content | Registering MTE Block Machine.");
         registerMTEHatch();
         loadMachines();
-        registerMTEWire();
+        registerMTEWireAndPipe();
         registerBasicMachine();
         registerCovers();
         registerGlasses();

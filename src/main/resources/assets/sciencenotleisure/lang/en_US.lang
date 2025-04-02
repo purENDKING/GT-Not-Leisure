@@ -186,6 +186,7 @@ MetaCasing.28.name=Hydraulic Assembling Casing
 MetaCasing.29.name=Hyper Pressure Breel Casing
 MetaCasing.30.name=Breel-Plated Casing
 MetaCasing.31.name=Steam Compact Pipe Casing
+MetaCasing02.0.name=Vibration-Safe Casing
 
 MetaBlock.0.name=Test Block
 MetaBlock.1.name=§dNew Horizons Coil
@@ -261,6 +262,7 @@ MetaBlockGlow.32.name=White Light
 MetaBlockGlass.0.name=Gaia Glass
 MetaBlockGlass.1.name=Terra Glass
 MetaBlockGlass.2.name=Fusion Glass
+MetaBlockGlass.3.name=Concentrating Sieve Mesh
 
 tile.MetaBlockColumn.0.name=Brick Bronze Shell
 tile.MetaBlockColumn.1.name=Brick Steel Shell
@@ -523,6 +525,10 @@ MetaItem.99.name=Hydraulic Steam Regulator
 tooltips.HydraulicSteamRegulator_00=16,777,216 L/t (335,544,320 L/s) as Cover
 MetaItem.100.name=SadBapyCat Token
 tooltips.SadBapyCatToken_00=:sadbapycat:
+MetaItem.101.name=Compressed Steam Turbine
+tooltips.CompressedSteamTurbine_00=Infinite Throughtput
+MetaItem.102.name=Steel Turbine
+tooltips.SteelTurbine_00=Stable like a Table
 
 item.TestItem.name=Test Item
 Tooltip_Testitem_00=If you see this Tooltip
@@ -1115,6 +1121,16 @@ gt.blockmachines.gt_pipe_compressedsteam_huge.name=Huge %material Fluid Pipe
 gt.blockmachines.gt_pipe_compressedsteam_large.name=Large %material Fluid Pipe
 gt.blockmachines.gt_pipe_compressedsteam_small.name=Small %material Fluid Pipe
 gt.blockmachines.gt_pipe_compressedsteam_tiny.name=Tiny %material Fluid Pipe
+gt.blockmachines.gt_pipe_stronze.name=%material Fluid Pipe
+gt.blockmachines.gt_pipe_stronze_huge.name=Huge %material Fluid Pipe
+gt.blockmachines.gt_pipe_stronze_large.name=Large %material Fluid Pipe
+gt.blockmachines.gt_pipe_stronze_small.name=Small %material Fluid Pipe
+gt.blockmachines.gt_pipe_stronze_tiny.name=Tiny %material Fluid Pipe
+gt.blockmachines.gt_pipe_breel.name=%material Fluid Pipe
+gt.blockmachines.gt_pipe_breel_huge.name=Huge %material Fluid Pipe
+gt.blockmachines.gt_pipe_breel_large.name=Large %material Fluid Pipe
+gt.blockmachines.gt_pipe_breel_small.name=Small %material Fluid Pipe
+gt.blockmachines.gt_pipe_breel_tiny.name=Tiny %material Fluid Pipe
 bw.itemtype.plateSuperdense=Superdense %material Plate
 bw.itemtype.nanite=%material Nanites
 
@@ -1520,7 +1536,7 @@ Tooltip_BrickBlastFurnace_Casing_03=24x Bronze Fireboxes
 Tooltip_BrickBlastFurnace_Casing_04=16x Copper Plated Bricks  
 
 NameSteamGateAssembler=Perfect Steam Progenitor
-gtnl.recipe.SteamgateAssembler=Boundless Creation Engine
+gtnl.recipe.SteamgateAssembler=Hydraulic Manufacturing
 SteamGateAssemblerRecipeType=Boundless Creation Engine
 Tooltip_SteamGateAssembler_00=§b§oAn unholy amalgamation of pipes and cogs, capable of using incredible amounts of steam.
 Tooltip_SteamGateAssembler_01=§b§oEach chamber is carefully calibrated with near-infinite amounts of pressure.

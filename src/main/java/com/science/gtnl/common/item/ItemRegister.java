@@ -405,6 +405,13 @@ public class ItemRegister {
             AnimatedText.buildTextWithAnimatedEnd(text("Tips: 瑶光Alkaid要的")));
         GTNLItemList.SadBapyCatToken.set(
             initItem("SadBapyCat Token", 100, new String[] { texter(":sadbapycat:", "tooltips.SadBapyCatToken_00") }));
+        GTNLItemList.CompressedSteamTurbine.set(
+            initItem(
+                "Compressed Steam Turbine",
+                101,
+                new String[] { texter("Infinite Throughtput", "tooltips.CompressedSteamTurbine_00") }));
+        GTNLItemList.SteelTurbine.set(
+            initItem("Steel Turbine", 102, new String[] { texter("Stable like a Table", "tooltips.SteelTurbine_00") }));
 
     }
 

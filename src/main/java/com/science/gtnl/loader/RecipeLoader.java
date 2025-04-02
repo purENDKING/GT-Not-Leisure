@@ -6,6 +6,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.common.recipe.AprilFool.CraftingTableAprilFoolRecipes;
+import com.science.gtnl.common.recipe.AprilFool.LavaMakerRecipes;
+import com.science.gtnl.common.recipe.AprilFool.SteamCarpenterRecipe;
+import com.science.gtnl.common.recipe.AprilFool.SteamGateAssemblerRecipes;
+import com.science.gtnl.common.recipe.AprilFool.SteamManufacturerRecipes;
+import com.science.gtnl.common.recipe.AprilFool.SteamWoodcutterRecipes;
 import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
 import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
@@ -29,7 +35,6 @@ import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
 import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
-import com.science.gtnl.common.recipe.GTNL.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
@@ -90,7 +95,13 @@ public class RecipeLoader {
             new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
             new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
             new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
-            new ShallowChemicalCouplingRecipes(), new SteamGateAssemblerRecipes() };
+            new ShallowChemicalCouplingRecipes() };
+
+        IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
+            new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),
+            new SteamWoodcutterRecipes(), new SteamGateAssemblerRecipes()
+
+        };
 
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipesPool().loadRecipes();
@@ -103,6 +114,10 @@ public class RecipeLoader {
 
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();
+        }
+
+        for (IRecipePool recipePoolAprilFool : recipePoolsAprilFool) {
+            recipePoolAprilFool.loadRecipes();
         }
 
         for (ItemStack stone : OreDictionary.getOres("stone")) {

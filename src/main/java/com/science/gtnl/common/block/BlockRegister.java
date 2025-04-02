@@ -81,6 +81,11 @@ public class BlockRegister {
             MetaItemBlockCasing.class,
             BasicBlocks.MetaCasing.getUnlocalizedName());
 
+        GameRegistry.registerBlock(
+            BasicBlocks.MetaCasing02,
+            MetaItemBlockCasing.class,
+            BasicBlocks.MetaCasing02.getUnlocalizedName());
+
         GameRegistry.registerBlock(BasicBlocks.StargateTier0, "StargateTier0");
         GTNLItemList.StargateTier0.set(new ItemStack(BasicBlocks.StargateTier0));
         GameRegistry.registerBlock(BasicBlocks.StargateTier1, "StargateTier1");
@@ -415,6 +420,7 @@ public class BlockRegister {
         GTNLItemList.GaiaGlass.set(ItemBlockGlass.initMetaBlockGlass("Gaia Glass", 0));
         GTNLItemList.TerraGlass.set(ItemBlockGlass.initMetaBlockGlass("Terra Glass", 1));
         GTNLItemList.FusionGlass.set(ItemBlockGlass.initMetaBlockGlass("Fusion Glass", 2));
+        GTNLItemList.ConcentratingSieveMesh.set(ItemBlockGlass.initMetaBlockGlass("Concentrating Sieve Mesh", 3));
 
         GTNLItemList.BronzeBrickCasing.set(ItemBlockColumn.initMetaBlock("Bronze Brick Casing", 0));
         GTNLItemList.SteelBrickCasing.set(ItemBlockColumn.initMetaBlock("Steel Brick Casing", 1));
@@ -495,6 +501,8 @@ public class BlockRegister {
             .set(MetaBlockConstructors.initMetaBlockCasing("Breel-Plated Casing", (byte) 30, BasicBlocks.MetaCasing));
         GTNLItemList.SteamCompactPipeCasing.set(
             MetaBlockConstructors.initMetaBlockCasing("Steam Compact Pipe Casing", (byte) 31, BasicBlocks.MetaCasing));
+        GTNLItemList.VibrationSafeCasing.set(
+            MetaBlockConstructors.initMetaBlockCasing("Vibration-Safe Casing", (byte) 0, BasicBlocks.MetaCasing02));
     }
 
     public static void registry() {

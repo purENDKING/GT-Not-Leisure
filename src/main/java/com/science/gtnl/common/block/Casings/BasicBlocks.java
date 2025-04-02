@@ -26,6 +26,7 @@ public class BasicBlocks {
     public static final Block MetaBlockGlass = new MetaBlockGlass("MetaBlockGlass", "MetaBlockGlass");
     public static final Block MetaBlockColumn = new MetaBlockColumn("MetaBlockColumn", "MetaBlockColumn");
     public static final MetaCasing MetaCasing = new MetaCasing("MetaCasing", (byte) 0);
+    public static final MetaCasing MetaCasing02 = new MetaCasing("MetaCasing02", (byte) 32);
     public static Block StargateTier0 = new BlocksStargate(0);
     public static Block StargateTier1 = new BlocksStargate(1);
     public static Block StargateTier2 = new BlocksStargate(2);
