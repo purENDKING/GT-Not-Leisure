@@ -308,7 +308,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType("Temple of Cacti Blessing")
+        tt.addMachineType(getMachineType())
             .addInfo("Burns Cactus Coke and Charcoal for increasingly efficient amounts of steam.")
             .addInfo("Every second the cactus wonder will consume all offers stored")
             .addInfo("The god of cacti will save their value and return it as steam blessings to her faithful zealots.")
