@@ -5,11 +5,9 @@ import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-import net.minecraft.util.EnumChatFormatting;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.science.gtnl.Utils.item.TextLocalization;
+import net.minecraft.util.EnumChatFormatting;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class AnimatedText {
 
@@ -64,6 +62,10 @@ public class AnimatedText {
     public static final Supplier<String> SNL_PBTR = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
         + ": "
         + AnimatedText.PBTR.get();
+
+    public static final Supplier<String> SNL_SCCR = () -> AnimatedText.SCIENCE_NOT_LEISURE.get() + RESET
+        + ": "
+        + AnimatedText.SCCR.get();
 
     public static final Supplier<String> SCIENCE_NOT_LEISURE = chain(
         text(TextLocalization.Adder),
@@ -301,16 +303,45 @@ public class AnimatedText {
     public static final Supplier<String> EDEN_GARDEN = chain(
         text(" X "),
         animatedText(
-            "伊甸生态园 by 茯角",
+            "伊甸生态园",
             1,
-            100,
+            120,
             LIGHT_PURPLE + BOLD + OBFUSCATED + UNDERLINE,
             RED + BOLD + OBFUSCATED + UNDERLINE,
             GOLD + OBFUSCATED + BOLD + UNDERLINE,
             YELLOW + OBFUSCATED + BOLD + UNDERLINE,
             GREEN + OBFUSCATED + BOLD + UNDERLINE,
             AQUA + OBFUSCATED + BOLD + UNDERLINE,
-            BLUE + OBFUSCATED + BOLD + UNDERLINE));
+            BLUE + OBFUSCATED + BOLD + UNDERLINE),
+        animatedText(
+            " by ",
+            1,
+            100,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            GOLD + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE),
+        animatedText(
+            "茯角",
+            1,
+            40,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE,
+            RED + BOLD + OBFUSCATED + UNDERLINE,
+            BLUE + BOLD + OBFUSCATED + UNDERLINE)
+        );
 
     public static final Supplier<String> PBTR = chain(
         animatedText(
@@ -324,6 +355,110 @@ public class AnimatedText {
             GREEN + OBFUSCATED + BOLD + UNDERLINE,
             AQUA + OBFUSCATED + BOLD + UNDERLINE,
             BLUE + OBFUSCATED + BOLD + UNDERLINE));
+
+    public static final Supplier<String> SCCR = chain(
+        animatedText(
+            "zero_CM",
+            1,
+            60,
+            RED + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GREEN + OBFUSCATED + BOLD + UNDERLINE,
+            DARK_GREEN + OBFUSCATED + BOLD + UNDERLINE,
+            AQUA + OBFUSCATED + BOLD + UNDERLINE,
+            BLUE + OBFUSCATED + BOLD + UNDERLINE,
+            DARK_PURPLE + OBFUSCATED + BOLD + UNDERLINE,
+            LIGHT_PURPLE + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            BLACK + OBFUSCATED + BOLD + UNDERLINE,
+            WHITE + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE,
+            YELLOW + OBFUSCATED + BOLD + UNDERLINE,
+            GOLD + OBFUSCATED + BOLD + UNDERLINE
+            ));
 
     public static final String AuthorHighPressureRaven = "" + EnumChatFormatting.WHITE
         + "High"

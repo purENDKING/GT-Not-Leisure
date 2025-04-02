@@ -106,7 +106,9 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_01)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_02)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_03)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_04)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -188,8 +190,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                     .setMachineHeat(ShallowChemicalCoupling.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(1.0 * getCoilLevel().getTier() * 0.85)
-                    .setSpeedBoost(1.0 * getCoilLevel().getTier() * 0.85);
+                    .setEUtDiscount(1.0 * getCoilLevel().getTier() * 0.75)
+                    .setSpeedBoost(1.0 * getCoilLevel().getTier() * 0.75);
             }
 
             @Override
@@ -225,6 +227,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
+        ParallelTier = 0;
         mCasing = 0;
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
@@ -244,6 +247,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
         }
 
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
+
+        ParallelTier = getParallelTier(aStack);
 
         return mCasing >= 30;
     }
