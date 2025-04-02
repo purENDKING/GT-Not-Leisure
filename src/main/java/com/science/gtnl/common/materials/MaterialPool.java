@@ -7,6 +7,7 @@ import bartworks.util.Pair;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TextureSet;
+import gtPlusPlus.core.client.CustomTextureSet;
 
 public class MaterialPool implements Runnable {
 
@@ -1495,6 +1496,49 @@ public class MaterialPool implements Runnable {
             .addMetalCraftingSolidifierRecipes(),
         offsetID_01 + 201,
         TextureSet.SET_SHINY);
+
+    public static final Werkstoff PitchblendeSlag = new Werkstoff(
+        new short[] { 68, 55, 28 },
+        "PitchblendeSlag",
+        subscriptNumbers("??ThPbCaSO4??"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MATERIAL,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 202,
+        TextureSet.SET_SHINY);
+
+    public static final Werkstoff UraniumSlag = new Werkstoff(
+        new short[] { 68, 100, 77 },
+        "UraniumSlag",
+        subscriptNumbers("??ThPbBa??"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MATERIAL,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 203,
+        TextureSet.SET_SHINY);
+
+    public static final Werkstoff UraniumChlorideSlag = new Werkstoff(
+        new short[] { 234, 243, 245 },
+        "UraniumChlorideSlag",
+        subscriptNumbers("??ThPbBaCl4??"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MATERIAL,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 204,
+        CustomTextureSet.TextureSets.NUCLEAR.get());
+    public static final Werkstoff RadiumChloride = new Werkstoff(
+        new short[] { 223, 223, 223 },
+        "RadiumChloride",
+        subscriptNumbers("RaCl2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MATERIAL,
+        new Werkstoff.GenerationFeatures().disable()
+            .onlyDust(),
+        offsetID_01 + 205,
+        CustomTextureSet.TextureSets.NUCLEAR.get());
 
     public static final Werkstoff.GenerationFeatures gf = new Werkstoff.GenerationFeatures();
 

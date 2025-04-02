@@ -7,8 +7,11 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.item.chemistry.AgriculturalChem;
@@ -57,6 +60,20 @@ public class CentrifugeRecipes implements IRecipePool {
             .noOptimize()
             .duration(200)
             .eut(480)
+            .addTo(CNCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.UraniumChlorideSlag.get(OrePrefixes.dust, 3))
+            .itemOutputs(
+                MaterialPool.BariumChloride.get(OrePrefixes.dust, 1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Lead, 1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Thorium, 1),
+                MaterialPool.RadiumChloride.get(OrePrefixes.dust, 1))
+            .outputChances(10000, 10000, 10000, 500)
+            .specialValue(0)
+            .noOptimize()
+            .duration(300)
+            .eut(TierEU.RECIPE_HV)
             .addTo(CNCR);
     }
 }

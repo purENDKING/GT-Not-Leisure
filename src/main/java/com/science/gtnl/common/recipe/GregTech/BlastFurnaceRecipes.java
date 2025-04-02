@@ -3,8 +3,10 @@ package com.science.gtnl.common.recipe.GregTech;
 import static gregtech.api.util.GTRecipeConstants.COIL_HEAT;
 
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
+import bartworks.system.material.WerkstoffLoader;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -14,6 +16,8 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.item.ModItems;
+import gtPlusPlus.core.util.minecraft.ItemUtils;
 
 public class BlastFurnaceRecipes implements IRecipePool {
 
@@ -43,6 +47,19 @@ public class BlastFurnaceRecipes implements IRecipePool {
             .fluidInputs(Materials.Helium.getGas(1000))
             .duration(120)
             .eut(TierEU.RECIPE_IV)
+            .metadata(COIL_HEAT, 8300)
+            .addTo(BFR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SodiumCarbonate, 6))
+            .itemOutputs(
+                MaterialPool.UraniumSlag.get(OrePrefixes.dust, 12),
+                ItemUtils.getSimpleStack(ModItems.dustCalciumCarbonate, 5),
+                GTUtility.copyAmountUnsafe(7, WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 1)))
+            .duration(100)
+            .eut(TierEU.RECIPE_HV)
             .metadata(COIL_HEAT, 8300)
             .addTo(BFR);
 

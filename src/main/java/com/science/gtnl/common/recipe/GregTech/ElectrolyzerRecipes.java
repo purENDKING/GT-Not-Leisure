@@ -13,8 +13,10 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
+import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class ElectrolyzerRecipes implements IRecipePool {
@@ -270,6 +272,38 @@ public class ElectrolyzerRecipes implements IRecipePool {
             .itemOutputs(MaterialPool.Technetium.get(OrePrefixes.dust, 1))
             .fluidInputs(MaterialsFluorides.TECHNETIUM_HEXAFLUORIDE.getFluidStack(1008))
             .fluidOutputs(Materials.Fluorine.getGas(6000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.RadiumChloride.get(OrePrefixes.dust, 3))
+            .itemOutputs(MaterialsElements.getInstance().RADIUM.getDust(1))
+            .fluidOutputs(Materials.Chlorine.getGas(2000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(600)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.BariumChloride.get(OrePrefixes.dust, 3))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Barium, 1))
+            .fluidOutputs(Materials.Chlorine.getGas(2000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_MV)
+            .addTo(ENCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(ItemUtils.getSimpleStack(ModItems.dustCalciumCarbonate, 5))
+            .itemOutputs(
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 1))
+            .fluidOutputs(Materials.Oxygen.getGas(3000))
             .specialValue(0)
             .noOptimize()
             .duration(100)

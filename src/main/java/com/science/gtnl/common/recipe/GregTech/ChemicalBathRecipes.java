@@ -11,12 +11,16 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 
 public class ChemicalBathRecipes implements IRecipePool {
 
@@ -62,6 +66,40 @@ public class ChemicalBathRecipes implements IRecipePool {
             .noOptimize()
             .duration(100)
             .eut(1966080)
+            .addTo(cBR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushed, Materials.Pitchblende, 1))
+            .fluidInputs(Materials.SulfuricAcid.getGas(1000))
+            .itemOutputs(
+                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(cBR);
+
+        RecipeBuilder.builder()
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.Pitchblende, 1))
+            .fluidInputs(Materials.SulfuricAcid.getGas(1000))
+            .itemOutputs(
+                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(cBR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.UraniumSlag.get(OrePrefixes.dust, 1))
+            .fluidInputs(Materials.HydrochloricAcid.getFluid(4000))
+            .itemOutputs(MaterialPool.UraniumChlorideSlag.get(OrePrefixes.dust, 1))
+            .specialValue(0)
+            .noOptimize()
+            .duration(160)
+            .eut(TierEU.RECIPE_HV)
             .addTo(cBR);
     }
 }
