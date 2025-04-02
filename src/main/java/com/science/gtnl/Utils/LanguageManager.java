@@ -125,6 +125,9 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.NaquadriaWaste, "超能硅岩废液");
         addWerkstoffLocalization(MaterialPool.SmallBaka, "硝苯氮");
         addWerkstoffLocalization(MaterialPool.LargeBaka, "\uD86D\uDFFC苯氮");
+        addWerkstoffLocalization(MaterialPool.CompressedSteam, "压缩蒸汽");
+        addWerkstoffLocalization(MaterialPool.Stronze, "青钢");
+        addWerkstoffLocalization(MaterialPool.Breel, "青铁");
         addWerkstoffLocalization(MaterialPool.Periodicium, "錭錤錶");
         addWerkstoffLocalization(MaterialPool.Stargate, "星门");
 
@@ -143,18 +146,6 @@ public class LanguageManager {
         addStringLocalization("Interaction_DESCRIPTION_Index_706", "需要采矿无人机MK-XII x 16");
         addStringLocalization("Interaction_DESCRIPTION_Index_707", "需要采矿无人机MK-XIII x 16");
         addStringLocalization("GT5U.gui.text.no_mining_drone", "§7未找到采矿无人机");
-        addStringLocalization("gt.blockmachines.wire.stargate.01.name", "1x星门导线");
-        addStringLocalization("gt.blockmachines.wire.stargate.02.name", "2x星门导线");
-        addStringLocalization("gt.blockmachines.wire.stargate.04.name", "4x星门导线");
-        addStringLocalization("gt.blockmachines.wire.stargate.08.name", "8x星门导线");
-        addStringLocalization("gt.blockmachines.wire.stargate.12.name", "12x星门导线");
-        addStringLocalization("gt.blockmachines.wire.stargate.16.name", "16x星门导线");
-        addStringLocalization("gt.blockmachines.cable.stargate.01.name", "1x星门线缆");
-        addStringLocalization("gt.blockmachines.cable.stargate.02.name", "2x星门线缆");
-        addStringLocalization("gt.blockmachines.cable.stargate.04.name", "4x星门线缆");
-        addStringLocalization("gt.blockmachines.cable.stargate.08.name", "8x星门线缆");
-        addStringLocalization("gt.blockmachines.cable.stargate.12.name", "12x星门线缆");
-        addStringLocalization("gt.blockmachines.cable.stargate.16.name", "16x星门线缆");
         addStringLocalization("bw.itemtype.plateSuperdense", "超致密%material板");
         addStringLocalization("bw.itemtype.nanite", "%material纳米蜂群");
     }
@@ -172,6 +163,29 @@ public class LanguageManager {
         }
         if (aWerkstoff.hasItemType(OrePrefixes.cell)) {
             addStringLocalization("fluid." + unlocalizedName, localizedName);
+        }
+        if (aWerkstoff.hasItemType(OrePrefixes.wire)) {
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".01.name", "1x%material导线");
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".02.name", "2x%material导线");
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".04.name", "4x%material导线");
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".08.name", "8x%material导线");
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".12.name", "12x%material导线");
+            addStringLocalization("gt.blockmachines.wire." + unlocalizedName + ".16.name", "16x%material导线");
+        }
+        if (aWerkstoff.hasItemType(OrePrefixes.cable)) {
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".01.name", "1x%material线缆");
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".02.name", "2x%material线缆");
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".04.name", "4x%material线缆");
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".08.name", "8x%material线缆");
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".12.name", "12x%material线缆");
+            addStringLocalization("gt.blockmachines.cable." + unlocalizedName + ".16.name", "16x%material线缆");
+        }
+        if (aWerkstoff.hasItemType(OrePrefixes.pipe)) {
+            addStringLocalization("gt.blockmachines.gt_pipe_" + unlocalizedName + ".name", "%material流体管道");
+            addStringLocalization("gt.blockmachines.gt_pipe_" + unlocalizedName + "_huge.name", "巨型%material流体管道");
+            addStringLocalization("gt.blockmachines.gt_pipe_" + unlocalizedName + "_large.name", "大型%material流体管道");
+            addStringLocalization("gt.blockmachines.gt_pipe_" + unlocalizedName + "_small.name", "小型%material流体管道");
+            addStringLocalization("gt.blockmachines.gt_pipe_" + unlocalizedName + "_tiny.name", "微型%material流体管道");
         }
     }
 
@@ -260,5 +274,16 @@ public class LanguageManager {
         addStringLocalization("gt.blockmachines.wire." + mName + ".08.name", "8x%material导线");
         addStringLocalization("gt.blockmachines.wire." + mName + ".12.name", "12x%material导线");
         addStringLocalization("gt.blockmachines.wire." + mName + ".16.name", "16x%material导线");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".01.name", "1x%material线缆");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".02.name", "2x%material线缆");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".04.name", "4x%material线缆");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".08.name", "8x%material线缆");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".12.name", "12x%material线缆");
+        addStringLocalization("gt.blockmachines.cable." + mName + ".16.name", "16x%material线缆");
+        addStringLocalization("gt.blockmachines.gt_pipe_" + mName + ".name", "%material管道");
+        addStringLocalization("gt.blockmachines.gt_pipe_" + mName + "_huge.name", "巨型%material管道");
+        addStringLocalization("gt.blockmachines.gt_pipe_" + mName + "_large.name", "大型%material管道");
+        addStringLocalization("gt.blockmachines.gt_pipe_" + mName + "_small.name", "小型%material管道");
+        addStringLocalization("gt.blockmachines.gt_pipe_" + mName + "_tiny.name", "微型%material管道");
     }
 }

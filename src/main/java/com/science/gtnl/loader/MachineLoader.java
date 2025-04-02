@@ -1,10 +1,13 @@
 package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
-import static com.science.gtnl.common.GTNLItemList.ShallowChemicalCoupling;
+import static gregtech.api.enums.Textures.BlockIcons.*;
+import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 
+import com.google.common.collect.ImmutableSet;
 import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.MoreMaterialToolUtil;
 import com.science.gtnl.Utils.item.TextLocalization;
@@ -28,6 +31,9 @@ import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamGateAssembler;
+import com.science.gtnl.common.machine.multiblock.AprilFool.SteamMegaCompressor;
+import com.science.gtnl.common.machine.multiblock.AprilFool.Steamgate;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.CheatOreProcessingFactory;
@@ -75,7 +81,6 @@ import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
 import com.science.gtnl.common.machine.multiblock.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
-import com.science.gtnl.common.machine.multiblock.Steamgate;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
@@ -139,7 +144,10 @@ import com.science.gtnl.common.materials.MaterialPool;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.util.CrackRecipeAdder;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import gregtech.api.render.TextureFactory;
+import gregtech.common.covers.*;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
@@ -627,6 +635,14 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.Steamgate.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
         addItemTooltip(GTNLItemList.Steamgate.get(1), AnimatedText.SteamgateCredits);
 
+        GTNLItemList.SteamGateAssembler
+            .set(new SteamGateAssembler(21114, "SteamGateAssembler", TextLocalization.NameSteamGateAssembler));
+        addItemTooltip(GTNLItemList.SteamGateAssembler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamMegaCompressor
+            .set(new SteamMegaCompressor(21115, "SteamMegaCompressor", TextLocalization.NameSteamMegaCompressor));
+        addItemTooltip(GTNLItemList.SteamMegaCompressor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,
@@ -646,8 +662,9 @@ public class MachineLoader {
 
         GTNLItemList.FluidManaInputHatch.set(
             new CustomFluidHatch(
-                FluidUtils.getFluidStack("fluidmana", 1)
-                    .getFluid(),
+                ImmutableSet.of(
+                    FluidUtils.getFluidStack("fluidmana", 1)
+                        .getFluid()),
                 512000,
                 21501,
                 "Fluid Mana Input Hatch",
@@ -657,8 +674,9 @@ public class MachineLoader {
 
         GTNLItemList.FluidIceInputHatch.set(
             new CustomFluidHatch(
-                FluidUtils.getFluidStack("ice", 1)
-                    .getFluid(),
+                ImmutableSet.of(
+                    FluidUtils.getFluidStack("ice", 1)
+                        .getFluid()),
                 256000,
                 21502,
                 "Fluid Ice Input Hatch",
@@ -668,8 +686,9 @@ public class MachineLoader {
 
         GTNLItemList.FluidBlazeInputHatch.set(
             new CustomFluidHatch(
-                FluidUtils.getFluidStack("molten.blaze", 1)
-                    .getFluid(),
+                ImmutableSet.of(
+                    FluidUtils.getFluidStack("molten.blaze", 1)
+                        .getFluid()),
                 256000,
                 21503,
                 "Fluid Blaze Input Hatch",
@@ -824,8 +843,15 @@ public class MachineLoader {
 
         GTNLItemList.BigSteamInputHatch.set(
             new CustomFluidHatch(
-                FluidUtils.getFluidStack("steam", 1)
-                    .getFluid(),
+                ImmutableSet.of(
+                    FluidUtils.getSteam(1)
+                        .getFluid(),
+                    FluidUtils.getSuperHeatedSteam(1)
+                        .getFluid(),
+                    FluidRegistry.getFluidStack("supercriticalsteam", 1)
+                        .getFluid(),
+                    MaterialPool.CompressedSteam.getMolten(1)
+                        .getFluid()),
                 4096000,
                 22518,
                 "Big Steam Input Hatch",
@@ -948,6 +974,7 @@ public class MachineLoader {
     public static void registerMTEWire() {
         CrackRecipeAdder.registerWire(22506, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
         MoreMaterialToolUtil.generateGTFluidPipes(Materials.BlueAlloy, 22519, 4000, 3000, true);
+        CrackRecipeAdder.registerPipe(22529, MaterialPool.CompressedSteam, 250000, 10000, true);
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
@@ -960,6 +987,34 @@ public class MachineLoader {
             TextLocalization.NameResourceCollectionModule).getStackForm(1);
         GTNLItemList.ResourceCollectionModule.set(ResourceCollectionModule);
         addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+    }
+
+    private static void registerCovers() {
+        GregTechAPI.registerCover(
+            GTNLItemList.HydraulicPump.get(1L),
+            TextureFactory.of(MACHINE_CASINGS[1][0], TextureFactory.of(OVERLAY_PUMP)),
+            new CoverPump(1048576, TextureFactory.of(OVERLAY_PUMP)));
+
+        GregTechAPI.registerCover(
+            GTNLItemList.HydraulicConveyor.get(1L),
+            TextureFactory.of(MACHINE_CASINGS[1][0], TextureFactory.of(OVERLAY_CONVEYOR)),
+            new CoverConveyor(1, 16, TextureFactory.of(OVERLAY_CONVEYOR)));
+
+        GregTechAPI.registerCover(
+            GTNLItemList.HydraulicRegulator.get(1L),
+            TextureFactory.of(MACHINE_CASINGS[1][0], TextureFactory.of(OVERLAY_PUMP)),
+            new CoverFluidRegulator(1048576, TextureFactory.of(OVERLAY_PUMP)));
+
+        GregTechAPI.registerCover(
+            GTNLItemList.HydraulicSteamValve.get(1L),
+            TextureFactory.of(MACHINE_CASINGS[1][0], TextureFactory.of(OVERLAY_VALVE)),
+            new CoverSteamValve(16777216, TextureFactory.of(OVERLAY_VALVE)));
+
+        GregTechAPI.registerCover(
+            GTNLItemList.HydraulicSteamRegulator.get(1L),
+            TextureFactory.of(MACHINE_CASINGS[1][0], TextureFactory.of(OVERLAY_VALVE)),
+            new CoverSteamRegulator(16777216, TextureFactory.of(OVERLAY_VALVE)));
+
     }
 
     public static void registerGlasses() {
@@ -983,6 +1038,7 @@ public class MachineLoader {
         loadMachines();
         registerMTEWire();
         registerBasicMachine();
+        registerCovers();
         registerGlasses();
     }
 }

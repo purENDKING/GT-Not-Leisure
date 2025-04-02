@@ -169,7 +169,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
                 .addElement(
                     'J',
                     ofChain(
-                        ofBlock(Blocks.water, 0),
+                        ofBlockAnyMeta(Blocks.water),
                         ofBlock(BlocksItems.getFluidBlock(InternalName.fluidDistilledWater), 0)))
                 .build();
         }

@@ -336,6 +336,76 @@ public class ItemRegister {
                 "Steamgate Dialing Device",
                 81,
                 new String[] { texter("Links steamgates for teleportation.", "tooltips.SteamgateDialingDevice_00") }));
+        GTNLItemList.SteamgateChevron.set(initItem("Steamgate Chevron", 82));
+        GTNLItemList.SteamgateChevronUpgrade.set(initItem("Steamgate Chevron Upgrade", 83));
+        GTNLItemList.SteamgateIrisBlade.set(initItem("Steamgate Iris Blade", 84));
+        GTNLItemList.SteamgateIrisUpgrade.set(initItem("Steamgate Iris Upgrade", 85));
+        GTNLItemList.SteamgateHeatContainmentPlate.set(
+            initItem(
+                "Steamgate Heat Containment Plate",
+                86,
+                new String[] {
+                    texter("Perfect temperature stability...", "tooltips.SteamgateHeatContainmentPlate_00") }));
+        GTNLItemList.SteamgateFrame.set(
+            initItem(
+                "Steamgate Frame",
+                87,
+                new String[] { texter("Innumerable interlocking gears...", "tooltips.SteamgateFrame_00") }));
+        GTNLItemList.SteamgateCoreCrystal.set(
+            initItem(
+                "Steamgate Core Crystal",
+                88,
+                new String[] {
+                    texter("A crystal made of pure condensed staem...", "tooltips.SteamgateCoreCrystal_00") }));
+        GTNLItemList.HydraulicMotor.set(initItem("Hydraulic Motor", 89));
+        GTNLItemList.HydraulicPiston.set(initItem("Hydraulic Piston", 90));
+        GTNLItemList.HydraulicPump.set(
+            initItem(
+                "Hydraulic Pump",
+                91,
+                new String[] { texter("1,048,576 L/t (20,971,520 L/s) as Cover", "tooltips.HydraulicPump_00") }));
+        GTNLItemList.HydraulicArm.set(initItem("Hydraulic Arm", 92));
+        GTNLItemList.HydraulicConveyor.set(
+            initItem(
+                "Hydraulic Conveyor",
+                93,
+                new String[] { texter("16 stacks every 1/20 sec (as Cover)", "tooltips.HydraulicConveyor_00") }));
+        GTNLItemList.HydraulicRegulator.set(
+            initItem(
+                "Hydraulic Regulator",
+                94,
+                new String[] {
+                    texter("Configurable up to 20,971,520 L/sec (as Cover)", "tooltips.HydraulicRegulator_00"),
+                    texter(
+                        "Rightclick/Screwdriver-rightclick/Shift-screwdriver-rightclick",
+                        "tooltips.HydraulicRegulator_01"),
+                    texter(
+                        "to adjust the pump speed by 1/16/256 L/sec per click",
+                        "tooltips.HydraulicRegulator_02") }));
+        GTNLItemList.HydraulicVaporGenerator.set(initItem("Hydraulic Vapor Generator", 95));
+        GTNLItemList.HydraulicSteamJetSpewer.set(initItem("Hydraulic Steam Jet Spewer", 96));
+        GTNLItemList.HydraulicSteamReceiver.set(initItem("Hydraulic Steam Receiver", 97));
+        GTNLItemList.HydraulicSteamValve.set(
+            initItem(
+                "Hydraulic Steam Valve",
+                98,
+                new String[] {
+                    texter("16,777,216 L/t (335,544,320 L/s) as Cover", "tooltips.HydraulicSteamValve_00") }));
+        addItemTooltip(
+            GTNLItemList.HydraulicSteamValve.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(text("Tips: 瑶光Alkaid要的")));
+        GTNLItemList.HydraulicSteamRegulator.set(
+            initItem(
+                "Hydraulic Steam Regulator",
+                99,
+                new String[] {
+                    texter("16,777,216 L/t (335,544,320 L/s) as Cover", "tooltips.HydraulicSteamRegulator_00") }));
+        addItemTooltip(
+            GTNLItemList.HydraulicSteamRegulator.get(1),
+            AnimatedText.buildTextWithAnimatedEnd(text("Tips: 瑶光Alkaid要的")));
+        GTNLItemList.SadBapyCatToken.set(
+            initItem("SadBapyCat Token", 100, new String[] { texter(":sadbapycat:", "tooltips.SadBapyCatToken_00") }));
+
     }
 
     public static void registry() {

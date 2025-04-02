@@ -367,8 +367,8 @@ public class RecipeRegister {
         .disableOptimize()
         .build();
 
-    public static final RecipeMap<RecipeMapBackend> steamGateAssemblerRecipes = RecipeMapBuilder
-        .of("gtnl.recipe.steamgateassembler")
+    public static final RecipeMap<RecipeMapBackend> SteamGateAssemblerRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.SteamgateAssembler")
         .maxIO(81, 1, 0, 0)
         .progressBar(GTUITextures.PROGRESSBAR_COMPRESS)
         .slotOverlaysSteam(
@@ -376,8 +376,15 @@ public class RecipeRegister {
                 : null)
         .progressBarSteam(GTUITextures.PROGRESSBAR_COMPRESS_STEAM)
         .neiHandlerInfo(
-            builder -> builder.setDisplayStack(GTNLItemList.SteamAssemblerBronze.get(1))
+            builder -> builder.setDisplayStack(GTNLItemList.SteamGateAssembler.get(1))
                 .setMaxRecipesPerPage(1))
         .frontend(SteamGateAssemblerFrontend::new)
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> CactusWonderFakeRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.CactusWonder")
+        .maxIO(1, 0, 0, 1)
+        .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_2_STEAM)
+        .neiHandlerInfo((builder -> builder.setDisplayStack((GTNLItemList.SteamCactusWonder.get(1)))))
         .build();
 }

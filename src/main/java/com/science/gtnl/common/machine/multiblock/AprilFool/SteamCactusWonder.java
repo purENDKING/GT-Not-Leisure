@@ -1,0 +1,355 @@
+package com.science.gtnl.common.machine.multiblock.AprilFool;
+
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
+import static gregtech.api.util.GTStructureUtility.*;
+import static gtPlusPlus.core.block.ModBlocks.blockCactusCharcoal;
+import static gtPlusPlus.core.block.ModBlocks.blockCactusCoke;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
+
+import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.math.Alignment;
+import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.common.recipe.RecipeRegister;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.GregTechAPI;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.SoundResource;
+import gregtech.api.enums.Textures;
+import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.recipe.RecipeMap;
+import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.common.blocks.BlockCasings1;
+import gtPlusPlus.core.item.ModItems;
+import gtPlusPlus.core.util.minecraft.FluidUtils;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+
+public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> implements ISurvivalConstructable {
+
+    public static final String TEXTURE_OVERLAY_CACTUS_WONDER = "sciencenotleisure:iconsets/OVERLAY_CACTUS_WONDER";
+    public static final String TEXTURE_OVERLAY_CACTUS_WONDER_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_CACTUS_WONDER_ACTIVE";
+    public static Textures.BlockIcons.CustomIcon OVERLAY_CACTUS_WONDER = new Textures.BlockIcons.CustomIcon(
+        TEXTURE_OVERLAY_CACTUS_WONDER);
+    public static Textures.BlockIcons.CustomIcon OVERLAY_CACTUS_WONDER_ACTIVE = new Textures.BlockIcons.CustomIcon(
+        TEXTURE_OVERLAY_CACTUS_WONDER_ACTIVE);
+
+    public SteamCactusWonder(String aName) {
+        super(aName);
+    }
+
+    public SteamCactusWonder(int aID, String aName, String aNameRegional) {
+        super(aID, aName, aNameRegional);
+    }
+
+    @Override
+    public IMetaTileEntity newMetaEntity(IGregTechTileEntity arg0) {
+        return new SteamCactusWonder(this.mName);
+    }
+
+    @Override
+    public String getMachineType() {
+        return "Temple of Cacti Blessings";
+    }
+
+    private int currentSteam;
+    private ItemStack currentOffer;
+    private long fueledAmount = 0;
+    private static final ItemStack[] possibleInputs = { new ItemStack(ModItems.itemCactusCharcoal, 1),
+        new ItemStack(blockCactusCharcoal, 1), new ItemStack(blockCactusCharcoal, 1, 1),
+        new ItemStack(blockCactusCharcoal, 1, 2), new ItemStack(blockCactusCharcoal, 1, 3),
+        new ItemStack(blockCactusCharcoal, 1, 4), new ItemStack(blockCactusCharcoal, 1, 5),
+        new ItemStack(ModItems.itemCactusCoke, 1), new ItemStack(blockCactusCoke, 1),
+        new ItemStack(blockCactusCoke, 1, 1), new ItemStack(blockCactusCoke, 1, 2),
+        new ItemStack(blockCactusCoke, 1, 3), new ItemStack(blockCactusCoke, 1, 4),
+        new ItemStack(blockCactusCoke, 1, 5) };
+    private static final long[] totalValue = { 8_000L, 90_000L, 1_012_500L, 11_390_625L, 128_144_531L, 1_441_625_977L,
+        16_218_292_236L, 16_000L, 180_000L, 2_025_000L, 22_781_250L, 256_289_063L, 2_883_251_953L, 32_436_584_473L };
+    private static final int[] steamType = { 1, 1, 1, 2, 2, 3, 3, 1, 1, 1, 2, 2, 3, 3 };
+
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "nei";
+
+    private static final String[][] structure = transpose(
+        new String[][] {
+            { "         ", "         ", "   CCC   ", "  CCCCC  ", "  CCCCC  ", "  CCCCC  ", "   CCC   ", "         ",
+                "         " },
+            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E AAA E ", "  ABBBA  ", "  ABBBA  ", "  ABBBA  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E CCC E ", "  C   C  ", "  C   C  ", "  C   C  ", " E CCC E ", "  E   E  ",
+                "         " },
+            { " DDD DDD ", "DDFDDDFDD", "DFDCCCDFD", "DDC   CDD", " DC   CD ", "DDC   CDD", "DFDCCCDFD", "DDFDDDFDD",
+                " DDD DDD " },
+            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E AAA E ", "  ABBBA  ", "  ABBBA  ", "  ABBBA  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E A~A E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
+                "         " },
+            { "         ", "  E   E  ", " E CCC E ", "  CCCCC  ", "  CCCCC  ", "  CCCCC  ", " E CCC E ", "  E   E  ",
+                "         " },
+            { "  CCCCC  ", " CFCCCFC ", "CFCCCCCFC", "CCCCCCCCC", "CCCCCCCCC", "CCCCCCCCC", "CFCCCCCFC", " CFCCCFC ",
+                "  CCCCC  " } });
+
+    public IStructureDefinition<SteamCactusWonder> getStructureDefinition() {
+        return StructureDefinition.<SteamCactusWonder>builder()
+            .addShape(STRUCTURE_PIECE_MAIN, structure)
+            .addShape(
+                STRUCTURE_PIECE_MAIN_SURVIVAL,
+                Arrays.stream(structure)
+                    .map(
+                        sa -> Arrays.stream(sa)
+                            .map(s -> s.replaceAll("E", " "))
+                            .toArray(String[]::new))
+                    .toArray(String[][]::new))
+            .addElement('A', chainAllGlasses())
+            .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 12))
+            .addElement(
+                'C',
+                ofChain(
+                    buildHatchAdder(SteamCactusWonder.class).atLeast(SteamHatchElement.InputBus_Steam, OutputHatch)
+                        .casingIndex(10)
+                        .dot(1)
+                        .buildAndChain(),
+                    ofBlock(GregTechAPI.sBlockCasings3, 13)))
+            .addElement('D', ofFrame(Materials.Steel))
+            .addElement('E', ofBlock(Blocks.cactus, 0))
+            .addElement('F', ofBlock(Blocks.sand, 0))
+            .build();
+    }
+
+    private static final int HORIZONTAL_OFF_SET = 4;
+    private static final int VERTICAL_OFF_SET = 8;
+    private static final int DEPTH_OFF_SET = 2;
+
+    @Override
+    public int getCasingTextureID() {
+        return ((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10);
+    }
+
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection facing,
+        int aColorIndex, boolean aActive, boolean aRedstone) {
+        ITexture[] rTexture;
+        if (side == facing) {
+            if (aActive) {
+                rTexture = new ITexture[] {
+                    Textures.BlockIcons
+                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)),
+                    TextureFactory.builder()
+                        .addIcon(OVERLAY_CACTUS_WONDER)
+                        .extFacing()
+                        .build(),
+                    TextureFactory.builder()
+                        .addIcon(OVERLAY_CACTUS_WONDER_ACTIVE)
+                        .extFacing()
+                        .glow()
+                        .build() };
+            } else {
+                rTexture = new ITexture[] {
+                    Textures.BlockIcons
+                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)),
+                    TextureFactory.builder()
+                        .addIcon(OVERLAY_CACTUS_WONDER)
+                        .extFacing()
+                        .build(),
+                    TextureFactory.builder()
+                        .addIcon(OVERLAY_CACTUS_WONDER_ACTIVE)
+                        .extFacing()
+                        .glow()
+                        .build() };
+            }
+        } else {
+            rTexture = new ITexture[] { Textures.BlockIcons
+                .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)) };
+        }
+        return rTexture;
+    }
+
+    @Override
+    public void construct(ItemStack stackSize, boolean hintsOnly) {
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
+    }
+
+    @Override
+    public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN_SURVIVAL,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
+    }
+
+    @Override
+    public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
+        return true;
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+
+        if (aBaseMetaTileEntity.isAllowedToWork()) {
+            if (aTick % 20 == 0) {
+                addFuel();
+            }
+            outputSteam();
+        }
+
+    }
+
+    private void addFuel() {
+        ArrayList<ItemStack> storedInputs = getStoredInputs();
+        for (ItemStack stack : storedInputs) {
+            for (int i = 0; i < 14; i++) {
+                if (stack.isItemEqual(possibleInputs[i])) {
+                    if (currentOffer == null) {
+                        currentOffer = stack;
+                        fueledAmount += totalValue[i] * stack.stackSize;
+                        currentSteam = steamType[i];
+                        this.depleteInput(stack);
+                    } else if (stack.isItemEqual(currentOffer)) {
+                        fueledAmount += totalValue[i] * stack.stackSize;
+                        this.depleteInput(stack);
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void outputSteam() {
+        if (fueledAmount > 0) {
+            if (currentSteam == 1) {
+                addOutput(FluidUtils.getSteam((int) Math.min(3200, fueledAmount)));
+                fueledAmount -= (int) Math.min(3200, fueledAmount);
+            } else if (currentSteam == 2) {
+                addOutput(FluidUtils.getSuperHeatedSteam((int) Math.min(6400, fueledAmount)));
+                fueledAmount -= (int) Math.min(6400, fueledAmount);
+            } else if (currentSteam == 3) {
+                addOutput(FluidRegistry.getFluidStack("supercriticalsteam", (int) Math.min(25600, fueledAmount)));
+                fueledAmount -= (int) Math.min(25600, fueledAmount);
+            }
+
+            if (fueledAmount <= 0) {
+                fueledAmount = 0;
+                currentOffer = null;
+            }
+        }
+    }
+
+    @Override
+    protected void drawTexts(DynamicPositionedColumn screenElements, SlotWidget inventorySlot) {
+        super.drawTexts(screenElements, inventorySlot);
+
+        screenElements
+            .widget(
+                new TextWidget()
+                    .setStringSupplier(
+                        () -> EnumChatFormatting.WHITE + "Offer Value: "
+                            + EnumChatFormatting.YELLOW
+                            + numberFormat.format(fueledAmount))
+                    .setTextAlignment((Alignment.CenterLeft)))
+            .widget(new FakeSyncWidget.LongSyncer(() -> fueledAmount, val -> fueledAmount = val));
+    }
+
+    @Override
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeRegister.CactusWonderFakeRecipes;
+    }
+
+    @Override
+    public int getTierRecipes() {
+        return 14;
+    }
+
+    @Override
+    public int getMaxParallelRecipes() {
+        return 1;
+    }
+
+    @Override
+    protected MultiblockTooltipBuilder createTooltip() {
+        MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
+        tt.addMachineType("Temple of Cacti Blessing")
+            .addInfo("Burns Cactus Coke and Charcoal for increasingly efficient amounts of steam.")
+            .addInfo("Every second the cactus wonder will consume all offers stored")
+            .addInfo("The god of cacti will save their value and return it as steam blessings to her faithful zealots.")
+            .addInfo("Can only take one type of offer at once.")
+            .addInfo("Needs Fully Grown Cacti on the Sand Blocks to form")
+            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Cactus")
+            .toolTipFinisher();
+        return tt;
+    }
+
+    @Override
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+        int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+        IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        final NBTTagCompound tag = accessor.getNBTData();
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setLong("fuel", fueledAmount);
+        aNBT.setInteger("steam", currentSteam);
+    }
+
+    @Override
+    public void loadNBTData(final NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        fueledAmount = aNBT.getLong("fuel");
+        currentSteam = aNBT.getInteger("steam");
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    protected SoundResource getActivitySoundLoop() {
+        return SoundResource.IC2_MACHINES_MACERATOR_OP;
+    }
+
+}

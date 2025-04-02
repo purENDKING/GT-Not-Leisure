@@ -18,7 +18,7 @@ import gregtech.api.util.GTOreDictUnificator;
 
 public class SteamGateAssemblerRecipes implements IRecipePool {
 
-    final RecipeMap<?> SGAR = RecipeRegister.steamGateAssemblerRecipes;
+    final RecipeMap<?> SGAR = RecipeRegister.SteamGateAssemblerRecipes;
 
     @Override
     public void loadRecipes() {

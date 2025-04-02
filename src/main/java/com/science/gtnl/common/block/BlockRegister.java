@@ -419,6 +419,7 @@ public class BlockRegister {
         GTNLItemList.BronzeBrickCasing.set(ItemBlockColumn.initMetaBlock("Bronze Brick Casing", 0));
         GTNLItemList.SteelBrickCasing.set(ItemBlockColumn.initMetaBlock("Steel Brick Casing", 1));
         GTNLItemList.CrushingWheels.set(ItemBlockColumn.initMetaBlock("Crushing Wheels", 2));
+        GTNLItemList.SolarBoilingCell.set(ItemBlockColumn.initMetaBlock("Solar Boiling Cell", 3));
 
         GTNLItemList.TestCasing
             .set(MetaBlockConstructors.initMetaBlockCasing("Test Casing", (byte) 0, BasicBlocks.MetaCasing));
@@ -474,6 +475,26 @@ public class BlockRegister {
             .set(MetaBlockConstructors.initMetaBlockCasing("Steamgate Ring Block", (byte) 21, BasicBlocks.MetaCasing));
         GTNLItemList.SteamgateChevronBlock.set(
             MetaBlockConstructors.initMetaBlockCasing("Steamgate Chevron Block", (byte) 22, BasicBlocks.MetaCasing));
+        GTNLItemList.IronReinforcedWood
+            .set(MetaBlockConstructors.initMetaBlockCasing("Iron Reinforced Wood", (byte) 23, BasicBlocks.MetaCasing));
+        GTNLItemList.BronzeReinforcedWood.set(
+            MetaBlockConstructors.initMetaBlockCasing("Bronze Reinforced Wood", (byte) 24, BasicBlocks.MetaCasing));
+        GTNLItemList.SteelReinforcedWood
+            .set(MetaBlockConstructors.initMetaBlockCasing("Steel Reinforced Wood", (byte) 25, BasicBlocks.MetaCasing));
+        GTNLItemList.BreelPipeCasing
+            .set(MetaBlockConstructors.initMetaBlockCasing("Breel Pipe Casing", (byte) 26, BasicBlocks.MetaCasing));
+        GTNLItemList.StronzeWrappedCasing.set(
+            MetaBlockConstructors.initMetaBlockCasing("Stronze-Wrapped Casing", (byte) 27, BasicBlocks.MetaCasing));
+        GTNLItemList.HydraulicAssemblingCasing.set(
+            MetaBlockConstructors
+                .initMetaBlockCasing("Hydraulic Assembling Casing", (byte) 28, BasicBlocks.MetaCasing));
+        GTNLItemList.HyperPressureBreelCasing.set(
+            MetaBlockConstructors
+                .initMetaBlockCasing("Hyper Pressure Breel Casing", (byte) 29, BasicBlocks.MetaCasing));
+        GTNLItemList.BreelPlatedCasing
+            .set(MetaBlockConstructors.initMetaBlockCasing("Breel-Plated Casing", (byte) 30, BasicBlocks.MetaCasing));
+        GTNLItemList.SteamCompactPipeCasing.set(
+            MetaBlockConstructors.initMetaBlockCasing("Steam Compact Pipe Casing", (byte) 31, BasicBlocks.MetaCasing));
     }
 
     public static void registry() {

@@ -1393,6 +1393,57 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 108,
         TextureSet.SET_FLUID);
 
+    public static final Werkstoff CompressedSteam = new Werkstoff(
+        new short[] { 211, 211, 211 },
+        "CompressedSteam",
+        subscriptNumbers("H2O"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MIXTURE,
+        new Werkstoff.GenerationFeatures().onlyDust()
+            .addMolten()
+            .addMetalItems()
+            .addCraftingMetalWorkingItems()
+            .addSimpleMetalWorkingItems()
+            .addMultipleIngotMetalWorkingItems()
+            .addMetaSolidifierRecipes()
+            .addMetalCraftingSolidifierRecipes(),
+        offsetID_01 + 109,
+        TextureSet.SET_SHINY);
+
+    public static final Werkstoff Stronze = new Werkstoff(
+        new short[] { 89, 61, 45 },
+        "Stronze",
+        subscriptNumbers("(SnCu3)(Fe50C)2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MIXTURE,
+        new Werkstoff.GenerationFeatures().onlyDust()
+            .addMolten()
+            .addMetalItems()
+            .addCraftingMetalWorkingItems()
+            .addSimpleMetalWorkingItems()
+            .addMultipleIngotMetalWorkingItems()
+            .addMetaSolidifierRecipes()
+            .addMetalCraftingSolidifierRecipes(),
+        offsetID_01 + 110,
+        TextureSet.SET_SHINY);
+
+    public static final Werkstoff Breel = new Werkstoff(
+        new short[] { 69, 60, 55 },
+        "Breel",
+        subscriptNumbers("(Fe50C)(SnCu3)2"),
+        new Werkstoff.Stats(),
+        Werkstoff.Types.MIXTURE,
+        new Werkstoff.GenerationFeatures().onlyDust()
+            .addMolten()
+            .addMetalItems()
+            .addCraftingMetalWorkingItems()
+            .addSimpleMetalWorkingItems()
+            .addMultipleIngotMetalWorkingItems()
+            .addMetaSolidifierRecipes()
+            .addMetalCraftingSolidifierRecipes(),
+        offsetID_01 + 111,
+        TextureSet.SET_SHINY);
+
     public static final Werkstoff Periodicium = new Werkstoff(
         new short[] { 60, 74, 243 },
         "Periodicium",
@@ -1413,7 +1464,8 @@ public class MaterialPool implements Runnable {
                 + "(Gs39TsЖ66TtЖ67〄62Fs⚶45Hy⚶53✢64En⦼53M⎋65⸎46✦◆✦48✧◇✧52Og*52Sh⏧68Tn57)"
                 + "((⌘☯𓍰𓍱𓍲𓍳𓍴𓍵𓍶𓍷𓍸☯⌘)66(⚷⚙⚷Ni4Ti6)40Fc⚙37҈30҉33«»67Rt*51۞47Rc62Si*68)"
                 + "(Fs61Ef30Ut69Tr66Ms40If53He*43Ai32Or55Vy36⬟⯂⬢⬣⯃⯄32Tt33Cc56Vu58Ao52))???144)"),
-        new Werkstoff.Stats().setToxic(true),
+        new Werkstoff.Stats().setToxic(true)
+            .setMass(2147483647),
         Werkstoff.Types.ELEMENT,
         new Werkstoff.GenerationFeatures().onlyDust()
             .addMolten()

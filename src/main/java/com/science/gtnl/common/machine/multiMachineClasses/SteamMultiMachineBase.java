@@ -11,11 +11,7 @@ import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -28,9 +24,9 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.gtnewhorizon.structurelib.alignment.IAlignmentLimits;
 import com.gtnewhorizons.modularui.api.drawable.ItemDrawable;
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
@@ -40,6 +36,7 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.interfaces.metatileentity.IItemLockable;
@@ -53,6 +50,7 @@ import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.objects.GTRenderedTexture;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.HatchElementBuilder;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
@@ -548,8 +546,29 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return aSteam;
     }
 
-    protected SteamTypes getSteamType() {
-        return SteamTypes.STEAM;
+    @Override
+    public ArrayList<FluidStack> getAllSteamStacks() {
+        ArrayList<FluidStack> aFluids = new ArrayList<>();
+        for (FluidStack aFluid : this.getStoredFluids()) {
+            if (aFluid != null) {
+                for (SteamTypes type : SteamTypes.VALUES) {
+                    if (aFluid.getFluid() == type.fluid) {
+                        aFluids.add(aFluid);
+                        break;
+                    }
+                }
+            }
+        }
+        return aFluids;
+    }
+
+    @Override
+    public int getTotalSteamStored() {
+        int total = 0;
+        for (FluidStack aFluid : getAllSteamStacks()) {
+            total += aFluid.amount;
+        }
+        return total;
     }
 
     @Override
@@ -602,8 +621,27 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     @Override
-    protected IAlignmentLimits getInitialAlignmentLimits() {
-        return (d, r, f) -> d.offsetY == 0 && r.isNotRotated();
+    public boolean onRunningTick(ItemStack aStack) {
+        if (lEUt < 0) {
+            long aSteamVal = ((-lEUt * 10000) / Math.max(1000, mEfficiency));
+            // Logger.INFO("Trying to drain "+aSteamVal+" steam per tick.");
+            if (!tryConsumeSteam((int) aSteamVal)) {
+                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean tryConsumeSteam(int aAmount) {
+        for (SteamTypes type : SteamTypes.getSupportedTypes()) {
+            FluidStack steamStack = new FluidStack(type.fluid, Math.max(1, aAmount / type.efficiencyFactor));
+            if (depleteInput(steamStack)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -618,7 +656,11 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             new DrawableWidget().setDrawable(STEAM_GAUGE_BG)
                 .dynamicTooltip(() -> {
                     List<String> ret = new ArrayList<>();
-                    ret.add(getSteamType().name + ": " + uiSteamStored + "/" + uiSteamCapacity + "L");
+                    ret.add(
+                        StatCollector.translateToLocal("AllSteamCapacity") + uiSteamStored
+                            + "/"
+                            + uiSteamCapacity
+                            + "L");
                     if (uiSteamStored == 0 && uiSteamStoredOfAllTypes != 0) {
                         ret.add(EnumChatFormatting.RED + "Found steam of wrong type!");
                     }
@@ -650,16 +692,28 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     protected enum SteamTypes {
 
         STEAM("Steam", FluidUtils.getSteam(1)
-            .getFluid());
+            .getFluid(), 1),
+        SH_STEAM("Superheated Steam", FluidUtils.getSuperHeatedSteam(1)
+            .getFluid(), 10),
+        SC_STEAM("Supercritical Steam", FluidRegistry.getFluidStack("supercriticalsteam", 1)
+            .getFluid(), 50),
+        CM_STEAM("Compressed Steam", MaterialPool.CompressedSteam.getMolten(1)
+            .getFluid(), 100000);
 
-        static final SteamTypes[] VALUES = values();
+        public static final SteamTypes[] VALUES = values();
 
-        final String name;
-        final Fluid fluid;
+        public final String displayName;
+        public final Fluid fluid;
+        public final int efficiencyFactor;
 
-        SteamTypes(String name, Fluid fluid) {
-            this.name = name;
+        SteamTypes(String name, Fluid fluid, int efficiency) {
+            this.displayName = name;
             this.fluid = fluid;
+            this.efficiencyFactor = efficiency;
+        }
+
+        public static List<SteamTypes> getSupportedTypes() {
+            return Arrays.asList(VALUES);
         }
     }
 

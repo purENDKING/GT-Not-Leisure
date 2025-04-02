@@ -2,8 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import javax.annotation.Nonnull;
@@ -109,7 +108,8 @@ public class LargeSteamCompressor extends SteamMultiMachineBase<LargeSteamCompre
                                 SteamHatchElement.InputBus_Steam,
                                 SteamHatchElement.OutputBus_Steam,
                                 InputBus,
-                                OutputBus)
+                                OutputBus,
+                                InputHatch)
                             .buildAndChain(
                                 onElementPass(
                                     x -> ++x.tCountCasing,

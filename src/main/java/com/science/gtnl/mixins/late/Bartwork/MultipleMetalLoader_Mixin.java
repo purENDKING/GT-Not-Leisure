@@ -33,7 +33,7 @@ public abstract class MultipleMetalLoader_Mixin {
                 .duration(
                     (int) Math.max(
                         werkstoff.getStats()
-                            .getMass() * 4,
+                            .getMass(),
                         1L))
                 .eut(
                     werkstoff.getStats()
