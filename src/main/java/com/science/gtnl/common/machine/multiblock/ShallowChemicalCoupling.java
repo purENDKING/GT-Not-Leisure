@@ -191,8 +191,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                     .setMachineHeat(ShallowChemicalCoupling.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(1.0 * getCoilLevel().getTier() * 0.75)
-                    .setSpeedBoost(1.0 * getCoilLevel().getTier() * 0.75);
+                    .setEUtDiscount(Math.pow(0.85, getCoilLevel().getTier()))
+                    .setSpeedBoost(Math.pow(0.85, getCoilLevel().getTier()));
             }
 
             @Override

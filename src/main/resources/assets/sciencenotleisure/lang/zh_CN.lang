@@ -2145,7 +2145,7 @@ ShallowChemicalCouplingRecipes=浅层化学耦合
 gtnl.recipe.ShallowChemicalCouplingRecipes=浅层化学耦合
 Tooltip_ShallowChemicalCoupling_00=§o基于分子层面操控的化学反应设备
 Tooltip_ShallowChemicalCoupling_01=§o通过直接操控分子化学键来避免繁杂的多步化学反应
-Tooltip_ShallowChemicalCoupling_02=线圈等级每提高一级，配方时间和耗电乘以75%%
+Tooltip_ShallowChemicalCoupling_02=线圈等级每提高一级，配方时间和耗电乘以85%%
 Tooltip_ShallowChemicalCoupling_03=玻璃等级限制了能源仓等级，UEV玻璃解锁所有等级
 Tooltip_ShallowChemicalCoupling_Casing_00=任意化学防护机械方块
 
