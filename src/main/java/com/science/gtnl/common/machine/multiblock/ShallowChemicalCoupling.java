@@ -9,6 +9,7 @@ import static gregtech.api.util.GTStructureUtility.*;
 
 import javax.annotation.Nonnull;
 
+import gregtech.api.util.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -106,9 +107,9 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_01)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_02)
             .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_03)
+            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_04)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -126,7 +127,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
 
     @Override
     public boolean isEnablePerfectOverclock() {
-        return getCoilLevel() == HeatingCoilLevel.UXV;
+        return true;
     }
 
     public void setCoilLevel(HeatingCoilLevel aCoilLevel) {
@@ -256,6 +257,16 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeRegister.ShallowChemicalCouplingRecipes;
+    }
+
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty() && getMaxInputAmps() <= 2;
+        logic.setAvailableVoltage(getMachineVoltageLimit());
+        logic.setAvailableAmperage(
+            useSingleAmp ? 1
+                : ExoticEnergyInputHelper.getMaxWorkingInputAmpsMulti(getExoticAndNormalEnergyHatchList()));
+        logic.setAmperageOC(false);
     }
 
 }

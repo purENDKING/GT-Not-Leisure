@@ -115,7 +115,8 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 1),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 5),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 2),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 5))
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 5),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 4))
             .fluidInputs(Materials.Hydrogen.getGas(25000))
             .fluidOutputs(Materials.Oxygen.getGas(4000), Materials.Chlorine.getGas(2000))
             .specialValue(0)
@@ -126,8 +127,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
 
         // 铱金属渣粉处理
         RecipeBuilder.builder()
-            .itemInputs(
-                GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrLeachResidue.get(OrePrefixes.dust, 1)))
+            .itemInputs(GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrLeachResidue.get(OrePrefixes.dust, 1)))
             .itemOutputs(
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 20),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 8),
@@ -135,8 +135,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 10))
             .fluidInputs(Materials.Hydrogen.getGas(8000), Materials.Chlorine.getGas(40000))
-            .fluidOutputs(
-                Materials.Oxygen.getGas(8000))
+            .fluidOutputs(Materials.Oxygen.getGas(8000))
             .specialValue(0)
             .noOptimize()
             .duration(1500)
@@ -171,6 +170,23 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
             .specialValue(0)
             .noOptimize()
             .duration(2400)
+            .eut(TierEU.RECIPE_LuV)
+            .addTo(PBTR);
+
+        // 粗制铑金属粉处理
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.copyAmountUnsafe(100, WerkstoffLoader.CrudeRhMetall.get(OrePrefixes.dust, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Sodium, 50))
+            .itemOutputs(WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 57))
+            .fluidInputs(
+                Materials.Nitrogen.getGas(1000),
+                Materials.Oxygen.getGas(180000),
+                Materials.Chlorine.getGas(90000))
+            .fluidOutputs(Materials.Hydrogen.getGas(71000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(6000)
             .eut(TierEU.RECIPE_LuV)
             .addTo(PBTR);
     }

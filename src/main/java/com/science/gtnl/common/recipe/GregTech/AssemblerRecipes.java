@@ -36,6 +36,7 @@ import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.item.crafting.ItemDummyResearch;
+import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtPlusPlus.core.recipe.common.CI;
@@ -1948,6 +1949,18 @@ public class AssemblerRecipes implements IRecipePool {
             .fluidOutputs()
             .duration(50)
             .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(2),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphite, 128),
+                GTNLItemList.NeutroniumWafer.get(1))
+            .fluidInputs(MaterialMisc.ETHYL_CYANOACRYLATE.getFluidStack(125))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphene, 128))
+            .fluidOutputs()
+            .duration(40)
+            .eut(TierEU.RECIPE_UV)
             .addTo(As);
 
     }

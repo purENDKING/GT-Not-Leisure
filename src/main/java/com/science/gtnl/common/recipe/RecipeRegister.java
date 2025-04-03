@@ -266,7 +266,7 @@ public class RecipeRegister {
 
     public static RecipeMap<RecipeMapBackend> MolecularTransformerRecipes = RecipeMapBuilder
         .of("gtnl.recipe.MolecularTransformerRecipes")
-        .maxIO(1, 1, 0, 0)
+        .maxIO(2, 1, 0, 0)
         .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.MolecularTransformer.get(1))

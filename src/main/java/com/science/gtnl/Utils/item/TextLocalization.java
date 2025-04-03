@@ -2317,9 +2317,6 @@ public class TextLocalization {
     public static final String Tooltip_ShallowChemicalCoupling_03 = texter(
         "Energy hatch limited by glass tier, UEV Glass unlocks all",
         "Tooltip_ShallowChemicalCoupling_03");
-    public static final String Tooltip_ShallowChemicalCoupling_04 = texter(
-        "Hypogen coil unlocking §cperfect overclock§7",
-        "Tooltip_ShallowChemicalCoupling_04");
     public static final String Tooltip_ShallowChemicalCoupling_Casing_00 = texter(
         "Any Chemical Protection Machine Block",
         "Tooltip_ShallowChemicalCoupling_Casing_00");

@@ -6,6 +6,7 @@ import static gregtech.api.enums.Mods.IndustrialCraft2;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.science.gtnl.Utils.enums.TierEU;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.IRecipePool;
@@ -16,6 +17,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 
 public class MolecularTransformerRecipes implements IRecipePool {
 
@@ -60,7 +62,20 @@ public class MolecularTransformerRecipes implements IRecipePool {
             .addTo(MTR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 2L))
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(1),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1L))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphene, 1L))
+            .specialValue(0)
+            .noOptimize()
+            .duration(100)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(MTR);
+
+        RecipeBuilder.builder()
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(2),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 2L))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 1L))
             .specialValue(0)
             .noOptimize()
