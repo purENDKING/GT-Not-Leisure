@@ -1951,17 +1951,5 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_LV)
             .addTo(As);
 
-        GTValues.RA.stdBuilder()
-            .itemInputs(
-                GTUtility.getIntegratedCircuit(2),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphite, 128),
-                GTNLItemList.NeutroniumWafer.get(1))
-            .fluidInputs(MaterialMisc.ETHYL_CYANOACRYLATE.getFluidStack(125))
-            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphene, 128))
-            .fluidOutputs()
-            .duration(40)
-            .eut(TierEU.RECIPE_UV)
-            .addTo(As);
-
     }
 }
