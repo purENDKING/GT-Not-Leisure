@@ -6,9 +6,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.common.recipe.AprilFool.CactusWonderFakeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.CraftingTableAprilFoolRecipes;
+import com.science.gtnl.common.recipe.AprilFool.InfernalCokeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.LavaMakerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamCarpenterRecipe;
+import com.science.gtnl.common.recipe.AprilFool.SteamFusionReactorRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamManufacturerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamWoodcutterRecipes;
@@ -99,7 +102,8 @@ public class RecipeLoader {
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),
-            new SteamWoodcutterRecipes(), new SteamGateAssemblerRecipes()
+            new SteamWoodcutterRecipes(), new SteamGateAssemblerRecipes(), new CactusWonderFakeRecipes(),
+            new InfernalCokeRecipes(), new SteamFusionReactorRecipes()
 
         };
 

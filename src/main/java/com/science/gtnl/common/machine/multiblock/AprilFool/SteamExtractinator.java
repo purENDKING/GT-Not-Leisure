@@ -180,7 +180,7 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
                 .addElement('E', ofBlock(GregTechAPI.sBlockCasings3, 13))
                 .addElement('G', ofFrame(Materials.Steel))
                 .addElement('H', ofBlock(MetaCasing02, 0))
-                .addElement('I', ofBlock(GregTechAPI.sBlockGlass1, 5))
+                .addElement('I', ofBlock(MetaBlockGlass, 3))
                 .addElement('J', ofBlock(MetaBlockColumn, 1))
                 .addElement(
                     'K',

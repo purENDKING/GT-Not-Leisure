@@ -171,14 +171,14 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
         if (side == facing) {
             if (aActive) {
                 rTexture = new ITexture[] {
-                    Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 27)),
+                    Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 29)),
                     TextureFactory.builder()
                         .addIcon(OVERLAY_TOP_STEAM_MACERATOR_ACTIVE)
                         .extFacing()
                         .build() };
             } else {
                 rTexture = new ITexture[] {
-                    Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 27)),
+                    Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 29)),
                     TextureFactory.builder()
                         .addIcon(OVERLAY_TOP_STEAM_MACERATOR)
                         .extFacing()
@@ -186,7 +186,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
             }
         } else {
             rTexture = new ITexture[] {
-                Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 27)) };
+                Textures.BlockIcons.getCasingTextureForId(GTUtility.getTextureId((byte) 116, (byte) 29)) };
         }
         return rTexture;
     }

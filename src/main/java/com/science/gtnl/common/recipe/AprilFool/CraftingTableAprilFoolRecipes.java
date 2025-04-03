@@ -66,6 +66,13 @@ public class CraftingTableAprilFoolRecipes implements IRecipePool {
                 MaterialPool.Breel.get(OrePrefixes.plate, 1), 'C',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.CrudeSteel, 1) });
 
+        // Steam Extractinator
+        GTModHandler.addCraftingRecipe(
+            GTNLItemList.SteamExtractinator.get(1),
+            new Object[] { "ABA", "CDC", "ABA", 'A', GTNLItemList.VibrationSafeCasing.get(1), 'B',
+                ItemList.Casing_BronzePlatedBricks.get(1), 'C', GTNLItemList.HydraulicPump.get(1), 'D',
+                MaterialPool.Stronze.get(OrePrefixes.pipeLarge, 1) });
+
         // Steam Fuser
         GTModHandler.addCraftingRecipe(
             GTNLItemList.LargeSteamAlloySmelter.get(1),
