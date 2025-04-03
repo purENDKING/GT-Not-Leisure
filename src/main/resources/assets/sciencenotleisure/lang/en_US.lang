@@ -2147,7 +2147,6 @@ Tooltip_ShallowChemicalCoupling_00=§oLMolecular Control Reactor Integrator
 Tooltip_ShallowChemicalCoupling_01=§oDirect Molecular Bond Control Bypasses Multi-Step Reactions
 Tooltip_ShallowChemicalCoupling_02=Recipe time & energy multiply by 75%% per coil tier
 Tooltip_ShallowChemicalCoupling_03=Energy hatch limited by glass tier, UEV Glass unlocks all
-Tooltip_ShallowChemicalCoupling_04=Hypogen coil unlocking §cperfect overclock§7
 Tooltip_ShallowChemicalCoupling_Casing_00=Any Chemical Protection Machine Block
 
 NameWhiteNightGenerator=White Night Generator
