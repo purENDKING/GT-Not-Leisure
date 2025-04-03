@@ -127,16 +127,16 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
         // 铱金属渣粉处理
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrLeachResidue.get(OrePrefixes.dust, 1)),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Calcium, 40))
+                GTUtility.copyAmountUnsafe(20, WerkstoffLoader.IrLeachResidue.get(OrePrefixes.dust, 1)))
             .itemOutputs(
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.SiliconDioxide, 12),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 20),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 8),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Copper, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Silicon, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 10))
             .fluidInputs(Materials.Hydrogen.getGas(8000), Materials.Chlorine.getGas(40000))
-            .fluidOutputs()
+            .fluidOutputs(
+                Materials.Oxygen.getGas(8000))
             .specialValue(0)
             .noOptimize()
             .duration(1500)
