@@ -752,6 +752,10 @@ bw.werkstoff.25108.name=Large Baka
 bw.werkstoff.25109.name=Compressed Steam
 bw.werkstoff.25110.name=Stronze
 bw.werkstoff.25111.name=Breel
+bw.werkstoff.25112.name=Pitchblende Slag
+bw.werkstoff.25113.name=Uranium Slag
+bw.werkstoff.25114.name=Uranium Chloride Slag
+bw.werkstoff.25115.name=Radium Chloride
 bw.werkstoff.25200.name=Periodicium
 bw.werkstoff.25201.name=Stargate
 
@@ -866,6 +870,10 @@ Material.largebaka=Large Baka
 Material.compressedsteam=Compressed Steam
 Material.stronze=Stronze
 Material.breel=Breel
+Material.pitchblendeslag=Pitchblende Slag
+Material.uraniumslag=Uranium Slag
+Material.uraniumchlorideslag=Uranium Chloride Slag
+Material.radiumchloride=Radium Chloride
 Material.periodicium=Periodicium
 Material.stargate=Stargate
 
@@ -981,6 +989,10 @@ fluid.largebaka=Large Baka
 fluid.compressedsteam=Compressed Steam
 fluid.stronze=Stronze
 fluid.breel=Breel
+fluid.pitchblendeslag=Pitchblende Slag
+fluid.uraniumslag=Uranium Slag
+fluid.uraniumchlorideslag=Uranium Chloride Slag
+fluid.radiumchloride=Radium Chloride
 fluid.periodicium=Periodicium
 fluid.stargate=Stargate
 
@@ -1096,6 +1108,10 @@ fluid.molten.largebaka=Large Baka
 fluid.molten.compressedsteam=Compressed Steam
 fluid.molten.stronze=Stronze
 fluid.molten.breel=Breel
+fluid.molten.pitchblendeslag=Pitchblende Slag
+fluid.molten.uraniumslag=Uranium Slag
+fluid.molten.uraniumchlorideslag=Uranium Chloride Slag
+fluid.molten.radiumchloride=Radium Chloride
 fluid.molten.periodicium=Molten Periodicium
 fluid.molten.stargate=Molten Stargate
 

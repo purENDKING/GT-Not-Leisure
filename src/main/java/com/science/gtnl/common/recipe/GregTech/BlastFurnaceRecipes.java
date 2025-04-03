@@ -60,7 +60,7 @@ public class BlastFurnaceRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(7, WerkstoffLoader.Sodiumsulfate.get(OrePrefixes.dust, 1)))
             .duration(100)
             .eut(TierEU.RECIPE_HV)
-            .metadata(COIL_HEAT, 8300)
+            .metadata(COIL_HEAT, 3650)
             .addTo(BFR);
 
     }

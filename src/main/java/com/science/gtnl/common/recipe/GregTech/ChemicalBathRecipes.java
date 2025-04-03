@@ -70,7 +70,7 @@ public class ChemicalBathRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushed, Materials.Pitchblende, 1))
-            .fluidInputs(Materials.SulfuricAcid.getGas(1000))
+            .fluidInputs(Materials.SulfuricAcid.getFluid(1000))
             .itemOutputs(
                 MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
@@ -82,7 +82,7 @@ public class ChemicalBathRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.Pitchblende, 1))
-            .fluidInputs(Materials.SulfuricAcid.getGas(1000))
+            .fluidInputs(Materials.SulfuricAcid.getFluid(1000))
             .itemOutputs(
                 MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
