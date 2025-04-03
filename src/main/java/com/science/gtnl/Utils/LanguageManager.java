@@ -128,12 +128,12 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.CompressedSteam, "压缩蒸汽");
         addWerkstoffLocalization(MaterialPool.Stronze, "青钢");
         addWerkstoffLocalization(MaterialPool.Breel, "青铁");
-        addWerkstoffLocalization(MaterialPool.Periodicium, "錭錤錶");
-        addWerkstoffLocalization(MaterialPool.Stargate, "星门");
         addWerkstoffLocalization(MaterialPool.PitchblendeSlag, "沥青铀矿渣");
         addWerkstoffLocalization(MaterialPool.UraniumSlag, "铀矿渣");
         addWerkstoffLocalization(MaterialPool.UraniumChlorideSlag, "氯化铀矿渣");
         addWerkstoffLocalization(MaterialPool.RadiumChloride, "氯化镭");
+        addWerkstoffLocalization(MaterialPool.Periodicium, "錭錤錶");
+        addWerkstoffLocalization(MaterialPool.Stargate, "星门");
 
         addGTMaterialLocalization(Materials.BlueAlloy, "蓝色合金");
 
