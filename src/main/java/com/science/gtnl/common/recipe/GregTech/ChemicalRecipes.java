@@ -635,5 +635,16 @@ public class ChemicalRecipes implements IRecipePool {
             .duration(100)
             .eut(TierEU.RECIPE_HV)
             .addTo(mCR);
+
+        RecipeBuilder.builder()
+            .itemInputs(MaterialPool.UraniumSlag.get(OrePrefixes.dust, 1))
+            .itemOutputs(MaterialPool.UraniumChlorideSlag.get(OrePrefixes.dust, 1))
+            .fluidInputs(Materials.HydrochloricAcid.getFluid(4000))
+            .fluidOutputs(Materials.Hydrogen.getGas(4000))
+            .specialValue(0)
+            .noOptimize()
+            .duration(200)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(mCR);
     }
 }

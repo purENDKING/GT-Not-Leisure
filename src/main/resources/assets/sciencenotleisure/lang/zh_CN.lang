@@ -754,6 +754,10 @@ bw.werkstoff.25110.name=青钢
 bw.werkstoff.25111.name=青铁
 bw.werkstoff.25200.name=錭錤錶
 bw.werkstoff.25201.name=星门
+bw.werkstoff.25202.name=沥青铀矿渣
+bw.werkstoff.25203.name=铀矿渣
+bw.werkstoff.25204.name=氯化铀矿渣
+bw.werkstoff.25205.name=氯化镭
 
 Material.hexanitrohexaazaisowurtzitane=六硝基六氮杂异伍兹烷
 Material.crudehexanitrohexaazaisowurtzitane=粗制六硝基六氮杂异伍兹烷
