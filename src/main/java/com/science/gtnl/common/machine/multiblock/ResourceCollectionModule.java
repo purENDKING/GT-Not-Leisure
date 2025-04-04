@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static net.minecraft.item.ItemStack.areItemStacksEqual;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -238,6 +239,10 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
 
+                if (parallelSetting.get() > getMaxParallelRecipes()) {
+                    return CheckRecipeResultRegistry.NO_RECIPE;
+                }
+
                 if (lastRecipe == recipe) {
                     processingLogicEU = recipe.mEUt;
                     setProcessingLogicPower(processingLogic);
@@ -250,6 +255,10 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
 
                 if (miningDrone == null) {
                     return SimpleCheckRecipeResult.ofFailure("no_mining_drone");
+                }
+
+                if (miningDrone.stackSize > 16) {
+                    miningDrone.stackSize = 16;
                 }
 
                 if (recipeReq >= 1 && recipeReq <= 6) {
@@ -275,14 +284,15 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
                             break;
                     }
 
-                    if (miningDrone.isItemEqual(requiredDrone)) {
+                    if (areItemStacksEqual(requiredDrone, miningDrone)) {
                         lastRecipe = recipe;
                         processingLogicEU = recipe.mEUt;
                         setProcessingLogicPower(processingLogic);
                         return CheckRecipeResultRegistry.SUCCESSFUL;
-                    }
+                    } else {
 
-                    return CheckRecipeResultRegistry.NO_RECIPE;
+                        return SimpleCheckRecipeResult.ofFailure("no_mining_drone");
+                    }
                 }
 
                 return super.validateRecipe(recipe);
@@ -291,7 +301,7 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                return super.createOverclockCalculator(recipe).setAmperageOC(false)
                     .setDurationDecreasePerOC(2)
                     .setEUtIncreasePerOC(4)
                     .setAmperage(availableAmperage)

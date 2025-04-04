@@ -75,7 +75,7 @@ public class ChemicalBathRecipes implements IRecipePool {
                 MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 12),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 2))
-            .outputChances(10000,10000,5000)
+            .outputChances(10000, 10000, 5000)
             .specialValue(0)
             .noOptimize()
             .duration(1800)
@@ -89,7 +89,7 @@ public class ChemicalBathRecipes implements IRecipePool {
                 MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 12),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 2))
-            .outputChances(10000,10000,5000)
+            .outputChances(10000, 10000, 5000)
             .specialValue(0)
             .noOptimize()
             .duration(1800)
