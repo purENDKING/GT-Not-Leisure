@@ -8,8 +8,12 @@ import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -25,9 +29,14 @@ import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings4;
 
 public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImplosionCompressor>
@@ -164,5 +173,37 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
             env,
             false,
             true);
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                long voltage = ElectricImplosionCompressor.this.getAverageInputVoltage();
+                if (recipe.mEUt > voltage * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @NotNull
+            @Override
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return super.createOverclockCalculator(recipe).setEUt(ElectricImplosionCompressor.this.getMaxInputEu())
+                    .setAmperage(1)
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
+                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    public void setProcessingLogicPower(ProcessingLogic logic) {
+        logic.setAvailableVoltage(getAverageInputVoltage());
+        logic.setAvailableAmperage(getMaxInputAmps());
+        logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
     }
 }
