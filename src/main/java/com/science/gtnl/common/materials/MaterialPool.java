@@ -1489,6 +1489,46 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 115,
         CustomTextureSet.TextureSets.NUCLEAR.get());
 
+    public static final Werkstoff GravelSluice = new Werkstoff(
+        new short[] { 91, 91, 91 },
+        "GravelSluice",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 116,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff SandSluice = new Werkstoff(
+        new short[] { 248, 250, 130 },
+        "SandSluice",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 117,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff ObsidianSluice = new Werkstoff(
+        new short[] { 53, 40, 61 },
+        "ObsidianSluice",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 118,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff GemSluice = new Werkstoff(
+        new short[] { 120, 153, 113 },
+        "GemSluice",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 119,
+        TextureSet.SET_FLUID);
+
     // Special
 
     public static final Werkstoff Periodicium = new Werkstoff(

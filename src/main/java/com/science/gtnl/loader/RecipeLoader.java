@@ -11,6 +11,7 @@ import com.science.gtnl.common.recipe.AprilFool.CraftingTableAprilFoolRecipes;
 import com.science.gtnl.common.recipe.AprilFool.InfernalCokeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.LavaMakerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamCarpenterRecipe;
+import com.science.gtnl.common.recipe.AprilFool.SteamExtractinatorRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamFusionReactorRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamManufacturerRecipes;
@@ -103,7 +104,7 @@ public class RecipeLoader {
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),
             new SteamWoodcutterRecipes(), new SteamGateAssemblerRecipes(), new CactusWonderFakeRecipes(),
-            new InfernalCokeRecipes(), new SteamFusionReactorRecipes()
+            new InfernalCokeRecipes(), new SteamFusionReactorRecipes(), new SteamExtractinatorRecipes()
 
         };
 
