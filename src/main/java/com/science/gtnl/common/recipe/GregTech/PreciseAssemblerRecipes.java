@@ -4,6 +4,7 @@ import static goodgenerator.loader.Loaders.compactFusionCoil;
 import static goodgenerator.loader.Loaders.huiCircuit;
 import static gregtech.api.util.GTRecipeConstants.PRECISE_ASSEMBLER_CASING_TIER;
 
+import gregtech.api.util.GTUtility;
 import net.minecraft.item.ItemStack;
 
 import com.science.gtnl.common.GTNLItemList;
@@ -165,6 +166,18 @@ public class PreciseAssemblerRecipes implements IRecipePool {
             .duration(400)
             .eut(TierEU.RECIPE_UEV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 3)
+            .addTo(PAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTUtility.copyAmount(0, GTNLItemList.NeutroniumWafer.get(1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphite, 64))
+            .fluidInputs(MaterialMisc.ETHYL_CYANOACRYLATE.getFluidStack(125))
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Graphene, 64))
+            .fluidOutputs()
+            .duration(40)
+            .eut(TierEU.RECIPE_UV)
+            .metadata(PRECISE_ASSEMBLER_CASING_TIER, 2)
             .addTo(PAR);
     }
 }

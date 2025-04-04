@@ -69,26 +69,30 @@ public class ChemicalBathRecipes implements IRecipePool {
             .addTo(cBR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushed, Materials.Pitchblende, 1))
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushed, Materials.Pitchblende, 12))
             .fluidInputs(Materials.SulfuricAcid.getFluid(1000))
             .itemOutputs(
-                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
+                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 2))
+            .outputChances(10000,10000,5000)
             .specialValue(0)
             .noOptimize()
-            .duration(200)
+            .duration(1800)
             .eut(TierEU.RECIPE_HV)
             .addTo(cBR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.Pitchblende, 1))
+            .itemInputs(GTOreDictUnificator.get(OrePrefixes.crushedPurified, Materials.Pitchblende, 12))
             .fluidInputs(Materials.SulfuricAcid.getFluid(1000))
             .itemOutputs(
-                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 1),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 1))
+                MaterialPool.PitchblendeSlag.get(OrePrefixes.dust, 12),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 10),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Uraninite, 2))
+            .outputChances(10000,10000,5000)
             .specialValue(0)
             .noOptimize()
-            .duration(200)
+            .duration(1800)
             .eut(TierEU.RECIPE_HV)
             .addTo(cBR);
 
