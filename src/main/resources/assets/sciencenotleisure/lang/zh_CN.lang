@@ -1156,7 +1156,9 @@ tooltip.lamp.borderless=无边框
 RFRRRecipes.1=可望不可及，不是么？
 PTARRecipes.1=精灵不喜欢面包。
 
-HIGH_PRESSURE_TOOLTIP_NOTICE=高压模式下处理速度和蒸汽消耗翻倍
+MachineTierTooltip=机器等级: 
+ParallelTooltip=并行: 
+HighPressureTooltipNotice=高压模式下处理速度和蒸汽消耗翻倍
 StructureTooComplex=结构太复杂了！
 BLUE_PRINT_INFO=请参考§9Structure§1Lib§7全息投影，构建主体结构
 textUseBlueprint=用§9蓝§b图§r预览
@@ -1344,7 +1346,7 @@ PreciseAssembler_Mode_1=精密组装机
 Tooltip_PreciseAssembler_00=比相同电压的机器快125%%
 Tooltip_PreciseAssembler_01=机械方块等级决定了能源仓最大等级, UHV机械方块解锁所有等级
 Tooltip_PreciseAssembler_02=并行数: 2 ^ 玻璃等级 + 精密电子单元机械方块等级 * 64
-Tooltip_PreciseAssembler_03=当精密电子单元机械方块等级为3时，开启§c无损超频§7
+Tooltip_PreciseAssembler_03=当精密电子单元机械方块等级大于3时，开启§c无损超频§7
 Tooltip_PreciseAssembler_Casing=任意精密机械方块
 
 NameDecayHastener=衰变加速器
@@ -1565,6 +1567,92 @@ Tooltip_SteamMegaCompressor_00=拥有256并行
 Tooltip_SteamMegaCompressor_01=§b§o喷射超乎想象的高压蒸汽流，以强力压缩材料。
 Tooltip_SteamMegaCompressor_02=§b§o可制造超致密金属板……
 Tooltip_SteamMegaCompressor_03=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamExtractinator=蒸汽精萃机
+gtnl.recipe.SteamExtractinator=萃取
+SteamExtractinatorRecipeType=资源萃取
+Tooltip_SteamExtractinator_00=蒸发不同泥浆中的杂质，以生成可用材料
+Tooltip_SteamExtractinator_01=一次可处理多达4个物品
+Tooltip_SteamExtractinator_02=§b§o从蒸汽到岩石，压力的力量或许能带来无限财富!
+Tooltip_SteamExtractinator_Casing_00=顶部青铜机械方块
+Tooltip_SteamExtractinator_Casing_01=底部青铜机械方块
+Tooltip_SteamExtractinator_Casing_02=上下之间青铜机械方块
+
+NameMegaSolarBoiler=巨型高压太阳能锅炉
+MegaSolarBoilerRecipeType=太阳能锅炉
+Tooltip_MegaSolarBoiler_00=也许鸿蒙之眼能够提供足够的银子来支撑这庞然大物
+Tooltip_MegaSolarBoiler_01=产生 96,000 升/秒的蒸汽
+Tooltip_MegaSolarBoiler_02=§b§o每秒产生的蒸汽比你的Steam游戏库里未游玩的游戏还要多
+
+NameSteamCactusWonder=仙人掌奇迹
+gtnl.recipe.CactusWonder=献给仙人掌神的供奉
+SteamCactusWonderRecipeType=仙人掌祝福之庙
+Tooltip_SteamCactusWonder_00=燃烧仙人掌焦炭和仙人掌炭，以产生越来越高效的蒸汽
+Tooltip_SteamCactusWonder_01=仙人掌奇迹每秒都会消耗所有储存的供奉
+Tooltip_SteamCactusWonder_02=仙人掌之神将保存它们的价值，并以蒸汽祝福回馈她忠诚的狂热信徒
+Tooltip_SteamCactusWonder_03=一次只能接受一种类型的供奉
+Tooltip_SteamCactusWonder_04=需要在沙子上种植成熟的仙人掌才能成型
+Tooltip_SteamCactusWonder_05=§b§o仙人掌🙏
+Tooltip_SteamCactusWonder_06=提供价值: 
+NEI.CactusWonderFakeRecipes.specialValue=提供价值: 
+
+NameSteamCarpenter=蒸汽木匠
+gtnl.recipe.SteamCarpenter=蒸汽工艺
+SteamCarpenterRecipeType=木匠
+Tooltip_SteamCarpenter_00=§b§o高效地将木材切割成多种形态
+Tooltip_SteamCarpenter_01=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamLavaMaker=超级石头加热器
+gtnl.recipe.LavaMaker=蒸汽蒸融
+SteamLavaMakerRecipeType=超级加热
+Tooltip_SteamLavaMaker_00=可一次熔化最多 4 块石头
+Tooltip_SteamLavaMaker_01=§b§o提高温度
+Tooltip_SteamLavaMaker_02=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamManufacturer=蒸汽制造商
+gtnl.recipe.SteamManufacturer=液压制造
+SteamManufacturerRecipeType=组装机
+Tooltip_SteamManufacturer_00=拥有4并行
+Tooltip_SteamManufacturer_01=以组装的方式组装组件
+Tooltip_SteamManufacturer_02=§b§o奴隶劳动? 在我的 GTNH 里绝不可能!
+
+NameSteamRockBreaker=蒸汽造石机
+SteamRockBreakerRecipeType=碎石机
+Tooltip_SteamRockBreaker_00=像碎石机一样工作，但更大
+Tooltip_SteamRockBreaker_01=电路板1 = 圆石，电路板2 = 石头，电路板3 = 黑曜石
+Tooltip_SteamRockBreaker_02=一次可处理多达8配方
+Tooltip_SteamRockBreaker_03=§b§o石石石石石石石石石石石石石石石石石石石石头头头头头头头头头头头头头头头头头头头头
+Tooltip_SteamRockBreaker_04=§b§o注意结构共用 :>
+
+NameSteamWoodcutter=蒸汽树场
+gtnl.recipe.SteamWoodcutter=蒸汽园艺
+SteamWoodcutterRecipeType=树场
+Tooltip_SteamWoodcutter_00=§b§o从树苗缓慢生长成树木
+Tooltip_SteamWoodcutter_01=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamFusionReactor=超高压反应堆
+gtnl.recipe.SteamFusion=高压反应堆
+SteamFusionReactorRecipeType=高压反应堆
+GT5U.gui.text.metadata.steamfusion=需要压缩超高压反应堆
+Tooltip_SteamFusionReactor_00=将蒸汽与热流体结合, 以达到更高的温度
+Tooltip_SteamFusionReactor_01=需要蒸汽才能运作? 不, 但也算是
+Tooltip_SteamFusionReactor_02=§b§o这是什么? 聚变? 哈哈哈, 别闹了, 再讲个笑话吧!
+Tooltip_SteamFusionReactor_Casing=1-8, 玻璃相邻的方块
+
+NameHighPressureSteamFusionReactor=压缩超高压反应堆
+HighPressureSteamFusionReactorRecipeType=高压反应堆
+Tooltip_HighPressureSteamFusionReactor_00=青铁与蒸汽的融合，从未被设想过
+Tooltip_HighPressureSteamFusionReactor_01=满足你所有的压力需求
+Tooltip_HighPressureSteamFusionReactor_02=一次可处理多达256配方
+Tooltip_HighPressureSteamFusionReactor_03=§b§o天啊，你到底做了什么
+Tooltip_HighPressureSteamFusionReactor_Casing=1-8, 玻璃相邻的方块
+
+NameSteamInfernalCokeOven=炼狱焦炉
+gtnl.recipe.InfernalCock=焦炉但是超模
+SteamInfernalCokeOvenRecipeType=焦炉
+Tooltip_SteamInfernalCokeOven_00=比粘土高炉更高效运作
+Tooltip_SteamInfernalCokeOven_01=每连续工作5秒，速度提升1%%，最高可达600%%
+Tooltip_SteamInfernalCokeOven_02=§b§o太棒了!
 
 NameLargeSteamCircuitAssembler=大型蒸汽电路组装机
 LargeSteamCircuitAssemblerRecipeType=电路组装机

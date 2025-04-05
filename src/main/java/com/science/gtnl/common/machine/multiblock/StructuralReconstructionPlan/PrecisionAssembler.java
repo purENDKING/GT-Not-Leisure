@@ -363,6 +363,13 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             }
         }
 
+        for (MTEHatch mExoEnergyHatch : this.mExoticEnergyHatches) {
+            if (machineTier < VoltageIndex.UHV & mExoEnergyHatch.mTier > machineTier) {
+                updateHatchTexture();
+                return false;
+            }
+        }
+
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {

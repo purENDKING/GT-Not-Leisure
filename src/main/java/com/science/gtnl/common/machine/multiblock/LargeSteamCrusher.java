@@ -275,7 +275,7 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
             .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

@@ -658,42 +658,51 @@ public class MachineLoader {
             .set(new SteamMegaCompressor(21115, "SteamMegaCompressor", TextLocalization.NameSteamMegaCompressor));
         addItemTooltip(GTNLItemList.SteamMegaCompressor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.MegaSolarBoiler.set(new MegaSolarBoiler(21116, "MegaSolarBoiler", "MegaSolarBoiler"));
+        GTNLItemList.MegaSolarBoiler
+            .set(new MegaSolarBoiler(21116, "MegaSolarBoiler", TextLocalization.NameMegaSolarBoiler));
         addItemTooltip(GTNLItemList.MegaSolarBoiler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamCactusWonder.set(new SteamCactusWonder(21117, "SteamCactusWonder", "SteamCactusWonder"));
+        GTNLItemList.SteamCactusWonder
+            .set(new SteamCactusWonder(21117, "SteamCactusWonder", TextLocalization.NameSteamCactusWonder));
         addItemTooltip(GTNLItemList.SteamCactusWonder.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamCarpenter.set(new SteamCarpenter(21118, "SteamCarpenter", "SteamCarpenter"));
+        GTNLItemList.SteamCarpenter
+            .set(new SteamCarpenter(21118, "SteamCarpenter", TextLocalization.NameSteamCarpenter));
         addItemTooltip(GTNLItemList.SteamCarpenter.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamLavaMaker.set(new SteamLavaMaker(21119, "SteamLavaMaker", "SteamLavaMaker"));
+        GTNLItemList.SteamLavaMaker
+            .set(new SteamLavaMaker(21119, "SteamLavaMaker", TextLocalization.NameSteamLavaMaker));
         addItemTooltip(GTNLItemList.SteamLavaMaker.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamManufacturer.set(new SteamManufacturer(21120, "SteamManufacturer", "SteamManufacturer"));
+        GTNLItemList.SteamManufacturer
+            .set(new SteamManufacturer(21120, "SteamManufacturer", TextLocalization.NameSteamManufacturer));
         addItemTooltip(GTNLItemList.SteamManufacturer.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamRockBreaker.set(new SteamRockBreaker(21121, "SteamRockBreaker", "SteamRockBreaker"));
+        GTNLItemList.SteamRockBreaker
+            .set(new SteamRockBreaker(21121, "SteamRockBreaker", TextLocalization.NameSteamRockBreaker));
         addItemTooltip(GTNLItemList.SteamRockBreaker.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamWoodcutter.set(new SteamWoodcutter(21122, "SteamWoodcutter", "SteamWoodcutter"));
+        GTNLItemList.SteamWoodcutter
+            .set(new SteamWoodcutter(21122, "SteamWoodcutter", TextLocalization.NameSteamWoodcutter));
         addItemTooltip(GTNLItemList.SteamWoodcutter.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamExtractinator.set(new SteamExtractinator(21123, "SteamExtractinator", "SteamExtractinator"));
+        GTNLItemList.SteamExtractinator
+            .set(new SteamExtractinator(21123, "SteamExtractinator", TextLocalization.NameSteamExtractinator));
         addItemTooltip(GTNLItemList.SteamExtractinator.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.SteamFusionReactor.set(new SteamFusionReactor(21124, "SteamFusionReactor", "SteamFusionReactor"));
+        GTNLItemList.SteamFusionReactor
+            .set(new SteamFusionReactor(21124, "SteamFusionReactor", TextLocalization.NameSteamFusionReactor));
         addItemTooltip(GTNLItemList.SteamFusionReactor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HighPressureSteamFusionReactor.set(
             new HighPressureSteamFusionReactor(
                 21125,
                 "HighPressureSteamFusionReactor",
-                "HighPressureSteamFusionReactor"));
+                TextLocalization.NameHighPressureSteamFusionReactor));
         addItemTooltip(GTNLItemList.HighPressureSteamFusionReactor.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.SteamInfernalCokeOven
-            .set(new SteamInfernalCokeOven(21126, "SteamInfernalCokeOven", "SteamInfernalCokeOven"));
+            .set(new SteamInfernalCokeOven(21126, "SteamInfernalCokeOven", TextLocalization.NameSteamInfernalCokeOven));
         addItemTooltip(GTNLItemList.SteamInfernalCokeOven.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.CheatOreProcessingFactory.set(

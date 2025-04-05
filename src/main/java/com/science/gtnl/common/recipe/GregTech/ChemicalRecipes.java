@@ -16,6 +16,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.IRecipeMap;
 import gregtech.api.util.*;
+import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
 import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
 
@@ -179,9 +180,9 @@ public class ChemicalRecipes implements IRecipePool {
 
         GTValues.RA.stdBuilder()
             .itemInputs(MaterialPool.NHydroxysuccinimide.get(OrePrefixes.dust, 13))
-            .fluidInputs(FluidRegistry.getFluidStack("molten.aceticanhydride", 1000))
+            .fluidInputs(MaterialMisc.ACETIC_ANHYDRIDE.getFluidStack(1000))
             .itemOutputs(MaterialPool.SuccinimidylAcetate.get(OrePrefixes.dust, 18))
-            .fluidOutputs(FluidRegistry.getFluidStack("acetiacid", 1000))
+            .fluidOutputs(Materials.AceticAcid.getFluid(1000))
             .specialValue(0)
             .noOptimize()
             .duration(80)

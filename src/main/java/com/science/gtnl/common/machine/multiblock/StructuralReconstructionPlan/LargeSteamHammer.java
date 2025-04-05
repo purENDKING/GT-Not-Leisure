@@ -262,7 +262,7 @@ public class LargeSteamHammer extends SteamMultiMachineBase<LargeSteamHammer> im
             .addInfo(TextLocalization.Tooltip_LargeSteamHammer_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamHammer_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamHammer_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

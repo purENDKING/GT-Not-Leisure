@@ -1,7 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.List;
@@ -11,7 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -21,6 +20,8 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -56,6 +57,15 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
         TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE);
     public static Textures.BlockIcons.CustomIcon OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW);
+    private static IStructureDefinition<SteamInfernalCokeOven> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SICO = "sciencenotleisure:multiblock/steam_infernal_coke_oven";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SICO);
+    private static final int HORIZONTAL_OFF_SET = 2;
+    private static final int VERTICAL_OFF_SET = 3;
+    private static final int DEPTH_OFF_SET = 0;
+    private float speedup = 1;
+    private int runningTickCounter = 0;
 
     public SteamInfernalCokeOven(String aName) {
         super(aName);
@@ -72,39 +82,34 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
 
     @Override
     public String getMachineType() {
-        return "Coke Oven";
+        return TextLocalization.SteamInfernalCokeOvenRecipeType;
     }
 
-    private float speedup = 1;
-    private int runningTickCounter = 0;
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-
-    private static final String[][] structure = transpose(
-        new String[][] { { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" },
-            { "AAAAA", "A   A", "A   A", "A   A", "AAAAA" }, { "BBBBB", "B   B", "B   B", "B   B", "BBBBB" },
-            { "AA~AA", "A   A", "A   A", "A   A", "AAAAA" }, { "CCCCC", "CCCCC", "CCCCC", "CCCCC", "CCCCC" } });
-
+    @Override
     public IStructureDefinition<SteamInfernalCokeOven> getStructureDefinition() {
-        return StructureDefinition.<SteamInfernalCokeOven>builder()
-            .addShape(STRUCTURE_PIECE_MAIN, structure)
-            .addElement(
-                'A',
-                ofChain(
-                    buildHatchAdder(SteamInfernalCokeOven.class)
-                        .atLeast(SteamHatchElement.InputBus_Steam, SteamHatchElement.OutputBus_Steam, OutputHatch)
-                        .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(GregTechAPI.sBlockCasings1, 10)))
-            .addElement('B', ofBlock(ModBlocks.blockCasingsMisc, 2))
-            .addElement('C', ofBlock(Blocks.nether_brick, 0))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SteamInfernalCokeOven>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement(
+                    'A',
+                    ofChain(
+                        buildHatchAdder(SteamInfernalCokeOven.class)
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                InputBus,
+                                SteamHatchElement.OutputBus_Steam,
+                                OutputBus,
+                                OutputHatch)
+                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(GregTechAPI.sBlockCasings1, 10)))
+                .addElement('B', ofBlock(ModBlocks.blockCasingsMisc, 2))
+                .addElement('C', ofBlock(Blocks.nether_brick, 0))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
-
-    private static final int HORIZONTAL_OFF_SET = 2;
-    private static final int VERTICAL_OFF_SET = 3;
-    private static final int DEPTH_OFF_SET = 0;
 
     @Override
     public int getCasingTextureID() {
@@ -213,9 +218,13 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Works more efficiently than a clay oven")
-            .addInfo("Every 5 seconds of continuous working it gets 1% faster, up to 600%")
-            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Poggers")
+            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_00)
+            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_01)
+            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_02)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(5, 5, 5, true)
             .toolTipFinisher();
         return tt;
     }

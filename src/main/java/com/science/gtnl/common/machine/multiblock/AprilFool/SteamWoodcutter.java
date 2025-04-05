@@ -1,8 +1,9 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static gregtech.api.enums.HatchElement.InputBus;
+import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -10,13 +11,14 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -36,6 +38,14 @@ import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 
 public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> implements ISurvivalConstructable {
 
+    private static IStructureDefinition<SteamWoodcutter> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SW_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_wood_cutter";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SW_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 3;
+    private static final int VERTICAL_OFF_SET = 6;
+    private static final int DEPTH_OFF_SET = 0;
+
     public SteamWoodcutter(String aName) {
         super(aName);
     }
@@ -46,40 +56,42 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
 
     @Override
     public String getMachineType() {
-        return "Woodcutter";
+        return TextLocalization.SteamWoodcutterRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     @Override
     public IStructureDefinition<SteamWoodcutter> getStructureDefinition() {
-        return StructureDefinition.<SteamWoodcutter>builder()
-            .addShape(
-                STRUCTURE_PIECE_MAIN,
-                (new String[][] { { "  CCC  ", "       ", "       ", "       ", "       ", "       ", "  C~C  " },
-                    { " CCBCC ", "  AAA  ", "  AAA  ", "  AAA  ", "  AAA  ", "  AAA  ", " CCBCC " },
-                    { "CCBDBCC", " A   A ", " A   A ", " A   A ", " A   A ", " A   A ", "CCEEECC" },
-                    { "CBDDDBC", " A   A ", " A   A ", " A   A ", " A   A ", " A   A ", "CBEEEBC" },
-                    { "CCBDBCC", " A   A ", " A   A ", " A   A ", " A   A ", " A   A ", "CCEEECC" },
-                    { " CCBCC ", "  AAA  ", "  AAA  ", "  AAA  ", "  AAA  ", "  AAA  ", " CCBCC " },
-                    { "  CCC  ", "       ", "       ", "       ", "       ", "       ", "  CCC  " } }))
-            .addElement('A', chainAllGlasses())
-            .addElement('B', ofBlock(MetaCasing, 23))
-            .addElement(
-                'C',
-                ofChain(
-                    buildSteamInput(SteamWoodcutter.class).casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
-                        .dot(1)
-                        .build(),
-                    buildHatchAdder(SteamWoodcutter.class)
-                        .atLeast(SteamHatchElement.InputBus_Steam, SteamHatchElement.OutputBus_Steam)
-                        .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(MetaCasing, 24)))
-            .addElement('D', ofBlock(MetaCasing, 25))
-            .addElement('E', ofBlock(Blocks.dirt, 0))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SteamWoodcutter>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlock(MetaCasing, 23))
+                .addElement(
+                    'B',
+                    ofChain(
+                        buildSteamBigInput(SteamWoodcutter.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
+                            .dot(1)
+                            .build(),
+                        buildSteamInput(SteamWoodcutter.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
+                            .dot(1)
+                            .build(),
+                        buildHatchAdder(SteamWoodcutter.class)
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                InputBus,
+                                SteamHatchElement.OutputBus_Steam,
+                                OutputBus)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(MetaCasing, 24)))
+                .addElement('C', ofBlock(MetaCasing, 25))
+                .addElement('D', chainAllGlasses())
+                .addElement('E', ofBlock(Blocks.dirt, 0))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
@@ -99,13 +111,22 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, 3, 6, 0);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, 3, 6, 0, elementBudget, env, false, true);
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -127,9 +148,12 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Grows trees slowly from saplings.")
-            .addInfo("Created by: ")
-            .addInfo("AuthorSteamIsTheNumber")
+            .addInfo(TextLocalization.Tooltip_SteamWoodcutter_00)
+            .addInfo(TextLocalization.Tooltip_SteamWoodcutter_01)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(7, 8, 7, true)
             .toolTipFinisher();
         return tt;
     }
@@ -163,7 +187,7 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 3, 6, 0);
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override

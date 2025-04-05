@@ -253,7 +253,7 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
             .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

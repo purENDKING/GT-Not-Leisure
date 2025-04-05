@@ -11,13 +11,14 @@ import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGla
 import static gregtech.api.util.GTStructureUtility.*;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -37,6 +38,14 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPressureSteamFusionReactor>
     implements ISurvivalConstructable {
 
+    private static IStructureDefinition<HighPressureSteamFusionReactor> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/high_pressure_steam_fusion_reactor";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SE_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 23;
+    private static final int VERTICAL_OFF_SET = 3;
+    private static final int DEPTH_OFF_SET = 40;
+
     public HighPressureSteamFusionReactor(String aName) {
         super(aName);
     }
@@ -47,375 +56,57 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
 
     @Override
     public String getMachineType() {
-        return "High Pressure Reactor";
+        return TextLocalization.HighPressureSteamFusionReactorRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     @Override
     public IStructureDefinition<HighPressureSteamFusionReactor> getStructureDefinition() {
-        return StructureDefinition.<HighPressureSteamFusionReactor>builder()
-            .addShape(
-                STRUCTURE_PIECE_MAIN,
-                transpose(
-                    (new String[][] {
-                        { "                                               ",
-                            "                                               ",
-                            "                    ECCCCCE                    ",
-                            "                    ECAAACE                    ",
-                            "                    ECCCCCE                    ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "  EEE                                     EEE  ",
-                            "  CCC                                     CCC  ",
-                            "  CAC                                     CAC  ",
-                            "  CAC                                     CAC  ",
-                            "  CAC                                     CAC  ",
-                            "  CCC                                     CCC  ",
-                            "  EEE                                     EEE  ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                    ECCCCCE                    ",
-                            "                    ECAAACE                    ",
-                            "                    ECCCCCE                    ",
-                            "                                               ",
-                            "                                               " },
-                        { "                                               ",
-                            "                    ECAAACE                    ",
-                            "                   CC     CC                   ",
-                            "                CCCCC     CCCCC                ",
-                            "              CCCCCCC     CCCCCCC              ",
-                            "            CCCCCCC ECAAACE CCCCCCC            ",
-                            "           CCCCC               CCCCC           ",
-                            "          CCCC                   CCCC          ",
-                            "         CCC                       CCC         ",
-                            "        CCC                         CCC        ",
-                            "       CCC                           CCC       ",
-                            "      CCC                             CCC      ",
-                            "     CCC                               CCC     ",
-                            "     CCC                               CCC     ",
-                            "    CCC                                 CCC    ",
-                            "    CCC                                 CCC    ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "  CCC                                     CCC  ",
-                            " ECCCE                                   ECCCE ",
-                            " C   C                                   C   C ",
-                            " A   A                                   A   A ",
-                            " A   A                                   A   A ",
-                            " A   A                                   A   A ",
-                            " C   C                                   C   C ",
-                            " ECCCE                                   ECCCE ",
-                            "  CCC                                     CCC  ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "    CCC                                 CCC    ",
-                            "    CCC                                 CCC    ",
-                            "     CCC                               CCC     ",
-                            "     CCC                               CCC     ",
-                            "      CCC                             CCC      ",
-                            "       CCC                           CCC       ",
-                            "        CCC                         CCC        ",
-                            "         CCC                       CCC         ",
-                            "          CCCC                   CCCC          ",
-                            "           CCCCC               CCCCC           ",
-                            "            CCCCCCC ECAAACE CCCCCCC            ",
-                            "              CCCCCCC     CCCCCCC              ",
-                            "                CCCCC     CCCCC                ",
-                            "                   CC     CC                   ",
-                            "                    ECAAACE                    ",
-                            "                                               " },
-                        { "                    ECCCCCE                    ",
-                            "                   CC     CC                   ",
-                            "                CCCCC     CCCCC                ",
-                            "              CCCCCBBBBBBBBBCCCCC              ",
-                            "            CCCCBBBCC     CCBBBCCCC            ",
-                            "           CCCBBCCCCC     CCCCCBBCCC           ",
-                            "          CCBBCCCCC ECCCCCE CCCCCBBCC          ",
-                            "         CCBCCCC               CCCCBCC         ",
-                            "        CCBCCC                   CCCBCC        ",
-                            "       CCBCC                       CCBCC       ",
-                            "      CCBCC                         CCBCC      ",
-                            "     CCBCC                           CCBCC     ",
-                            "    CCBCC                             CCBCC    ",
-                            "    CCBCC                             CCBCC    ",
-                            "   CCBCC                               CCBCC   ",
-                            "   CCBCC                               CCBCC   ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            " CCBCC                                   CCBCC ",
-                            "ECCBCCE                                 ECCBCCE",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "ECCBCCE                                 ECCBCCE",
-                            " CCBCC                                   CCBCC ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "   CCBCC                               CCBCC   ",
-                            "   CCBCC                               CCBCC   ",
-                            "    CCBCC                             CCBCC    ",
-                            "    CCBCC                             CCBCC    ",
-                            "     CCBCC                           CCBCC     ",
-                            "      CCBCC                         CCBCC      ",
-                            "       CCBCC                       CCBCC       ",
-                            "        CCBCCC                   CCCBCC        ",
-                            "         CCBCCCC               CCCCBCC         ",
-                            "          CCBBCCCCC ECCCCCE CCCCCBBCC          ",
-                            "           CCCBBCCCCC     CCCCCBBCCC           ",
-                            "            CCCCBBBCC     CCBBBCCCC            ",
-                            "              CCCCCBBBBBBBBBCCCCC              ",
-                            "                CCCCC     CCCCC                ",
-                            "                   CC     CC                   ",
-                            "                    ECCCCCE                    " },
-                        { "                    ECAAACE                    ",
-                            "                   CC     CC                   ",
-                            "                CCCBBBBBBBBBCCC                ",
-                            "              CCBBBBBBBBBBBBBBBCC              ",
-                            "            CCBBBBBBBBBBBBBBBBBBBCC            ",
-                            "           CBBBBBBBCC     CCBBBBBBBC           ",
-                            "          CBBBBBCCC ECDADCE CCCBBBBBC          ",
-                            "         CBBBBCC               CCBBBBC         ",
-                            "        CBBBCC                   CCBBBC        ",
-                            "       CBBBC                       CBBBC       ",
-                            "      CBBBC                         CBBBC      ",
-                            "     CBBBC                           CBBBC     ",
-                            "    CBBBC                             CBBBC    ",
-                            "    CBBBC                             CBBBC    ",
-                            "   CBBBC                               CBBBC   ",
-                            "   CBBBC                               CBBBC   ",
-                            "  CBBBC                                 CBBBC  ",
-                            "  CBBBC                                 CBBBC  ",
-                            "  CBBBC                                 CBBBC  ",
-                            " CBBBC                                   CBBBC ",
-                            "ECBBBCE                                 ECBBBCE",
-                            "C BBB C                                 C BBB C",
-                            "A BBB D                                 D BBB A",
-                            "A BBB A                                 A BBB A",
-                            "A BBB D                                 D BBB A",
-                            "C BBB C                                 C BBB C",
-                            "ECBBBCE                                 ECBBBCE",
-                            " CBBBC                                   CBBBC ",
-                            "  CBBBC                                 CBBBC  ",
-                            "  CBBBC                                 CBBBC  ",
-                            "  CBBBC                                 CBBBC  ",
-                            "   CBBBC                               CBBBC   ",
-                            "   CBBBC                               CBBBC   ",
-                            "    CBBBC                             CBBBC    ",
-                            "    CBBBC                             CBBBC    ",
-                            "     CBBBC                           CBBBC     ",
-                            "      CBBBC                         CBBBC      ",
-                            "       CBBBC                       CBBBC       ",
-                            "        CBBBCC                   CCBBBC        ",
-                            "         CBBBBCC               CCBBBBC         ",
-                            "          CBBBBBCCC ECD~DCE CCCBBBBBC          ",
-                            "           CBBBBBBBCC     CCBBBBBBBC           ",
-                            "            CCBBBBBBBBBBBBBBBBBBBCC            ",
-                            "              CCBBBBBBBBBBBBBBBCC              ",
-                            "                CCCBBBBBBBBBCCC                ",
-                            "                   CC     CC                   ",
-                            "                    ECAAACE                    " },
-                        { "                    ECCCCCE                    ",
-                            "                   CC     CC                   ",
-                            "                CCCCC     CCCCC                ",
-                            "              CCCCCBBBBBBBBBCCCCC              ",
-                            "            CCCCBBBCC     CCBBBCCCC            ",
-                            "           CCCBBCCCCC     CCCCCBBCCC           ",
-                            "          CCBBCCCCC ECCCCCE CCCCCBBCC          ",
-                            "         CCBCCCC               CCCCBCC         ",
-                            "        CCBCCC                   CCCBCC        ",
-                            "       CCBCC                       CCBCC       ",
-                            "      CCBCC                         CCBCC      ",
-                            "     CCBCC                           CCBCC     ",
-                            "    CCBCC                             CCBCC    ",
-                            "    CCBCC                             CCBCC    ",
-                            "   CCBCC                               CCBCC   ",
-                            "   CCBCC                               CCBCC   ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            " CCBCC                                   CCBCC ",
-                            "ECCBCCE                                 ECCBCCE",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "C  B  C                                 C  B  C",
-                            "ECCBCCE                                 ECCBCCE",
-                            " CCBCC                                   CCBCC ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "  CCBCC                                 CCBCC  ",
-                            "   CCBCC                               CCBCC   ",
-                            "   CCBCC                               CCBCC   ",
-                            "    CCBCC                             CCBCC    ",
-                            "    CCBCC                             CCBCC    ",
-                            "     CCBCC                           CCBCC     ",
-                            "      CCBCC                         CCBCC      ",
-                            "       CCBCC                       CCBCC       ",
-                            "        CCBCCC                   CCCBCC        ",
-                            "         CCBCCCC               CCCCBCC         ",
-                            "          CCBBCCCCC ECCCCCE CCCCCBBCC          ",
-                            "           CCCBBCCCCC     CCCCCBBCCC           ",
-                            "            CCCCBBBCC     CCBBBCCCC            ",
-                            "              CCCCCBBBBBBBBBCCCCC              ",
-                            "                CCCCC     CCCCC                ",
-                            "                   CC     CC                   ",
-                            "                    ECCCCCE                    " },
-                        { "                                               ",
-                            "                    ECAAACE                    ",
-                            "                   CC     CC                   ",
-                            "                CCCCC     CCCCC                ",
-                            "              CCCCCCC     CCCCCCC              ",
-                            "            CCCCCCC ECAAACE CCCCCCC            ",
-                            "           CCCCC               CCCCC           ",
-                            "          CCCC                   CCCC          ",
-                            "         CCC                       CCC         ",
-                            "        CCC                         CCC        ",
-                            "       CCC                           CCC       ",
-                            "      CCC                             CCC      ",
-                            "     CCC                               CCC     ",
-                            "     CCC                               CCC     ",
-                            "    CCC                                 CCC    ",
-                            "    CCC                                 CCC    ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "  CCC                                     CCC  ",
-                            " ECCCE                                   ECCCE ",
-                            " C   C                                   C   C ",
-                            " A   A                                   A   A ",
-                            " A   A                                   A   A ",
-                            " A   A                                   A   A ",
-                            " C   C                                   C   C ",
-                            " ECCCE                                   ECCCE ",
-                            "  CCC                                     CCC  ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "   CCC                                   CCC   ",
-                            "    CCC                                 CCC    ",
-                            "    CCC                                 CCC    ",
-                            "     CCC                               CCC     ",
-                            "     CCC                               CCC     ",
-                            "      CCC                             CCC      ",
-                            "       CCC                           CCC       ",
-                            "        CCC                         CCC        ",
-                            "         CCC                       CCC         ",
-                            "          CCCC                   CCCC          ",
-                            "           CCCCC               CCCCC           ",
-                            "            CCCCCCC ECAAACE CCCCCCC            ",
-                            "              CCCCCCC     CCCCCCC              ",
-                            "                CCCCC     CCCCC                ",
-                            "                   CC     CC                   ",
-                            "                    ECAAACE                    ",
-                            "                                               " },
-                        { "                                               ",
-                            "                                               ",
-                            "                    ECCCCCE                    ",
-                            "                    ECAAACE                    ",
-                            "                    ECCCCCE                    ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "  EEE                                     EEE  ",
-                            "  CCC                                     CCC  ",
-                            "  CAC                                     CAC  ",
-                            "  CAC                                     CAC  ",
-                            "  CAC                                     CAC  ",
-                            "  CCC                                     CCC  ",
-                            "  EEE                                     EEE  ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                                               ",
-                            "                    ECCCCCE                    ",
-                            "                    ECAAACE                    ",
-                            "                    ECCCCCE                    ",
-                            "                                               ",
-                            "                                               " } })))
-            .addElement(
-                'D',
-                ofChain(
-                    buildSteamInput(HighPressureSteamFusionReactor.class)
-                        .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
-                        .dot(1)
-                        .build(),
-                    buildHatchAdder(HighPressureSteamFusionReactor.class).atLeast(InputHatch, OutputHatch)
-                        .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
-                        .dot(1)
-                        .buildAndChain(),
-                    chainAllGlasses()))
-            .addElement('B', ofBlock(MetaCasing, 31))
-            .addElement('A', chainAllGlasses())
-            .addElement('C', ofBlock(MetaCasing02, 0))
-            .addElement('E', ofFrame(Materials.Steel))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<HighPressureSteamFusionReactor>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlock(MetaCasing, 31))
+                .addElement('B', ofBlock(MetaCasing02, 0))
+                .addElement('C', chainAllGlasses())
+                .addElement('D', ofFrame(Materials.Steel))
+                .addElement(
+                    'E',
+                    ofChain(
+                        buildSteamBigInput(HighPressureSteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
+                            .dot(1)
+                            .build(),
+                        buildSteamInput(HighPressureSteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
+                            .dot(1)
+                            .build(),
+                        buildHatchAdder(HighPressureSteamFusionReactor.class).atLeast(InputHatch, OutputHatch)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
+                            .dot(1)
+                            .buildAndChain(),
+                        chainAllGlasses()))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, 23, 3, 40);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, 23, 3, 40, elementBudget, env, false, true);
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -450,16 +141,16 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("An Amalgamation of Breel and Steam, never envisioned before")
-            .addInfo("For All the pressure needs you may have")
-            .addInfo("Can do up to 256 recipes at once")
-            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "What in the world have you done")
-            .addCasingInfoMin("Vibration Safe Casing", 1664, false)
-            .addCasingInfoMin("Steam Compact Pipe Casing", 560, false)
-            .addCasingInfoMin("Compressed Steam Frame Box", 128, false)
-            .addCasingInfoMin("Reinforced Glass", 63, false)
-            .addInputHatch("1-8, Internal Glass Blocks", 1)
-            .addOutputHatch("1-8, Internal Glass Blocks", 1)
+            .addInfo(TextLocalization.Tooltip_HighPressureSteamFusionReactor_00)
+            .addInfo(TextLocalization.Tooltip_HighPressureSteamFusionReactor_01)
+            .addInfo(TextLocalization.Tooltip_HighPressureSteamFusionReactor_02)
+            .addInfo(TextLocalization.Tooltip_HighPressureSteamFusionReactor_03)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(47, 7, 47, true)
+            .addInputHatch(TextLocalization.Tooltip_HighPressureSteamFusionReactor_Casing, 1)
+            .addOutputHatch(TextLocalization.Tooltip_HighPressureSteamFusionReactor_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
@@ -493,7 +184,7 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 23, 3, 40);
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override

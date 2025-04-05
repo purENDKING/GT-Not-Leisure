@@ -2,22 +2,17 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.HatchElement.InputBus;
+import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -28,7 +23,10 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -50,10 +48,17 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> implements ISurvivalConstructable {
+
+    private static IStructureDefinition<SteamRockBreaker> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "main_survival";
+    private static final String SRB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_rock_breaker";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SRB_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 5;
+    private static final int VERTICAL_OFF_SET = 4;
+    private static final int DEPTH_OFF_SET = 0;
 
     public SteamRockBreaker(String aName) {
         super(aName);
@@ -70,17 +75,8 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
 
     @Override
     public String getMachineType() {
-        return "Rock Breaker";
+        return TextLocalization.SteamRockBreakerRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "main_survival";
-
-    private IStructureDefinition<SteamRockBreaker> STRUCTURE_DEFINITION = null;
-
-    private static final int HORIZONTAL_OFF_SET = 5;
-    private static final int VERTICAL_OFF_SET = 4;
-    private static final int DEPTH_OFF_SET = 0;
 
     @Override
     public void onValueUpdate(byte aValue) {
@@ -110,20 +106,6 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(id) };
     }
 
-    private final String[][] shape = new String[][] {
-        { "           ", "           ", "           ", "           ", "     E     ", "    EEE    ", "     E     ",
-            "           ", "           ", "           ", "           " },
-        { "           ", "           ", "           ", "           ", "     E     ", "    E E    ", "     E     ",
-            "           ", "           ", "           ", "           " },
-        { "           ", "   C   C   ", "   C   C   ", " CCD   DCC ", "     E     ", "    E E    ", "     E     ",
-            " CCD   DCC ", "   C   C   ", "   C   C   ", "           " },
-        { "   C   C   ", "           ", "           ", "C  D   D  C", "     E     ", "    E E    ", "     E     ",
-            "C  D   D  C", "           ", "           ", "   C   C   " },
-        { " CCCC~CCCC ", "CFFFFCFFFFC", "CFFFGEGFFFC", "CFFGEEEGFFC", "CFGEEEEEGFC", " CEEEEEEEC ", "CFGEEEEEGFC",
-            "CFFGEEEGFFC", "CFFFGEGFFFC", "CFFFFCFFFFC", " CCCC CCCC " },
-        { "CCCCCCCCCCC", "CAAAACAAAAC", "CACCCCCCCAC", "CACBBBBBCAC", "CACBBBBBCAC", "CCCBBBBBCCC", "CACBBBBBCAC",
-            "CACBBBBBCAC", "CACCCCCCCAC", "CAAAACAAAAC", "CCCCCCCCCCC" } };
-
     @Override
     public IStructureDefinition<SteamRockBreaker> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
@@ -134,40 +116,51 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
                     Arrays.stream(transpose(shape))
                         .map(
                             sa -> Arrays.stream(sa)
-                                .map(s -> s.replaceAll("F", " "))
                                 .map(s -> s.replaceAll("E", " "))
+                                .map(s -> s.replaceAll("G", " "))
                                 .toArray(String[]::new))
                         .toArray(String[][]::new))
                 .addElement(
-                    'C',
+                    'A',
                     ofChain(
+                        buildSteamBigInput(SteamRockBreaker.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamInput(SteamRockBreaker.class).casingIndex(10)
                             .dot(1)
                             .build(),
                         buildHatchAdder(SteamRockBreaker.class)
-                            .atLeast(SteamHatchElement.InputBus_Steam, SteamHatchElement.OutputBus_Steam)
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                InputBus,
+                                SteamHatchElement.OutputBus_Steam,
+                                OutputBus)
                             .casingIndex(10)
                             .dot(1)
-                            .buildAndChain(),
-                        ofBlocksTiered(
-                            SteamRockBreaker::getTierMachineCasing,
-                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
-                            -1,
-                            (t, m) -> t.tierMachineCasing = m,
-                            t -> t.tierMachineCasing)))
+                            .buildAndChain(
+                                onElementPass(
+                                    x -> ++x.tCountCasing,
+                                    withChannel(
+                                        "tier",
+                                        ofBlocksTiered(
+                                            LargeSteamFurnace::getTierMachineCasing,
+                                            ImmutableList.of(Pair.of(sBlockCasings1, 10), Pair.of(sBlockCasings2, 0)),
+                                            -1,
+                                            (t, m) -> t.tierMachineCasing = m,
+                                            t -> t.tierMachineCasing))))))
                 .addElement(
-                    'A',
+                    'B',
                     ofBlocksTiered(
                         SteamRockBreaker::getTierPipeCasing,
                         ImmutableList.of(Pair.of(sBlockCasings2, 12), Pair.of(sBlockCasings2, 13)),
                         -1,
                         (t, m) -> t.tierPipeCasing = m,
                         t -> t.tierPipeCasing))
-                .addElement('B', ofBlock(sBlockCasings4, 15))
+                .addElement('C', ofBlock(sBlockCasings4, 15))
                 .addElement('D', ofBlock(Blocks.iron_block, 0))
-                .addElement('F', ofAnyWater(true))
                 .addElement('E', ofChain(ofBlockAnyMeta(Blocks.lava), ofBlockAnyMeta(Blocks.flowing_lava)))
-                .addElement('G', ofBlock(Blocks.cobblestone, 0))
+                .addElement('F', ofBlock(Blocks.cobblestone, 0))
+                .addElement('G', ofAnyWater(true))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -198,8 +191,6 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
         }
         return built;
     }
-
-    private int tierPipeCasing = -1;
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
@@ -264,60 +255,18 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Works as a Rock Breaker, but big")
-            .addInfo("Cog 1 = Cobblestone, Cog 2 = Stone, Cog 3 = Obsidian")
-            .addInfo("Processes up to 8 recipes at once")
-            .addInfo(
-                EnumChatFormatting.AQUA + ""
-                    + EnumChatFormatting.ITALIC
-                    + "STOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONE")
-            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Keep an eye for Wallsharing :>")
-            .addInfo(HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_00)
+            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_01)
+            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_02)
+            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_03)
+            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_04)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(11, 6, 11, true)
             .toolTipFinisher();
         return tt;
-    }
-
-    @Override
-    public String[] getInfoData() {
-        ArrayList<String> info = new ArrayList<>(Arrays.asList(super.getInfoData()));
-        info.add("Machine Tier: " + EnumChatFormatting.YELLOW + tierMachine);
-        return info.toArray(new String[0]);
-    }
-
-    @Override
-    public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
-        super.getWailaBody(itemStack, currenttip, accessor, config);
-        NBTTagCompound tag = accessor.getNBTData();
-        currenttip.add(
-            StatCollector.translateToLocal("GTPP.machines.tier") + ": "
-                + EnumChatFormatting.YELLOW
-                + getSteamTierTextForWaila(tag)
-                + EnumChatFormatting.RESET);
-        currenttip.add(
-            StatCollector.translateToLocal("GT5U.multiblock.curparallelism") + ": "
-                + EnumChatFormatting.BLUE
-                + tag.getInteger("parallel")
-                + EnumChatFormatting.RESET);
-    }
-
-    @Override
-    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
-        int z) {
-        super.getWailaNBTData(player, tile, tag, world, x, y, z);
-        tag.setInteger("tierMachine", tierMachine);
-    }
-
-    @Override
-    public void saveNBTData(NBTTagCompound aNBT) {
-        super.saveNBTData(aNBT);
-        aNBT.setInteger("tierMachine", tierMachine);
-    }
-
-    @Override
-    public void loadNBTData(final NBTTagCompound aNBT) {
-        super.loadNBTData(aNBT);
-        tierMachine = aNBT.getInteger("tierMachine");
     }
 
     @SideOnly(Side.CLIENT)

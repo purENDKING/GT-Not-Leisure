@@ -298,7 +298,7 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
             .addInfo(TextLocalization.Tooltip_LargeSteamMixer_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamMixer_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamMixer_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

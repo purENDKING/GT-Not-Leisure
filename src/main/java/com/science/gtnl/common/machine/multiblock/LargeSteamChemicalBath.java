@@ -241,7 +241,7 @@ public class LargeSteamChemicalBath extends SteamMultiMachineBase<LargeSteamChem
             .addInfo(TextLocalization.Tooltip_LargeSteamChemicalBath_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamChemicalBath_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamChemicalBath_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

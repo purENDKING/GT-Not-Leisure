@@ -249,7 +249,7 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
         tt.addMachineType(TextLocalization.SteamCrackingRecipeType)
             .addInfo(TextLocalization.Tooltip_SteamCracking_00)
             .addInfo(TextLocalization.Tooltip_SteamCracking_01)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

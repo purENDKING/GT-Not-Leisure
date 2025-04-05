@@ -259,7 +259,7 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
             .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamExtractor_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

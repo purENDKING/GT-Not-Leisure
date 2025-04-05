@@ -38,6 +38,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.materials.MaterialPool;
@@ -225,8 +226,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public String[] getInfoData() {
         ArrayList<String> info = new ArrayList<>(Arrays.asList(super.getInfoData()));
-        info.add("Machine Tier: " + EnumChatFormatting.YELLOW + tierMachine);
-        info.add("Parallel: " + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
+        info.add(TextLocalization.MachineTierTooltip + EnumChatFormatting.YELLOW + tierMachine);
+        info.add(TextLocalization.ParallelTooltip + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
         return info.toArray(new String[0]);
     }
 

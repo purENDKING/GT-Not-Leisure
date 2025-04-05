@@ -234,7 +234,7 @@ public class LargeSteamAlloySmelter extends SteamMultiMachineBase<LargeSteamAllo
             .addInfo(TextLocalization.Tooltip_LargeSteamAlloySmelter_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamAlloySmelter_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamAlloySmelter_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

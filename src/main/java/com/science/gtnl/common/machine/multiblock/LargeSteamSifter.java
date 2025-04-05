@@ -264,7 +264,7 @@ public class LargeSteamSifter extends SteamMultiMachineBase<LargeSteamSifter> im
             .addInfo(TextLocalization.Tooltip_LargeSteamSifter_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamSifter_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamSifter_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

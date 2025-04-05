@@ -356,9 +356,11 @@ public class TextLocalization {
         "Produces a high precision laser from a powerful current.",
         "Tooltip_LaserBeacon");
 
-    public static final String HIGH_PRESSURE_TOOLTIP_NOTICE = texter(
+    public static final String MachineTierTooltip = texter("Machine Tier: ", "MachineTierTooltip");
+    public static final String ParallelTooltip = texter("Parallel: ", "ParallelTooltip");
+    public static final String HighPressureTooltipNotice = texter(
         "Processing Speed & Steam Consumption is doubled under High Pressure",
-        "HIGH_PRESSURE_TOOLTIP_NOTICE");
+        "HighPressureTooltipNotice");
 
     public static final String NameSteamGateAssembler = texter("Perfect Steam Progenitor", "NameSteamGateAssembler");
     public static final String SteamGateAssemblerRecipeType = texter(
@@ -394,6 +396,172 @@ public class TextLocalization {
         "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
         "Tooltip_SteamMegaCompressor_03");
 
+    public static final String NameSteamExtractinator = texter("Steam Extractinator", "NameSteamExtractinator");
+    public static final String SteamExtractinatorRecipeType = texter(
+        "Resource Extractor",
+        "SteamExtractinatorRecipeType");
+    public static final String Tooltip_SteamExtractinator_00 = texter(
+        "Vaporizes impurities in different soil slurries to generate usable materials",
+        "Tooltip_SteamExtractinator_00");
+    public static final String Tooltip_SteamExtractinator_01 = texter(
+        "Processes up to 4 recipes at once",
+        "Tooltip_SteamExtractinator_01");
+    public static final String Tooltip_SteamExtractinator_02 = texter(
+        "§b§oFrom Steam to rocks, the power of the pressure may bring you infinite wealth!.",
+        "Tooltip_SteamExtractinator_02");
+    public static final String Tooltip_SteamExtractinator_Casing_00 = texter(
+        "Top Layer of Bronze Casings",
+        "Tooltip_SteamExtractinator_Casing_00");
+    public static final String Tooltip_SteamExtractinator_Casing_01 = texter(
+        "Bottom Layer of Bronze Casings",
+        "Tooltip_SteamExtractinator_Casing_01");
+    public static final String Tooltip_SteamExtractinator_Casing_02 = texter(
+        "2 Middle Bronze Casing Layers",
+        "Tooltip_SteamExtractinator_Casing_02");
+
+    public static final String NameMegaSolarBoiler = texter("Mega Pressure Solar Boiler", "NameMegaSolarBoiler");
+    public static final String MegaSolarBoilerRecipeType = texter("Solar Boiler", "MegaSolarBoilerRecipeType");
+    public static final String Tooltip_MegaSolarBoiler_00 = texter(
+        "Maybe an Eye of Harmony could provide enough silver for this monstrosity",
+        "Tooltip_MegaSolarBoiler_00");
+    public static final String Tooltip_MegaSolarBoiler_01 = texter(
+        "Produces 96,000 L/s of Steam",
+        "Tooltip_MegaSolarBoiler_01");
+    public static final String Tooltip_MegaSolarBoiler_02 = texter(
+        "§b§oMore steam/s than unplayed games in your steam library",
+        "Tooltip_MegaSolarBoiler_02");
+
+    public static final String NameSteamCactusWonder = texter("Cactus Wonder", "NameSteamCactusWonder");
+    public static final String SteamCactusWonderRecipeType = texter(
+        "Temple of Cacti Blessings",
+        "SteamCactusWonderRecipeType");
+    public static final String Tooltip_SteamCactusWonder_00 = texter(
+        "Burns Cactus Coke and Charcoal for increasingly efficient amounts of steam.",
+        "Tooltip_SteamCactusWonder_00");
+    public static final String Tooltip_SteamCactusWonder_01 = texter(
+        "Every second the cactus wonder will consume all offers stored",
+        "Tooltip_SteamCactusWonder_01");
+    public static final String Tooltip_SteamCactusWonder_02 = texter(
+        "The god of cacti will save their value and return it as steam blessings to her faithful zealots.",
+        "Tooltip_SteamCactusWonder_02");
+    public static final String Tooltip_SteamCactusWonder_03 = texter(
+        "Can only take one type of offer at once.",
+        "Tooltip_SteamCactusWonder_03");
+    public static final String Tooltip_SteamCactusWonder_04 = texter(
+        "Needs Fully Grown Cacti on the Sand Blocks to form",
+        "Tooltip_SteamCactusWonder_04");
+    public static final String Tooltip_SteamCactusWonder_05 = texter("§b§oCactus", "Tooltip_SteamCactusWonder_05");
+    public static final String Tooltip_SteamCactusWonder_06 = texter("Offer Value: ", "Tooltip_SteamCactusWonder_06");
+
+    public static final String NameSteamCarpenter = texter("Steam Carpenter", "NameSteamCarpenter");
+    public static final String SteamCarpenterRecipeType = texter("Carpenter", "SteamCarpenterRecipeType");
+    public static final String Tooltip_SteamCarpenter_00 = texter(
+        "§b§oCuts wood efficiently into many forms.",
+        "Tooltip_SteamCarpenter_00");
+    public static final String Tooltip_SteamCarpenter_01 = texter(
+        "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
+        "Tooltip_SteamCarpenter_01");
+
+    public static final String NameSteamLavaMaker = texter("Stone Superheater", "NameSteamLavaMaker");
+    public static final String SteamLavaMakerRecipeType = texter("Superheater", "SteamLavaMakerRecipeType");
+    public static final String Tooltip_SteamLavaMaker_00 = texter(
+        "Can melt up to 4 stones at a time",
+        "Tooltip_SteamLavaMaker_00");
+    public static final String Tooltip_SteamLavaMaker_01 = texter(
+        "§b§oTurning up the heat",
+        "Tooltip_SteamLavaMaker_01");
+    public static final String Tooltip_SteamLavaMaker_02 = texter(
+        "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
+        "Tooltip_SteamLavaMaker_02");
+
+    public static final String NameSteamManufacturer = texter("Steam Manufacturer", "NameSteamManufacturer");
+    public static final String SteamManufacturerRecipeType = texter("Assembler", "SteamManufacturerRecipeType");
+    public static final String Tooltip_SteamManufacturer_00 = texter("Has 4 Parallels", "Tooltip_SteamManufacturer_00");
+    public static final String Tooltip_SteamManufacturer_01 = texter(
+        "Assembles assemblies assemblically",
+        "Tooltip_SteamManufacturer_01");
+    public static final String Tooltip_SteamManufacturer_02 = texter(
+        "§b§oSlave labor? Not in my GTNH!",
+        "Tooltip_SteamManufacturer_02");
+
+    public static final String NameSteamRockBreaker = texter("Steam Manufacturer", "NameSteamRockBreaker");
+    public static final String SteamRockBreakerRecipeType = texter("Rock Breaker", "SteamRockBreakerRecipeType");
+    public static final String Tooltip_SteamRockBreaker_00 = texter(
+        "Works as a Rock Breaker, but big",
+        "Tooltip_SteamRockBreaker_00");
+    public static final String Tooltip_SteamRockBreaker_01 = texter(
+        "Cog 1 = Cobblestone, Cog 2 = Stone, Cog 3 = Obsidian",
+        "Tooltip_SteamRockBreaker_01");
+    public static final String Tooltip_SteamRockBreaker_02 = texter(
+        "Processes up to 8 recipes at once",
+        "Tooltip_SteamRockBreaker_02");
+    public static final String Tooltip_SteamRockBreaker_03 = texter(
+        "§b§oSTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONE",
+        "Tooltip_SteamRockBreaker_03");
+    public static final String Tooltip_SteamRockBreaker_04 = texter(
+        "§b§oKeep an eye for Wallsharing :>",
+        "Tooltip_SteamRockBreaker_04");
+
+    public static final String NameSteamWoodcutter = texter("Steam Woodcutter", "NameSteamWoodcutter");
+    public static final String SteamWoodcutterRecipeType = texter("Woodcutter", "SteamWoodcutterRecipeType");
+    public static final String Tooltip_SteamWoodcutter_00 = texter(
+        "§b§oGrows trees slowly from saplings.",
+        "Tooltip_SteamWoodcutter_00");
+    public static final String Tooltip_SteamWoodcutter_01 = texter(
+        "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
+        "Tooltip_SteamWoodcutter_01");
+
+    public static final String NameSteamFusionReactor = texter("Hyper Pressure Reactor", "NameSteamFusionReactor");
+    public static final String SteamFusionReactorRecipeType = texter(
+        "High Pressure Reactor",
+        "SteamFusionReactorRecipeType");
+    public static final String Tooltip_SteamFusionReactor_00 = texter(
+        "Combines Steam with hot fluids in order to reach higher temperatures",
+        "Tooltip_SteamFusionReactor_00");
+    public static final String Tooltip_SteamFusionReactor_01 = texter(
+        "Requires Steam to work? No, but kinda.",
+        "Tooltip_SteamFusionReactor_01");
+    public static final String Tooltip_SteamFusionReactor_02 = texter(
+        "§b§oWhat's this? Fusion? HAHAHA, tell another joke silly!",
+        "Tooltip_SteamFusionReactor_02");
+    public static final String Tooltip_SteamFusionReactor_Casing = texter(
+        "1-8, Blocks Adjacent to Glass",
+        "Tooltip_SteamFusionReactor_Casing");
+
+    public static final String NameHighPressureSteamFusionReactor = texter(
+        "Compact Hyper Pressure Reactor",
+        "NameHighPressureSteamFusionReactor");
+    public static final String HighPressureSteamFusionReactorRecipeType = texter(
+        "High Pressure Reactor",
+        "HighPressureSteamFusionReactorRecipeType");
+    public static final String Tooltip_HighPressureSteamFusionReactor_00 = texter(
+        "An Amalgamation of Breel and Steam, never envisioned before",
+        "Tooltip_HighPressureSteamFusionReactor_00");
+    public static final String Tooltip_HighPressureSteamFusionReactor_01 = texter(
+        "For All the pressure needs you may have",
+        "Tooltip_HighPressureSteamFusionReactor_01");
+    public static final String Tooltip_HighPressureSteamFusionReactor_02 = texter(
+        "Can do up to 256 recipes at once",
+        "Tooltip_HighPressureSteamFusionReactor_02");
+    public static final String Tooltip_HighPressureSteamFusionReactor_03 = texter(
+        "§b§oWhat in the world have you done",
+        "Tooltip_HighPressureSteamFusionReactor_03");
+    public static final String Tooltip_HighPressureSteamFusionReactor_Casing = texter(
+        "1-8, Blocks Adjacent to Glass",
+        "Tooltip_HighPressureSteamFusionReactor_Casing");
+
+    public static final String NameSteamInfernalCokeOven = texter("Infernal Coke Oven", "NameSteamInfernalCokeOven");
+    public static final String SteamInfernalCokeOvenRecipeType = texter("Coke Oven", "SteamInfernalCokeOvenRecipeType");
+    public static final String Tooltip_SteamInfernalCokeOven_00 = texter(
+        "Works more efficiently than a clay oven",
+        "Tooltip_SteamInfernalCokeOven_00");
+    public static final String Tooltip_SteamInfernalCokeOven_01 = texter(
+        "Every 5 seconds of continuous working it gets 1%% faster, up to 600%%",
+        "Tooltip_SteamInfernalCokeOven_01");
+    public static final String Tooltip_SteamInfernalCokeOven_02 = texter(
+        "§b§oPoggers",
+        "Tooltip_SteamInfernalCokeOven_02");
+
     public static final String NameLargeSteamCircuitAssembler = texter(
         "Large Steam Circuit Assembler",
         "NameLargeSteamCircuitAssembler");
@@ -427,7 +595,9 @@ public class TextLocalization {
     public static final String Tooltip_SteamTurbine_03 = texter("Fluid capacity: ", "Tooltip_SteamTurbine_03");
 
     public static final String SteamAssemblerBronze = texter("Steam Assembler", "SteamAssemblerBronze");
-    public static final String SteamAssemblerSteel = texter("High Pressure Steam Assembler", "SteamAssemblerSteel");
+    public static final String SteamAssemblerSteel = texter(
+        "High SteamExtractinator Steam Assembler",
+        "SteamAssemblerSteel");
     public static final String Tooltip_SteamAssembler_00 = texter("Avengers, Assemble!", "Tooltip_SteamAssembler_00");
 
     public static final String ManaTank = texter("Mana Tank", "ManaTank");

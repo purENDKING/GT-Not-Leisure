@@ -2,8 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.OutputHatch;
+import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -28,6 +27,8 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import cpw.mods.fml.relauncher.Side;
@@ -53,6 +54,13 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
     public static final String TEXTURE_SOLAR_CELL_TOP = "sciencenotleisure:iconsets/SOLAR_CELL_TOP";
     public static Textures.BlockIcons.CustomIcon SOLAR_CELL_TOP = new Textures.BlockIcons.CustomIcon(
         TEXTURE_SOLAR_CELL_TOP);
+    private static IStructureDefinition<MegaSolarBoiler> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String MSB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/mega_solar_boiler";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(MSB_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 10;
+    private static final int VERTICAL_OFF_SET = 4;
+    private static final int DEPTH_OFF_SET = 1;
 
     public MegaSolarBoiler(String aName) {
         super(aName);
@@ -69,48 +77,33 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
 
     @Override
     public String getMachineType() {
-        return "Solar Boiler";
+        return TextLocalization.MegaSolarBoilerRecipeType;
     }
 
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-
-    // spotless:off
-
-    private static final String[][] structure = transpose(
-        new String[][]{
-            {" BBBBB         BBBBB ","BAAAAAB       BAAAAAB","BAAAAAB       BAAAAAB","BAAAAAB       BAAAAAB","BAAAAAB       BAAAAAB","BAAAAAB       BAAAAAB"," BBBBB         BBBBB "},
-            {"  DDD           DDD  "," FFFFF         FFFFF ","DFFFFFD       DFFFFFD","DFFFFFD       DFFFFFD","DFFFFFD       DFFFFFD"," FFFFF         FFFFF ","  DDD           DDD  "},
-            {"   B   CCCCCCC   B   "," CCCCC CAAAAAC CCCCC "," CBBBC CAAAAAC CBBBC ","BCBBBCBCAAAAACBCBBBCB"," CBBBC CAAAAAC CBBBC "," CCCCC CAAAAAC CCCCC ","   B   CCCCCCC   B   "},
-            {"       C     C       ","       CFFFFFC       ","   EE  CFFFFFC  EE   ","  EEEEECFFFFFCEEEE   ","   EE  CFFFFFC  EE   ","       CFFFFFC       ","       CCCCCCC       "},
-            {"       C     C       ","       CGG~GGC       ","    EEECBBBBBCEEE    ","   EEEECBBBBBCEEEE   ","    EEECBBBBBCEEE    ","       CBBBBBC       ","       CGGGGGC       "}
-        });
-
-    // spotless:on
-
+    @Override
     public IStructureDefinition<MegaSolarBoiler> getStructureDefinition() {
-        return StructureDefinition.<MegaSolarBoiler>builder()
-            .addShape(STRUCTURE_PIECE_MAIN, structure)
-            .addElement('A', chainAllGlasses())
-            .addElement('B', ofBlock(GregTechAPI.sBlockCasings1, 10))
-            .addElement(
-                'G',
-                ofChain(
-                    buildHatchAdder(MegaSolarBoiler.class)
-                        .atLeast(SteamHatchElement.InputBus_Steam, InputHatch, OutputHatch)
-                        .casingIndex(10)
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(GregTechAPI.sBlockCasings1, 10)))
-            .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
-            .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 12))
-            .addElement('E', ofBlock(GregTechAPI.sBlockCasings2, 13))
-            .addElement('F', ofBlock(MetaBlockColumn, 3))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<MegaSolarBoiler>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', chainAllGlasses())
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings1, 10))
+                .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
+                .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 12))
+                .addElement('E', ofBlock(GregTechAPI.sBlockCasings2, 13))
+                .addElement('F', ofBlock(MetaBlockColumn, 3))
+                .addElement(
+                    'G',
+                    ofChain(
+                        buildHatchAdder(MegaSolarBoiler.class)
+                            .atLeast(SteamHatchElement.InputBus_Steam, InputBus, InputHatch, OutputHatch)
+                            .casingIndex(10)
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(GregTechAPI.sBlockCasings1, 10)))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
-
-    private static final int HORIZONTAL_OFF_SET = 10;
-    private static final int VERTICAL_OFF_SET = 4;
-    private static final int DEPTH_OFF_SET = 1;
 
     @Override
     public int getCasingTextureID() {
@@ -245,12 +238,13 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Maybe an Eye of Harmony could provide enough silver for this monstrosity")
-            .addInfo("Produces 96.000 L/s of Steam")
-            .addInfo(
-                EnumChatFormatting.AQUA + ""
-                    + EnumChatFormatting.ITALIC
-                    + "More steam/s than unplayed games in your steam library")
+            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_00)
+            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_01)
+            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_02)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(21, 5, 7, true)
             .toolTipFinisher();
         return tt;
     }

@@ -1156,7 +1156,9 @@ tooltip.lamp.borderless=Borderless
 RFRRRecipes.1=Close, but not quite, huh?
 PTARRecipes.1=Elves don't like bread.
 
-HIGH_PRESSURE_TOOLTIP_NOTICE=High pressure mode doubles processing speed and steam consumption
+MachineTierTooltip=Machine Tier: 
+ParallelTooltip=Parallel: 
+HighPressureTooltipNotice=High pressure mode doubles processing speed and steam consumption
 StructureTooComplex=Structure is too complex!
 BLUE_PRINT_INFO=Please refer to §9Structure§1Lib§7 hologram to build the main structure
 textUseBlueprint=Use §9Blueprint§r to preview
@@ -1565,6 +1567,92 @@ Tooltip_SteamMegaCompressor_00=Has 256 parallels
 Tooltip_SteamMegaCompressor_01=§b§oShoots impossibly pressurized jets of steam at material to compress it.
 Tooltip_SteamMegaCompressor_02=§b§oCapable of creating superdense plates...
 Tooltip_SteamMegaCompressor_03=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamExtractinator=Steam Extractinator
+gtnl.recipe.SteamExtractinator=Extractination
+SteamExtractinatorRecipeType=Resource Extractor
+Tooltip_SteamExtractinator_00=Vaporizes impurities in different soil slurries to generate usable materials
+Tooltip_SteamExtractinator_01=Processes up to 4 recipes at once
+Tooltip_SteamExtractinator_02=§b§oFrom Steam to rocks, the power of the pressure may bring you infinite wealth!.
+Tooltip_SteamExtractinator_Casing_00=Top Layer of Bronze Casings
+Tooltip_SteamExtractinator_Casing_01=Bottom Layer of Bronze Casings
+Tooltip_SteamExtractinator_Casing_02=2 Middle Bronze Casing Layers
+
+NameMegaSolarBoiler=Mega Pressure Solar Boiler
+MegaSolarBoilerRecipeType=Solar Boiler
+Tooltip_MegaSolarBoiler_00=Maybe an Eye of Harmony could provide enough silver for this monstrosity
+Tooltip_MegaSolarBoiler_01=Produces 96,000 L/s of Steam
+Tooltip_MegaSolarBoiler_02=§b§oMore steam/s than unplayed games in your steam library
+
+NameSteamCactusWonder=Cactus Wonder
+gtnl.recipe.CactusWonder=Offerings to the Cacti Pantheon
+SteamCactusWonderRecipeType=Temple of Cacti Blessings
+Tooltip_SteamCactusWonder_00=Burns Cactus Coke and Charcoal for increasingly efficient amounts of steam.
+Tooltip_SteamCactusWonder_01=Every second the cactus wonder will consume all offers stored
+Tooltip_SteamCactusWonder_02=The god of cacti will save their value and return it as steam blessings to her faithful zealots.
+Tooltip_SteamCactusWonder_03=Can only take one type of offer at once.
+Tooltip_SteamCactusWonder_04=Needs Fully Grown Cacti on the Sand Blocks to form
+Tooltip_SteamCactusWonder_05=§b§oCactus🙏
+Tooltip_SteamCactusWonder_06=Offer Value: 
+NEI.CactusWonderFakeRecipes.specialValue=Offer Value: 
+
+NameSteamCarpenter=Steam Carpenter
+gtnl.recipe.SteamCarpenter=Steamic Carpentry
+SteamCarpenterRecipeType=Carpenter
+Tooltip_SteamCarpenter_00=§b§oCuts wood efficiently into many forms.
+Tooltip_SteamCarpenter_01=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamLavaMaker=Stone Superheater
+gtnl.recipe.LavaMaker=Steam Vapor Melting
+SteamLavaMakerRecipeType=Superheater
+Tooltip_SteamLavaMaker_00=Can melt up to 4 stones at a time
+Tooltip_SteamLavaMaker_01=§b§oTurning up the heat
+Tooltip_SteamLavaMaker_02=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamManufacturer=Steam Manufacturer
+gtnl.recipe.SteamManufacturer=Hydraulic Manufacturing
+SteamManufacturerRecipeType=Assembler
+Tooltip_SteamManufacturer_00=Has 4 Parallel
+Tooltip_SteamManufacturer_01=Assembles assemblies assemblically
+Tooltip_SteamManufacturer_02=§b§oSlave labor? Not in my GTNH!
+
+NameSteamRockBreaker=Steam Cobbler
+SteamRockBreakerRecipeType=Rock Breaker
+Tooltip_SteamRockBreaker_00=Works as a Rock Breaker, but big
+Tooltip_SteamRockBreaker_01=Cog 1 = Cobblestone, Cog 2 = Stone, Cog 3 = Obsidian
+Tooltip_SteamRockBreaker_02=Processes up to 8 recipes at once
+Tooltip_SteamRockBreaker_03=§b§oSTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONE
+Tooltip_SteamRockBreaker_04=§b§oKeep an eye for Wallsharing :>
+
+NameSteamWoodcutter=Steam Woodcutter
+gtnl.recipe.SteamWoodcutter=Vapor Gardening
+SteamWoodcutterRecipeType=Woodcutter
+Tooltip_SteamWoodcutter_00=§b§oGrows trees slowly from saplings.
+Tooltip_SteamWoodcutter_01=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
+
+NameSteamFusionReactor=Hyper Pressure Reactor
+gtnl.recipe.SteamFusion=High Pressure Reactor
+SteamFusionReactorRecipeType=High Pressure Reactor
+GT5U.gui.text.metadata.steamfusion=Need Compact Hyper Pressure Reactor
+Tooltip_SteamFusionReactor_00=Combines Steam with hot fluids in order to reach higher temperatures
+Tooltip_SteamFusionReactor_01=Requires Steam to work? No, but kinda.
+Tooltip_SteamFusionReactor_02=§b§oWhat's this? Fusion? HAHAHA, tell another joke silly!
+Tooltip_SteamFusionReactor_Casing=1-8, Blocks Adjacent to Glass
+
+NameHighPressureSteamFusionReactor=Compact Hyper Pressure Reactor
+HighPressureSteamFusionReactorRecipeType=High Pressure Reactor
+Tooltip_HighPressureSteamFusionReactor_00=An Amalgamation of Breel and Steam, never envisioned before
+Tooltip_HighPressureSteamFusionReactor_01=For All the pressure needs you may have
+Tooltip_HighPressureSteamFusionReactor_02=Can do up to 256 recipes at once
+Tooltip_HighPressureSteamFusionReactor_03=§b§oWhat in the world have you done
+Tooltip_HighPressureSteamFusionReactor_Casing=1-8, Blocks Adjacent to Glass
+
+NameSteamInfernalCokeOven=Infernal Coke Oven
+gtnl.recipe.InfernalCock=Coke Oven but OP
+SteamInfernalCokeOvenRecipeType=Coke Oven
+Tooltip_SteamInfernalCokeOven_00=Works more efficiently than a clay oven
+Tooltip_SteamInfernalCokeOven_01=Every 5 seconds of continuous working it gets 1%% faster, up to 600%%
+Tooltip_SteamInfernalCokeOven_02=§b§oPoggers
 
 NameLargeSteamCircuitAssembler=Large Steam Circuit Assembler  
 LargeSteamCircuitAssemblerRecipeType=Circuit Assembler  

@@ -235,7 +235,7 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
             .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_03)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)

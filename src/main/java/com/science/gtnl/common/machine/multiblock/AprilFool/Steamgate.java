@@ -16,6 +16,7 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -36,6 +37,14 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
         TEXTURE_OVERLAY_STEAMGATE_CONTROLLER);
     public static Textures.BlockIcons.CustomIcon STEAMGATE_CASING = new Textures.BlockIcons.CustomIcon(
         TEXTURE_STEAMGATE_CASING);
+    private static IStructureDefinition<Steamgate> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SG_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steamgate";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SG_STRUCTURE_FILE_PATH);
+
+    private static final int HORIZONTAL_OFF_SET = 4;
+    private static final int VERTICAL_OFF_SET = 8;
+    private static final int DEPTH_OFF_SET = 0;
 
     public Steamgate(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -75,28 +84,34 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, 4, 8, 0);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, 4, 8, 0, elementBudget, env, false, true);
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     @Override
     public IStructureDefinition<Steamgate> getStructureDefinition() {
-        return StructureDefinition.<Steamgate>builder()
-            .addShape(
-                STRUCTURE_PIECE_MAIN,
-                (transpose(
-                    new String[][] { { "  AABAA  " }, { " BA   AB " }, { "AA     AA" }, { "A       A" },
-                        { "B       B" }, { "A       A" }, { "AA     AA" }, { " BA   AB " }, { "  AA~AA  " } })))
-            .addElement('A', ofBlock(MetaCasing, 21))
-            .addElement('B', ofBlock(MetaCasing, 22))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<Steamgate>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlock(MetaCasing, 21))
+                .addElement('B', ofBlock(MetaCasing, 22))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
@@ -126,7 +141,7 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 4, 8, 0);
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override

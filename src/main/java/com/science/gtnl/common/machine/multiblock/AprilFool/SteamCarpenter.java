@@ -1,18 +1,20 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static gregtech.api.enums.HatchElement.InputBus;
+import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -35,6 +37,13 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
         TEXTURE_OVERLAY_CARPENTER);
     public static Textures.BlockIcons.CustomIcon OVERLAY_CARPENTER_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_CARPENTER_ACTIVE);
+    private static IStructureDefinition<SteamCarpenter> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_carpenter";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SC_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 1;
+    private static final int VERTICAL_OFF_SET = 2;
+    private static final int DEPTH_OFF_SET = 0;
 
     public SteamCarpenter(String aName) {
         super(aName);
@@ -46,43 +55,58 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
 
     @Override
     public String getMachineType() {
-        return "Carpenter";
+        return TextLocalization.SteamCarpenterRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     @Override
     public IStructureDefinition<SteamCarpenter> getStructureDefinition() {
-        return StructureDefinition.<SteamCarpenter>builder()
-            .addShape(
-                STRUCTURE_PIECE_MAIN,
-                (new String[][] { { "A A", "   ", "A~A" }, { "ABA", "C C", "AAA" }, { " A ", " C ", " A " } }))
-            .addElement(
-                'A',
-                ofChain(
-                    buildSteamInput(SteamCarpenter.class).casingIndex(10)
-                        .dot(1)
-                        .build(),
-                    buildHatchAdder(SteamCarpenter.class)
-                        .atLeast(SteamHatchElement.InputBus_Steam, SteamHatchElement.OutputBus_Steam)
-                        .casingIndex(10)
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(GregTechAPI.sBlockCasings1, 10)))
-            .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 2))
-            .addElement('C', ofFrame(Materials.Wood))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SteamCarpenter>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement(
+                    'A',
+                    ofChain(
+                        buildSteamBigInput(SteamCarpenter.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
+                        buildSteamInput(SteamCarpenter.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
+                        buildHatchAdder(SteamCarpenter.class)
+                            .atLeast(
+                                SteamHatchElement.InputBus_Steam,
+                                InputBus,
+                                SteamHatchElement.OutputBus_Steam,
+                                OutputBus)
+                            .casingIndex(10)
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(GregTechAPI.sBlockCasings1, 10)))
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 2))
+                .addElement('C', ofFrame(Materials.Wood))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, 1, 2, 0);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, 1, 2, 0, elementBudget, env, false, true);
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -104,10 +128,12 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(
-                EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Cuts wood efficiently into many forms.")
-            .addInfo("Created by: ")
-            .addInfo("AuthorSteamIsTheNumber")
+            .addInfo(TextLocalization.Tooltip_SteamCarpenter_00)
+            .addInfo(TextLocalization.Tooltip_SteamCarpenter_01)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(3, 3, 3, true)
             .toolTipFinisher();
         return tt;
     }
@@ -143,7 +169,7 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 1, 2, 0);
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override

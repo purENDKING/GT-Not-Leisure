@@ -11,14 +11,12 @@ import net.minecraft.world.World;
 import com.science.gtnl.client.GTNLCreativeTabs;
 
 import gregtech.api.util.GTUtility;
-import gregtech.common.render.items.GeneratedMaterialRenderer;
 import ic2.core.IC2Potion;
 
 // Code From NH-Utilities
 public class RadioactiveItem extends Item {
 
     private final int mRadio;
-    public static GeneratedMaterialRenderer renderer;
 
     public RadioactiveItem(String name, int mRadio) {
         super();

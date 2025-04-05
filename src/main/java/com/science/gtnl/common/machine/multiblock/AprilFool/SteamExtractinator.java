@@ -3,22 +3,13 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 import static gregtech.api.enums.HatchElement.InputHatch;
+import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +18,8 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -48,8 +41,6 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator> implements ISurvivalConstructable {
 
@@ -59,6 +50,13 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
         TEXTURE_OVERLAY_EXTRACTINATOR);
     public static Textures.BlockIcons.CustomIcon OVERLAY_EXTRACTINATOR_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_EXTRACTINATOR_ACTIVE);
+    private static IStructureDefinition<SteamExtractinator> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_extractinator";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SE_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 1;
+    private static final int VERTICAL_OFF_SET = 8;
+    private static final int DEPTH_OFF_SET = 10;
 
     public SteamExtractinator(String aName) {
         super(aName);
@@ -75,16 +73,8 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
 
     @Override
     public String getMachineType() {
-        return "Resource Extractor";
+        return TextLocalization.SteamExtractinatorRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-
-    private IStructureDefinition<SteamExtractinator> STRUCTURE_DEFINITION = null;
-
-    private static final int HORIZONTAL_OFF_SET = 1;
-    private static final int VERTICAL_OFF_SET = 8;
-    private static final int DEPTH_OFF_SET = 10;
 
     @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection facing,
@@ -119,69 +109,24 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
     public IStructureDefinition<SteamExtractinator> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SteamExtractinator>builder()
-                .addShape(
-                    STRUCTURE_PIECE_MAIN,
-                    (transpose(
-                        new String[][] {
-                            { "               ", "               ", "       AA   AA ", "       A     A ",
-                                "               ", "               ", "               ", "               ",
-                                "               ", "               ", "               ", "               ",
-                                "               ", "       A     A ", "       AA   AA ", "               ",
-                                "               " },
-                            { "               ", "               ", "       AAAAAAA ", "       A     A ",
-                                "       A     A ", "       A     A ", "       A     A ", "       A     A ",
-                                "       A     A ", "       A     A ", "EEE    A     A ", "EEE    A     A ",
-                                "EEE    A     A ", "       A     A ", "       AAAAAAA ", "               ",
-                                "               " },
-                            { "          G    ", "               ", "        HHHHH  ", "       H     H ",
-                                "       H     H ", "       D     D ", "       H     H ", "       H     H ",
-                                "       H     H ", "       H     H ", "KKK    H     H ", "KCCCCCCD     D ",
-                                "KKK    H     H ", "       H     H ", "        HHHHH  ", "               ",
-                                "          G    " },
-                            { "          B    ", "         BBB   ", "        ABBBA  ", "       AIIIIIA ",
-                                "      DDIIIIIDD", "      DDIIIIIDD", "      DDIIIIIDD", "       AIIIIIA ",
-                                "       AIIIIIA ", "       AIIIIIA ", "HHH   DDIIIIIDD", "HCH   DDIIIIIDD",
-                                "HHH   DDIIIIIDD", "       AIIIIIA ", "        ABBBA  ", "         BBB   ",
-                                "          B    " },
-                            { "          G    ", "               ", "        HHHHH  ", "       H     H ",
-                                "      GH     HG", "       D     D ", "      GH     HG", "       H     H ",
-                                "       H     H ", "       H     H ", "MMM   GH     HG", "MCCCCCCD     D ",
-                                "MMM   GH     HG", "       H     H ", "        HHHHH  ", "               ",
-                                "          G    " },
-                            { "          G    ", "               ", "       HGGGGGH ", "       H     H ",
-                                "      GH     HG", "       H     H ", "      G       G", "               ",
-                                "               ", "               ", "HHH   G       G", "HCH    H     H ",
-                                "HHH   GH     HG", "       H     H ", "       HGGGGGH ", "               ",
-                                "          G    " },
-                            { "          G    ", "               ", "        HHHHH  ", "       H     H ",
-                                "      GH     HG", "       D     D ", "      GH     HG", "       H     H ",
-                                "       H     H ", "       H     H ", "MMM   GH     HG", "MCCCCCCD     D ",
-                                "MMM   GH     HG", "       H     H ", "        HHHHH  ", "               ",
-                                "          G    " },
-                            { "          B    ", "         BBB   ", "        ABBBA  ", "       AIIIIIA ",
-                                "      DDIIIIIDD", "      DDIIIIIDD", "      DDIIIIIDD", "       AIIIIIA ",
-                                "       AIIIIIA ", "       AIIIIIA ", "HHH   DDIIIIIDD", "HCC   DDIIIIIDD",
-                                "HHH   DDIIIIIDD", "       AIIIIIA ", "        ABBBA  ", "         BBB   ",
-                                "          B    " },
-                            { "          G    ", "               ", "        HHHHH  ", "       H     H ",
-                                "       H     H ", "       D     D ", "       H     H ", "       H     H ",
-                                "       H     H ", "       H     H ", "L~L    H     H ", "LCCCCCCD     D ",
-                                "LLL    H     H ", "       H     H ", "        HHHHH  ", "               ",
-                                "          G    " },
-                            { "          G    ", "               ", "       JJJJJJJ ", "       JJJJJJJ ",
-                                "       JJJJJJJ ", "       JJJJJJJ ", "       JJJJJJJ ", "       JJJJJJJ ",
-                                "       JJJJJJJ ", "       JJJJJJJ ", "EEE    JJJJJJJ ", "EEE    JJJJJJJ ",
-                                "EEE    JJJJJJJ ", "       JJJJJJJ ", "       JJJJJJJ ", "               ",
-                                "          G    " } })))
-                .addElement('A', ofBlock(GregTechAPI.sBlockCasings2, 0))
-                .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 3))
-                .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 12))
-                .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 13))
-                .addElement('E', ofBlock(GregTechAPI.sBlockCasings3, 13))
-                .addElement('G', ofFrame(Materials.Steel))
-                .addElement('H', ofBlock(MetaCasing02, 0))
-                .addElement('I', ofBlock(MetaBlockGlass, 3))
-                .addElement('J', ofBlock(MetaBlockColumn, 1))
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlock(MetaBlockGlass, 3))
+                .addElement('B', ofBlock(MetaCasing02, 0))
+                .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
+                .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 3))
+                .addElement('E', ofBlock(GregTechAPI.sBlockCasings2, 12))
+                .addElement('F', ofBlock(GregTechAPI.sBlockCasings2, 13))
+                .addElement('G', ofBlock(GregTechAPI.sBlockCasings3, 13))
+                .addElement('H', ofFrame(Materials.Steel))
+                .addElement('I', ofBlock(MetaBlockColumn, 1))
+                .addElement(
+                    'J',
+                    ofChain(
+                        buildHatchAdder(SteamExtractinator.class).atLeast(SteamHatchElement.OutputBus_Steam, OutputBus)
+                            .casingIndex(10)
+                            .dot(2)
+                            .buildAndChain(),
+                        ofBlock(GregTechAPI.sBlockCasings1, 10)))
                 .addElement(
                     'K',
                     ofChain(
@@ -193,14 +138,9 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
                 .addElement(
                     'L',
                     ofChain(
-                        buildHatchAdder(SteamExtractinator.class).atLeast(SteamHatchElement.OutputBus_Steam)
-                            .casingIndex(10)
-                            .dot(2)
-                            .buildAndChain(),
-                        ofBlock(GregTechAPI.sBlockCasings1, 10)))
-                .addElement(
-                    'M',
-                    ofChain(
+                        buildSteamBigInput(SteamExtractinator.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamInput(SteamExtractinator.class).casingIndex(10)
                             .dot(3)
                             .build(),
@@ -280,54 +220,18 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Uses " + EnumChatFormatting.GOLD + "Superheated Steam")
-            .addInfo("Vaporizes impurities in different soil slurries to generate usable materials")
-            .addInfo("Processes up to 4 recipes at once")
-            .addInfo(
-                EnumChatFormatting.AQUA + ""
-                    + EnumChatFormatting.ITALIC
-                    + "From Steam to rocks, the power of the pressure may bring you infinite wealth!.")
-            .addInputHatch("Top Layer of Bronze Casings")
-            .addOutputHatch("Bottom Layer of Bronze Casings")
-            .addEnergyHatch("2 Middle Bronze Casing Layers")
+            .addInfo(TextLocalization.Tooltip_SteamExtractinator_00)
+            .addInfo(TextLocalization.Tooltip_SteamExtractinator_01)
+            .addInfo(TextLocalization.Tooltip_SteamExtractinator_02)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(15, 10, 14, true)
+            .addInputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_00)
+            .addOutputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_01)
+            .addEnergyHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_02)
             .toolTipFinisher();
         return tt;
-    }
-
-    @Override
-    public String[] getInfoData() {
-        ArrayList<String> info = new ArrayList<>(Arrays.asList(super.getInfoData()));
-        info.add("Parallel: " + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
-        return info.toArray(new String[0]);
-    }
-
-    @Override
-    public void getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor,
-        IWailaConfigHandler config) {
-        super.getWailaBody(itemStack, currenttip, accessor, config);
-        NBTTagCompound tag = accessor.getNBTData();
-        currenttip.add(
-            StatCollector.translateToLocal("GT5U.multiblock.curparallelism") + ": "
-                + EnumChatFormatting.BLUE
-                + tag.getInteger("parallel")
-                + EnumChatFormatting.RESET);
-    }
-
-    @Override
-    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
-        int z) {
-        super.getWailaNBTData(player, tile, tag, world, x, y, z);
-        tag.setInteger("parallel", getMaxParallelRecipes());
-    }
-
-    @Override
-    public void saveNBTData(NBTTagCompound aNBT) {
-        super.saveNBTData(aNBT);
-    }
-
-    @Override
-    public void loadNBTData(final NBTTagCompound aNBT) {
-        super.loadNBTData(aNBT);
     }
 
     @SideOnly(Side.CLIENT)

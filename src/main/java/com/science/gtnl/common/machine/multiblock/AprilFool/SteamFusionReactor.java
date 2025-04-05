@@ -1,7 +1,6 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofChain;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputHatch;
@@ -11,7 +10,6 @@ import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGla
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +18,8 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.common.recipe.Special.SteamFusionTierKey;
@@ -42,6 +42,14 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 
 public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor> implements ISurvivalConstructable {
 
+    private static IStructureDefinition<SteamFusionReactor> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String SFR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_fusion_reactor";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SFR_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 7;
+    private static final int VERTICAL_OFF_SET = 1;
+    private static final int DEPTH_OFF_SET = 12;
+
     public SteamFusionReactor(String aName) {
         super(aName);
     }
@@ -52,57 +60,56 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
 
     @Override
     public String getMachineType() {
-        return "High Pressure Reactor";
+        return TextLocalization.SteamFusionReactorRecipeType;
     }
-
-    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     @Override
     public IStructureDefinition<SteamFusionReactor> getStructureDefinition() {
-        return StructureDefinition.<SteamFusionReactor>builder()
-            .addShape(
-                STRUCTURE_PIECE_MAIN,
-                (new String[][] { { "               ", "      DDD      ", "               " },
-                    { "      CCC      ", "    DDBBBDD    ", "      CCC      " },
-                    { "    CC   CC    ", "   ABBDDDBBA   ", "    CC   CC    " },
-                    { "   C       C   ", "  ABAD   DABA  ", "   C       C   " },
-                    { "  C         C  ", " DBA       ABD ", "  C         C  " },
-                    { "  C         C  ", " DBD       DBD ", "  C         C  " },
-                    { " C           C ", "DBD         DBD", " C           C " },
-                    { " C           C ", "DBD         DBD", " C           C " },
-                    { " C           C ", "DBD         DBD", " C           C " },
-                    { "  C         C  ", " DBD       DBD ", "  C         C  " },
-                    { "  C         C  ", " DBA       ABD ", "  C         C  " },
-                    { "   C       C   ", "  ABAD   DABA  ", "   C       C   " },
-                    { "    CC   CC    ", "   ABBA~ABBA   ", "    CC   CC    " },
-                    { "      CCC      ", "    DDBBBDD    ", "      CCC      " },
-                    { "               ", "      DDD      ", "               " } }))
-            .addElement(
-                'A',
-                ofChain(
-                    buildSteamInput(SteamFusionReactor.class).casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
-                        .dot(1)
-                        .build(),
-                    buildHatchAdder(SteamFusionReactor.class).atLeast(InputHatch, OutputHatch)
-                        .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(MetaCasing, 29)))
-            .addElement('B', ofBlock(MetaCasing, 26))
-            .addElement('D', chainAllGlasses())
-            .addElement('C', ofBlock(MetaCasing, 29))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SteamFusionReactor>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addElement('A', ofBlock(MetaCasing, 26))
+                .addElement('B', ofBlock(MetaCasing, 29))
+                .addElement('C', chainAllGlasses())
+                .addElement(
+                    'D',
+                    ofChain(
+                        buildSteamBigInput(SteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
+                            .dot(1)
+                            .build(),
+                        buildSteamInput(SteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
+                            .dot(1)
+                            .build(),
+                        buildHatchAdder(SteamFusionReactor.class).atLeast(InputHatch, OutputHatch)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(MetaCasing, 29)))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, 7, 1, 12);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
-        return survivialBuildPiece(STRUCTURE_PIECE_MAIN, stackSize, 7, 1, 12, elementBudget, env, false, true);
+        return survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            elementBudget,
+            env,
+            false,
+            true);
     }
 
     @Override
@@ -152,14 +159,15 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Combines Steam with hot fluids in order to reach higher temperatures")
-            .addInfo("Requires Steam to work? No, but kinda.")
-            .addInfo(
-                EnumChatFormatting.AQUA + ""
-                    + EnumChatFormatting.ITALIC
-                    + "What's this? Fusion? HAHAHA, tell another joke silly!")
-            .addInputHatch("1-8, Blocks Adjacent to Glass", 1)
-            .addOutputHatch("1-8, Blocks Adjacent to Glass", 1)
+            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_00)
+            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_01)
+            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_02)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(15, 3, 15, true)
+            .addInputHatch(TextLocalization.Tooltip_SteamFusionReactor_Casing, 1)
+            .addOutputHatch(TextLocalization.Tooltip_SteamFusionReactor_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
@@ -193,7 +201,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, 7, 1, 12);
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override

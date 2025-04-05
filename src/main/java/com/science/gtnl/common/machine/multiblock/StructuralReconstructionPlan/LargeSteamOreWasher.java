@@ -256,7 +256,7 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
             .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)

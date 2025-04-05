@@ -21,7 +21,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +34,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
+import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -186,11 +186,15 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
+        if (mOutputFluids == null) {
+            mOutputFluids = new FluidStack[1];
+        }
+
         try {
             if (fuelTierI) {
                 if (hydrogen) {
-                    int fuelAvailable = getFluidAmount("naquadah based liquid fuel mki");
-                    int hydroAvailable = getFluidAmount("hydrogen");
+                    int fuelAvailable = getFluidAmount(GGMaterial.naquadahBasedFuelMkI.getFluidOrGas(1));
+                    int hydroAvailable = getFluidAmount(Materials.Hydrogen.getGas(1));
                     int maxFuelMulti = Math.min(fuelAvailable / 16, 4);
                     int maxHydroMulti = Math.min(hydroAvailable / 80, 4);
                     multiplier = Math.min(maxFuelMulti, maxHydroMulti);
@@ -200,19 +204,17 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     }
 
                     // 尝试消耗液体
-                    boolean success = drainFluid("naquadah based liquid fuel mki", 16 * multiplier)
-                        && drainFluid("hydrogen", 80 * multiplier);
+                    boolean success = drainFluid(GGMaterial.naquadahBasedFuelMkI.getFluidOrGas(1), 16 * multiplier)
+                        && drainFluid(Materials.Hydrogen.getGas(1), 80 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
                     // 生成耗尽燃料并直接赋值给 mOutputFluids
-                    mOutputFluids[0] = new FluidStack(
-                        FluidRegistry.getFluid("naquadah based liquid fuel mki (depleted)"),
-                        16 * multiplier);
+                    mOutputFluids[0] = GGMaterial.naquadahBasedFuelMkIDepleted.getFluidOrGas(160 * multiplier);
                 } else if (oxygenPlasma) {
-                    int fuelAvailable = getFluidAmount("naquadah based liquid fuel mki");
-                    int oxyPlasmaAvailable = getFluidAmount("plasma.oxygen");
+                    int fuelAvailable = getFluidAmount(GGMaterial.naquadahBasedFuelMkI.getFluidOrGas(1));
+                    int oxyPlasmaAvailable = getFluidAmount(Materials.Oxygen.getPlasma(1));
                     int maxFuelMulti = Math.min(fuelAvailable / 160, 4);
                     int maxOxyMulti = Math.min(oxyPlasmaAvailable / 40, 4);
                     multiplier = Math.min(maxFuelMulti, maxOxyMulti);
@@ -222,21 +224,19 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     }
 
                     // 尝试消耗液体
-                    boolean success = drainFluid("naquadah based liquid fuel mki", 160 * multiplier)
-                        && drainFluid("plasma.oxygen", 40 * multiplier);
+                    boolean success = drainFluid(GGMaterial.naquadahBasedFuelMkI.getFluidOrGas(1), 160 * multiplier)
+                        && drainFluid(Materials.Oxygen.getPlasma(1), 40 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
                     // 生成耗尽燃料并直接赋值给 mOutputFluids
-                    mOutputFluids[0] = new FluidStack(
-                        FluidRegistry.getFluid("naquadah based liquid fuel mki (depleted)"),
-                        160 * multiplier);
+                    mOutputFluids[0] = GGMaterial.naquadahBasedFuelMkIDepleted.getFluidOrGas(160 * multiplier);
                 }
             } else if (fuelTierII) {
                 if (hydrogen) {
-                    int fuelAvailable = getFluidAmount("naquadah based liquid fuel mkii");
-                    int hydroAvailable = getFluidAmount("hydrogen");
+                    int fuelAvailable = getFluidAmount(GGMaterial.naquadahBasedFuelMkII.getFluidOrGas(1));
+                    int hydroAvailable = getFluidAmount(Materials.Hydrogen.getGas(1));
                     int maxFuelMulti = Math.min(fuelAvailable / 16, 4);
                     int maxHydroMulti = Math.min(hydroAvailable / 80, 4);
                     multiplier = Math.min(maxFuelMulti, maxHydroMulti);
@@ -245,18 +245,16 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    boolean success = drainFluid("naquadah based liquid fuel mkii", 16 * multiplier)
-                        && drainFluid("hydrogen", 80 * multiplier);
+                    boolean success = drainFluid(GGMaterial.naquadahBasedFuelMkII.getFluidOrGas(1), 16 * multiplier)
+                        && drainFluid(Materials.Hydrogen.getGas(1), 80 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    mOutputFluids[0] = new FluidStack(
-                        FluidRegistry.getFluid("naquadah based liquid fuel mkii (depleted)"),
-                        16 * multiplier);
+                    mOutputFluids[0] = GGMaterial.naquadahBasedFuelMkIIDepleted.getFluidOrGas(160 * multiplier);
                 } else if (nitrogenPlasma) {
-                    int fuelAvailable = getFluidAmount("naquadah based liquid fuel mkii");
-                    int nitroPlasmaAvailable = getFluidAmount("plasma.nitrogen");
+                    int fuelAvailable = getFluidAmount(GGMaterial.naquadahBasedFuelMkII.getFluidOrGas(1));
+                    int nitroPlasmaAvailable = getFluidAmount(Materials.Nitrogen.getPlasma(1));
                     int maxFuelMulti = Math.min(fuelAvailable / 160, 4);
                     int maxNitroMulti = Math.min(nitroPlasmaAvailable / 40, 4);
                     multiplier = Math.min(maxFuelMulti, maxNitroMulti);
@@ -265,15 +263,13 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    boolean success = drainFluid("naquadah based liquid fuel mkii", 160 * multiplier)
-                        && drainFluid("plasma.nitrogen", 40 * multiplier);
+                    boolean success = drainFluid(GGMaterial.naquadahBasedFuelMkII.getFluidOrGas(1), 160 * multiplier)
+                        && drainFluid(Materials.Nitrogen.getPlasma(1), 40 * multiplier);
                     if (!success) {
                         return CheckRecipeResultRegistry.NO_RECIPE;
                     }
 
-                    mOutputFluids[0] = new FluidStack(
-                        FluidRegistry.getFluid("naquadah based liquid fuel mkii (depleted)"),
-                        160 * multiplier);
+                    mOutputFluids[0] = GGMaterial.naquadahBasedFuelMkIIDepleted.getFluidOrGas(160 * multiplier);
                 }
             }
         } catch (Exception e) {
@@ -301,26 +297,26 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
         return CheckRecipeResultRegistry.GENERATING;
     }
 
-    private int getFluidAmount(String fluidName) {
+    private int getFluidAmount(FluidStack fluidToCheck) {
+        if (fluidToCheck == null) return 0;
+
         int total = 0;
-        for (FluidStack fs : getStoredFluids()) {
-            if (fs.getFluid()
-                .getName()
-                .equals(fluidName)) {
-                total += fs.amount;
+        for (FluidStack storedFluid : getStoredFluids()) {
+            if (storedFluid != null && storedFluid.isFluidEqual(fluidToCheck)) {
+                total += storedFluid.amount;
             }
         }
         return total;
     }
 
-    private boolean drainFluid(String fluidName, int amount) {
+    private boolean drainFluid(FluidStack fluidToDrain, int amount) {
+        if (fluidToDrain == null || amount <= 0) return false;
+
         int remaining = amount;
-        for (FluidStack fs : getStoredFluids()) {
-            if (fs.getFluid()
-                .getName()
-                .equals(fluidName)) {
-                int drained = Math.min(fs.amount, remaining);
-                fs.amount -= drained;
+        for (FluidStack storedFluid : getStoredFluids()) {
+            if (storedFluid != null && storedFluid.isFluidEqual(fluidToDrain)) {
+                int drained = Math.min(storedFluid.amount, remaining);
+                storedFluid.amount -= drained;
                 remaining -= drained;
                 if (remaining <= 0) break;
             }
@@ -335,7 +331,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
 
             boolean success = true;
             if (Oxygen) {
-                success = drainFluid("oxygen", 2000);
+                success = drainFluid(Materials.Oxygen.getGas(1), 2000);
             }
 
             endRecipeProcessing();

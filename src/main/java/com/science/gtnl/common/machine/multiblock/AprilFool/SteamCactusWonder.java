@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.*;
@@ -30,6 +31,8 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -60,6 +63,14 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
         TEXTURE_OVERLAY_CACTUS_WONDER);
     public static Textures.BlockIcons.CustomIcon OVERLAY_CACTUS_WONDER_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_CACTUS_WONDER_ACTIVE);
+    private static IStructureDefinition<SteamCactusWonder> STRUCTURE_DEFINITION = null;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "nei";
+    private static final String SCW_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_cactus_wonder";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SCW_STRUCTURE_FILE_PATH);
+    private static final int HORIZONTAL_OFF_SET = 4;
+    private static final int VERTICAL_OFF_SET = 8;
+    private static final int DEPTH_OFF_SET = 2;
 
     public SteamCactusWonder(String aName) {
         super(aName);
@@ -76,7 +87,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
 
     @Override
     public String getMachineType() {
-        return "Temple of Cacti Blessings";
+        return TextLocalization.SteamCactusWonderRecipeType;
     }
 
     private int currentSteam;
@@ -94,64 +105,39 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
         16_218_292_236L, 16_000L, 180_000L, 2_025_000L, 22_781_250L, 256_289_063L, 2_883_251_953L, 32_436_584_473L };
     private static final int[] steamType = { 1, 1, 1, 2, 2, 3, 3, 1, 1, 1, 2, 2, 3, 3 };
 
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "nei";
-
-    private static final String[][] structure = transpose(
-        new String[][] {
-            { "         ", "         ", "   CCC   ", "  CCCCC  ", "  CCCCC  ", "  CCCCC  ", "   CCC   ", "         ",
-                "         " },
-            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E AAA E ", "  ABBBA  ", "  ABBBA  ", "  ABBBA  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E CCC E ", "  C   C  ", "  C   C  ", "  C   C  ", " E CCC E ", "  E   E  ",
-                "         " },
-            { " DDD DDD ", "DDFDDDFDD", "DFDCCCDFD", "DDC   CDD", " DC   CD ", "DDC   CDD", "DFDCCCDFD", "DDFDDDFDD",
-                " DDD DDD " },
-            { "         ", "  E   E  ", " E AAA E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E AAA E ", "  ABBBA  ", "  ABBBA  ", "  ABBBA  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E A~A E ", "  A   A  ", "  A   A  ", "  A   A  ", " E AAA E ", "  E   E  ",
-                "         " },
-            { "         ", "  E   E  ", " E CCC E ", "  CCCCC  ", "  CCCCC  ", "  CCCCC  ", " E CCC E ", "  E   E  ",
-                "         " },
-            { "  CCCCC  ", " CFCCCFC ", "CFCCCCCFC", "CCCCCCCCC", "CCCCCCCCC", "CCCCCCCCC", "CFCCCCCFC", " CFCCCFC ",
-                "  CCCCC  " } });
-
     public IStructureDefinition<SteamCactusWonder> getStructureDefinition() {
-        return StructureDefinition.<SteamCactusWonder>builder()
-            .addShape(STRUCTURE_PIECE_MAIN, structure)
-            .addShape(
-                STRUCTURE_PIECE_MAIN_SURVIVAL,
-                Arrays.stream(structure)
-                    .map(
-                        sa -> Arrays.stream(sa)
-                            .map(s -> s.replaceAll("E", " "))
-                            .toArray(String[]::new))
-                    .toArray(String[][]::new))
-            .addElement('A', chainAllGlasses())
-            .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 12))
-            .addElement(
-                'C',
-                ofChain(
-                    buildHatchAdder(SteamCactusWonder.class).atLeast(SteamHatchElement.InputBus_Steam, OutputHatch)
-                        .casingIndex(10)
-                        .dot(1)
-                        .buildAndChain(),
-                    ofBlock(GregTechAPI.sBlockCasings3, 13)))
-            .addElement('D', ofFrame(Materials.Steel))
-            .addElement('E', ofBlock(Blocks.cactus, 0))
-            .addElement('F', ofBlock(Blocks.sand, 0))
-            .build();
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SteamCactusWonder>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
+                .addShape(
+                    STRUCTURE_PIECE_MAIN_SURVIVAL,
+                    Arrays.stream(transpose(shape))
+                        .map(
+                            sa -> Arrays.stream(sa)
+                                .map(s -> s.replaceAll("E", " "))
+                                .toArray(String[]::new))
+                        .toArray(String[][]::new))
+                .addElement('A', chainAllGlasses())
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings2, 12))
+                .addElement(
+                    'C',
+                    ofChain(
+                        buildSteamBigInput(SteamCactusWonder.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
+                        buildHatchAdder(SteamCactusWonder.class)
+                            .atLeast(SteamHatchElement.InputBus_Steam, InputBus, OutputHatch)
+                            .casingIndex(10)
+                            .dot(1)
+                            .buildAndChain(),
+                        ofBlock(GregTechAPI.sBlockCasings3, 13)))
+                .addElement('D', ofFrame(Materials.Steel))
+                .addElement('E', ofBlock(Blocks.cactus, 0))
+                .addElement('F', ofBlock(Blocks.sand, 0))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
     }
-
-    private static final int HORIZONTAL_OFF_SET = 4;
-    private static final int VERTICAL_OFF_SET = 8;
-    private static final int DEPTH_OFF_SET = 2;
 
     @Override
     public int getCasingTextureID() {
@@ -283,7 +269,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
             .widget(
                 new TextWidget()
                     .setStringSupplier(
-                        () -> EnumChatFormatting.WHITE + "Offer Value: "
+                        () -> EnumChatFormatting.WHITE + TextLocalization.Tooltip_SteamCactusWonder_06
                             + EnumChatFormatting.YELLOW
                             + numberFormat.format(fueledAmount))
                     .setTextAlignment((Alignment.CenterLeft)))
@@ -309,12 +295,16 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo("Burns Cactus Coke and Charcoal for increasingly efficient amounts of steam.")
-            .addInfo("Every second the cactus wonder will consume all offers stored")
-            .addInfo("The god of cacti will save their value and return it as steam blessings to her faithful zealots.")
-            .addInfo("Can only take one type of offer at once.")
-            .addInfo("Needs Fully Grown Cacti on the Sand Blocks to form")
-            .addInfo(EnumChatFormatting.AQUA + "" + EnumChatFormatting.ITALIC + "Cactus")
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_00)
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_01)
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_02)
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_03)
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_04)
+            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_05)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(9, 11, 9, true)
             .toolTipFinisher();
         return tt;
     }

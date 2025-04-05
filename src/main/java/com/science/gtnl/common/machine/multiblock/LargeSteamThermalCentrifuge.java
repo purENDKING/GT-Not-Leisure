@@ -261,7 +261,7 @@ public class LargeSteamThermalCentrifuge extends SteamMultiMachineBase<LargeStea
             .addInfo(TextLocalization.Tooltip_LargeSteamThermalCentrifuge_00)
             .addInfo(TextLocalization.Tooltip_LargeSteamThermalCentrifuge_01)
             .addInfo(TextLocalization.Tooltip_LargeSteamThermalCentrifuge_02)
-            .addInfo(TextLocalization.HIGH_PRESSURE_TOOLTIP_NOTICE)
+            .addInfo(TextLocalization.HighPressureTooltipNotice)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
