@@ -40,7 +40,7 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
         if (!world.isRemote && getMovingObjectPositionFromPlayer(world, player, true) == null) {
             GTUIInfos.openPlayerHeldItemUI(player);
         }
-        return super.onItemRightClick(stack, world, player);
+        return stack;
     }
 
     @Override

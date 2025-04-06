@@ -45,6 +45,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
     private static boolean offlineMode = false;
     private static boolean isSteveModel = false;
     private static final Set<String> BLACKLISTED_UUIDS = Sets.newConcurrentHashSet();
+    private static final Set<String> BLACKLISTED_NAMES = Sets.newConcurrentHashSet();
     private static final Set<String> BLACKLISTED_SKIN_URLS = Sets.newConcurrentHashSet();
     private static final Set<String> BLACKLISTED_CAPE_URLS = Sets.newConcurrentHashSet();
     private static final Map<String, String> UUID_CACHE = new HashMap<>();
@@ -286,12 +287,11 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
     }
 
     private String fetchUUID(String username) {
-        // 检查缓存
         if (UUID_CACHE.containsKey(username.toLowerCase())) {
             return UUID_CACHE.get(username.toLowerCase());
         }
 
-        if (BLACKLISTED_UUIDS.contains(username.toLowerCase())) {
+        if (BLACKLISTED_NAMES.contains(username.toLowerCase())) {
             return null;
         }
 
@@ -302,7 +302,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             connection.setConnectTimeout(3000);
 
             if (connection.getResponseCode() == 204) {
-                BLACKLISTED_UUIDS.add(username.toLowerCase());
+                BLACKLISTED_NAMES.add(username.toLowerCase());
                 return null;
             }
 
@@ -316,7 +316,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
 
             String json = response.toString();
             if (json.contains("\"errorMessage\"")) {
-                BLACKLISTED_UUIDS.add(username.toLowerCase());
+                BLACKLISTED_NAMES.add(username.toLowerCase());
                 return null;
             }
 
@@ -329,6 +329,7 @@ public class BlockPlayerDollRenderer extends TileEntitySpecialRenderer {
             return uuid;
         } catch (Exception e) {
             e.printStackTrace();
+            BLACKLISTED_NAMES.add(username.toLowerCase());
             return null;
         }
     }
