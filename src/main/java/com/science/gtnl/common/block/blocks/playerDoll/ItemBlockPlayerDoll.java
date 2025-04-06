@@ -51,7 +51,7 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
     @Override
     public ModularWindow createWindow(UIBuildContext buildContext, ItemStack stack) {
         if (!(stack.getItem() instanceof ItemBlockPlayerDoll)) return null;
-        return new PlayerDollUIFactory(buildContext, stack).createWindow();
+        return new PlayerDollUIFactory(buildContext).createWindow();
     }
 
     /**
@@ -60,11 +60,9 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
     private static class PlayerDollUIFactory {
 
         private final UIBuildContext buildContext;
-        private final ItemStack stack;
 
-        public PlayerDollUIFactory(UIBuildContext buildContext, ItemStack stack) {
+        public PlayerDollUIFactory(UIBuildContext buildContext) {
             this.buildContext = buildContext;
-            this.stack = stack;
         }
 
         public ModularWindow createWindow() {
