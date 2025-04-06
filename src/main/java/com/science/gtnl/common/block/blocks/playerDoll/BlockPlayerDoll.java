@@ -93,6 +93,7 @@ public class BlockPlayerDoll extends BlockContainer {
                     tileEntityPlayerDoll.setOwnerUUID(uuid);
                 } else {
                     String playerName = player.getCommandSenderName();
+                    tileEntityPlayerDoll.setOwner(playerName);
                     String uuid = tileEntityPlayerDoll.fetchUUID(playerName);
                     tileEntityPlayerDoll.setOwnerUUID(uuid);
                 }
