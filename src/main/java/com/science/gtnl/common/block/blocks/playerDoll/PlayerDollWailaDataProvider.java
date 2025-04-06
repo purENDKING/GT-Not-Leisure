@@ -5,14 +5,11 @@ import java.util.List;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
-
-import com.mojang.authlib.GameProfile;
 
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -22,13 +19,13 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
 
     @Override
     public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        return null; // 默认返回 null，使用 WAILA 的默认行为
+        return null;
     }
 
     @Override
     public List<String> getWailaHead(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
-        return currentTip; // 默认不修改头部信息
+        return currentTip;
     }
 
     @Override
@@ -67,18 +64,6 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
             }
         }
 
-        if (tag.hasKey("SkullOwner", 10)) {
-            NBTTagCompound ownerTag = tag.getCompoundTag("SkullOwner");
-            GameProfile profile = NBTUtil.func_152459_a(ownerTag);
-            if (profile != null && !StringUtils.isNullOrEmpty(profile.getName())) {
-                currentTip.add(
-                    EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_TileEntityPlayerDoll_00")
-                        + EnumChatFormatting.GOLD
-                        + profile.getName());
-                return currentTip;
-            }
-        }
-
         if (tag.hasKey("SkullOwner", 8)) {
             String playerName = tag.getString("SkullOwner");
             if (!StringUtils.isNullOrEmpty(playerName)) {
@@ -95,7 +80,7 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
     @Override
     public List<String> getWailaTail(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
-        return currentTip; // 默认不修改尾部信息
+        return currentTip;
     }
 
     @Override
@@ -104,17 +89,14 @@ public class PlayerDollWailaDataProvider implements IWailaDataProvider {
         if (te instanceof TileEntityPlayerDoll) {
             TileEntityPlayerDoll playerDoll = (TileEntityPlayerDoll) te;
 
-            // 将 TileEntity 数据写入 NBT
             if (playerDoll.getSkullOwner() != null) {
-                NBTTagCompound ownerTag = new NBTTagCompound();
-                NBTUtil.func_152460_a(ownerTag, playerDoll.getSkullOwner());
-                tag.setTag("SkullOwner", ownerTag);
+                tag.setString("SkullOwner", playerDoll.getSkullOwner());
             }
 
             if (playerDoll.getSkinHttp() != null) {
                 tag.setString("SkinHttp", playerDoll.getSkinHttp());
             }
-            if (playerDoll.getCapeHttp() != null) { // 新增 CapeHttp 写入
+            if (playerDoll.getCapeHttp() != null) {
                 tag.setString("CapeHttp", playerDoll.getCapeHttp());
             }
             tag.setBoolean("enableElytra", playerDoll.getEnableElytra());

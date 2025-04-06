@@ -57,7 +57,7 @@ public class ItemBlockPlayerDoll extends ItemBlock implements IItemWithModularUI
     /**
      * GUI 工厂类
      */
-    private class PlayerDollUIFactory {
+    private static class PlayerDollUIFactory {
 
         private final UIBuildContext buildContext;
         private final ItemStack stack;

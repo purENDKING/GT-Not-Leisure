@@ -1,20 +1,23 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Set;
+
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.StringUtils;
 
-import com.google.common.collect.Iterables;
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
+import com.google.common.collect.Sets;
 
 public class TileEntityPlayerDoll extends TileEntity {
 
-    public GameProfile skullOwner;
+    private static final Set<String> BLACKLISTED_USERS = Sets.newConcurrentHashSet();
+    public String skullOwner;
+    public String ownerUUID;
     public String skinHttp;
     public String capeHttp;
     public boolean enableElytra;
@@ -22,16 +25,19 @@ public class TileEntityPlayerDoll extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
-            this.skullOwner = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
-        } else if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-            String playerName = nbt.getString("SkullOwner");
-            this.skullOwner = new GameProfile(null, playerName);
+
+        if (nbt.hasKey("SkullOwner", 8)) {
+            this.skullOwner = nbt.getString("SkullOwner");
         }
+
+        if (nbt.hasKey("OwnerUUID", 8)) {
+            this.ownerUUID = nbt.getString("OwnerUUID");
+        }
+
         if (nbt.hasKey("SkinHttp", 8)) {
             this.skinHttp = nbt.getString("SkinHttp");
         }
-        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 读取
+        if (nbt.hasKey("CapeHttp", 8)) {
             this.capeHttp = nbt.getString("CapeHttp");
         }
         if (nbt.hasKey("enableElytra")) {
@@ -42,63 +48,127 @@ public class TileEntityPlayerDoll extends TileEntity {
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
+
         if (this.skullOwner != null) {
-            NBTTagCompound ownerTag = new NBTTagCompound();
-            NBTUtil.func_152460_a(ownerTag, this.skullOwner);
-            nbt.setTag("SkullOwner", ownerTag);
+            nbt.setString("SkullOwner", this.skullOwner);
+        }
+
+        if (this.ownerUUID != null) {
+            nbt.setString("OwnerUUID", this.ownerUUID);
         }
         if (this.skinHttp != null) {
             nbt.setString("SkinHttp", this.skinHttp);
         }
-        if (this.capeHttp != null) { // 新增 CapeHttp 写入
+        if (this.capeHttp != null) {
             nbt.setString("CapeHttp", this.capeHttp);
         }
+
         nbt.setBoolean("enableElytra", enableElytra);
     }
 
-    /**
-     * 获取 TileEntity 的描述包，用于客户端和服务器同步数据
-     */
     @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
-        this.writeToNBT(nbt); // 将 TileEntity 数据写入 NBT
+        this.writeToNBT(nbt);
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 4, nbt);
     }
 
     @Override
     public void onDataPacket(net.minecraft.network.NetworkManager net,
         net.minecraft.network.play.server.S35PacketUpdateTileEntity pkt) {
-        NBTTagCompound nbt = pkt.func_148857_g(); // 获取数据包中的 NBT 数据
-        if (nbt.hasKey("SkullOwner", 10)) { // 10 表示 NBTTagCompound
-            this.skullOwner = NBTUtil.func_152459_a(nbt.getCompoundTag("SkullOwner"));
-        } else if (nbt.hasKey("SkullOwner", 8)) { // 8 表示 NBTTagString
-            String playerName = nbt.getString("SkullOwner");
-            this.skullOwner = new GameProfile(null, playerName);
+        NBTTagCompound nbt = pkt.func_148857_g();
+        this.readFromNBT(nbt);
+    }
+
+    public String fetchUUID(String username) {
+        if (BLACKLISTED_USERS.contains(username.toLowerCase())) {
+            return null;
         }
-        if (nbt.hasKey("SkinHttp", 8)) {
-            this.skinHttp = nbt.getString("SkinHttp");
-        }
-        if (nbt.hasKey("CapeHttp", 8)) { // 新增 CapeHttp 同步
-            this.capeHttp = nbt.getString("CapeHttp");
-        }
-        if (nbt.hasKey("enableElytra")) {
-            enableElytra = nbt.getBoolean("enableElytra");
+
+        try {
+            URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setConnectTimeout(3000);
+
+            if (connection.getResponseCode() == 204) {
+                BLACKLISTED_USERS.add(username.toLowerCase());
+                return null;
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            String json = response.toString();
+            if (json.contains("\"errorMessage\"")) {
+                BLACKLISTED_USERS.add(username.toLowerCase());
+                return null;
+            }
+
+            int idStart = json.indexOf("\"id\":\"") + 6;
+            int idEnd = json.indexOf("\"", idStart);
+            return formatUUID(json.substring(idStart, idEnd));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    public GameProfile getSkullOwner() {
+    private String formatUUID(String compactUUID) {
+        if (compactUUID == null || compactUUID.length() != 32) {
+            return compactUUID;
+        }
+        return compactUUID.substring(0, 8) + "-"
+            + compactUUID.substring(8, 12)
+            + "-"
+            + compactUUID.substring(12, 16)
+            + "-"
+            + compactUUID.substring(16, 20)
+            + "-"
+            + compactUUID.substring(20);
+    }
+
+    public String getSkullOwner() {
         return skullOwner;
     }
 
-    public void getGameProfileNull() {
+    public String getOwnerUUID() {
+        return ownerUUID;
+    }
+
+    public void clearOwner() {
         this.skullOwner = null;
+        this.ownerUUID = null;
         this.markDirty();
     }
 
-    public void getGameProfile(GameProfile gameProfile) {
-        this.skullOwner = gameProfile;
-        this.getProfile();
+    public boolean hasOwner() {
+        return skullOwner != null && !skullOwner.isEmpty();
+    }
+
+    public void setOwner(String username) {
+        if (username != null && !username.isEmpty()) {
+            String uuid = fetchUUID(username);
+            if (uuid != null) {
+                this.skullOwner = username;
+                this.ownerUUID = uuid;
+                this.markDirty();
+            }
+        }
+    }
+
+    public boolean hasOwnerUUID() {
+        return ownerUUID != null && !ownerUUID.isEmpty();
+    }
+
+    public void setOwnerUUID(String uuid) {
+        this.ownerUUID = uuid;
+        this.markDirty();
     }
 
     public boolean hasSkinHttp() {
@@ -111,18 +181,20 @@ public class TileEntityPlayerDoll extends TileEntity {
 
     public void setSkinHttp(String skinHttp) {
         this.skinHttp = skinHttp;
+        this.markDirty();
     }
 
-    public boolean hasCapeHttp() { // 新增 CapeHttp 检查
+    public boolean hasCapeHttp() {
         return capeHttp != null && !capeHttp.isEmpty();
     }
 
-    public String getCapeHttp() { // 新增 CapeHttp 获取
+    public String getCapeHttp() {
         return capeHttp;
     }
 
-    public void setCapeHttp(String capeHttp) { // 新增 CapeHttp 设置
+    public void setCapeHttp(String capeHttp) {
         this.capeHttp = capeHttp;
+        this.markDirty();
     }
 
     public boolean getEnableElytra() {
@@ -131,32 +203,6 @@ public class TileEntityPlayerDoll extends TileEntity {
 
     public void setEnableElytra(boolean enableElytra) {
         this.enableElytra = enableElytra;
-    }
-
-    public void getProfile() {
-        if (this.skullOwner != null && !StringUtils.isNullOrEmpty(this.skullOwner.getName())) {
-            if (!this.skullOwner.isComplete() || !this.skullOwner.getProperties()
-                .containsKey("textures")) {
-                GameProfile gameprofile = MinecraftServer.getServer()
-                    .func_152358_ax()
-                    .func_152655_a(this.skullOwner.getName());
-
-                if (gameprofile != null) {
-                    Property property = (Property) Iterables.getFirst(
-                        gameprofile.getProperties()
-                            .get("textures"),
-                        (Object) null);
-
-                    if (property == null) {
-                        gameprofile = MinecraftServer.getServer()
-                            .func_147130_as()
-                            .fillProfileProperties(gameprofile, true);
-                    }
-
-                    this.skullOwner = gameprofile;
-                    this.markDirty();
-                }
-            }
-        }
+        this.markDirty();
     }
 }

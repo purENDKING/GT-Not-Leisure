@@ -31,6 +31,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -243,6 +244,12 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (glassTier < VoltageIndex.UEV & mEnergyHatch.mTier > glassTier) {
+                return false;
+            }
+        }
+
+        for (MTEHatch mExoEnergyHatch : this.mExoticEnergyHatches) {
+            if (glassTier < VoltageIndex.UEV & mExoEnergyHatch.mTier > glassTier) {
                 return false;
             }
         }
