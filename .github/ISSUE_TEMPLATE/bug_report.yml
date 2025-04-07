@@ -1,39 +1,65 @@
 name: Report Bug
-description: "Report a bug that does not abruptly end a game session or prevent the start of the game."
-labels:
-- "Status: Triage"
-- "Bug: Minor"
+description: "Report a crash, mod conflict, or any other type of bug."
+labels: []
+assignees: ABKQPO
 body:
 - type: markdown
   attributes:
-    value: 'Examples of this category include: item duping, item voiding, cannot craft item, behavior and description does not match.
-
-    Please note if you merely want a change, e.g. think something is too OP, you should use the Suggest a Change template instead.'
-- type: input
-  id: pack_version
+    value: '## Thank you for opening a bug report! Please answer all required questions completely and accurately, and read the optional questions to see if they apply to your issue.
+    
+    ## If you want to suggest a change, please do not open an issue. Use the [discussions page](https://github.com/ABKQPO/GT-Not-Leisure/discussions) instead. Issues that are suggestions will be closed and locked.'
+- type: checkboxes
+  id: initial
   attributes:
-    label: Your Pack Version
-    description: What version of the pack are you playing? If you're using an ancient version maybe first try updating the pack. We usually fix hundreds of issues per release, so there is a good chance your problem have been fixed already in the latest version. There are also usually Dev releases inbetween Official releases that may not show up on other platforms.
-    placeholder: "Example: 2.7.3"
-  validations:
-    required: true
-- type: input
-  id: mod_version
-  attributes:
-    label: Your Mod Version
-    description: What version of the mod are you playing? If you're using an ancient version maybe first try updating the mod. We usually fix hundreds of issues per release, so there is a good chance your problem have been fixed already in the latest version. There are also usually Dev releases inbetween Official releases that may not show up on other platforms.
-    placeholder: "Example: 1.9.0-master-200"
-  validations:
-    required: true
-- type: dropdown
-  id: java
-  attributes:
-    label: Java Version
-    description: What Java version are you using? It's worth mentioning that if you play on Java9+ you should try update to latest minor release (e.g. prefer Java 17.0.6 over 17.0.2) of that version.
+    label: Initial Questions
+    description: Please mark them so we can better handle this report
     options:
+      - label: "I have verified that this issue occurs in a SUPPORTED environment, meaning I can reproduce this WITHOUT OptiFine, and without Bukkit+Forge server software like KCauldron, Thermos, Crucible, Mohist etc"
+        required: true
+- type: markdown
+  attributes:
+    value: '### Please answer each question completely and to the best of your knowledge. Do not attempt to skip questions which are required.'
+- type: input
+  id: version
+  attributes:
+    label: Mod Version
+    description: What version of the mod are you using? Give an actual version number or jar name, not "latest". Speaking of which, if you are not on the latest jar, try updating first.
+    placeholder: "1.9.0-bugfix2, and/or ScienceNotLeisure-v0.1.9-bugfix-2-master.195+66be9ee1e9-dirty.jar"
+  validations:
+    required: true
+- type: textarea
+  id: whatistheissue
+  attributes:
+    label: Describe the Issue
+    description: Give a description of the issue, steps to reproduce the issue, as well as what you think the expected result should be.
+    placeholder: "Example: 1 Foo is crafted but no Bar is consumed. 1 Bar should be consumed."
+  validations:
+    required: true
+- type: textarea
+  id: conflict
+  attributes:
+    label: Conflicting Mods
+    description: If this is a mod conflict, list the mods you think are causing the issue.
+    placeholder: "Example: Causes <insert feature> to break only if <insert modname> is installed"
+  validations:
+    required: false
+- type: input
+  id: crash
+  attributes:
+    label: Crash Report
+    description: If your issue is a crash, upload a link to the report here. [GitHub Gist](https://gist.github.com) is preferred, but any non-PasteBin website is acceptable.
+    placeholder: "https://gist.github.com/yourname/examplecore"
+  validations:
+    required: false
+- type: textarea
+  id: more
+  attributes:
+    label: Other Details
+    description: Additional details you think are important to provide, if it's a mod conflict, post the mods list here. If this is a worldgen issue, post seed, and coords here. Etc. Please use [GitHub Gist](https://gist.github.com) or other non-PasteBin paste websites to upload logs.
+    placeholder: "Insert logs, etc here."
+  validations:
+    required: false
     - Java 8
-    - Java 9
-    - Java 11
     - Java 17
     - Java 19
     - Java 20
