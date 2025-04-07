@@ -1,21 +1,41 @@
-name: Auto-close issues without labels
+name: Auto Tag and Close Issues
 
 on:
   issues:
     types: [opened, edited]
 
 jobs:
-  auto_close_unlabeled_issues:
+  auto_tag_and_close:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Close issue if it has no labels
+      - name: Auto tag and close if unlabeled
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = context.payload.issue;
+            const currentLabels = issue.labels.map(label => label.name);
+            let newLabels = [...currentLabels];
 
-            if (issue.labels.length === 0) {
+            if (issue.body.includes('000-BugReport') && !currentLabels.includes('bug')) {
+              newLabels.push('bug');
+            } else if (issue.body.includes('001-RequestFeature') && !currentLabels.includes('Feature')) {
+              newLabels.push('Feature');
+            }
+
+            if (newLabels.length > currentLabels.length) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: newLabels
+              });
+            }
+
+            const updatedLabels = newLabels;
+
+            if (updatedLabels.length === 0) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
