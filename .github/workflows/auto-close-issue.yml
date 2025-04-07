@@ -1,67 +1,32 @@
-name: Auto Tag and Close Issues
+name: Auto-close issues without labels
 
 on:
   issues:
     types: [opened, edited]
 
 jobs:
-  process_issue:
+  auto_close_unlabeled_issues:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Parse issue form
-        id: parse
-        uses: onmax/issue-form-parser@v1.4
-        with:
-          issue_number: ${{ github.event.issue.number }}
-
-      - name: Determine and apply labels
-        id: label
+      - name: Close issue if it has no labels
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const payloadRaw = `${{ toJson(steps.parse.outputs.payload) }}`;
-            const payload = JSON.parse(payloadRaw);
             const issue = context.payload.issue;
-            const labelsToAdd = [];
 
-            const templateUsed = payload["template"] || '';
-
-            if (templateUsed === "000-BugReport") {
-              labelsToAdd.push("bug");
-            } else if (templateUsed === "001-RequestFeature") {
-              labelsToAdd.push("Feature");
-            }
-
-            if (labelsToAdd.length > 0) {
-              await github.rest.issues.addLabels({
+            if (issue.labels.length === 0) {
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                labels: labelsToAdd
+                body: `@${issue.user.login} 你好！由于此 issue 没有任何标签，将被自动关闭。请确保按照模板提交并添加相应标签。谢谢！`
+              });
+
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
               });
             }
-
-            core.setOutput("labels", labelsToAdd.join(','));
-
-      - name: Close issue if no labels were applied
-        if: steps.label.outputs.labels == ''
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const issue = context.payload.issue;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              body: `@${issue.user.login} 你好！由于此 issue 没有识别到任何模板标签，已被自动关闭。请确保按照模板提交并选择正确的类型标签（例如 Bug Report 或 Feature Request）。谢谢！`
-            });
-
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              state: 'closed'
-            });

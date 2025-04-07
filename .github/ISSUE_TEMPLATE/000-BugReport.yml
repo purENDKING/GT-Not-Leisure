@@ -1,7 +1,7 @@
 name: Report Bug
 description: "Report a crash, mod conflict, or any other type of bug."
 labels:
-- "Crash"
+- "bug"
 assignees: ABKQPO
 body:
 - type: markdown
