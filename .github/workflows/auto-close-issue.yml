@@ -21,7 +21,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const core = require('@actions/core');
             const payload = JSON.parse(`\`${{ steps.parse.outputs.payload }}\``);
             const issue = context.payload.issue;
             const labelsToAdd = [];
