@@ -14,6 +14,7 @@ import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRen
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
+import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.render.TwilightSwordModelRender;
@@ -47,8 +48,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
-        MinecraftForge.EVENT_BUS.register(new ItemPlayerDollRenderer());
-        MinecraftForge.EVENT_BUS.register(new BlockPlayerDollRenderer());
+        MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
     }
 
     @Override

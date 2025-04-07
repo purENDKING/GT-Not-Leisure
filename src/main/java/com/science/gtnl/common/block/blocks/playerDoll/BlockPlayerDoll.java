@@ -1,5 +1,7 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
+import static com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager.fetchUUID;
+
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
@@ -12,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
@@ -83,9 +86,19 @@ public class BlockPlayerDoll extends BlockContainer {
                 if (nbt.hasKey("SkullOwner", 8)) {
                     String playerName = nbt.getString("SkullOwner");
                     tileEntityPlayerDoll.setOwner(playerName);
+                    String uuid = fetchUUID(playerName);
+                    if (!StringUtils.isNullOrEmpty(uuid)) {
+                        nbt.setString("OwnerUUID", uuid);
+                        tileEntityPlayerDoll.setOwnerUUID(uuid);
+                    }
                 } else {
                     String playerName = player.getCommandSenderName();
                     tileEntityPlayerDoll.setOwner(playerName);
+                    String uuid = fetchUUID(playerName);
+                    if (!StringUtils.isNullOrEmpty(uuid)) {
+                        nbt.setString("OwnerUUID", uuid);
+                        tileEntityPlayerDoll.setOwnerUUID(uuid);
+                    }
                 }
 
                 if (nbt.hasKey("OwnerUUID", 8)) {
@@ -94,14 +107,19 @@ public class BlockPlayerDoll extends BlockContainer {
                 } else {
                     String playerName = player.getCommandSenderName();
                     tileEntityPlayerDoll.setOwner(playerName);
-                    String uuid = tileEntityPlayerDoll.fetchUUID(playerName);
-                    tileEntityPlayerDoll.setOwnerUUID(uuid);
+                    String uuid = fetchUUID(playerName);
+                    if (!StringUtils.isNullOrEmpty(uuid)) {
+                        nbt.setString("OwnerUUID", uuid);
+                        tileEntityPlayerDoll.setOwnerUUID(uuid);
+                    }
                 }
             } else {
                 String playerName = player.getCommandSenderName();
                 tileEntityPlayerDoll.setOwner(playerName);
-                String uuid = tileEntityPlayerDoll.fetchUUID(playerName);
-                tileEntityPlayerDoll.setOwnerUUID(uuid);
+                String uuid = fetchUUID(playerName);
+                if (!StringUtils.isNullOrEmpty(uuid)) {
+                    tileEntityPlayerDoll.setOwnerUUID(uuid);
+                }
             }
         }
 

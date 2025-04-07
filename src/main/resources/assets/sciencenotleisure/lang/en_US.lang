@@ -1617,6 +1617,7 @@ Tooltip_SteamManufacturer_01=Assembles assemblies assemblically
 Tooltip_SteamManufacturer_02=§b§oSlave labor? Not in my GTNH!
 
 NameSteamRockBreaker=Steam Cobbler
+gtnl.recipe.RockBreakerRecipes=Rock Breaker
 SteamRockBreakerRecipeType=Rock Breaker
 Tooltip_SteamRockBreaker_00=Works as a Rock Breaker, but big
 Tooltip_SteamRockBreaker_01=Cog 1 = Cobblestone, Cog 2 = Stone, Cog 3 = Obsidian

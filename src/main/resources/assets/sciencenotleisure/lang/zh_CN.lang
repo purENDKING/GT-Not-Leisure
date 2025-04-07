@@ -1617,6 +1617,7 @@ Tooltip_SteamManufacturer_01=以组装的方式组装组件
 Tooltip_SteamManufacturer_02=§b§o奴隶劳动? 在我的 GTNH 里绝不可能!
 
 NameSteamRockBreaker=蒸汽造石机
+gtnl.recipe.RockBreakerRecipes=碎石机
 SteamRockBreakerRecipeType=碎石机
 Tooltip_SteamRockBreaker_00=像碎石机一样工作，但更大
 Tooltip_SteamRockBreaker_01=电路板1 = 圆石，电路板2 = 石头，电路板3 = 黑曜石
