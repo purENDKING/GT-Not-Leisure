@@ -5,48 +5,63 @@ on:
     types: [opened, edited]
 
 jobs:
-  auto_tag_and_close:
+  process_issue:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Auto tag and close if unlabeled
+      - name: Parse issue form
+        id: parse
+        uses: onmax/issue-form-parser@v1.4
+        with:
+          issue_number: ${{ github.event.issue.number }}
+
+      - name: Determine and apply labels
+        id: label
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const payload = JSON.parse(`\`${{ steps.parse.outputs.payload }}\``);
+            const issue = context.payload.issue;
+            const labelsToAdd = [];
+
+            const templateUsed = payload["template"] || '';
+
+            if (templateUsed === "000-BugReport") {
+              labelsToAdd.push("bug");
+            } else if (templateUsed === "001-RequestFeature") {
+              labelsToAdd.push("Feature");
+            }
+
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labelsToAdd
+              });
+            }
+
+            return labelsToAdd.join(',');
+        result-encoding: string
+
+      - name: Close issue if no labels were applied
+        if: steps.label.outputs.result == ''
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue = context.payload.issue;
-            const currentLabels = issue.labels.map(label => label.name);
-            let newLabels = [...currentLabels];
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              body: `@${issue.user.login} 你好！由于此 issue 没有识别到任何模板标签，已被自动关闭。请确保按照模板提交并选择正确的类型标签（例如 Bug Report 或 Feature Request）。谢谢！`
+            });
 
-            if (issue.body.includes('000-BugReport') && !currentLabels.includes('bug')) {
-              newLabels.push('bug');
-            } else if (issue.body.includes('001-RequestFeature') && !currentLabels.includes('Feature')) {
-              newLabels.push('Feature');
-            }
-
-            if (newLabels.length > currentLabels.length) {
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                labels: newLabels
-              });
-            }
-
-            const updatedLabels = newLabels;
-
-            if (updatedLabels.length === 0) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                body: `@${issue.user.login} 你好！由于此 issue 没有任何标签，将被自动关闭。请确保按照模板提交并添加相应标签。谢谢！`
-              });
-
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                state: 'closed'
-              });
-            }
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue.number,
+              state: 'closed'
+            });
