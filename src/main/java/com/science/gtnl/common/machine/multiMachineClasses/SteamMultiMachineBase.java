@@ -386,8 +386,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return false;
     }
 
-    @Override
-    public ArrayList<FluidStack> getStoredFluids() {
+    public ArrayList<FluidStack> getStoredSteamFluids() {
         ArrayList<FluidStack> rList = new ArrayList<>();
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) {
             if (tHatch.getFillableStack() != null) {
@@ -398,9 +397,6 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             if (tHatch.getFillableStack() != null) {
                 rList.add(tHatch.getFillableStack());
             }
-        }
-        for (MTEHatchInput hatch : this.mInputHatches) if (hatch.getFillableStack() != null) {
-            rList.add(hatch.getFillableStack());
         }
         return rList;
     }
@@ -540,7 +536,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
 
     private int getTotalSteamStoredOfAnyType() {
         int aSteam = 0;
-        for (FluidStack aFluid : this.getStoredFluids()) {
+        for (FluidStack aFluid : this.getStoredSteamFluids()) {
             if (aFluid == null) continue;
             for (SteamTypes type : SteamTypes.VALUES) {
                 if (aFluid.getFluid() == type.fluid) {
@@ -554,7 +550,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public ArrayList<FluidStack> getAllSteamStacks() {
         ArrayList<FluidStack> aFluids = new ArrayList<>();
-        for (FluidStack aFluid : this.getStoredFluids()) {
+        for (FluidStack aFluid : this.getStoredSteamFluids()) {
             if (aFluid != null) {
                 for (SteamTypes type : SteamTypes.VALUES) {
                     if (aFluid.getFluid() == type.fluid) {

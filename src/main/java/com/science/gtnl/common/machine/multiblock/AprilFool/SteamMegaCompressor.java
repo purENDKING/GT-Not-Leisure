@@ -165,7 +165,7 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
             if (aActive) {
                 rTexture = new ITexture[] {
                     Textures.BlockIcons
-                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)),
+                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings2, 0)),
                     TextureFactory.builder()
                         .addIcon(OVERLAY_MULTI_STEAMHOLE_ACTIVE)
                         .extFacing()
@@ -178,7 +178,7 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
             } else {
                 rTexture = new ITexture[] {
                     Textures.BlockIcons
-                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)),
+                        .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings2, 0)),
                     TextureFactory.builder()
                         .addIcon(OVERLAY_MULTI_STEAMHOLE)
                         .extFacing()
@@ -191,7 +191,7 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
             }
         } else {
             rTexture = new ITexture[] { Textures.BlockIcons
-                .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings1, 10)) };
+                .getCasingTextureForId(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings2, 0)) };
         }
         return rTexture;
     }
