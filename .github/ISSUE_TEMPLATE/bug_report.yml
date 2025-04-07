@@ -17,6 +17,14 @@ body:
     placeholder: "Example: 2.7.3"
   validations:
     required: true
+- type: input
+  id: version
+  attributes:
+    label: Your Mod Version
+    description: What version of the mod are you playing? If you're using an ancient version maybe first try updating the mod. We usually fix hundreds of issues per release, so there is a good chance your problem have been fixed already in the latest version. There are also usually Dev releases inbetween Official releases that may not show up on other platforms.
+    placeholder: "Example: 1.9.0-master-200"
+  validations:
+    required: true
 - type: dropdown
   id: java
   attributes:
