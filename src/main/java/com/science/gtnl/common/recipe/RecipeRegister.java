@@ -440,4 +440,10 @@ public class RecipeRegister {
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamInfernalCokeOven.get(1))))
         .build();
+
+    public static final RecipeMap<RecipeMapBackend> RockBreakerRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.RockBreakerRecipes")
+        .maxIO(2, 1, 0, 0)
+        .disableRegisterNEI()
+        .build();
 }

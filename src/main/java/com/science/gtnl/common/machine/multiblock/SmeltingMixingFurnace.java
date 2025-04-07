@@ -244,11 +244,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
 
             boolean hasRequiredItem = false;
-            for (int i = 0; i < this.getBaseMetaTileEntity()
-                .getSizeInventory(); i++) {
-                ItemStack stack = this.getBaseMetaTileEntity()
-                    .getStackInSlot(i);
-                if (stack != null && stack.isItemEqual(requiredItem)) {
+            for (ItemStack item : getAllStoredInputs()) {
+                if (item != null && item.isItemEqual(requiredItem)) {
                     hasRequiredItem = true;
                     break;
                 }

@@ -35,7 +35,6 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
@@ -64,7 +63,6 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
-import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> implements ISurvivalConstructable {
 
@@ -155,7 +153,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_01)
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_02)
             .addInfo(TextLocalization.Tooltip_PreciseAssembler_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
@@ -371,14 +369,6 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        if (MainConfig.enableMachineAmpLimit) {
-            for (MTEHatch hatch : getExoticEnergyHatches()) {
-                if (hatch instanceof MTEHatchEnergyTunnel) {
-                    return false;
-                }
-            }
-            if (getMaxInputAmps() > 64) return false;
-        }
 
         updateHatchTexture();
         updateTexture(aBaseMetaTileEntity, getCasingTextureID());
