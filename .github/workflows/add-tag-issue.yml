@@ -2,59 +2,30 @@ name: Auto Tag Issues
 
 on:
   issues:
-    types: [opened]
-  workflow_dispatch:
-    inputs:
-      issue_number:
-        description: 'Issue number to run this action on' required: true
-        type: integer
+    types: [opened, edited]
 
 jobs:
-  tag_issues:
+  auto_tag_issues:
     runs-on: ubuntu-latest steps:
-      - name: Get issue details
-        id: get_issue uses: actions/github-script@v6 with:
-          script: |
-            const issue = await github.rest.issues.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: ${{ github.event_name == 'workflow_dispatch' && inputs.issue_number || github.event.issue.number }}
-            });
-            return {
-              body: issue.data.body,
-              labels: issue.data.labels.map(label => label.name)
-            };
-
-      - name: Check template and add tag
-        id: add_tag
+      - name: Add tag based on template
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issueBody = ${{ steps.get_issue.outputs.body }};
-            const currentLabels = ${{ steps.get_issue.outputs.labels }};
-            let newLabels = [...currentLabels];
-            
-            if (issueBody.includes('000-BugReport')) {
-              if (!currentLabels.includes('bug')) {
-                newLabels.push('bug');
-              }
+            const issue = context.payload.issue;
+            const newLabels = [...issue.labels.map(label => label.name)];
+
+            if (issue.body.includes('000-BugReport') && !newLabels.includes('bug')) {
+              newLabels.push('bug');
             }
-            else if (issueBody.includes('001-RequestFeature')) {
-              if (!currentLabels.includes('Feature')) {
-                newLabels.push('Feature');
-              }
+            else if (issue.body.includes('001-RequestFeature') && !newLabels.includes('Feature')) {
+              newLabels.push('Feature');
             }
 
-            if (newLabels.length !== currentLabels.length) {
+            if (newLabels.length > issue.labels.length) {
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: ${{ github.event_name == 'workflow_dispatch' && inputs.issue_number || github.event.issue.number }},
-                labels: newLabels
-              });
-              return 'Added appropriate tag based on template';
+                issue_number: issue.number,
+                labels: newLabels });
             }
-            return 'No tag needed - template not matched or tag already exists';
-
-      - name: Log result
-        run: echo "${{ steps.add_tag.outputs.result }}"
