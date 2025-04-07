@@ -33,6 +33,14 @@ body:
     - Other versions in between
   validations:
     required: true
+- type: textarea
+  id: report
+  attributes:
+    label: Crash Report
+    description: "If no crash report is created, attach `logs/fml-client-latest.log` or `logs/fml-server-latest.log`, depending on if it's a dedicated server crash or a client crash. You can also type in additional info that you consider important."
+    placeholder: "Example: pastebin/something OR submit the file to github by dragging it to this textbox."
+  validations:
+    required: false
 - type: checkboxes
   id: final
   attributes:
