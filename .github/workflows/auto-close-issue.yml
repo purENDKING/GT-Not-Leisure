@@ -21,6 +21,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const core = require('@actions/core');
             const payload = JSON.parse(`\`${{ steps.parse.outputs.payload }}\``);
             const issue = context.payload.issue;
             const labelsToAdd = [];
@@ -42,11 +43,10 @@ jobs:
               });
             }
 
-            return labelsToAdd.join(',');
-        result-encoding: string
+            core.setOutput("labels", labelsToAdd.join(','));
 
       - name: Close issue if no labels were applied
-        if: steps.label.outputs.result == ''
+        if: steps.label.outputs.labels == ''
         uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
