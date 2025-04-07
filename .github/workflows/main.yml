@@ -1,32 +1,32 @@
-name: Auto-close untagged issues
+name: Auto-close issues without labels
 
 on:
   issues:
     types: [opened, edited]
 
 jobs:
-  check_and_close_untagged_issues:
-    runs-on: ubuntu-latest steps:
-      - name: Check if issue has labels id: check_labels uses: actions/github-script@v6 with:
+  auto_close_unlabeled_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close issue if it has no labels
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue = context.payload.issue if (issue.labels.length === 0) {
-              core.setOutput('has_labels', 'false')
- } else {
-              core.setOutput('has_labels', 'true')
+            const issue = context.payload.issue;
+
+            if (issue.labels.length === 0) {
+              await github.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `@${issue.user.login} 你好！由于此 issue 没有任何标签，将被自动关闭。请确保按照模板提交并添加相应标签。谢谢！`
+              });
+
+              await github.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
             }
-      - name: Close untagged issue if: steps.check_labels.outputs.has_labels == 'false'
-        uses: actions/github-script@v6 with:
-          script: |
-            const issue = context.payload.issue
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              state: 'closed'
-            })
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              body: `@${issue.user.login} 您好！👋\n\n这个 issue 因为没有添加任何标签而被自动关闭。请创建一个带有适当标签的新 issue。`
-            })
