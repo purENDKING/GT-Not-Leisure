@@ -16,14 +16,14 @@ jobs:
             const issue = context.payload.issue;
 
             if (issue.labels.length === 0) {
-              await github.issues.createComment({
+              await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
                 body: `@${issue.user.login} 你好！由于此 issue 没有任何标签，将被自动关闭。请确保按照模板提交并添加相应标签。谢谢！`
               });
 
-              await github.issues.update({
+              await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
