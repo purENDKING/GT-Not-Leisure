@@ -1,6 +1,7 @@
 name: Report Bug
 description: "Report a crash, mod conflict, or any other type of bug."
-labels: []
+labels:
+- "Crash"
 assignees: ABKQPO
 body:
 - type: markdown
@@ -8,19 +9,19 @@ body:
     value: '## Thank you for opening a bug report! Please answer all required questions completely and accurately, and read the optional questions to see if they apply to your issue.
     
     ## If you want to suggest a change, please do not open an issue. Use the [discussions page](https://github.com/ABKQPO/GT-Not-Leisure/discussions) instead. Issues that are suggestions will be closed and locked.'
-- type: checkboxes
-  id: initial
-  attributes:
-    label: Initial Questions
-    description: Please mark them so we can better handle this report
-    options:
-      - label: "I have verified that this issue occurs in a SUPPORTED environment, meaning I can reproduce this WITHOUT OptiFine, and without Bukkit+Forge server software like KCauldron, Thermos, Crucible, Mohist etc"
-        required: true
 - type: markdown
   attributes:
     value: '### Please answer each question completely and to the best of your knowledge. Do not attempt to skip questions which are required.'
 - type: input
-  id: version
+  id: pack_version
+  attributes:
+    label: Your Pack Version
+    description: What version of the pack are you playing? If you're using an ancient version maybe first try updating the pack. We usually fix hundreds of issues per release, so there is a good chance your problem have been fixed already in the latest version. There are also usually Dev releases inbetween Official releases that may not show up on other platforms.
+    placeholder: "Example: 2.1.1.0"
+  validations:
+    required: true
+- type: input
+  id: mod_version
   attributes:
     label: Mod Version
     description: What version of the mod are you using? Give an actual version number or jar name, not "latest". Speaking of which, if you are not on the latest jar, try updating first.
@@ -43,23 +44,15 @@ body:
     placeholder: "Example: Causes <insert feature> to break only if <insert modname> is installed"
   validations:
     required: false
-- type: input
-  id: crash
+- type: dropdown
+  id: java
   attributes:
-    label: Crash Report
-    description: If your issue is a crash, upload a link to the report here. [GitHub Gist](https://gist.github.com) is preferred, but any non-PasteBin website is acceptable.
-    placeholder: "https://gist.github.com/yourname/examplecore"
-  validations:
-    required: false
-- type: textarea
-  id: more
-  attributes:
-    label: Other Details
-    description: Additional details you think are important to provide, if it's a mod conflict, post the mods list here. If this is a worldgen issue, post seed, and coords here. Etc. Please use [GitHub Gist](https://gist.github.com) or other non-PasteBin paste websites to upload logs.
-    placeholder: "Insert logs, etc here."
-  validations:
-    required: false
+    label: Java Version
+    description: What Java version are you using? It's worth mentioning that if you play on Java9+ you should try update to latest minor release (e.g. prefer Java 17.0.6 over 17.0.2) of that version.
+    options:
     - Java 8
+    - Java 9
+    - Java 11
     - Java 17
     - Java 19
     - Java 20
@@ -74,16 +67,16 @@ body:
     description: "If no crash report is created, attach `logs/fml-client-latest.log` or `logs/fml-server-latest.log`, depending on if it's a dedicated server crash or a client crash. You can also type in additional info that you consider important."
     placeholder: "Example: pastebin/something OR submit the file to github by dragging it to this textbox."
   validations:
-    required: false
+    required: true
 - type: checkboxes
   id: final
   attributes:
     label: Final Checklist
-    description: Please mark them so we can better handle this report
+    description: Please mark them so we can better handle this report.
     options:
-      - label: "I have searched this issue tracker and there is nothing similar already. Posting on a closed issue saying the bug still exists will prompt us to investigate and reopen it once we confirm your report."
+      - label: "I have searched this issue tracker and there is nothing similar already. Posting on a closed issue saying the crash still exists will prompt us to investigate and reopen it once we confirm your report."
         required: true
-      - label: "I can reproduce this problem consistently by follow the exact steps I described above, or this does not need reproducing, e.g. recipe loophole."
+      - label: "I can reproduce this crash consistently by following the exact steps I described above."
         required: false
-      - label: "I have asked other people and they confirm they also have this problem by follow the exact steps I described above, or this does not need reproducing, e.g. recipe loophole."
+      - label: "I have asked other people and they confirm they also crash by following the exact steps I described above."
         required: false
