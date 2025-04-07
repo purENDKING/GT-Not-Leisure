@@ -29,21 +29,21 @@ jobs:
             const templateUsed = payload["template"] || '';
 
             if (templateUsed === "000-BugReport") {
-            labelsToAdd.push("bug");
+              labelsToAdd.push("bug");
             } else if (templateUsed === "001-RequestFeature") {
-            labelsToAdd.push("Feature");
+              labelsToAdd.push("Feature");
             }
 
             if (labelsToAdd.length > 0) {
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: issue.number,
-              labels: labelsToAdd
-            });
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labelsToAdd
+              });
             }
 
-      core.setOutput("labels", labelsToAdd.join(','));
+            core.setOutput("labels", labelsToAdd.join(','));
 
       - name: Close issue if no labels were applied
         if: steps.label.outputs.labels == ''
