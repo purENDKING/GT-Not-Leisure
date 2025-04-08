@@ -40,7 +40,7 @@ public class multiDehydratorRecipes implements IRecipePool {
         RecipeBuilder.builder()
             .fluidInputs(MaterialPool.PloyamicAcid.getFluidOrGas(144))
             .itemOutputs()
-            .fluidOutputs(MaterialPool.Polyimide.getFluidOrGas(144))
+            .fluidOutputs(MaterialPool.Polyimide.getMolten(144))
             .specialValue(0)
             .noOptimize()
             .duration(270)

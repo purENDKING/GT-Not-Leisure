@@ -465,8 +465,14 @@ public class MaterialPool implements Runnable {
         subscriptNumbers("C22H12N2O6"),
         new Werkstoff.Stats(),
         Werkstoff.Types.ELEMENT,
-        new Werkstoff.GenerationFeatures().disable()
-            .addCells(),
+        new Werkstoff.GenerationFeatures().onlyDust()
+            .addMolten()
+            .addMetalItems()
+            .addCraftingMetalWorkingItems()
+            .addSimpleMetalWorkingItems()
+            .addMultipleIngotMetalWorkingItems()
+            .addMetaSolidifierRecipes()
+            .addMetalCraftingSolidifierRecipes(),
         offsetID_01 + 41,
         TextureSet.SET_FLUID);
 

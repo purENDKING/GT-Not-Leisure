@@ -114,7 +114,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.Silicon, 8),
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.Naquadah, 4))
-            .fluidInputs(MaterialPool.Polyimide.getFluidOrGas(288))
+            .fluidInputs(MaterialPool.Polyimide.getMolten(288))
             .itemOutputs(GTNLItemList.BiowareSMDCapacitor.get(16))
             .specialValue(0)
             .noOptimize()
@@ -128,7 +128,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Lutetium, 1),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tritanium, 1))
-            .fluidInputs(MaterialPool.Polyimide.getFluidOrGas(288))
+            .fluidInputs(MaterialPool.Polyimide.getMolten(288))
             .itemOutputs(GTNLItemList.BiowareSMDDiode.get(16))
             .specialValue(0)
             .noOptimize()
@@ -142,7 +142,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Naquadria, 1),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Tritanium, 1))
-            .fluidInputs(MaterialPool.Polyimide.getFluidOrGas(288))
+            .fluidInputs(MaterialPool.Polyimide.getMolten(288))
             .itemOutputs(GTNLItemList.BiowareSMDResistor.get(16))
             .specialValue(0)
             .noOptimize()
@@ -156,7 +156,7 @@ public class AssemblerRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
                 MaterialPool.Germaniumtungstennitride.get(OrePrefixes.plate, 2),
                 MaterialsAlloy.SILICON_CARBIDE.getPlate(2))
-            .fluidInputs(MaterialPool.Polyimide.getFluidOrGas(288))
+            .fluidInputs(MaterialPool.Polyimide.getMolten(288))
             .itemOutputs(GTNLItemList.BiowareSMDTransistor.get(16))
             .specialValue(0)
             .noOptimize()
@@ -169,7 +169,7 @@ public class AssemblerRecipes implements IRecipePool {
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.NaquadahAlloy, 8),
                 GTOreDictUnificator.get(OrePrefixes.ring, Materials.NaquadahAlloy, 1))
-            .fluidInputs(MaterialPool.Polyimide.getFluidOrGas(288))
+            .fluidInputs(MaterialPool.Polyimide.getMolten(288))
             .itemOutputs(GTNLItemList.BiowareSMDInductor.get(16))
             .specialValue(0)
             .noOptimize()
