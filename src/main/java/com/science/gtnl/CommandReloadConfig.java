@@ -12,12 +12,12 @@ public class CommandReloadConfig extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "GTLL_reloadconfig"; // 命令名称
+        return "gtnl_reloadconfig"; // 命令名称
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/gtll_reloadconfig - 重新加载 gtll 的配置文件";
+        return "/gtnl_reloadconfig - 重新加载 gtll 的配置文件";
     }
 
     @Override
