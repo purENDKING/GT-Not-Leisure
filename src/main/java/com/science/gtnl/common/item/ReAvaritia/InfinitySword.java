@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
@@ -54,6 +55,7 @@ import fox.spiteful.avaritia.LudicrousText;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
+import vazkii.botania.common.entity.EntityDoppleganger;
 
 public class InfinitySword extends ItemSword implements ICosmicRenderItem, SubtitleDisplay {
 
@@ -217,7 +219,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     private void applyInfinityDamage(EntityLivingBase target, EntityLivingBase attacker) {
 
-        if (target instanceof EntityPlayer playerTarget) {
+        if (target instanceof EntityDragon) {
+            target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+            target.setDead();
+        } else if (target instanceof EntityPlayer playerTarget) {
             for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
                 ItemStack armorStack = playerTarget.inventory.armorInventory[i];
                 if (armorStack != null) {
@@ -269,7 +274,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         target.onDeath(INFINITY_DAMAGE);
 
         // 直接删除目标实体
-        target.worldObj.removeEntity(target);
+        if (!(target instanceof EntityPlayer)) {
+            target.worldObj.removeEntity(target);
+        }
+
         if (target instanceof EntityPlayer playerTarget) {
             if (!playerTarget.worldObj.isRemote) {
                 playerTarget.setDead();
@@ -348,6 +356,34 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             boolean isSneaking = player.isSneaking();
             boolean isHostile = target instanceof IMob;
 
+            if (target instanceof EntityDoppleganger livingTarget) {
+                try {
+                    Field playersField = EntityDoppleganger.class.getDeclaredField("playersWhoAttacked");
+                    playersField.setAccessible(true);
+
+                    List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
+                    String playerName = player.getCommandSenderName();
+                    if (!playersWhoAttacked.contains(playerName)) {
+                        playersWhoAttacked.add(playerName);
+                    }
+                    livingTarget.recentlyHit = 100;
+                    DamageSource playerSource = DamageSource.causePlayerDamage(player);
+                    livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+                    livingTarget.setHealth(0);
+                    livingTarget.onDeath(playerSource);
+                    livingTarget.setDead();
+                    livingTarget.worldObj.removeEntity(livingTarget);
+
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (target instanceof EntityDragon) {
+                target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+                target.setDead();
+            }
+
             if (!isSneaking && !(isHostile || target instanceof EntityPlayer)) continue;
 
             if (target instanceof EntityPlayer) {
@@ -357,8 +393,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 }
             }
 
-            if (target instanceof EntityLivingBase) {
-                applyDoubleSweepDamage((EntityLivingBase) target, player);
+            if (target instanceof EntityLivingBase livingTarget) {
+                livingTarget.recentlyHit = 100;
+                applyDoubleSweepDamage(livingTarget, player);
             }
         }
     }
@@ -432,7 +469,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         target.setHealth(0);
 
         target.onDeath(INFINITY_DAMAGE);
-        target.worldObj.removeEntity(target);
+        if (!(target instanceof EntityPlayer)) {
+            target.worldObj.removeEntity(target);
+        }
 
         if (target instanceof EntityPlayer playerTarget) {
             if (!playerTarget.worldObj.isRemote) {
@@ -600,14 +639,15 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             ItemStack heldItem = player.getHeldItem();
 
             if (heldItem != null && heldItem.getItem() == this) {
+                GL11.glPushMatrix();
                 float currentTime = (player.worldObj.getTotalWorldTime() + event.partialRenderTick) / 20.0F;
 
                 float rotationSpeed = 1800.0F;
 
                 float rotationAngle = (currentTime * rotationSpeed) % 360;
 
-                GL11.glPushMatrix();
                 GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
+                GL11.glPopMatrix();
             }
         }
     }
