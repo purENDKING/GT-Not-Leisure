@@ -1,5 +1,6 @@
 package com.science.gtnl.loader;
 
+import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblyLineRecipes;
@@ -12,7 +13,7 @@ public class RecipeLoaderServerStart {
     public static void loadRecipesServerStart() {
 
         IRecipePool[] recipePools = new IRecipePool[] { new FormingPressRecipes(), new CircuitAssemblerRecipes(),
-            new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
+            new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes(), new FallingTowerRecipes() };
 
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();

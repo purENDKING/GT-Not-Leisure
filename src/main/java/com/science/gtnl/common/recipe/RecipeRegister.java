@@ -3,6 +3,7 @@ package com.science.gtnl.common.recipe;
 import java.util.Comparator;
 
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.recipe.Special.BloodSoulFrontend;
 import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
 import com.science.gtnl.common.recipe.Special.NaquadahReactorSpecialValue;
 import com.science.gtnl.common.recipe.Special.RealArtificialStarSpecialValue;
@@ -31,14 +32,15 @@ public class RecipeRegister {
         .disableOptimize()
         .build();
 
-    public static final RecipeMap<RecipeMapBackend> BloodSoulTradingRecipes = RecipeMapBuilder
-        .of("gtnl.recipe.BloodSoulTradingRecipes")
-        .maxIO(4, 0, 1, 1)
-        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+    public static final RecipeMap<RecipeMapBackend> FallingTowerRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.FallingTowerRecipes")
+        .maxIO(1, 81, 0, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_COMPRESS)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.BloodSoulSacrificialArray.get(1))
-                .setMaxRecipesPerPage(2))
+                .setMaxRecipesPerPage(1))
         .disableOptimize()
+        .frontend(FallingTowerFrontend::new)
         .build();
 
     public static final RecipeMap<RecipeMapBackend> BloodDemonInjectionRecipes = RecipeMapBuilder
@@ -49,6 +51,7 @@ public class RecipeRegister {
             builder -> builder.setDisplayStack(GTNLItemList.BloodSoulSacrificialArray.get(1))
                 .setMaxRecipesPerPage(2))
         .disableOptimize()
+        .frontend(BloodSoulFrontend::new)
         .build();
 
     public static final RecipeMap<RecipeMapBackend> AlchemicChemistrySetRecipes = RecipeMapBuilder
@@ -59,6 +62,7 @@ public class RecipeRegister {
             builder -> builder.setDisplayStack(GTNLItemList.BloodSoulSacrificialArray.get(1))
                 .setMaxRecipesPerPage(2))
         .disableOptimize()
+        .frontend(BloodSoulFrontend::new)
         .build();
 
     public static final RecipeMap<RecipeMapBackend> RealArtificialStarRecipes = RecipeMapBuilder

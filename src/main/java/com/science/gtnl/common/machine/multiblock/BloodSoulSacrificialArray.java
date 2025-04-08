@@ -2,21 +2,27 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.sBlockCasings8;
-import static gregtech.api.enums.HatchElement.InputBus;
-import static gregtech.api.enums.HatchElement.InputHatch;
-import static gregtech.api.enums.HatchElement.OutputBus;
+import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,35 +30,55 @@ import com.dreammaster.block.BlockList;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import WayofTime.alchemicalWizardry.ModBlocks;
+import WayofTime.alchemicalWizardry.api.soulNetwork.SoulNetworkHandler;
+import WayofTime.alchemicalWizardry.common.entity.projectile.EntityMeteor;
+import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.recipe.check.SimpleCheckRecipeResult;
+import gregtech.api.recipe.check.SingleRecipeCheck;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
+import gregtech.api.util.ParallelHelper;
 import gregtech.common.blocks.BlockCasings8;
-import kubatech.loaders.BlockLoader;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 
-public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrificialArray> {
+public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacrificialArray> {
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String BSSA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blood_soul_sacrificial_array"; // 文件路径
     public final int horizontalOffSet = 16;
     public final int verticalOffSet = 10;
     public final int depthOffSet = 9;
+    public static boolean isCreativeOrb = false;
+    public static int currentEssence = 0;
     public static IStructureDefinition<BloodSoulSacrificialArray> STRUCTURE_DEFINITION = null;
-    public byte mode = 1;
     public static String[][] shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
+    private static final int MACHINEMODE_BLOOD_DEMON = 0;
+    private static final int MACHINEMODE_FALLING_TOWER = 1;
+    private static final int MACHINEMODE_ALCHEMIC = 2;
 
     public BloodSoulSacrificialArray(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -62,24 +88,21 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
         super(aName);
     }
 
-    protected float getSpeedBonus() {
-        return 1F;
-    }
-
-    protected int getMaxParallelRecipes() {
-        return 2147483647;
-    }
-
-    protected boolean isEnablePerfectOverclock() {
-        return false;
+    @Override
+    public int getMaxParallelRecipes() {
+        if (ParallelTier <= 1) {
+            return 8;
+        } else {
+            return (int) Math.pow(4, ParallelTier - 2) * 4;
+        }
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        switch (mode) {
-            case 1:
-                return RecipeRegister.BloodSoulTradingRecipes;
-            case 2:
+        switch (machineMode) {
+            case MACHINEMODE_FALLING_TOWER:
+                return RecipeRegister.FallingTowerRecipes;
+            case MACHINEMODE_ALCHEMIC:
                 return RecipeRegister.AlchemicChemistrySetRecipes;
             default:
                 return RecipeRegister.BloodDemonInjectionRecipes;
@@ -90,24 +113,67 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
         return Arrays.asList(
-            RecipeRegister.BloodSoulTradingRecipes,
+            RecipeRegister.FallingTowerRecipes,
             RecipeRegister.AlchemicChemistrySetRecipes,
             RecipeRegister.BloodDemonInjectionRecipes);
     }
 
     @Override
+    public int nextMachineMode() {
+        if (machineMode == MACHINEMODE_BLOOD_DEMON) return MACHINEMODE_FALLING_TOWER;
+        else if (machineMode == MACHINEMODE_FALLING_TOWER) return MACHINEMODE_ALCHEMIC;
+        else return MACHINEMODE_BLOOD_DEMON;
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.clear();
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_FLUID);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_METAL);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_PACKAGER);
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        setMachineModeIcons();
+        builder.widget(createModeSwitchButton(builder));
+    }
+
+    @Override
     public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
-        this.mode = (byte) ((this.mode + 1) % 3);
+        this.machineMode = (byte) ((this.machineMode + 1) % 3);
         GTUtility.sendChatToPlayer(
             aPlayer,
-            StatCollector.translateToLocal("BloodSoulSacrificialArray.modeMsg." + this.mode));
+            StatCollector.translateToLocal("BloodSoulSacrificialArray_Mode_" + this.machineMode));
 
     }
 
     @Override
+    public String getMachineModeName() {
+        return StatCollector.translateToLocal("BloodSoulSacrificialArray_Mode_" + machineMode);
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch();
+        ParallelTier = 0;
+
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+            return false;
+        }
+
+        if (!checkHatch()) {
+            return false;
+        }
+
+        ParallelTier = getParallelTier(aStack);
+
+        return true;
     }
 
     @Override
@@ -135,8 +201,8 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<BloodSoulSacrificialArray>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(BlockLoader.defcCasingBlock, 7))
-                .addElement('B', ofBlock(sBlockCasings8, 3))
+                .addElement('A', ofBlock(Loaders.FRF_Casings, 0))
+                .addElement('B', ofBlock(sBlockCasings8, 10))
                 .addElement('C', ofBlock(gtPlusPlus.core.block.ModBlocks.blockSpecialMultiCasings, 13))
                 .addElement('D', ofBlock(gtPlusPlus.core.block.ModBlocks.blockCasingsMisc, 9))
                 .addElement('E', ofBlockAnyMeta(BlockList.BloodyIchorium.getBlock()))
@@ -158,11 +224,11 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
                 .addElement('U', ofBlockAnyMeta(ModBlocks.speedRune))
                 .addElement('V', ofBlockAnyMeta(Blocks.beacon))
                 .addElement('W', ofBlockAnyMeta(com.arc.bloodarsenal.common.block.ModBlocks.lp_materializer))
-                .addElement('X', ofFrame(Materials.BlackPlutonium))
+                .addElement('X', ofFrame(Materials.NaquadahAlloy))
                 .addElement('Y', ofBlockAnyMeta(ModBlocks.ritualStone))
                 .addElement(
                     'Z',
-                    buildHatchAdder(BloodSoulSacrificialArray.class).atLeast(InputBus, OutputBus, InputHatch)
+                    buildHatchAdder(BloodSoulSacrificialArray.class).atLeast(InputBus, OutputBus, Maintenance)
                         .adder(BloodSoulSacrificialArray::addToMachineList)
                         .dot(1)
                         .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(3))
@@ -178,13 +244,60 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setByte("mode", mode);
+        aNBT.setInteger("mode", machineMode);
+        aNBT.setInteger("lp", currentEssence);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        mode = aNBT.getByte("mode");
+        machineMode = aNBT.getInteger("mode");
+        currentEssence = aNBT.getInteger("lp");
+    }
+
+    @Override
+    public boolean onRunningTick(ItemStack stack) {
+        boolean spawnMeteor = false;
+
+        if ((this.mProgresstime + 1) % 20 == 0 && this.mProgresstime > 0
+            && this.getRecipeMap() == RecipeRegister.FallingTowerRecipes) {
+            if (mProgresstime < 20) {
+                spawnMeteor = true;
+            }
+
+            if (this.mMaxProgresstime - this.mProgresstime < 250 && spawnMeteor) {
+                IGregTechTileEntity aBaseMetaTileEntity = this.getBaseMetaTileEntity();
+                World world = aBaseMetaTileEntity.getWorld();
+                int baseX = aBaseMetaTileEntity.getXCoord();
+                int baseY = aBaseMetaTileEntity.getYCoord();
+                int baseZ = aBaseMetaTileEntity.getZCoord();
+
+                ForgeDirection frontFacing = aBaseMetaTileEntity.getFrontFacing();
+                ForgeDirection backFacing = frontFacing.getOpposite();
+
+                int offsetX = backFacing.offsetX * 4;
+                int offsetZ = backFacing.offsetZ * 4;
+
+                int spawnX = baseX + offsetX;
+                int spawnY = 257;
+                int spawnZ = baseZ + offsetZ;
+
+                if (!world.isRemote) {
+                    EntityMeteor meteor = new EntityMeteor(world, spawnX + 0.5, spawnY, spawnZ + 0.5, 114514);
+                    meteor.motionY = -1.0f;
+                    meteor.hasTerrae = true;
+                    meteor.hasOrbisTerrae = true;
+                    meteor.hasCrystallos = true;
+                    meteor.hasIncendium = true;
+                    meteor.hasTennebrae = true;
+
+                    world.spawnEntityInWorld(meteor);
+                    spawnMeteor = false;
+                }
+            }
+        }
+
+        return super.onRunningTick(stack);
     }
 
     @Override
@@ -192,6 +305,12 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.BloodSoulSacrificialArrayRecipeType)
             .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_00)
+            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_01)
+            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_02)
+            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_03)
+            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_04)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
@@ -201,6 +320,159 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
             .addOutputBus(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
             .toolTipFinisher();
         return tt;
+    }
+
+    @Nonnull
+    @Override
+    public CheckRecipeResult checkProcessing() {
+        ItemStack controllerItem = getControllerSlot();
+        this.ParallelTier = getParallelTier(controllerItem);
+        isCreativeOrb = false;
+
+        ItemStack requiredItem = GTModHandler.getModItem(Avaritia.ID, "Orb_Armok", 1);
+
+        for (ItemStack item : getAllStoredInputs()) {
+            if (item != null && item.isItemEqual(requiredItem)) {
+                isCreativeOrb = true;
+                break;
+            }
+        }
+        return super.checkProcessing();
+    }
+
+    @Override
+    public ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @Nonnull
+            @Override
+            public CheckRecipeResult process() {
+                RecipeMap<?> recipeMap = preProcess();
+
+                if (inputItems == null) {
+                    inputItems = new ItemStack[0];
+                }
+                if (inputFluids == null) {
+                    inputFluids = new FluidStack[0];
+                }
+
+                if (isRecipeLocked && recipeLockableMachine != null
+                    && recipeLockableMachine.getSingleRecipeCheck() != null) {
+                    // Recipe checker is already built, we'll use it
+                    SingleRecipeCheck singleRecipeCheck = recipeLockableMachine.getSingleRecipeCheck();
+                    // Validate recipe here, otherwise machine will show "not enough output space"
+                    // even if recipe cannot be found
+                    if (singleRecipeCheck.checkRecipeInputs(false, 1, inputItems, inputFluids) == 0) {
+                        return CheckRecipeResultRegistry.NO_RECIPE;
+                    }
+
+                    return validateAndCalculateRecipe(
+                        recipeLockableMachine.getSingleRecipeCheck()
+                            .getRecipe()).checkRecipeResult;
+                }
+                Stream<GTRecipe> matchedRecipes = findRecipeMatches(recipeMap);
+                Iterable<GTRecipe> recipeIterable = matchedRecipes::iterator;
+                CheckRecipeResult checkRecipeResult = CheckRecipeResultRegistry.NO_RECIPE;
+                for (GTRecipe matchedRecipe : recipeIterable) {
+                    CalculationResult foundResult = validateAndCalculateRecipe(matchedRecipe);
+                    if (foundResult.checkRecipeResult != CheckRecipeResultRegistry.NO_RECIPE) {
+                        // Recipe failed in interesting way, so remember that and continue searching
+                        checkRecipeResult = foundResult.checkRecipeResult;
+                    }
+                    if (foundResult.successfullyConsumedInputs) {
+                        // Successfully found and set recipe, so return it
+                        if (isCreativeOrb) {
+                            return foundResult.checkRecipeResult;
+                        } else {
+                            currentEssence = SoulNetworkHandler.getCurrentEssence(getOwner());
+                            int needEssence = (int) (this.lastRecipe.mSpecialValue * (1 - ParallelTier / 50.0));
+
+                            if (currentEssence >= calculatedParallels * needEssence) {
+                                SoulNetworkHandler
+                                    .setCurrentEssence(getOwner(), currentEssence - calculatedParallels * needEssence);
+                                currentEssence = currentEssence - calculatedParallels * needEssence;
+                                return foundResult.checkRecipeResult;
+                            }
+                            checkRecipeResult = SimpleCheckRecipeResult.ofFailure("metadata.blood");
+                        }
+                    }
+                }
+                return checkRecipeResult;
+            }
+
+            @Nonnull
+            private CalculationResult validateAndCalculateRecipe(@Nonnull GTRecipe recipe) {
+                CheckRecipeResult result = validateRecipe(recipe);
+                if (!result.wasSuccessful()) {
+                    return CalculationResult.ofFailure(result);
+                }
+
+                ParallelHelper helper = createParallelHelper(recipe);
+                OverclockCalculator calculator = createOverclockCalculator(recipe);
+                helper.setCalculator(calculator);
+                helper.build();
+
+                if (!helper.getResult()
+                    .wasSuccessful()) {
+                    return CalculationResult.ofFailure(helper.getResult());
+                }
+
+                return CalculationResult.ofSuccess(applyRecipe(recipe, helper, calculator, result));
+            }
+
+            @Nonnull
+            @Override
+            protected ParallelHelper createParallelHelper(@Nonnull GTRecipe recipe) {
+
+                currentEssence = SoulNetworkHandler.getCurrentEssence(getOwner());
+                int needEssence = (int) (recipe.mSpecialValue * (1 - ParallelTier / 50.0));
+
+                return new ParallelHelper().setRecipe(recipe)
+                    .setItemInputs(inputItems)
+                    .setFluidInputs(inputFluids)
+                    .setAvailableEUt(availableVoltage * availableAmperage)
+                    .setMachine(machine, protectItems, protectFluids)
+                    .setRecipeLocked(recipeLockableMachine, isRecipeLocked)
+                    .setMaxParallel(isCreativeOrb ? maxParallel : Math.min(maxParallel, currentEssence / needEssence))
+                    .setEUtModifier(euModifier)
+                    .enableBatchMode(batchSize)
+                    .setConsumption(true)
+                    .setOutputCalculation(true);
+            }
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+
+                if (isCreativeOrb) {
+                    return CheckRecipeResultRegistry.SUCCESSFUL;
+                } else {
+                    currentEssence = SoulNetworkHandler.getCurrentEssence(getOwner());
+                    int needEssence = recipe.mSpecialValue;
+                    if (currentEssence > needEssence) {
+                        return CheckRecipeResultRegistry.SUCCESSFUL;
+                    }
+                }
+
+                return SimpleCheckRecipeResult.ofFailure("metadata.blood");
+            }
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setAmperage(availableAmperage)
+                    .setRecipeEUt(recipe.mEUt)
+                    .setEUt(availableVoltage)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+            }
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    public String getOwner() {
+        return this.getBaseMetaTileEntity()
+            .getOwnerName();
     }
 
     @Override
@@ -228,5 +500,27 @@ public class BloodSoulSacrificialArray extends MultiMachineBase<BloodSoulSacrifi
                     .build() };
         }
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+        IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        currentTip.add(
+            StatCollector.translateToLocal("BloodSoulSacrificialArray.LPNetwork") + EnumChatFormatting.WHITE
+                + currentEssence
+                + EnumChatFormatting.RESET
+                + " LP");
+
+    }
+
+    @Override
+    public String[] getInfoData() {
+        String[] info = super.getInfoData();
+        info[4] = StatCollector.translateToLocal("BloodSoulSacrificialArray.LPNetwork") + EnumChatFormatting.RED
+            + GTUtility.formatNumbers(Math.abs(currentEssence))
+            + EnumChatFormatting.RESET
+            + " LP";
+        return info;
     }
 }

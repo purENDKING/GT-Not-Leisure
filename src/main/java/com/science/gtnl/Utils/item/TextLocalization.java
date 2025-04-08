@@ -731,6 +731,18 @@ public class TextLocalization {
     public static final String Tooltip_BloodSoulSacrificialArray_00 = texter(
         "§4§oSaSacrifice your soul...",
         "Tooltip_BloodSoulSacrificialArray_00");
+    public static final String Tooltip_BloodSoulSacrificialArray_01 = texter(
+        "The Parallel Control Core provides 4x parallelism!",
+        "Tooltip_BloodSoulSacrificialArray_01");
+    public static final String Tooltip_BloodSoulSacrificialArray_02 = texter(
+        "Power cost reduction is replaced by LP consumption reduction.",
+        "Tooltip_BloodSoulSacrificialArray_02");
+    public static final String Tooltip_BloodSoulSacrificialArray_03 = texter(
+        "Directly draws LP from the machine owner's network.",
+        "Tooltip_BloodSoulSacrificialArray_03");
+    public static final String Tooltip_BloodSoulSacrificialArray_04 = texter(
+        "Using Amonk’s Blood Orb ignores all LP consumption.",
+        "Tooltip_BloodSoulSacrificialArray_04");
     public static final String Tooltip_BloodSoulSacrificialArray_Casing = texter(
         "Ang Mining Blck Plutonium Casing",
         "Tooltip_BloodSoulSacrificialArray_Casing");

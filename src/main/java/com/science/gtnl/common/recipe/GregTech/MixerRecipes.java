@@ -20,8 +20,8 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.core.item.chemistry.AgriculturalChem;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.MaterialsAlloy;
@@ -31,7 +31,7 @@ import gtnhlanth.common.register.WerkstoffMaterialPool;
 
 public class MixerRecipes implements IRecipePool {
 
-    final RecipeMap<?> MR = RecipeMaps.mixerRecipes;
+    final RecipeMap<?> MNCR = GTPPRecipeMaps.mixerNonCellRecipes;
 
     @Override
     public void loadRecipes() {
@@ -46,7 +46,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(130)
             .eut(480)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
             .itemInputs(MaterialMisc.SODIUM_NITRATE.getDust(5))
@@ -57,7 +57,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(80)
             .eut(120)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
             .itemInputs(
@@ -70,7 +70,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(250)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Naquadah, 2L))
@@ -80,7 +80,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(400)
             .eut(TierEU.RECIPE_LuV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -96,7 +96,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(200)
             .eut(TierEU.RECIPE_IV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.RareEarth, 1L))
@@ -108,7 +108,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(100)
             .eut(TierEU.RECIPE_MV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RecipeBuilder.builder()
             .itemInputs(
@@ -133,7 +133,7 @@ public class MixerRecipes implements IRecipePool {
             .noOptimize()
             .duration(27648000)
             .eut(TierEU.RECIPE_LV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -142,7 +142,7 @@ public class MixerRecipes implements IRecipePool {
             .itemOutputs(MaterialPool.Breel.get(OrePrefixes.dust, 3))
             .duration(5 * SECONDS)
             .eut(12)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.gravel, 16))
@@ -150,7 +150,7 @@ public class MixerRecipes implements IRecipePool {
             .fluidOutputs(MaterialPool.GravelSluice.getFluidOrGas(4000))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.sand, 16))
@@ -158,7 +158,7 @@ public class MixerRecipes implements IRecipePool {
             .fluidOutputs(MaterialPool.SandSluice.getFluidOrGas(4000))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         RA.stdBuilder()
             .itemInputs(new ItemStack(Blocks.obsidian, 16))
@@ -166,7 +166,7 @@ public class MixerRecipes implements IRecipePool {
             .fluidOutputs(MaterialPool.ObsidianSluice.getFluidOrGas(4000))
             .duration(5 * SECONDS)
             .eut(TierEU.RECIPE_LV)
-            .addTo(MR);
+            .addTo(MNCR);
 
         GTValues.RA.stdBuilder()
             .itemInputs(
@@ -178,7 +178,7 @@ public class MixerRecipes implements IRecipePool {
             .fluidOutputs(MaterialPool.GemSluice.getFluidOrGas(4000))
             .duration(15 * SECONDS)
             .eut(300)
-            .addTo(MR);
+            .addTo(MNCR);
 
     }
 }

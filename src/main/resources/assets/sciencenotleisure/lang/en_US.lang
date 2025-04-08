@@ -1728,14 +1728,21 @@ Tooltip_GenerationEarthEngine_01=The pinnacle of human technology!
 Tooltip_GenerationEarthEngine_Casing=Any Batch Processing Machine Block  
 
 NameBloodSoulSacrificialArray=Blood Soul Sacrificial Array  
-gtnl.recipe.BloodSoulTradingRecipes=Blood Soul Trading  
 gtnl.recipe.BloodDemonInjectionRecipes=Blood Demon Injection  
+gtnl.recipe.FallingTowerRecipes=GT Falling Tower
 gtnl.recipe.AlchemicChemistrySetRecipes=Alchemic Chemistry  
-BloodSoulSacrificialArray.modeMsg.0=Blood Demon Injection  
-BloodSoulSacrificialArray.modeMsg.1=Blood Soul Trading  
-BloodSoulSacrificialArray.modeMsg.2=Alchemic Chemistry  
-BloodSoulSacrificialArrayRecipeType=Blood Demon Injection / Alchemic Chemistry / Blood Soul Trading  
-Tooltip_BloodSoulSacrificialArray_00=Sacrifice your soul...  
+NEI.BloodSoulSacrificialArray.specialValue=Need LP: %s
+GT5U.gui.text.metadata.blood=Need More LP
+BloodSoulSacrificialArray.LPNetwork=LP network stored quantity: 
+BloodSoulSacrificialArray_Mode_0=Blood Demon Injection  
+BloodSoulSacrificialArray_Mode_1=GT Falling Tower
+BloodSoulSacrificialArray_Mode_2=Alchemic Chemistry  
+BloodSoulSacrificialArrayRecipeType=Blood Demon Injection / GT Falling Tower / Alchemic Chemistry
+Tooltip_BloodSoulSacrificialArray_00=§4§oSacrifice your soul...  
+Tooltip_BloodSoulSacrificialArray_01=The Parallel Control Core provides 4x parallelism!
+Tooltip_BloodSoulSacrificialArray_02=Power cost reduction is replaced by LP consumption reduction.
+Tooltip_BloodSoulSacrificialArray_03=Directly draws LP from the machine owner's network.
+Tooltip_BloodSoulSacrificialArray_04=Using Amonk’s Blood Orb ignores all LP consumption.
 Tooltip_BloodSoulSacrificialArray_Casing=Any Black Plutonium Mining Machine Block  
 
 NameTeleportationArrayToAlfheim=Alfheim Teleportation Array  

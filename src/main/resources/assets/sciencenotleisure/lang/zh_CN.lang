@@ -1728,14 +1728,21 @@ Tooltip_GenerationEarthEngine_01=人类技术巅峰之作！
 Tooltip_GenerationEarthEngine_Casing=任意批量生产框架
 
 NameBloodSoulSacrificialArray=血魂祭祀阵
-gtnl.recipe.BloodSoulTradingRecipes=血魂交易
 gtnl.recipe.BloodDemonInjectionRecipes=血魔注入
+gtnl.recipe.FallingTowerRecipes=GT坠星标位
 gtnl.recipe.AlchemicChemistrySetRecipes=秘法炼金
-BloodSoulSacrificialArray.modeMsg.0=血魔注入
-BloodSoulSacrificialArray.modeMsg.1=血魂交易
-BloodSoulSacrificialArray.modeMsg.2=秘法炼金
-BloodSoulSacrificialArrayRecipeType=血魔注入 / 秘法炼金 / 血魂交易
-Tooltip_BloodSoulSacrificialArray_00=献祭你的灵魂...
+NEI.BloodSoulSacrificialArray.specialValue=需要LP: %s
+GT5U.gui.text.metadata.blood=需要更多LP
+BloodSoulSacrificialArray.LPNetwork=LP网络已存储数量: 
+BloodSoulSacrificialArray_Mode_0=血魔注入
+BloodSoulSacrificialArray_Mode_1=GT坠星标位
+BloodSoulSacrificialArray_Mode_2=秘法炼金
+BloodSoulSacrificialArrayRecipeType=血魔注入 / GT坠星标位 / 秘法炼金
+Tooltip_BloodSoulSacrificialArray_00=§4§o献祭你的灵魂...
+Tooltip_BloodSoulSacrificialArray_01=并行控制核心将额外提供4倍并行!
+Tooltip_BloodSoulSacrificialArray_02=耗电减免改为LP消耗减免
+Tooltip_BloodSoulSacrificialArray_03=直接从机器所有者的LP网络抽取LP
+Tooltip_BloodSoulSacrificialArray_04=放入阿蒙克气血宝珠无视所有LP消耗
 Tooltip_BloodSoulSacrificialArray_Casing=任意黑钚采矿机械方块
 
 NameTeleportationArrayToAlfheim=精灵传送法阵
@@ -2001,7 +2008,7 @@ SmeltingMixingFurnace_Mode_0=合金搅拌
 SmeltingMixingFurnace_Mode_1=超维度等离子锻炉
 Tooltip_SmeltingMixingFurnace_00=§9§l以极高效的方式操纵物质
 Tooltip_SmeltingMixingFurnace_01=§9§l使合金的制作摆脱冶炼的桎梏
-Tooltip_SmeltingMixingFurnace_02=在控制器内放入超维校准矩阵来启用超维度等离子锻炉配方
+Tooltip_SmeltingMixingFurnace_02=输入超维校准矩阵来启用超维度等离子锻炉配方
 Tooltip_SmeltingMixingFurnace_Casing=任意超能机械方块
 
 NameProcessingArrayGTNL=处理阵列：重生
