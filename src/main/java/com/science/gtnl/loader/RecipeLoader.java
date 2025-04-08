@@ -57,6 +57,7 @@ import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.AssemblingLineRecipes;
+import com.science.gtnl.common.recipe.GregTech.AutoclaveRecipes;
 import com.science.gtnl.common.recipe.GregTech.BacterialVatRecipes;
 import com.science.gtnl.common.recipe.GregTech.BlastFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.CentrifugeRecipes;
@@ -99,23 +100,24 @@ public class RecipeLoader {
 
     public static void loadRecipes() {
         IRecipePool[] recipePools = new IRecipePool[] { new ChemicalRecipes(), new ElectrolyzerRecipes(),
-            new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AlloyBlastSmelterRecipes(),
-            new AssemblingLineRecipes(), new CompressorRecipes(), new ReFusionReactorRecipes(),
-            new RealArtificialStarRecipes(), new PortalToAlfheimRecipes(), new NatureSpiritArrayRecipes(),
-            new ManaInfusionRecipes(), new TranscendentPlasmaMixerRecipes(), new PlasmaForgeRecipes(),
-            new CraftingTableRecipes(), new ChemicalBathRecipes(), new SteamCrackerRecipes(), new DesulfurizerRecipes(),
-            new PetrochemicalPlantRecipes(), new FusionReactorRecipes(), new SmeltingMixingFurnaceRecipes(),
-            new FluidExtraction(), new DigesterRecipes(), new DissolutionTankRecipes(), new CentrifugeRecipes(),
-            new ChemicalDehydratorRecipes(), new RareEarthCentrifugalRecipes(), new MatterFabricatorRecipes(),
-            new TheTwilightForestRecipes(), new IsaMillRecipes(), new CellRegulatorRecipes(),
-            new VacuumFurnaceRecipes(), new FishingGroundRecipes(), new DistilleryRecipes(),
-            new ElementCopyingRecipes(), new AlloySmelterRecipes(), new MolecularTransformerRecipes(),
-            new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(), new LaserEngraverRecipes(),
-            new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(), new FluidExtractorRecipes(),
-            new DecayHastenerRecipes(), new PreciseAssemblerRecipes(), new FuelRefiningComplexRecipes(),
-            new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
-            new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
-            new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(), new AlchemicChemistrySetRecipes() };
+            new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AutoclaveRecipes(),
+            new AlloyBlastSmelterRecipes(), new AssemblingLineRecipes(), new CompressorRecipes(),
+            new ReFusionReactorRecipes(), new RealArtificialStarRecipes(), new PortalToAlfheimRecipes(),
+            new NatureSpiritArrayRecipes(), new ManaInfusionRecipes(), new TranscendentPlasmaMixerRecipes(),
+            new PlasmaForgeRecipes(), new CraftingTableRecipes(), new ChemicalBathRecipes(), new SteamCrackerRecipes(),
+            new DesulfurizerRecipes(), new PetrochemicalPlantRecipes(), new FusionReactorRecipes(),
+            new SmeltingMixingFurnaceRecipes(), new FluidExtraction(), new DigesterRecipes(),
+            new DissolutionTankRecipes(), new CentrifugeRecipes(), new ChemicalDehydratorRecipes(),
+            new RareEarthCentrifugalRecipes(), new MatterFabricatorRecipes(), new TheTwilightForestRecipes(),
+            new IsaMillRecipes(), new CellRegulatorRecipes(), new VacuumFurnaceRecipes(), new FishingGroundRecipes(),
+            new DistilleryRecipes(), new ElementCopyingRecipes(), new AlloySmelterRecipes(),
+            new MolecularTransformerRecipes(), new NaquadahReactorRecipes(), new DragonEvolutionFusionCraftingRecipes(),
+            new LaserEngraverRecipes(), new BacterialVatRecipes(), new CuttingRecipes(), new BlastFurnaceRecipes(),
+            new FluidExtractorRecipes(), new DecayHastenerRecipes(), new PreciseAssemblerRecipes(),
+            new FuelRefiningComplexRecipes(), new CrackingRecipes(), new DistillationTowerRecipes(),
+            new SpaceMinerRecipes(), new SpaceDrillRecipes(), new SpaceAssemblerRecipes(), new PCBFactoryRecipes(),
+            new PlatinumBasedTreatmentRecipes(), new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(),
+            new AlchemicChemistrySetRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),

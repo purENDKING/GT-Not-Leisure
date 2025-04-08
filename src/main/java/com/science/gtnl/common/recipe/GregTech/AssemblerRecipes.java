@@ -1950,5 +1950,17 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_LV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTOreDictUnificator.get(OrePrefixes.plate, Materials.Wood, 8L),
+                GTOreDictUnificator.get(OrePrefixes.foil, Materials.Copper, 32),
+                GTUtility.getIntegratedCircuit(6))
+            .fluidInputs(MaterialPool.Polyetheretherketone.getMolten(36))
+            .itemOutputs(ItemList.Circuit_Board_Coated_Basic.get(64))
+            .fluidOutputs()
+            .duration(1600)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
     }
 }
