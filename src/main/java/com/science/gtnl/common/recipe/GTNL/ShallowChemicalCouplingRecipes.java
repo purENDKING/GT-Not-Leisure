@@ -1276,6 +1276,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
             // 单步聚酰亚胺
             RecipeBuilder.builder()
                 .itemInputs(
+                    GTUtility.getIntegratedCircuit(7),
                     GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1)),
                     GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 22))
@@ -1293,6 +1294,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
+                    GTUtility.getIntegratedCircuit(17),
                     GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1)),
                     GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
                     GTUtility.copyAmountUnsafe(2750, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1)))
@@ -1311,6 +1313,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
             // 单步聚醚醚酮
             RecipeBuilder.builder()
                 .itemInputs(
+                    GTUtility.getIntegratedCircuit(7),
                     GTUtility.copyAmount(0, GTNLItemList.ZnFeAlClCatalyst.get(1)),
                     GTUtility.copyAmount(0, (GTNLItemList.BlackLight.get(1))),
                     GTUtility.copyAmount(0, (MaterialPool.CoAcAbCatalyst.get(OrePrefixes.dust, 1))),
@@ -1326,6 +1329,7 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
+                    GTUtility.getIntegratedCircuit(17),
                     GTUtility.copyAmount(0, GTNLItemList.ZnFeAlClCatalyst.get(1)),
                     GTUtility.copyAmount(0, (GTNLItemList.BlackLight.get(1))),
                     GTUtility.copyAmount(0, (MaterialPool.CoAcAbCatalyst.get(OrePrefixes.dust, 1))),
