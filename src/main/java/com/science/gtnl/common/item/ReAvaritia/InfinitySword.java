@@ -70,6 +70,8 @@ import vazkii.botania.common.entity.EntityDoppleganger;
 
 public class InfinitySword extends ItemSword implements ICosmicRenderItem, SubtitleDisplay {
 
+    public static boolean cancelBloodSword = false;
+    public static boolean cancelDragonArmor = false;
     private static final long COOLDOWN = 1000; // 1000 ms = 1 second
     private static final ToolMaterial INFINITY = EnumHelper.addToolMaterial("INFINITY", 32, 9999, 9999F, 9999F, 200);
     private IIcon cosmicMask;
@@ -94,10 +96,11 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase victim, EntityLivingBase attacker) {
-        if (attacker.worldObj.isRemote) return true;
+    public boolean hitEntity(ItemStack stack, EntityLivingBase victim, EntityLivingBase player) {
+        if (player.worldObj.isRemote) return true;
 
         if (victim instanceof EntityPlayer targetPlayer) {
+            cancelDragonArmor = player.isSneaking();
 
             boolean wearingInfinityArmor = false;
             for (ItemStack armorStack : targetPlayer.inventory.armorInventory) {
@@ -118,7 +121,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 dropInventoryItems(targetPlayer);
 
                 // 施加无限伤害
-                applyInfinityDamage(victim, attacker);
+                applyInfinityDamage(victim, player);
             }
         }
 
@@ -128,12 +131,12 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 playersField.setAccessible(true);
 
                 List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
-                String playerName = attacker.getCommandSenderName();
+                String playerName = player.getCommandSenderName();
                 if (!playersWhoAttacked.contains(playerName)) {
                     playersWhoAttacked.add(playerName);
                 }
                 livingTarget.recentlyHit = 100;
-                DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) attacker);
+                DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) player);
                 livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
                 livingTarget.setHealth(0);
                 livingTarget.onDeath(playerSource);
@@ -151,9 +154,18 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         }
 
         victim.recentlyHit = 100;
-        applyInfinityDamage(victim, attacker);
+        applyInfinityDamage(victim, player);
 
         return true;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
+        boolean advancedToolTips) {
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_00);
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_01);
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_02);
     }
 
     @Override
@@ -169,6 +181,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
                     if (hitEntity instanceof EntityLivingBase livingEntity) {
                         hitEntity(stack, livingEntity, player);
+                        cancelDragonArmor = player.isSneaking();
 
                     } else if (hitEntity instanceof EntityDragonPart dragonPart) {
                         EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj; // 获取末影龙本体
@@ -236,6 +249,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
+                cancelBloodSword = true;
                 if (player.isBurning()) {
                     player.extinguish();
                 }
@@ -259,6 +273,8 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 if (player.posY < 0) {
                     player.setPositionAndUpdate(player.posX, 255, player.posZ);
                 }
+            } else {
+                cancelBloodSword = false;
             }
         }
     }
@@ -335,6 +351,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
         // 设置目标血量为 0
         target.setHealth(0);
+        target.setDead();
 
         // 触发目标的死亡事件
         target.onDeath(INFINITY_DAMAGE);
@@ -539,6 +556,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
 
         target.setHealth(0);
+        target.setDead();
 
         target.onDeath(INFINITY_DAMAGE);
         if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss

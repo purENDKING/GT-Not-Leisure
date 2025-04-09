@@ -607,16 +607,23 @@ Tooltip_Blaze_Smelt_On=熔炼模式已激活！
 Tooltip_Blaze_Smelt_Off=熔炼模式已取消！
 
 item.InfinitySword.name=寰宇支配之剑
+Tooltip_InfinitySword_00=§8§o弑神诛天，归墟始终。
+Tooltip_InfinitySword_01=§9持有此剑时无视咒灵之剑的抵挡
+Tooltip_InfinitySword_02=§9蹲下左键攻击来无视龙之护甲的保护
 Damage_InfinitySword=无限
 Tooltip_InfinitySword_Aura_00=技能冷却中！剩余时间： 
 Tooltip_InfinitySword_Aura_01= 秒
+death.attack.damage.gtnl.infinity=%1$s 被抹杀了存在
 item.InfinityPickaxe.name=世界崩解之镐
+Tooltip_InfinityPickaxe_00=§8§o开天裂地，无物不破。
 item.InfinityAxe.name=自然荒芜之斧
+Tooltip_InfinityAxe_00=§8§o一斧落下，山海俱寂。
 item.InfinityHoe.name=地蕴复生之锄
+Tooltip_InfinityHoe_00=§8§o化枯为生，唤地脉之魂。
 item.InfinityShovel.name=星球吞噬之铲
+Tooltip_InfinityShovel_00=§8§o吞土裂壤，瞬如狂风。
 Tooltip_Infinity_Mode_1=切换到 普通模式
 Tooltip_Infinity_Mode_2=切换到 范围模式
-death.attack.damage.gtnl.infinity=%1$s 被星空的力量击碎了
 
 item.InfinityBucket.name=§6远海鲸吞之桶
 Tooltip_InfinityBucket_00=§8§o吞噬一切…

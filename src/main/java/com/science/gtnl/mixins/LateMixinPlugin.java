@@ -30,6 +30,8 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Bartwork.SimpleMetalLoader_Mixin");
         mixins.add("Bartwork.CircuitImprintLoader_Mixin");
         mixins.add("MTETreeFarm_Mixin");
+        mixins.add("ItemBloodSword_Mixin");
+        mixins.add("DraconicEvolutionEventHandler_Mixin");
         return mixins;
     }
 
