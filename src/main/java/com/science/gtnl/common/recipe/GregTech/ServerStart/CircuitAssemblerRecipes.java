@@ -8,6 +8,7 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 
+import bartworks.system.material.CircuitGeneration.BWMetaItems;
 import bartworks.system.material.WerkstoffLoader;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -33,7 +34,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Battery_RE_ULV_Tantalum.get(4L),
                 ItemList.Circuit_Parts_Wiring_Basic.get(4L),
                 ItemList.Circuit_Parts_Coil.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
                 ItemList.Circuit_Primitive.get(1L))
             .fluidInputs(Materials.Tin.getMolten(144))
@@ -50,7 +52,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_Advanced.get(4L),
                 ItemList.Circuit_Parts_Wiring_Elite.get(4L),
                 ItemList.Circuit_Parts_Wiring_Advanced.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
                 GTNLItemList.CircuitResonaticULV.get(1))
             .fluidInputs(Materials.Tin.getMolten(144))
@@ -67,7 +70,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_Advanced.get(8L),
                 ItemList.Circuit_Parts_Wiring_Elite.get(8L),
                 ItemList.Circuit_Parts_Wiring_Advanced.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 1, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gem, 1),
                 GTNLItemList.CircuitResonaticLV.get(1))
             .fluidInputs(Materials.Tin.getMolten(144))
@@ -84,7 +88,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_DiodeSMD.get(4L),
                 ItemList.Circuit_Parts_TransistorSMD.get(4L),
                 ItemList.Circuit_Parts_CapacitorSMD.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 2, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 2),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
                 GTNLItemList.CircuitResonaticMV.get(1))
             .fluidInputs(Materials.SolderingAlloy.getMolten(144))
@@ -101,7 +106,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_DiodeSMD.get(8L),
                 ItemList.Circuit_Parts_TransistorSMD.get(8L),
                 ItemList.Circuit_Parts_CapacitorSMD.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 4),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
                 GTNLItemList.CircuitResonaticHV.get(1))
             .fluidInputs(Materials.SolderingAlloy.getMolten(144))
@@ -118,7 +124,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_DiodeASMD.get(4L),
                 ItemList.Circuit_Parts_TransistorASMD.get(4L),
                 ItemList.Circuit_Parts_CapacitorASMD.get(4L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 4),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
                 GTNLItemList.CircuitResonaticEV.get(1))
             .fluidInputs(Materials.SolderingAlloy.getMolten(144))
@@ -135,7 +142,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_DiodeASMD.get(8L),
                 ItemList.Circuit_Parts_TransistorASMD.get(8L),
                 ItemList.Circuit_Parts_CapacitorASMD.get(8L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 4, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 4),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemFlawless, 1),
                 GTNLItemList.CircuitResonaticIV.get(1))
             .fluidInputs(Materials.SolderingAlloy.getMolten(144))
@@ -152,7 +160,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 GTNLItemList.BiowareSMDDiode.get(16),
                 GTNLItemList.BiowareSMDCapacitor.get(16),
                 GTNLItemList.BiowareSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 8),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
                 GTNLItemList.CircuitResonaticLuV.get(1))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(144))
@@ -169,7 +178,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Parts_DiodeXSMD.get(16L),
                 ItemList.Circuit_Parts_TransistorXSMD.get(16L),
                 ItemList.Circuit_Parts_CapacitorXSMD.get(16L),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 8),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
                 GTNLItemList.CircuitResonaticZPM.get(1))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(288))
@@ -186,7 +196,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 GTNLItemList.ExoticSMDDiode.get(16),
                 GTNLItemList.ExoticSMDCapacitor.get(16),
                 GTNLItemList.ExoticSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 8),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
                 GTNLItemList.CircuitResonaticUV.get(1))
             .fluidInputs(MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(432))
@@ -203,7 +214,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 GTNLItemList.CosmicSMDDiode.get(16),
                 GTNLItemList.CosmicSMDCapacitor.get(16),
                 GTNLItemList.CosmicSMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 8),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
                 GTNLItemList.CircuitResonaticUHV.get(1))
             .fluidInputs(MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(288))
@@ -220,7 +232,8 @@ public class CircuitAssemblerRecipes implements IRecipePool {
                 GTNLItemList.TemporallySMDDiode.get(16),
                 GTNLItemList.TemporallySMDCapacitor.get(16),
                 GTNLItemList.TemporallySMDTransistor.get(16),
-                GTModHandler.getModItem(BartWorks.ID, "gt.bwMetaGeneratedItem0", 8, 3),
+                BWMetaItems.getCircuitParts()
+                    .getStack(3, 8),
                 WerkstoffLoader.MagnetoResonaticDust.get(OrePrefixes.gemExquisite, 1),
                 GTNLItemList.CircuitResonaticUEV.get(1))
             .fluidInputs(MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(432))
