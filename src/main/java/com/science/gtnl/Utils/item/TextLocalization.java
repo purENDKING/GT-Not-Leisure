@@ -1476,6 +1476,12 @@ public class TextLocalization {
 
     public static final String NameDecayHastener = texter("Decay Hastener", "NameDecayHastener");
     public static final String DecayHastenerRecipeType = texter("Decay Hastener", "DecayHastenerRecipeType");
+    public static final String Tooltip_DecayHastener_00 = texter(
+        "Accelerating and stopping any part of the decay chain",
+        "Tooltip_DecayHastener_00");
+    public static final String Tooltip_DecayHastener_01 = texter(
+        "§9§oTime flows like water,so we build dams to intercept the river and open floodgates to accelerated the flood",
+        "Tooltip_DecayHastener_01");
     public static final String Tooltip_DecayHastener_Casing = texter(
         "Any Radiant Naquadah Alloy Casing",
         "Tooltip_DecayHastener_Casing");
