@@ -21,6 +21,7 @@ public class MainConfig {
     public static boolean enableCustomPlayerDoll = true;
     public static boolean enableMachineAmpLimit = true;
     public static boolean enableAprilFoolRecipe = false;
+    public static boolean enableInfinitySwordBypassMechanism = true;
 
     private static Configuration config;
 
@@ -132,6 +133,14 @@ public class MainConfig {
         enableAprilFoolRecipe = config
             .get("Force enable April Fool's recipe", "enable", enableAprilFoolRecipe, "Enable April Fool's Recipe")
             .getBoolean(enableAprilFoolRecipe);
+
+        enableInfinitySwordBypassMechanism = config
+            .get(
+                "Enable Infinity Sword bypass against Blood Sword and Draconic Armor",
+                "enable",
+                enableInfinitySwordBypassMechanism,
+                "Enable Bypass")
+            .getBoolean(enableInfinitySwordBypassMechanism);
 
         if (config.hasChanged()) {
             config.save();

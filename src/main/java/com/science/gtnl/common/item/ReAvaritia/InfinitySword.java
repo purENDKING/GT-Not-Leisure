@@ -100,7 +100,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (player.worldObj.isRemote) return true;
 
         if (victim instanceof EntityPlayer targetPlayer) {
-            cancelDragonArmor = player.isSneaking();
+            if (MainConfig.enableAprilFoolRecipe) cancelDragonArmor = player.isSneaking();
 
             boolean wearingInfinityArmor = false;
             for (ItemStack armorStack : targetPlayer.inventory.armorInventory) {
@@ -181,7 +181,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
                     if (hitEntity instanceof EntityLivingBase livingEntity) {
                         hitEntity(stack, livingEntity, player);
-                        cancelDragonArmor = player.isSneaking();
+                        if (MainConfig.enableAprilFoolRecipe) cancelDragonArmor = player.isSneaking();
 
                     } else if (hitEntity instanceof EntityDragonPart dragonPart) {
                         EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj; // 获取末影龙本体
@@ -249,7 +249,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
-                cancelBloodSword = true;
+                if (MainConfig.enableAprilFoolRecipe) cancelBloodSword = true;
                 if (player.isBurning()) {
                     player.extinguish();
                 }
