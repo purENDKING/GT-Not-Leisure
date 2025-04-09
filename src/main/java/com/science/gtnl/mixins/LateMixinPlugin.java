@@ -28,6 +28,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Bartwork.Werkstoff_Mixin");
         mixins.add("Bartwork.MultipleMetalLoader_Mixin");
         mixins.add("Bartwork.SimpleMetalLoader_Mixin");
+        mixins.add("Bartwork.CircuitImprintLoader_Mixin");
         mixins.add("MTETreeFarm_Mixin");
         return mixins;
     }
