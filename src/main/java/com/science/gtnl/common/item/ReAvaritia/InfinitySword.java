@@ -639,15 +639,14 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             ItemStack heldItem = player.getHeldItem();
 
             if (heldItem != null && heldItem.getItem() == this) {
-                GL11.glPushMatrix();
                 float currentTime = (player.worldObj.getTotalWorldTime() + event.partialRenderTick) / 20.0F;
 
                 float rotationSpeed = 1800.0F;
 
                 float rotationAngle = (currentTime * rotationSpeed) % 360;
 
+                GL11.glPushMatrix();
                 GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-                GL11.glPopMatrix();
             }
         }
     }
