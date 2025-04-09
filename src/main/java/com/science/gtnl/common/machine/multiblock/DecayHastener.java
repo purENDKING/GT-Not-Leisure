@@ -91,6 +91,8 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.DecayHastenerRecipeType)
+            .addInfo(TextLocalization.Tooltip_DecayHastener_00)
+            .addInfo(TextLocalization.Tooltip_DecayHastener_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)

@@ -1359,6 +1359,8 @@ Tooltip_PreciseAssembler_Casing=任意精密机械方块
 NameDecayHastener=衰变加速器
 gtnl.recipe.DecayHastenerRecipes=衰变扭曲
 DecayHastenerRecipeType=衰变扭曲
+Tooltip_DecayHastener_00=加速与截停衰变链的任意部分
+Tooltip_DecayHastener_01=§9§o逝者如斯，我们便筑坝截流，开闸放洪
 Tooltip_DecayHastener_Casing=任意放射硅岩合金机械方块
 
 NameWoodDistillation=木化工厂
