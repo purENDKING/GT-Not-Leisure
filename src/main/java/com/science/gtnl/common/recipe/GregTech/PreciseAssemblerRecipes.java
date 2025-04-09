@@ -94,7 +94,7 @@ public class PreciseAssemblerRecipes implements IRecipePool {
                 Materials.NiobiumTitanium.getMolten(864),
                 MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
                 Materials.SolderingAlloy.getMolten(2304),
-                Materials.Polybenzimidazole.getMolten(2304))
+                MaterialPool.Polyetheretherketone.getMolten(2304))
             .duration(400)
             .eut(TierEU.RECIPE_LuV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 1)
@@ -111,7 +111,7 @@ public class PreciseAssemblerRecipes implements IRecipePool {
                 Materials.VanadiumGallium.getMolten(864),
                 MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
                 Materials.SolderingAlloy.getMolten(2304),
-                Materials.Polybenzimidazole.getMolten(2304))
+                MaterialPool.Polyetheretherketone.getMolten(2304))
             .duration(400)
             .eut(TierEU.RECIPE_ZPM)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 1)
@@ -128,7 +128,7 @@ public class PreciseAssemblerRecipes implements IRecipePool {
                 Materials.YttriumBariumCuprate.getMolten(864),
                 MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
                 Materials.SolderingAlloy.getMolten(2304),
-                Materials.Polybenzimidazole.getMolten(2304))
+                MaterialPool.Polyetheretherketone.getMolten(2304))
             .duration(400)
             .eut(TierEU.RECIPE_UV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 2)
@@ -145,7 +145,7 @@ public class PreciseAssemblerRecipes implements IRecipePool {
                 Materials.Europium.getMolten(864),
                 MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
                 Materials.SolderingAlloy.getMolten(2304),
-                Materials.Polybenzimidazole.getMolten(2304))
+                MaterialPool.Polyetheretherketone.getMolten(2304))
             .duration(400)
             .eut(TierEU.RECIPE_UHV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 2)
@@ -162,7 +162,7 @@ public class PreciseAssemblerRecipes implements IRecipePool {
                 WerkstoffLoader.Oganesson.getFluidOrGas(864),
                 MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
                 Materials.SolderingAlloy.getMolten(2304),
-                Materials.Polybenzimidazole.getMolten(2304))
+                MaterialPool.Polyetheretherketone.getMolten(2304))
             .duration(400)
             .eut(TierEU.RECIPE_UEV)
             .metadata(PRECISE_ASSEMBLER_CASING_TIER, 3)
