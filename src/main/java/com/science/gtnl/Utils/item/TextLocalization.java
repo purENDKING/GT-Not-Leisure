@@ -104,6 +104,15 @@ public class TextLocalization {
     public static final String Tooltip_Blaze_Smelt_On = texter("Enabled Smelt Mode", "Tooltip_Blaze_Smelt_On");
     public static final String Tooltip_Blaze_Smelt_Off = texter("Disabled Smelt Mode", "Tooltip_Blaze_Smelt_Off");
 
+    public static final String Tooltip_InfinitySword_00 = texter(
+        "§8§oGodslayer, heavens fall; to the void, all returns.",
+        "Tooltip_InfinitySword_00");
+    public static final String Tooltip_InfinitySword_01 = texter(
+        "§9Ignores the blocking effect of the Blood Sword while held",
+        "Tooltip_InfinitySword_01");
+    public static final String Tooltip_InfinitySword_02 = texter(
+        "§9Crouch and left-click to bypass Draconic Armor's protection",
+        "Tooltip_InfinitySword_02");
     public static final String Damage_InfinitySword = texter("Infinity", "Damage_InfinitySword");
     public static final String Tooltip_Infinity_Mode_1 = texter("Set to Base Mode", "Tooltip_Infinity_Mode_1");
     public static final String Tooltip_Infinity_Mode_2 = texter("Set to Range Mode", "Tooltip_Infinity_Mode_2");
@@ -111,6 +120,18 @@ public class TextLocalization {
         "Skill is on cooldown! Remaining time: ",
         "Tooltip_InfinitySword_Aura_00");
     public static final String Tooltip_InfinitySword_Aura_01 = texter(" Second", "Tooltip_InfinitySword_Aura_01");
+    public static final String Tooltip_InfinityPickaxe_00 = texter(
+        "§8§oShatter worlds, break all bounds.",
+        "Tooltip_InfinityPickaxe_00");
+    public static final String Tooltip_InfinityAxe_00 = texter(
+        "§8§oOne swing silences all nature.",
+        "Tooltip_InfinityAxe_00");
+    public static final String Tooltip_InfinityHoe_00 = texter(
+        "§8§oFrom decay, life awakens.",
+        "Tooltip_InfinityHoe_00");
+    public static final String Tooltip_InfinityShovel_00 = texter(
+        "§8§oDevours earth, swift as storm.",
+        "Tooltip_InfinityShovel_00");
 
     public static final String Tooltip_MatterCluster_Counter = texter("Items", "Tooltip_MatterCluster_Counter");
     public static final String Tooltip_MatterCluster_00 = texter(

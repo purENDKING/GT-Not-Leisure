@@ -137,8 +137,10 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onLivingDeath(LivingDeathEvent event) {
+        if (event.entity == null) return;
+        if (event.entity.worldObj.isRemote) return;
         if (event.entity instanceof EntityPlayer player) {
 
             // 检查玩家物品栏中的 InfinityTotem
@@ -162,11 +164,12 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
 
             // 处理 InfinityTotem 效果
             if (stack != null && stack.getItemDamage() < stack.getMaxDamage()) {
-                event.setCanceled(true);
                 if (stack.getItemDamage() == stack.getMaxDamage() - 1) {
+                    event.setCanceled(true);
                     triggerFinalEffect(player.worldObj, player, stack);
                     removeTotemFromPlayer(player, stack);
                 } else {
+                    event.setCanceled(true);
                     triggerNormalEffect(player.worldObj, player, stack);
                 }
                 showSubtitle();

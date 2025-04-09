@@ -24,9 +24,13 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.ItemLoader;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class InfinityHoe extends ItemHoe {
 
@@ -50,6 +54,13 @@ public class InfinityHoe extends ItemHoe {
     @Override
     public void setDamage(ItemStack stack, int damage) {
         super.setDamage(stack, 0);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
+        boolean advancedToolTips) {
+        toolTip.add(TextLocalization.Tooltip_InfinityHoe_00);
     }
 
     @Override

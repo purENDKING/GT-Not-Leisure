@@ -58,6 +58,13 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
+        boolean advancedToolTips) {
+        toolTip.add(TextLocalization.Tooltip_InfinityShovel_00);
+    }
+
+    @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         ItemStack pick = new ItemStack(this);
         list.add(pick);

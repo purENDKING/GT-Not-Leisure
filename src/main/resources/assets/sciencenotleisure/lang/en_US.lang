@@ -607,16 +607,23 @@ Tooltip_Blaze_Smelt_On=Smelting mode activated!
 Tooltip_Blaze_Smelt_Off=Smelting mode deactivated!
 
 item.InfinitySword.name=Sword of the Cosmos
+Tooltip_InfinitySword_00=§8§oGodslayer, heavens fall; to the void, all returns.
+Tooltip_InfinitySword_01=§9Ignores the blocking effect of the Blood Sword while held
+Tooltip_InfinitySword_02=§9Crouch and left-click to bypass Draconic Armor's protection
 Damage_InfinitySword=Infinite
 Tooltip_InfinitySword_Aura_00=Skill cooldown! Remaining time: 
 Tooltip_InfinitySword_Aura_01= seconds
+death.attack.damage.gtnl.infinity=%1$s was excised from existence
 item.InfinityPickaxe.name=Pickaxe of World Collapse
+Tooltip_InfinityPickaxe_00=§8§oShatter worlds, break all bounds.
 item.InfinityAxe.name=Axe of Nature's Desolation
+Tooltip_InfinityAxe_00=§8§oOne swing silences all nature.
 item.InfinityHoe.name=Hoe of Earth's Rebirth
+Tooltip_InfinityHoe_00=§8§oFrom decay, life awakens.
 item.InfinityShovel.name=Shovel of Planet Devourer
+Tooltip_InfinityShovel_00=§8§oDevours earth, swift as storm.
 Tooltip_Infinity_Mode_1=Switch to Normal Mode
 Tooltip_Infinity_Mode_2=Switch to Area Mode
-death.attack.damage.gtnl.infinity=%1$s was shattered by the power of the stars
 
 item.InfinityBucket.name=§6Bucket of the Distant Sea
 Tooltip_InfinityBucket_00=§8§oDevours everything…
