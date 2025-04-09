@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
+import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.materials.MaterialPool;
@@ -85,7 +86,7 @@ public class AssemblerRecipes implements IRecipePool {
         String[] lampTypes = { "Lamp", "LampBorderless", "LampOff", "LampOffBorderless" };
 
         String[] colors = { "Black", "Pink", "Red", "Orange", "Yellow", "Green", "Lime", "Blue", "LightBlue", "Cyan",
-            "Brown", "Magenta", "Purple", "Gray", "LightGray" };
+            "Brown", "Magenta", "Purple", "Gray", "LightGray", "White" };
 
         for (String color : colors) {
             String fluidName = "dye.chemical.dye" + color.toLowerCase();
@@ -94,7 +95,7 @@ public class AssemblerRecipes implements IRecipePool {
                 String lampType = lampTypes[i];
                 int circuitConfig = i + 1;
 
-                GTValues.RA.stdBuilder()
+                RecipeBuilder.builder()
                     .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glass, 6L),
                         new ItemStack(Items.glowstone_dust, 1),
@@ -103,6 +104,8 @@ public class AssemblerRecipes implements IRecipePool {
                         GTNLItemList.valueOf(color + lampType)
                             .get(1))
                     .fluidInputs(FluidRegistry.getFluidStack(fluidName, 144))
+                    .specialValue(0)
+                    .noOptimize()
                     .duration(40)
                     .eut(TierEU.RECIPE_LV)
                     .addTo(As);

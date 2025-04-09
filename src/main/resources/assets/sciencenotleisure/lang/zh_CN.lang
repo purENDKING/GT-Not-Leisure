@@ -1186,6 +1186,7 @@ Tooltip_WirelessEnergyMultiMachine_06=无线模式下支持跨配方并行
 Tooltip_WirelessEnergyMultiMachine_07=机器可进行§c无损超频§7
 Tooltip_WirelessEnergyMultiMachine_08=无线模式固定运行时间为%%stick
 Tooltip_WirelessEnergyMultiMachine_09=不安装能源仓将自动进入无线模式
+Tooltip_WirelessEnergyMultiMachine_10=每级并行控制核心将减少无线模式所需时间的0.5秒
 Waila.General.WirelessMode=无线模式
 Waila.General.CurrentEuCost=当前EU消耗
 
@@ -1782,6 +1783,12 @@ NameNeutroniumWireCutting=中子丝线切割机
 NeutroniumWireCuttingRecipeType=切割机
 Tooltip_NeutroniumWireCutting_00=每级玻璃等级额外提供5%%的加速和耗电减免(乘算叠加)
 Tooltip_NeutroniumWireCutting_Casing=任意超能硅岩强化无菌净水厂机械方块
+
+NameIntegratedAssemblyFacility=综合组装车间
+IntegratedAssemblyFacilityRecipeType=组装机
+Tooltip_IntegratedAssemblyFacility_00=每级玻璃和部件装配线外壳等级额外提供5%%的加速和耗电减免(乘算叠加)
+Tooltip_IntegratedAssemblyFacility_01=部件装配线外壳等级决定了能源仓最大等级 + 3, UIV机械方块解锁所有等级
+Tooltip_IntegratedAssemblyFacility_Casing=任意强化镀铱机械方块
 
 NameCrackerHub=裂解反应枢纽
 CrackerHubRecipeType=石油裂化机

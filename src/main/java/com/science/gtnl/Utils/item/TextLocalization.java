@@ -779,6 +779,22 @@ public class TextLocalization {
         "Ang Naquadria-Reinforced Water Plant Casing",
         "Tooltip_NeutroniumWireCutting_Casing");
 
+    public static final String NameIntegratedAssemblyFacility = texter(
+        "Integrated Assembly Facility",
+        "NameIntegratedAssemblyFacility");
+    public static final String IntegratedAssemblyFacilityRecipeType = texter(
+        "Assembler",
+        "IntegratedAssemblyFacilityRecipeType");
+    public static final String Tooltip_IntegratedAssemblyFacility_00 = texter(
+        "Each level of Glass and Component Assembly Line Casing grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_IntegratedAssemblyFacility_00");
+    public static final String Tooltip_IntegratedAssemblyFacility_01 = texter(
+        "The level of the Component Assembly Line Casing determines the maximum level of the energy warehouse + 3. UIV mechanical blocks unlock all levels.",
+        "Tooltip_IntegratedAssemblyFacility_01");
+    public static final String Tooltip_IntegratedAssemblyFacility_Casing = texter(
+        "Ang Advanced Iridium Plated Machine Casing",
+        "Tooltip_IntegratedAssemblyFacility_Casing");
+
     public static final String NameCrackerHub = texter("Cracker Hub", "NameCrackerHub");
     public static final String CrackerHubRecipeType = texter("Oil Cracker", "CrackerHubRecipeType");
     public static final String Tooltip_CrackerHub_00 = texter(
@@ -1980,6 +1996,9 @@ public class TextLocalization {
     public static final String Tooltip_WirelessEnergyMultiMachine_09 = texter(
         "If the energy storage unit is not installed, it will automatically enter wireless mode",
         "Tooltip_WirelessEnergyMultiMachine_09");
+    public static final String Tooltip_WirelessEnergyMultiMachine_10 = texter(
+        "Wireless mode activation time is reduced by 0.5s per Parallel Control Core level",
+        "Tooltip_WirelessEnergyMultiMachine_10");
     public static final String Waila_WirelessMode = texter("Wireless Mode", "Waila.General.WirelessMode");
     public static final String Waila_CurrentEuCost = texter("Current EU Cost", "Waila.General.CurrentEuCost");
 

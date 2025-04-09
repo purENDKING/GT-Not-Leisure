@@ -61,6 +61,7 @@ import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
 import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
 import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
+import com.science.gtnl.common.machine.multiblock.IntegratedAssemblyFacility;
 import com.science.gtnl.common.machine.multiblock.LapotronChip;
 import com.science.gtnl.common.machine.multiblock.LargeBrewer;
 import com.science.gtnl.common.machine.multiblock.LargeCircuitAssembler;
@@ -704,6 +705,13 @@ public class MachineLoader {
         GTNLItemList.SteamInfernalCokeOven
             .set(new SteamInfernalCokeOven(21126, "SteamInfernalCokeOven", TextLocalization.NameSteamInfernalCokeOven));
         addItemTooltip(GTNLItemList.SteamInfernalCokeOven.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.IntegratedAssemblyFacility.set(
+            new IntegratedAssemblyFacility(
+                21127,
+                "IntegratedAssemblyFacility",
+                TextLocalization.NameIntegratedAssemblyFacility));
+        addItemTooltip(GTNLItemList.IntegratedAssemblyFacility.get(1), AnimatedText.SNL_QYZG);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
