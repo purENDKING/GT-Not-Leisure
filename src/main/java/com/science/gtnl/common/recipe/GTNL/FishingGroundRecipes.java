@@ -40,26 +40,23 @@ public class FishingGroundRecipes implements IRecipePool {
         }
 
         RecipeBuilder.builder()
-            .itemInputs(
-                GTUtility.getIntegratedCircuit(1),
-                GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatCooked, 16L))
+            .itemInputs(GTUtility.getIntegratedCircuit(1), GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)))
             .itemOutputs(
-                new ItemStack(Items.fish, 64, 0),
-                new ItemStack(Items.fish, 64, 1),
-                new ItemStack(Items.fish, 64, 2),
-                new ItemStack(Items.fish, 64, 3))
+                new ItemStack(Items.fish, 16, 0),
+                new ItemStack(Items.fish, 16, 1),
+                new ItemStack(Items.fish, 16, 2),
+                new ItemStack(Items.fish, 8, 3))
             .fluidInputs(FluidRegistry.getFluidStack("water", 10000))
-            .outputChances(9000, 9000, 9000, 9000)
+            .outputChances(2500, 2500, 2500, 1000)
             .specialValue(0)
             .noOptimize()
-            .duration(2000)
+            .duration(1000)
             .eut(512)
             .addTo(FGR);
 
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(1),
+                GTUtility.getIntegratedCircuit(2),
                 GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatRaw, 16L))
             .itemOutputs(
@@ -76,37 +73,25 @@ public class FishingGroundRecipes implements IRecipePool {
             .addTo(FGR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTUtility.getIntegratedCircuit(1), GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)))
+            .itemInputs(
+                GTUtility.getIntegratedCircuit(3),
+                GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatCooked, 16L))
             .itemOutputs(
-                new ItemStack(Items.fish, 16, 0),
-                new ItemStack(Items.fish, 16, 1),
-                new ItemStack(Items.fish, 16, 2),
-                new ItemStack(Items.fish, 8, 3))
+                new ItemStack(Items.fish, 64, 0),
+                new ItemStack(Items.fish, 64, 1),
+                new ItemStack(Items.fish, 64, 2),
+                new ItemStack(Items.fish, 64, 3))
             .fluidInputs(FluidRegistry.getFluidStack("water", 10000))
-            .outputChances(2500, 2500, 2500, 1000)
+            .outputChances(9000, 9000, 9000, 9000)
             .specialValue(0)
             .noOptimize()
-            .duration(1000)
+            .duration(2000)
             .eut(512)
             .addTo(FGR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTUtility.getIntegratedCircuit(1), GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)))
-            .itemOutputs(
-                new ItemStack(Items.fish, 16, 0),
-                new ItemStack(Items.fish, 16, 1),
-                new ItemStack(Items.fish, 16, 2),
-                new ItemStack(Items.fish, 8, 3))
-            .fluidInputs(FluidRegistry.getFluidStack("water", 10000))
-            .outputChances(2500, 2500, 2500, 1000)
-            .specialValue(0)
-            .noOptimize()
-            .duration(1000)
-            .eut(512)
-            .addTo(FGR);
-
-        RecipeBuilder.builder()
-            .itemInputs(GTUtility.getIntegratedCircuit(3), ItemList.ActivatedCarbonFilterMesh.get(1))
+            .itemInputs(GTUtility.getIntegratedCircuit(7), ItemList.ActivatedCarbonFilterMesh.get(1))
             .itemOutputs(
                 new ItemStack(Items.rotten_flesh, 16),
                 new ItemStack(Items.bone, 16),
@@ -182,7 +167,7 @@ public class FishingGroundRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(4),
+                GTUtility.getIntegratedCircuit(8),
                 GTUtility.copyAmount(0, ItemList.ActivatedCarbonFilterMesh.get(1)))
             .itemOutputs(
                 new ItemStack(Blocks.waterlily, 32),
@@ -208,7 +193,7 @@ public class FishingGroundRecipes implements IRecipePool {
             .addTo(FGR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTUtility.getIntegratedCircuit(5), com.dreammaster.item.ItemList.MaceratedPlantmass.getIS(16))
+            .itemInputs(GTUtility.getIntegratedCircuit(9), com.dreammaster.item.ItemList.MaceratedPlantmass.getIS(16))
             .itemOutputs(
                 new ItemStack(AgriculturalChem.mAgrichemItem1, 64, 0),
                 new ItemStack(AgriculturalChem.mAgrichemItem1, 64, 1),
@@ -224,7 +209,7 @@ public class FishingGroundRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.getIntegratedCircuit(6),
+                GTUtility.getIntegratedCircuit(10),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Mytryl, 32L),
                 GTModHandler.getModItem(PamsHarvestCraft.ID, "seaweedItem", 64, missing))
             .itemOutputs(
@@ -243,7 +228,7 @@ public class FishingGroundRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTUtility.getIntegratedCircuit(2),
+                    GTUtility.getIntegratedCircuit(4),
                     GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)))
                 .itemOutputs(
                     GTModHandler.getModItem(PamsHarvestCraft.ID, "anchovyrawItem", 16),
@@ -310,7 +295,7 @@ public class FishingGroundRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTUtility.getIntegratedCircuit(2),
+                    GTUtility.getIntegratedCircuit(5),
                     GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)),
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatRaw, 16L))
                 .itemOutputs(
@@ -378,7 +363,7 @@ public class FishingGroundRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(
-                    GTUtility.getIntegratedCircuit(2),
+                    GTUtility.getIntegratedCircuit(6),
                     GTUtility.copyAmount(0, new ItemStack(Items.fishing_rod, 1)),
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatCooked, 16L))
                 .itemOutputs(
