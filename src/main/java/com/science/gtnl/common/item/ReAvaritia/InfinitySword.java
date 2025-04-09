@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.ReAvaritia;
 
+import static com.science.gtnl.common.item.items.TwilightSword.rayTrace;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.monster.IMob;
@@ -27,6 +30,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -55,6 +59,13 @@ import fox.spiteful.avaritia.LudicrousText;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
+import galaxyspace.core.entity.boss.EntityBlazeBoss;
+import galaxyspace.core.entity.boss.EntityCrystalBoss;
+import galaxyspace.core.entity.boss.EntityGhastBoss;
+import galaxyspace.core.entity.boss.EntitySlimeBoss;
+import galaxyspace.core.entity.boss.EntityWolfBoss;
+import micdoodle8.mods.galacticraft.core.entities.EntitySkeletonBoss;
+import micdoodle8.mods.galacticraft.planets.mars.entities.EntityCreeperBoss;
 import vazkii.botania.common.entity.EntityDoppleganger;
 
 public class InfinitySword extends ItemSword implements ICosmicRenderItem, SubtitleDisplay {
@@ -110,7 +121,62 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 applyInfinityDamage(victim, attacker);
             }
         }
+
+        if (victim instanceof EntityDoppleganger livingTarget) {
+            try {
+                Field playersField = EntityDoppleganger.class.getDeclaredField("playersWhoAttacked");
+                playersField.setAccessible(true);
+
+                List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
+                String playerName = attacker.getCommandSenderName();
+                if (!playersWhoAttacked.contains(playerName)) {
+                    playersWhoAttacked.add(playerName);
+                }
+                livingTarget.recentlyHit = 100;
+                DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) attacker);
+                livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+                livingTarget.setHealth(0);
+                livingTarget.onDeath(playerSource);
+                livingTarget.setDead();
+                livingTarget.worldObj.removeEntity(livingTarget);
+
+            } catch (NoSuchFieldException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (victim instanceof EntityDragon) {
+            victim.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+            victim.setDead();
+        }
+
+        victim.recentlyHit = 100;
+        applyInfinityDamage(victim, attacker);
+
         return true;
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
+        super.onUpdate(stack, world, entity, slot, isSelected);
+
+        if (entity instanceof EntityPlayer player) {
+            if (player.getCurrentEquippedItem() == stack && player.swingProgress == 0.5F && !world.isRemote) {
+                MovingObjectPosition rayTraceResult = rayTrace(player, false, true);
+
+                if (rayTraceResult != null && rayTraceResult.entityHit != null) {
+                    Entity hitEntity = rayTraceResult.entityHit;
+
+                    if (hitEntity instanceof EntityLivingBase livingEntity) {
+                        hitEntity(stack, livingEntity, player);
+
+                    } else if (hitEntity instanceof EntityDragonPart dragonPart) {
+                        EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj; // 获取末影龙本体
+                        hitEntity(stack, dragon, player);
+                    }
+                }
+            }
+        }
     }
 
     private void dropInventoryItems(EntityPlayer player) {
@@ -274,7 +340,13 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         target.onDeath(INFINITY_DAMAGE);
 
         // 直接删除目标实体
-        if (!(target instanceof EntityPlayer)) {
+        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
+            || target instanceof EntityBlazeBoss
+            || target instanceof EntityCrystalBoss
+            || target instanceof EntityGhastBoss
+            || target instanceof EntitySlimeBoss
+            || target instanceof EntityWolfBoss
+            || target instanceof EntitySkeletonBoss)) {
             target.worldObj.removeEntity(target);
         }
 
@@ -469,7 +541,13 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         target.setHealth(0);
 
         target.onDeath(INFINITY_DAMAGE);
-        if (!(target instanceof EntityPlayer)) {
+        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
+            || target instanceof EntityBlazeBoss
+            || target instanceof EntityCrystalBoss
+            || target instanceof EntityGhastBoss
+            || target instanceof EntitySlimeBoss
+            || target instanceof EntityWolfBoss
+            || target instanceof EntitySkeletonBoss)) {
             target.worldObj.removeEntity(target);
         }
 

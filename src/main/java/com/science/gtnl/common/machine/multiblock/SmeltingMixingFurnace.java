@@ -60,6 +60,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     protected GTRecipe lastRecipeToBuffer;
     public byte mGlassTier = 0;
+    public boolean hasRequiredItem = false;
     public static final int HORIZONTAL_OFF_SET = 8;
     public static final int VERTICAL_OFF_SET = 14;
     public static final int DEPTH_OFF_SET = 0;
@@ -215,11 +216,21 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         repairMachine();
         mCasing = 0;
         wirelessMode = false;
+        hasRequiredItem = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         if (mCasing <= 15 && !checkHatches() && mGlassTier < VoltageIndex.UEV) {
             updateHatchTexture();
             return false;
         }
+
+        ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
+        for (ItemStack item : getAllStoredInputs()) {
+            if (item != null && item.isItemEqual(requiredItem)) {
+                hasRequiredItem = true;
+                break;
+            }
+        }
+
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         energyHatchTier = checkEnergyHatchTier();
         return true;
@@ -241,16 +252,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     @Override
     public CheckRecipeResult checkProcessing() {
         if (this.getRecipeMap() == RecipeMaps.plasmaForgeRecipes) {
-            ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
-
-            boolean hasRequiredItem = false;
-            for (ItemStack item : getAllStoredInputs()) {
-                if (item != null && item.isItemEqual(requiredItem)) {
-                    hasRequiredItem = true;
-                    break;
-                }
-            }
-
             if (!hasRequiredItem) {
                 return CheckRecipeResultRegistry.NO_RECIPE;
             }
