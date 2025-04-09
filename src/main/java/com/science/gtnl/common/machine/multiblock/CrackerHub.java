@@ -85,9 +85,9 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(
-                String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, getWirelessModeProcessingTime()))
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "200"))
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -204,7 +204,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
 
     @Override
     public int getWirelessModeProcessingTime() {
-        return 128;
+        return 200 - ParallelTier * 10;
     }
 
     public HeatingCoilLevel getCoilLevel() {

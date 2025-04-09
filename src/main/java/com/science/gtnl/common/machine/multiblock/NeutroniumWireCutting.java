@@ -49,15 +49,15 @@ import tectech.thing.casing.TTCasingsContainer;
 public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<NeutroniumWireCutting>
     implements IWirelessEnergyHatchInformation {
 
-    public byte mGlassTier = 0;
-    public static final int HORIZONTAL_OFF_SET = 3;
-    public static final int VERTICAL_OFF_SET = 10;
-    public static final int DEPTH_OFF_SET = 0;
-    public int tCountCasing = 0;
+    private byte mGlassTier = 0;
+    private static final int HORIZONTAL_OFF_SET = 3;
+    private static final int VERTICAL_OFF_SET = 10;
+    private static final int DEPTH_OFF_SET = 0;
+    private int tCountCasing = 0;
     private static IStructureDefinition<NeutroniumWireCutting> STRUCTURE_DEFINITION = null;
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String ICF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/neutronium_wire_cutting"; // 文件路径
-    public static String[][] shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String ICF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/neutronium_wire_cutting"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
 
     public NeutroniumWireCutting(String aName) {
         super(aName);
@@ -85,9 +85,9 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(
-                String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, getWirelessModeProcessingTime()))
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "200"))
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -98,7 +98,6 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             .addInputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addOutputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addEnergyHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
@@ -237,7 +236,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
 
     @Override
     public int getWirelessModeProcessingTime() {
-        return 128;
+        return 200 - ParallelTier * 10;
     }
 
     @Override

@@ -155,15 +155,15 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        if (!wirelessMode) {
-            boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
-            logic.setAvailableVoltage(getMachineVoltageLimit());
-            logic.setAvailableAmperage(useSingleAmp ? 2 : getMaxInputAmps());
-            logic.setAmperageOC(useSingleAmp);
-        } else {
+        if (wirelessMode) {
             logic.setAvailableVoltage(getAverageInputVoltage());
             logic.setAvailableAmperage(getMaxInputAmps());
-            logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
+            logic.setAmperageOC(false);
+        } else {
+            boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+            logic.setAvailableVoltage(getMachineVoltageLimit());
+            logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+            logic.setAmperageOC(useSingleAmp);
         }
     }
 
