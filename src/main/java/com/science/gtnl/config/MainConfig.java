@@ -1,6 +1,7 @@
 package com.science.gtnl.config;
 
 import java.io.File;
+import java.time.LocalDate;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -19,6 +20,7 @@ public class MainConfig {
     public static boolean enableInfinitySwordExplosion = true;
     public static boolean enableCustomPlayerDoll = true;
     public static boolean enableMachineAmpLimit = true;
+    public static boolean enableAprilFoolRecipe = false;
 
     public static boolean needSeedPacket = true;
 
@@ -29,6 +31,12 @@ public class MainConfig {
             config = new Configuration(configFile);
             loadConfig();
         }
+
+        LocalDate today = LocalDate.now();
+        if (today.getMonthValue() == 4 && today.getDayOfMonth() == 1) {
+            enableAprilFoolRecipe = true;
+        }
+
     }
 
     public static void reloadConfig() {
@@ -122,6 +130,10 @@ public class MainConfig {
         enableMachineAmpLimit = config
             .get("Enable Machine Can't Use Laser Hatch", "enable", enableMachineAmpLimit, "Enable Amp Limit")
             .getBoolean(enableMachineAmpLimit);
+
+        enableAprilFoolRecipe = config
+            .get("Force enable April Fool's recipe", "enable", enableAprilFoolRecipe, "Enable April Fool's Recipe")
+            .getBoolean(enableAprilFoolRecipe);
 
         if (config.hasChanged()) {
             config.save();
