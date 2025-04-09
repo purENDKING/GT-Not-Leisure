@@ -6,6 +6,8 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 import static gregtech.api.util.GTRecipeConstants.COIL_HEAT;
 
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
+import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -1269,6 +1271,72 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
                 .metadata(COIL_HEAT, 3800)
                 .duration(24 * SECONDS + 10 * TICKS)
                 .eut(TierEU.RECIPE_ZPM)
+                .addTo(SCCR);
+
+            // 单步聚酰亚胺
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1)),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 22))
+                .fluidInputs(
+                    Materials.Oxygen.getGas(6000),
+                    Materials.Nitrogen.getGas(2000),
+                    Materials.Hydrogen.getGas(12000))
+                .fluidOutputs(MaterialPool.Polyimide.getMolten(144))
+                .specialValue(9500)
+                .noOptimize()
+                .metadata(COIL_HEAT, 9500)
+                .duration(20)
+                .eut(TierEU.RECIPE_UV)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1)),
+                    GTUtility.copyAmount(0, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
+                    GTUtility.copyAmountUnsafe(2750, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1)))
+                .fluidInputs(
+                    Materials.Oxygen.getGas(750000),
+                    Materials.Nitrogen.getGas(250000),
+                    Materials.Hydrogen.getGas(1500000))
+                .fluidOutputs(MaterialPool.Polyimide.getMolten(18000))
+                .specialValue(10700)
+                .noOptimize()
+                .metadata(COIL_HEAT, 10700)
+                .duration(200)
+                .eut(TierEU.RECIPE_UHV)
+                .addTo(SCCR);
+
+            // 单步聚醚醚酮
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTUtility.copyAmount(0, GTNLItemList.ZnFeAlClCatalyst.get(1)),
+                    GTUtility.copyAmount(0, (GTNLItemList.BlackLight.get(1))),
+                    GTUtility.copyAmount(0, (MaterialPool.CoAcAbCatalyst.get(OrePrefixes.dust, 1))),
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 45))
+                .fluidInputs(Materials.Oxygen.getGas(54000), Materials.Hydrogen.getGas(216000))
+                .fluidOutputs(MaterialPool.Polyetheretherketone.getMolten(2592))
+                .specialValue(9500)
+                .noOptimize()
+                .metadata(COIL_HEAT, 9500)
+                .duration(200)
+                .eut(TierEU.RECIPE_UHV)
+                .addTo(SCCR);
+
+            RecipeBuilder.builder()
+                .itemInputs(
+                    GTUtility.copyAmount(0, GTNLItemList.ZnFeAlClCatalyst.get(1)),
+                    GTUtility.copyAmount(0, (GTNLItemList.BlackLight.get(1))),
+                    GTUtility.copyAmount(0, (MaterialPool.CoAcAbCatalyst.get(OrePrefixes.dust, 1))),
+                    GTUtility.copyAmountUnsafe(1440, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Carbon, 1)))
+                .fluidInputs(Materials.Oxygen.getGas(1728000), Materials.Hydrogen.getGas(6912000))
+                .fluidOutputs(MaterialPool.Polyetheretherketone.getMolten(82944))
+                .specialValue(10700)
+                .noOptimize()
+                .metadata(COIL_HEAT, 10700)
+                .duration(400)
+                .eut(TierEU.RECIPE_UEV)
                 .addTo(SCCR);
         }
     }
