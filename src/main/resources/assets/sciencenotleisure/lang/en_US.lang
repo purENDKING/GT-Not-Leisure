@@ -2266,7 +2266,7 @@ Tooltip_ShallowChemicalCoupling_Casing_00=Any Chemical Protection Machine Block
 
 NameAdvancedCircuitAssemblyLine=Advanced Circuit Assembly Line
 AdvancedCircuitAssemblyLineRecipes=Advanced Circuit Assembly Line
-gtnl.recipe.ShallowChemicalCouplingRecipes=Advanced Circuit Assembly Line
+gtnl.recipe.AdvancedCircuitAssemblyLineRecipes=Advanced Circuit Assembly Line
 Tooltip_AdvancedCircuitAssemblyLine_00=111
 Tooltip_AdvancedCircuitAssemblyLine_01=222
 Tooltip_AdvancedCircuitAssemblyLine_02=333

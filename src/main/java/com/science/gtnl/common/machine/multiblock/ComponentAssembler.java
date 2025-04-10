@@ -69,13 +69,13 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
     public byte glassTier = 0;
     public int casingAmount;
     protected int energyHatchTier;
-    public static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
-    public static String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
-    public static IStructureDefinition<ComponentAssembler> STRUCTURE_DEFINITION = null;
+    private static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private final int horizontalOffSet = 3;
+    private final int verticalOffSet = 4;
+    private final int depthOffSet = 0;
+    private static IStructureDefinition<ComponentAssembler> STRUCTURE_DEFINITION = null;
 
     @Override
     public IStructureDefinition<ComponentAssembler> getStructureDefinition() {
@@ -123,11 +123,13 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
     }
 
-    protected boolean isEnablePerfectOverclock() {
+    @Override
+    public boolean isEnablePerfectOverclock() {
         return false;
     }
 
-    protected int getMaxParallelRecipes() {
+    @Override
+    public int getMaxParallelRecipes() {
         return 16;
     }
 

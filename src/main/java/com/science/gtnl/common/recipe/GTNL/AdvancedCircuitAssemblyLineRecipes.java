@@ -1,0 +1,29 @@
+package com.science.gtnl.common.recipe.GTNL;
+
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+
+import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.common.recipe.RecipeRegister;
+
+import gregtech.api.enums.GTValues;
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMap;
+
+public class AdvancedCircuitAssemblyLineRecipes implements IRecipePool {
+
+    final RecipeMap<?> ACALR = RecipeRegister.AdvancedCircuitAssemblyLineRecipes;
+
+    @Override
+    public void loadRecipes() {
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(new ItemStack(Blocks.dirt, 1))
+            .itemOutputs(ItemList.Circuit_Crystalprocessor.get(64))
+            .specialValue(14)
+            .duration(1)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(ACALR);
+    }
+}

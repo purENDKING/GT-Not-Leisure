@@ -1,6 +1,9 @@
 package com.science.gtnl.common.recipe;
 
+import java.util.Collections;
 import java.util.Comparator;
+
+import net.minecraft.util.StatCollector;
 
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.Special.BloodSoulFrontend;
@@ -11,7 +14,9 @@ import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
 import com.science.gtnl.common.recipe.Special.SpaceMinerFrontend;
 import com.science.gtnl.common.recipe.Special.SteamFusionTierKey;
 
+import goodgenerator.api.recipe.ComponentAssemblyLineFrontend;
 import goodgenerator.client.GUI.GGUITextures;
+import gregtech.api.enums.GTValues;
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMapBackend;
@@ -375,12 +380,18 @@ public class RecipeRegister {
     public static RecipeMap<RecipeMapBackend> AdvancedCircuitAssemblyLineRecipes = RecipeMapBuilder
         .of("gtnl.recipe.AdvancedCircuitAssemblyLineRecipes")
         .maxIO(12, 1, 12, 0)
-        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
-        .frontend(GeneralFrontend::new)
+        .neiTransferRect(70, 15, 18, 54)
+        .neiSpecialInfoFormatter(
+            recipeInfo -> Collections.singletonList(
+                StatCollector.translateToLocalFormatted(
+                    "value.component_assembly_line",
+                    GTValues.VN[recipeInfo.recipe.mSpecialValue])))
+        .dontUseProgressBar()
+        .addSpecialTexture(70, 11, 72, 40, GGUITextures.PICTURE_COMPONENT_ASSLINE)
+        .frontend(ComponentAssemblyLineFrontend::new)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.AdvancedCircuitAssemblyLine.get(1))
                 .setMaxRecipesPerPage(1))
-        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
         .disableOptimize()
         .build();
 

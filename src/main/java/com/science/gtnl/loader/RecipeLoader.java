@@ -27,6 +27,7 @@ import com.science.gtnl.common.recipe.AprilFool.SteamFusionReactorRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamManufacturerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamWoodcutterRecipes;
+import com.science.gtnl.common.recipe.GTNL.AdvancedCircuitAssemblyLineRecipes;
 import com.science.gtnl.common.recipe.GTNL.AlchemicChemistrySetRecipes;
 import com.science.gtnl.common.recipe.GTNL.BloodDemonInjectionRecipes;
 import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
@@ -117,7 +118,7 @@ public class RecipeLoader {
             new FuelRefiningComplexRecipes(), new CrackingRecipes(), new DistillationTowerRecipes(),
             new SpaceMinerRecipes(), new SpaceDrillRecipes(), new SpaceAssemblerRecipes(), new PCBFactoryRecipes(),
             new PlatinumBasedTreatmentRecipes(), new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(),
-            new AlchemicChemistrySetRecipes() };
+            new AlchemicChemistrySetRecipes(), new AdvancedCircuitAssemblyLineRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),

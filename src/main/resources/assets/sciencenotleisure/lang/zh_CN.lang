@@ -2266,7 +2266,7 @@ Tooltip_ShallowChemicalCoupling_Casing_00=任意化学防护机械方块
 
 NameAdvancedCircuitAssemblyLine=进阶电路装配线
 AdvancedCircuitAssemblyLineRecipes=电路装配线
-gtnl.recipe.ShallowChemicalCouplingRecipes=电路装配线
+gtnl.recipe.AdvancedCircuitAssemblyLineRecipes=电路装配线
 Tooltip_AdvancedCircuitAssemblyLine_00=111
 Tooltip_AdvancedCircuitAssemblyLine_01=222
 Tooltip_AdvancedCircuitAssemblyLine_02=333
