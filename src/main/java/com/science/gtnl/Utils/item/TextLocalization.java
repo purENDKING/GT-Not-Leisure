@@ -764,6 +764,9 @@ public class TextLocalization {
     public static final String Tooltip_BloodSoulSacrificialArray_04 = texter(
         "Using Amonk’s Blood Orb ignores all LP consumption.",
         "Tooltip_BloodSoulSacrificialArray_04");
+    public static final String Tooltip_BloodSoulSacrificialArray_05 = texter(
+        "Right click on the machine using a wire cutter to turn on and off the falling tower rendering",
+        "Tooltip_BloodSoulSacrificialArray_05");
     public static final String Tooltip_BloodSoulSacrificialArray_Casing = texter(
         "Ang Mining Blck Plutonium Casing",
         "Tooltip_BloodSoulSacrificialArray_Casing");

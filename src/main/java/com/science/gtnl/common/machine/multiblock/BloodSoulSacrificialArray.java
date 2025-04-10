@@ -73,6 +73,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
     public final int verticalOffSet = 10;
     public final int depthOffSet = 9;
     public static boolean isCreativeOrb = false;
+    public static boolean enableRender = true;
     public static int currentEssence = 0;
     public static IStructureDefinition<BloodSoulSacrificialArray> STRUCTURE_DEFINITION = null;
     public static String[][] shape = StructureUtils.readStructureFromFile(BSSA_STRUCTURE_FILE_PATH);
@@ -147,6 +148,19 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
             aPlayer,
             StatCollector.translateToLocal("BloodSoulSacrificialArray_Mode_" + this.machineMode));
 
+    }
+
+    @Override
+    public boolean onWireCutterRightClick(ForgeDirection side, ForgeDirection wrenchingSide, EntityPlayer aPlayer,
+        float aX, float aY, float aZ, ItemStack aTool) {
+        if (enableRender) {
+            enableRender = false;
+            GTUtility.sendChatToPlayer(aPlayer, StatCollector.translateToLocal("BloodSoulSacrificialArray_Render_Off"));
+        } else {
+            enableRender = true;
+            GTUtility.sendChatToPlayer(aPlayer, StatCollector.translateToLocal("BloodSoulSacrificialArray_Render_On"));
+        }
+        return true;
     }
 
     @Override
@@ -261,7 +275,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
 
         if ((this.mProgresstime + 1) % 20 == 0 && this.mProgresstime > 0
             && this.getRecipeMap() == RecipeRegister.FallingTowerRecipes) {
-            if (mProgresstime < 20) {
+            if (mProgresstime < 20 && enableRender) {
                 spawnMeteor = true;
             }
 
@@ -311,6 +325,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
             .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_04)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_05)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
