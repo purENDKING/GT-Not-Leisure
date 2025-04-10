@@ -372,6 +372,18 @@ public class RecipeRegister {
         .disableOptimize()
         .build();
 
+    public static RecipeMap<RecipeMapBackend> AdvancedCircuitAssemblyLineRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.AdvancedCircuitAssemblyLineRecipes")
+        .maxIO(12, 1, 12, 0)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .frontend(GeneralFrontend::new)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.AdvancedCircuitAssemblyLine.get(1))
+                .setMaxRecipesPerPage(1))
+        .neiSpecialInfoFormatter(HeatingCoilSpecialValueFormatter.INSTANCE)
+        .disableOptimize()
+        .build();
+
     public static final RecipeMap<RecipeMapBackend> SteamGateAssemblerRecipes = RecipeMapBuilder
         .of("gtnl.recipe.SteamgateAssembler")
         .maxIO(81, 1, 0, 0)
