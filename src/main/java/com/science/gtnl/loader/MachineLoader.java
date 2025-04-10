@@ -29,6 +29,7 @@ import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
+import com.science.gtnl.common.machine.multiblock.AdvancedCircuitAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.AprilFool.HighPressureSteamFusionReactor;
@@ -712,6 +713,13 @@ public class MachineLoader {
                 "IntegratedAssemblyFacility",
                 TextLocalization.NameIntegratedAssemblyFacility));
         addItemTooltip(GTNLItemList.IntegratedAssemblyFacility.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.AdvancedCircuitAssemblyLine.set(
+            new AdvancedCircuitAssemblyLine(
+                21128,
+                "AdvancedCircuitAssemblyLine",
+                TextLocalization.NameAdvancedCircuitAssemblyLine));
+        addItemTooltip(GTNLItemList.AdvancedCircuitAssemblyLine.get(1), AnimatedText.SNL_SCCR);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
