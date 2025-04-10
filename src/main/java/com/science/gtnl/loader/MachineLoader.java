@@ -719,7 +719,7 @@ public class MachineLoader {
                 21128,
                 "AdvancedCircuitAssemblyLine",
                 TextLocalization.NameAdvancedCircuitAssemblyLine));
-        addItemTooltip(GTNLItemList.AdvancedCircuitAssemblyLine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        addItemTooltip(GTNLItemList.AdvancedCircuitAssemblyLine.get(1), AnimatedText.SNL_SCCR);
 
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
