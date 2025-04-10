@@ -396,15 +396,15 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mi")))) {
-                            outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ob")))) {
-                            outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ti")))) {
@@ -436,9 +436,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pr")))) {
-                            outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Tr")))) {
@@ -456,9 +456,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("MM")))) {
-                                outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
+                        outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pl")))) {

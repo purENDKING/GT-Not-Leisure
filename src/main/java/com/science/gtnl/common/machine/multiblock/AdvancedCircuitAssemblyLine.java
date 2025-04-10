@@ -194,7 +194,7 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0));
+                    .setEUtDiscount(0.8 - (ParallelTier / 36.0));
                 // .setSpeedBoost(Math.max(0.05, 1.0 / 3.75 - (ParallelTier / 200.0)));
             }
 
@@ -213,7 +213,7 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
         runningTickCounter++;
         if (runningTickCounter % 10 == 0 && speedup < 10) {
             runningTickCounter = 0;
-            speedup += 0.025F;
+            speedup += 0.15F;
         }
         return super.onRunningTick(aStack);
     }
