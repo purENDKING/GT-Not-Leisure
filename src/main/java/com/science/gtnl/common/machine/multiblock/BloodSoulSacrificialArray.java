@@ -465,7 +465,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(1)
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setSpeedBoost(1 - (ParallelTier / 50.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

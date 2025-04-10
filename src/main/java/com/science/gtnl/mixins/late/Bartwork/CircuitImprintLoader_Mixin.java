@@ -6,6 +6,11 @@ import net.minecraft.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import com.science.gtnl.loader.RecipeLoaderServerStart;
 
 import bartworks.system.material.CircuitGeneration.BWMetaItems;
 import bartworks.system.material.CircuitGeneration.CircuitImprintLoader;
@@ -17,6 +22,16 @@ import gregtech.api.util.GTRecipe;
 @SuppressWarnings("UnusedMixin")
 @Mixin(value = CircuitImprintLoader.class, remap = false)
 public abstract class CircuitImprintLoader_Mixin {
+
+    @Inject(
+        method = "run",
+        at = @At(
+            value = "INVOKE",
+            target = "Lbartworks/system/material/CircuitGeneration/CircuitImprintLoader;exchangeRecipesInList(Ljava/util/HashSet;Ljava/util/HashSet;)V",
+            shift = At.Shift.BEFORE))
+    private static void injectCustomRecipeLoader(CallbackInfo ci) {
+        RecipeLoaderServerStart.loadRecipesServerStart();
+    }
 
     /**
      * Overwrites the makeMoreExpensive method in CircuitImprintLoader.
