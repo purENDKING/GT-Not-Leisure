@@ -21,6 +21,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -236,44 +237,297 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
             List<FluidStack> outputFluids = new ArrayList<>();
             for (ItemStack item : getAllStoredInputs()) {
                 if (item.getItem() != null) {
-                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("DD")))) {
-                        int random = new Random().nextInt(4) + 1;
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ow")))) {
+                        int random = new Random().nextInt(5) + 1;
                         switch (random) {
                             case 1:
-                                outputFluids.add(Materials.Oxygen.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.Oil.getFluid(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                             case 2:
-                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.OilHeavy.getFluid(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                             case 3:
-                                outputFluids.add(Materials.Hydrogen.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.OilLight.getFluid(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                             case 4:
-                                outputFluids.add(Materials.Argon.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.OilMedium.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 5:
+                                outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                         }
                     }
-                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ow")))) {
-                        int random = new Random().nextInt(4) + 1;
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mo")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ma")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Chlorobenzene.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Eu")))) {
+                        int random = new Random().nextInt(3) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 3:
+                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ca")))) {
+                        int random = new Random().nextInt(2) + 1;
                         switch (random) {
                             case 1:
                                 outputFluids.add(Materials.Oxygen.getGas(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                             case 2:
-                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.LiquidOxygen.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Rb")))) {
+                        int random = new Random().nextInt(4) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
                                 eut += 128000;
                                 break;
                             case 3:
-                                outputFluids.add(Materials.Hydrogen.getGas(excessFuel * 1000L));
+                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
                                 eut += 128000;
                                 break;
                             case 4:
-                                outputFluids.add(Materials.Argon.getGas(excessFuel * 1000L));
+                                outputFluids.add(Materials.Lava.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Io")))) {
+                        int random = new Random().nextInt(3) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SulfuricAcid.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.CarbonDioxide.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 3:
+                                outputFluids.add(Materials.Lead.getMolten(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Me")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Iron.getMolten(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ve")))) {
+                        int random = new Random().nextInt(3) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SulfuricAcid.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.CarbonDioxide.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 3:
+                                outputFluids.add(Materials.Lead.getMolten(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mi")))) {
+                            outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
+                            eut += 128000;
+                            break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ob")))) {
+                            outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
+                            eut += 128000;
+                            break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ti")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.Ethane.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Methane.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("RA")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pr")))) {
+                            outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
+                            eut += 128000;
+                            break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Tr")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.Ethylene.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("MM")))) {
+                                outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pl")))) {
+                        int random = new Random().nextInt(4) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Fluorine.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 3:
+                                outputFluids.add(Materials.Oxygen.getGas(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 4:
+                                outputFluids.add(Materials.LiquidAir.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BC")))) {
+                        int random = new Random().nextInt(2) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.Unknown.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                        }
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BE")))) {
+                        outputFluids.add(Materials.LiquidAir.getFluid(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BF")))) {
+                        outputFluids.add(Materials.Tin.getMolten(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CA")))) {
+                        outputFluids.add(Materials.Copper.getMolten(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
+                    }
+
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("TE")))) {
+                        int random = new Random().nextInt(3) + 1;
+                        switch (random) {
+                            case 1:
+                                outputFluids.add(Materials.Copper.getMolten(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 2:
+                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
+                                eut += 128000;
+                                break;
+                            case 3:
+                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
                                 eut += 128000;
                                 break;
                         }
