@@ -2549,6 +2549,28 @@ public class TextLocalization {
         "Any Chemical Protection Machine Block",
         "Tooltip_ShallowChemicalCoupling_Casing_00");
 
+    public static final String NameAdvancedCircuitAssemblyLine = texter(
+        "Advanced Circuit Assembly Line",
+        "NameAdvancedCircuitAssemblyLine");
+    public static final String AdvancedCircuitAssemblyLineRecipes = texter(
+        "Advanced Circuit Assembly Line",
+        "AdvancedCircuitAssemblyLineRecipes");
+    public static final String Tooltip_AdvancedCircuitAssemblyLine_00 = texter(
+        "11111",
+        "Tooltip_AdvancedCircuitAssemblyLine_00");
+    public static final String Tooltip_AdvancedCircuitAssemblyLine_01 = texter(
+        "22222",
+        "Tooltip_AdvancedCircuitAssemblyLine_01");
+    public static final String Tooltip_AdvancedCircuitAssemblyLine_02 = texter(
+        "33333",
+        "Tooltip_AdvancedCircuitAssemblyLine_02");
+    public static final String Tooltip_AdvancedCircuitAssemblyLine_03 = texter(
+        "44444",
+        "Tooltip_AdvancedCircuitAssemblyLine_03");
+    public static final String Tooltip_AdvancedCircuitAssemblyLine_Casing_00 = texter(
+        "55555",
+        "Tooltip_AdvancedCircuitAssemblyLine_Casing_00");
+
     public static final String NameWhiteNightGenerator = texter("White Night Generator", "NameWhiteNightGenerator");
     public static final String Tooltip_WhiteNightGenerator_MachineType = texter(
         "§d§lBaptism of Violet",
