@@ -2537,10 +2537,10 @@ public class TextLocalization {
         "Shallow Chemical Coupling",
         "ShallowChemicalCouplingRecipes");
     public static final String Tooltip_ShallowChemicalCoupling_00 = texter(
-        "§oLMolecular Control Reactor Integrator",
+        "§7§oLMolecular Control Reactor Integrator",
         "Tooltip_ShallowChemicalCoupling_00");
     public static final String Tooltip_ShallowChemicalCoupling_01 = texter(
-        "§oDirect Molecular Bond Control Bypasses Multi-Step Reactions",
+        "§7§oDirect Molecular Bond Control Bypasses Multi-Step Reactions",
         "Tooltip_ShallowChemicalCoupling_01");
     public static final String Tooltip_ShallowChemicalCoupling_02 = texter(
         "Recipe time & energy multiply by 85%% per coil tier",
@@ -2559,19 +2559,19 @@ public class TextLocalization {
         "Advanced Circuit Assembly Line",
         "AdvancedCircuitAssemblyLineRecipes");
     public static final String Tooltip_AdvancedCircuitAssemblyLine_00 = texter(
-        "11111",
+        "§c§oOutperforming BartWork's Circuit Assemblers",
         "Tooltip_AdvancedCircuitAssemblyLine_00");
     public static final String Tooltip_AdvancedCircuitAssemblyLine_01 = texter(
-        "22222",
+        "§c§oAssembling Circuits at Unimaginable Speeds",
         "Tooltip_AdvancedCircuitAssemblyLine_01");
     public static final String Tooltip_AdvancedCircuitAssemblyLine_02 = texter(
-        "33333",
+        "Progressive Runtime Acceleration Scaling to §b10x Maximum Velocity",
         "Tooltip_AdvancedCircuitAssemblyLine_02");
     public static final String Tooltip_AdvancedCircuitAssemblyLine_03 = texter(
-        "44444",
+        "Base EU/t Reduction: 80% | Formula: 0.8 - (Parallel Tier / 36)",
         "Tooltip_AdvancedCircuitAssemblyLine_03");
     public static final String Tooltip_AdvancedCircuitAssemblyLine_Casing_00 = texter(
-        "55555",
+        "Any advanced electronic computing machinery block",
         "Tooltip_AdvancedCircuitAssemblyLine_Casing_00");
 
     public static final String NameWhiteNightGenerator = texter("White Night Generator", "NameWhiteNightGenerator");
