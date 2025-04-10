@@ -238,28 +238,25 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
             for (ItemStack item : getAllStoredInputs()) {
                 if (item.getItem() != null) {
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ow")))) {
-                        int random = new Random().nextInt(5) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Oil.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.OilHeavy.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(Materials.OilLight.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 4:
-                                outputFluids.add(Materials.OilMedium.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 5:
-                                outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
+                        if (Math.random() < 0.25) {
+                            outputFluids.add(Materials.Oil.getFluid(excessFuel * 1000L));
+                            eut += 128000;
+                        }
+                        if (Math.random() < 0.25) {
+                            outputFluids.add(Materials.OilHeavy.getFluid(excessFuel * 1000L));
+                            eut += 128000;
+                        }
+                        if (Math.random() < 0.25) {
+                            outputFluids.add(Materials.OilLight.getFluid(excessFuel * 1000L));
+                            eut += 128000;
+                        }
+                        if (Math.random() < 0.25) {
+                            outputFluids.add(Materials.OilMedium.getFluid(excessFuel * 1000L));
+                            eut += 128000;
+                        }
+                        if (Math.random() < 0.25) {
+                            outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
+                            eut += 128000;
                         }
                     }
 
@@ -396,15 +393,15 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mi")))) {
-                            outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ob")))) {
-                            outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ti")))) {
@@ -436,9 +433,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pr")))) {
-                            outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                            break;
+                        outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Tr")))) {
@@ -456,9 +453,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("MM")))) {
-                                outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
+                        outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
+                        eut += 128000;
+                        break;
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pl")))) {
