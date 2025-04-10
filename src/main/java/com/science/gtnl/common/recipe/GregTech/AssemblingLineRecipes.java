@@ -2,6 +2,7 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static gregtech.api.enums.Mods.*;
+import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.*;
 import static gregtech.api.util.GTRecipeConstants.*;
 
@@ -1000,6 +1001,58 @@ public class AssemblingLineRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_UHV)
             .duration(60 * SECONDS)
             .addTo(AssemblyLine);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, GTModHandler.getModItem(BloodMagic.ID, "Altar", 1))
+            .metadata(RESEARCH_TIME, 20 * HOURS)
+            .itemInputs(
+                GTModHandler.getModItem(BloodMagic.ID, "masterStone", 32),
+                new Object[] { OrePrefixes.circuit.get(Materials.ZPM), 32L },
+                new Object[] { OrePrefixes.circuit.get(Materials.UV), 16L },
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Trinium, 16),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorZPM, 64L),
+                ItemList.Field_Generator_ZPM.get(16),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Naquadah, 5),
+                ItemList.Electric_Pump_ZPM.get(32),
+                ItemList.Emitter_ZPM.get(32),
+                GTModHandler.getModItem(BloodArsenal.ID, "lp_materializer", 1),
+                GTModHandler.getModItem(BloodArsenal.ID, "life_infuser", 1),
+                GTModHandler.getModItem(BloodMagic.ID, "blockWritingTable", 1),
+                GTModHandler.getModItem(BloodMagic.ID, "activationCrystal", 1, 1),
+                GTModHandler.getModItem(BloodMagic.ID, "itemRitualDiviner", 1, 2))
+            .fluidInputs(
+                Materials.Grade4PurifiedWater.getFluid(64000),
+                Materials.Americium.getMolten(4608),
+                Materials.Neutronium.getMolten(2304),
+                Materials.NaquadahEnriched.getMolten(1152))
+            .itemOutputs(GTNLItemList.BloodSoulSacrificialArray.get(1))
+            .eut(TierEU.RECIPE_UV)
+            .duration(120 * SECONDS)
+            .addTo(AssemblyLine);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            getModItem(GregTech.ID, "gt.blockmachines", 1, 12735),
+            256000,
+            1024,
+            (int) TierEU.RECIPE_UHV,
+            1,
+            new Object[] { getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
+                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
+                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
+                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 16),
+                new Object[] { OrePrefixes.circuit.get(Materials.UHV), 32 },
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUHV, 64L),
+                ItemList.Field_Generator_UHV.get(16), ItemList.Conveyor_Module_UHV.get(32),
+                ItemList.Robot_Arm_UHV.get(32), getModItem(GTPlusPlus.ID, "MU-metaitem.01", 1, 32105),
+                ItemList.Emitter_ZPM.get(32), GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 32),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Naquadria, 5),
+                ItemList.Sensor_UHV.get(32) },
+            new FluidStack[] { Materials.Grade6PurifiedWater.getFluid(64000),
+                MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(32000), Materials.CosmicNeutronium.getMolten(2304) },
+            GTNLItemList.AdvancedCircuitAssemblyLine.get(1),
+            4800,
+            (int) TierEU.RECIPE_UHV);
 
         TTRecipeAdder.addResearchableAssemblylineRecipe(
             GTNLItemList.ChemicalPlant.get(1),
