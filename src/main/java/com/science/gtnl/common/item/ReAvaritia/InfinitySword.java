@@ -100,7 +100,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (player.worldObj.isRemote) return true;
 
         if (victim instanceof EntityPlayer targetPlayer) {
-            if (MainConfig.enableAprilFoolRecipe) cancelDragonArmor = player.isSneaking();
+            if (MainConfig.enableInfinitySwordBypassMechanism) cancelDragonArmor = player.isSneaking();
 
             boolean wearingInfinityArmor = false;
             for (ItemStack armorStack : targetPlayer.inventory.armorInventory) {
@@ -115,14 +115,13 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
             if (wearingInfinityArmor) {
                 targetPlayer.setHealth(targetPlayer.getHealth() - 20.0F);
-                return true;
             } else {
                 // 将玩家的盔甲栏和主手的物品变成掉落物
-                dropInventoryItems(targetPlayer);
+                // dropInventoryItems(targetPlayer);
 
-                // 施加无限伤害
                 applyInfinityDamage(victim, player);
             }
+            return true;
         }
 
         if (victim instanceof EntityDoppleganger livingTarget) {
@@ -142,15 +141,15 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                 livingTarget.onDeath(playerSource);
                 livingTarget.setDead();
                 livingTarget.worldObj.removeEntity(livingTarget);
+                return true;
 
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            } catch (NoSuchFieldException | IllegalAccessException ignored) {}
         }
 
         if (victim instanceof EntityDragon) {
             victim.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
             victim.setDead();
+            return true;
         }
 
         victim.recentlyHit = 100;
@@ -159,39 +158,299 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         return true;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
-        boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_00);
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_01);
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_02);
+    private void applyInfinityDamage(EntityLivingBase target, EntityLivingBase attacker) {
+
+        if (target instanceof EntityDragon) {
+            target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+            target.setDead();
+        } else if (target instanceof EntityPlayer playerTarget && attacker.isSneaking()) {
+            for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
+                ItemStack armorStack = playerTarget.inventory.armorInventory[i];
+                if (armorStack != null) {
+                    if (armorStack.hasTagCompound()) {
+                        if (armorStack.getTagCompound()
+                            .hasKey("Energy")) {
+                            armorStack.getTagCompound()
+                                .setInteger("Energy", 0);
+                        }
+                        if (armorStack.getTagCompound()
+                            .hasKey("charge")) {
+                            armorStack.getTagCompound()
+                                .setDouble("charge", 0.0);
+                        }
+                    }
+                }
+            }
+            target.attackEntityFrom(getAdminKill(), Float.POSITIVE_INFINITY);
+        }
+
+        DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) attacker);
+        target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
+
+        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
+
+        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
+            || target instanceof EntityBlazeBoss
+            || target instanceof EntityCrystalBoss
+            || target instanceof EntityGhastBoss
+            || target instanceof EntitySlimeBoss
+            || target instanceof EntityWolfBoss
+            || target instanceof EntitySkeletonBoss)) {
+            target.setHealth(0);
+            target.onDeath(INFINITY_DAMAGE);
+            target.setDead();
+            target.worldObj.removeEntity(target);
+            target.worldObj.updateEntity(target);
+        }
     }
 
     @Override
-    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
-        super.onUpdate(stack, world, entity, slot, isSelected);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote) {
+            AxisAlignedBB area = player.boundingBox.expand(50.0, 50.0, 50.0);
+            List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, area);
 
-        if (entity instanceof EntityPlayer player) {
-            if (player.getCurrentEquippedItem() == stack && player.swingProgress == 0.5F && !world.isRemote) {
-                MovingObjectPosition rayTraceResult = rayTrace(player, false, true);
+            for (Entity entity : entities) {
+                if (entity instanceof EntityItem item) {
 
-                if (rayTraceResult != null && rayTraceResult.entityHit != null) {
-                    Entity hitEntity = rayTraceResult.entityHit;
+                    double centerX = player.posX;
+                    double centerY = player.posY + (player.height / 2.0);
+                    double centerZ = player.posZ;
+                    item.setPosition(centerX, centerY, centerZ);
 
-                    if (hitEntity instanceof EntityLivingBase livingEntity) {
-                        hitEntity(stack, livingEntity, player);
-                        if (MainConfig.enableAprilFoolRecipe) cancelDragonArmor = player.isSneaking();
-
-                    } else if (hitEntity instanceof EntityDragonPart dragonPart) {
-                        EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj; // 获取末影龙本体
-                        hitEntity(stack, dragon, player);
-                    }
                 }
+
+                if (entity instanceof EntityXPOrb xpOrb) {
+
+                    double centerX = player.posX;
+                    double centerY = player.posY + (player.height / 2.0);
+                    double centerZ = player.posZ;
+                    xpOrb.setPosition(centerX, centerY, centerZ);
+                }
+            }
+        }
+
+        cancelDragonArmor = false;
+        handleSwordAttack(stack, world, player);
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        return stack;
+    }
+
+    private void handleSwordAttack(ItemStack stack, World world, EntityPlayer player) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt == null) {
+            nbt = new NBTTagCompound();
+            stack.setTagCompound(nbt);
+        }
+        long lastUsed = nbt.getLong("LastUsed");
+
+        if (System.currentTimeMillis() - lastUsed < COOLDOWN) {
+            if (world.isRemote) {
+                long remainingTime = (COOLDOWN - (System.currentTimeMillis() - lastUsed)) / 1000;
+                showSubtitle(
+                    TextLocalization.Tooltip_InfinitySword_Aura_00 + remainingTime
+                        + TextLocalization.Tooltip_InfinitySword_Aura_01);
+            }
+            return;
+        }
+
+        if (!world.isRemote) {
+            executeSweepAttack(world, player);
+        }
+
+        nbt.setLong("LastUsed", System.currentTimeMillis());
+    }
+
+    private void executeSweepAttack(World world, EntityPlayer player) {
+        AxisAlignedBB area = player.boundingBox.expand(100.0, 100.0, 100.0);
+        List<Entity> targets = world.getEntitiesWithinAABBExcludingEntity(player, area);
+
+        for (Entity target : targets) {
+            if (target == player) continue;
+
+            if (target instanceof EntityDoppleganger livingTarget) {
+                try {
+                    Field playersField = EntityDoppleganger.class.getDeclaredField("playersWhoAttacked");
+                    playersField.setAccessible(true);
+
+                    List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
+                    String playerName = player.getCommandSenderName();
+                    if (!playersWhoAttacked.contains(playerName)) {
+                        playersWhoAttacked.add(playerName);
+                    }
+                    livingTarget.recentlyHit = 100;
+                    DamageSource playerSource = DamageSource.causePlayerDamage(player);
+                    livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+                    livingTarget.setHealth(0);
+                    livingTarget.onDeath(playerSource);
+                    livingTarget.setDead();
+                    livingTarget.worldObj.removeEntity(livingTarget);
+
+                } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+            }
+
+            if (target instanceof EntityDragon) {
+                target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+                target.setDead();
+            }
+
+            if (!player.isSneaking() && !(target instanceof IMob || target instanceof EntityPlayer)) continue;
+
+            if (target instanceof EntityPlayer targetPlater) {
+                if (player.isSneaking()) {
+                    handlePlayerTarget(targetPlater, player, world);
+                    return;
+                }
+            }
+
+            if (target instanceof EntityLivingBase livingTarget) {
+                livingTarget.recentlyHit = 100;
+                applyDoubleSweepDamage(livingTarget, player);
             }
         }
     }
 
+    private void handlePlayerTarget(EntityPlayer target, EntityPlayer attacker, World world) {
+        if (LudicrousItems.isInfinite(target)) {
+            target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 20.0F);
+
+            float newHealth = target.getHealth() - 20.0F;
+            if (newHealth <= 0) {
+                target.setHealth(0);
+                target.onDeath(DamageSource.causePlayerDamage(attacker));
+            } else {
+                target.setHealth(newHealth);
+            }
+
+            if (MainConfig.enableInfinitySwordExplosion) {
+                world.newExplosion(target, target.posX, target.posY, target.posZ, 250.0F, true, true);
+            }
+        } else {
+            applyDoubleSweepDamage(target, attacker);
+        }
+    }
+
+    private void applyDoubleSweepDamage(EntityLivingBase target, EntityPlayer attacker) {
+        if (!attacker.isSneaking() && target instanceof EntityPlayer) {
+            return;
+        }
+
+        DamageSource playerSource = DamageSource.causePlayerDamage(attacker);
+        target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
+
+        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
+        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
+
+        target.onDeath(INFINITY_DAMAGE);
+        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
+            || target instanceof EntityBlazeBoss
+            || target instanceof EntityCrystalBoss
+            || target instanceof EntityGhastBoss
+            || target instanceof EntitySlimeBoss
+            || target instanceof EntityWolfBoss
+            || target instanceof EntitySkeletonBoss)) {
+            target.setHealth(0);
+            target.onDeath(INFINITY_DAMAGE);
+            target.setDead();
+            target.worldObj.removeEntity(target);
+            target.worldObj.updateEntity(target);
+        }
+    }
+
+    @Override
+    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity victim) {
+        if (player.worldObj.isRemote) return true;
+        if (victim instanceof EntityLivingBase entity) {
+            if (entity instanceof EntityPlayer targetPlayer) {
+                cancelDragonArmor = false;
+                if (MainConfig.enableInfinitySwordBypassMechanism) cancelDragonArmor = player.isSneaking();
+
+                boolean wearingInfinityArmor = false;
+                for (ItemStack armorStack : targetPlayer.inventory.armorInventory) {
+                    if (armorStack != null && (armorStack.getItem() == LudicrousItems.infinity_helm
+                        || armorStack.getItem() == LudicrousItems.infinity_armor
+                        || armorStack.getItem() == LudicrousItems.infinity_pants
+                        || armorStack.getItem() == LudicrousItems.infinity_shoes)) {
+                        wearingInfinityArmor = true;
+                        break;
+                    }
+                }
+
+                if (wearingInfinityArmor) {
+                    targetPlayer.setHealth(targetPlayer.getHealth() - 20.0F);
+                } else {
+                    // 将玩家的盔甲栏和主手的物品变成掉落物
+                    // dropInventoryItems(targetPlayer);
+
+                    applyInfinityDamage(targetPlayer, player);
+                }
+                return true;
+            }
+
+            if (entity instanceof EntityDoppleganger livingTarget) {
+                try {
+                    Field playersField = EntityDoppleganger.class.getDeclaredField("playersWhoAttacked");
+                    playersField.setAccessible(true);
+
+                    List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
+                    String playerName = player.getCommandSenderName();
+                    if (!playersWhoAttacked.contains(playerName)) {
+                        playersWhoAttacked.add(playerName);
+                    }
+                    livingTarget.recentlyHit = 100;
+                    DamageSource playerSource = DamageSource.causePlayerDamage(player);
+                    livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
+                    livingTarget.setHealth(0);
+                    livingTarget.onDeath(playerSource);
+                    livingTarget.setDead();
+                    livingTarget.worldObj.removeEntity(livingTarget);
+                    return true;
+
+                } catch (NoSuchFieldException | IllegalAccessException ignored) {}
+            }
+
+            if (entity instanceof EntityDragon) {
+                entity.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
+                entity.setDead();
+                return true;
+            }
+
+            entity.recentlyHit = 100;
+            applyInfinityDamage(entity, player);
+        }
+        return true;
+    }
+
+    @SuppressWarnings("unused")
     private void dropInventoryItems(EntityPlayer player) {
         if (player.worldObj.isRemote) {
             return;
@@ -219,19 +478,46 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                     player.posY,
                     player.posZ,
                     armorStack.copy());
-
-                // 生成掉落物实体
                 player.worldObj.spawnEntityInWorld(entityItem);
-
-                // 清空玩家装备栏
                 player.inventory.armorInventory[i] = null;
-
-                // 标记库存为脏数据
                 player.inventory.markDirty();
 
-                // 更新容器（如果需要）
                 if (player.openContainer != null) {
                     player.openContainer.detectAndSendChanges();
+                }
+            }
+        }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
+        boolean advancedToolTips) {
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_00);
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_01);
+        toolTip.add(TextLocalization.Tooltip_InfinitySword_02);
+    }
+
+    @Override
+    public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean isSelected) {
+        super.onUpdate(stack, world, entity, slot, isSelected);
+        if (entity instanceof EntityPlayer player) {
+            if (player.getCurrentEquippedItem() == stack && player.swingProgress == 0.5F && !world.isRemote) {
+                MovingObjectPosition rayTraceResult = rayTrace(player, false, true);
+                cancelDragonArmor = false;
+
+                if (rayTraceResult != null && rayTraceResult.entityHit != null) {
+                    Entity hitEntity = rayTraceResult.entityHit;
+
+                    if (hitEntity instanceof EntityLivingBase livingEntity) {
+                        hitEntity(stack, livingEntity, player);
+                        cancelDragonArmor = false;
+                        if (MainConfig.enableInfinitySwordBypassMechanism) cancelDragonArmor = player.isSneaking();
+
+                    } else if (hitEntity instanceof EntityDragonPart dragonPart) {
+                        EntityDragon dragon = (EntityDragon) dragonPart.entityDragonObj;
+                        hitEntity(stack, dragon, player);
+                    }
                 }
             }
         }
@@ -249,7 +535,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
-                if (MainConfig.enableAprilFoolRecipe) cancelBloodSword = true;
+                if (MainConfig.enableInfinitySwordBypassMechanism) cancelBloodSword = true;
                 if (player.isBurning()) {
                     player.extinguish();
                 }
@@ -299,291 +585,13 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         return potionID >= 1 && potionID < 256;
     }
 
-    private void applyInfinityDamage(EntityLivingBase target, EntityLivingBase attacker) {
-
-        if (target instanceof EntityDragon) {
-            target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
-            target.setDead();
-        } else if (target instanceof EntityPlayer playerTarget) {
-            for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
-                ItemStack armorStack = playerTarget.inventory.armorInventory[i];
-                if (armorStack != null) {
-                    if (armorStack.hasTagCompound()) {
-                        if (armorStack.getTagCompound()
-                            .hasKey("Energy")) {
-                            armorStack.getTagCompound()
-                                .setInteger("Energy", 0);
-                        }
-                        if (armorStack.getTagCompound()
-                            .hasKey("charge")) {
-                            armorStack.getTagCompound()
-                                .setDouble("charge", 0.0);
-                        }
-                    }
-                }
-            }
-        }
-
-        // 使用玩家作为来源的伤害
-        target.attackEntityFrom(getAdminKill(), Float.POSITIVE_INFINITY);
-        DamageSource playerSource = DamageSource.causePlayerDamage((EntityPlayer) attacker);
-        target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
-
-        // 使用 Infinity Sword 的特殊伤害
-        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
-
-        // 施加所有其他类型的伤害
-        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
-
-        // 设置目标血量为 0
-        target.setHealth(0);
-        target.setDead();
-
-        // 触发目标的死亡事件
-        target.onDeath(INFINITY_DAMAGE);
-
-        // 直接删除目标实体
-        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
-            || target instanceof EntityBlazeBoss
-            || target instanceof EntityCrystalBoss
-            || target instanceof EntityGhastBoss
-            || target instanceof EntitySlimeBoss
-            || target instanceof EntityWolfBoss
-            || target instanceof EntitySkeletonBoss)) {
-            target.worldObj.removeEntity(target);
-        }
-
-        if (target instanceof EntityPlayer playerTarget) {
-            if (!playerTarget.worldObj.isRemote) {
-                playerTarget.setDead();
-                playerTarget.worldObj.updateEntity(playerTarget);
-            }
-        }
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (!player.isSneaking() && !world.isRemote) { // 确保代码在服务端运行
-            AxisAlignedBB area = player.boundingBox.expand(50.0, 50.0, 50.0);
-            List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, area);
-
-            for (Entity entity : entities) {
-                // 处理掉落物
-                if (entity instanceof EntityItem item) {
-
-                    double centerX = player.posX;
-                    double centerY = player.posY + (player.height / 2.0);
-                    double centerZ = player.posZ;
-                    item.setPosition(centerX, centerY, centerZ);
-
-                }
-
-                // 处理经验球
-                if (entity instanceof EntityXPOrb xpOrb) {
-
-                    // 将经验球传送到玩家中心
-                    double centerX = player.posX;
-                    double centerY = player.posY + (player.height / 2.0);
-                    double centerZ = player.posZ;
-                    xpOrb.setPosition(centerX, centerY, centerZ);
-                }
-            }
-        }
-
-        // 原有的右键点击逻辑
-        handleSwordAttack(stack, world, player);
-        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
-        return stack;
-    }
-
-    private void handleSwordAttack(ItemStack stack, World world, EntityPlayer player) {
-        NBTTagCompound nbt = stack.getTagCompound();
-        if (nbt == null) {
-            nbt = new NBTTagCompound();
-            stack.setTagCompound(nbt);
-        }
-        long lastUsed = nbt.getLong("LastUsed");
-
-        if (System.currentTimeMillis() - lastUsed < COOLDOWN) {
-            if (world.isRemote) {
-                long remainingTime = (COOLDOWN - (System.currentTimeMillis() - lastUsed)) / 1000;
-                showSubtitle(
-                    TextLocalization.Tooltip_InfinitySword_Aura_00 + remainingTime
-                        + TextLocalization.Tooltip_InfinitySword_Aura_01);
-            }
-            return;
-        }
-
-        if (!world.isRemote) {
-            executeSweepAttack(world, player);
-        }
-
-        nbt.setLong("LastUsed", System.currentTimeMillis());
-    }
-
-    private void executeSweepAttack(World world, EntityPlayer player) {
-        AxisAlignedBB area = player.boundingBox.expand(100.0, 100.0, 100.0);
-        List<Entity> targets = world.getEntitiesWithinAABBExcludingEntity(player, area);
-
-        for (Entity target : targets) {
-            if (target == player) continue;
-
-            boolean isSneaking = player.isSneaking();
-            boolean isHostile = target instanceof IMob;
-
-            if (target instanceof EntityDoppleganger livingTarget) {
-                try {
-                    Field playersField = EntityDoppleganger.class.getDeclaredField("playersWhoAttacked");
-                    playersField.setAccessible(true);
-
-                    List<String> playersWhoAttacked = (List<String>) playersField.get(livingTarget);
-                    String playerName = player.getCommandSenderName();
-                    if (!playersWhoAttacked.contains(playerName)) {
-                        playersWhoAttacked.add(playerName);
-                    }
-                    livingTarget.recentlyHit = 100;
-                    DamageSource playerSource = DamageSource.causePlayerDamage(player);
-                    livingTarget.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
-                    livingTarget.setHealth(0);
-                    livingTarget.onDeath(playerSource);
-                    livingTarget.setDead();
-                    livingTarget.worldObj.removeEntity(livingTarget);
-
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (target instanceof EntityDragon) {
-                target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
-                target.setDead();
-            }
-
-            if (!isSneaking && !(isHostile || target instanceof EntityPlayer)) continue;
-
-            if (target instanceof EntityPlayer) {
-                if (isSneaking) {
-                    handlePlayerTarget((EntityPlayer) target, player, world);
-                    continue;
-                }
-            }
-
-            if (target instanceof EntityLivingBase livingTarget) {
-                livingTarget.recentlyHit = 100;
-                applyDoubleSweepDamage(livingTarget, player);
-            }
-        }
-    }
-
-    private void handlePlayerTarget(EntityPlayer target, EntityPlayer attacker, World world) {
-        if (LudicrousItems.isInfinite(target)) {
-            target.attackEntityFrom(DamageSource.causePlayerDamage(attacker), 20.0F);
-
-            float newHealth = target.getHealth() - 20.0F;
-            if (newHealth <= 0) {
-                target.setHealth(0);
-                target.onDeath(DamageSource.causePlayerDamage(attacker));
-            } else {
-                target.setHealth(newHealth);
-            }
-
-            if (MainConfig.enableInfinitySwordExplosion) {
-                world.createExplosion(null, target.posX, target.posY, target.posZ, 250.0F, true);
-            }
-        } else {
-            applyDoubleSweepDamage(target, attacker);
-        }
-    }
-
-    private void applyDoubleSweepDamage(EntityLivingBase target, EntityPlayer attacker) {
-        if (!attacker.isSneaking() && target instanceof EntityPlayer) {
-            return;
-        }
-
-        if (target instanceof EntityPlayer playerTarget) {
-            for (int i = 0; i < playerTarget.inventory.armorInventory.length; i++) {
-                ItemStack armorStack = playerTarget.inventory.armorInventory[i];
-                if (armorStack != null) {
-                    if (armorStack.hasTagCompound()) {
-                        if (armorStack.getTagCompound()
-                            .hasKey("Energy")) {
-                            armorStack.getTagCompound()
-                                .setInteger("Energy", 0);
-                        }
-                        if (armorStack.getTagCompound()
-                            .hasKey("charge")) {
-                            armorStack.getTagCompound()
-                                .setDouble("charge", 0.0);
-                        }
-                    }
-                }
-            }
-        }
-
-        DamageSource playerSource = DamageSource.causePlayerDamage(attacker);
-        target.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(getAdminKill(), Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(new DamageSourceInfinitySword(attacker), Float.POSITIVE_INFINITY);
-
-        target.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
-        target.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
-
-        target.setHealth(0);
-        target.setDead();
-
-        target.onDeath(INFINITY_DAMAGE);
-        if (!(target instanceof EntityPlayer || target instanceof EntityCreeperBoss
-            || target instanceof EntityBlazeBoss
-            || target instanceof EntityCrystalBoss
-            || target instanceof EntityGhastBoss
-            || target instanceof EntitySlimeBoss
-            || target instanceof EntityWolfBoss
-            || target instanceof EntitySkeletonBoss)) {
-            target.worldObj.removeEntity(target);
-        }
-
-        if (target instanceof EntityPlayer playerTarget) {
-            if (!playerTarget.worldObj.isRemote) {
-                playerTarget.setDead();
-                playerTarget.worldObj.updateEntity(playerTarget);
-            }
-        }
-    }
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onPlayerAttacked(LivingAttackEvent event) {
         if (event.entity instanceof EntityPlayer player) {
             if (player.isUsingItem() && player.getHeldItem() != null
                 && player.getHeldItem()
                     .getItem() == this) {
-                event.setCanceled(true); // 取消任何伤害
+                event.setCanceled(true);
             }
         }
     }
@@ -593,50 +601,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         if (event.entity instanceof EntityPlayer player) {
             if (player.getHeldItem() != null && player.getHeldItem()
                 .getItem() == this) {
-                event.setCanceled(true); // 取消死亡事件
-                player.setHealth(player.getMaxHealth()); // 设置玩家血量为最大值
+                event.setCanceled(true);
+                player.setHealth(player.getMaxHealth());
             }
         }
-    }
-
-    @Override
-    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if (!entity.worldObj.isRemote && entity instanceof EntityPlayer victim) {
-
-            if (victim.capabilities.isCreativeMode && !victim.isDead
-                && victim.getHealth() > 0
-                && !LudicrousItems.isInfinite(victim)) {
-
-                DamageSource playerSource = DamageSource.causePlayerDamage(player);
-                victim.attackEntityFrom(playerSource, Float.POSITIVE_INFINITY);
-
-                victim.attackEntityFrom(new DamageSourceInfinitySword(player), Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(INFINITY_DAMAGE, Float.POSITIVE_INFINITY);
-
-                victim.attackEntityFrom(DamageSource.anvil, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.fallingBlock, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.wither, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.magic, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.generic, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.fall, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.cactus, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.starve, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.drown, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.inWall, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.lava, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.inFire, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.onFire, Float.POSITIVE_INFINITY);
-                victim.attackEntityFrom(DamageSource.outOfWorld, Float.POSITIVE_INFINITY);
-
-                victim.setHealth(0);
-
-                victim.onDeath(INFINITY_DAMAGE);
-                victim.worldObj.removeEntity(victim);
-
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -770,7 +738,6 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             field.setAccessible(true);
             return (DamageSource) field.get(null);
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
