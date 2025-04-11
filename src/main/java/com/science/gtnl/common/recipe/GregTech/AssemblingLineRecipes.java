@@ -1044,7 +1044,7 @@ public class AssemblingLineRecipes implements IRecipePool {
                 new Object[] { OrePrefixes.circuit.get(Materials.UHV), 32 },
                 GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUHV, 64L),
                 ItemList.Field_Generator_UHV.get(16), ItemList.Conveyor_Module_UHV.get(32),
-                ItemList.Robot_Arm_UHV.get(32), getModItem(GTPlusPlus.ID, "MU-metaitem.01", 1, 32105),
+                ItemList.Robot_Arm_UHV.get(32), GregtechItemList.Laser_Lens_Special.get(1),
                 ItemList.Emitter_ZPM.get(32), GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Neutronium, 32),
                 GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Naquadria, 5),
                 ItemList.Sensor_UHV.get(32) },
@@ -1078,18 +1078,18 @@ public class AssemblingLineRecipes implements IRecipePool {
             .metadata(RESEARCH_ITEM, getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 47))
             .metadata(RESEARCH_TIME, 12 * HOURS)
             .itemInputs(
-                getModItem(GregTech.ID, "gt.blockmachines", 1, 15300),
+                CustomItemList.Machine_Multi_Transformer.get(1),
                 getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 4, 47),
                 ItemList.Field_Generator_LuV.get(2),
                 ItemList.Emitter_LuV.get(4),
-                getModItem(GregTech.ID, "gt.blockcasings4", 4, 7),
+                ItemList.Casing_Fusion_Coil.get(4),
                 new Object[] { OrePrefixes.circuit.get(Materials.LuV), 1L },
-                getModItem(GregTech.ID, "gt.blockmachines", 32, 15470))
+                CustomItemList.LASERpipe.get(32))
             .fluidInputs(
                 Materials.Europium.getMolten(1728),
                 Materials.NaquadahAlloy.getMolten(3456),
                 Materials.SuperCoolant.getFluid(6912))
-            .itemOutputs(getModItem(GregTech.ID, "gt.blockmachines", 1, 13115))
+            .itemOutputs(ItemList.WormholeGenerator.get(1))
             .eut(TierEU.RECIPE_LuV)
             .duration(120 * SECONDS)
             .addTo(AssemblyLine);

@@ -349,7 +349,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                         outputFluids.add(calculateOutput(1.0, 400, Materials.Tin.getMolten(1L)));
                     }
 
-                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CB")))) { // GalaxySpace_CentauriA is actually α Centauri Bb
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CB")))) { // CentauriA is α Centauri Bb
                         outputFluids.add(calculateOutput(1.0, 300, Materials.Copper.getMolten(1L)));
                     }
 
