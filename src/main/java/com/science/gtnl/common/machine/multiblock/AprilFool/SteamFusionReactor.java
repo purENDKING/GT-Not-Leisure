@@ -9,6 +9,8 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_STEAM_MACERATOR
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.util.OverclockCalculator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -39,6 +41,8 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+
+import javax.annotation.Nonnull;
 
 public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor> implements ISurvivalConstructable {
 
@@ -123,6 +127,14 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
                     return SimpleCheckRecipeResult.ofFailure("metadata.steamfusion");
                 }
                 return super.validateRecipe(recipe);
+            }
+
+            @Override
+            @Nonnull
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1);
             }
         };
     }

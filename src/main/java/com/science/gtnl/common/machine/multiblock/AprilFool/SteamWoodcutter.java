@@ -9,6 +9,7 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import javax.annotation.Nonnull;
 
+import gregtech.api.util.OverclockCalculator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -35,6 +36,7 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
+import org.jetbrains.annotations.NotNull;
 
 public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> implements ISurvivalConstructable {
 
@@ -140,6 +142,14 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @Override
+            @Nonnull
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1);
             }
         };
     }

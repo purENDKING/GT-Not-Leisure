@@ -117,8 +117,6 @@ public class ScienceNotLeisure {
         MeteorMiner.initializeBlacklist();
 
         new LazyStaticsInitLoader().initStaticsOnCompleteInit();
-
-        TextHandler.serializeLangMap(MainConfig.enableDebugMode);
     }
 
     @Mod.EventHandler

@@ -8,6 +8,8 @@ import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -35,6 +37,8 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
+
+import javax.annotation.Nonnull;
 
 public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> implements ISurvivalConstructable {
 
@@ -154,12 +158,23 @@ public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> 
     protected ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
-            @NotNull
+            @Nonnull
             @Override
-            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setNoOverclock(true);
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (availableVoltage < recipe.mEUt) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
             }
-        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+
+            @Override
+            @Nonnull
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1);
+            }
+        };
     }
 
     @Override

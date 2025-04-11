@@ -8,6 +8,11 @@ import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.*;
 
+import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.util.GTRecipe;
+import gregtech.api.util.OverclockCalculator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -29,6 +34,9 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implements ISurvivalConstructable {
 
@@ -167,6 +175,29 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
+    }
+
+    @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @Nonnull
+            @Override
+            protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (availableVoltage < recipe.mEUt) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return CheckRecipeResultRegistry.SUCCESSFUL;
+            }
+
+            @Override
+            @Nonnull
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1);
+            }
+        };
     }
 
     @Override

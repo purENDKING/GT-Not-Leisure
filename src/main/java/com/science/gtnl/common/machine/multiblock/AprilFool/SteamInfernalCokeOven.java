@@ -6,6 +6,8 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.List;
 
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.util.OverclockCalculator;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -44,6 +46,8 @@ import gregtech.common.blocks.BlockCasings1;
 import gtPlusPlus.core.block.ModBlocks;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
+
+import javax.annotation.Nonnull;
 
 public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCokeOven>
     implements ISurvivalConstructable {
@@ -194,6 +198,14 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
                 setSpeedBonus(1F / speedup);
                 return super.validateRecipe(recipe);
+            }
+
+            @Override
+            @Nonnull
+            protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                return OverclockCalculator.ofNoOverclock(recipe)
+                    .setEUtDiscount(1)
+                    .setSpeedBoost(1);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

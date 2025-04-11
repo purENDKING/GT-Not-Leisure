@@ -79,16 +79,6 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
     }
 
     @Override
-    public void onValueUpdate(byte aValue) {
-        tierMachineCasing = aValue;
-    }
-
-    @Override
-    public byte getUpdateData() {
-        return (byte) tierMachineCasing;
-    }
-
-    @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         int id = tierMachine == 2 ? ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0)
