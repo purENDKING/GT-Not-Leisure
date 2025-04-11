@@ -308,7 +308,7 @@ public class RecipeRegister {
     public static RecipeMap<RecipeMapBackend> GrandAssemblyLineRecipes = RecipeMapBuilder
         .of("gtnl.recipe.GrandAssemblyLineRecipes")
         .maxIO(16, 1, 4, 0)
-        .dontUseProgressBar()
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.GrandAssemblyLine.get(1))
                 .setMaxRecipesPerPage(1))

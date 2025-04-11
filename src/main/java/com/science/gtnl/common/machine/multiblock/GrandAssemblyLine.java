@@ -11,13 +11,19 @@ import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
@@ -166,6 +172,12 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         return RecipeMaps.assemblylineVisualRecipes;
     }
 
+    @Nonnull
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(RecipeMaps.assemblylineVisualRecipes, RecipeRegister.GrandAssemblyLineRecipes);
+    }
+
     @Override
     public boolean isCorrectMachinePart(ItemStack aStack) {
         return true;
@@ -242,7 +254,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             ArrayList<ItemStack> allInputs = new ArrayList<>(Arrays.asList(itemInputs));
             ArrayList<FluidStack> allFluids = new ArrayList<>(Arrays.asList(fluidInputs));
 
-            // 获取所有有效配方
             List<GTRecipe.RecipeAssemblyLine> validRecipes = new ArrayList<>();
             for (ItemStack tDataStick : getDataItems(2)) {
                 AssemblyLineUtils.LookupResult tLookupResult = AssemblyLineUtils
@@ -250,62 +261,79 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                 if (tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_HASH
                     || tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_RECIPE) {
+
                     GTRecipe.RecipeAssemblyLine tRecipe = tLookupResult.getRecipe();
                     if (tRecipe != null) {
-                        // 处理 mInputs 和 mOreDictAlt
                         ItemStack[] tInputs = tRecipe.mInputs;
                         ItemStack[][] tOreDictAlt = tRecipe.mOreDictAlt;
 
-                        // 生成原始配方
-                        validRecipes.add(tRecipe);
+                        validRecipes.add(tRecipe); // 原始配方
 
-                        // 生成替代配方（如果存在替代物品）
+                        boolean hasValidAlt = false;
                         if (tOreDictAlt != null) {
-                            // 遍历每个替代组（i从1开始，因为0是原始物品）
-                            for (int i = 1; i < tOreDictAlt.length; i++) {
-                                ItemStack[] altItems = tOreDictAlt[i];
-                                if (altItems != null && altItems.length > 0) {
-                                    // 检查替代物品是否与原始物品的矿辞相同
-                                    boolean hasValidAlternatives = false;
-                                    for (ItemStack altItem : altItems) {
-                                        if (altItem != null && !OreDictionary.itemMatches(tInputs[i], altItem, false)) {
-                                            hasValidAlternatives = true;
-                                            break;
+                            for (ItemStack[] altArray : tOreDictAlt) {
+                                if (altArray != null && altArray.length > 1) {
+                                    hasValidAlt = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (hasValidAlt) {
+                            // 对替代内容做分组（完全一致才分到一组）
+                            Map<String, Set<Integer>> groupedSlots = new HashMap<>();
+                            for (int i = 0; i < tOreDictAlt.length; i++) {
+                                ItemStack[] alts = tOreDictAlt[i];
+                                if (alts == null || alts.length <= 1) continue;
+
+                                // 使用所有替代品的哈希组合作为唯一标识
+                                String key = Arrays.stream(alts)
+                                    .filter(Objects::nonNull)
+                                    .map(stack -> stack.getUnlocalizedName() + "@" + stack.getItemDamage())
+                                    .sorted()
+                                    .collect(Collectors.joining("|"));
+
+                                groupedSlots.computeIfAbsent(key, k -> new HashSet<>())
+                                    .add(i);
+                            }
+
+                            // 构造笛卡尔积组合
+                            List<ItemStack[]> combinations = new ArrayList<>();
+                            combinations.add(Arrays.copyOf(tInputs, tInputs.length));
+
+                            for (Map.Entry<String, Set<Integer>> entry : groupedSlots.entrySet()) {
+                                Set<Integer> slotGroup = entry.getValue();
+                                int referenceSlot = slotGroup.iterator()
+                                    .next();
+                                ItemStack[] alternatives = tOreDictAlt[referenceSlot];
+
+                                if (alternatives == null || alternatives.length == 0) continue;
+
+                                List<ItemStack[]> newCombinations = new ArrayList<>();
+                                for (ItemStack altItem : alternatives) {
+                                    for (ItemStack[] prevCombo : combinations) {
+                                        ItemStack[] newCombo = Arrays.copyOf(prevCombo, prevCombo.length);
+                                        for (int slot : slotGroup) {
+                                            newCombo[slot] = altItem.copy();
                                         }
-                                    }
-
-                                    // 如果有有效地替代物品，生成替代配方
-                                    if (hasValidAlternatives) {
-                                        // 复制原始输入物品
-                                        ItemStack[] newInputs = Arrays.copyOf(tInputs, tInputs.length);
-
-                                        // 替换为当前组的替代物品
-                                        for (int j = 0; j < newInputs.length; j++) {
-                                            if (j < tOreDictAlt.length && tOreDictAlt[j] != null
-                                                && tOreDictAlt[j].length > i - 1) {
-                                                // 使用当前组的替代物品（i）
-                                                ItemStack altItem = tOreDictAlt[j][i - 1]; // i从1开始
-                                                if (altItem != null
-                                                    && !OreDictionary.itemMatches(tInputs[j], altItem, false)) {
-                                                    newInputs[j] = altItem;
-                                                }
-                                            }
-                                        }
-
-                                        // 生成替代配方
-                                        GTRecipe.RecipeAssemblyLine tAltRecipe = new GTRecipe.RecipeAssemblyLine(
-                                            tRecipe.mResearchItem, // 研究物品
-                                            tRecipe.mResearchTime, // 研究时间
-                                            newInputs, // 替换后的输入物品
-                                            tRecipe.mFluidInputs, // 输入流体
-                                            tRecipe.mOutput, // 输出物品
-                                            tRecipe.mDuration, // 时间
-                                            tRecipe.mEUt, // 功率
-                                            tOreDictAlt // 替代物品
-                                        );
-                                        validRecipes.add(tAltRecipe);
+                                        newCombinations.add(newCombo);
                                     }
                                 }
+                                combinations = newCombinations;
+                            }
+
+                            // 注册所有生成组合
+                            for (ItemStack[] inputs : combinations) {
+                                GTRecipe.RecipeAssemblyLine tAltRecipe = new GTRecipe.RecipeAssemblyLine(
+                                    tRecipe.mResearchItem,
+                                    tRecipe.mResearchTime,
+                                    inputs,
+                                    tRecipe.mFluidInputs,
+                                    tRecipe.mOutput,
+                                    tRecipe.mDuration,
+                                    tRecipe.mEUt,
+                                    tOreDictAlt);
+                                validRecipes.add(tAltRecipe);
                             }
                         }
                     }
@@ -423,31 +451,13 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     int required = input.stackSize;
                     if (required <= 0) continue;
 
-                    // 获取矿辞名称
-                    int[] oreIDs = OreDictionary.getOreIDs(input);
                     long available = 0;
 
-                    // 如果有矿辞，检查所有匹配矿辞的物品
-                    if (oreIDs.length > 0) {
-                        for (int oreID : oreIDs) {
-                            String oreName = OreDictionary.getOreName(oreID);
-                            List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
-
-                            // 遍历所有匹配矿辞的物品
-                            for (ItemStack oreDictItem : oreDictItems) {
-                                GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(oreDictItem);
-                                long availableOriginal = getAvailableItemCount(oreDictItem, allInputs);
-                                long allocated = itemAllocated.getOrDefault(itemId, 0);
-                                available += Math.max(0, availableOriginal - allocated);
-                            }
-                        }
-                    } else {
-                        // 如果没有矿辞，直接检查原始物品
-                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
-                        long availableOriginal = getAvailableItemCount(input, allInputs);
-                        long allocated = itemAllocated.getOrDefault(itemId, 0);
-                        available = Math.max(0, availableOriginal - allocated);
-                    }
+                    // 如果没有矿辞，直接检查原始物品
+                    GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                    long availableOriginal = getAvailableItemCount(input, allInputs);
+                    long allocated = itemAllocated.getOrDefault(itemId, 0);
+                    available = Math.max(0, availableOriginal - allocated);
 
                     // 计算当前物品的并行数
                     long parallelForItem = available / required;
@@ -499,41 +509,15 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 // 更新模拟消耗的上下文
                 for (ItemStack input : requiredItems) {
                     int required = input.stackSize * recipeParallel;
-
-                    // 获取矿辞名称
-                    int[] oreIDs = OreDictionary.getOreIDs(input);
-                    if (oreIDs.length > 0) {
-                        // 如果有矿辞，优先消耗匹配矿辞的物品
-                        for (int oreID : oreIDs) {
-                            String oreName = OreDictionary.getOreName(oreID);
-                            List<ItemStack> oreDictItems = OreDictionary.getOres(oreName);
-
-                            // 遍历所有匹配矿辞的物品
-                            for (ItemStack oreDictItem : oreDictItems) {
-                                GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(oreDictItem);
-                                int consumed = (int) Math.min(
-                                    required,
-                                    getAvailableItemCount(oreDictItem, allInputs)
-                                        - itemAllocated.getOrDefault(itemId, 0));
-                                if (consumed > 0) {
-                                    itemAllocated.put(itemId, itemAllocated.getOrDefault(itemId, 0) + consumed);
-                                    required -= consumed;
-                                }
-                                if (required <= 0) break;
-                            }
-                            if (required <= 0) break;
-                        }
-                    } else {
-                        // 如果没有矿辞，直接消耗原始物品
-                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
-                        int consumed = (int) Math.min(
-                            required,
-                            getAvailableItemCount(input, allInputs) - itemAllocated.getOrDefault(itemId, 0));
-                        if (consumed > 0) {
-                            itemAllocated.put(itemId, itemAllocated.getOrDefault(itemId, 0) + consumed);
-                            required -= consumed;
-                        }
+                    // 如果没有矿辞，直接消耗原始物品
+                    GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
+                    int consumed = (int) Math
+                        .min(required, getAvailableItemCount(input, allInputs) - itemAllocated.getOrDefault(itemId, 0));
+                    if (consumed > 0) {
+                        itemAllocated.put(itemId, itemAllocated.getOrDefault(itemId, 0) + consumed);
+                        required -= consumed;
                     }
+
                 }
 
                 for (FluidStack fluid : requiredFluids) {
@@ -1122,4 +1106,5 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
+
 }
