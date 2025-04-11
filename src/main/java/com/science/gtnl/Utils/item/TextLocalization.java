@@ -2000,7 +2000,7 @@ public class TextLocalization {
         "If the energy storage unit is not installed, it will automatically enter wireless mode",
         "Tooltip_WirelessEnergyMultiMachine_09");
     public static final String Tooltip_WirelessEnergyMultiMachine_10 = texter(
-        "Wireless mode activation time is reduced by 0.5s per Parallel Control Core level",
+        "Wireless mode activation time is reduced by 10 tick per Parallel Control Core level",
         "Tooltip_WirelessEnergyMultiMachine_10");
     public static final String Waila_WirelessMode = texter("Wireless Mode", "Waila.General.WirelessMode");
     public static final String Waila_CurrentEuCost = texter("Current EU Cost", "Waila.General.CurrentEuCost");

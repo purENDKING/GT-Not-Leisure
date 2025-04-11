@@ -1186,7 +1186,7 @@ Tooltip_WirelessEnergyMultiMachine_06=Supports cross-recipe parallelism in wirel
 Tooltip_WirelessEnergyMultiMachine_07=Machine can perform §clossless overclocking§7
 Tooltip_WirelessEnergyMultiMachine_08=Wireless mode fixes runtime to %%stick
 Tooltip_WirelessEnergyMultiMachine_09=Automatically enters wireless mode if no energy hatch is installed
-Tooltip_WirelessEnergyMultiMachine_10=Wireless mode activation time is reduced by 0.5s per Parallel Control Core level
+Tooltip_WirelessEnergyMultiMachine_10=Wireless mode activation time is reduced by 10 tick per Parallel Control Core level
 Waila.General.WirelessMode=Wireless Mode
 Waila.General.CurrentEuCost=Current EU Consumption
 

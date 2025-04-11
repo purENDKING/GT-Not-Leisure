@@ -1186,7 +1186,7 @@ Tooltip_WirelessEnergyMultiMachine_06=无线模式下支持跨配方并行
 Tooltip_WirelessEnergyMultiMachine_07=机器可进行§c无损超频§7
 Tooltip_WirelessEnergyMultiMachine_08=无线模式固定运行时间为%%stick
 Tooltip_WirelessEnergyMultiMachine_09=不安装能源仓将自动进入无线模式
-Tooltip_WirelessEnergyMultiMachine_10=每级并行控制核心将减少无线模式所需时间的0.5秒
+Tooltip_WirelessEnergyMultiMachine_10=每级并行控制核心将减少无线模式所需时间的10tick
 Waila.General.WirelessMode=无线模式
 Waila.General.CurrentEuCost=当前EU消耗
 

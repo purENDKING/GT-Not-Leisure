@@ -8,6 +8,9 @@ import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
@@ -299,14 +302,27 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
         // 获取输出流体并进行 null 检查
         FluidStack[] outputFluids = processingLogic.getOutputFluids();
+        List<FluidStack> expandedFluids = new ArrayList<>();
+
         if (outputFluids != null) {
             for (FluidStack fluidStack : outputFluids) {
                 if (fluidStack != null) {
-                    fluidStack.amount *= this.mLevel * GTUtility.getTier(this.getMaxInputVoltage()) * 10;
+                    // 计算放大后的总量
+                    long totalAmount = (long) fluidStack.amount * this.mLevel
+                        * GTUtility.getTier(this.getMaxInputVoltage())
+                        * 10;
+
+                    // 拆分为多个 FluidStack，避免 amount 超过 int 上限
+                    while (totalAmount > 0) {
+                        int stackSize = (int) Math.min(totalAmount, Integer.MAX_VALUE);
+                        expandedFluids.add(new FluidStack(fluidStack.getFluid(), stackSize));
+                        totalAmount -= stackSize;
+                    }
                 }
             }
         }
-        mOutputFluids = outputFluids;
+
+        mOutputFluids = expandedFluids.toArray(new FluidStack[0]);
 
         return result;
     }

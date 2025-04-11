@@ -22,8 +22,8 @@ public class AdvancedCircuitAssemblyLineRecipes implements IRecipePool {
             .itemInputs(new ItemStack(Blocks.dirt, 1))
             .itemOutputs(ItemList.Circuit_Crystalprocessor.get(64))
             .specialValue(14)
-            .duration(1)
-            .eut(TierEU.RECIPE_LV)
+            .duration(Integer.MAX_VALUE)
+            .eut(TierEU.RECIPE_MAX)
             .addTo(ACALR);
     }
 }

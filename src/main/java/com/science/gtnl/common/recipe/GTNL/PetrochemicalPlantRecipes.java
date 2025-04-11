@@ -1,14 +1,18 @@
 package com.science.gtnl.common.recipe.GTNL;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import java.lang.reflect.Field;
+import java.util.LinkedHashMap;
+
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.dreammaster.bartworksHandler.BacteriaRegistry;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
+import bartworks.common.loaders.BioItemList;
+import bartworks.util.BioCulture;
 import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTModHandler;
@@ -20,50 +24,6 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
     @Override
     public void loadRecipes() {
-
-        ItemStack BioVatXenoxene = GTModHandler.getModItem("bartworks", "BioLabParts", 1);
-        NBTTagCompound BioVatType = BioVatXenoxene.getTagCompound();
-        if (BioVatType != null) {
-            BioVatType.setByte("Breedable", (byte) 0);
-            BioVatType.setByte("Rarety", (byte) 2);
-            BioVatType.setString("Name", "Xenoxene Xenoxsis");
-            BioVatType.setIntArray("Color", new int[] { 54, 119, 181, });
-
-            NBTTagCompound PlasmidTag = new NBTTagCompound();
-            PlasmidTag.setInteger("Chance", 750);
-            PlasmidTag.setString("Name", "Barnadafis Arboriatoris");
-            PlasmidTag.setByte("Rarity", (byte) 3);
-            PlasmidTag.setInteger("Tier", 2);
-            BioVatType.setTag("Plasmid", PlasmidTag);
-
-            NBTTagCompound DNATag = new NBTTagCompound();
-            DNATag.setInteger("Chance", 750);
-            DNATag.setString("Name", "TCetiEis Fucus Serratus");
-            DNATag.setByte("Rarity", (byte) 3);
-            DNATag.setInteger("Tier", 2);
-            BioVatType.setTag("DNA", DNATag);
-        } else {
-            BioVatType = new NBTTagCompound();
-            BioVatType.setByte("Breedable", (byte) 0);
-            BioVatType.setByte("Rarety", (byte) 2);
-            BioVatType.setString("Name", "Xenoxene Xenoxsis");
-            BioVatType.setIntArray("Color", new int[] { 54, 119, 181, });
-
-            NBTTagCompound PlasmidTag = new NBTTagCompound();
-            PlasmidTag.setInteger("Chance", 750);
-            PlasmidTag.setString("Name", "Barnadafis Arboriatoris");
-            PlasmidTag.setByte("Rarity", (byte) 3);
-            PlasmidTag.setInteger("Tier", 2);
-            BioVatType.setTag("Plasmid", PlasmidTag);
-
-            NBTTagCompound DNATag = new NBTTagCompound();
-            DNATag.setInteger("Chance", 750);
-            DNATag.setString("Name", "TCetiEis Fucus Serratus");
-            DNATag.setByte("Rarity", (byte) 3);
-            DNATag.setInteger("Tier", 2);
-            BioVatType.setTag("DNA", DNATag);
-            BioVatXenoxene.setTagCompound(BioVatType);
-        }
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
@@ -177,7 +137,7 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(
-                GTUtility.copyAmount(0, BioVatXenoxene),
+                GTUtility.copyAmount(0, BioItemList.getPetriDish(getCulture("CombinedBac"))),
                 GTModHandler.getModItem("gregtech", "gt.metaitem.01", 16, 2618),
                 GTModHandler.getModItem("gregtech", "gt.metaitem.01", 16, 2083))
             .fluidInputs(
@@ -295,5 +255,18 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
             .duration(200)
             .eut(1920)
             .addTo(PPR);
+    }
+
+    public static BioCulture getCulture(String key) {
+        try {
+            Field field = BacteriaRegistry.class.getDeclaredField("CultureSet");
+            field.setAccessible(true); // 绕过访问控制
+            @SuppressWarnings("unchecked")
+            LinkedHashMap<String, BioCulture> map = (LinkedHashMap<String, BioCulture>) field.get(null);
+            return map.get(key);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
