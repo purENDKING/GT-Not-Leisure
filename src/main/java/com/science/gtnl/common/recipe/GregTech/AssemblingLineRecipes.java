@@ -334,7 +334,7 @@ public class AssemblingLineRecipes implements IRecipePool {
                 MaterialsAlloy.BOTMIUM.getFluidStack(4608), WerkstoffLoader.Oganesson.getFluidOrGas(16000) },
             GTNLItemList.ElectricImplosionCompressor.get(1),
             120 * SECONDS,
-            (int) TierEU.RECIPE_UMV);
+            (int) TierEU.RECIPE_UEV);
 
         GTValues.RA.stdBuilder()
             .metadata(RESEARCH_ITEM, ItemList.Machine_Multi_BlastFurnace.get(1))
@@ -1069,7 +1069,7 @@ public class AssemblingLineRecipes implements IRecipePool {
                 ItemList.Electric_Pump_ZPM.get(16), ItemList.Emitter_ZPM.get(16),
                 GTOreDictUnificator.get(OrePrefixes.foil, Materials.Europium, 48) },
             new FluidStack[] { Materials.Grade4PurifiedWater.getFluid(64000),
-                Materials.Polybenzimidazole.getMolten(4608), MaterialsAlloy.INDALLOY_140.getFluidStack(16000) },
+                MaterialPool.Polyetheretherketone.getMolten(4608), MaterialsAlloy.INDALLOY_140.getFluidStack(16000) },
             GTNLItemList.ShallowChemicalCoupling.get(1),
             2400,
             (int) TierEU.RECIPE_ZPM
