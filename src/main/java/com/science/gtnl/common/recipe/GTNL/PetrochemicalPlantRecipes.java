@@ -3,9 +3,10 @@ package com.science.gtnl.common.recipe.GTNL;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.bartworksHandler.BacteriaRegistry;
+import com.dreammaster.fluids.FluidList;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.IRecipePool;
@@ -14,9 +15,14 @@ import com.science.gtnl.common.recipe.RecipeRegister;
 import bartworks.common.loaders.BioItemList;
 import bartworks.util.BioCulture;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.MaterialsKevlar;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.item.chemistry.CoalTar;
+import gtPlusPlus.core.item.chemistry.RocketFuels;
+import gtPlusPlus.core.util.minecraft.FluidUtils;
 
 public class PetrochemicalPlantRecipes implements IRecipePool {
 
@@ -27,22 +33,20 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(
-                FluidRegistry.getFluidStack("liquid_heavy_oil", 1000),
-                FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(Materials.OilHeavy.getFluid(1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("ethylene", 450),
-                FluidRegistry.getFluidStack("methane", 450),
-                FluidRegistry.getFluidStack("helium", 10),
-                FluidRegistry.getFluidStack("propane", 30),
-                FluidRegistry.getFluidStack("propene", 300),
-                FluidRegistry.getFluidStack("ethane", 45),
-                FluidRegistry.getFluidStack("butane", 60),
-                FluidRegistry.getFluidStack("butene", 240),
-                FluidRegistry.getFluidStack("butadiene", 150),
-                FluidRegistry.getFluidStack("liquid_toluene", 240),
-                FluidRegistry.getFluidStack("benzene", 1200),
-                FluidRegistry.getFluidStack("octane", 20))
+                Materials.Ethylene.getGas(450),
+                Materials.Methane.getGas(450),
+                Materials.Helium.getGas(10),
+                Materials.Propane.getGas(30),
+                Materials.Propene.getGas(300),
+                Materials.Ethane.getGas(45),
+                Materials.Butane.getGas(60),
+                Materials.Butene.getGas(240),
+                Materials.Butadiene.getGas(150),
+                Materials.Toluene.getFluid(240),
+                Materials.Benzene.getFluid(1200),
+                Materials.Octane.getFluid(20))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -51,22 +55,20 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(
-                FluidRegistry.getFluidStack("liquid_light_oil", 1000),
-                FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(Materials.OilLight.getFluid(1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("ethylene", 250),
-                FluidRegistry.getFluidStack("methane", 2000),
-                FluidRegistry.getFluidStack("helium", 40),
-                FluidRegistry.getFluidStack("propane", 140),
-                FluidRegistry.getFluidStack("propene", 90),
-                FluidRegistry.getFluidStack("ethane", 200),
-                FluidRegistry.getFluidStack("butane", 120),
-                FluidRegistry.getFluidStack("butene", 80),
-                FluidRegistry.getFluidStack("butadiene", 80),
-                FluidRegistry.getFluidStack("liquid_toluene", 20),
-                FluidRegistry.getFluidStack("benzene", 100),
-                FluidRegistry.getFluidStack("octane", 20))
+                Materials.Ethylene.getGas(250),
+                Materials.Methane.getGas(2000),
+                Materials.Helium.getGas(40),
+                Materials.Propane.getGas(140),
+                Materials.Propene.getGas(90),
+                Materials.Ethane.getGas(200),
+                Materials.Butane.getGas(120),
+                Materials.Butene.getGas(80),
+                Materials.Butadiene.getGas(80),
+                Materials.Toluene.getFluid(20),
+                Materials.Benzene.getFluid(100),
+                Materials.Octane.getFluid(20))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -75,20 +77,20 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(FluidRegistry.getFluidStack("oil", 1000), FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(Materials.Oil.getFluid(1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("ethylene", 400),
-                FluidRegistry.getFluidStack("methane", 400),
-                FluidRegistry.getFluidStack("helium", 20),
-                FluidRegistry.getFluidStack("propane", 80),
-                FluidRegistry.getFluidStack("propene", 400),
-                FluidRegistry.getFluidStack("ethane", 80),
-                FluidRegistry.getFluidStack("butane", 80),
-                FluidRegistry.getFluidStack("butene", 100),
-                FluidRegistry.getFluidStack("butadiene", 90),
-                FluidRegistry.getFluidStack("liquid_toluene", 60),
-                FluidRegistry.getFluidStack("benzene", 180),
-                FluidRegistry.getFluidStack("octane", 60))
+                Materials.Ethylene.getGas(400),
+                Materials.Methane.getGas(400),
+                Materials.Helium.getGas(20),
+                Materials.Propane.getGas(80),
+                Materials.Propene.getGas(400),
+                Materials.Ethane.getGas(80),
+                Materials.Butane.getGas(80),
+                Materials.Butene.getGas(100),
+                Materials.Butadiene.getGas(90),
+                Materials.Toluene.getFluid(60),
+                Materials.Benzene.getFluid(180),
+                Materials.Octane.getFluid(60))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -97,22 +99,20 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(2))
-            .fluidInputs(
-                FluidRegistry.getFluidStack("liquid_medium_oil", 1000),
-                FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(Materials.OilMedium.getFluid(1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("ethylene", 1000),
-                FluidRegistry.getFluidStack("methane", 1000),
-                FluidRegistry.getFluidStack("helium", 10),
-                FluidRegistry.getFluidStack("propane", 30),
-                FluidRegistry.getFluidStack("propene", 600),
-                FluidRegistry.getFluidStack("ethane", 130),
-                FluidRegistry.getFluidStack("butane", 70),
-                FluidRegistry.getFluidStack("butene", 100),
-                FluidRegistry.getFluidStack("butadiene", 100),
-                FluidRegistry.getFluidStack("liquid_toluene", 40),
-                FluidRegistry.getFluidStack("benzene", 200),
-                FluidRegistry.getFluidStack("octane", 30))
+                Materials.Ethylene.getGas(1000),
+                Materials.Methane.getGas(1000),
+                Materials.Helium.getGas(10),
+                Materials.Propane.getGas(30),
+                Materials.Propene.getGas(600),
+                Materials.Ethane.getGas(130),
+                Materials.Butane.getGas(70),
+                Materials.Butene.getGas(100),
+                Materials.Butadiene.getGas(100),
+                Materials.Toluene.getFluid(40),
+                Materials.Benzene.getFluid(200),
+                Materials.Octane.getFluid(30))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -120,15 +120,15 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
             .addTo(PPR);
 
         RecipeBuilder.builder()
-            .fluidInputs(FluidRegistry.getFluidStack("woodtar", 1000), FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(Materials.WoodTar.getFluid(1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("creosote", 300),
-                FluidRegistry.getFluidStack("phenol", 200),
-                FluidRegistry.getFluidStack("benzene", 500),
-                FluidRegistry.getFluidStack("liquid_toluene", 100),
-                FluidRegistry.getFluidStack("dimethylbenzene", 300),
-                FluidRegistry.getFluidStack("1,3dimethylbenzene", 300),
-                FluidRegistry.getFluidStack("1,4dimethylbenzene", 300))
+                Materials.Creosote.getFluid(300),
+                Materials.Phenol.getFluid(200),
+                Materials.Benzene.getFluid(500),
+                Materials.Toluene.getFluid(100),
+                Materials.Dimethylbenzene.getFluid(300),
+                MaterialsKevlar.IIIDimethylbenzene.getFluid(300),
+                MaterialsKevlar.IVDimethylbenzene.getFluid(300))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -138,23 +138,23 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
         RecipeBuilder.builder()
             .itemInputs(
                 GTUtility.copyAmount(0, BioItemList.getPetriDish(getCulture("CombinedBac"))),
-                GTModHandler.getModItem("gregtech", "gt.metaitem.01", 16, 2618),
-                GTModHandler.getModItem("gregtech", "gt.metaitem.01", 16, 2083))
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.AntimonyTrioxide, 16),
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 16))
             .fluidInputs(
                 MaterialPool.BarnardaCSappy.getFluidOrGas(1000),
-                FluidRegistry.getFluidStack("oil", 2000),
+                Materials.Oil.getFluid(2000),
                 Materials.Silver.getPlasma(10))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_heavy_oil", 100),
-                FluidRegistry.getFluidStack("oil", 5),
-                FluidRegistry.getFluidStack("creosote", 200),
-                FluidRegistry.getFluidStack("water", 500),
-                FluidRegistry.getFluidStack("fermentedbacterialsludge", 10),
-                FluidRegistry.getFluidStack("fermentedbiomass", 200),
-                FluidRegistry.getFluidStack("superheavyradox", 20),
-                FluidRegistry.getFluidStack("heavyradox", 30),
-                FluidRegistry.getFluidStack("dilutedxenoxene", 1),
-                FluidRegistry.getFluidStack("lightradox", 80),
+                Materials.OilHeavy.getFluid(100),
+                Materials.Oil.getFluid(5),
+                Materials.Creosote.getFluid(200),
+                Materials.Water.getFluid(500),
+                FluidList.FermentedBacterialSludge.getFluidStack(10),
+                Materials.FermentedBiomass.getFluid(200),
+                Materials.RadoxSuperHeavy.getFluid(20),
+                Materials.RadoxHeavy.getFluid(30),
+                Materials.DilutedXenoxene.getFluid(1),
+                Materials.RadoxLight.getGas(80),
                 Materials.RadoxGas.getGas(20))
             .specialValue(0)
             .noOptimize()
@@ -163,14 +163,14 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
             .addTo(PPR);
 
         RecipeBuilder.builder()
-            .fluidInputs(FluidRegistry.getFluidStack("fluid.coaltar", 1000), FluidRegistry.getFluidStack("steam", 1000))
+            .fluidInputs(new FluidStack(CoalTar.Coal_Tar, 1000), FluidUtils.getSteam(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("fluid.coaltaroil", 300),
-                FluidRegistry.getFluidStack("liquid_naphtha", 150),
-                FluidRegistry.getFluidStack("fluid.ethylbenzene", 200),
-                FluidRegistry.getFluidStack("fluid.anthracene", 50),
-                FluidRegistry.getFluidStack("fluid.kerosene", 600),
-                FluidRegistry.getFluidStack("fluid.naphthalene", 300))
+                new FluidStack(CoalTar.Coal_Tar_Oil, 300),
+                Materials.Naphtha.getFluid(150),
+                new FluidStack(CoalTar.Ethylbenzene, 200),
+                new FluidStack(CoalTar.Anthracene, 50),
+                new FluidStack(RocketFuels.Kerosene, 600),
+                new FluidStack(CoalTar.Naphthalene, 300))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -179,14 +179,14 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(FluidRegistry.getFluidStack("liquid_heavy_oil", 2000))
+            .fluidInputs(Materials.OilHeavy.getFluid(2000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_naphtha", 150),
-                FluidRegistry.getFluidStack("naphthenicacid", 50),
-                FluidRegistry.getFluidStack("gas_gas", 600),
-                FluidRegistry.getFluidStack("liquid_heavy_fuel", 1000),
-                FluidRegistry.getFluidStack("liquid_light_fuel", 450),
-                FluidRegistry.getFluidStack("lubricant", 750))
+                Materials.Naphtha.getFluid(150),
+                MaterialsKevlar.NaphthenicAcid.getFluid(50),
+                Materials.Gas.getGas(600),
+                Materials.HeavyFuel.getFluid(1000),
+                Materials.LightFuel.getFluid(450),
+                Materials.Lubricant.getFluid(750))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -195,14 +195,14 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(FluidRegistry.getFluidStack("liquid_light_oil", 2000))
+            .fluidInputs(Materials.OilLight.getFluid(2000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_naphtha", 200),
-                FluidRegistry.getFluidStack("naphthenicacid", 15),
-                FluidRegistry.getFluidStack("gas_gas", 1600),
-                FluidRegistry.getFluidStack("liquid_heavy_fuel", 70),
-                FluidRegistry.getFluidStack("liquid_light_fuel", 130),
-                FluidRegistry.getFluidStack("lubricant", 250))
+                Materials.Naphtha.getFluid(200),
+                MaterialsKevlar.NaphthenicAcid.getFluid(15),
+                Materials.Gas.getGas(1600),
+                Materials.HeavyFuel.getFluid(70),
+                Materials.LightFuel.getFluid(130),
+                Materials.Lubricant.getFluid(250))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -211,13 +211,13 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(FluidRegistry.getFluidStack("oil", 1000))
+            .fluidInputs(Materials.Oil.getFluid(1000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_naphtha", 400),
-                FluidRegistry.getFluidStack("naphthenicacid", 50),
-                FluidRegistry.getFluidStack("gas_gas", 1200),
-                FluidRegistry.getFluidStack("liquid_heavy_fuel", 300),
-                FluidRegistry.getFluidStack("liquid_light_fuel", 1000))
+                Materials.Naphtha.getFluid(400),
+                MaterialsKevlar.NaphthenicAcid.getFluid(50),
+                Materials.Gas.getGas(1200),
+                Materials.HeavyFuel.getFluid(300),
+                Materials.LightFuel.getFluid(1000))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -226,14 +226,14 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(FluidRegistry.getFluidStack("liquid_medium_oil", 2000))
+            .fluidInputs(Materials.OilMedium.getFluid(2000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_naphtha", 1500),
-                FluidRegistry.getFluidStack("naphthenicacid", 25),
-                FluidRegistry.getFluidStack("gas_gas", 600),
-                FluidRegistry.getFluidStack("liquid_heavy_fuel", 100),
-                FluidRegistry.getFluidStack("liquid_light_fuel", 500),
-                FluidRegistry.getFluidStack("lubricant", 500))
+                Materials.Naphtha.getFluid(1500),
+                MaterialsKevlar.NaphthenicAcid.getFluid(25),
+                Materials.Gas.getGas(600),
+                Materials.HeavyFuel.getFluid(100),
+                Materials.LightFuel.getFluid(500),
+                Materials.Lubricant.getFluid(500))
             .specialValue(0)
             .noOptimize()
             .duration(200)
@@ -242,14 +242,14 @@ public class PetrochemicalPlantRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTUtility.getIntegratedCircuit(1))
-            .fluidInputs(FluidRegistry.getFluidStack("liquid_extra_heavy_oil", 2000))
+            .fluidInputs(Materials.OilExtraHeavy.getFluid(2000))
             .fluidOutputs(
-                FluidRegistry.getFluidStack("liquid_naphtha", 225),
-                FluidRegistry.getFluidStack("naphthenicacid", 75),
-                FluidRegistry.getFluidStack("gas_gas", 900),
-                FluidRegistry.getFluidStack("liquid_heavy_fuel", 1500),
-                FluidRegistry.getFluidStack("liquid_light_fuel", 675),
-                FluidRegistry.getFluidStack("lubricant", 1125))
+                Materials.Naphtha.getFluid(225),
+                MaterialsKevlar.NaphthenicAcid.getFluid(75),
+                Materials.Gas.getGas(900),
+                Materials.HeavyFuel.getFluid(1500),
+                Materials.LightFuel.getFluid(675),
+                Materials.Lubricant.getFluid(1125))
             .specialValue(0)
             .noOptimize()
             .duration(200)
