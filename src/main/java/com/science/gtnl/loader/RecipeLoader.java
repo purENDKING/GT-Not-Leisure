@@ -34,6 +34,7 @@ import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
 import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
 import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
+import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
 import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
 import com.science.gtnl.common.recipe.GTNL.IsaMillRecipes;
@@ -100,6 +101,9 @@ import gregtech.api.util.GTModHandler;
 public class RecipeLoader {
 
     public static void loadRecipes() {
+
+        registerCustomMeteors();
+
         IRecipePool[] recipePools = new IRecipePool[] { new ChemicalRecipes(), new ElectrolyzerRecipes(),
             new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AutoclaveRecipes(),
             new AlloyBlastSmelterRecipes(), new AssemblingLineRecipes(), new CompressorRecipes(),
@@ -118,7 +122,7 @@ public class RecipeLoader {
             new FuelRefiningComplexRecipes(), new CrackingRecipes(), new DistillationTowerRecipes(),
             new SpaceMinerRecipes(), new SpaceDrillRecipes(), new SpaceAssemblerRecipes(), new PCBFactoryRecipes(),
             new PlatinumBasedTreatmentRecipes(), new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(),
-            new AlchemicChemistrySetRecipes(), new AdvancedCircuitAssemblyLineRecipes() };
+            new AlchemicChemistrySetRecipes(), new AdvancedCircuitAssemblyLineRecipes(), new FallingTowerRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),
@@ -149,7 +153,6 @@ public class RecipeLoader {
             PortalToAlfheimOreRecipes.addManaInfusionOreRecipes(stone);
         }
 
-        registerCustomMeteors();
     }
 
     public static void registerCustomMeteors() {

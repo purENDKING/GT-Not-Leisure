@@ -359,6 +359,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                         outputFluids
                             .add(calculateOutput(0.4, 700, FluidRegistry.getFluidStack("ic2distilledwater", 1)));
                     }
+
                 }
             }
 
@@ -376,19 +377,19 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
         return CheckRecipeResultRegistry.NO_RECIPE;
     }
 
-    public static FluidStack calculateOutput(double probability, int oilFieldReserve, FluidStack fluidStack) {
+    public static FluidStack calculateOutput(double probability, long oilFieldReserve, FluidStack fluidStack) {
 
         FluidStack fluidStacks = null;
 
         if (Math.random() < probability) {
             Fluid fluidType = fluidStack.getFluid();
-            double baseOutput = (1000 * oilFieldReserve * (oilFieldReserve + 1))
+            long baseOutput = (long) ((1000 * oilFieldReserve * (oilFieldReserve + 1))
                 * (0.5 + 0.25 * (GTValues.V[energyHatchTier - 7]))
                 * (excessFuel / 1000.0)
-                * drillTier;
+                * drillTier);
 
             needEu += (int) (baseOutput / 10000);
-            long outputAmount = (long) baseOutput;
+            long outputAmount = baseOutput;
 
             if (outputAmount > Integer.MAX_VALUE) {
                 long totalAmount = outputAmount;

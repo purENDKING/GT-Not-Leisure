@@ -771,7 +771,7 @@ public class TextLocalization {
         "Right click on the machine using a wire cutter to turn on and off the falling tower rendering",
         "Tooltip_BloodSoulSacrificialArray_05");
     public static final String Tooltip_BloodSoulSacrificialArray_Casing = texter(
-        "Ang Mining Blck Plutonium Casing",
+        "Front-left-right Radiant Naquadah Alloy Casing",
         "Tooltip_BloodSoulSacrificialArray_Casing");
 
     public static final String NameNeutroniumWireCutting = texter(
