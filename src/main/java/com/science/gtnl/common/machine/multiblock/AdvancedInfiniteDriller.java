@@ -8,10 +8,10 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ORE_DRILL;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ORE_DRILL_ACTIVE;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gregtech.api.util.GTUtility.validMTEList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -21,6 +21,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -46,7 +47,9 @@ import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
 import goodgenerator.loader.Loaders;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoidingMode;
@@ -55,6 +58,8 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -71,7 +76,10 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDriller>
     implements ISurvivalConstructable {
 
-    private int excessFuel = 0;
+    private static int energyHatchTier;
+    private static int excessFuel = 0;
+    private static int drillTier = 0;
+    private static int needEu = 0;
     private int mCasing;
 
     private static IStructureDefinition<AdvancedInfiniteDriller> STRUCTURE_DEFINITION = null;
@@ -188,18 +196,16 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
-        if (this.excessFuel < 300) {
-            this.excessFuel = 300;
+        if (excessFuel < 300) {
+            excessFuel = 300;
         }
 
-        if (this.excessFuel > 10000) {
-            this.excessFuel = 10000;
+        if (excessFuel > 10000) {
+            excessFuel = 10000;
         }
 
-        ItemStack controllerSlot = getControllerSlot();
-        if (controllerSlot == null || !controllerSlot
-            .isItemEqual(GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, Materials.Infinity, 1L))) {
-            this.excessFuel = Math.max(300, this.excessFuel - 4);
+        if (drillTier == 0) {
+            excessFuel = Math.max(300, excessFuel - 4);
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
@@ -208,14 +214,14 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
-        if (this.excessFuel < 2000) {
+        if (excessFuel < 2000) {
             int consumptionCount = 0;
 
             for (FluidStack tFluid : storedFluids) {
                 if (tFluid != null && tFluid.getFluid()
                     .getName()
                     .equals("pyrotheum")) {
-                    int consumption = (int) Math.pow(this.excessFuel, 1.3);
+                    int consumption = (int) Math.pow(excessFuel, 1.3);
                     if (tFluid.amount >= consumption) {
                         tFluid.amount -= consumption;
                         consumptionCount++;
@@ -224,310 +230,134 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
             }
 
             if (consumptionCount > 0) {
-                this.excessFuel += consumptionCount;
+                excessFuel += consumptionCount;
                 this.mMaxProgresstime = 32;
                 this.lEUt = (int) -TierEU.RECIPE_ZPM;
                 return CheckRecipeResultRegistry.SUCCESSFUL;
             } else {
-                this.excessFuel = Math.max(300, this.excessFuel - 4);
+                excessFuel = Math.max(300, excessFuel - 4);
                 return CheckRecipeResultRegistry.NO_RECIPE;
             }
         } else {
-            int eut = 0;
+            needEu = 0;
             List<FluidStack> outputFluids = new ArrayList<>();
             for (ItemStack item : getAllStoredInputs()) {
                 if (item.getItem() != null) {
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ow")))) {
-                        if (Math.random() < 0.25) {
-                            outputFluids.add(Materials.Oil.getFluid(excessFuel * 1000L));
-                            eut += 128000;
-                        }
-                        if (Math.random() < 0.25) {
-                            outputFluids.add(Materials.OilHeavy.getFluid(excessFuel * 1000L));
-                            eut += 128000;
-                        }
-                        if (Math.random() < 0.25) {
-                            outputFluids.add(Materials.OilLight.getFluid(excessFuel * 1000L));
-                            eut += 128000;
-                        }
-                        if (Math.random() < 0.25) {
-                            outputFluids.add(Materials.OilMedium.getFluid(excessFuel * 1000L));
-                            eut += 128000;
-                        }
-                        if (Math.random() < 0.25) {
-                            outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
-                            eut += 128000;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 625, Materials.Oil.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 350, Materials.OilHeavy.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 625, Materials.OilLight.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 625, Materials.OilMedium.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 350, Materials.NatruralGas.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mo")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 200, Materials.SaltWater.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.85, 425, Materials.Helium_3.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ma")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Chlorobenzene.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 400, Materials.SaltWater.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.5, 400, Materials.Chlorobenzene.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Eu")))) {
-                        int random = new Random().nextInt(3) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 800, Materials.SaltWater.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 200, Materials.OilExtraHeavy.getFluid(1L)));
+                        outputFluids
+                            .add(calculateOutput(0.4, 3500, FluidRegistry.getFluidStack("ic2distilledwater", 1)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ca")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Oxygen.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.LiquidOxygen.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 200, Materials.Oxygen.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.5, 200, Materials.LiquidOxygen.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Rb")))) {
-                        int random = new Random().nextInt(4) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.NatruralGas.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
-                                eut += 128000;
-                                break;
-                            case 4:
-                                outputFluids.add(Materials.Lava.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 625, Materials.NatruralGas.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 625, Materials.OilExtraHeavy.getFluid(1L)));
+                        outputFluids
+                            .add(calculateOutput(0.5, 5000, FluidRegistry.getFluidStack("ic2distilledwater", 1)));
+                        outputFluids.add(calculateOutput(0.4, 820, Materials.Lava.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Io")))) {
-                        int random = new Random().nextInt(3) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SulfuricAcid.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.CarbonDioxide.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(Materials.Lead.getMolten(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.45, 350, Materials.SulfuricAcid.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.45, 750, Materials.CarbonDioxide.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 650, Materials.Lead.getMolten(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Me")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Iron.getMolten(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.769, 800, Materials.Helium_3.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 400, Materials.Iron.getMolten(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ve")))) {
-                        int random = new Random().nextInt(3) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SulfuricAcid.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.CarbonDioxide.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(Materials.Lead.getMolten(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 250, Materials.SulfuricAcid.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.4, 1500, Materials.CarbonDioxide.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 1600, Materials.Lead.getMolten(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Mi")))) {
-                        outputFluids.add(Materials.HydricSulfide.getGas(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 900, Materials.HydricSulfide.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ob")))) {
-                        outputFluids.add(Materials.CarbonMonoxide.getGas(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 2000, Materials.CarbonMonoxide.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ti")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Ethane.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Methane.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 800, Materials.Ethane.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.5, 200, Materials.Methane.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("RA")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.SaltWater.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Helium_3.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 1250, Materials.SaltWater.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.6, 1250, Materials.Helium_3.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pr")))) {
-                        outputFluids.add(Materials.Deuterium.getGas(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 700, Materials.Deuterium.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Tr")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Ethylene.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 800, Materials.Ethylene.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.5, 800, Materials.Nitrogen.getGas(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("MM")))) {
-                        outputFluids.add(Materials.HydrofluoricAcid.getFluid(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 300, Materials.HydrofluoricAcid.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Pl")))) {
-                        int random = new Random().nextInt(4) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Nitrogen.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Fluorine.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(Materials.Oxygen.getGas(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 4:
-                                outputFluids.add(Materials.LiquidAir.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 800, Materials.Nitrogen.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 300, Materials.Fluorine.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 800, Materials.Oxygen.getGas(1L)));
+                        outputFluids.add(calculateOutput(0.4, 800, Materials.LiquidAir.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BC")))) {
-                        int random = new Random().nextInt(2) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.Unknown.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.5, 800, Materials.OilExtraHeavy.getFluid(1L)));
+                        outputFluids.add(calculateOutput(0.5, 300, Materials.Unknown.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BE")))) {
-                        outputFluids.add(Materials.LiquidAir.getFluid(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 400, Materials.LiquidAir.getFluid(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("BF")))) {
-                        outputFluids.add(Materials.Tin.getMolten(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 400, Materials.Tin.getMolten(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CA")))) {
-                        outputFluids.add(Materials.Copper.getMolten(excessFuel * 1000L));
-                        eut += 128000;
-                        break;
+                        outputFluids.add(calculateOutput(1.0, 300, Materials.Copper.getMolten(1L)));
                     }
 
                     if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("TE")))) {
-                        int random = new Random().nextInt(3) + 1;
-                        switch (random) {
-                            case 1:
-                                outputFluids.add(Materials.Copper.getMolten(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 2:
-                                outputFluids.add(Materials.OilExtraHeavy.getFluid(excessFuel * 1000L));
-                                eut += 128000;
-                                break;
-                            case 3:
-                                outputFluids.add(FluidRegistry.getFluidStack("ic2distilledwater", 1000));
-                                eut += 128000;
-                                break;
-                        }
+                        outputFluids.add(calculateOutput(0.4, 200, Materials.Copper.getMolten(1L)));
+                        outputFluids.add(calculateOutput(0.4, 10000, Materials.OilExtraHeavy.getFluid(1L)));
+                        outputFluids
+                            .add(calculateOutput(0.4, 700, FluidRegistry.getFluidStack("ic2distilledwater", 1)));
                     }
                 }
             }
@@ -538,12 +368,42 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
 
             if (mOutputFluids != null) {
                 this.mMaxProgresstime = (5750000 / excessFuel) - 475;
-                this.lEUt = -eut;
+                this.lEUt = -needEu;
                 return CheckRecipeResultRegistry.SUCCESSFUL;
             }
         }
 
         return CheckRecipeResultRegistry.NO_RECIPE;
+    }
+
+    public static FluidStack calculateOutput(double probability, int oilFieldReserve, FluidStack fluidStack) {
+
+        FluidStack fluidStacks = null;
+
+        if (Math.random() < probability) {
+            Fluid fluidType = fluidStack.getFluid();
+            double baseOutput = (1000 * oilFieldReserve * (oilFieldReserve + 1))
+                * (0.5 + 0.25 * (GTValues.V[energyHatchTier - 7]))
+                * (excessFuel / 1000.0)
+                * drillTier;
+
+            needEu += (int) (baseOutput / 10000);
+            long outputAmount = (long) baseOutput;
+
+            if (outputAmount > Integer.MAX_VALUE) {
+                long totalAmount = outputAmount;
+
+                while (totalAmount > 0) {
+                    int stackSize = (int) Math.min(totalAmount, Integer.MAX_VALUE);
+                    fluidStacks = new FluidStack(fluidType, stackSize);
+                    totalAmount -= stackSize;
+                }
+            } else {
+                fluidStacks = new FluidStack(fluidType, (int) outputAmount);
+            }
+        }
+
+        return fluidStacks;
     }
 
     @Override
@@ -576,16 +436,12 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         startRecipeProcessing();
 
-        if (this.excessFuel > 2000 && mProgresstime != 0 && mProgresstime % 20 == 0) {
-            this.excessFuel += (int) Math.floor(this.excessFuel / 2000.0);
+        if (excessFuel > 2000 && mProgresstime != 0 && mProgresstime % 20 == 0) {
+            excessFuel += (int) Math.floor(excessFuel / 2000.0);
         }
 
-        if (this.excessFuel > 10000) {
-            ItemStack controllerSlot = getControllerSlot();
-            if (controllerSlot != null && controllerSlot
-                .isItemEqual(GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, Materials.Infinity, 1L))) {
-                mInventory[getControllerSlotIndex()] = null;
-            }
+        if (excessFuel > 10000) {
+            mInventory[getControllerSlotIndex()] = null;
             this.stopMachine(ShutDownReasonRegistry.POWER_LOSS);
         }
 
@@ -597,10 +453,10 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                         if (tFluid.getFluid()
                             .getName()
                             .equals("pyrotheum")) {
-                            int consumption = (int) Math.pow(this.excessFuel, 1.3);
+                            int consumption = (int) Math.pow(excessFuel, 1.3);
                             if (tFluid.amount >= consumption) {
                                 tFluid.amount -= consumption;
-                                this.excessFuel += 1;
+                                excessFuel += 1;
                             }
                         }
 
@@ -609,7 +465,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                             .equals("ic2distilledwater")) {
                             if (tFluid.amount >= 200000) {
                                 tFluid.amount -= 200000;
-                                this.excessFuel -= 1;
+                                excessFuel -= 1;
                             }
                         }
 
@@ -618,7 +474,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                             .equals("liquidoxygen")) {
                             if (tFluid.amount >= 200000) {
                                 tFluid.amount -= 200000;
-                                this.excessFuel -= 2;
+                                excessFuel -= 2;
                             }
                         }
 
@@ -627,14 +483,14 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                             .equals("liquid helium")) {
                             if (tFluid.amount >= 200000) {
                                 tFluid.amount -= 200000;
-                                this.excessFuel -= 4;
+                                excessFuel -= 4;
                             }
                         }
                     }
                 }
             }
         } else if (aTick % 20 == 0 && !aBaseMetaTileEntity.isActive()) {
-            this.excessFuel -= 4;
+            excessFuel -= 4;
             if (excessFuel < 300) {
                 excessFuel = 300;
             }
@@ -646,9 +502,55 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)
-            && !mOutputHatches.isEmpty()
-            && mCasing >= 570;
+        mCasing = 0;
+        drillTier = 0;
+
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
+            && !mOutputHatches.isEmpty()) {
+            return false;
+        }
+
+        energyHatchTier = checkEnergyHatchTier();
+        drillTier = checkDrillTier();
+
+        return mCasing >= 570;
+    }
+
+    public int checkDrillTier() {
+        ItemStack controllerSlot = getControllerSlot();
+        if (controllerSlot != null) {
+            if (controllerSlot
+                .isItemEqual(GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, Materials.Neutronium, 1L))) {
+                return 1;
+            }
+
+            if (controllerSlot
+                .isItemEqual(GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, Materials.CosmicNeutronium, 1L))) {
+                return 2;
+            }
+
+            if (controllerSlot
+                .isItemEqual(GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, Materials.Infinity, 1L))) {
+                return 3;
+            }
+
+            if (controllerSlot.isItemEqual(
+                GTOreDictUnificator.get(OrePrefixes.toolHeadDrill, MaterialsUEVplus.TranscendentMetal, 1L))) {
+                return 4;
+            }
+        }
+        return 0;
+    }
+
+    public int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @Override
