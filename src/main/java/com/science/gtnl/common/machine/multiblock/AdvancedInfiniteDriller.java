@@ -311,7 +311,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                         outputFluids.add(calculateOutput(0.5, 200, Materials.Methane.getGas(1L)));
                     }
 
-                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("RA")))) {
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("Ra")))) {
                         outputFluids.add(calculateOutput(0.4, 1250, Materials.SaltWater.getFluid(1L)));
                         outputFluids.add(calculateOutput(0.6, 1250, Materials.Helium_3.getGas(1L)));
                     }
@@ -349,7 +349,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                         outputFluids.add(calculateOutput(1.0, 400, Materials.Tin.getMolten(1L)));
                     }
 
-                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CA")))) {
+                    if (item.isItemEqual(new ItemStack(ModBlocks.getBlock("CB")))) { // GalaxySpace_CentauriA is actually α Centauri Bb
                         outputFluids.add(calculateOutput(1.0, 300, Materials.Copper.getMolten(1L)));
                     }
 
