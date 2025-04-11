@@ -1072,9 +1072,26 @@ public class AssemblingLineRecipes implements IRecipePool {
                 MaterialPool.Polyetheretherketone.getMolten(4608), MaterialsAlloy.INDALLOY_140.getFluidStack(16000) },
             GTNLItemList.ShallowChemicalCoupling.get(1),
             2400,
-            (int) TierEU.RECIPE_ZPM
+            (int) TierEU.RECIPE_ZPM);
 
-        );
-
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 47))
+            .metadata(RESEARCH_TIME, 12 * HOURS)
+            .itemInputs(
+                getModItem(GregTech.ID, "gt.blockmachines", 1, 15300),
+                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 4, 47),
+                ItemList.Field_Generator_LuV.get(2),
+                ItemList.Emitter_LuV.get(4),
+                getModItem(GregTech.ID, "gt.blockcasings4", 4, 7),
+                new Object[] { OrePrefixes.circuit.get(Materials.LuV), 1L },
+                getModItem(GregTech.ID, "gt.blockmachines", 32, 15470))
+            .fluidInputs(
+                Materials.Europium.getMolten(1728),
+                Materials.NaquadahAlloy.getMolten(3456),
+                Materials.SuperCoolant.getFluid(6912))
+            .itemOutputs(getModItem(GregTech.ID, "gt.blockmachines", 1, 13115))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(120 * SECONDS)
+            .addTo(AssemblyLine);
     }
 }
