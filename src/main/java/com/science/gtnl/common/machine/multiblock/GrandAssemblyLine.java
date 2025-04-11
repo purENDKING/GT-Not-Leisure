@@ -1,14 +1,19 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static gregtech.GTMod.GT_FML_LOGGER;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
+import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.api.util.GTUtility.validMTEList;
+import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
+import static net.minecraft.util.StatCollector.translateToLocal;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,12 +26,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -38,6 +46,17 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.drawable.IDrawable;
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
+import com.gtnewhorizons.modularui.api.math.Alignment;
+import com.gtnewhorizons.modularui.api.math.Color;
+import com.gtnewhorizons.modularui.api.math.Size;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
@@ -51,6 +70,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoidingMode;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -80,18 +100,22 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssemblyLine>
     implements ISurvivalConstructable {
 
-    protected int ParallelTier;
+    private UUID ownerUUID;
+    private BigInteger costingEU = BigInteger.ZERO;
+    private boolean wirelessMode = false;
+    private int ParallelTier;
     private int mCasing;
     private int energyHatchTier;
+    private static int minRecipeTime = 20;
     private static IStructureDefinition<GrandAssemblyLine> STRUCTURE_DEFINITION = null;
-    public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String GAL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/grand_assembly_line";
-    public static String[][] shape = StructureUtils.readStructureFromFile(GAL_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 46;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
-    public ArrayList<MTEHatchDataAccess> mDataAccessHatches = new ArrayList<>();
-    public static final int CASING_INDEX = BlockGTCasingsTT.textureOffset + 3;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
+    private static final String GAL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/grand_assembly_line";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(GAL_STRUCTURE_FILE_PATH);
+    private final int horizontalOffSet = 46;
+    private final int verticalOffSet = 2;
+    private final int depthOffSet = 0;
+    private final ArrayList<MTEHatchDataAccess> mDataAccessHatches = new ArrayList<>();
+    private static final int CASING_INDEX = BlockGTCasingsTT.textureOffset + 3;
     private static Textures.BlockIcons.CustomIcon ScreenOFF;
     private static Textures.BlockIcons.CustomIcon ScreenON;
     private boolean isDualInputHatch = false;
@@ -128,6 +152,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_09)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_10)
             .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_11)
+            .addInfo(TextLocalization.Tooltip_GrandAssemblyLine_12)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
@@ -196,8 +221,9 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         // 第一步：初始化参数
         ItemStack controllerItem = getControllerSlot();
         this.ParallelTier = getParallelTier(controllerItem);
-        int limit = 20;
-        long energyEU = GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
+        int limit = minRecipeTime;
+        long energyEU = wirelessMode ? Integer.MAX_VALUE
+            : GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
 
         if (energyEU <= 0) return CheckRecipeResultRegistry.POWER_OVERFLOW;
@@ -230,6 +256,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         int totalMaxProgressTime = 0; // 累加的最大时间
         int powerParallel = 0;
         int CircuitOC = -1; // 电路板限制超频次数
+        costingEU = BigInteger.ZERO;
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
 
         for (ItemStack item : getAllStoredInputs()) {
@@ -372,6 +399,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     threshold *= 4; // 阈值更新为 4^n
                 }
 
+                if (wirelessMode) overclockCount = Integer.MAX_VALUE;
+
                 if (CircuitOC >= 0) {
                     overclockCount = Math.min(overclockCount, CircuitOC);
                 }
@@ -451,7 +480,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     int required = input.stackSize;
                     if (required <= 0) continue;
 
-                    long available = 0;
+                    long available;
 
                     // 如果没有矿辞，直接检查原始物品
                     GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
@@ -495,7 +524,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 int recipeParallel = Math.min(finalItemParallel, finalFluidParallel);
 
                 // 使用功率并行数限制 RecipeParallel
-                recipeParallel = Math.min(recipeParallel, powerParallel);
+                if (!wirelessMode) recipeParallel = Math.min(recipeParallel, powerParallel);
 
                 // 检查剩余的最大并行数
                 if (recipeParallel > remainingMaxParallel) {
@@ -550,38 +579,44 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
                 GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
                 long parallel = entry.getValue();
-                needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
+                if (wirelessMode) {
+                    costingEU = BigInteger.valueOf(recipe.mEUt * recipe.mDuration * parallel);
+                } else {
+                    needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
+                }
                 needTime += recipe.mDuration;
             }
 
-            // 调整功率和时间以适配能源仓输入功率
-            long needEUt = needEU / needTime;
+            if (!wirelessMode) {
+                // 调整功率和时间以适配能源仓输入功率
+                long needEUt = needEU / needTime;
 
-            while (needEU / needTime > energyEU) {
-                needEU /= 2;
-                needTime *= 2;
-            }
-
-            while ((needEU / needTime) * 8 < energyEU) {
-                // 检查 needEUt 是否超过 Long.MAX_VALUE
-                if (needEUt > Long.MAX_VALUE / 4) {
-                    needEUt = Long.MAX_VALUE;
-                    break; // 如果超过上限，则设置为最大值并退出循环
+                while (needEU / needTime > energyEU) {
+                    needEU /= 2;
+                    needTime *= 2;
                 }
 
-                // 检查 needTime 是否会低于 1
-                if (needTime / 2 < 1) {
-                    break; // 如果时间会低于 1，则退出循环
+                while ((needEU / needTime) * 8 < energyEU) {
+                    // 检查 needEUt 是否超过 Long.MAX_VALUE
+                    if (needEUt > Long.MAX_VALUE / 4) {
+                        needEUt = Long.MAX_VALUE;
+                        break; // 如果超过上限，则设置为最大值并退出循环
+                    }
+
+                    // 检查 needTime 是否会低于 1
+                    if (needTime / 2 < 1) {
+                        break; // 如果时间会低于 1，则退出循环
+                    }
+
+                    // 更新 needEUt 和 needTime
+                    needEUt *= 4;
+                    needTime /= (ParallelTier >= 11) ? 4 : 2;
                 }
 
-                // 更新 needEUt 和 needTime
-                needEUt *= 4;
-                needTime /= (ParallelTier >= 11) ? 4 : 2;
+                // 累加总功率和最大时间
+                totalNeedEUt = needEUt;
+                totalMaxProgressTime = needTime;
             }
-
-            // 累加总功率和最大时间
-            totalNeedEUt = needEUt;
-            totalMaxProgressTime = needTime;
 
             // 第六步：生成输出物品并累加到总输出列表
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
@@ -616,7 +651,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                 // 消耗流体
                 for (FluidStack fluid : recipe.mFluidInputs) {
-                    consumeFluids(fluid, fluid.amount * parallel, allFluids); // 使用自定义方法
+                    consumeFluids(fluid, (long) fluid.amount * parallel, allFluids); // 使用自定义方法
                 }
             }
         }
@@ -633,8 +668,16 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         updateSlots();
 
         // 设置总功率和最大时间
-        this.lEUt = -totalNeedEUt; // 使用累加的总功率
-        this.mMaxProgresstime = totalMaxProgressTime; // 使用累加的最大时间
+        if (wirelessMode) {
+            if (!addEUToGlobalEnergyMap(ownerUUID, costingEU.multiply(NEGATIVE_ONE))) {
+                return CheckRecipeResultRegistry.insufficientPower(costingEU.longValue());
+            }
+            this.lEUt = 0;
+            this.mMaxProgresstime = 20;
+        } else {
+            this.lEUt = -totalNeedEUt;
+            this.mMaxProgresstime = totalMaxProgressTime;
+        }
 
         // 更新效率
         this.mEfficiency = 10000;
@@ -671,22 +714,11 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     // 自定义方法：获取可用物品数量
     private long getAvailableItemCount(ItemStack required, ArrayList<ItemStack> allInputs) {
         long count = 0;
-        Map<GTUtility.ItemId, ItemStack> inputsFromME = new HashMap<>();
 
         // 优先检查完全匹配的物品
         for (ItemStack input : allInputs) {
             if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
-                // 如果是来自 ME 总线的物品，使用 GTUtility.ItemId 去重
-                if (isFromMEBus(input)) {
-                    GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
-                    if (!inputsFromME.containsKey(itemId)) {
-                        inputsFromME.put(itemId, input);
-                        count += input.stackSize;
-                    }
-                } else {
-                    // 非 ME 总线的物品直接累加
-                    count += input.stackSize;
-                }
+                count += input.stackSize;
             }
         }
 
@@ -706,18 +738,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                             // 检查输入物品是否与矿辞匹配
                             for (ItemStack oreDictItem : oreDictItems) {
                                 if (OreDictionary.itemMatches(oreDictItem, input, false)) {
-                                    // 如果是来自 ME 总线的物品，使用 GTUtility.ItemId 去重
-                                    if (isFromMEBus(input)) {
-                                        GTUtility.ItemId itemId = GTUtility.ItemId.createNoCopy(input);
-                                        if (!inputsFromME.containsKey(itemId)) {
-                                            inputsFromME.put(itemId, input);
-                                            count += input.stackSize;
-                                        }
-                                    } else {
-                                        // 非 ME 总线的物品直接累加
-                                        count += input.stackSize;
-                                    }
-                                    break; // 匹配成功后跳出矿辞匹配循环
+                                    count += input.stackSize;
+                                    break;
                                 }
                             }
                         }
@@ -729,43 +751,17 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         return count;
     }
 
-    // 自定义方法：获取可用流体数量
     private long getAvailableFluidAmount(FluidStack required, ArrayList<FluidStack> allFluids) {
         long amount = 0;
-        Map<Fluid, FluidStack> inputsFromME = new HashMap<>();
 
         for (FluidStack fluid : allFluids) {
             if (fluid != null && fluid.isFluidEqual(required)) {
-                // 如果是来自 ME 总线的流体，使用 Fluid 去重
-                if (isFromMEHatch(fluid)) {
-                    if (!inputsFromME.containsKey(fluid.getFluid())) {
-                        inputsFromME.put(fluid.getFluid(), fluid);
-                        amount += fluid.amount;
-                    }
-                } else {
-                    // 非 ME 总线的流体直接累加
-                    amount += fluid.amount;
-                }
+                amount += fluid.amount;
+
             }
         }
 
         return amount;
-    }
-
-    // 判断物品是否来自 ME 总线
-    private boolean isFromMEBus(ItemStack itemStack) {
-        // 根据实际逻辑判断是否为来自 ME 总线的物品
-        // 例如，检查物品的 UnlocalizedName 或其他标识
-        return itemStack.getUnlocalizedName()
-            .startsWith("gt.me_bus_item");
-    }
-
-    // 判断流体是否来自 ME 总线
-    private boolean isFromMEHatch(FluidStack fluidStack) {
-        // 根据实际逻辑判断是否为来自 ME 总线的流体
-        // 例如，检查流体的 UnlocalizedName 或其他标识
-        return fluidStack.getUnlocalizedName()
-            .startsWith("gt.me_hatch_fluid");
     }
 
     // 自定义方法：消耗物品
@@ -815,13 +811,21 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     }
 
     // 自定义方法：消耗流体
-    private void consumeFluids(FluidStack required, int amount, ArrayList<FluidStack> allFluids) {
-        int remaining = amount;
+    private void consumeFluids(FluidStack required, long amount, ArrayList<FluidStack> allFluids) {
+        long remaining = amount;
         for (FluidStack fluid : allFluids) {
             if (fluid != null && fluid.isFluidEqual(required)) {
-                int toConsume = Math.min(fluid.amount, remaining);
-                fluid.amount -= toConsume;
-                remaining -= toConsume;
+                int available = fluid.amount;
+
+                int toConsumeNow = (int) Math.min(available, Math.min(remaining, Integer.MAX_VALUE));
+
+                fluid.amount -= toConsumeNow;
+                remaining -= toConsumeNow;
+
+                if (fluid.amount <= 0) {
+                    fluid.amount = 0;
+                }
+
                 if (remaining <= 0) {
                     break;
                 }
@@ -835,6 +839,24 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             hatch_dataAccess.setActive(true);
         }
         return super.onRunningTick(aStack);
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setBoolean("wirelessMode", wirelessMode);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        wirelessMode = aNBT.getBoolean("wirelessMode");
+    }
+
+    @Override
+    public void onFirstTick(IGregTechTileEntity aBaseMetaTileEntity) {
+        super.onFirstTick(aBaseMetaTileEntity);
+        this.ownerUUID = aBaseMetaTileEntity.getOwnerUuid();
     }
 
     @Override
@@ -896,6 +918,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         mDataAccessHatches.clear();
         isDualInputHatch = false;
         useSingleAmp = true;
+        wirelessMode = false;
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
         useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
@@ -911,7 +934,11 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             if (mEnergyHatches.size() > 1 && getMaxInputAmps() > 64) return false;
         }
 
-        if (mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) return false;
+        if (ParallelTier >= 12 && mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) {
+            wirelessMode = true;
+            useSingleAmp = false;
+            energyHatchTier = 14;
+        } else if (mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) return false;
 
         if (!mDualInputHatches.isEmpty()) {
             isDualInputHatch = true;
@@ -923,8 +950,8 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
-        logic.setAvailableVoltage(getMachineVoltageLimit());
-        logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps() / 4);
+        logic.setAvailableVoltage(wirelessMode ? Long.MAX_VALUE : getMachineVoltageLimit());
+        logic.setAvailableAmperage(wirelessMode ? Long.MAX_VALUE : useSingleAmp ? 1 : getMaxInputAmps() / 4);
         logic.setAmperageOC(false);
     }
 
@@ -1101,10 +1128,71 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) * ((ParallelTier >= 13) ? 0.2 : 1))
-                    .setSpeedBoost((1 / 1.67 - (ParallelTier / 200.0)) * ((ParallelTier >= 13) ? 1.0 / 20.0 : 1));
+                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) * ((ParallelTier >= 12) ? 0.2 : 1))
+                    .setSpeedBoost((1 / 1.67 - (ParallelTier / 200.0)) * ((ParallelTier >= 12) ? 1.0 / 20.0 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    private static final int PARALLEL_WINDOW_ID = 10;
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        buildContext.addSyncedWindow(PARALLEL_WINDOW_ID, this::createParallelWindow);
+        builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
+            if (!widget.isClient()) {
+                widget.getContext()
+                    .openSyncedWindow(PARALLEL_WINDOW_ID);
+            }
+        })
+            .setPlayClickSound(true)
+            .setBackground(() -> {
+                List<UITexture> ret = new ArrayList<>();
+                ret.add(GTUITextures.BUTTON_STANDARD);
+                ret.add(GTUITextures.OVERLAY_BUTTON_BATCH_MODE_ON);
+                return ret.toArray(new IDrawable[0]);
+            })
+            .addTooltip(translateToLocal("Info_GrandAssemblyLine_00"))
+            .setTooltipShowUpDelay(TOOLTIP_DELAY)
+            .setPos(174, 112)
+            .setSize(16, 16));
+        super.addUIWidgets(builder, buildContext);
+    }
+
+    protected ModularWindow createParallelWindow(final EntityPlayer player) {
+        final int WIDTH = 158;
+        final int HEIGHT = 52;
+        final int PARENT_WIDTH = getGUIWidth();
+        final int PARENT_HEIGHT = getGUIHeight();
+        ModularWindow.Builder builder = ModularWindow.builder(WIDTH, HEIGHT);
+        builder.setBackground(GTUITextures.BACKGROUND_SINGLEBLOCK_DEFAULT);
+        builder.setGuiTint(getGUIColorization());
+        builder.setDraggable(true);
+        builder.setPos(
+            (size, window) -> Alignment.Center.getAlignedPos(size, new Size(PARENT_WIDTH, PARENT_HEIGHT))
+                .add(
+                    Alignment.BottomRight.getAlignedPos(new Size(PARENT_WIDTH, PARENT_HEIGHT), new Size(WIDTH, HEIGHT))
+                        .add(WIDTH - 3, 0)
+                        .subtract(0, 10)));
+        builder.widget(
+            TextWidget.localised("Info_GrandAssemblyLine_00")
+                .setPos(3, 4)
+                .setSize(150, 20))
+            .widget(
+                new NumericWidget().setSetter(val -> minRecipeTime = (int) val)
+                    .setGetter(() -> minRecipeTime)
+                    .setBounds(1, Integer.MAX_VALUE)
+                    .setDefaultValue(1)
+                    .setScrollValues(1, 4, 64)
+                    .setTextAlignment(Alignment.Center)
+                    .setTextColor(Color.WHITE.normal)
+                    .setSize(150, 18)
+                    .setPos(4, 25)
+                    .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD)
+                    .attachSyncer(
+                        new FakeSyncWidget.IntegerSyncer(() -> minRecipeTime, (val) -> minRecipeTime = val),
+                        builder));
+        return builder.build();
     }
 
 }

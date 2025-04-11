@@ -689,8 +689,11 @@ public class TextLocalization {
         "Install UIV and above parallel control cores to unlock §cperfect overclock§7",
         "Tooltip_GrandAssemblyLine_10");
     public static final String Tooltip_GrandAssemblyLine_11 = texter(
-        "Installing UXV and above parallel control cores will provide an additional 500%% power reduction and 1900%% acceleration (multiplicatively stacked)",
+        "Installing UMV and above parallel control cores will provide an additional 500%% power reduction and 1900%% acceleration (multiplicatively stacked)",
         "Tooltip_GrandAssemblyLine_11");
+    public static final String Tooltip_GrandAssemblyLine_12 = texter(
+        "Installing a parallel control core of UMV tier or higher without an energy hatch will automatically activate wireless mode",
+        "Tooltip_GrandAssemblyLine_12");
     public static final String Tooltip_GrandAssemblyLine_Casing = texter(
         "Ang Advanced Computer Casing Or Reinforced Glass",
         "Tooltip_GrandAssemblyLine_Casing");
