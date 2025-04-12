@@ -56,8 +56,8 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
     private int tCountCasing = 0;
     private static IStructureDefinition<NeutroniumWireCutting> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String ICF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/neutronium_wire_cutting"; // 文件路径
-    private static final String[][] shape = StructureUtils.readStructureFromFile(ICF_STRUCTURE_FILE_PATH);
+    private static final String NWC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/neutronium_wire_cutting"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(NWC_STRUCTURE_FILE_PATH);
 
     public NeutroniumWireCutting(String aName) {
         super(aName);
@@ -96,7 +96,6 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             .addInputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addOutputBus(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addInputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .addEnergyHatch(TextLocalization.Tooltip_NeutroniumWireCutting_Casing, 1)
             .toolTipFinisher();
         return tt;

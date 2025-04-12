@@ -186,7 +186,23 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
-        return -1;
+        if (this.mMachine) return -1;
+        int realBudget = elementBudget >= 500 ? elementBudget : Math.min(500, elementBudget * 5);
+
+        if (stackSize.stackSize > 1) {
+            return this.survivialBuildPiece(
+                STRUCTURE_PIECE_MAIN,
+                stackSize,
+                horizontalOffSet,
+                verticalOffSet,
+                depthOffSet,
+                realBudget,
+                env,
+                false,
+                true);
+        } else {
+            return -1;
+        }
     }
 
     @Override
