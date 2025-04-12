@@ -3,10 +3,13 @@ package com.science.gtnl.common.recipe.GTNL;
 import static gregtech.api.enums.Mods.EnderIO;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.brandon3055.draconicevolution.common.ModItems;
@@ -24,7 +27,14 @@ import kubatech.loaders.MobHandlerLoader;
 
 public class ExtremeExtremeEntityCrusherRecipes {
 
-    final RecipeMap<?> EEEC = RecipeRegister.ExtremeExtremeEntityCrusherRecipes;
+    private final RecipeMap<?> EEEC = RecipeRegister.ExtremeExtremeEntityCrusherRecipes;
+
+    private static final Set<String> registeredSpawnerTypes = new HashSet<>();
+
+    public static void init() {
+        MinecraftForge.EVENT_BUS.register(new ExtremeExtremeEntityCrusherRecipes());
+        registeredSpawnerTypes.clear();
+    }
 
     @SubscribeEvent
     public void onPostMobRegistration(PostMobRegistrationEvent event) {
@@ -33,6 +43,10 @@ public class ExtremeExtremeEntityCrusherRecipes {
         ArrayList<MobDrop> drops = event.drops;
 
         if (drops.isEmpty() || !mobRecipe.isUsableInVial) return;
+
+        if (!registeredSpawnerTypes.add(mobType)) {
+            return;
+        }
 
         MobHandlerLoader.MobEECRecipe eecRecipe = new MobHandlerLoader.MobEECRecipe(drops, mobRecipe);
 

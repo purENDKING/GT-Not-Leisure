@@ -21,8 +21,7 @@ public class BartworkLoad_Head_Mixin {
     private static void onRunOnPlayerJoined(boolean classicMode, boolean disableExtraGasRecipes, CallbackInfo ci) {
         if (MainConfig.enableDeleteRecipe) {
             RemoveRecipes.removeRecipes();
-            RecipeUtil
-                .removeMatchingRecipes(RecipeRegister.ConvertToCircuitAssembler, RecipeMaps.circuitAssemblerRecipes);
         }
+        RecipeUtil.removeMatchingRecipes(RecipeRegister.ConvertToCircuitAssembler, RecipeMaps.circuitAssemblerRecipes);
     }
 }
