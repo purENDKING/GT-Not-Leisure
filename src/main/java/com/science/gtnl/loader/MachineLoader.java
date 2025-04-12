@@ -81,6 +81,7 @@ import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
 import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
 import com.science.gtnl.common.machine.multiblock.NineIndustrialMultiMachine;
 import com.science.gtnl.common.machine.multiblock.PetrochemicalPlant;
@@ -721,6 +722,11 @@ public class MachineLoader {
                 TextLocalization.NameAdvancedCircuitAssemblyLine));
         addItemTooltip(GTNLItemList.AdvancedCircuitAssemblyLine.get(1), AnimatedText.SNL_SCCR);
 
+        GTNLItemList.NanoPhagocytosisPlant
+            .set(new NanoPhagocytosisPlant(21129, "NanoPhagocytosisPlant", TextLocalization.NameNanoPhagocytosisPlant));
+        addItemTooltip(GTNLItemList.NanoPhagocytosisPlant.get(1), AnimatedText.SNL_QYZG);
+
+        // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
                 21919,

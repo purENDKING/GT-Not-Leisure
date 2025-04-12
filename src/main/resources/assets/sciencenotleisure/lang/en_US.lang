@@ -1789,6 +1789,12 @@ NeutroniumWireCuttingRecipeType=Cutter
 Tooltip_NeutroniumWireCutting_00=Each glass tier provides an additional 5%% speed and power reduction (multiplicative).
 Tooltip_NeutroniumWireCutting_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
 
+NameNanoPhagocytosisPlant=Nano Phagocytosis Plant
+NanoPhagocytosisPlantRecipeType=Macerator
+Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nanites
+Tooltip_NanoPhagocytosisPlant_01=Each glass tier provides an additional 5%% speed and power reduction (multiplicative).
+Tooltip_NanoPhagocytosisPlant_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
+
 NameIntegratedAssemblyFacility=Integrated Assembly Facility
 IntegratedAssemblyFacilityRecipeType=Assembler
 Tooltip_IntegratedAssemblyFacility_00=Each level of Glass and Component Assembly Line Casing grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)

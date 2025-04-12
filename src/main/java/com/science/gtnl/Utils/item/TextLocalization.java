@@ -785,6 +785,20 @@ public class TextLocalization {
         "Ang Naquadria-Reinforced Water Plant Casing",
         "Tooltip_NeutroniumWireCutting_Casing");
 
+    public static final String NameNanoPhagocytosisPlant = texter(
+        "Nano Phagocytosis Plant",
+        "NameNanoPhagocytosisPlant");
+    public static final String NanoPhagocytosisPlantRecipeType = texter("Macerator", "NanoPhagocytosisPlantRecipeType");
+    public static final String Tooltip_NanoPhagocytosisPlant_00 = texter(
+        "Ruthlessly shred everything with a swarm of Nanites",
+        "Tooltip_NanoPhagocytosisPlant_00");
+    public static final String Tooltip_NanoPhagocytosisPlant_01 = texter(
+        "Each level of glass grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_NanoPhagocytosisPlant_01");
+    public static final String Tooltip_NanoPhagocytosisPlant_Casing = texter(
+        "Ang Naquadria-Reinforced Water Plant Casing",
+        "Tooltip_NanoPhagocytosisPlant_Casing");
+
     public static final String NameIntegratedAssemblyFacility = texter(
         "Integrated Assembly Facility",
         "NameIntegratedAssemblyFacility");
