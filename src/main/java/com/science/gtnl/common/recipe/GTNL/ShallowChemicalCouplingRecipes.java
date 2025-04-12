@@ -1021,10 +1021,9 @@ public class ShallowChemicalCouplingRecipes implements IRecipePool {
 
             RecipeBuilder.builder()
                 .itemInputs(GTBees.combs.getStackForType(CombType.NEUTRONIUM, 4))
-                .itemOutputs(
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Neutronium, 12L),
-                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Neutronium, 4L))
-                .outputChances(10000, 7500)
+                .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Neutronium, 4L))
+                .fluidOutputs(Materials.Neutronium.getMolten(1152))
+                .outputChances(5000)
                 .specialValue(8000)
                 .noOptimize()
                 .metadata(COIL_HEAT, 8000)
