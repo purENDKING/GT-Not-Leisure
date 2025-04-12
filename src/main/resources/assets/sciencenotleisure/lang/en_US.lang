@@ -1784,6 +1784,8 @@ Tooltip_LapotronChip_00=Work in progress.
 Tooltip_LapotronChip_01=Can be used to quickly build a basic base.
 Tooltip_LapotronChip_Casing=Any Radiant Naquadah Alloy Machine Block
 
+gtnl.recipe.ExtremeExtremeEntityCrusherRecipes=Extreme Extreme Entity Crusher
+
 NameNeutroniumWireCutting=Neutronium Wire Cutter
 NeutroniumWireCuttingRecipeType=Cutter
 Tooltip_NeutroniumWireCutting_00=Each glass tier provides an additional 5%% speed and power reduction (multiplicative).

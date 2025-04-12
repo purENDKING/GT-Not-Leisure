@@ -1784,6 +1784,8 @@ Tooltip_LapotronChip_00=正在制作中
 Tooltip_LapotronChip_01=可以用于迅速搭建基础基地
 Tooltip_LapotronChip_Casing=任意放射硅岩合金机械方块
 
+gtnl.recipe.ExtremeExtremeEntityCrusherRecipes=极·工业屠宰场
+
 NameNeutroniumWireCutting=中子丝线切割机
 NeutroniumWireCuttingRecipeType=切割机
 Tooltip_NeutroniumWireCutting_00=每级玻璃等级额外提供5%%的加速和耗电减免(乘算叠加)

@@ -5,14 +5,19 @@ import java.util.Comparator;
 
 import net.minecraft.util.StatCollector;
 
+import com.science.gtnl.Utils.recipes.BloodSoulFrontend;
+import com.science.gtnl.Utils.recipes.ExtremeExtremeEntityCrusherFrontend;
+import com.science.gtnl.Utils.recipes.FallingTowerFrontend;
+import com.science.gtnl.Utils.recipes.GeneralFrontend;
+import com.science.gtnl.Utils.recipes.IndustrialInfusionCraftingRecipesFrontend;
+import com.science.gtnl.Utils.recipes.IsaMillTierKey;
+import com.science.gtnl.Utils.recipes.NaquadahReactorSpecialValue;
+import com.science.gtnl.Utils.recipes.RealArtificialStarSpecialValue;
+import com.science.gtnl.Utils.recipes.ResourceCollectionModuleTierKey;
+import com.science.gtnl.Utils.recipes.SpaceMinerFrontend;
+import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
+import com.science.gtnl.Utils.recipes.SteamGateAssemblerFrontend;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.recipe.Special.BloodSoulFrontend;
-import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
-import com.science.gtnl.common.recipe.Special.NaquadahReactorSpecialValue;
-import com.science.gtnl.common.recipe.Special.RealArtificialStarSpecialValue;
-import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
-import com.science.gtnl.common.recipe.Special.SpaceMinerFrontend;
-import com.science.gtnl.common.recipe.Special.SteamFusionTierKey;
 
 import goodgenerator.api.recipe.ComponentAssemblyLineFrontend;
 import goodgenerator.client.GUI.GGUITextures;
@@ -490,5 +495,16 @@ public class RecipeRegister {
         .maxIO(6, 1, 1, 0)
         .disableRegisterNEI()
         .disableOptimize()
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> ExtremeExtremeEntityCrusherRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.ExtremeExtremeEntityCrusherRecipes")
+        .maxIO(1, 36, 0, 1)
+        .progressBar(GTUITextures.PROGRESSBAR_COMPRESS)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.PrimitiveDistillationTower.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .frontend(ExtremeExtremeEntityCrusherFrontend::new)
         .build();
 }
