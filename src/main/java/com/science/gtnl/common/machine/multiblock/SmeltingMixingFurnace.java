@@ -251,6 +251,15 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
+
+        ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
+        for (ItemStack item : getAllStoredInputs()) {
+            if (item != null && item.isItemEqual(requiredItem)) {
+                hasRequiredItem = true;
+                break;
+            }
+        }
+
         if (this.getRecipeMap() == RecipeMaps.plasmaForgeRecipes) {
             if (!hasRequiredItem) {
                 return CheckRecipeResultRegistry.NO_RECIPE;

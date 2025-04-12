@@ -406,6 +406,7 @@ public class RecipeRegister {
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.SteamGateAssembler.get(1))
                 .setMaxRecipesPerPage(1))
+        .disableOptimize()
         .frontend(SteamGateAssemblerFrontend::new)
         .build();
 
@@ -414,6 +415,7 @@ public class RecipeRegister {
         .maxIO(1, 0, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_2_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamCactusWonder.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> SteamManufacturerRecipes = RecipeMapBuilder
@@ -421,6 +423,7 @@ public class RecipeRegister {
         .maxIO(9, 1, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamManufacturer.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> SteamCarpenterRecipes = RecipeMapBuilder
@@ -428,12 +431,14 @@ public class RecipeRegister {
         .maxIO(2, 2, 0, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamCarpenter.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> LavaMakerRecipes = RecipeMapBuilder.of("gtnl.recipe.LavaMaker")
         .maxIO(1, 0, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_COMPRESS_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamLavaMaker.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> SteamWoodcutterRecipes = RecipeMapBuilder
@@ -441,6 +446,7 @@ public class RecipeRegister {
         .maxIO(1, 3, 0, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamWoodcutter.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> SteamExtractinatorRecipes = RecipeMapBuilder
@@ -448,6 +454,7 @@ public class RecipeRegister {
         .maxIO(1, 6, 1, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamExtractinator.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> SteamFusionReactorRecipes = RecipeMapBuilder
@@ -459,6 +466,7 @@ public class RecipeRegister {
             Comparator
                 .<GTRecipe, Integer>comparing(recipe -> recipe.getMetadataOrDefault(SteamFusionTierKey.INSTANCE, 0))
                 .thenComparing(GTRecipe::compareTo))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> InfernalCockRecipes = RecipeMapBuilder
@@ -466,11 +474,21 @@ public class RecipeRegister {
         .maxIO(1, 1, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamInfernalCokeOven.get(1))))
+        .disableOptimize()
         .build();
 
     public static final RecipeMap<RecipeMapBackend> RockBreakerRecipes = RecipeMapBuilder
         .of("gtnl.recipe.RockBreakerRecipes")
         .maxIO(2, 1, 0, 0)
+        .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
+        .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamRockBreaker.get(1))))
+        .disableOptimize()
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> ConvertToCircuitAssembler = RecipeMapBuilder
+        .of("gtnl.recipe.ConvertToCircuitAssembler")
+        .maxIO(6, 1, 1, 0)
         .disableRegisterNEI()
+        .disableOptimize()
         .build();
 }

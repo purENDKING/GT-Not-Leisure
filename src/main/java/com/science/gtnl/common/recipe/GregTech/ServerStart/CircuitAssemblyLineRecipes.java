@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.recipe.BartWorksRecipeMaps;
 import bartworks.system.material.CircuitGeneration.CircuitImprintLoader;
@@ -22,27 +23,39 @@ import gregtech.api.util.GTRecipe;
 public class CircuitAssemblyLineRecipes implements IRecipePool {
 
     public static final ArrayListMultimap<NBTTagCompound, GTRecipe> recipeTagMap = ArrayListMultimap.create();
+
     private static final HashSet<GTRecipe> ORIGINAL_CAL_RECIPES = new HashSet<>();
     private static final HashSet<GTRecipe> MODIFIED_CAL_RECIPES = new HashSet<>();
+    private static final HashSet<GTRecipe> CONVERTED_CAL_RECIPES = new HashSet<>();
 
     @Override
     public void loadRecipes() {
         HashSet<GTRecipe> toRem = new HashSet<>();
         HashSet<GTRecipe> toAdd = new HashSet<>();
-        deleteCALRecipesAndTags();
+        deleteConvertedCALRecipes();
         rebuildCircuitAssemblerMap(toRem, toAdd);
+        exchangeRecipesInList(toRem, toAdd);
     }
 
-    private static void deleteCALRecipesAndTags() {
+    private static void deleteConvertedCALRecipes() {
         BartWorksRecipeMaps.circuitAssemblyLineRecipes.getBackend()
-            .clearRecipes();
+            .removeRecipes(CONVERTED_CAL_RECIPES);
         recipeTagMap.clear();
+        CONVERTED_CAL_RECIPES.clear();
     }
 
     private static void rebuildCircuitAssemblerMap(HashSet<GTRecipe> toRem, HashSet<GTRecipe> toAdd) {
         reAddOriginalRecipes();
-        RecipeMaps.circuitAssemblerRecipes.getAllRecipes()
+        RecipeRegister.ConvertToCircuitAssembler.getAllRecipes()
             .forEach(e -> handleCircuitRecipeRebuilding(e, toRem, toAdd));
+    }
+
+    private static void exchangeRecipesInList(HashSet<GTRecipe> toRem, HashSet<GTRecipe> toAdd) {
+        toAdd.forEach(RecipeMaps.circuitAssemblerRecipes::add);
+        RecipeMaps.circuitAssemblerRecipes.getBackend()
+            .removeRecipes(toRem);
+        ORIGINAL_CAL_RECIPES.addAll(toRem);
+        MODIFIED_CAL_RECIPES.addAll(toAdd);
     }
 
     private static void reAddOriginalRecipes() {
@@ -56,6 +69,8 @@ public class CircuitAssemblyLineRecipes implements IRecipePool {
     private static void handleCircuitRecipeRebuilding(GTRecipe circuitRecipe, HashSet<GTRecipe> toRem,
         HashSet<GTRecipe> toAdd) {
         ItemStack[] outputs = circuitRecipe.mOutputs;
+        if (outputs == null || outputs.length == 0 || outputs[0] == null) return;
+
         boolean isOrePass = isCircuitOreDict(outputs[0]);
         String unlocalizedName = outputs[0].getUnlocalizedName();
         if (isOrePass || unlocalizedName.contains("Circuit") || unlocalizedName.contains("circuit")) {
@@ -71,12 +86,32 @@ public class CircuitAssemblyLineRecipes implements IRecipePool {
                 ? FluidRegistry.getFluid("molten.mutatedlivingsolder")
                 : FluidRegistry.getFluid("molten.solderingalloy");
 
-            if (circuitRecipe.mFluidInputs[0].isFluidEqual(Materials.SolderingAlloy.getMolten(0))
-                || circuitRecipe.mFluidInputs[0].isFluidEqual(new FluidStack(solderIndalloy, 0))
-                || circuitRecipe.mFluidInputs[0].isFluidEqual(new FluidStack(solderUEV, 0))) {
+            FluidStack fluid = circuitRecipe.mFluidInputs != null && circuitRecipe.mFluidInputs.length > 0
+                ? circuitRecipe.mFluidInputs[0]
+                : null;
+
+            if (fluid != null && (fluid.isFluidEqual(Materials.SolderingAlloy.getMolten(0))
+                || fluid.isFluidEqual(new FluidStack(solderIndalloy, 0))
+                || fluid.isFluidEqual(new FluidStack(solderUEV, 0)))) {
+
                 GTRecipe newRecipe = CircuitImprintLoader.reBuildRecipe(circuitRecipe);
-                if (newRecipe != null) BartWorksRecipeMaps.circuitAssemblyLineRecipes.addRecipe(newRecipe);
-            } else if (circuitRecipe.mEUt > TierEU.IV) toRem.add(circuitRecipe);
+                if (newRecipe != null) {
+                    BartWorksRecipeMaps.circuitAssemblyLineRecipes.addRecipe(newRecipe);
+                    CONVERTED_CAL_RECIPES.add(newRecipe);
+                    addCutoffRecipeToSets(toRem, toAdd, circuitRecipe);
+                }
+
+            } else if (circuitRecipe.mEUt > TierEU.IV) {
+                toRem.add(circuitRecipe);
+            }
+        }
+    }
+
+    private static void addCutoffRecipeToSets(HashSet<GTRecipe> toRem, HashSet<GTRecipe> toAdd,
+        GTRecipe circuitRecipe) {
+        if (circuitRecipe.mEUt > TierEU.IV) {
+            toRem.add(circuitRecipe);
+            toAdd.add(circuitRecipe);
         }
     }
 
