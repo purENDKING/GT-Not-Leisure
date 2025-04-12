@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import WayofTime.alchemicalWizardry.api.alchemy.AlchemyRecipe;

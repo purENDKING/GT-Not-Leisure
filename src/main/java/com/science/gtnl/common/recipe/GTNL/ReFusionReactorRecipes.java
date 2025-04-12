@@ -6,8 +6,8 @@ import static gregtech.api.util.GTModHandler.getModItem;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.recipe.RecipeMap;

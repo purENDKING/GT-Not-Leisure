@@ -6,9 +6,9 @@ import static gregtech.api.util.GTRecipeConstants.PRECISE_ASSEMBLER_CASING_TIER;
 
 import net.minecraft.item.ItemStack;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;

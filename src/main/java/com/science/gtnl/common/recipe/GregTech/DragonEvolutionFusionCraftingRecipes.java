@@ -4,8 +4,8 @@ import static gregtech.api.enums.Mods.DraconicEvolution;
 import static gregtech.api.enums.Mods.GalacticraftAmunRa;
 import static gregtech.api.util.GTRecipeConstants.DEFC_CASING_TIER;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

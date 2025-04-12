@@ -4,7 +4,7 @@ import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.util.GTModHandler.getModItem;
 
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.enums.GTValues;

@@ -1,8 +1,8 @@
 package com.science.gtnl.common.recipe.GregTech.ServerStart;
 
 import com.science.gtnl.Utils.enums.TierEU;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;

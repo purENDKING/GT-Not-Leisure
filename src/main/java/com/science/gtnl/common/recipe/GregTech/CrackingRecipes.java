@@ -1,8 +1,8 @@
 package com.science.gtnl.common.recipe.GregTech;
 
 import com.science.gtnl.Utils.enums.TierEU;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;

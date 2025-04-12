@@ -6,8 +6,8 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.science.gtnl.Utils.enums.TierEU;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

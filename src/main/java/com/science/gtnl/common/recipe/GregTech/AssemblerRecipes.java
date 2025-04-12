@@ -13,11 +13,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;

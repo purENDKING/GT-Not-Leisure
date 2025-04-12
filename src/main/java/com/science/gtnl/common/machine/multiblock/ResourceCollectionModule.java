@@ -31,9 +31,9 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DynamicTextWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.recipes.ResourceCollectionModuleTierKey;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.RecipeRegister;
-import com.science.gtnl.common.recipe.Special.ResourceCollectionModuleTierKey;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUITextures;

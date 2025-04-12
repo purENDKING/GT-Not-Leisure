@@ -1,6 +1,6 @@
-package com.science.gtnl.common.recipe;
+package com.science.gtnl.Utils.recipes;
 
-import static com.science.gtnl.common.recipe.CustomCraftRecipe.areStacksEqual;
+import static com.science.gtnl.Utils.recipes.CustomCraftRecipe.areStacksEqual;
 import static gregtech.api.util.GTUtility.areFluidsEqual;
 
 import java.util.ArrayList;

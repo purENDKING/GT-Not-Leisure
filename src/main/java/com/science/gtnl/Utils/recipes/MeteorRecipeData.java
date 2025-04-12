@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Special;
+package com.science.gtnl.Utils.recipes;
 
 import java.util.ArrayList;
 import java.util.Comparator;

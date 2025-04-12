@@ -8,8 +8,8 @@ import java.util.UUID;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;

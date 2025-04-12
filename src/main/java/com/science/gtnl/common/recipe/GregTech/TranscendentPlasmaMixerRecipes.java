@@ -2,9 +2,9 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;

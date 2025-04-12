@@ -6,9 +6,9 @@ import static gtPlusPlus.core.block.ModBlocks.blockCactusCoke;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
+import com.science.gtnl.Utils.recipes.SteamAmountSpecialValue;
 import com.science.gtnl.common.recipe.RecipeRegister;
-import com.science.gtnl.common.recipe.Special.SteamAmountSpecialValue;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.recipe.RecipeMap;

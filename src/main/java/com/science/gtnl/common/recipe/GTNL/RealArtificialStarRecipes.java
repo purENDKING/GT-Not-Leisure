@@ -5,7 +5,7 @@ import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.GTNLItemList.*;
 import static com.science.gtnl.config.MainConfig.*;
 
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.enums.GTValues;

@@ -10,7 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.enums.GTValues;

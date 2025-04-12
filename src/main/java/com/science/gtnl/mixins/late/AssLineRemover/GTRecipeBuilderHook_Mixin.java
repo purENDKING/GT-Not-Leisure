@@ -1,6 +1,6 @@
 package com.science.gtnl.mixins.late.AssLineRemover;
 
-import static com.science.gtnl.common.recipe.Special.AssLineRecipeHook.RECIPE_TO_REMOVE;
+import static com.science.gtnl.Utils.recipes.AssLineRecipeHook.RECIPE_TO_REMOVE;
 import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;
 import static gregtech.api.util.GTRecipeConstants.RESEARCH_TIME;
 
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.science.gtnl.common.recipe.Special.AssLineRecipeHook;
+import com.science.gtnl.Utils.recipes.AssLineRecipeHook;
 
 import cpw.mods.fml.common.registry.GameData;
 import gregtech.api.interfaces.IRecipeMap;

@@ -6,7 +6,7 @@ import static gregtech.api.enums.Materials.Tritanium;
 import static gregtech.api.util.GTRecipeConstants.*;
 
 import com.dreammaster.gthandler.CustomItemList;
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 
 import bartworks.API.recipe.BartWorksRecipeMaps;
 import gregtech.api.enums.GTValues;

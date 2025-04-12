@@ -22,6 +22,7 @@ import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.recipe.GTNL.ExtremeExtremeEntityCrusherRecipes;
 import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.LazyStaticsInitLoader;
@@ -41,6 +42,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import gregtech.api.enums.Mods;
 
 // after
 @Mod(
@@ -147,6 +149,9 @@ public class ScienceNotLeisure {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
+        if (Mods.MobsInfo.isModLoaded()) {
+            MinecraftForge.EVENT_BUS.register(new ExtremeExtremeEntityCrusherRecipes());
+        }
 
         if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
             && ProgrammableHatches.isModLoaded()

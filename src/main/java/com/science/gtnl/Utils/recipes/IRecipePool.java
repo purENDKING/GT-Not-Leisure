@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe;
+package com.science.gtnl.Utils.recipes;
 
 public interface IRecipePool {
 

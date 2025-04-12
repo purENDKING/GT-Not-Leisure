@@ -22,9 +22,9 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.Utils.recipes.IsaMillTierKey;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
-import com.science.gtnl.common.recipe.Special.IsaMillTierKey;
 import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;

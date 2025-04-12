@@ -3,7 +3,7 @@ package com.science.gtnl.common.recipe.GregTech;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

@@ -4,9 +4,9 @@ import static gregtech.api.enums.Mods.*;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.system.material.CircuitGeneration.BWMetaItems;

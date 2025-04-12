@@ -2,8 +2,8 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import static gregtech.api.util.GTRecipeConstants.COIL_HEAT;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.item.items.MilledOre;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;

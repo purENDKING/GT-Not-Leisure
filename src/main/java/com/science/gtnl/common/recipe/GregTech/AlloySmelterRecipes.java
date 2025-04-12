@@ -3,9 +3,9 @@ package com.science.gtnl.common.recipe.GregTech;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

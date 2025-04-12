@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe;
+package com.science.gtnl.Utils.recipes;
 
 import java.util.List;
 import java.util.function.Supplier;

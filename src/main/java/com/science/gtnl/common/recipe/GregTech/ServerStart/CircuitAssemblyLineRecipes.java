@@ -9,7 +9,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.recipe.BartWorksRecipeMaps;

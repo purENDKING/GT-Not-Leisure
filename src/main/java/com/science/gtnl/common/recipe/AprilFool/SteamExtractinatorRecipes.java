@@ -3,8 +3,8 @@ package com.science.gtnl.common.recipe.AprilFool;
 import static gregtech.api.enums.GTValues.RA;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import gregtech.api.enums.Materials;

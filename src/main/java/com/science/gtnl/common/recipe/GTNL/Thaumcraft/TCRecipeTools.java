@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Thaumcraft;
+package com.science.gtnl.common.recipe.GTNL.Thaumcraft;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,6 +11,7 @@ import java.util.Map;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
@@ -54,6 +55,8 @@ import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
 import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
+import com.science.gtnl.common.recipe.GTNL.Thaumcraft.InfusionCraftingRecipesPool;
+import com.science.gtnl.common.recipe.GTNL.Thaumcraft.ShapedArcaneCraftingRecipesPool;
 import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
@@ -88,10 +91,7 @@ import com.science.gtnl.common.recipe.GregTech.SpaceAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
-import com.science.gtnl.common.recipe.IRecipePool;
 import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRecipes;
-import com.science.gtnl.common.recipe.Thaumcraft.InfusionCraftingRecipesPool;
-import com.science.gtnl.common.recipe.Thaumcraft.ShapedArcaneCraftingRecipesPool;
 
 import WayofTime.alchemicalWizardry.common.summoning.meteor.MeteorRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe;
+package com.science.gtnl.Utils.recipes;
 
 import static com.science.gtnl.ScienceNotLeisure.LOG;
 import static gregtech.api.enums.GTValues.W;

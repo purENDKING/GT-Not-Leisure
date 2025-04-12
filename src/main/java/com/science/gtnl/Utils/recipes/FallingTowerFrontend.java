@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe;
+package com.science.gtnl.Utils.recipes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,31 +26,32 @@ import gregtech.common.gui.modularui.UIHelper;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class SteamGateAssemblerFrontend extends RecipeMapFrontend {
+public class FallingTowerFrontend extends RecipeMapFrontend {
 
-    public SteamGateAssemblerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
+    public FallingTowerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
-            uiPropertiesBuilder.progressBarPos(new Pos2d(124, 175))
+            uiPropertiesBuilder.progressBarPos(new Pos2d(26, 7))
                 .logoPos(new Pos2d(150, 200)),
-            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 170)));
+            neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 170))
+                .neiSpecialInfoFormatter(new BloodSoulFrontend.BloodSoulSpecialValueFormatter()));
     }
 
     @Override
     public List<Pos2d> getItemInputPositions(int itemInputCount) {
         ArrayList<Pos2d> positions = new ArrayList<>();
-        for (int j = 0; j < 9; j++) {
-            for (int i = 0; i < 9; i++) {
-                positions.add(new Pos2d((6 + 18 * i), (7 + 18 * j)));
-            }
-        }
+        positions.add(new Pos2d(6, 7));
         return positions;
     }
 
     @Override
     public List<Pos2d> getItemOutputPositions(int itemOutputCount) {
         ArrayList<Pos2d> positions = new ArrayList<>();
-        positions.add(new Pos2d(150, 175));
+        for (int j = 0; j < 9; j++) {
+            for (int i = 0; i < 9; i++) {
+                positions.add(new Pos2d((6 + 18 * i), (25 + 18 * j)));
+            }
+        }
         return positions;
     }
 

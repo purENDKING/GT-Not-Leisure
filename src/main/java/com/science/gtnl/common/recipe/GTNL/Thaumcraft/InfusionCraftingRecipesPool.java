@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Thaumcraft;
+package com.science.gtnl.common.recipe.GTNL.Thaumcraft;
 
 import static com.science.gtnl.Utils.enums.TierEU.RECIPE_LV;
 import static fox.spiteful.avaritia.items.LudicrousItems.bigPearl;
@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.science.gtnl.Utils.Utils;
-import com.science.gtnl.common.recipe.IRecipePool;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import cpw.mods.fml.common.registry.GameRegistry;

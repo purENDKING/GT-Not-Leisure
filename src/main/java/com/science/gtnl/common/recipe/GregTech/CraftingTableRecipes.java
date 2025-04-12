@@ -9,8 +9,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.dreammaster.gthandler.CustomItemList;
+import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.recipe.IRecipePool;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;

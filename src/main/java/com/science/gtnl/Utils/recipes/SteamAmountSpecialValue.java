@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.Special;
+package com.science.gtnl.Utils.recipes;
 
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static kubatech.api.Variables.numberFormat;
