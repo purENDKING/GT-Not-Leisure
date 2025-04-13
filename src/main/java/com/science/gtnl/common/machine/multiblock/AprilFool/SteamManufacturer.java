@@ -174,7 +174,7 @@ public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> 
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

@@ -167,7 +167,7 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

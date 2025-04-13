@@ -135,7 +135,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

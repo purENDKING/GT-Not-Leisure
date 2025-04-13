@@ -184,7 +184,7 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

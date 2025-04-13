@@ -198,7 +198,7 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override

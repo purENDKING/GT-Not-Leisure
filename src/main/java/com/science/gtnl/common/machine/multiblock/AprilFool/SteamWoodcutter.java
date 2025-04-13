@@ -152,7 +152,7 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }
-        };
+        }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
     @Override
