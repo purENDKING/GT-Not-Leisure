@@ -31,7 +31,7 @@ public class SpaceAssemblerRecipes implements IRecipePool {
                 ItemList.Circuit_Chip_CrystalCPU.get(2),
                 GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Tritanium, 8),
                 GTOreDictUnificator.get(OrePrefixes.bolt, Materials.HSSS, 8),
-                GTOreDictUnificator.get(OrePrefixes.gemExquisite, Materials.Glass, 1),
+                GTOreDictUnificator.get(OrePrefixes.gemExquisite, Materials.Diamond, 1),
                 MaterialsAlloy.HASTELLOY_C276.getPlate(2))
             .fluidInputs(Materials.Sunnarium.getMolten(10), Materials.ElectrumFlux.getMolten(288))
             .itemOutputs(ItemList.Optically_Compatible_Memory.get(1))
