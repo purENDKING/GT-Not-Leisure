@@ -237,7 +237,7 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return OverclockCalculator.ofNoOverclock(recipe)
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
                     .setEUtDiscount(0.6 * tierMachine)
                     .setSpeedBoost(1.0 / 20.0 / tierMachine);
             }

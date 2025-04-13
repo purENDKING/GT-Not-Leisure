@@ -208,7 +208,7 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
             @NotNull
             @Override
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(0);
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount));
             }
 
             @NotNull

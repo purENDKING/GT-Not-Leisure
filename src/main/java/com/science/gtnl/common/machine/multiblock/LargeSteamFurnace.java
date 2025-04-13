@@ -217,7 +217,7 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return OverclockCalculator.ofNoOverclock(recipe)
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
                     .setEUtDiscount(0.5 * tierMachine)
                     .setSpeedBoost(1.0 / 10.0 / tierMachine);
             }

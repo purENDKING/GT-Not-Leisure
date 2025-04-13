@@ -210,7 +210,7 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return OverclockCalculator.ofNoOverclock(recipe)
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
                     .setSpeedBoost(1f);
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

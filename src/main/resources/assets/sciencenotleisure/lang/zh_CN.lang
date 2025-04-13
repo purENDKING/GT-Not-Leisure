@@ -1166,6 +1166,8 @@ PTARRecipes.1=精灵不喜欢面包。
 MachineTierTooltip=机器等级: 
 ParallelTooltip=并行: 
 HighPressureTooltipNotice=高压模式下处理速度和蒸汽消耗翻倍
+Info_SteamMachine_00=超频次数
+
 StructureTooComplex=结构太复杂了！
 BLUE_PRINT_INFO=请参考§9Structure§1Lib§7全息投影，构建主体结构
 textUseBlueprint=用§9蓝§b图§r预览

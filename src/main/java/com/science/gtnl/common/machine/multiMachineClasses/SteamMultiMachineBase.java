@@ -10,6 +10,7 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.filterValidMTEs;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
+import static net.minecraft.util.StatCollector.translateToLocal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -31,12 +33,19 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.drawable.ItemDrawable;
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
+import com.gtnewhorizons.modularui.api.math.Alignment;
+import com.gtnewhorizons.modularui.api.math.Color;
+import com.gtnewhorizons.modularui.api.math.Size;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
@@ -44,6 +53,7 @@ import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.GregTechAPI;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.metatileentity.IItemLockable;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -71,6 +81,8 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> extends MTESteamMultiBase<T> {
 
+    private static final int OC_WINDOW_ID = 11;
+    protected static int RecipeOcCount = 0;
     protected int tierAdvancedCasing = -1;
     protected int tierBrickCasing = -1;
     protected int tierPlatedCasing = -1;
@@ -647,12 +659,29 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
 
     @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
-        super.addUIWidgets(builder, buildContext);
+        buildContext.addSyncedWindow(OC_WINDOW_ID, this::createRecipeOcCountWindow);
         builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamCapacity, val -> uiSteamCapacity = val));
         builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStored, val -> uiSteamStored = val));
         builder.widget(
             new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStoredOfAnyType, val -> uiSteamStoredOfAllTypes = val));
 
+        builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
+            if (!widget.isClient()) {
+                widget.getContext()
+                    .openSyncedWindow(OC_WINDOW_ID);
+            }
+        })
+            .setPlayClickSound(true)
+            .setBackground(() -> {
+                List<UITexture> ret = new ArrayList<>();
+                ret.add(GTUITextures.BUTTON_STANDARD);
+                ret.add(GTUITextures.OVERLAY_BUTTON_BATCH_MODE_ON);
+                return ret.toArray(new IDrawable[0]);
+            })
+            .addTooltip(translateToLocal("Info_SteamMachine_00"))
+            .setTooltipShowUpDelay(TOOLTIP_DELAY)
+            .setPos(174, 112)
+            .setSize(16, 16));
         builder.widget(
             new DrawableWidget().setDrawable(STEAM_GAUGE_BG)
                 .dynamicTooltip(() -> {
@@ -681,6 +710,46 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             new ItemDrawable(GTNLItemList.FakeItemSiren.get(1)).asWidget()
                 .setPos(-64 + 21 - 7, 100 - 20)
                 .setEnabled(w -> uiSteamStored == 0));
+
+        super.addUIWidgets(builder, buildContext);
+    }
+
+    protected ModularWindow createRecipeOcCountWindow(final EntityPlayer player) {
+        final int WIDTH = 158;
+        final int HEIGHT = 52;
+        final int PARENT_WIDTH = getGUIWidth();
+        final int PARENT_HEIGHT = getGUIHeight();
+        ModularWindow.Builder builder = ModularWindow.builder(WIDTH, HEIGHT);
+        builder.setBackground(GTUITextures.BACKGROUND_SINGLEBLOCK_DEFAULT);
+        builder.setGuiTint(getGUIColorization());
+        builder.setDraggable(true);
+        builder.setPos(
+            (size, window) -> Alignment.Center.getAlignedPos(size, new Size(PARENT_WIDTH, PARENT_HEIGHT))
+                .add(
+                    Alignment.BottomRight.getAlignedPos(new Size(PARENT_WIDTH, PARENT_HEIGHT), new Size(WIDTH, HEIGHT))
+                        .add(WIDTH - 3, 0)
+                        .subtract(0, 10)));
+        builder.widget(
+            TextWidget.localised("Info_SteamMachine_00")
+                .setPos(3, 4)
+                .setSize(150, 20))
+            .widget(
+                new NumericWidget().setSetter(val -> RecipeOcCount = (int) Math.min(4, val))
+                    .setGetter(() -> Math.min(4, RecipeOcCount))
+                    .setBounds(1, Integer.MAX_VALUE)
+                    .setDefaultValue(1)
+                    .setScrollValues(1, 4, 64)
+                    .setTextAlignment(Alignment.Center)
+                    .setTextColor(Color.WHITE.normal)
+                    .setSize(150, 18)
+                    .setPos(4, 25)
+                    .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD)
+                    .attachSyncer(
+                        new FakeSyncWidget.IntegerSyncer(
+                            () -> Math.min(4, RecipeOcCount),
+                            (val) -> RecipeOcCount = Math.min(4, val)),
+                        builder));
+        return builder.build();
     }
 
     protected static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamBigInput(
