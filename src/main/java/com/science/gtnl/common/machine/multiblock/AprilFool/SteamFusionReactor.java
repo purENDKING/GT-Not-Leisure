@@ -26,9 +26,6 @@ import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import gregtech.api.enums.SoundResource;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -144,12 +141,6 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
     }
 
     @Override
-    public boolean onRunningTick(ItemStack aStack) {
-        doActivitySound(getActivitySoundLoop());
-        return super.onRunningTick(aStack);
-    }
-
-    @Override
     public int getTierRecipes() {
         return 14;
     }
@@ -158,12 +149,6 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
     public int getMaxParallelRecipes() {
         // Max call to prevent seeing -16 parallels in waila for unformed multi
         return 1;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    protected SoundResource getActivitySoundLoop() {
-        return SoundResource.GT_MACHINES_FUSION_LOOP;
     }
 
     @Override
