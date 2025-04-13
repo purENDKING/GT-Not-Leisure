@@ -101,7 +101,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     implements ISurvivalConstructable {
 
     private UUID ownerUUID;
-    private BigInteger costingEU = BigInteger.ZERO;
     private boolean wirelessMode = false;
     private int ParallelTier;
     private int mCasing;
@@ -256,7 +255,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         int totalMaxProgressTime = 0; // 累加的最大时间
         int powerParallel = 0;
         int CircuitOC = -1; // 电路板限制超频次数
-        costingEU = BigInteger.ZERO;
+        BigInteger costingEU = BigInteger.ZERO;
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
 
         for (ItemStack item : getAllStoredInputs()) {
@@ -392,28 +391,38 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 int overclockCount = 0;
                 long energyRatio = energyEU / recipe.mEUt; // EnergyEU 与 recipe.mEUt 的比值
                 long threshold = 1; // 初始阈值是 4^0 = 1
+                int adjustedTime;
+                long adjustedPower;
 
-                // 计算最大可能的超频次数
-                while (energyRatio >= threshold * 4) { // 判断是否可以进行下一次超频
-                    overclockCount++;
-                    threshold *= 4; // 阈值更新为 4^n
-                }
+                if (wirelessMode) {
+                    adjustedTime = minRecipeTime;
+                    adjustedPower = (long) recipe.mEUt * (recipe.mDuration / adjustedTime);
+                    while (adjustedPower > Integer.MAX_VALUE) {
+                        adjustedPower /= 4;
+                        adjustedTime *= 4;
+                    }
+                } else {
 
-                if (wirelessMode) overclockCount = Integer.MAX_VALUE;
+                    // 计算最大可能的超频次数
+                    while (energyRatio >= threshold * 4) { // 判断是否可以进行下一次超频
+                        overclockCount++;
+                        threshold *= 4; // 阈值更新为 4^n
+                    }
 
-                if (CircuitOC >= 0) {
-                    overclockCount = Math.min(overclockCount, CircuitOC);
-                }
+                    if (CircuitOC >= 0) {
+                        overclockCount = Math.min(overclockCount, CircuitOC);
+                    }
 
-                // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
-                long adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount);
-                int adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
+                    // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
+                    adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount);
+                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
 
-                // 检查功耗是否超过 int 的最大值或时间是否小于 1
-                while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
-                    overclockCount--; // 减少超频次数
-                    adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
-                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
+                    // 检查功耗是否超过 int 的最大值或时间是否小于 1
+                    while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
+                        overclockCount--; // 减少超频次数
+                        adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
+                        adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
+                    }
                 }
 
                 // 确保时间最小为 1
@@ -646,7 +655,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                 // 消耗物品
                 for (ItemStack input : recipe.mInputs) {
-                    consumeItems(input, input.stackSize * parallel, allInputs); // 使用自定义方法
+                    consumeItems(input, (long) input.stackSize * parallel, allInputs); // 使用自定义方法
                 }
 
                 // 消耗流体
@@ -673,7 +682,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 return CheckRecipeResultRegistry.insufficientPower(costingEU.longValue());
             }
             this.lEUt = 0;
-            this.mMaxProgresstime = 20;
+            this.mMaxProgresstime = minRecipeTime;
         } else {
             this.lEUt = -totalNeedEUt;
             this.mMaxProgresstime = totalMaxProgressTime;
@@ -765,15 +774,23 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     }
 
     // 自定义方法：消耗物品
-    private void consumeItems(ItemStack required, int amount, ArrayList<ItemStack> allInputs) {
-        int remaining = amount;
+    private void consumeItems(ItemStack required, long amount, ArrayList<ItemStack> allInputs) {
+        long remaining = amount;
 
         // 优先消耗完全匹配的物品
         for (ItemStack input : allInputs) {
             if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
-                int toConsume = Math.min(input.stackSize, remaining);
-                input.stackSize -= toConsume;
-                remaining -= toConsume;
+                int available = input.stackSize;
+
+                int toConsumeNow = (int) Math.min(available, Math.min(remaining, Integer.MAX_VALUE));
+
+                input.stackSize -= toConsumeNow;
+                remaining -= toConsumeNow;
+
+                if (input.stackSize <= 0) {
+                    input.stackSize = 0;
+                }
+
                 if (remaining <= 0) {
                     return; // 消耗完毕，直接返回
                 }
@@ -795,9 +812,18 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                         // 在输入槽位中查找匹配的物品
                         for (ItemStack input : allInputs) {
                             if (input != null && OreDictionary.itemMatches(oreDictItem, input, false)) {
-                                int toConsume = Math.min(input.stackSize, remaining);
-                                input.stackSize -= toConsume;
-                                remaining -= toConsume;
+
+                                int available = input.stackSize;
+
+                                int toConsumeNow = (int) Math.min(available, Math.min(remaining, Integer.MAX_VALUE));
+
+                                input.stackSize -= toConsumeNow;
+                                remaining -= toConsumeNow;
+
+                                if (input.stackSize <= 0) {
+                                    input.stackSize = 0;
+                                }
+
                                 if (remaining <= 0) {
                                     return; // 消耗完毕，直接返回
                                 }
@@ -827,7 +853,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 }
 
                 if (remaining <= 0) {
-                    break;
+                    return;
                 }
             }
         }
@@ -931,7 +957,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     return false;
                 }
             }
-            if (mEnergyHatches.size() > 1 && getMaxInputAmps() > 64) return false;
+            if (mEnergyHatches.size() + mExoticEnergyHatches.size() > 1 || getMaxInputAmps() > 64) return false;
         }
 
         if (ParallelTier >= 12 && mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) {

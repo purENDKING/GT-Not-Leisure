@@ -22,8 +22,15 @@ dependencies {
     implementation('com.github.GTNewHorizons:EnderIO:2.8.22:dev')
     implementation('com.github.GTNewHorizons:ThaumicTinkerer:2.10.2:dev')
     implementation('com.google.auto.value:auto-value-annotations:1.10.1')
+    implementation rfg.deobf(files("libs/NHUtilities-1.5.3.jar"))
     annotationProcessor('com.google.auto.value:auto-value:1.10.1')
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:BlockRenderer6343:1.2.16:dev")
+    implementation('com.github.GTNewHorizons:Avaritiaddons:1.8.4-GTNH:dev')
+    implementation('com.github.GTNewHorizons:Eternal-Singularity:1.2.1:dev')
+    implementation('com.github.GTNewHorizons:Universal-Singularities:8.8.0:dev')
+    implementation('com.github.GTNewHorizons:Jabba:1.4.6:dev')
+    implementation('com.github.GTNewHorizons:ThaumicTinkerer:2.10.2:dev')
+    implementation('com.github.GTNewHorizons:WarpTheory:1.4.3-GTNH:dev')
 }
 
 configurations.all {
