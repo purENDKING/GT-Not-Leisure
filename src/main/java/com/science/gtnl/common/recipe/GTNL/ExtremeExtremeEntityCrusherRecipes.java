@@ -65,7 +65,7 @@ public class ExtremeExtremeEntityCrusherRecipes {
             int chance = drop.chance;
 
             if (output.isItemEqual(new ItemStack(ModItems.mobSoul))) {
-                chance = 50;
+                chance = 10;
             }
 
             outputs.add(output);
