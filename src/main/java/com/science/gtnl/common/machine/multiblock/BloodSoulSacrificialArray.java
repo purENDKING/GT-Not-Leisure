@@ -94,7 +94,11 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
         if (ParallelTier <= 1) {
             return 8;
         } else {
-            return (int) Math.pow(4, ParallelTier - 2) * 4;
+            if (this.getRecipeMap() == RecipeRegister.FallingTowerRecipes) {
+                return (int) Math.pow(4, ParallelTier - 2) / 16;
+            } else {
+                return (int) Math.pow(4, ParallelTier - 2) * 4;
+            }
         }
     }
 

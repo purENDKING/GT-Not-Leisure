@@ -33,8 +33,12 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -94,12 +98,16 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.IDualInputInventory;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 import tectech.thing.casing.BlockGTCasingsTT;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssemblyLine>
     implements ISurvivalConstructable {
 
+    private static final String ZERO_STRING = "0";
+    private String costingEUText = ZERO_STRING;
     private UUID ownerUUID;
     private boolean wirelessMode = false;
     private int ParallelTier;
@@ -255,6 +263,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         int totalMaxProgressTime = 0; // 累加的最大时间
         int powerParallel = 0;
         int CircuitOC = -1; // 电路板限制超频次数
+        costingEUText = ZERO_STRING;
         BigInteger costingEU = BigInteger.ZERO;
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
 
@@ -681,6 +690,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             if (!addEUToGlobalEnergyMap(ownerUUID, costingEU.multiply(NEGATIVE_ONE))) {
                 return CheckRecipeResultRegistry.insufficientPower(costingEU.longValue());
             }
+            costingEUText = GTUtility.formatNumbers(costingEU);
             this.lEUt = 0;
             this.mMaxProgresstime = minRecipeTime;
         } else {
@@ -1219,6 +1229,34 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                         new FakeSyncWidget.IntegerSyncer(() -> minRecipeTime, (val) -> minRecipeTime = val),
                         builder));
         return builder.build();
+    }
+
+    @Override
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+        int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+        final IGregTechTileEntity tileEntity = getBaseMetaTileEntity();
+        if (tileEntity != null) {
+            tag.setBoolean("wirelessMode", wirelessMode);
+            if (wirelessMode) tag.setString("costingEUText", costingEUText);
+        }
+    }
+
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+        IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        final NBTTagCompound tag = accessor.getNBTData();
+        if (tag.getBoolean("wirelessMode")) {
+            currentTip.add(EnumChatFormatting.LIGHT_PURPLE + TextLocalization.Waila_WirelessMode);
+            currentTip.add(
+                EnumChatFormatting.AQUA + TextLocalization.Waila_CurrentEuCost
+                    + EnumChatFormatting.RESET
+                    + ": "
+                    + EnumChatFormatting.GOLD
+                    + tag.getString("costingEUText")
+                    + EnumChatFormatting.RESET
+                    + " EU");
+        }
     }
 
 }
