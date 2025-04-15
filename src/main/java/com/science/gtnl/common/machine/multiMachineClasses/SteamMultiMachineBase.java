@@ -273,12 +273,14 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         super.saveNBTData(aNBT);
         aNBT.setInteger("tierMachine", tierMachine);
         aNBT.setInteger("mMode", machineMode);
+        aNBT.setInteger("recipeOcCount", RecipeOcCount);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         tierMachine = aNBT.getInteger("tierMachine");
+        RecipeOcCount = aNBT.getInteger("recipeOcCount");
     }
 
     @Override

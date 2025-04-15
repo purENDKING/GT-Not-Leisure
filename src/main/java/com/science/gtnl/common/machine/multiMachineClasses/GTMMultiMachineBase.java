@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -47,6 +48,18 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     @Override
     public float getSpeedBonus() {
         return 1;
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setInteger("parallelTier", ParallelTier);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        ParallelTier = aNBT.getInteger("parallelTier");
     }
 
     @Override

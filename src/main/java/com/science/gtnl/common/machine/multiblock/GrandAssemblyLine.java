@@ -687,10 +687,10 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
         // 设置总功率和最大时间
         if (wirelessMode) {
+            costingEUText = GTUtility.formatNumbers(costingEU);
             if (!addEUToGlobalEnergyMap(ownerUUID, costingEU.multiply(NEGATIVE_ONE))) {
                 return CheckRecipeResultRegistry.insufficientPower(costingEU.longValue());
             }
-            costingEUText = GTUtility.formatNumbers(costingEU);
             this.lEUt = 0;
             this.mMaxProgresstime = minRecipeTime;
         } else {
@@ -881,12 +881,16 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setBoolean("wirelessMode", wirelessMode);
+        aNBT.setInteger("parallelTier", ParallelTier);
+        aNBT.setInteger("minRecipeTime", minRecipeTime);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         wirelessMode = aNBT.getBoolean("wirelessMode");
+        ParallelTier = aNBT.getInteger("parallelTier");
+        minRecipeTime = aNBT.getInteger("minRecipeTime");
     }
 
     @Override

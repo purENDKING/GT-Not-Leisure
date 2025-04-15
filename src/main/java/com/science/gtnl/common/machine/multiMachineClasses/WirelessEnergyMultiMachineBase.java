@@ -65,12 +65,14 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setBoolean("wirelessMode", wirelessMode);
+        aNBT.setInteger("parallelTier", ParallelTier);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         wirelessMode = aNBT.getBoolean("wirelessMode");
+        ParallelTier = aNBT.getInteger("parallelTier");
     }
 
     @Override
