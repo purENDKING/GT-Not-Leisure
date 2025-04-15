@@ -357,6 +357,8 @@ public enum GTNLItemList implements IItemContainer {
     LargeSteamMixer,
     ElectricBlastFurnace,
 
+    MTEElectricImplosionCompressor,
+
     NanoPhagocytosisPlant,
     IntegratedAssemblyFacility,
     HighPressureSteamFusionReactor,

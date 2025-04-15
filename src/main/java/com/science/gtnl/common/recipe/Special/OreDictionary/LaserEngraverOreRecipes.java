@@ -65,6 +65,15 @@ public class LaserEngraverOreRecipes implements IOreRecipeRegistrator {
                     500,
                     250,
                     TierEU.RECIPE_IV);
+
+                recipeWithPurifiedWater(
+                    new ItemStack[] { GTNLItemList.NeutroniumWafer.get(1), GTUtility.copyAmount(0, aStack) },
+                    new ItemStack[] { GTUtility.copyAmountUnsafe(256, ItemList.Circuit_Wafer_ULPIC.get(1)) },
+                    Materials.Grade5PurifiedWater,
+                    Materials.Grade6PurifiedWater,
+                    50,
+                    25,
+                    TierEU.RECIPE_IV);
             }
             case "craftingLensYellow" -> {
 
@@ -75,15 +84,6 @@ public class LaserEngraverOreRecipes implements IOreRecipeRegistrator {
                     Materials.Grade6PurifiedWater,
                     500,
                     250,
-                    TierEU.RECIPE_IV);
-
-                recipeWithPurifiedWater(
-                    new ItemStack[] { GTNLItemList.NeutroniumWafer.get(1), GTUtility.copyAmount(0, aStack) },
-                    new ItemStack[] { GTUtility.copyAmountUnsafe(256, ItemList.Circuit_Wafer_ULPIC.get(1)) },
-                    Materials.Grade5PurifiedWater,
-                    Materials.Grade6PurifiedWater,
-                    50,
-                    25,
                     TierEU.RECIPE_IV);
 
             }

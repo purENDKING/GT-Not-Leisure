@@ -4,7 +4,9 @@ import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
+import com.science.gtnl.Mods;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.google.common.collect.ImmutableSet;
@@ -33,6 +35,7 @@ import com.science.gtnl.common.machine.multiblock.AdvancedCircuitAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.AprilFool.HighPressureSteamFusionReactor;
+import com.science.gtnl.common.machine.multiblock.AprilFool.MTEElectricImplosionCompressor;
 import com.science.gtnl.common.machine.multiblock.AprilFool.MegaSolarBoiler;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamCactusWonder;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamCarpenter;
@@ -168,6 +171,9 @@ import gregtech.common.covers.CoverSteamRegulator;
 import gregtech.common.covers.CoverSteamValve;
 import gtPlusPlus.api.objects.Logger;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MachineLoader {
 
@@ -726,6 +732,12 @@ public class MachineLoader {
             .set(new NanoPhagocytosisPlant(21129, "NanoPhagocytosisPlant", TextLocalization.NameNanoPhagocytosisPlant));
         addItemTooltip(GTNLItemList.NanoPhagocytosisPlant.get(1), AnimatedText.SNL_QYZG);
 
+        GTNLItemList.MTEElectricImplosionCompressor.set(
+            new MTEElectricImplosionCompressor(
+                21130,
+                "Electric Implosion Compressor",
+                "Electric Implosion Compressor"));
+
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
@@ -743,12 +755,16 @@ public class MachineLoader {
     }
 
     public static void registerMTEHatch() {
+        Set<Fluid> acceptedFluids = new HashSet<>();
+        acceptedFluids.add(FluidUtils.getFluidStack("fluidmana", 1).getFluid());
+
+        if (Mods.TwistSpaceTechnology.isModLoaded()) {
+            acceptedFluids.add(FluidUtils.getFluidStack("liquid mana", 1).getFluid());
+        }
 
         GTNLItemList.FluidManaInputHatch.set(
             new CustomFluidHatch(
-                ImmutableSet.of(
-                    FluidUtils.getFluidStack("fluidmana", 1)
-                        .getFluid()),
+                ImmutableSet.copyOf(acceptedFluids),
                 512000,
                 21501,
                 "Fluid Mana Input Hatch",
