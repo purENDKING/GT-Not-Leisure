@@ -424,7 +424,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
 
                 if (wirelessMode) {
                     adjustedTime = minRecipeTime;
-                    adjustedPower = (long) recipe.mEUt * (recipe.mDuration / adjustedTime);
+                    adjustedPower = Math.max(1, recipe.mEUt * (recipe.mDuration / adjustedTime));
                     while (adjustedPower > Integer.MAX_VALUE) {
                         adjustedPower /= 4;
                         adjustedTime *= 4;
@@ -442,14 +442,16 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                     }
 
                     // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
-                    adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount);
-                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
+                    adjustedPower = Math.max(1, recipe.mEUt * (long) Math.pow(4, overclockCount));
+                    adjustedTime = Math
+                        .max(1, recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount));
 
                     // 检查功耗是否超过 int 的最大值或时间是否小于 1
                     while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
                         overclockCount--; // 减少超频次数
                         adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
-                        adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
+                        adjustedTime = Math
+                            .max(1, recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount)); // 重新计算时间
                     }
                 }
 
