@@ -49,7 +49,7 @@ public class DragonEvolutionFusionCraftingRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputsUnsafe(
                 GTUtility.copyAmount(0, GTModHandler.getModItem(DraconicEvolution.ID, "draconicCore", 1)),
-                GTModHandler.getModItem(GalacticraftAmunRa.ID, "tile.baseBlockRock", 1, 14),
+                GTModHandler.getModItem(GalacticraftAmunRa.ID, "item.baseItem", 4, 26),
                 GTOreDictUnificator.get(OrePrefixes.gem, Materials.InfusedEntropy, 512),
                 GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Draconium, 16),
                 GTModHandler.getModItem(DraconicEvolution.ID, "awakenedCore", 8))

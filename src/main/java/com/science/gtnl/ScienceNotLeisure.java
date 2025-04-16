@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.science.gtnl.Utils.LanguageManager;
+import com.science.gtnl.Utils.LoginMessage;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
@@ -134,6 +135,9 @@ public class ScienceNotLeisure {
         MaterialLoader.load();
         LanguageManager.init();
         new RecipeLoaderRunnable().run();
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new LoginMessage());
 
         AEApi.instance()
             .registries()

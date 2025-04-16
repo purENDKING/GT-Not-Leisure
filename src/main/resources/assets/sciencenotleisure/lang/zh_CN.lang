@@ -1,9 +1,15 @@
 itemGroup.GTNotLeisureItem=GT不再业余: 物品
 itemGroup.GTNotLeisureMachine=GT不再业余: 机器
 itemGroup.GTNotLeisureBlock=GT不再业余: 方块
-itemGroup.ReAvaritia=无尽：重生
+itemGroup.ReAvaritia=无尽: 重生
 StructuralReconstructionPlan=结构代替计划
 AppliedEnergistics2=应用能源2
+
+Welcome_GTNL_00=你已安装GT Not Leisure!
+Welcome_GTNL_01=如果你是第一次安装这个模组，请仔细检查配置文件
+Welcome_GTNL_02=本模组添加了大量的机器和新的配方
+Welcome_GTNL_DeleteRecipe=配方移除已启用，注意部分配方可能与原版不一致
+Welcome_GTNL_Debug=GTNL Debug模式已启用
 
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
