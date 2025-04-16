@@ -49,7 +49,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
     version = Tags.VERSION,
     name = MODNAME,
     dependencies = "required-after:IC2;" + "required-after:structurelib;"
-        + "required-before:Avaritia;"
+        + "required-after:Avaritia;"
+        + "required-after:eternalsingularity;"
         + "required-after:AWWayofTime;"
         + "required-after:BloodArsenal;"
         + "required-after:modularui;"
