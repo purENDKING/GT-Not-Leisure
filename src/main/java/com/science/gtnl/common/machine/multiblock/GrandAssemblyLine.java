@@ -228,7 +228,6 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         // 第一步：初始化参数
         ItemStack controllerItem = getControllerSlot();
         this.ParallelTier = getParallelTier(controllerItem);
-        int limit = minRecipeTime;
         long energyEU = wirelessMode ? Integer.MAX_VALUE
             : GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
@@ -254,7 +253,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
         }
 
         // 执行配方处理逻辑
-        return processRecipeLogic(inputInventories, energyEU, maxParallel, limit);
+        return processRecipeLogic(inputInventories, energyEU, maxParallel, minRecipeTime);
     }
 
     private CheckRecipeResult processRecipeLogic(ArrayList<IDualInputInventory> inputInventories, long energyEU,
@@ -386,19 +385,39 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
             validRecipes.sort(Comparator.comparingInt(recipe -> recipe.mEUt));
 
             for (GTRecipe.RecipeAssemblyLine recipe : validRecipes) {
+                ItemStack[] inputItems;
+                FluidStack[] inputFluids;
+                ItemStack outputItem;
 
                 // 提取输入输出物品和流体
-                ItemStack[] inputItems = Arrays.stream(recipe.mInputs)
-                    .map(ItemStack::copy)
-                    .toArray(ItemStack[]::new);
-                FluidStack[] inputFluids = Arrays.stream(recipe.mFluidInputs)
-                    .map(FluidStack::copy)
-                    .toArray(FluidStack[]::new);
-                ItemStack outputItem = recipe.mOutput.copy();
+                try {
+                    inputItems = Arrays.stream(
+                        Objects.requireNonNull(recipe.mInputs, "Inputs is null: " + Arrays.toString(recipe.mInputs)))
+                        .map(Objects::requireNonNull)
+                        .map(ItemStack::copy)
+                        .toArray(ItemStack[]::new);
+
+                    inputFluids = Arrays
+                        .stream(
+                            Objects.requireNonNull(
+                                recipe.mFluidInputs,
+                                "FluidInputs is null: " + Arrays.toString(recipe.mFluidInputs)))
+                        .map(Objects::requireNonNull)
+                        .map(FluidStack::copy)
+                        .toArray(FluidStack[]::new);
+
+                    outputItem = Objects.requireNonNull(recipe.mOutput, "Output is null: " + recipe.mOutput)
+                        .copy();
+
+                } catch (Throwable t) {
+                    System.err.println("[GTNL] Failed to copy recipe: " + recipe);
+                    t.printStackTrace();
+                    continue; // 跳过这个配方
+                }
 
                 // 计算超频次数
                 int overclockCount = 0;
-                long energyRatio = energyEU / recipe.mEUt; // EnergyEU 与 recipe.mEUt 的比值
+                long energyRatio = energyEU / Math.max(1, recipe.mEUt); // EnergyEU 与 recipe.mEUt 的比值，避免除以0
                 long threshold = 1; // 初始阈值是 4^0 = 1
                 int adjustedTime;
                 long adjustedPower;
@@ -475,7 +494,7 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 // 更新配方的功率和时间
                 recipe.mEUt = adjustedPower;
                 recipe.mDuration = adjustedTime;
-                powerParallel = (int) Math.floor(energyEU / recipe.mEUt);
+                powerParallel = (int) Math.floor((double) energyEU / recipe.mEUt);
             }
 
             // 第四步：处理配方并行逻辑
@@ -598,7 +617,9 @@ public class GrandAssemblyLine extends MTEExtendedPowerMultiBlockBase<GrandAssem
                 GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
                 long parallel = entry.getValue();
                 if (wirelessMode) {
-                    costingEU = BigInteger.valueOf(recipe.mEUt * recipe.mDuration * parallel);
+                    costingEU = BigInteger.valueOf(recipe.mEUt)
+                        .multiply(BigInteger.valueOf(recipe.mDuration))
+                        .multiply(BigInteger.valueOf(parallel));
                 } else {
                     needEU += (long) recipe.mEUt * recipe.mDuration * parallel;
                 }
