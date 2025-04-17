@@ -16,3 +16,18 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.annotationProcessorPath = configurations.annotationProcessor
 }
+
+tasks.named("runClient", JavaExec) {
+    workingDir = file("${projectDir}/run/client")
+    doFirst {
+        workingDir.mkdirs()
+    }
+}
+
+tasks.named("runServer", JavaExec) {
+    workingDir = file("${projectDir}/run/server")
+    doFirst {
+        workingDir.mkdirs()
+    }
+}
+
