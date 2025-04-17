@@ -644,12 +644,30 @@ public class TextLocalization {
         "Converts Mana into EU",
         "Tooltip_ManaDynamoHatch_01");
     public static final String Tooltip_ManaDynamoHatch_02 = texter(
-        "Base rate: 100L of Mana -> 1 EU",
+        "Base rate: 1 of Mana -> 200 EU",
         "Tooltip_ManaDynamoHatch_02");
     public static final String Tooltip_ManaDynamoHatch_03 = texter("Fluid capacity: ", "Tooltip_ManaDynamoHatch_03");
     public static final String Tooltip_ManaDynamoHatch_04 = texter(
         "Right-click with the screwdriver to switch modes",
         "Tooltip_ManaDynamoHatch_04");
+
+    public static final String ManaEnergyHatchLV = texter("Mana Energy Hatch (LV)", "ManaEnergyHatchLV");
+    public static final String ManaEnergyHatchHV = texter("Mana Energy Hatch (HV)", "ManaEnergyHatchHV");
+    public static final String ManaEnergyHatchIV = texter("Mana Energy Hatch (IV)", "ManaEnergyHatchIV");
+    public static final String ManaEnergyHatchZPM = texter("Mana Energy Hatch (ZPM)", "ManaEnergyHatchZPM");
+    public static final String Tooltip_ManaEnergyHatch_00 = texter(
+        "Can transfer mana into nearby mana pools",
+        "Tooltip_ManaEnergyHatch_00");
+    public static final String Tooltip_ManaEnergyHatch_01 = texter(
+        "Converts EU into Mana",
+        "Tooltip_ManaEnergyHatch_01");
+    public static final String Tooltip_ManaEnergyHatch_02 = texter(
+        "Base rate: 250 of EU -> 1 Mana",
+        "Tooltip_ManaEnergyHatch_02");
+    public static final String Tooltip_ManaEnergyHatch_03 = texter("Fluid capacity: ", "Tooltip_ManaEnergyHatch_03");
+    public static final String Tooltip_ManaEnergyHatch_04 = texter(
+        "Right-click with the screwdriver to switch modes",
+        "Tooltip_ManaEnergyHatch_04");
 
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(

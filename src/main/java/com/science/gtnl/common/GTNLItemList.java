@@ -490,7 +490,11 @@ public enum GTNLItemList implements IItemContainer {
     ManaDynamoHatchLV,
     ManaDynamoHatchHV,
     ManaDynamoHatchIV,
-    ManaDynamoHatchZPM;
+    ManaDynamoHatchZPM,
+    ManaEnergyHatchLV,
+    ManaEnergyHatchHV,
+    ManaEnergyHatchIV,
+    ManaEnergyHatchZPM;
 
     public boolean mHasNotBeenSet;
     public boolean mDeprecated;

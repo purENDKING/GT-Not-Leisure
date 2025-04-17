@@ -30,6 +30,7 @@ import com.science.gtnl.common.machine.hatch.HumongousInputBus;
 import com.science.gtnl.common.machine.hatch.HumongousNinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
 import com.science.gtnl.common.machine.hatch.ManaDynamoHatch;
+import com.science.gtnl.common.machine.hatch.ManaEnergyHatch;
 import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
@@ -957,6 +958,7 @@ public class MachineLoader {
         addItemTooltip(GTNLItemList.BigSteamInputHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
+    @Deprecated
     public static void registerTestMachine() {
         GTNLItemList.QuadrupleOutputHatchEV.set(
             new DualOutputHatch(21700, 4, "Quadruple Output Hatch EV", TextLocalization.QuadrupleOutputHatchEV, 4));
@@ -1066,6 +1068,22 @@ public class MachineLoader {
         GTNLItemList.ManaDynamoHatchZPM
             .set(new ManaDynamoHatch(22528, "ManaDynamoHatchZPM", TextLocalization.ManaDynamoHatchZPM, 7, 16));
         addItemTooltip(GTNLItemList.ManaDynamoHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaEnergyHatchLV
+            .set(new ManaEnergyHatch(22544, "ManaEnergyHatchLV", TextLocalization.ManaEnergyHatchLV, 1, 16));
+        addItemTooltip(GTNLItemList.ManaEnergyHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaEnergyHatchHV
+            .set(new ManaEnergyHatch(22545, "ManaEnergyHatchHV", TextLocalization.ManaEnergyHatchHV, 3, 16));
+        addItemTooltip(GTNLItemList.ManaEnergyHatchHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaEnergyHatchIV
+            .set(new ManaEnergyHatch(22546, "ManaEnergyHatchIV", TextLocalization.ManaEnergyHatchIV, 5, 16));
+        addItemTooltip(GTNLItemList.ManaEnergyHatchIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ManaEnergyHatchZPM
+            .set(new ManaEnergyHatch(22547, "ManaEnergyHatchZPM", TextLocalization.ManaEnergyHatchZPM, 7, 16));
+        addItemTooltip(GTNLItemList.ManaEnergyHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWireAndPipe() {

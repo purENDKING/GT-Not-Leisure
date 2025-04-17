@@ -38,7 +38,8 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
     private boolean isLiquidizerMode = true;
     private static final int MANA_POOL_RADIUS = 2;
     private static final int MANA_FLOWER_RADIUS = 6;
-    private static final int MANA_TO_EU_RATE = 20;
+    private static final int MANA_TO_EU_RATE = 200;
+    private static final FluidStack fluidMana = MaterialPool.FluidMana.getFluidOrGas(1);
     private static int mAmp;
 
     public ManaDynamoHatch(int aID, String aName, String aNameRegional, int aTier, int aAmp) {
@@ -131,7 +132,7 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
 
         if (currentAmount < targetMana) {
             int manaToAdd = targetMana - currentAmount;
-            FluidStack manaStack = new FluidStack(MaterialPool.FluidMana.getFluidOrGas(1), manaToAdd);
+            FluidStack manaStack = new FluidStack(fluidMana, manaToAdd);
             fill(manaStack, true);
         }
     }
@@ -150,7 +151,7 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
             int manaToTransfer = Math.min(poolMana, capacity - currentAmount);
             if (manaToTransfer <= 0) continue;
 
-            FluidStack manaStack = new FluidStack(MaterialPool.FluidMana.getFluidOrGas(1), manaToTransfer);
+            FluidStack manaStack = new FluidStack(fluidMana, manaToTransfer);
             fill(manaStack, true);
             pool.recieveMana(-manaToTransfer);
         }
@@ -199,7 +200,7 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
 
             ManaHelper.setMana(flower, flowerMana - transferAmount);
 
-            FluidStack manaStack = new FluidStack(MaterialPool.FluidMana.getFluidOrGas(1), transferAmount);
+            FluidStack manaStack = new FluidStack(fluidMana, transferAmount);
             fill(manaStack, true);
             currentAmount += transferAmount;
 

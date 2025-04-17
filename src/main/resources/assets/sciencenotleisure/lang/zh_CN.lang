@@ -36,12 +36,22 @@ ManaDynamoHatchIV=神话动力仓
 ManaDynamoHatchZPM=盖亚动力仓
 Tooltip_ManaDynamoHatch_00=可以从附近的魔力池和魔力花抽取魔力
 Tooltip_ManaDynamoHatch_01=将魔力转换为EU
-Tooltip_ManaDynamoHatch_02=基础效率: 1mana / 20EU
+Tooltip_ManaDynamoHatch_02=基础效率: 1mana / 200EU
 Tooltip_ManaDynamoHatch_03=流体容量: 
 Tooltip_ManaDynamoHatch_04=使用螺丝刀右键来切换模式
 Mode_ManaDynamoHatch_00=从魔力能源仓抽取魔力到魔力池
 Mode_ManaDynamoHatch_01=从魔力池抽取魔力到魔力能源仓
 Info_ManaDynamoHatch_00=存储魔力: 
+
+ManaEnergyHatchLV=稀释魔力能源仓
+ManaEnergyHatchHV=魔力能源仓
+ManaEnergyHatchIV=神话能源仓
+ManaEnergyHatchZPM=盖亚能源仓
+Tooltip_ManaEnergyHatch_00=可以将魔力填充到附近的魔力池
+Tooltip_ManaEnergyHatch_01=将EU转换为魔力
+Tooltip_ManaEnergyHatch_02=基础效率: 250EU / 1mana
+Tooltip_ManaEnergyHatch_03=流体容量: 
+Info_ManaEnergyHatch_00=存储魔力: 
 
 BigSteamInputHatch=大型蒸汽仓
 AllSteamCapacity=总蒸汽数量: 
