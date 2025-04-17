@@ -35,6 +35,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
@@ -516,22 +517,28 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         return STRUCTURE_DEFINITION;
     }
 
-    public static int getTierDimensionFieldBlockFromBlock(Block block, int meta) {
+    @Nullable
+    public static Integer getTierDimensionFieldBlockFromBlock(Block block, int meta) {
+        if (block == null) return null;
         if (block == GregTechAPI.sBlockCasings1 && 14 == meta) return 1;
         if (block == SpacetimeCompressionFieldGenerators) return meta + 2;
-        return -1;
+        return null;
     }
 
-    public static int getTierTimeFieldBlockFromBlock(Block block, int meta) {
+    @Nullable
+    public static Integer getTierTimeFieldBlockFromBlock(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasingsTT && 14 == meta) return 1;
         if (block == TimeAccelerationFieldGenerator) return meta + 2;
-        return -1;
+        return null;
     }
 
-    public static int getTierStabilisationFieldBlockFromBlock(Block block, int meta) {
+    @Nullable
+    public static Integer getTierStabilisationFieldBlockFromBlock(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasingsTT && 9 == meta) return 1;
         if (block == StabilisationFieldGenerators) return meta + 2;
-        return -1;
+        return null;
     }
 
     @Override

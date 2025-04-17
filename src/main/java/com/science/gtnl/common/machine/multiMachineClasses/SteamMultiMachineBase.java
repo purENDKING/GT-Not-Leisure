@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -109,62 +111,80 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         super(aName);
     }
 
-    protected static int getTierAdvancedCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierAdvancedCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == BWBlockCasings && 32066 == meta) return 1;
         if (block == BWBlockCasings && 32071 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierMachineCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierMachineCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasings1 && 10 == meta) {
             return 1;
         }
         if (block == sBlockCasings2 && 0 == meta) {
             return 2;
         }
-        return 0;
+        return null;
     }
 
-    protected static int getTierPipeCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierPipeCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasings2 && 12 == meta) return 1;
         if (block == sBlockCasings2 && 13 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierGearCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierGearCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasings2 && 2 == meta) return 1;
         if (block == sBlockCasings2 && 3 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierMaterialBlockCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierMaterialBlockCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == Blocks.iron_block) return 1;
         if (block == sBlockMetal6 && 13 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierFrameCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierFrameCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockFrames && 300 == meta) return 1;
         if (block == sBlockFrames && 305 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierBrickCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierBrickCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == MetaBlockColumn && 0 == meta) return 1;
         if (block == MetaBlockColumn && 1 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierPlatedCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierPlatedCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == blockCustomMachineCasings && 0 == meta) return 1;
         if (block == sBlockCasings2 && 0 == meta) return 2;
-        return 0;
+        return null;
     }
 
-    protected static int getTierFireboxCasing(Block block, int meta) {
+    @Nullable
+    protected static Integer getTierFireboxCasing(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasings3 && 13 == meta) return 1;
         if (block == sBlockCasings3 && 14 == meta) return 2;
-        return 0;
+        return null;
     }
 
     @Override

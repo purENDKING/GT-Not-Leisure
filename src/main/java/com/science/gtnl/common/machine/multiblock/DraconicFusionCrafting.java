@@ -14,6 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -151,10 +152,12 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
         return STRUCTURE_DEFINITION;
     }
 
-    public static int getTierCasingFromBlock(Block block, int meta) {
+    @Nullable
+    public static Integer getTierCasingFromBlock(Block block, int meta) {
+        if (block == null) return null;
         if (block == BlockLoader.defcCasingBlock) return meta - 7;
         if (block == TTCasingsContainer.SpacetimeCompressionFieldGenerators && 2 == meta) return 6;
-        return -1;
+        return null;
     }
 
     @Override

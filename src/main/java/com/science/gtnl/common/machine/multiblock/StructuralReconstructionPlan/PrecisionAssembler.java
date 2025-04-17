@@ -24,6 +24,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -245,15 +246,19 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         return casingTier >= 4;
     }
 
-    public static int getCasingTier(Block block, int meta) {
+    @Nullable
+    public static Integer getCasingTier(Block block, int meta) {
+        if (block == null) return null;
         if (block == Loaders.impreciseUnitCasing) return 0;
         if (block == Loaders.preciseUnitCasing) return meta + 1;
-        return -1;
+        return null;
     }
 
-    public static int getMachineTier(Block block, int meta) {
+    @Nullable
+    public static Integer getMachineTier(Block block, int meta) {
+        if (block == null) return null;
         if (block == sBlockCasings1) return meta;
-        return -1;
+        return null;
     }
 
     @Override
