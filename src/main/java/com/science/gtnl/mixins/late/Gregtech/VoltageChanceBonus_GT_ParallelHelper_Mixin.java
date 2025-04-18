@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.late.Gregtech;
 
 import java.util.OptionalDouble;
 

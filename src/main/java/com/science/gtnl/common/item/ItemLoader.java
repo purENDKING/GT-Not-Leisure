@@ -22,7 +22,6 @@ import com.science.gtnl.common.item.ReAvaritia.InfinityShovel;
 import com.science.gtnl.common.item.ReAvaritia.InfinitySword;
 import com.science.gtnl.common.item.ReAvaritia.InfinityTotem;
 import com.science.gtnl.common.item.ReAvaritia.MatterCluster;
-import com.science.gtnl.common.item.items.DebugItem;
 import com.science.gtnl.common.item.items.FakeItemSiren;
 import com.science.gtnl.common.item.items.FuelRod.FuelRod;
 import com.science.gtnl.common.item.items.FuelRod.FuelRodDepleted;
@@ -61,7 +60,6 @@ public class ItemLoader {
     public static Item MatterCluster = new MatterCluster();
     public static Item KFCFamily = new KFCFamily(20, 20, true);
     public static Item SatietyRing = new SatietyRing();
-    public static Item DebugItem = new DebugItem();
     public static Item RejectionRing = new RejectionRing();
     public static Item TwilightSword = new TwilightSword();
     public static Item SuperReachRing = new SuperReachRing();
@@ -110,7 +108,6 @@ public class ItemLoader {
         IRegistry(SatietyRing, "SatietyRing");
         IRegistry(RejectionRing, "RejectionRing");
         IRegistry(TwilightSword, "TwilightSword");
-        IRegistry(DebugItem, "DebugItem");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 

@@ -19,20 +19,21 @@ public class LateMixinPlugin implements ILateMixinLoader {
     @Override
     public List<String> getMixins(Set<String> loadedMods) {
         var mixins = new ArrayList<String>();
-        mixins.add("AssLineRemover.GTRecipeBuilderHook_Mixin");
-        mixins.add("AssLineRemover.ForGTPreLoadHook_Mixin");
-        mixins.add("AssLineRemover.TTAssLineBuilderHook_Mixin");
+        mixins.add("Gregtech.AssLineRemover.GTRecipeBuilderHook_Mixin");
+        mixins.add("Gregtech.AssLineRemover.ForGTPreLoadHook_Mixin");
+        mixins.add("Gregtech.AssLineRemover.TTAssLineBuilderHook_Mixin");
+        mixins.add("Gregtech.MTETreeFarm_Mixin");
+        mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
+        mixins.add("Gregtech.BehaviourScanner_Mixin");
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");
         mixins.add("Bartwork.WerkstoffLoader_Mixin");
         mixins.add("Bartwork.Werkstoff_Mixin");
         mixins.add("Bartwork.MultipleMetalLoader_Mixin");
         mixins.add("Bartwork.SimpleMetalLoader_Mixin");
         mixins.add("Bartwork.CircuitImprintLoader_Mixin");
-        mixins.add("MTETreeFarm_Mixin");
         mixins.add("ItemBloodSword_Mixin");
         mixins.add("DraconicEvolutionEventHandler_Mixin");
         mixins.add("BacteriaRegistry_Mixin");
-        mixins.add("VoltageChanceBonus_GT_ParallelHelper_Mixin");
         return mixins;
     }
 

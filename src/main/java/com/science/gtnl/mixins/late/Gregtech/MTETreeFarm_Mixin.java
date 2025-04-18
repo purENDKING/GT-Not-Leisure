@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.late.Gregtech;
 
 import static gregtech.api.enums.GTValues.RA;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;

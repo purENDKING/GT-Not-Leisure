@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late.AssLineRemover;
+package com.science.gtnl.mixins.late.Gregtech.AssLineRemover;
 
 import static com.science.gtnl.Utils.recipes.AssLineRecipeHook.RECIPE_TO_REMOVE;
 import static gregtech.api.util.GTRecipeConstants.RESEARCH_ITEM;

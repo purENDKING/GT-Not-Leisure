@@ -16,6 +16,7 @@ public class ChanceBonusManager {
     // Original code from Overpowered Mod. MIT License. 2025/4/18
 
     public static final LinkedList<ChanceBonusProvider> bonusProviders = new LinkedList<>();
+    public static CustomChanceBonusProvider customProvider = new CustomChanceBonusProvider();
 
     public interface ChanceBonusProvider {
 
@@ -95,6 +96,7 @@ public class ChanceBonusManager {
     }
 
     static {
+        ChanceBonusManager.addFirstBonusProvider(customProvider);
         addLastBonusProvider((machine, recipeTier, prevBonus, recipe) -> {
             if (machine instanceof MTEMultiBlockBase mte) {
                 try {

@@ -18,6 +18,8 @@ Tooltip_PerfectOverclock=Machine can perform §clossless overclocking§7
 OverclockType.Description.01=Each overclock, time divided by
 OverclockType.Description.02=Power multiplied by
 
+Info_VoltageChanceBonus_00=Voltage Chance Bonus: §3%.2f%% §r(Voltage Tier: §3%s§r, Base Voltage Tier: §3%s§r)
+
 HatchCustomFluid_00=Input fluids for multiblock machines
 HatchCustomFluid_01=Capacity: 
 HatchCustomFluid_02=Allowed fluids: 

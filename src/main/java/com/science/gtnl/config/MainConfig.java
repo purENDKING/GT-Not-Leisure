@@ -51,9 +51,9 @@ public class MainConfig {
         recipeOutputChance = config
             .get(
                 "Change Recipe Output Chance",
-                "Change Recipe Item Output, like QFT",
+                "ChanceOutput",
                 recipeOutputChance,
-                "Recipe Output Chance")
+                "Change Recipe Item Output, like QFT")
             .getDouble(recipeOutputChance);
 
         EUEveryEnhancementCore = config

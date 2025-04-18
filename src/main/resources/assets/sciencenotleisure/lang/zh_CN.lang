@@ -18,6 +18,8 @@ Tooltip_PerfectOverclock=机器可进行§c无损超频§7
 OverclockType.Description.01=每次超频时, 耗时除以
 OverclockType.Description.02=耗电乘以
 
+Info_VoltageChanceBonus_00=电压概率加成: §3%.2f%% §r(电压等级: §3%s§r, 基础电压等级: §3%s§r) 
+
 HatchCustomFluid_00=为多方块机器输入流体
 HatchCustomFluid_01=容量: 
 HatchCustomFluid_02=允许的流体: 
@@ -591,8 +593,6 @@ Tooltip_TwilightSword_07=§r生命值低于10时基础伤害翻倍
 Tooltip_TwilightSword_08=§r攻击实体轮流使用四种强力的攻击
 Tooltip_TwilightSword_09=§r长按右键触发特殊攻击
 Tooltip_TwilightSword_10=§oModel by IceyArk
-
-Debug_VoltageChanceBonus_00=电压概率加成: %.2f%% ( 电压等级: %s，基础电压等级: %s ) 
 
 item.CrystalSword.name=§d双锋裂界之剑
 Tooltip_CrystalSword_00=§8§o锋刃所向，裂界无阻；剑影所至，敌影无存。
