@@ -233,6 +233,7 @@ public enum GTNLItemList implements IItemContainer {
     RecordSus,
     RecordNewHorizons,
     FakeItemSiren,
+    DebugItem,
 
     InfinityFuelRod,
     InfinityFuelRodDepleted,

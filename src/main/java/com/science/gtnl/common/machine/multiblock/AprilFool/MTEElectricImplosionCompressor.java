@@ -242,6 +242,7 @@ public class MTEElectricImplosionCompressor extends MTEExtendedPowerMultiBlockBa
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+
                 long voltage = MTEElectricImplosionCompressor.this.getAverageInputVoltage();
                 // Only allow a minimum of T-1 energy hatch
                 if (recipe.mEUt > voltage * 4) {

@@ -32,6 +32,8 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("ItemBloodSword_Mixin");
         mixins.add("DraconicEvolutionEventHandler_Mixin");
         mixins.add("BacteriaRegistry_Mixin");
+        mixins.add("GregTechAPI_Mixin");
+        mixins.add("VoltageChanceBonus_GT_ParallelHelper_Mixin");
         return mixins;
     }
 
