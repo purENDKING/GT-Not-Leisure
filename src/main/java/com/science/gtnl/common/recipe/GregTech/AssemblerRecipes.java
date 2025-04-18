@@ -43,6 +43,7 @@ import gtPlusPlus.core.recipe.common.CI;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnhlanth.common.register.LanthItemList;
+import vazkii.botania.common.Botania;
 
 public class AssemblerRecipes implements IRecipePool {
 
@@ -1965,5 +1966,132 @@ public class AssemblerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_LV)
             .addTo(As);
 
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_LV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 1),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 1),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsBotania.Manasteel, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt12, Materials.RedstoneAlloy, 2))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(1000))
+            .itemOutputs(GTNLItemList.ManaDynamoHatchLV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_HV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 2),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 2),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsBotania.ElvenElementium, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt12, Materials.SuperconductorHV, 4))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(2000))
+            .itemOutputs(GTNLItemList.ManaDynamoHatchHV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_IV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 4),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 4),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsBotania.ElvenElementium, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt12, Materials.SuperconductorIV, 8))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(4000))
+            .itemOutputs(GTNLItemList.ManaDynamoHatchIV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_IV.get(2),
+                GTModHandler.getModItem(Botania.ID, "pump", 8),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 8),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsBotania.Terrasteel, 4L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt12, Materials.SuperconductorZPM, 16))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(8000))
+            .itemOutputs(GTNLItemList.ManaDynamoHatchZPM.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_LV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 1),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 1),
+                GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.Manasteel, 6L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.RedstoneAlloy, 2))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(1000))
+            .itemOutputs(GTNLItemList.ManaEnergyHatchLV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_LV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_HV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 2),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 2),
+                GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.ElvenElementium, 6L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorHV, 4))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(2000))
+            .itemOutputs(GTNLItemList.ManaEnergyHatchHV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_IV.get(1),
+                GTModHandler.getModItem(Botania.ID, "pump", 4),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 4),
+                GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.ElvenElementium, 6L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorIV, 8))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(4000))
+            .itemOutputs(GTNLItemList.ManaEnergyHatchIV.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 0),
+                GTModHandler.getModItem(Botania.ID, "spark", 4),
+                GTModHandler.getModItem(Botania.ID, "rune", 1, 8),
+                ItemList.Super_Tank_IV.get(2),
+                GTModHandler.getModItem(Botania.ID, "pump", 8),
+                GTModHandler.getModItem(Botania.ID, "rfGenerator", 8),
+                GTOreDictUnificator.get(OrePrefixes.plate, MaterialsBotania.Terrasteel, 6L),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorZPM, 16))
+            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(8000))
+            .itemOutputs(GTNLItemList.ManaEnergyHatchZPM.get(1))
+            .duration(160)
+            .eut(TierEU.RECIPE_ZPM)
+            .addTo(As);
     }
 }
