@@ -4,23 +4,23 @@ import java.util.LinkedList;
 import java.util.OptionalDouble;
 import java.util.function.Function;
 
-import org.intellij.lang.annotations.MagicConstant;
-
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.api.IVoltageChanceBonus;
+import com.science.gtnl.config.MainConfig;
 
-import gregtech.api.enums.VoltageIndex;
+import gregtech.api.metatileentity.implementations.MTEMultiBlockBase;
 import gregtech.api.util.GTRecipe;
-import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.base.GTPPMultiBlockBase;
+import gregtech.api.util.GTUtility;
 
 public class ChanceBonusManager {
 
+    // Original code from Overpowered Mod. MIT License. 2025/4/18
+
     private static final LinkedList<ChanceBonusProvider> bonusProviders = new LinkedList<>();
+    public static GTRecipe lastRecipes;
 
     public interface ChanceBonusProvider {
 
-        Double getBonus(Object machine, @MagicConstant(valuesFromClass = VoltageIndex.class) int recipeTier,
-            double prevMultiplier);
+        Double getBonus(Object machine, int recipeTier, double prevMultiplier);
     }
 
     public static class ChanceBonusProviderContext {
@@ -54,12 +54,19 @@ public class ChanceBonusManager {
             .addFirst((machine, tier, prev) -> provider.apply(new ChanceBonusProviderContext(machine, tier, prev)));
     }
 
+    public static void setLastGTRecipe(GTRecipe recipe) {
+        lastRecipes = recipe;
+    }
+
+    public static GTRecipe getLastGTRecipe() {
+        return lastRecipes;
+    }
+
     private static double getTierChanceBonus(int tier, int baseTier, double bonusPerTier) {
         return tier <= baseTier ? 0.0 : (tier - baseTier) * bonusPerTier;
     }
 
-    public static Double getChanceBonus(Object machine,
-        @MagicConstant(valuesFromClass = VoltageIndex.class) int recipeTier, double prevMultiplier) {
+    public static Double getChanceBonus(Object machine, int recipeTier, double prevMultiplier) {
         for (ChanceBonusProvider provider : bonusProviders) {
             try {
                 Double bonus = provider.getBonus(machine, recipeTier, prevMultiplier);
@@ -71,8 +78,7 @@ public class ChanceBonusManager {
         return null;
     }
 
-    public static OptionalDouble getChanceBonusOptional(Object machine,
-        @MagicConstant(valuesFromClass = VoltageIndex.class) int recipeTier, double prevMultiplier) {
+    public static OptionalDouble getChanceBonusOptional(Object machine, int recipeTier, double prevMultiplier) {
         Double result = getChanceBonus(machine, recipeTier, prevMultiplier);
         return result != null ? OptionalDouble.of(result) : OptionalDouble.empty();
     }
@@ -92,29 +98,20 @@ public class ChanceBonusManager {
     }
 
     static {
-        // Strategy 1: IVoltageChanceBonus support
         addLastBonusProvider((machine, recipeTier, prevBonus) -> {
-            if (machine instanceof IVoltageChanceBonus) {
-                return ((IVoltageChanceBonus) machine).getBonusChance();
-            }
-            return null;
-        });
-
-        // Strategy 2: GT++ multiblock machine support
-        addLastBonusProvider((machine, recipeTier, prevBonus) -> {
-            if (machine instanceof GTPPMultiBlockBase) {
+            if (machine instanceof MTEMultiBlockBase mte) {
                 try {
-                    GTPPMultiBlockBase<?> mb = (GTPPMultiBlockBase<?>) machine;
-                    int minTier = mb.mAllEnergyHatches.stream()
-                        .mapToInt(h -> h.mTier)
-                        .min()
-                        .orElse(0);
-                    return getTierChanceBonus(minTier, recipeTier, 0.15);
+                    int machineTier = GTUtility.getTier(mte.getMaxInputVoltage());
+                    int baseTier = GTUtility.getTier(getLastGTRecipe().mEUt);
+                    double bonusPerTier = MainConfig.recipeOutputChance / 100.0;
+
+                    return getTierChanceBonus(machineTier, baseTier, bonusPerTier);
                 } catch (Exception e) {
-                    ScienceNotLeisure.LOG.warn("Error reading GT++ machine tier", e);
+                    ScienceNotLeisure.LOG.warn("Error reading MTEExtendedPowerMultiBlockBase voltage tier", e);
                 }
             }
             return null;
         });
     }
+
 }

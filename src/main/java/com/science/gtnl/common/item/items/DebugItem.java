@@ -7,11 +7,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
+import com.science.gtnl.Utils.recipes.ChanceBonusManager;
 import com.science.gtnl.api.IVoltageChanceBonus;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.metatileentity.CommonMetaTileEntity;
+import gregtech.api.metatileentity.implementations.MTEMultiBlockBase;
+import gregtech.api.util.GTUtility;
 
 public class DebugItem extends Item {
 
@@ -30,13 +34,21 @@ public class DebugItem extends Item {
             TileEntity tile = world.getTileEntity(x, y, z);
             if (tile instanceof CommonMetaTileEntity) {
                 Object meta = ((CommonMetaTileEntity) tile).getMetaTileEntity();
-                if (meta instanceof IVoltageChanceBonus) {
-                    IVoltageChanceBonus bonusMachine = (IVoltageChanceBonus) meta;
-                    double bonus = bonusMachine.getBonusChance() * 100;
+
+                if (meta instanceof IVoltageChanceBonus bonusMachine) {
+                    double bonus = bonusMachine.getBonusChance();
                     int tier = bonusMachine.getVoltageTier();
-                    int base = bonusMachine.getBaseVoltageTier();
+                    int baseTier = bonusMachine.getBaseVoltageTier();
                     player.addChatComponentMessage(
-                        new ChatComponentTranslation("Debug_VoltageChanceBonus_00", bonus, tier, base));
+                        new ChatComponentTranslation("Debug_VoltageChanceBonus_00", bonus, tier, baseTier));
+                } else if (meta instanceof MTEMultiBlockBase mte) {
+                    try {
+                        int tier = GTUtility.getTier(mte.getMaxInputVoltage());
+                        int baseTier = GTUtility.getTier(ChanceBonusManager.getLastGTRecipe().mEUt);
+                        double bonus = (tier <= baseTier) ? 0.0 : (tier - baseTier) * MainConfig.recipeOutputChance;
+                        player.addChatComponentMessage(
+                            new ChatComponentTranslation("Debug_VoltageChanceBonus_00", bonus, tier, baseTier));
+                    } catch (Exception ignored) {}
                 }
             }
         }

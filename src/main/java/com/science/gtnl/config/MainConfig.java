@@ -22,6 +22,7 @@ public class MainConfig {
     public static boolean enableMachineAmpLimit = true;
     public static boolean enableAprilFoolRecipe = false;
     public static boolean enableInfinitySwordBypassMechanism = true;
+    public static double recipeOutputChance = 2.5;
 
     private static Configuration config;
 
@@ -46,6 +47,14 @@ public class MainConfig {
     }
 
     public static void loadConfig() {
+
+        recipeOutputChance = config
+            .get(
+                "Change Recipe Output Chance",
+                "Change Recipe Item Output, like QFT",
+                recipeOutputChance,
+                "Recipe Output Chance")
+            .getDouble(recipeOutputChance);
 
         EUEveryEnhancementCore = config
             .get(

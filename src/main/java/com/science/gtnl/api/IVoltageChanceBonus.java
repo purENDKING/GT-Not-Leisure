@@ -2,6 +2,8 @@ package com.science.gtnl.api;
 
 import org.intellij.lang.annotations.MagicConstant;
 
+import com.science.gtnl.config.MainConfig;
+
 import gregtech.api.enums.VoltageIndex;
 
 /**
@@ -12,6 +14,8 @@ import gregtech.api.enums.VoltageIndex;
  * @see com.science.gtnl.Utils.recipes.ChanceBonusManager
  */
 public interface IVoltageChanceBonus {
+
+    // Original code from Overpowered Mod. MIT License. 2025/4/18
 
     /**
      * @return the voltage tier; ULV is 0, LV is 1, etc.
@@ -37,7 +41,7 @@ public interface IVoltageChanceBonus {
     }
 
     default double getBonusChancePerVoltage() {
-        return 0.5;
+        return MainConfig.recipeOutputChance;
     }
 
 }
