@@ -43,7 +43,6 @@ import gtPlusPlus.core.recipe.common.CI;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtnhlanth.common.register.LanthItemList;
-import vazkii.botania.common.Botania;
 
 public class AssemblerRecipes implements IRecipePool {
 
