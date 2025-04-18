@@ -15,12 +15,11 @@ public class ChanceBonusManager {
 
     // Original code from Overpowered Mod. MIT License. 2025/4/18
 
-    private static final LinkedList<ChanceBonusProvider> bonusProviders = new LinkedList<>();
-    public static GTRecipe lastRecipes;
+    public static final LinkedList<ChanceBonusProvider> bonusProviders = new LinkedList<>();
 
     public interface ChanceBonusProvider {
 
-        Double getBonus(Object machine, int recipeTier, double prevMultiplier);
+        Double getBonus(Object machine, int recipeTier, double prevMultiplier, GTRecipe recipe);
     }
 
     public static class ChanceBonusProviderContext {
@@ -28,11 +27,14 @@ public class ChanceBonusManager {
         public final Object machine;
         public final int recipeTier;
         public final double prevChanceMultiplier;
+        public final GTRecipe recipe;
 
-        public ChanceBonusProviderContext(Object machine, int recipeTier, double prevChanceMultiplier) {
+        public ChanceBonusProviderContext(Object machine, int recipeTier, double prevChanceMultiplier,
+            GTRecipe recipe) {
             this.machine = machine;
             this.recipeTier = recipeTier;
             this.prevChanceMultiplier = prevChanceMultiplier;
+            this.recipe = recipe;
         }
     }
 
@@ -45,31 +47,25 @@ public class ChanceBonusManager {
     }
 
     public static void addLastBonusProvider(Function<ChanceBonusProviderContext, Double> provider) {
-        bonusProviders
-            .addLast((machine, tier, prev) -> provider.apply(new ChanceBonusProviderContext(machine, tier, prev)));
+        bonusProviders.addLast(
+            (machine, tier, prev, recipe) -> provider
+                .apply(new ChanceBonusProviderContext(machine, tier, prev, recipe)));
     }
 
     public static void addFirstBonusProvider(Function<ChanceBonusProviderContext, Double> provider) {
-        bonusProviders
-            .addFirst((machine, tier, prev) -> provider.apply(new ChanceBonusProviderContext(machine, tier, prev)));
-    }
-
-    public static void setLastGTRecipe(GTRecipe recipe) {
-        lastRecipes = recipe;
-    }
-
-    public static GTRecipe getLastGTRecipe() {
-        return lastRecipes;
+        bonusProviders.addFirst(
+            (machine, tier, prev, recipe) -> provider
+                .apply(new ChanceBonusProviderContext(machine, tier, prev, recipe)));
     }
 
     private static double getTierChanceBonus(int tier, int baseTier, double bonusPerTier) {
         return tier <= baseTier ? 0.0 : (tier - baseTier) * bonusPerTier;
     }
 
-    public static Double getChanceBonus(Object machine, int recipeTier, double prevMultiplier) {
+    public static Double getChanceBonus(Object machine, int recipeTier, double prevMultiplier, GTRecipe recipe) {
         for (ChanceBonusProvider provider : bonusProviders) {
             try {
-                Double bonus = provider.getBonus(machine, recipeTier, prevMultiplier);
+                Double bonus = provider.getBonus(machine, recipeTier, prevMultiplier, recipe);
                 if (bonus != null) return bonus;
             } catch (Exception e) {
                 ScienceNotLeisure.LOG.warn("Error in chance bonus provider", e);
@@ -78,8 +74,9 @@ public class ChanceBonusManager {
         return null;
     }
 
-    public static OptionalDouble getChanceBonusOptional(Object machine, int recipeTier, double prevMultiplier) {
-        Double result = getChanceBonus(machine, recipeTier, prevMultiplier);
+    public static OptionalDouble getChanceBonusOptional(Object machine, int recipeTier, double prevMultiplier,
+        GTRecipe recipe) {
+        Double result = getChanceBonus(machine, recipeTier, prevMultiplier, recipe);
         return result != null ? OptionalDouble.of(result) : OptionalDouble.empty();
     }
 
@@ -98,16 +95,16 @@ public class ChanceBonusManager {
     }
 
     static {
-        addLastBonusProvider((machine, recipeTier, prevBonus) -> {
+        addLastBonusProvider((machine, recipeTier, prevBonus, recipe) -> {
             if (machine instanceof MTEMultiBlockBase mte) {
                 try {
                     int machineTier = GTUtility.getTier(mte.getMaxInputVoltage());
-                    int baseTier = GTUtility.getTier(getLastGTRecipe().mEUt);
+                    int baseTier = GTUtility.getTier(recipe.mEUt);
                     double bonusPerTier = MainConfig.recipeOutputChance / 100.0;
 
                     return getTierChanceBonus(machineTier, baseTier, bonusPerTier);
                 } catch (Exception e) {
-                    ScienceNotLeisure.LOG.warn("Error reading MTEExtendedPowerMultiBlockBase voltage tier", e);
+                    ScienceNotLeisure.LOG.warn("Error reading MTEMultiBlockBase voltage tier", e);
                 }
             }
             return null;

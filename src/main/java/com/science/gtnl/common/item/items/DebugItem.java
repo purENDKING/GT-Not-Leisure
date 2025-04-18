@@ -7,7 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
-import com.science.gtnl.Utils.recipes.ChanceBonusManager;
 import com.science.gtnl.api.IVoltageChanceBonus;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
@@ -44,7 +43,7 @@ public class DebugItem extends Item {
                 } else if (meta instanceof MTEMultiBlockBase mte) {
                     try {
                         int tier = GTUtility.getTier(mte.getMaxInputVoltage());
-                        int baseTier = GTUtility.getTier(ChanceBonusManager.getLastGTRecipe().mEUt);
+                        int baseTier = GTUtility.getTier(1);
                         double bonus = (tier <= baseTier) ? 0.0 : (tier - baseTier) * MainConfig.recipeOutputChance;
                         player.addChatComponentMessage(
                             new ChatComponentTranslation("Debug_VoltageChanceBonus_00", bonus, tier, baseTier));

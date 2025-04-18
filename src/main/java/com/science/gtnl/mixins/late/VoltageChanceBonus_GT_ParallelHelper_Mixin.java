@@ -36,9 +36,8 @@ public abstract class VoltageChanceBonus_GT_ParallelHelper_Mixin {
     @Inject(method = "determineParallel", at = @At("HEAD"), remap = false)
     private void opDetermineParallel(CallbackInfo ci) {
         // Compute optional bonus based on machine and current EU/t
-        ChanceBonusManager.setLastGTRecipe(recipe);
         OptionalDouble bonusOptional = ChanceBonusManager
-            .getChanceBonusOptional(machine, GTUtility.getTier(recipe.mEUt), chanceMultiplier);
+            .getChanceBonusOptional(machine, GTUtility.getTier(recipe.mEUt), chanceMultiplier, recipe);
         // If present, apply bonus by copying the recipe with increased chances
         if (bonusOptional.isPresent()) {
             recipe = ChanceBonusManager.copyAndBonusChance(recipe, bonusOptional.getAsDouble());
