@@ -14,6 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
+import com.science.gtnl.Mods;
 import com.science.gtnl.Utils.recipes.ChanceBonusManager;
 import com.science.gtnl.config.MainConfig;
 
@@ -44,23 +45,25 @@ public class BehaviourScanner_Mixin {
                 GTUtility.getCoordinateScan(tList, aPlayer, aWorld, 1, aX, aY, aZ, side, hitX, hitY, hitZ),
                 aPlayer)) {
 
-                TileEntity tile = aWorld.getTileEntity(aX, aY, aZ);
-                if (tile instanceof CommonMetaTileEntity) {
-                    Object meta = ((CommonMetaTileEntity) tile).getMetaTileEntity();
-                    if (meta instanceof MTEMultiBlockBase mte) {
-                        GTRecipe recipe = ChanceBonusManager.customProvider.getRecipeForMachine(mte);
-                        if (recipe != null) {
-                            int tier = GTUtility.getTier(mte.getMaxInputVoltage());
-                            int baseTier = GTUtility.getTier(recipe.mEUt);
-                            double bonusPerTier = MainConfig.recipeOutputChance;
-                            double bonus = tier <= baseTier ? 0.0 : (tier - baseTier) * bonusPerTier;
+                if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
+                    TileEntity tile = aWorld.getTileEntity(aX, aY, aZ);
+                    if (tile instanceof CommonMetaTileEntity) {
+                        Object meta = ((CommonMetaTileEntity) tile).getMetaTileEntity();
+                        if (meta instanceof MTEMultiBlockBase mte) {
+                            GTRecipe recipe = ChanceBonusManager.customProvider.getRecipeForMachine(mte);
+                            if (recipe != null) {
+                                int tier = GTUtility.getTier(mte.getMaxInputVoltage());
+                                int baseTier = GTUtility.getTier(recipe.mEUt);
+                                double bonusPerTier = MainConfig.recipeOutputChance;
+                                double bonus = tier <= baseTier ? 0.0 : (tier - baseTier) * bonusPerTier;
 
-                            String debugMessage = String.format(
-                                StatCollector.translateToLocal("Info_VoltageChanceBonus_00"),
-                                bonus,
-                                tier,
-                                baseTier);
-                            tList.add(debugMessage);
+                                String debugMessage = String.format(
+                                    StatCollector.translateToLocal("Info_VoltageChanceBonus_00"),
+                                    bonus,
+                                    tier,
+                                    baseTier);
+                                tList.add(debugMessage);
+                            }
                         }
                     }
                 }

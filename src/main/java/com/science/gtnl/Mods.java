@@ -17,7 +17,8 @@ public enum Mods {
     AE2Thing(Names.AE2THING),
     QzMiner(Names.QZMINER),
     OTHTechnology(Names.OTHTECHNOLOGY),
-    Baubles(Names.BAUBLES);
+    Baubles(Names.BAUBLES),
+    Overpowered(Names.OVERPOWERED);
 
     public static class Names {
 
@@ -31,6 +32,7 @@ public enum Mods {
         public static final String QZMINER = "qz_miner";
         public static final String OTHTECHNOLOGY = "123Technology";
         public static final String BAUBLES = "Baubles";
+        public static final String OVERPOWERED = "Overpowered";
     }
 
     public final String ID;

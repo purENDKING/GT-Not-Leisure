@@ -8,7 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.science.gtnl.Mods;
 import com.science.gtnl.Utils.recipes.ChanceBonusManager;
+import com.science.gtnl.config.MainConfig;
 
 import gregtech.api.interfaces.tileentity.IVoidable;
 import gregtech.api.util.GTRecipe;
@@ -35,12 +37,14 @@ public abstract class VoltageChanceBonus_GT_ParallelHelper_Mixin {
      */
     @Inject(method = "determineParallel", at = @At("HEAD"), remap = false)
     private void opDetermineParallel(CallbackInfo ci) {
-        // Compute optional bonus based on machine and current EU/t
-        OptionalDouble bonusOptional = ChanceBonusManager
-            .getChanceBonusOptional(machine, GTUtility.getTier(recipe.mEUt), chanceMultiplier, recipe);
-        // If present, apply bonus by copying the recipe with increased chances
-        if (bonusOptional.isPresent()) {
-            recipe = ChanceBonusManager.copyAndBonusChance(recipe, bonusOptional.getAsDouble());
+        if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
+            // Compute optional bonus based on machine and current EU/t
+            OptionalDouble bonusOptional = ChanceBonusManager
+                .getChanceBonusOptional(machine, GTUtility.getTier(recipe.mEUt), chanceMultiplier, recipe);
+            // If present, apply bonus by copying the recipe with increased chances
+            if (bonusOptional.isPresent()) {
+                recipe = ChanceBonusManager.copyAndBonusChance(recipe, bonusOptional.getAsDouble());
+            }
         }
     }
 }

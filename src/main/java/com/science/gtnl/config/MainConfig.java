@@ -22,6 +22,7 @@ public class MainConfig {
     public static boolean enableMachineAmpLimit = true;
     public static boolean enableAprilFoolRecipe = false;
     public static boolean enableInfinitySwordBypassMechanism = true;
+    public static boolean enableRecipeOutputChance = true;
     public static double recipeOutputChance = 2.5;
 
     private static Configuration config;
@@ -150,6 +151,10 @@ public class MainConfig {
                 enableInfinitySwordBypassMechanism,
                 "Enable Bypass")
             .getBoolean(enableInfinitySwordBypassMechanism);
+
+        enableRecipeOutputChance = config
+            .get("Enable Output Change Function", "enable", enableRecipeOutputChance, "Enable Chance")
+            .getBoolean(enableRecipeOutputChance);
 
         if (config.hasChanged()) {
             config.save();

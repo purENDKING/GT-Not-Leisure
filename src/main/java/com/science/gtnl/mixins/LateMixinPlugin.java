@@ -6,6 +6,8 @@ import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
+import com.science.gtnl.Mods;
+import com.science.gtnl.config.MainConfig;
 
 @LateMixin
 @SuppressWarnings("unused")
@@ -23,8 +25,6 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Gregtech.AssLineRemover.ForGTPreLoadHook_Mixin");
         mixins.add("Gregtech.AssLineRemover.TTAssLineBuilderHook_Mixin");
         mixins.add("Gregtech.MTETreeFarm_Mixin");
-        mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
-        mixins.add("Gregtech.BehaviourScanner_Mixin");
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");
         mixins.add("Bartwork.WerkstoffLoader_Mixin");
         mixins.add("Bartwork.Werkstoff_Mixin");
@@ -34,6 +34,12 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("ItemBloodSword_Mixin");
         mixins.add("DraconicEvolutionEventHandler_Mixin");
         mixins.add("BacteriaRegistry_Mixin");
+
+        if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
+            mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
+            mixins.add("Gregtech.BehaviourScanner_Mixin");
+        }
+
         return mixins;
     }
 
