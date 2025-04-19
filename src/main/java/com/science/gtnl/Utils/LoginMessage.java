@@ -5,6 +5,7 @@ import static net.minecraft.util.EnumChatFormatting.*;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
 
+import com.science.gtnl.Mods;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -26,6 +27,16 @@ public class LoginMessage {
         if (MainConfig.enableDebugMode) {
             event.player
                 .addChatMessage(new ChatComponentText(RED + StatCollector.translateToLocal("Welcome_GTNL_Debug")));
+        }
+
+        if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
+            event.player.addChatMessage(
+                new ChatComponentText(GOLD + StatCollector.translateToLocal("Welcome_GTNL_RecipeOutputChance_00")));
+            event.player.addChatMessage(
+                new ChatComponentText(
+                    GOLD + StatCollector.translateToLocal("Welcome_GTNL_RecipeOutputChance_01")
+                        + MainConfig.recipeOutputChance
+                        + "%"));
         }
     }
 }

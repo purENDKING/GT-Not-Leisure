@@ -14,6 +14,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import org.jetbrains.annotations.Nullable;
 
+import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -28,12 +29,12 @@ import gregtech.api.util.GTUtility;
 public class ExtremeRecipeImporter implements IRecipePool {
 
     final RecipeMap<?> SGAR = RecipeRegister.SteamGateAssemblerRecipes;
-    List<IRecipe> originRecipes = ExtremeCraftingManager.getInstance()
-        .getRecipeList();
 
     @Override
     public void loadRecipes() {
-        importRecipes(originRecipes);
+        importRecipes(
+            ExtremeCraftingManager.getInstance()
+                .getRecipeList());
     }
 
     public void importRecipes(List<IRecipe> recipes) {
@@ -75,7 +76,11 @@ public class ExtremeRecipeImporter implements IRecipePool {
                 .duration(128)
                 .eut(0)
                 .addTo(SGAR);
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            ScienceNotLeisure.LOG
+                .error("Failed to import ShapelessOreRecipe – output: {}, inputs: {}", output, recipe.getInput(), e);
+
+        }
     }
 
     private void importShapedRecipe(ShapelessOreRecipe recipe) {
@@ -94,7 +99,16 @@ public class ExtremeRecipeImporter implements IRecipePool {
                 .duration(128)
                 .eut(0)
                 .addTo(SGAR);
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+
+            ScienceNotLeisure.LOG.error(
+                "Failed to import ShapelessOreRecipe – output: {}, inputs: {}",
+                output,
+                sortOutInputs(
+                    recipe.getInput()
+                        .toArray()),
+                e);
+        }
     }
 
     protected Object[] sortOutInputs(Object... in) {
@@ -170,6 +184,11 @@ public class ExtremeRecipeImporter implements IRecipePool {
                 .duration(128)
                 .eut(0)
                 .addTo(SGAR);
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+
+            ScienceNotLeisure.LOG
+                .error("Failed to import ShapelessOreRecipe – output: {}, inputs: {}", output, inputs, e);
+
+        }
     }
 }

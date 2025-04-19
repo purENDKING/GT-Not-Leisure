@@ -10,6 +10,8 @@ Welcome_GTNL_01=If this is your first time installing the mod, please check the 
 Welcome_GTNL_02=This mod adds a large number of machines and new recipes.
 Welcome_GTNL_DeleteRecipe=Recipe removal is enabled. Note that some recipes may differ from the original.
 Welcome_GTNL_Debug=GTNL Debug mode is enabled.
+Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabled。
+Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: 
 
 Adder=Add Mod: 
 Tooltip_Tectech_Hatch=Supports §9Tec§1Tech§r laser hatches!

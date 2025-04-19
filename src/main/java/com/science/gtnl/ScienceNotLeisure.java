@@ -1,6 +1,5 @@
 package com.science.gtnl;
 
-import static com.science.gtnl.Mods.*;
 import static com.science.gtnl.ScienceNotLeisure.MODID;
 import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
@@ -23,7 +22,6 @@ import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
-import com.science.gtnl.common.recipe.Special.CheatRecipes;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
@@ -77,7 +75,6 @@ public class ScienceNotLeisure {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     public static Configuration config;
-    public static String DevResource = "";
 
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
     public static CommonProxy proxy;
@@ -136,9 +133,6 @@ public class ScienceNotLeisure {
         MaterialLoader.load();
         LanguageManager.init();
         new RecipeLoaderRunnable().run();
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new LoginMessage());
 
         AEApi.instance()
             .registries()
@@ -152,17 +146,8 @@ public class ScienceNotLeisure {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-
-        if (OTHTechnology.isModLoaded() && EyeOfHarmonyBuffer.isModLoaded()
-            && ProgrammableHatches.isModLoaded()
-            && TwistSpaceTechnology.isModLoaded()
-            && NHUtilities.isModLoaded()
-            && AE2Thing.isModLoaded()
-            && QzMiner.isModLoaded()
-            && MainConfig.enableCheatRecipeWithOwner) {
-            FMLCommonHandler.instance()
-                .bus()
-                .register(new CheatRecipes());
-        }
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new LoginMessage());
     }
 }

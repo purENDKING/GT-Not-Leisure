@@ -10,6 +10,8 @@ Welcome_GTNL_01=如果你是第一次安装这个模组，请仔细检查配置�
 Welcome_GTNL_02=本模组添加了大量的机器和新的配方
 Welcome_GTNL_DeleteRecipe=配方移除已启用，注意部分配方可能与原版不一致
 Welcome_GTNL_Debug=GTNL Debug模式已启用
+Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
+Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: 
 
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！

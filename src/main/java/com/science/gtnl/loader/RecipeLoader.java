@@ -18,7 +18,6 @@ import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRe
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.AprilFool.CactusWonderFakeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.CraftingTableAprilFoolRecipes;
-import com.science.gtnl.common.recipe.AprilFool.ExtremeRecipeImporter;
 import com.science.gtnl.common.recipe.AprilFool.InfernalCokeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.LavaMakerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.RockBreakerRecipes;
@@ -128,7 +127,7 @@ public class RecipeLoader {
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),
             new SteamWoodcutterRecipes(), new SteamGateAssemblerRecipes(), new CactusWonderFakeRecipes(),
             new InfernalCokeRecipes(), new SteamFusionReactorRecipes(), new SteamExtractinatorRecipes(),
-            new ExtremeRecipeImporter(), new RockBreakerRecipes()
+            new RockBreakerRecipes()
 
         };
 

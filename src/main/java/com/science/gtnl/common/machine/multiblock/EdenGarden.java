@@ -180,7 +180,9 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack itemStack) {
         mCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
-        boolean valid = this.mMaintenanceHatches.size() == 1 && !this.mEnergyHatches.isEmpty() && this.mCasing >= 70;
+        boolean valid = this.mMaintenanceHatches.size() == 1
+            && !(this.mEnergyHatches.isEmpty() || this.mExoticEnergyHatches.isEmpty())
+            && this.mCasing >= 1000;
 
         if (valid) this.updateSeedLimits();
         return valid;

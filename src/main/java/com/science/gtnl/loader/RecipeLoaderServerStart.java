@@ -2,6 +2,7 @@ package com.science.gtnl.loader;
 
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeUtil;
+import com.science.gtnl.common.recipe.AprilFool.ExtremeRecipeImporter;
 import com.science.gtnl.common.recipe.GTNL.ExtremeExtremeEntityCrusherRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblerConvertRecipes;
@@ -26,7 +27,8 @@ public class RecipeLoaderServerStart {
             }
 
             IRecipePool[] recipePools = new IRecipePool[] { new FormingPressRecipes(),
-                new CircuitAssemblerConvertRecipes(), new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
+                new CircuitAssemblerConvertRecipes(), new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes(),
+                new ExtremeRecipeImporter() };
 
             for (IRecipePool recipePool : recipePools) {
                 recipePool.loadRecipes();
