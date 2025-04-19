@@ -1,18 +1,24 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
+import static goodgenerator.loader.Loaders.FRF_Coil_1;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
-import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
-import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
+import static gregtech.api.util.GTStructureUtility.*;
+import static gtPlusPlus.core.block.ModBlocks.blockCasings4Misc;
+import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
+import static kekztech.common.Blocks.lscLapotronicEnergyUnit;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,17 +26,20 @@ import org.jetbrains.annotations.NotNull;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.misc.OverclockType;
 
-import bartworks.API.BorosilicateGlass;
-import goodgenerator.loader.Loaders;
-import gregtech.api.GregTechAPI;
+import galaxyspace.core.register.GSBlocks;
+import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.TAE;
 import gregtech.api.enums.Textures;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -41,43 +50,46 @@ import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import gregtech.common.blocks.BlockCasings9;
-import gtnhlanth.common.register.LanthItemList;
 
-public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPhagocytosisPlant>
+public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBase<MagneticEnergyReactionFurnace>
     implements IWirelessEnergyHatchInformation {
 
-    private byte mGlassTier = 0;
-    private static final int HORIZONTAL_OFF_SET = 10;
-    private static final int VERTICAL_OFF_SET = 22;
-    private static final int DEPTH_OFF_SET = 0;
+    private static final int MACHINEMODE_ARC = 0;
+    private static final int MACHINEMODE_PLSAMA = 1;
+    private HeatingCoilLevel heatLevel;
+    private int coilTier = 0;
+    private static final int HORIZONTAL_OFF_SET = 16;
+    private static final int VERTICAL_OFF_SET = 12;
+    private static final int DEPTH_OFF_SET = 1;
     private int tCountCasing = 0;
-    private static IStructureDefinition<NanoPhagocytosisPlant> STRUCTURE_DEFINITION = null;
+    public static final int CASING_INDEX = TAE.getIndexFromPage(3, 3);
+    private static IStructureDefinition<MagneticEnergyReactionFurnace> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String NPP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant"; // 文件路径
-    private static final String[][] shape = StructureUtils.readStructureFromFile(NPP_STRUCTURE_FILE_PATH);
+    private static final String MERF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/magnetic_energy_reaction_furnace"; // 文件路径
+    private static final String[][] shape = StructureUtils.readStructureFromFile(MERF_STRUCTURE_FILE_PATH);
 
-    public NanoPhagocytosisPlant(String aName) {
+    public MagneticEnergyReactionFurnace(String aName) {
         super(aName);
     }
 
-    public NanoPhagocytosisPlant(int aID, String aName, String aNameRegional) {
+    public MagneticEnergyReactionFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new NanoPhagocytosisPlant(this.mName);
+        return new MagneticEnergyReactionFurnace(this.mName);
     }
 
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.NanoPhagocytosisPlantRecipeType)
-            .addInfo(TextLocalization.Tooltip_NanoPhagocytosisPlant_00)
-            .addInfo(TextLocalization.Tooltip_NanoPhagocytosisPlant_01)
+        tt.addMachineType(TextLocalization.MagneticEnergyReactionFurnaceRecipeType)
+            .addInfo(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_00)
+            .addInfo(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_01)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
@@ -93,17 +105,17 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(21, 24, 38, true)
-            .addInputBus(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
+            .beginStructureBlock(33, 14, 15, true)
+            .addInputBus(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
+            .addOutputBus(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
+            .addEnergyHatch(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
             .toolTipFinisher();
         return tt;
     }
 
     @Override
     public int getCasingTextureID() {
-        return ((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12);
+        return CASING_INDEX;
     }
 
     @Override
@@ -125,40 +137,32 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     }
 
     @Override
-    public IStructureDefinition<NanoPhagocytosisPlant> getStructureDefinition() {
+    public IStructureDefinition<MagneticEnergyReactionFurnace> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<NanoPhagocytosisPlant>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<MagneticEnergyReactionFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 2))
+                .addElement('A', ofBlock(FRF_Coil_1, 0))
+                .addElement('B', ofBlock(MetaBlockGlass, 2))
+                .addElement('C', ofBlockAnyMeta(ELECTRODE_CASING))
+                .addElement('D', ofBlock(sBlockCasings10, 0))
+                .addElement('E', ofBlock(sBlockCasings10, 6))
+                .addElement('F', ofBlock(sBlockCasings2, 6))
+                .addElement('G', ofBlock(sBlockCasings4, 12))
                 .addElement(
-                    'B',
-                    buildHatchAdder(NanoPhagocytosisPlant.class).atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy))
-                        .casingIndex(((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12))
+                    'H',
+                    ofCoil(MagneticEnergyReactionFurnace::setCoilLevel, MagneticEnergyReactionFurnace::getCoilLevel))
+                .addElement('I', ofBlock(sBlockCasings9, 13))
+                .addElement('J', ofFrame(Materials.Neutronium))
+                .addElement('K', ofBlock(sBlockMetal5, 1))
+                .addElement(
+                    'L',
+                    buildHatchAdder(MagneticEnergyReactionFurnace.class)
+                        .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
+                        .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings9, 12))))
-                .addElement('C', ofBlock(sBlockCasingsTT, 0))
-                .addElement('D', ofBlock(sBlockCasings10, 7))
-                .addElement('E', ofBlock(sBlockCasings8, 7))
-                .addElement('F', ofBlock(sBlockCasings1, 15))
-                .addElement('G', ofBlock(sBlockCasings4, 7))
-                .addElement('H', ofBlock(sBlockCasings4, 11))
-                .addElement('I', ofBlock(sBlockCasings4, 12))
-                .addElement('J', ofBlock(Loaders.compactFusionCoil, 2))
-                .addElement('K', ofBlock(sBlockCasings10, 3))
-                .addElement('L', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
-                .addElement('M', ofBlock(sBlockCasings8, 11))
-                .addElement('N', ofBlock(sBlockCasings9, 13))
-                .addElement('O', ofFrame(Materials.EnrichedHolmium))
-                .addElement('P', ofBlock(sBlockCasings8, 10))
-                .addElement('Q', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
-                .addElement('R', ofBlock(sBlockMetal5, 1))
-                .addElement('S', ofBlock(sBlockCasings10, 8))
-                .addElement('T', ofBlock(MetaCasing, 4))
-                .addElement('U', ofBlock(sBlockCasingsTT, 6))
-                .addElement('V', ofBlock(sBlockCasings3, 10))
-                .addElement('W', ofBlock(MetaCasing, 18))
-                .addElement('X', ofBlock(blockCasingsMisc, 5))
-                .addElement('Y', ofBlock(Loaders.compactFusionCoil, 0))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings4Misc, 3))))
+                .addElement('M', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
+                .addElement('N', ofBlock(lscLapotronicEnergyUnit, 0))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -198,13 +202,16 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
+        heatLevel = HeatingCoilLevel.None;
         tCountCasing = 0;
+        coilTier = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         if (tCountCasing <= 200 && !checkHatches()) {
             updateHatchTexture();
             return false;
         }
+        coilTier = getCoilLevel().getTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return true;
     }
@@ -228,32 +235,78 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
                     : super.createOverclockCalculator(recipe)
-                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
-                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
+                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.80, coilTier))
+                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.80, coilTier));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
 
-    @Override
-    public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.maceratorRecipes;
+    public HeatingCoilLevel getCoilLevel() {
+        return this.heatLevel;
+    }
+
+    public void setCoilLevel(HeatingCoilLevel level) {
+        this.heatLevel = level;
     }
 
     @Override
-    public int getWirelessModeProcessingTime() {
-        return 150 - ParallelTier * 10;
+    public RecipeMap<?> getRecipeMap() {
+        return (machineMode == MACHINEMODE_ARC) ? RecipeMaps.arcFurnaceRecipes : RecipeMaps.plasmaArcFurnaceRecipes;
+    }
+
+    @Nonnull
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(RecipeMaps.arcFurnaceRecipes, RecipeMaps.plasmaArcFurnaceRecipes);
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.clear();
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_METAL);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_FLUID);
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setByte("mGlassTier", mGlassTier);
+        aNBT.setInteger("mode", machineMode);
     }
 
     @Override
-    public void loadNBTData(NBTTagCompound aNBT) {
+    public void loadNBTData(final NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        mGlassTier = aNBT.getByte("mGlassTier");
+        machineMode = aNBT.getInteger("mode");
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        setMachineModeIcons();
+        builder.widget(createModeSwitchButton(builder));
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        this.machineMode = (byte) ((this.machineMode + 1) % 2);
+        GTUtility.sendChatToPlayer(
+            aPlayer,
+            StatCollector.translateToLocal("MagneticEnergyReactionFurnace_Mode_" + this.machineMode));
+    }
+
+    @Override
+    public String getMachineModeName() {
+        return StatCollector.translateToLocal("MagneticEnergyReactionFurnace_Mode_" + machineMode);
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    @Override
+    public int getWirelessModeProcessingTime() {
+        return 150 - ParallelTier * 10;
     }
 
 }

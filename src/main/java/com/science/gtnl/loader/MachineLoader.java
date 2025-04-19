@@ -85,6 +85,7 @@ import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
 import com.science.gtnl.common.machine.multiblock.LargeSteamSifter;
 import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
 import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
+import com.science.gtnl.common.machine.multiblock.MagneticEnergyReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
@@ -731,6 +732,13 @@ public class MachineLoader {
         GTNLItemList.NanoPhagocytosisPlant
             .set(new NanoPhagocytosisPlant(21129, "NanoPhagocytosisPlant", TextLocalization.NameNanoPhagocytosisPlant));
         addItemTooltip(GTNLItemList.NanoPhagocytosisPlant.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.MagneticEnergyReactionFurnace.set(
+            new MagneticEnergyReactionFurnace(
+                21130,
+                "MagneticEnergyReactionFurnace",
+                TextLocalization.NameMagneticEnergyReactionFurnace));
+        addItemTooltip(GTNLItemList.MagneticEnergyReactionFurnace.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

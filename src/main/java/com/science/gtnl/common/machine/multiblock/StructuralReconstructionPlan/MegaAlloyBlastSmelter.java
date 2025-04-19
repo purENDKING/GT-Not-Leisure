@@ -164,6 +164,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         ParallelTier = 0;
+        heatLevel = HeatingCoilLevel.None;
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mEnergyHatches.size() <= 1

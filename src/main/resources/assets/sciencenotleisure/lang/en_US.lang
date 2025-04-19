@@ -1817,6 +1817,14 @@ Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nan
 Tooltip_NanoPhagocytosisPlant_01=Each glass tier provides an additional 5%% speed and power reduction (multiplicative).
 Tooltip_NanoPhagocytosisPlant_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
 
+NameMagneticEnergyReactionFurnace=Magnetic Energy Reaction Furnace
+MagneticEnergyReactionFurnaceRecipeType=Arc Furnace / Plasma Arc Furnace
+MagneticEnergyReactionFurnace_Mode_0=Arc Furnace
+MagneticEnergyReactionFurnace_Mode_1=Plasma Arc Furnace
+Tooltip_MagneticEnergyReactionFurnace_00=Capacitor is operating at full capacity.
+Tooltip_MagneticEnergyReactionFurnace_01=Each level of coil grade provides an additional 20%% acceleration and power consumption reduction (multiplication and superposition)
+Tooltip_MagneticEnergyReactionFurnace_Casing=Ang Tempered Arc Furnace Casing
+
 NameIntegratedAssemblyFacility=Integrated Assembly Facility
 IntegratedAssemblyFacilityRecipeType=Assembler
 Tooltip_IntegratedAssemblyFacility_00=Each level of Glass and Component Assembly Line Casing grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)

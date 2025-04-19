@@ -817,6 +817,22 @@ public class TextLocalization {
         "Ang Naquadria-Reinforced Water Plant Casing",
         "Tooltip_NanoPhagocytosisPlant_Casing");
 
+    public static final String NameMagneticEnergyReactionFurnace = texter(
+        "Magnetic Energy Reaction Furnace",
+        "NameMagneticEnergyReactionFurnace");
+    public static final String MagneticEnergyReactionFurnaceRecipeType = texter(
+        "Arc Furnace / Plasma Arc Furnace",
+        "MagneticEnergyReactionFurnaceRecipeType");
+    public static final String Tooltip_MagneticEnergyReactionFurnace_00 = texter(
+        "Capacitor is operating at full capacity.",
+        "Tooltip_MagneticEnergyReactionFurnace_00");
+    public static final String Tooltip_MagneticEnergyReactionFurnace_01 = texter(
+        "Each level of coil grade provides an additional 20%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_MagneticEnergyReactionFurnace_01");
+    public static final String Tooltip_MagneticEnergyReactionFurnace_Casing = texter(
+        "Ang Tempered Arc Furnace Casing",
+        "Tooltip_MagneticEnergyReactionFurnace_Casing");
+
     public static final String NameIntegratedAssemblyFacility = texter(
         "Integrated Assembly Facility",
         "NameIntegratedAssemblyFacility");
