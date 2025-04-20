@@ -1,5 +1,6 @@
 package com.science.gtnl.common.machine.multiblock;
 
+import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -170,7 +171,7 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
                 .addElement('B', ofBlock(sBlockCasings1, 13))
                 .addElement('C', ofBlock(sBlockCasings10, 11))
                 .addElement('D', ofBlock(sBlockCasings9, 11))
-                .addElement('E', ofBlockUnlocalizedName("bartworks", "BW_GlasBlocks", 15))
+                .addElement('E', ofBlock(bw_realglas, 15))
                 .addElement('F', ofBlock(sBlockGlass1, 2))
                 .addElement('G', ofBlock(BlockQuantumGlass.INSTANCE, 0))
                 .addElement('I', ofBlockAnyMeta(Blocks.beacon))

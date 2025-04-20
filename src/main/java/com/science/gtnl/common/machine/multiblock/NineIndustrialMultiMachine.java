@@ -57,7 +57,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
@@ -205,12 +204,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
             env,
             false,
             true);
-    }
-
-    public void updateHatchTexture() {
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
     }
 
     @Override

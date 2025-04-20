@@ -52,6 +52,7 @@ import com.science.gtnl.common.machine.multiblock.AprilFool.SteamMegaCompressor;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamRockBreaker;
 import com.science.gtnl.common.machine.multiblock.AprilFool.SteamWoodcutter;
 import com.science.gtnl.common.machine.multiblock.AprilFool.Steamgate;
+import com.science.gtnl.common.machine.multiblock.BioengineeringModule;
 import com.science.gtnl.common.machine.multiblock.BloodSoulSacrificialArray;
 import com.science.gtnl.common.machine.multiblock.BrickedBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.CheatOreProcessingFactory;
@@ -88,11 +89,14 @@ import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
 import com.science.gtnl.common.machine.multiblock.MagneticEnergyReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.machine.multiblock.NanitesIntegratedProcessingCenter;
 import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
 import com.science.gtnl.common.machine.multiblock.NineIndustrialMultiMachine;
+import com.science.gtnl.common.machine.multiblock.OreExtractionModule;
 import com.science.gtnl.common.machine.multiblock.PetrochemicalPlant;
 import com.science.gtnl.common.machine.multiblock.PlatinumBasedTreatment;
+import com.science.gtnl.common.machine.multiblock.PolymerTwistingModule;
 import com.science.gtnl.common.machine.multiblock.PrimitiveDistillationTower;
 import com.science.gtnl.common.machine.multiblock.ProcessingArray;
 import com.science.gtnl.common.machine.multiblock.RareEarthCentrifugal;
@@ -739,6 +743,25 @@ public class MachineLoader {
                 "MagneticEnergyReactionFurnace",
                 TextLocalization.NameMagneticEnergyReactionFurnace));
         addItemTooltip(GTNLItemList.MagneticEnergyReactionFurnace.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.NanitesIntegratedProcessingCenter.set(
+            new NanitesIntegratedProcessingCenter(
+                21131,
+                "NanitesIntegratedProcessingCenter",
+                TextLocalization.NameNanitesIntegratedProcessingCenter));
+        addItemTooltip(GTNLItemList.NanitesIntegratedProcessingCenter.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.BioengineeringModule
+            .set(new BioengineeringModule(21132, "BioengineeringModule", TextLocalization.NameBioengineeringModule));
+        addItemTooltip(GTNLItemList.BioengineeringModule.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.PolymerTwistingModule
+            .set(new PolymerTwistingModule(21133, "PolymerTwistingModule", TextLocalization.NamePolymerTwistingModule));
+        addItemTooltip(GTNLItemList.PolymerTwistingModule.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.OreExtractionModule
+            .set(new OreExtractionModule(21134, "OreExtractionModule", TextLocalization.NameOreExtractionModule));
+        addItemTooltip(GTNLItemList.OreExtractionModule.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

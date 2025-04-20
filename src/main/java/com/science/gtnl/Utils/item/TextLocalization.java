@@ -665,9 +665,6 @@ public class TextLocalization {
         "Base rate: 250 of EU -> 1 Mana",
         "Tooltip_ManaEnergyHatch_02");
     public static final String Tooltip_ManaEnergyHatch_03 = texter("Fluid capacity: ", "Tooltip_ManaEnergyHatch_03");
-    public static final String Tooltip_ManaEnergyHatch_04 = texter(
-        "Right-click with the screwdriver to switch modes",
-        "Tooltip_ManaEnergyHatch_04");
 
     public static final String NameGrandAssemblyLine = texter("Grand Assembly Line", "NameGrandAssemblyLine");
     public static final String GrandAssemblyLineRecipeType = texter(
@@ -848,6 +845,37 @@ public class TextLocalization {
     public static final String Tooltip_IntegratedAssemblyFacility_Casing = texter(
         "Ang Advanced Iridium Plated Machine Casing",
         "Tooltip_IntegratedAssemblyFacility_Casing");
+
+    public static final String NameNanitesIntegratedProcessingCenter = texter(
+        "Nanites Integrated Processing Center",
+        "NameNanitesIntegratedProcessingCenter");
+    public static final String NanitesIntegratedProcessingCenterRecipeType = texter(
+        "Nanites Integrated Processing Center",
+        "NanitesIntegratedProcessingCenterRecipeType");
+    public static final String Tooltip_NanitesIntegratedProcessingCenter_00 = texter(
+        "Our advanced nano-swarm manufacturing technology has completely surpassed the outdated chemical production lines",
+        "Tooltip_NanitesIntegratedProcessingCenter_00");
+    public static final String Tooltip_NanitesIntegratedProcessingCenter_01 = texter(
+        "Install the corresponding module to unlock the related recipe",
+        "Tooltip_NanitesIntegratedProcessingCenter_01");
+    public static final String Tooltip_NanitesIntegratedProcessingCenter_02 = texter(
+        "Inserting Nano Swarms into the controller can reduce material requirements",
+        "Tooltip_NanitesIntegratedProcessingCenter_02");
+    public static final String Tooltip_NanitesIntegratedProcessingCenter_03 = texter(
+        "Each level of coil grade provides an additional 10%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Tooltip_NanitesIntegratedProcessingCenter_03");
+    public static final String Tooltip_NanitesIntegratedProcessingCenter_Casing = texter(
+        "Ang Radiant Naquadah Alloy Casing",
+        "Tooltip_NanitesIntegratedProcessingCenter_Casing");
+
+    public static final String NameBioengineeringModule = texter("Bioengineering Module", "NameBioengineeringModule");
+    public static final String NamePolymerTwistingModule = texter(
+        "Polymer Twisting Module",
+        "NamePolymerTwistingModule");
+    public static final String NameOreExtractionModule = texter("Ore Extraction Module", "NameOreExtractionModule");
+    public static final String Tooltip_NanitesBaseModule_Casing = texter(
+        "Hint 1 dots",
+        "Tooltip_NanitesBaseModule_Casing");
 
     public static final String NameCrackerHub = texter("Cracker Hub", "NameCrackerHub");
     public static final String CrackerHubRecipeType = texter("Oil Cracker", "CrackerHubRecipeType");

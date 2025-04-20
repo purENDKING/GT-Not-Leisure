@@ -200,6 +200,7 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
             && mOutputHatches.isEmpty();
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
         heatLevel = HeatingCoilLevel.None;

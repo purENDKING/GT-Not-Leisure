@@ -44,7 +44,6 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
-import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -115,12 +114,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             .addEnergyHatch(TextLocalization.Tooltip_SmeltingMixingFurnace_Casing, 1)
             .toolTipFinisher();
         return tt;
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mInputHatches) h.updateTexture(CASING_INDEX);
-        for (MTEHatch h : mOutputHatches) h.updateTexture(CASING_INDEX);
-        for (MTEHatch h : mInputBusses) h.updateTexture(CASING_INDEX);
     }
 
     @Override

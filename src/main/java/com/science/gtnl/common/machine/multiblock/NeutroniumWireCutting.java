@@ -190,6 +190,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             && mOutputHatches.isEmpty();
     }
 
+    @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
         tCountCasing = 0;

@@ -1186,6 +1186,8 @@ PTARRecipes.1=Elves don't like bread.
 MachineTierTooltip=Machine Tier: 
 ParallelTooltip=Parallel: 
 HighPressureTooltipNotice=High pressure mode doubles processing speed and steam consumption
+Info_SteamMachine_00=Overclocking count
+
 StructureTooComplex=Structure is too complex!
 BLUE_PRINT_INFO=Please refer to §9Structure§1Lib§7 hologram to build the main structure
 textUseBlueprint=Use §9Blueprint§r to preview
@@ -1830,6 +1832,19 @@ IntegratedAssemblyFacilityRecipeType=Assembler
 Tooltip_IntegratedAssemblyFacility_00=Each level of Glass and Component Assembly Line Casing grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)
 Tooltip_IntegratedAssemblyFacility_01=The level of the Component Assembly Line Casing determines the maximum level of the energy warehouse + 3. UIV mechanical blocks unlock all levels.
 Tooltip_IntegratedAssemblyFacility_Casing=Ang Advanced Iridium Plated Machine Casing
+
+NameNanitesIntegratedProcessingCenter=Nanites Integrated Processing Center
+NanitesIntegratedProcessingCenterRecipeType=Nanites Integrated Processing Center
+Tooltip_NanitesIntegratedProcessingCenter_00=Our advanced nano-swarm manufacturing technology has completely surpassed the outdated chemical production lines
+Tooltip_NanitesIntegratedProcessingCenter_01=Install the corresponding module to unlock the related recipe
+Tooltip_NanitesIntegratedProcessingCenter_02=Inserting Nano Swarms into the controller can reduce material requirements
+Tooltip_NanitesIntegratedProcessingCenter_03=Each level of coil grade provides an additional 10%% acceleration and power consumption reduction (multiplication and stacking)
+Tooltip_NanitesIntegratedProcessingCenter_Casing=Any Radiant Naquadah Alloy Machine Casing
+
+NameBioengineeringModule=Bioengineering Module
+NamePolymerTwistingModule=Polymer Twisting Module
+NameOreExtractionModule=Ore Extraction Module
+Tooltip_NanitesBaseModule_Casing=Hint 1 dots
 
 NameCrackerHub=Cracker Hub
 CrackerHubRecipeType=Oil Cracker
