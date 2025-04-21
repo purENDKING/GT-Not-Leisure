@@ -1,0 +1,700 @@
+package com.science.gtnl.common.machine.multiblock;
+
+import static bartworks.common.loaders.ItemRegistry.bw_realglas;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
+import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.HatchElement.ExoticEnergy;
+import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
+import static gregtech.api.util.GTStructureUtility.*;
+import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
+import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.jetbrains.annotations.NotNull;
+
+import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
+import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
+import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
+import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
+import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizon.structurelib.structure.StructureUtility;
+import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
+import com.gtnewhorizons.gtnhintergalactic.config.IGConfig;
+import com.gtnewhorizons.gtnhintergalactic.gui.IG_UITextures;
+import com.gtnewhorizons.gtnhintergalactic.tile.TileEntitySpaceElevatorCable;
+import com.gtnewhorizons.gtnhintergalactic.tile.multi.elevator.ElevatorUtil;
+import com.gtnewhorizons.gtnhintergalactic.tile.multi.elevatormodules.TileEntityModuleBase;
+import com.gtnewhorizons.modularui.api.ModularUITextures;
+import com.gtnewhorizons.modularui.api.drawable.IDrawable;
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
+import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
+import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
+import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.TextLocalization;
+
+import galaxyspace.core.register.GSBlocks;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.SoundResource;
+import gregtech.api.enums.Textures;
+import gregtech.api.interfaces.IHatchElement;
+import gregtech.api.interfaces.ISecondaryDescribable;
+import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.objects.GTChunkManager;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.util.GTUtility;
+import gregtech.api.util.HatchElementBuilder;
+import gregtech.api.util.IGTHatchAdder;
+import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.common.misc.spaceprojects.SpaceProjectManager;
+import kubatech.loaders.BlockLoader;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
+import micdoodle8.mods.galacticraft.core.client.gui.screen.GuiCelestialSelection;
+import micdoodle8.mods.galacticraft.core.entities.player.GCPlayerStats;
+import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
+import micdoodle8.mods.galacticraft.core.util.WorldUtil;
+import tectech.thing.gui.TecTechUITextures;
+import tectech.thing.metaTileEntity.multi.base.TTMultiblockBase;
+import tectech.thing.metaTileEntity.multi.base.render.TTRenderedExtendedFacingTexture;
+
+public class SuperSpaceElevator extends TTMultiblockBase
+    implements IConstructable, ISecondaryDescribable, ISurvivalConstructable {
+
+    /** List of project modules in this elevator */
+    public ArrayList<TileEntityModuleBase> mProjectModuleHatches = new ArrayList<>();
+    /** TE of the cable */
+    protected TileEntitySpaceElevatorCable elevatorCable;
+    /** Motor tier of the Space Elevator */
+    protected int motorTier = 0;
+    /** Flag if the chunks of the machine are loaded by it */
+    private boolean isLoadedChunk;
+    /** Interval in which the modules will be supplied with power in ticks */
+    private static final int MODULE_CHARGE_INTERVAL = 10;
+    /** Multiplier for the internal EU buffer */
+    private static final int INTERNAL_BUFFER_MULTIPLIER = 256;
+    /** Window ID of the contributors child window */
+    private static final int CONTRIBUTORS_WINDOW_ID = 10;
+
+    public static final int CASING_INDEX_BASE = 32 * 128;
+    private static final String STRUCTURE_PIECE_MAIN = "main_base";
+    private static final String STRUCTURE_PIECE_EXTENDED = "main_extended";
+    private static final int STRUCTURE_PIECE_MAIN_HOR_OFFSET = 32;
+    private static final int STRUCTURE_PIECE_MAIN_VERT_OFFSET = 49;
+    private static final int STRUCTURE_PIECE_MAIN_DEPTH_OFFSET = 28;
+    private static final int STRUCTURE_PIECE_EXTENDED_HOR_OFFSET = 32;
+    private static final int STRUCTURE_PIECE_EXTENDED_VERT_OFFSET = -4;
+    private static final int STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET = 28;
+    private static IStructureDefinition<SuperSpaceElevator> STRUCTURE_DEFINITION = null;
+    private static final String SSEB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_base";
+    private static final String SSEE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_extended";
+    private static final String[][] shapeBase = StructureUtils.readStructureFromFile(SSEB_STRUCTURE_FILE_PATH);
+    private static final String[][] shapeExtended = StructureUtils.readStructureFromFile(SSEE_STRUCTURE_FILE_PATH);
+
+    private int tCountCasing = 0;
+    private boolean wirelessMode = false;
+    private BigInteger costingEU = BigInteger.ZERO;
+    private UUID ownerUUID;
+    private String costingEUText = ZERO_STRING;
+
+    public SuperSpaceElevator(int aID, String aName, String aNameRegional) {
+        super(aID, aName, aNameRegional);
+        useLongPower = true;
+    }
+
+    protected SuperSpaceElevator(String aName) {
+        super(aName);
+        useLongPower = true;
+    }
+
+    @Override
+    public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
+        return new SuperSpaceElevator(this.mName);
+    }
+
+    @Override
+    public MultiblockTooltipBuilder createTooltip() {
+        MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
+        tt.addMachineType(TextLocalization.SuperSpaceElevatorRecipeType)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_00)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_01)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_02)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_03)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_04)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_05)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_06)
+            .addInfo(TextLocalization.Tooltip_SuperSpaceElevator_07)
+            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+            .addSeparator()
+            .addInfo(TextLocalization.StructureTooComplex)
+            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .beginStructureBlock(65, 53, 65, true)
+            .addEnergyHatch(TextLocalization.Tooltip_SuperSpaceElevator_Casing)
+            .addDynamoHatch(TextLocalization.Tooltip_SuperSpaceElevator_Casing)
+            .toolTipFinisher();
+        return tt;
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        motorTier = aNBT.getInteger("motorTier");
+        wirelessMode = aNBT.getBoolean("wirelessMode");
+        super.loadNBTData(aNBT);
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        aNBT.setInteger("motorTier", motorTier);
+        aNBT.setBoolean("wirelessMode", wirelessMode);
+        super.saveNBTData(aNBT);
+    }
+
+    @Override
+    public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
+        IWailaConfigHandler config) {
+        super.getWailaBody(itemStack, currentTip, accessor, config);
+        final NBTTagCompound tag = accessor.getNBTData();
+        if (tag.getBoolean("wirelessMode")) {
+            currentTip.add(EnumChatFormatting.LIGHT_PURPLE + TextLocalization.Waila_WirelessMode);
+            currentTip.add(
+                EnumChatFormatting.AQUA + TextLocalization.Waila_CurrentEuCost
+                    + EnumChatFormatting.RESET
+                    + ": "
+                    + EnumChatFormatting.GOLD
+                    + tag.getString("costingEUText")
+                    + EnumChatFormatting.RESET
+                    + " EU");
+        }
+    }
+
+    @Override
+    public void getWailaNBTData(EntityPlayerMP player, TileEntity tile, NBTTagCompound tag, World world, int x, int y,
+        int z) {
+        super.getWailaNBTData(player, tile, tag, world, x, y, z);
+        final IGregTechTileEntity tileEntity = getBaseMetaTileEntity();
+        if (tileEntity != null) {
+            tag.setBoolean("wirelessMode", wirelessMode);
+            if (wirelessMode) tag.setString("costingEUText", costingEUText);
+        }
+    }
+
+    @Override
+    public long maxEUStore() {
+        return INTERNAL_BUFFER_MULTIPLIER * super.maxEUStore();
+    }
+
+    public int getNumberOfModules() {
+        return mProjectModuleHatches != null ? mProjectModuleHatches.size() : 0;
+    }
+
+    public int getChunkX() {
+        return getBaseMetaTileEntity().getXCoord() >> 4;
+    }
+
+    public int getChunkZ() {
+        return getBaseMetaTileEntity().getZCoord() >> 4;
+    }
+
+    @Override
+    public IStructureDefinition<? extends TTMultiblockBase> getStructure_EM() {
+        if (STRUCTURE_DEFINITION == null) {
+            STRUCTURE_DEFINITION = StructureDefinition.<SuperSpaceElevator>builder()
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shapeBase))
+                .addShape(STRUCTURE_PIECE_EXTENDED, transpose(shapeExtended))
+                .addElement('A', ofBlock(MetaCasing, 18))
+                .addElement('B', ofBlock(IGBlocks.SpaceElevatorCasing, 2))
+                .addElement('C', ofBlock(sBlockCasingsTT, 0))
+                .addElement(
+                    'D',
+                    withChannel(
+                        "motor",
+                        StructureUtility.ofBlocksTiered(
+                            ElevatorUtil.motorTierConverter(),
+                            ElevatorUtil.getMotorTiers(),
+                            0,
+                            SuperSpaceElevator::setMotorTier,
+                            SuperSpaceElevator::getMotorTier)))
+                .addElement('E', ofFrame(Materials.Neutronium))
+                .addElement(
+                    'F',
+                    buildHatchAdder(SuperSpaceElevator.class).atLeast(Energy.or(ExoticEnergy), Dynamo)
+                        .casingIndex(CASING_INDEX_BASE)
+                        .dot(1)
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(IGBlocks.SpaceElevatorCasing, 0))))
+                .addElement('G', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
+                .addElement('H', ofBlock(IGBlocks.SpaceElevatorCasing, 1))
+                .addElement('I', ofBlock(sBlockCasings1, 12))
+                .addElement('J', ofBlock(BlockLoader.defcCasingBlock, 7))
+                .addElement('K', ofBlock(bw_realglas, 14))
+                .addElement('L', classicHatches(CASING_INDEX_BASE, 10, IGBlocks.SpaceElevatorCasing, 0))
+                .addElement(
+                    'M',
+                    HatchElementBuilder.<SuperSpaceElevator>builder()
+                        .atLeast(SuperSpaceElevator.ProjectModuleElement.ProjectModule)
+                        .casingIndex(CASING_INDEX_BASE)
+                        .dot(10)
+                        .buildAndChain(IGBlocks.SpaceElevatorCasing, 0))
+                .addElement(
+                    'N',
+                    ElevatorUtil.ofBlockAdder(SuperSpaceElevator::addCable, IGBlocks.SpaceElevatorCable, 0))
+                .addElement('O', ofBlock(MetaBlockGlow, 31))
+                .build();
+        }
+        return STRUCTURE_DEFINITION;
+    }
+
+    @Override
+    public void construct(ItemStack stackSize, boolean hintsOnly) {
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            STRUCTURE_PIECE_MAIN_HOR_OFFSET,
+            STRUCTURE_PIECE_MAIN_VERT_OFFSET,
+            STRUCTURE_PIECE_MAIN_DEPTH_OFFSET);
+
+        int tMotorTier = Math.min(stackSize.stackSize, 6);
+        if (tMotorTier > 1) {
+            for (int i = 0; i < tMotorTier - 1; i++) {
+                this.buildPiece(
+                    STRUCTURE_PIECE_EXTENDED,
+                    stackSize,
+                    hintsOnly,
+                    STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
+                    STRUCTURE_PIECE_EXTENDED_VERT_OFFSET - i * 6,
+                    STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET);
+            }
+        }
+    }
+
+    @Override
+    public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
+        if (this.mMachine) return -1;
+
+        int[] built = new int[stackSize.stackSize + 1];
+
+        built[0] = this.survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            STRUCTURE_PIECE_MAIN_HOR_OFFSET,
+            STRUCTURE_PIECE_MAIN_VERT_OFFSET,
+            STRUCTURE_PIECE_MAIN_DEPTH_OFFSET,
+            elementBudget,
+            env,
+            false,
+            true);
+
+        int tMotorTier = Math.min(stackSize.stackSize, 6);
+
+        if (tMotorTier > 1) {
+            for (int i = 0; i < tMotorTier - 1; i++) {
+                built[i] = this.survivialBuildPiece(
+                    STRUCTURE_PIECE_EXTENDED,
+                    stackSize,
+                    STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
+                    STRUCTURE_PIECE_EXTENDED_VERT_OFFSET - i * 6,
+                    STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET,
+                    elementBudget,
+                    env,
+                    false,
+                    true);
+            }
+        }
+
+        return multiBuildPiece(built);
+    }
+
+    @Override
+    public boolean checkMachine_EM(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        mProjectModuleHatches.clear();
+        elevatorCable = null;
+        motorTier = 0;
+        wirelessMode = false;
+
+        if (!structureCheck_EM(
+            STRUCTURE_PIECE_MAIN,
+            STRUCTURE_PIECE_MAIN_HOR_OFFSET,
+            STRUCTURE_PIECE_MAIN_VERT_OFFSET,
+            STRUCTURE_PIECE_MAIN_DEPTH_OFFSET)) {
+            if (elevatorCable != null) {
+                elevatorCable.setShouldRender(false);
+            }
+            return false;
+        }
+
+        if (motorTier > 1) {
+            int actualExtensionLayers = 0;
+
+            while (actualExtensionLayers < motorTier - 1) {
+                if (!structureCheck_EM(
+                    STRUCTURE_PIECE_EXTENDED,
+                    STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
+                    STRUCTURE_PIECE_EXTENDED_VERT_OFFSET - actualExtensionLayers * 6,
+                    STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET)) {
+                    break;
+                }
+
+                actualExtensionLayers++;
+            }
+        }
+
+        if (elevatorCable != null) {
+            elevatorCable.setShouldRender(true);
+        }
+
+        if (motorTier > 2 && mExoticEnergyHatches.isEmpty() && mEnergyHatches.isEmpty()) wirelessMode = true;
+
+        return tCountCasing > 1000;
+    }
+
+    public boolean addProjectModuleToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
+            return false;
+        }
+        IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+        if (aMetaTileEntity == null) {
+            return false;
+        }
+        if (aMetaTileEntity instanceof TileEntityModuleBase) {
+            return mProjectModuleHatches.add((TileEntityModuleBase) aMetaTileEntity);
+        }
+        return false;
+    }
+
+    public boolean addCable(Block block, int aBaseCasingIndex, World world, int x, int y, int z) {
+        // Check if the cable block is valid and can see the sky
+        if (block != IGBlocks.SpaceElevatorCable || world == null) {
+            return false;
+        }
+        if (!world.canBlockSeeTheSky(x, y + 1, z)) {
+            return false;
+        }
+
+        TileEntity te = world.getTileEntity(x, y, z);
+
+        if (te instanceof TileEntitySpaceElevatorCable) {
+            elevatorCable = (TileEntitySpaceElevatorCable) te;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void setMotorTier(int tier) {
+        motorTier = tier;
+    }
+
+    public int getMotorTier() {
+        return motorTier;
+    }
+
+    @Override
+    public void onRemoval() {
+        if (elevatorCable != null) {
+            elevatorCable.setShouldRender(false);
+        }
+        if (mProjectModuleHatches != null && !mProjectModuleHatches.isEmpty()) {
+            for (TileEntityModuleBase projectModule : mProjectModuleHatches) {
+                projectModule.disconnect();
+            }
+        }
+        super.onRemoval();
+    }
+
+    @Override
+    public void onFirstTick_EM(IGregTechTileEntity aBaseMetaTileEntity) {
+        this.ownerUUID = aBaseMetaTileEntity.getOwnerUuid();
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        costingEUText = ZERO_STRING;
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+        if (aBaseMetaTileEntity.isServerSide()) {
+            if (aTick == 1) {
+                SpaceProjectManager.checkOrCreateTeam(aBaseMetaTileEntity.getOwnerUuid());
+            }
+            if (!aBaseMetaTileEntity.isAllowedToWork()) {
+                // if machine has stopped, stop chunkloading
+                GTChunkManager.releaseTicket((TileEntity) aBaseMetaTileEntity);
+                isLoadedChunk = false;
+            } else if (!isLoadedChunk) {
+                // load a 5x5 area when machine is running
+                GTChunkManager.releaseTicket((TileEntity) aBaseMetaTileEntity);
+                int offX = aBaseMetaTileEntity.getFrontFacing().offsetX;
+                int offZ = aBaseMetaTileEntity.getFrontFacing().offsetZ;
+                for (int i = -2; i < 3; i++) {
+                    for (int j = -2; j < 3; j++) {
+                        GTChunkManager.requestChunkLoad(
+                            (TileEntity) aBaseMetaTileEntity,
+                            new ChunkCoordIntPair(getChunkX() + offX + i, getChunkZ() + offZ + j));
+                    }
+                }
+                this.isLoadedChunk = true;
+            } else {
+                if (elevatorCable != null && IGConfig.spaceElevator.isCableRenderingEnabled
+                    && elevatorCable.getAnimation() == TileEntitySpaceElevatorCable.ClimberAnimation.NO_ANIMATION
+                    && aTick % 2000 == 0) {
+                    elevatorCable.startAnimation(TileEntitySpaceElevatorCable.ClimberAnimation.DELIVER_ANIMATION);
+                }
+            }
+
+            // Charge project modules
+            if (getBaseMetaTileEntity().isAllowedToWork()) {
+                if (aTick % MODULE_CHARGE_INTERVAL == 0) {
+                    if (!mProjectModuleHatches.isEmpty()) {
+                        long perModuleEnergy;
+                        if (wirelessMode) {
+                            perModuleEnergy = Long.MAX_VALUE / mProjectModuleHatches.size() * MODULE_CHARGE_INTERVAL;
+                        } else {
+                            perModuleEnergy = getEUVar() / mProjectModuleHatches.size() * MODULE_CHARGE_INTERVAL;
+                        }
+                        for (TileEntityModuleBase projectModule : mProjectModuleHatches) {
+                            if (projectModule.getNeededMotorTier() <= motorTier) {
+                                projectModule.connect();
+                                if (wirelessMode) {
+                                    BigInteger costEU = BigInteger.valueOf(perModuleEnergy);
+
+                                    if (addEUToGlobalEnergyMap(ownerUUID, costEU.multiply(NEGATIVE_ONE))) {
+                                        costingEUText = GTUtility.formatNumbers(costEU);
+                                        costingEU = costingEU.add(costEU);
+                                        projectModule.increaseStoredEU(perModuleEnergy);
+                                    }
+
+                                } else {
+                                    long tAvailableEnergy = getEUVar();
+                                    if (tAvailableEnergy > 0) {
+                                        long used = projectModule
+                                            .increaseStoredEU(Math.min(perModuleEnergy, tAvailableEnergy));
+                                        setEUVar(Math.max(0, tAvailableEnergy - used));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (!mProjectModuleHatches.isEmpty()) {
+                    for (TileEntityModuleBase projectModule : mProjectModuleHatches) {
+                        projectModule.disconnect();
+                    }
+                }
+            }
+            if (mEfficiency < 0) mEfficiency = 0;
+            fixAllIssues();
+        }
+    }
+
+    @Override
+    protected SoundResource getActivitySoundLoop() {
+        return SoundResource.TECTECH_MACHINES_FX_WHOOUM;
+    }
+
+    @Override
+    public @NotNull CheckRecipeResult checkProcessing_EM() {
+        if (getBaseMetaTileEntity().isAllowedToWork()) {
+            mEfficiencyIncrease = 10000;
+            mMaxProgresstime = 10;
+            return CheckRecipeResultRegistry.SUCCESSFUL;
+        }
+
+        mEfficiencyIncrease = 0;
+        mMaxProgresstime = 0;
+        return CheckRecipeResultRegistry.NO_RECIPE;
+    }
+
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection facing,
+        int colorIndex, boolean aActive, boolean aRedstone) {
+        if (side == facing) {
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX_BASE),
+                new TTRenderedExtendedFacingTexture(aActive ? TTMultiblockBase.ScreenON : TTMultiblockBase.ScreenOFF) };
+        }
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX_BASE) };
+    }
+
+    @Override
+    public boolean doesBindPlayerInventory() {
+        return false;
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(IG_UITextures.PICTURE_ELEVATOR_LOGO_DARK)
+                .setSize(18, 18)
+                .setPos(150, 154));
+    }
+
+    @Override
+    protected void drawTexts(DynamicPositionedColumn screenElements, SlotWidget inventorySlot) {
+        screenElements.setSynced(false)
+            .setSpace(0)
+            .setPos(10, 7);
+
+        screenElements
+            .widget(
+                new TextWidget(GTUtility.trans("138", "Incomplete Structure.")).setDefaultColor(COLOR_TEXT_WHITE.get())
+                    .setEnabled(widget -> !mMachine))
+            .widget(new FakeSyncWidget.BooleanSyncer(() -> mMachine, val -> mMachine = val));
+
+        screenElements.widget(
+            new TextWidget(StatCollector.translateToLocal("gt.blockmachines.multimachine.ig.elevator.gui.ready"))
+                .setDefaultColor(COLOR_TEXT_WHITE.get())
+                .setEnabled(widget -> mMachine));
+
+        screenElements
+            .widget(
+                TextWidget
+                    .dynamicString(
+                        () -> StatCollector.translateToLocal(
+                            "gt.blockmachines.multimachine.ig.elevator.gui.numOfModules") + ": " + getNumberOfModules())
+                    .setDefaultColor(COLOR_TEXT_WHITE.get())
+                    .setEnabled(widget -> getBaseMetaTileEntity().getErrorDisplayID() == 0));
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+
+        // Teleportation button
+        builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
+            if (!widget.getContext()
+                .isClient()) {
+                if (getBaseMetaTileEntity().isAllowedToWork() && motorTier > 0) {
+                    EntityPlayer player = widget.getContext()
+                        .getPlayer();
+                    if (player instanceof EntityPlayerMP playerBase) {
+                        final GCPlayerStats stats = GCPlayerStats.get(playerBase);
+                        stats.coordsTeleportedFromX = playerBase.posX;
+                        stats.coordsTeleportedFromZ = playerBase.posZ;
+                        try {
+                            WorldUtil.toCelestialSelection(
+                                playerBase,
+                                stats,
+                                250,
+                                GuiCelestialSelection.MapMode.TELEPORTATION);
+                        } catch (final Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        })
+            .setPlayClickSound(false)
+            .setBackground(() -> {
+                List<UITexture> ret = new ArrayList<>();
+                ret.add(TecTechUITextures.BUTTON_STANDARD_16x16);
+                ret.add(IG_UITextures.OVERLAY_BUTTON_PLANET_TELEPORT);
+                return ret.toArray(new IDrawable[0]);
+            })
+            .setPos(174, doesBindPlayerInventory() ? 132 : 156)
+            .setSize(16, 16)
+            .addTooltip(GCCoreUtil.translate("ig.button.travel"))
+            .setTooltipShowUpDelay(TOOLTIP_DELAY));
+
+        // Open contributor window button
+        builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
+            if (!widget.getContext()
+                .isClient()) {
+                widget.getContext()
+                    .openSyncedWindow(CONTRIBUTORS_WINDOW_ID);
+            }
+        })
+            .addTooltip(StatCollector.translateToLocal("ig.structure.contributors"))
+            .setBackground(ModularUITextures.ICON_INFO)
+            .setPos(133, 155)
+            .setSize(16, 16));
+    }
+
+    @Override
+    public boolean doRandomMaintenanceDamage() {
+        return false;
+    }
+
+    @Override
+    public boolean willExplodeInRain() {
+        return false;
+    }
+
+    @Override
+    protected ButtonWidget createSafeVoidButton() {
+        return null;
+    }
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
+    }
+
+    public enum ProjectModuleElement implements IHatchElement<SuperSpaceElevator> {
+
+        ProjectModule(SuperSpaceElevator::addProjectModuleToMachineList, TileEntityModuleBase.class) {
+
+            @Override
+            public long count(SuperSpaceElevator tileEntity) {
+                return tileEntity.mProjectModuleHatches.size();
+            }
+        };
+
+        private final List<Class<? extends IMetaTileEntity>> mteClasses;
+        private final IGTHatchAdder<SuperSpaceElevator> adder;
+
+        @SafeVarargs
+        ProjectModuleElement(IGTHatchAdder<SuperSpaceElevator> adder, Class<? extends IMetaTileEntity>... mteClasses) {
+            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
+            this.adder = adder;
+        }
+
+        @Override
+        public List<? extends Class<? extends IMetaTileEntity>> mteClasses() {
+            return mteClasses;
+        }
+
+        public IGTHatchAdder<? super SuperSpaceElevator> adder() {
+            return adder;
+        }
+    }
+
+    public static int multiBuildPiece(int... buildPieces) {
+        int out = 0x80000000;
+        for (int v : buildPieces) {
+            out &= (v & 0x80000000) | 0x7fffffff;
+            if (v != -1) out += v;
+        }
+        return out < 0 ? -1 : out;
+    }
+
+}

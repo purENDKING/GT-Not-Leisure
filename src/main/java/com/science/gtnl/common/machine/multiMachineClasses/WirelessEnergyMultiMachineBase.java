@@ -81,6 +81,7 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         this.ownerUUID = aBaseMetaTileEntity.getOwnerUuid();
     }
 
+    @Override
     public void getWailaBody(ItemStack itemStack, List<String> currentTip, IWailaDataAccessor accessor,
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);

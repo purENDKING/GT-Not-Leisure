@@ -161,6 +161,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.U
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumDryingFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ZpmKuangBiaoTwoGiantNuclearFusionReactor;
+import com.science.gtnl.common.machine.multiblock.SuperSpaceElevator;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
@@ -183,6 +184,7 @@ import gtPlusPlus.core.util.minecraft.FluidUtils;
 public class MachineLoader {
 
     public static ItemStack ResourceCollectionModule;
+    public static ItemStack SuperSpaceElevator;
 
     public static void loadMachines() {
 
@@ -763,6 +765,12 @@ public class MachineLoader {
             .set(new OreExtractionModule(21134, "OreExtractionModule", TextLocalization.NameOreExtractionModule));
         addItemTooltip(GTNLItemList.OreExtractionModule.get(1), AnimatedText.SNL_QYZG);
 
+        /**
+         * SuperSpaceElevator used 21135
+         *
+         * @see #loadMachinesPostInit()
+         */
+
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
@@ -1135,6 +1143,13 @@ public class MachineLoader {
             TextLocalization.NameResourceCollectionModule).getStackForm(1);
         GTNLItemList.ResourceCollectionModule.set(ResourceCollectionModule);
         addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        SuperSpaceElevator = new SuperSpaceElevator(
+            21135,
+            "SuperSpaceElevator",
+            TextLocalization.NameSuperSpaceElevator).getStackForm(1);
+        GTNLItemList.SuperSpaceElevator.set(SuperSpaceElevator);
+        addItemTooltip(GTNLItemList.SuperSpaceElevator.get(1), AnimatedText.SNL_QYZG);
     }
 
     private static void registerCovers() {

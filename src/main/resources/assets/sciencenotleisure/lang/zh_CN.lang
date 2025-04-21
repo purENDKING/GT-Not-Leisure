@@ -1298,6 +1298,18 @@ Interaction_DESCRIPTION_Index_706=需要采矿无人机MK-XII x 16
 Interaction_DESCRIPTION_Index_707=需要采矿无人机MK-XIII x 16
 GT5U.gui.text.no_mining_drone=§7未找到采矿无人机
 
+NameSuperSpaceElevator=超级太空电梯
+SuperSpaceElevatorRecipeType=太空电梯
+Tooltip_SuperSpaceElevator_00=§d§l连接星辰
+Tooltip_SuperSpaceElevator_01=每级加速轨道提供112模块数量
+Tooltip_SuperSpaceElevator_02=加速轨道等级限制了模块等级
+Tooltip_SuperSpaceElevator_03=每个模块有各自独立的输入输出空间，除了能量
+Tooltip_SuperSpaceElevator_04=本控制器接收能量供应并将能量分发
+Tooltip_SuperSpaceElevator_05=MK-III及以上加速轨道可开启无线模式
+Tooltip_SuperSpaceElevator_06=当主结构未安装能源仓时自动进入无线模式
+Tooltip_SuperSpaceElevator_07=关闭控制器即可暂停所有模块
+Tooltip_SuperSpaceElevator_Casing=任意太空电梯基座机械方块
+
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
 Tooltip_LargeMixer_00=比相同电压的机器快275%%
@@ -1498,9 +1510,9 @@ Tooltip_LargeSolidifier_00=比相同电压的机器快300%%
 Tooltip_LargeSolidifier_Casing=任意洗矿厂机械方块
 
 NameLargeCanning=大型装罐机
-LargeCanningRecipeType=流体装罐机 / 装罐机
-LargeCanning_Mode_0=流体装罐机
-LargeCanning_Mode_1=装罐机
+LargeCanningRecipeType=装罐机 / 流体装罐机
+LargeCanning_Mode_0=装罐机
+LargeCanning_Mode_1=流体装罐机
 Tooltip_LargeCanning_00=比相同电压的机器快233%%
 Tooltip_LargeCanning_01=只需要使用配方要求功率的50%%
 Tooltip_LargeCanning_Casing=任意洗矿厂机械方块

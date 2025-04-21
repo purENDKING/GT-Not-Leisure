@@ -1298,6 +1298,18 @@ Interaction_DESCRIPTION_Index_706=Requires MK-XII Mining Drones x 16
 Interaction_DESCRIPTION_Index_707=Requires MK-XIII Mining Drones x 16
 GT5U.gui.text.no_mining_drone=§7No mining drones found
 
+NameSuperSpaceElevator=Super Space Elevator
+SuperSpaceElevatorRecipeType=Space Elevator
+Tooltip_SuperSpaceElevator_00=§d§lConnected to the Stars
+Tooltip_SuperSpaceElevator_01=Each level of speed track provides 112 module
+Tooltip_SuperSpaceElevator_02=Motor tier limits module tier and amount of possible modules
+Tooltip_SuperSpaceElevator_03=Each module has their own space for IO, except energy
+Tooltip_SuperSpaceElevator_04=Energy is supplied to this controller and gets distributed
+Tooltip_SuperSpaceElevator_05=MK-III and above speed tracks can enable wireless mode
+Tooltip_SuperSpaceElevator_06=The system automatically activates wireless mode when no energy hatch is installed in the main structure
+Tooltip_SuperSpaceElevator_07=Disabling this controller also pauses all modules
+Tooltip_SuperSpaceElevator_Casing=Any Space Elevator Base Casing
+
 NameLargeMixer=Large Mixing Tank
 LargeMixerRecipeType=Mixer
 Tooltip_LargeMixer_00=275%% faster than machines of the same voltage

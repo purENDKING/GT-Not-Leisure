@@ -1747,6 +1747,36 @@ public class TextLocalization {
         "Any Space Elevator Base Casing",
         "Tooltip_ResourceCollectionModule_Casing");
 
+    public static final String NameSuperSpaceElevator = texter("Super Space Elevator", "NameSuperSpaceElevator");
+    public static final String SuperSpaceElevatorRecipeType = texter("Space Elevator", "SuperSpaceElevatorRecipeType");
+    public static final String Tooltip_SuperSpaceElevator_00 = texter(
+        "§d§lConnected to the Stars",
+        "Tooltip_SuperSpaceElevator_00");
+    public static final String Tooltip_SuperSpaceElevator_01 = texter(
+        "Each level of speed track provides 112 module",
+        "Tooltip_SuperSpaceElevator_01");
+    public static final String Tooltip_SuperSpaceElevator_02 = texter(
+        "Motor tier limits module tier and amount of possible modules",
+        "Tooltip_SuperSpaceElevator_02");
+    public static final String Tooltip_SuperSpaceElevator_03 = texter(
+        "Each module has their own space for IO, except energy",
+        "Tooltip_SuperSpaceElevator_03");
+    public static final String Tooltip_SuperSpaceElevator_04 = texter(
+        "Energy is supplied to this controller and gets distributed",
+        "Tooltip_SuperSpaceElevator_04");
+    public static final String Tooltip_SuperSpaceElevator_05 = texter(
+        "MK-III and above speed tracks can enable wireless mode",
+        "Tooltip_SuperSpaceElevator_05");
+    public static final String Tooltip_SuperSpaceElevator_06 = texter(
+        "The system automatically activates wireless mode when no energy hatch is installed in the main structure",
+        "Tooltip_SuperSpaceElevator_06");
+    public static final String Tooltip_SuperSpaceElevator_07 = texter(
+        "Disabling this controller also pauses all modules",
+        "Tooltip_SuperSpaceElevator_07");
+    public static final String Tooltip_SuperSpaceElevator_Casing = texter(
+        "Any Space Elevator Base Casing",
+        "Tooltip_SuperSpaceElevator_Casing");
+
     public static final String NameFuelRefiningComplex = texter("Fuel Refining Complex", "NameFuelRefiningComplex");
     public static final String FuelRefiningComplexRecipeType = texter(
         "Fuel Refining Complex",
