@@ -226,7 +226,7 @@ public class SmeltingMixingFurnaceRecipes implements IRecipePool {
                 Materials.Titanium.getMolten(144),
                 Materials.Nickel.getMolten(144 * 4),
                 Materials.Cobalt.getMolten(144 * 2))
-            .fluidOutputs(GregtechOrePrefixes.GT_Materials.MaragingSteel300.getMolten(3456))
+            .fluidOutputs(MaterialsAlloy.MARAGING300.getFluidStack(3456))
             .specialValue(0)
             .noOptimize()
             .duration(400)
@@ -242,7 +242,7 @@ public class SmeltingMixingFurnaceRecipes implements IRecipePool {
                 Materials.Aluminium.getMolten(144),
                 Materials.Nickel.getMolten(144 * 4),
                 Materials.Cobalt.getMolten(144 * 2))
-            .fluidOutputs(GregtechOrePrefixes.GT_Materials.MaragingSteel350.getMolten(3456))
+            .fluidOutputs(MaterialsAlloy.MARAGING350.getFluidStack(3456))
             .specialValue(0)
             .noOptimize()
             .duration(400)
