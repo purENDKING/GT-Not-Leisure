@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
-import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
@@ -13,6 +12,7 @@ import static gregtech.api.enums.HatchElement.ExoticEnergy;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static gregtech.api.util.GTStructureUtility.*;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
+import static gregtech.common.misc.WirelessNetworkManager.getUserEU;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
 import java.math.BigInteger;
@@ -102,7 +102,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
     /** Flag if the chunks of the machine are loaded by it */
     private boolean isLoadedChunk;
     /** Interval in which the modules will be supplied with power in ticks */
-    private static final int MODULE_CHARGE_INTERVAL = 10;
+    private static final int MODULE_CHARGE_INTERVAL = 20;
     /** Multiplier for the internal EU buffer */
     private static final int INTERNAL_BUFFER_MULTIPLIER = 256;
     /** Window ID of the contributors child window */
@@ -125,7 +125,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
 
     private int tCountCasing = 0;
     private boolean wirelessMode = false;
-    private BigInteger costingEU = BigInteger.ZERO;
     private UUID ownerUUID;
     private String costingEUText = ZERO_STRING;
 
@@ -357,7 +356,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
         if (motorTier > 1) {
             int actualExtensionLayers = 0;
 
-            while (actualExtensionLayers < motorTier - 1) {
+            while (actualExtensionLayers < motorTier) {
                 if (!structureCheck_EM(
                     STRUCTURE_PIECE_EXTENDED,
                     STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
@@ -440,7 +439,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
 
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        costingEUText = ZERO_STRING;
         super.onPostTick(aBaseMetaTileEntity, aTick);
         if (aBaseMetaTileEntity.isServerSide()) {
             if (aTick == 1) {
@@ -477,22 +475,17 @@ public class SuperSpaceElevator extends TTMultiblockBase
                     if (!mProjectModuleHatches.isEmpty()) {
                         long perModuleEnergy;
                         if (wirelessMode) {
-                            perModuleEnergy = Long.MAX_VALUE / mProjectModuleHatches.size() * MODULE_CHARGE_INTERVAL;
+                            perModuleEnergy = Long.MAX_VALUE;
                         } else {
                             perModuleEnergy = getEUVar() / mProjectModuleHatches.size() * MODULE_CHARGE_INTERVAL;
                         }
                         for (TileEntityModuleBase projectModule : mProjectModuleHatches) {
                             if (projectModule.getNeededMotorTier() <= motorTier) {
                                 projectModule.connect();
-                                if (wirelessMode) {
-                                    BigInteger costEU = BigInteger.valueOf(perModuleEnergy);
-
-                                    if (addEUToGlobalEnergyMap(ownerUUID, costEU.multiply(NEGATIVE_ONE))) {
-                                        costingEUText = GTUtility.formatNumbers(costEU);
-                                        costingEU = costingEU.add(costEU);
-                                        projectModule.increaseStoredEU(perModuleEnergy);
-                                    }
-
+                                if (wirelessMode && getUserEU(ownerUUID).compareTo(BigInteger.ZERO) > 0) {
+                                    long used = projectModule.increaseStoredEU(perModuleEnergy);
+                                    costingEUText = GTUtility.formatNumbers(used);
+                                    addEUToGlobalEnergyMap(ownerUUID, -used);
                                 } else {
                                     long tAvailableEnergy = getEUVar();
                                     if (tAvailableEnergy > 0) {
