@@ -70,7 +70,6 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     protected static final String STRUCTURE_PIECE_LAYER_HINT = "layerHint";
     protected static final String STRUCTURE_PIECE_TOP_HINT = "topHint";
     protected static final String STRUCTURE_PIECE_TOP = "top";
-    private static IStructureDefinition<LargeDistillery> STRUCTURE_DEFINITION = null;
     public static final String LDB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/base";
     public static final String LDL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer";
     public static final String LDLH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer_hint";
@@ -240,54 +239,51 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
         IHatchElement<LargeDistillery> layeredOutputHatch = OutputHatch
             .withCount(LargeDistillery::getCurrentLayerOutputHatchCount)
             .withAdder(LargeDistillery::addLayerOutputHatch);
-        if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<LargeDistillery>builder()
-                .addShape(STRUCTURE_PIECE_BASE, transpose(shape_base))
-                .addShape(STRUCTURE_PIECE_LAYER, transpose(shape_layer))
-                .addShape(STRUCTURE_PIECE_LAYER_HINT, transpose(shape_layer_hint))
-                .addShape(STRUCTURE_PIECE_TOP_HINT, transpose(shape_top_hint))
-                .addShape(STRUCTURE_PIECE_TOP, transpose(shape_top))
-                .addElement(
-                    'A',
-                    ofChain(
-                        buildHatchAdder(LargeDistillery.class)
-                            .atLeast(Energy.or(ExoticEnergy), OutputBus, InputHatch, InputBus, Maintenance)
-                            .casingIndex(CASING_INDEX)
-                            .dot(1)
-                            .build(),
-                        onElementPass(LargeDistillery::onCasingFound, ofBlock(blockCasingsMisc, 11))))
-                .addElement(
-                    'B',
-                    ofChain(
-                        buildHatchAdder(LargeDistillery.class).atLeast(layeredOutputHatch)
-                            .casingIndex(CASING_INDEX)
-                            .dot(2)
-                            .disallowOnly(ForgeDirection.UP, ForgeDirection.DOWN)
-                            .build(),
-                        ofHatchAdder(LargeDistillery::addEnergyInputToMachineList, CASING_INDEX, 2),
-                        ofHatchAdder(LargeDistillery::addLayerOutputHatch, CASING_INDEX, 2),
-                        ofHatchAdder(LargeDistillery::addMaintenanceToMachineList, CASING_INDEX, 2),
-                        onElementPass(LargeDistillery::onCasingFound, ofBlock(blockCasingsMisc, 11))))
-                .addElement('C', ofBlock(sBlockCasings2, 13))
-                .addElement(
-                    'D',
-                    ofChain(
-                        ofHatchAdder(LargeDistillery::addOutputToMachineList, CASING_INDEX, 3),
-                        ofHatchAdder(LargeDistillery::addMaintenanceToMachineList, CASING_INDEX, 3),
-                        ofBlock(blockCasingsMisc, 11),
-                        isAir()))
-                .addElement(
-                    'E',
+        return StructureDefinition.<LargeDistillery>builder()
+            .addShape(STRUCTURE_PIECE_BASE, transpose(shape_base))
+            .addShape(STRUCTURE_PIECE_LAYER, transpose(shape_layer))
+            .addShape(STRUCTURE_PIECE_LAYER_HINT, transpose(shape_layer_hint))
+            .addShape(STRUCTURE_PIECE_TOP_HINT, transpose(shape_top_hint))
+            .addShape(STRUCTURE_PIECE_TOP, transpose(shape_top))
+            .addElement(
+                'A',
+                ofChain(
+                    buildHatchAdder(LargeDistillery.class)
+                        .atLeast(Energy.or(ExoticEnergy), OutputBus, InputHatch, InputBus, Maintenance)
+                        .casingIndex(CASING_INDEX)
+                        .dot(1)
+                        .build(),
+                    onElementPass(LargeDistillery::onCasingFound, ofBlock(blockCasingsMisc, 11))))
+            .addElement(
+                'B',
+                ofChain(
                     buildHatchAdder(LargeDistillery.class).atLeast(layeredOutputHatch)
                         .casingIndex(CASING_INDEX)
-                        .dot(2)
-                        .disallowOnly(ForgeDirection.UP)
-                        .buildAndChain(blockCasingsMisc, 11))
-                .addElement('F', ofBlock(blockCasingsMisc, 11))
-                .addElement('G', Muffler.newAny(CASING_INDEX, 1))
-                .build();
-        }
-        return STRUCTURE_DEFINITION;
+                        .dot(1)
+                        .disallowOnly(ForgeDirection.UP, ForgeDirection.DOWN)
+                        .build(),
+                    ofHatchAdder(LargeDistillery::addEnergyInputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(LargeDistillery::addLayerOutputHatch, CASING_INDEX, 1),
+                    ofHatchAdder(LargeDistillery::addMaintenanceToMachineList, CASING_INDEX, 1),
+                    onElementPass(LargeDistillery::onCasingFound, ofBlock(blockCasingsMisc, 11))))
+            .addElement('C', ofBlock(sBlockCasings2, 13))
+            .addElement(
+                'D',
+                ofChain(
+                    ofHatchAdder(LargeDistillery::addOutputToMachineList, CASING_INDEX, 1),
+                    ofHatchAdder(LargeDistillery::addMaintenanceToMachineList, CASING_INDEX, 1),
+                    ofBlock(blockCasingsMisc, 11),
+                    isAir()))
+            .addElement(
+                'E',
+                buildHatchAdder(LargeDistillery.class).atLeast(layeredOutputHatch)
+                    .casingIndex(CASING_INDEX)
+                    .dot(1)
+                    .disallowOnly(ForgeDirection.UP)
+                    .buildAndChain(blockCasingsMisc, 11))
+            .addElement('F', ofBlock(blockCasingsMisc, 11))
+            .addElement('G', Muffler.newAny(CASING_INDEX, 1))
+            .build();
     }
 
     @Override

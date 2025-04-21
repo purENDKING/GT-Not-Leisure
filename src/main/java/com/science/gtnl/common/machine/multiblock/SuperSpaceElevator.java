@@ -117,7 +117,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
     private static final int STRUCTURE_PIECE_EXTENDED_HOR_OFFSET = 32;
     private static final int STRUCTURE_PIECE_EXTENDED_VERT_OFFSET = -4;
     private static final int STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET = 28;
-    private static IStructureDefinition<SuperSpaceElevator> STRUCTURE_DEFINITION = null;
     private static final String SSEB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_base";
     private static final String SSEE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_extended";
     private static final String[][] shapeBase = StructureUtils.readStructureFromFile(SSEB_STRUCTURE_FILE_PATH);
@@ -228,50 +227,59 @@ public class SuperSpaceElevator extends TTMultiblockBase
 
     @Override
     public IStructureDefinition<? extends TTMultiblockBase> getStructure_EM() {
-        if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<SuperSpaceElevator>builder()
-                .addShape(STRUCTURE_PIECE_MAIN, transpose(shapeBase))
-                .addShape(STRUCTURE_PIECE_EXTENDED, transpose(shapeExtended))
-                .addElement('A', ofBlock(MetaCasing, 18))
-                .addElement('B', ofBlock(IGBlocks.SpaceElevatorCasing, 2))
-                .addElement('C', ofBlock(sBlockCasingsTT, 0))
-                .addElement(
-                    'D',
-                    withChannel(
-                        "motor",
-                        StructureUtility.ofBlocksTiered(
-                            ElevatorUtil.motorTierConverter(),
-                            ElevatorUtil.getMotorTiers(),
-                            0,
-                            SuperSpaceElevator::setMotorTier,
-                            SuperSpaceElevator::getMotorTier)))
-                .addElement('E', ofFrame(Materials.Neutronium))
-                .addElement(
-                    'F',
-                    buildHatchAdder(SuperSpaceElevator.class).atLeast(Energy.or(ExoticEnergy), Dynamo)
-                        .casingIndex(CASING_INDEX_BASE)
-                        .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(IGBlocks.SpaceElevatorCasing, 0))))
-                .addElement('G', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
-                .addElement('H', ofBlock(IGBlocks.SpaceElevatorCasing, 1))
-                .addElement('I', ofBlock(sBlockCasings1, 12))
-                .addElement('J', ofBlock(BlockLoader.defcCasingBlock, 7))
-                .addElement('K', ofBlock(bw_realglas, 14))
-                .addElement('L', classicHatches(CASING_INDEX_BASE, 10, IGBlocks.SpaceElevatorCasing, 0))
-                .addElement(
-                    'M',
-                    HatchElementBuilder.<SuperSpaceElevator>builder()
-                        .atLeast(SuperSpaceElevator.ProjectModuleElement.ProjectModule)
-                        .casingIndex(CASING_INDEX_BASE)
-                        .dot(10)
-                        .buildAndChain(IGBlocks.SpaceElevatorCasing, 0))
-                .addElement(
-                    'N',
-                    ElevatorUtil.ofBlockAdder(SuperSpaceElevator::addCable, IGBlocks.SpaceElevatorCable, 0))
-                .addElement('O', ofBlock(MetaBlockGlow, 31))
-                .build();
-        }
-        return STRUCTURE_DEFINITION;
+        return StructureDefinition.<SuperSpaceElevator>builder()
+            .addShape(STRUCTURE_PIECE_MAIN, transpose(shapeBase))
+            .addShape(STRUCTURE_PIECE_EXTENDED, transpose(shapeExtended))
+            .addElement('A', ofBlock(MetaCasing, 18))
+            .addElement('B', ofBlock(IGBlocks.SpaceElevatorCasing, 2))
+            .addElement('C', ofBlock(sBlockCasingsTT, 0))
+            .addElement(
+                'D',
+                withChannel(
+                    "motor",
+                    StructureUtility.ofBlocksTiered(
+                        ElevatorUtil.motorTierConverter(),
+                        ElevatorUtil.getMotorTiers(),
+                        0,
+                        SuperSpaceElevator::setMotorTier,
+                        SuperSpaceElevator::getMotorTier)))
+            .addElement('E', ofFrame(Materials.Neutronium))
+            .addElement(
+                'F',
+                buildHatchAdder(SuperSpaceElevator.class).atLeast(Energy.or(ExoticEnergy), Dynamo)
+                    .casingIndex(CASING_INDEX_BASE)
+                    .dot(1)
+                    .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(IGBlocks.SpaceElevatorCasing, 0))))
+            .addElement('G', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
+            .addElement('H', ofBlock(IGBlocks.SpaceElevatorCasing, 1))
+            .addElement('I', ofBlock(sBlockCasings1, 12))
+            .addElement('J', ofBlock(BlockLoader.defcCasingBlock, 7))
+            .addElement('K', ofBlock(bw_realglas, 14))
+            .addElement(
+                'L',
+                buildHatchAdder(SuperSpaceElevator.class)
+                    .atLeast(
+                        InputBus,
+                        InputHatch,
+                        OutputHatch,
+                        OutputBus,
+                        HatchElement.EnergyMulti,
+                        HatchElement.DynamoMulti,
+                        HatchElement.InputData,
+                        HatchElement.OutputData)
+                    .casingIndex(CASING_INDEX_BASE)
+                    .dot(1)
+                    .buildAndChain(IGBlocks.SpaceElevatorCasing, 0))
+            .addElement(
+                'M',
+                HatchElementBuilder.<SuperSpaceElevator>builder()
+                    .atLeast(ProjectModuleElement.ProjectModule)
+                    .casingIndex(CASING_INDEX_BASE)
+                    .dot(1)
+                    .buildAndChain(IGBlocks.SpaceElevatorCasing, 0))
+            .addElement('N', ElevatorUtil.ofBlockAdder(SuperSpaceElevator::addCable, IGBlocks.SpaceElevatorCable, 0))
+            .addElement('O', ofBlock(MetaBlockGlow, 31))
+            .build();
     }
 
     @Override
@@ -302,7 +310,8 @@ public class SuperSpaceElevator extends TTMultiblockBase
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (this.mMachine) return -1;
 
-        int[] built = new int[stackSize.stackSize + 1];
+        int tMotorTier = Math.min(stackSize.stackSize, 6);
+        int[] built = new int[tMotorTier];
 
         built[0] = this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
@@ -315,11 +324,9 @@ public class SuperSpaceElevator extends TTMultiblockBase
             false,
             true);
 
-        int tMotorTier = Math.min(stackSize.stackSize, 6);
-
         if (tMotorTier > 1) {
             for (int i = 0; i < tMotorTier - 1; i++) {
-                built[i] = this.survivialBuildPiece(
+                built[i + 1] = this.survivialBuildPiece(
                     STRUCTURE_PIECE_EXTENDED,
                     stackSize,
                     STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
