@@ -135,6 +135,7 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
         return STRUCTURE_DEFINITION;
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

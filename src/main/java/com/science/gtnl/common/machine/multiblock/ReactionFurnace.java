@@ -84,6 +84,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(11);
     }

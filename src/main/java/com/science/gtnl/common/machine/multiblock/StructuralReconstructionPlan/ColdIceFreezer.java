@@ -210,7 +210,8 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
         return false;
     }
 
-    protected int getCasingTextureID() {
+    @Override
+    public int getCasingTextureID() {
         return TAE.getIndexFromPage(2, 10);
     }
 

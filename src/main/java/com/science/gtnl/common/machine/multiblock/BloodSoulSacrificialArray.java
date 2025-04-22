@@ -249,7 +249,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
                     buildHatchAdder(BloodSoulSacrificialArray.class).atLeast(InputBus, OutputBus, Maintenance)
                         .adder(BloodSoulSacrificialArray::addToMachineList)
                         .dot(1)
-                        .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10))
+                        .casingIndex(getCasingTextureID())
                         .buildAndChain(GregTechAPI.sBlockCasings8, 3))
                 .addElement('0', ofBlockAnyMeta(ModBlocks.blockAltar))
                 .addElement('1', ofBlockAnyMeta(Blocks.hopper))
@@ -499,6 +499,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
         return new BloodSoulSacrificialArray(this.mName);
     }
 
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10);
     }

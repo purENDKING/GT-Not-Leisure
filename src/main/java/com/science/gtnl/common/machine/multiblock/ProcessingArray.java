@@ -143,6 +143,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
             || addExoticEnergyInputToMachineList(aTileEntity, aBaseCasingIndex);
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

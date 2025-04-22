@@ -119,6 +119,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         return STRUCTURE_DEFINITION;
     }
 
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0);
     }

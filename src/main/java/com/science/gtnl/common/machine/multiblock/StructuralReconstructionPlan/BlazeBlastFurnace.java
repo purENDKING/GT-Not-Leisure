@@ -292,7 +292,8 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
         return false;
     }
 
-    protected int getCasingTextureID() {
+    @Override
+    public int getCasingTextureID() {
         return TAE.getIndexFromPage(2, 11);
     }
 

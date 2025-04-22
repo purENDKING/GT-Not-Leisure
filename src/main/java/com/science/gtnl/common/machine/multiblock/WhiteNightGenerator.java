@@ -42,7 +42,6 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
-import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
@@ -191,10 +190,6 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
         wirelessMode = mDynamoHatches.isEmpty();
         currentOutputEU = 300L * multiTier;
         return multiTier > 0;
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mDynamoHatches) h.updateTexture(CASING_INDEX);
     }
 
     @Override
@@ -383,6 +378,7 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(5);
     }

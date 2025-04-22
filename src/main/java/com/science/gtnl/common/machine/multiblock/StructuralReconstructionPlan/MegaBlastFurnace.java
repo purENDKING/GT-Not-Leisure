@@ -210,6 +210,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return TAE.GTPP_INDEX(15);
     }

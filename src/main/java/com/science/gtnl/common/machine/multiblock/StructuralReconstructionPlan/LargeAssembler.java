@@ -95,6 +95,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

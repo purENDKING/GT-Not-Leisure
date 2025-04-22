@@ -97,6 +97,7 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

@@ -93,6 +93,7 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return (byte) TAE.GTPP_INDEX(29);
     }

@@ -93,6 +93,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return TAE.GTPP_INDEX(1);
     }

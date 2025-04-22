@@ -71,6 +71,11 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
     }
 
     @Override
+    public int getCasingTextureID() {
+        return GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings5, 14);
+    }
+
+    @Override
     public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
         int colorIndex, boolean aActive, boolean redstoneLevel) {
         if (side == aFacing) {
@@ -150,7 +155,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
                     'D',
                     buildHatchAdder(LibraryOfRuina.class)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .casingIndex(GTUtility.getCasingTextureIndex(GregTechAPI.sBlockCasings5, 14))
+                        .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlockAnyMeta(SHIELDED_ACCELERATOR_CASING))))
                 .addElement('E', ofBlock(sBlockCasings10, 4))

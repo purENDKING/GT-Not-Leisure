@@ -245,6 +245,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

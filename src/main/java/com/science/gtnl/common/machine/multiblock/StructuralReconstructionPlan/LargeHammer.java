@@ -80,6 +80,7 @@ public class LargeHammer extends GTMMultiMachineBase<LargeHammer> implements ISu
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

@@ -244,7 +244,8 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
-    protected int getCasingTextureID() {
+    @Override
+    public int getCasingTextureID() {
         return CASING_INDEX;
     }
 

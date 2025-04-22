@@ -91,6 +91,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return (byte) TAE.GTPP_INDEX(11);
     }

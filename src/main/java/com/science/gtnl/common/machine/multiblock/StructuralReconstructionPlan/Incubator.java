@@ -117,6 +117,11 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     }
 
     @Override
+    public int getCasingTextureID() {
+        return CASING_INDEX;
+    }
+
+    @Override
     public boolean isEnablePerfectOverclock() {
         return false;
     }

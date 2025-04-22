@@ -78,6 +78,7 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

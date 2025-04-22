@@ -79,6 +79,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

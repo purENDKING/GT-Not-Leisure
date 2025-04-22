@@ -130,6 +130,11 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     public static IStructureDefinition<EdenGarden> STRUCTURE_DEFINITION = null;
 
     @Override
+    public int getCasingTextureID() {
+        return CASING_INDEX;
+    }
+
+    @Override
     public boolean isEnablePerfectOverclock() {
         return true;
     }
@@ -976,16 +981,17 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
                     .extFacing()
                     .glow()
                     .build() };
-            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX), TextureFactory.builder()
-                .addIcon(OVERLAY_FRONT_DISTILLATION_TOWER)
-                .extFacing()
-                .build(),
+            return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()),
+                TextureFactory.builder()
+                    .addIcon(OVERLAY_FRONT_DISTILLATION_TOWER)
+                    .extFacing()
+                    .build(),
                 TextureFactory.builder()
                     .addIcon(OVERLAY_FRONT_DISTILLATION_TOWER_GLOW)
                     .extFacing()
                     .glow()
                     .build() };
         }
-        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(CASING_INDEX) };
+        return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 }

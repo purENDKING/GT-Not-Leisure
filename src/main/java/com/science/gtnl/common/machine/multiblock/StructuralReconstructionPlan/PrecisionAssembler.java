@@ -62,7 +62,6 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
-import gregtech.common.tileentities.machines.IDualInputHatch;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 
 public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> implements ISurvivalConstructable {
@@ -127,6 +126,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         return (byte) casingTier;
     }
 
+    @Override
     public int getCasingTextureID() {
         if (casingTier >= 0) {
             return CASING_INDEX + casingTier;
@@ -229,16 +229,6 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                 .build();
         }
         return STRUCTURE_DEFINITION;
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mMaintenanceHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mEnergyHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mExoticEnergyHatches) h.updateTexture(getCasingTextureID());
-        for (IDualInputHatch h : mDualInputHatches) h.updateTexture(getCasingTextureID());
     }
 
     @Override

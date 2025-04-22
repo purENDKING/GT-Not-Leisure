@@ -96,6 +96,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

@@ -88,6 +88,7 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

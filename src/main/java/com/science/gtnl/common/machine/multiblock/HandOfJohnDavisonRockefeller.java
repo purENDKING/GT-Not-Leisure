@@ -20,7 +20,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.Materials;
@@ -43,7 +43,7 @@ import gregtech.common.blocks.BlockCasings10;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 
-public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDavisonRockefeller>
+public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase<HandOfJohnDavisonRockefeller>
     implements ISurvivalConstructable {
 
     public int mCasing;
@@ -64,16 +64,6 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
 
     public HandOfJohnDavisonRockefeller(String aName) {
         super(aName);
-    }
-
-    @Override
-    public boolean isEnablePerfectOverclock() {
-        return GTUtility.getTier(this.getMaxInputVoltage()) > 11;
-    }
-
-    @Override
-    public float getSpeedBonus() {
-        return 1;
     }
 
     @Override
@@ -99,6 +89,7 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }
@@ -118,9 +109,17 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
             .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_03)
             .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_04)
             .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_05)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_06)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_07)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_08)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -242,7 +241,7 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
                 for (int i = 0; i < levels; i++) {
                     discount *= 0.95;
                 }
-                return discount;
+                return (0.4 - (ParallelTier / 50.0)) * discount;
             }
 
             private double calculateSpeedBoost(double levels) {
@@ -254,7 +253,7 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
                         break;
                     }
                 }
-                return speedBoost;
+                return (0.1 * Math.pow(0.75, ParallelTier)) * speedBoost;
             }
 
             @NotNull
@@ -264,5 +263,10 @@ public class HandOfJohnDavisonRockefeller extends MultiMachineBase<HandOfJohnDav
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
+    }
+
+    @Override
+    public int getWirelessModeProcessingTime() {
+        return 200 - ParallelTier * 10;
     }
 }

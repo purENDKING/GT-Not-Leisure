@@ -84,6 +84,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
         return new Desulfurizer(this.mName);
     }
 
+    @Override
     public int getCasingTextureID() {
         return ((BlockCasings4) GregTechAPI.sBlockCasings4).getTextureIndex(1);
     }

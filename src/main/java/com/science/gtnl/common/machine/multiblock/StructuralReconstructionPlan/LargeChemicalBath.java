@@ -100,6 +100,7 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return (byte) TAE.GTPP_INDEX(11);
     }

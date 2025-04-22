@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -87,6 +88,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return TAE.getIndexFromPage(2, 2);
     }
@@ -141,7 +143,13 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
                     'D',
                     buildHatchAdder(LargeCircuitAssembler.class).casingIndex(TAE.getIndexFromPage(2, 2))
                         .dot(1)
-                        .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(
+                            InputHatch,
+                            InputBus,
+                            OutputBus,
+                            Maintenance,
+                            Energy.or(ExoticEnergy),
+                            ParallelController)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 2))))
                 .build();
         }
@@ -181,6 +189,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (glassTier < VoltageIndex.UV & mEnergyHatch.mTier > glassTier) {
+                updateHatchTexture();
                 return false;
             }
         }
@@ -188,6 +197,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
         if (MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
+                    updateHatchTexture();
                     return false;
                 }
             }
@@ -196,6 +206,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
 
         ParallelTier = getParallelTier(aStack);
         if (this.mEnergyHatches.size() >= 2) return false;
+        updateHatchTexture();
         return mCasing >= 30;
     }
 }

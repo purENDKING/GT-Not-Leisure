@@ -118,6 +118,11 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         return new RealArtificialStar(this.mName);
     }
 
+    @Override
+    public int getCasingTextureID() {
+        return 13;
+    }
+
     public static void initStatics() {
         DepletedExcitedNaquadahFuelRod = GTNL_ItemID.createNoNBT(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1));
         EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));

@@ -92,6 +92,7 @@ public class LargeCentrifuge extends GTMMultiMachineBase<LargeCentrifuge> implem
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return (byte) TAE.GTPP_INDEX(0);
     }

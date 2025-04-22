@@ -106,6 +106,7 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
         return new ITexture[] { Textures.BlockIcons.getCasingTextureForId(getCasingTextureID()) };
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }

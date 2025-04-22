@@ -105,6 +105,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
         return rTexture;
     }
 
+    @Override
     public int getCasingTextureID() {
         return CASING_INDEX;
     }
