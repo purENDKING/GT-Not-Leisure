@@ -274,7 +274,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
 
         // 如果所有检查通过，继续处理
         GTRecipe tRecipe = recipe.copy();
-        int multiplier = 1001;
+        int multiplier = 0;
         mExpectedMultiplier = multiplier;
 
         // 计算基于输入流体的最大倍数
@@ -286,15 +286,13 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
         }
 
         // 计算倍数
-        multiplier = (int) Math.min(multiplier, fluidAmount / recipe.mFluidInputs[0].amount);
-
-        // 确保倍数至少为 1
-        multiplier = Math.max(multiplier, 1);
-        mTimes = multiplier;
+        multiplier = (int) fluidAmount / recipe.mFluidInputs[0].amount / 1001;
+        multiplier = Math.max(Math.min(multiplier, getMaxParallelRecipes()), 1);
+        mTimes = multiplier * 1001;
 
         // 更新流体输入和输出的量
-        tRecipe.mFluidInputs[0].amount *= multiplier;
-        tRecipe.mFluidOutputs[0].amount *= multiplier;
+        tRecipe.mFluidInputs[0].amount *= multiplier * 1001;
+        tRecipe.mFluidOutputs[0].amount *= multiplier * 1001;
 
         return tRecipe;
     }

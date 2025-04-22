@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.Utils.LoginMessage;
+import com.science.gtnl.Utils.item.GTGiveTrackerMod;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
@@ -122,6 +123,7 @@ public class ScienceNotLeisure {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
+        event.registerServerCommand(new CommandGTNLCheatBook());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -146,6 +148,7 @@ public class ScienceNotLeisure {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
+        MinecraftForge.EVENT_BUS.register(new GTGiveTrackerMod());
         FMLCommonHandler.instance()
             .bus()
             .register(new LoginMessage());

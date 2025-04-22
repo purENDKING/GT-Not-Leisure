@@ -186,7 +186,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         mCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
         boolean valid = this.mMaintenanceHatches.size() == 1
-            && !(this.mEnergyHatches.isEmpty() || this.mExoticEnergyHatches.isEmpty())
+            && !(this.mEnergyHatches.isEmpty() && this.mExoticEnergyHatches.isEmpty())
             && this.mCasing >= 1000;
 
         if (valid) this.updateSeedLimits();
@@ -514,7 +514,6 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
-        int tier = getVoltageTier();
         updateSeedLimits();
 
         if (setupPhase > 0) {
@@ -541,7 +540,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
             }
 
             this.updateSlots();
-            this.mMaxProgresstime = 6;
+            this.mMaxProgresstime = 10;
             this.lEUt = 0;
             this.mEfficiency = 10000;
             this.mEfficiencyIncrease = 10000;
@@ -575,13 +574,13 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         double multiplier = EIG_BALANCE_MAX_FERTILIZER_BOOST;
         this.guiDropTracker = new EIGDropTable();
         if (this.mode == EIGModes.IC2) {
-            this.mMaxProgresstime = 128;
+            this.mMaxProgresstime = Math.max(20, 100 / (energyHatchTier - 5));
             double timeElapsed = ((double) this.mMaxProgresstime * (1 << EIG_BALANCE_IC2_ACCELERATOR_TIER));
             for (EIGBucket bucket : this.buckets) {
                 bucket.addProgress(timeElapsed * multiplier, this.guiDropTracker);
             }
         } else if (this.mode == EIGModes.Normal) {
-            this.mMaxProgresstime = Math.max(20, 100 / (tier - 3)); // Min 1 s
+            this.mMaxProgresstime = Math.max(20, 100 / (energyHatchTier - 3)); // Min 1 s
             for (EIGBucket bucket : this.buckets) {
                 bucket.addProgress(multiplier, this.guiDropTracker);
             }
@@ -590,7 +589,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         this.guiDropTracker.addTo(this.dropTracker, multiplier);
         this.mOutputItems = this.dropTracker.getDrops();
 
-        this.lEUt = -(long) ((double) GTValues.V[tier] * 0.99d);
+        this.lEUt = -(long) ((double) GTValues.V[energyHatchTier] * 0.99d);
         this.mEfficiency = 10000;
         this.mEfficiencyIncrease = 10000;
         this.updateSlots();

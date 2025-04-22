@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 import static com.science.gtnl.Utils.Utils.filterValidMTEs;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static gregtech.api.util.GTUtility.validMTEList;
-import static kubatech.api.Variables.ln4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -194,14 +193,6 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
      */
     protected int getLimitedMaxParallel() {
         return getMaxParallelRecipes();
-    }
-
-    public int getVoltageTier() {
-        return (int) getVoltageTierExact();
-    }
-
-    public double getVoltageTierExact() {
-        return Math.log((double) getMaxInputEu() / 8d) / ln4 + 1e-8d;
     }
 
     protected long getMachineVoltageLimit() {

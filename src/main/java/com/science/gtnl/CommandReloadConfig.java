@@ -16,7 +16,7 @@ public class CommandReloadConfig extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "gtnl_reloadconfig"; // 命令名称
+        return "gtnl_reloadconfig";
     }
 
     @Override
@@ -60,6 +60,6 @@ public class CommandReloadConfig extends CommandBase {
 
     @Override
     public int getRequiredPermissionLevel() {
-        return 2; // 仅限管理员使用
+        return 3;
     }
 }

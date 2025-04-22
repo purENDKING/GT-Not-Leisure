@@ -390,10 +390,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                 * drillTier);
 
             needEu += (int) (baseOutput / 10000);
-            long outputAmount = baseOutput;
 
-            if (outputAmount > Integer.MAX_VALUE) {
-                long totalAmount = outputAmount;
+            if (baseOutput > Integer.MAX_VALUE) {
+                long totalAmount = baseOutput;
 
                 while (totalAmount > 0) {
                     int stackSize = (int) Math.min(totalAmount, Integer.MAX_VALUE);
@@ -401,7 +400,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     totalAmount -= stackSize;
                 }
             } else {
-                fluidStacks = new FluidStack(fluidType, (int) outputAmount);
+                fluidStacks = new FluidStack(fluidType, (int) baseOutput);
             }
         }
 
