@@ -115,10 +115,9 @@ ParallelControllerHatchUMV=Parallel Controller Hatch (UMV)
 ParallelControllerHatchUXV=Parallel Controller Hatch (UXV)
 ParallelControllerHatchMAX=Parallel Controller Hatch (MAX)
 Tooltip_ParallelControllerHatch_00=Provides maximum parallelism for multiblock machines
-Tooltip_ParallelControllerHatch_01=Tier: 
-Tooltip_ParallelControllerHatch_02=Allows up to %s recipes to be processed simultaneously
-Tooltip_ParallelControllerHatch_03=§dSpeed: +%s%%
-Tooltip_ParallelControllerHatch_04=§5EU Consumption: -%s%%
+Tooltip_ParallelControllerHatch_01=Allows up to %s recipes to be processed simultaneously
+Tooltip_ParallelControllerHatch_02=§dSpeed: +%s%%
+Tooltip_ParallelControllerHatch_03=§5EU Consumption: -%s%%
 Info_ParallelControllerHatch_00=Parallel
 
 NinefoldInputHatchEV=Ninefold Input Hatch (EV)

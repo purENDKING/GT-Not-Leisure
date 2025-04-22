@@ -21,7 +21,6 @@ import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTUtility;
 
 public class ParallelControllerHatch extends MTEHatch {
 
@@ -38,20 +37,18 @@ public class ParallelControllerHatch extends MTEHatch {
             aNameRegional,
             aTier,
             0,
-            new String[] { StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_00"), "", "", "", "" },
+            new String[] { StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_00"), "", "", "" },
             aTextures);
         this.maxParallel = setMaxParallel(mTier);
         this.parallel = maxParallel;
         int speedBoost = setSpeedBoost(mTier);
         int euDiscount = setEUtDiscount(mTier);
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_01")
-            + GTUtility.getColoredTierNameFromTier(mTier);
+        mDescriptionArray[1] = String
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_01"), maxParallel);
         mDescriptionArray[2] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_02"), maxParallel);
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_02"), speedBoost);
         mDescriptionArray[3] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_03"), speedBoost);
-        mDescriptionArray[4] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_04"), euDiscount);
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_03"), euDiscount);
     }
 
     public ParallelControllerHatch(String aName, int aTier, int aInvSlotCount, String[] aDescription,
@@ -61,14 +58,12 @@ public class ParallelControllerHatch extends MTEHatch {
         this.parallel = maxParallel;
         int speedBoost = setSpeedBoost(mTier);
         int euDiscount = setEUtDiscount(mTier);
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_01")
-            + GTUtility.getColoredTierNameFromTier(mTier);
+        mDescriptionArray[1] = String
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_01"), maxParallel);
         mDescriptionArray[2] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_02"), maxParallel);
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_02"), speedBoost);
         mDescriptionArray[3] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_03"), speedBoost);
-        mDescriptionArray[4] = String
-            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_04"), euDiscount);
+            .format(StatCollector.translateToLocal("Tooltip_ParallelControllerHatch_03"), euDiscount);
     }
 
     @Override

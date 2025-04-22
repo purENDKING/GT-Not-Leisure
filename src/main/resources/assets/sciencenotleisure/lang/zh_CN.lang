@@ -115,10 +115,9 @@ ParallelControllerHatchUMV=并行控制仓 (UMV)
 ParallelControllerHatchUXV=并行控制仓 (UXV)
 ParallelControllerHatchMAX=并行控制仓 (MAX)
 Tooltip_ParallelControllerHatch_00=为多方块机器提供最大并行
-Tooltip_ParallelControllerHatch_01=等级: 
-Tooltip_ParallelControllerHatch_02=允许同时处理至多%s个配方 
-Tooltip_ParallelControllerHatch_03=§d速度: +%s%%
-Tooltip_ParallelControllerHatch_04=§5EU消耗: -%s%%
+Tooltip_ParallelControllerHatch_01=允许同时处理至多%s个配方 
+Tooltip_ParallelControllerHatch_02=§d速度: +%s%%
+Tooltip_ParallelControllerHatch_03=§5EU消耗: -%s%%
 Info_ParallelControllerHatch_00=并行
 
 NinefoldInputHatchEV=九重输入仓 (EV)
