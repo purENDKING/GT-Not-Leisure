@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.block.BlockList;
+import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.enums.TierEU;
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
@@ -1073,6 +1074,30 @@ public class AssemblingLineRecipes implements IRecipePool {
             GTNLItemList.ShallowChemicalCoupling.get(1),
             2400,
             (int) TierEU.RECIPE_ZPM);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GTNLItemList.SuperSpaceElevator.get(1),
+            96000,
+            256,
+            (int) TierEU.RECIPE_UEV,
+            1,
+            new Object[] { getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
+                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
+                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
+                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
+                GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsUEVplus.TranscendentMetal, 32),
+                ItemList.Field_Generator_UEV.get(32), new Object[] { OrePrefixes.circuit.get(Materials.UHV), 64 },
+                new Object[] { OrePrefixes.circuit.get(Materials.UEV), 32 },
+                getModItem(GregTech.ID, "gt.metaitem.03", 64, 32165),
+                getModItem(GalacticraftAmunRa.ID, "item.baseItem", 64, 15),
+                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Infinity, 64),
+                new ItemStack(IGBlocks.SpaceElevatorCasing, 64, 0) },
+            new FluidStack[] { MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(4000),
+                MaterialsUEVplus.MoltenProtoHalkoniteBase.getFluid(8000),
+                MaterialsUEVplus.DimensionallyShiftedSuperfluid.getFluid(16000), Materials.Infinity.getMolten(4608) },
+            GTNLItemList.SuperSpaceElevator.get(1),
+            9000,
+            (int) TierEU.RECIPE_UEV);
 
         GTValues.RA.stdBuilder()
             .metadata(RESEARCH_ITEM, getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 47))
