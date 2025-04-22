@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static goodgenerator.loader.Loaders.gravityStabilizationCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -154,7 +155,14 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
                 .addElement(
                     'D',
                     buildHatchAdder(LibraryOfRuina.class)
-                        .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(
+                            InputHatch,
+                            OutputHatch,
+                            InputBus,
+                            OutputBus,
+                            Maintenance,
+                            Energy.or(ExoticEnergy),
+                            ParallelController)
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlockAnyMeta(SHIELDED_ACCELERATOR_CASING))))

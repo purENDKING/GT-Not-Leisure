@@ -8,10 +8,12 @@ import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
+import thaumcraft.api.crafting.ShapelessArcaneRecipe;
 
 public class TCRecipeTools {
 
-    public static ArrayList<ShapedArcaneCraftingRecipe> SAR = new ArrayList<>();
+    public static ArrayList<ShapelessArcaneCraftingRecipe> ShaplessAR = new ArrayList<>();
+    public static ArrayList<ShapedArcaneCraftingRecipe> ShapedAR = new ArrayList<>();
     public static ArrayList<InfusionCraftingRecipe> ICR = new ArrayList<>();
 
     public TCRecipeTools() {}
@@ -28,7 +30,24 @@ public class TCRecipeTools {
                 ShapedArcaneCraftingRecipe y = new ShapedArcaneCraftingRecipe(
                     recipe.getInput(),
                     recipe.getRecipeOutput());
-                SAR.add(y);
+                ShapedAR.add(y);
+            }
+        }
+    }
+
+    public static void getShapelessArcaneCraftingRecipe() {
+        List<Object> craftingRecipes = ThaumcraftApi.getCraftingRecipes();
+        for (Object r : craftingRecipes) {
+            if (!(r instanceof ShapelessArcaneRecipe recipe)) {
+                continue;
+            }
+
+            if (recipe.getRecipeOutput() instanceof ItemStack && recipe.getRecipeOutput()
+                .getItem() != null) {
+                ShapelessArcaneCraftingRecipe y = new ShapelessArcaneCraftingRecipe(
+                    recipe.getInput(),
+                    recipe.getRecipeOutput());
+                ShaplessAR.add(y);
             }
         }
     }
@@ -63,6 +82,25 @@ public class TCRecipeTools {
         }
 
         public Object[] getInputItems() {
+            return InputItems;
+        }
+
+        public ItemStack getOutput() {
+            return OutputItem;
+        }
+    }
+
+    public static class ShapelessArcaneCraftingRecipe {
+
+        private final ArrayList<ItemStack> InputItems;
+        private final ItemStack OutputItem;
+
+        public ShapelessArcaneCraftingRecipe(ArrayList<ItemStack> InputItems, ItemStack OutputItem) {
+            this.InputItems = InputItems;
+            this.OutputItem = OutputItem;
+        }
+
+        public ArrayList<ItemStack> getInputItems() {
             return InputItems;
         }
 

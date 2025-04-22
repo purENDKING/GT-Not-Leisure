@@ -60,10 +60,41 @@ public class ShapedArcaneCraftingRecipesPool implements IRecipePool {
     @Override
     public void loadRecipes() {
         TCRecipeTools.getShapedArcaneCraftingRecipe();
+        TCRecipeTools.getShapelessArcaneCraftingRecipe();
 
         final IRecipeMap IAA = RecipeRegister.IndustrialShapedArcaneCraftingRecipes;
 
-        for (TCRecipeTools.ShapedArcaneCraftingRecipe recipe : TCRecipeTools.SAR) {
+        for (TCRecipeTools.ShapedArcaneCraftingRecipe recipe : TCRecipeTools.ShapedAR) {
+            if (shouldSkip(
+                recipe.getOutput()
+                    .getItem())) {
+                continue;
+            }
+
+            List<ItemStack> inputItems = new ArrayList<>();
+            for (Object input : recipe.getInputItems()) {
+                if (input instanceof ItemStack) {
+                    inputItems.add((ItemStack) input);
+                } else if (input instanceof List) {
+                    List<ItemStack> oreDictItems = (List<ItemStack>) input;
+                    if (!oreDictItems.isEmpty() && !isOreDictBlacklisted(oreDictItems.get(0))) {
+                        inputItems.add(oreDictItems.get(0));
+                    }
+                }
+            }
+
+            GTValues.RA.stdBuilder()
+                .ignoreCollision()
+                .clearInvalid()
+                .itemInputsUnified(inputItems.toArray(new ItemStack[0]))
+                .itemOutputs(recipe.getOutput())
+                .noOptimize()
+                .duration(20)
+                .eut(RECIPE_LV)
+                .addTo(IAA);
+        }
+
+        for (TCRecipeTools.ShapelessArcaneCraftingRecipe recipe : TCRecipeTools.ShaplessAR) {
             if (shouldSkip(
                 recipe.getOutput()
                     .getItem())) {
