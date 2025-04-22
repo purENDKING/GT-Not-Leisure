@@ -13,17 +13,21 @@ import org.apache.logging.log4j.Logger;
 
 import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.Utils.LoginMessage;
-import com.science.gtnl.Utils.item.GTGiveTrackerMod;
+import com.science.gtnl.Utils.item.GiveCommandMonitor;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
+import com.science.gtnl.common.command.CommandGiveCountBook;
+import com.science.gtnl.common.command.CommandReloadConfig;
 import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.config.ClientEventHandler;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.config.ServerEventHandler;
 import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
@@ -41,6 +45,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 // after
 @Mod(
@@ -75,6 +80,7 @@ public class ScienceNotLeisure {
     public static final String RESOURCE_ROOT_ID = "sciencenotleisure";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
+    public static SimpleNetworkWrapper network;
     public static Configuration config;
 
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
@@ -123,19 +129,27 @@ public class ScienceNotLeisure {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
-        event.registerServerCommand(new CommandGTNLCheatBook());
+        event.registerServerCommand(new CommandGiveCountBook());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        proxy.registerMessages();
         BlazeSword.registerEntity();
         proxy.preInit(event);
         MaterialLoader.load();
         LanguageManager.init();
         new RecipeLoaderRunnable().run();
 
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new ServerEventHandler());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new ClientEventHandler());
         AEApi.instance()
             .registries()
             .interfaceTerminal()
@@ -148,7 +162,7 @@ public class ScienceNotLeisure {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new GTGiveTrackerMod());
+        MinecraftForge.EVENT_BUS.register(new GiveCommandMonitor());
         FMLCommonHandler.instance()
             .bus()
             .register(new LoginMessage());

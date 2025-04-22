@@ -1,15 +1,18 @@
-package com.science.gtnl;
+package com.science.gtnl.common.command;
 
 import static net.minecraft.util.EnumChatFormatting.*;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.MinecraftForge;
 
-import com.science.gtnl.Events.ConfigReloadedEvent;
+import com.science.gtnl.Mods;
+import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.config.Config;
+import com.science.gtnl.config.ConfigSyncMessage;
 import com.science.gtnl.config.MainConfig;
 
 public class CommandReloadConfig extends CommandBase {
@@ -21,7 +24,7 @@ public class CommandReloadConfig extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/gtnl_reloadconfig - 重新加载 gtnl 的配置文件";
+        return "/gtnl_reloadconfig - reload GTNL config";
     }
 
     @Override
@@ -29,10 +32,13 @@ public class CommandReloadConfig extends CommandBase {
         try {
             Config.reloadConfig();
 
-            // 触发配置重载事件
-            MinecraftForge.EVENT_BUS.post(new ConfigReloadedEvent());
-
-            sender.addChatMessage(new ChatComponentText("配置文件已成功重新加载！"));
+            ConfigSyncMessage msg = new ConfigSyncMessage(new MainConfig());
+            for (Object obj : MinecraftServer.getServer()
+                .getConfigurationManager().playerEntityList) {
+                if (obj instanceof EntityPlayerMP) {
+                    ScienceNotLeisure.network.sendTo(msg, (EntityPlayerMP) obj);
+                }
+            }
 
             if (MainConfig.enableDeleteRecipe) {
                 sender.addChatMessage(
@@ -53,8 +59,9 @@ public class CommandReloadConfig extends CommandBase {
                             + MainConfig.recipeOutputChance
                             + "%"));
             }
+
         } catch (Exception e) {
-            sender.addChatMessage(new ChatComponentText("配置文件重载失败！错误信息: " + e.getMessage()));
+            sender.addChatMessage(new ChatComponentText("Error Reload GTNL config: " + e.getMessage()));
         }
     }
 

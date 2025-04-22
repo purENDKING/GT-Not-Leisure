@@ -68,4 +68,10 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(ItemLoader.InfinitySword, sparkly);
         MinecraftForgeClient.registerItemRenderer(ItemLoader.MatterCluster, sparkly);
     }
+
+    @Override
+    public void registerMessages() {
+        super.registerMessages();
+        // You could register any client‐only handlers here.
+    }
 }
