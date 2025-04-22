@@ -6,7 +6,9 @@ import static gregtech.api.util.GTUtility.validMTEList;
 import static kubatech.api.Variables.ln4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -42,9 +44,11 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedRow;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.gui.modularui.GTUITextures;
+import gregtech.api.interfaces.IHatchElement;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
@@ -53,6 +57,7 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEExtendedPowerMultiBlockBase;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.metatileentity.implementations.MTEHatchMuffler;
@@ -61,6 +66,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTUtility;
+import gregtech.api.util.IGTHatchAdder;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.IDualInputInventory;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
@@ -77,6 +83,11 @@ import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteam
 public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MTEExtendedPowerMultiBlockBase<T>
     implements IConstructable, ISurvivalConstructable {
 
+    protected int mCasing;
+    protected int ParallelTier;
+    protected int energyHatchTier;
+    protected int mMaxParallel = 0;
+
     // region Class Constructor
     public MultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -91,6 +102,7 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
      * This is the array Used to Store the Tectech Multi-Amp Dynamo hatches.
      */
     public ArrayList<MTEHatch> mTecTechDynamoHatches = new ArrayList<>();
+    public ArrayList<ParallelControllerHatch> mParallelControllerHatches = new ArrayList<>();
 
     /**
      * This is the array Used to Store the Tectech Multi-Amp Energy hatches.
@@ -173,6 +185,8 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
     @ApiStatus.OverrideOnly
     protected abstract int getMaxParallelRecipes();
 
+    public abstract int getCasingTextureID();
+
     /**
      * Limit the max parallel to prevent overflow.
      *
@@ -188,6 +202,21 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
 
     public double getVoltageTierExact() {
         return Math.log((double) getMaxInputEu() / 8d) / ln4 + 1e-8d;
+    }
+
+    protected long getMachineVoltageLimit() {
+        return GTValues.V[energyHatchTier];
+    }
+
+    protected int checkEnergyHatchTier() {
+        int tier = 0;
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
+            tier = Math.max(tHatch.mTier, tier);
+        }
+        return tier;
     }
 
     @FunctionalInterface
@@ -609,7 +638,8 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
     }
 
     public boolean checkHatch() {
-        return mMaintenanceHatches.size() <= 1 && (this.getPollutionPerSecond(null) <= 0 || !mMufflerHatches.isEmpty());
+        return mMaintenanceHatches.size() <= 1 && (this.getPollutionPerSecond(null) <= 0 || !mMufflerHatches.isEmpty())
+            && mParallelControllerHatches.size() <= 1;
     }
 
     @Override
@@ -622,6 +652,7 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
         this.mTecTechDynamoHatches.clear();
         this.mAllEnergyHatches.clear();
         this.mAllDynamoHatches.clear();
+        this.mParallelControllerHatches.clear();
     }
 
     public IMetaTileEntity getMetaTileEntity(final IGregTechTileEntity aTileEntity) {
@@ -923,6 +954,73 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
     @Override
     public int getRecipeCatalystPriority() {
         return -1;
+    }
+
+    public int getMaxParallel() {
+        return mMaxParallel;
+    }
+
+    public void setMaxParallel(int parallel) {
+        mMaxParallel = parallel;
+    }
+
+    protected void updateHatchTexture() {
+        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mMufflerHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mMaintenanceHatches) h.updateTexture(getCasingTextureID());
+        for (IDualInputHatch h : mDualInputHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mEnergyHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mExoticEnergyHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mDynamoHatches) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mParallelControllerHatches) h.updateTexture(getCasingTextureID());
+    }
+
+    public enum ParallelControllerElement implements IHatchElement<MultiMachineBase<?>> {
+
+        ParallelController(MultiMachineBase::addParallelControllerToMachineList, ParallelControllerHatch.class) {
+
+            @Override
+            public long count(MultiMachineBase<?> tileEntity) {
+                return tileEntity.mParallelControllerHatches.size();
+            }
+        };
+
+        private final List<Class<? extends IMetaTileEntity>> mteClasses;
+        private final IGTHatchAdder<MultiMachineBase<?>> adder;
+
+        @SafeVarargs
+        ParallelControllerElement(IGTHatchAdder<MultiMachineBase<?>> adder,
+            Class<? extends IMetaTileEntity>... mteClasses) {
+            this.mteClasses = Collections.unmodifiableList(Arrays.asList(mteClasses));
+            this.adder = adder;
+        }
+
+        @Override
+        public List<? extends Class<? extends IMetaTileEntity>> mteClasses() {
+            return mteClasses;
+        }
+
+        public IGTHatchAdder<? super MultiMachineBase<?>> adder() {
+            return adder;
+        }
+    }
+
+    public boolean addParallelControllerToMachineList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
+            return false;
+        }
+        IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+        if (aMetaTileEntity == null) {
+            return false;
+        }
+        if (aMetaTileEntity instanceof ParallelControllerHatch) {
+            return mParallelControllerHatches.add((ParallelControllerHatch) aMetaTileEntity);
+        }
+        return false;
     }
 
     // endregion

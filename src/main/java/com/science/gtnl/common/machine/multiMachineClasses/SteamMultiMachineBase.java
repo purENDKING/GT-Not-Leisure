@@ -70,6 +70,7 @@ import gregtech.api.util.HatchElementBuilder;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings1;
 import gregtech.common.blocks.BlockCasings2;
+import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
@@ -221,6 +222,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
+        for (IDualInputHatch h : mDualInputHatches) h.updateTexture(getCasingTextureID());
     }
 
     protected int getCasingTextureID() {

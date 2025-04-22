@@ -15,11 +15,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 
-import gregtech.api.enums.GTValues;
+import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.util.ExoticEnergyInputHelper;
@@ -27,10 +27,6 @@ import gregtech.api.util.GTRecipe;
 import gregtech.api.util.OverclockCalculator;
 
 public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> extends MultiMachineBase<T> {
-
-    protected int mCasing;
-    protected int ParallelTier;
-    protected int energyHatchTier;
 
     public GTMMultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -63,6 +59,22 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     }
 
     @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide()) {
+            if (mParallelControllerHatches.size() == 1 && aTick % 20 == 0) {
+                for (ParallelControllerHatch module : mParallelControllerHatches) {
+                    setMaxParallel(module.getParallel());
+                    ParallelTier = module.mTier;
+                }
+            } else {
+                setMaxParallel(8);
+            }
+            if (mEfficiency < 0) mEfficiency = 0;
+        }
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+    }
+
+    @Override
     public ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
@@ -91,24 +103,11 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
         logic.setAmperageOC(useSingleAmp);
     }
 
-    protected long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
-    }
-
-    protected int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
-    }
-
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 1) {
+        if (mParallelControllerHatches.size() == 1) {
+            return getMaxParallel();
+        } else if (ParallelTier <= 1) {
             return 8;
         } else {
             return (int) Math.pow(4, ParallelTier - 2);

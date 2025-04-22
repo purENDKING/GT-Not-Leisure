@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.Utils.Utils.mergeArray;
-import static gregtech.api.util.GTUtility.validMTEList;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 
 import java.math.BigInteger;
@@ -22,13 +21,11 @@ import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 import com.science.gtnl.misc.OverclockType;
 
-import gregtech.api.enums.GTValues;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
-import gregtech.api.metatileentity.implementations.MTEHatch;
-import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
@@ -79,6 +76,22 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     public void onFirstTick(IGregTechTileEntity aBaseMetaTileEntity) {
         super.onFirstTick(aBaseMetaTileEntity);
         this.ownerUUID = aBaseMetaTileEntity.getOwnerUuid();
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide()) {
+            if (mParallelControllerHatches.size() == 1 && aTick % 20 == 0) {
+                for (ParallelControllerHatch module : mParallelControllerHatches) {
+                    setMaxParallel(module.getParallel());
+                    ParallelTier = module.mTier;
+                }
+            } else {
+                setMaxParallel(8);
+            }
+            if (mEfficiency < 0) mEfficiency = 0;
+        }
+        super.onPostTick(aBaseMetaTileEntity, aTick);
     }
 
     @Override
@@ -170,24 +183,11 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         }
     }
 
-    protected long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
-    }
-
-    protected int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
-    }
-
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 1) {
+        if (mParallelControllerHatches.size() == 1) {
+            return getMaxParallel();
+        } else if (ParallelTier <= 1) {
             return 8;
         } else {
             return (int) Math.pow(4, ParallelTier - 2) * 16;
@@ -291,8 +291,6 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         return result;
     }
 
-    public abstract int getCasingTextureID();
-
     protected void prepareProcessing() {}
 
     protected void setupWirelessProcessingPowerLogic(ProcessingLogic logic) {
@@ -300,13 +298,6 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         logic.setAvailableVoltage(Long.MAX_VALUE);
         logic.setAvailableAmperage(1);
         logic.setAmperageOC(false);
-    }
-
-    protected void updateHatchTexture() {
-        for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
-        for (MTEHatch h : mOutputHatches) h.updateTexture(getCasingTextureID());
     }
 
     public int getExtraEUCostMultiplier() {

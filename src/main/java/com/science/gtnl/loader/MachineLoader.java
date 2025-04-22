@@ -32,6 +32,7 @@ import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
 import com.science.gtnl.common.machine.hatch.ManaDynamoHatch;
 import com.science.gtnl.common.machine.hatch.ManaEnergyHatch;
 import com.science.gtnl.common.machine.hatch.NinefoldInputHatch;
+import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
@@ -995,6 +996,118 @@ public class MachineLoader {
                 TextLocalization.BigSteamInputHatch,
                 1));
         addItemTooltip(GTNLItemList.BigSteamInputHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchLV.set(
+            new ParallelControllerHatch(
+                22548,
+                "ParallelControllerHatchLV",
+                TextLocalization.ParallelControllerHatchLV,
+                1));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchMV.set(
+            new ParallelControllerHatch(
+                22549,
+                "ParallelControllerHatchMV",
+                TextLocalization.ParallelControllerHatchMV,
+                2));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchHV.set(
+            new ParallelControllerHatch(
+                22550,
+                "ParallelControllerHatchHV",
+                TextLocalization.ParallelControllerHatchHV,
+                3));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchEV.set(
+            new ParallelControllerHatch(
+                22551,
+                "ParallelControllerHatchEV",
+                TextLocalization.ParallelControllerHatchEV,
+                4));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchIV.set(
+            new ParallelControllerHatch(
+                22552,
+                "ParallelControllerHatchIV",
+                TextLocalization.ParallelControllerHatchIV,
+                5));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchLuV.set(
+            new ParallelControllerHatch(
+                22553,
+                "ParallelControllerHatchLuV",
+                TextLocalization.ParallelControllerHatchLuV,
+                6));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchLuV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchZPM.set(
+            new ParallelControllerHatch(
+                22554,
+                "ParallelControllerHatchZPM",
+                TextLocalization.ParallelControllerHatchZPM,
+                7));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUV.set(
+            new ParallelControllerHatch(
+                22555,
+                "ParallelControllerHatchUV",
+                TextLocalization.ParallelControllerHatchUV,
+                8));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUHV.set(
+            new ParallelControllerHatch(
+                22556,
+                "ParallelControllerHatchUHV",
+                TextLocalization.ParallelControllerHatchUHV,
+                9));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUEV.set(
+            new ParallelControllerHatch(
+                22557,
+                "ParallelControllerHatchUEV",
+                TextLocalization.ParallelControllerHatchUEV,
+                10));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUIV.set(
+            new ParallelControllerHatch(
+                22558,
+                "ParallelControllerHatchUIV",
+                TextLocalization.ParallelControllerHatchUIV,
+                11));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUMV.set(
+            new ParallelControllerHatch(
+                22559,
+                "ParallelControllerHatchUMV",
+                TextLocalization.ParallelControllerHatchUMV,
+                12));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchUXV.set(
+            new ParallelControllerHatch(
+                22560,
+                "ParallelControllerHatchUXV",
+                TextLocalization.ParallelControllerHatchUXV,
+                13));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchUXV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ParallelControllerHatchMAX.set(
+            new ParallelControllerHatch(
+                22561,
+                "ParallelControllerHatchMAX",
+                TextLocalization.ParallelControllerHatchMAX,
+                14));
+        addItemTooltip(GTNLItemList.ParallelControllerHatchMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

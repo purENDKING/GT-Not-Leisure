@@ -6,6 +6,7 @@ import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.util.GTLanguageManager;
 
+@Deprecated
 public class TextLocalization {
 
     public static final String Tooltip_Tectech_Hatch = texter(
@@ -229,6 +230,49 @@ public class TextLocalization {
     public static final String Tooltip_DebugEnergyHatch_02 = texter(
         "§9Where do they come from?",
         "Tooltip_DebugEnergyHatch_02");
+
+    public static final String ParallelControllerHatchLV = texter(
+        "Parallel Controller Hatch (LV)",
+        "ParallelControllerHatchLV");
+    public static final String ParallelControllerHatchMV = texter(
+        "Parallel Controller Hatch (MV)",
+        "ParallelControllerHatchMV");
+    public static final String ParallelControllerHatchHV = texter(
+        "Parallel Controller Hatch (HV)",
+        "ParallelControllerHatchHV");
+    public static final String ParallelControllerHatchEV = texter(
+        "Parallel Controller Hatch (EV)",
+        "ParallelControllerHatchEV");
+    public static final String ParallelControllerHatchIV = texter(
+        "Parallel Controller Hatch (IV)",
+        "ParallelControllerHatchIV");
+    public static final String ParallelControllerHatchLuV = texter(
+        "Parallel Controller Hatch (LuV)",
+        "ParallelControllerHatchLuV");
+    public static final String ParallelControllerHatchZPM = texter(
+        "Parallel Controller Hatch (ZPM)",
+        "ParallelControllerHatchZPM");
+    public static final String ParallelControllerHatchUV = texter(
+        "Parallel Controller Hatch (UV)",
+        "ParallelControllerHatchUV");
+    public static final String ParallelControllerHatchUHV = texter(
+        "Parallel Controller Hatch (UHV)",
+        "ParallelControllerHatchUHV");
+    public static final String ParallelControllerHatchUEV = texter(
+        "Parallel Controller Hatch (UEV)",
+        "ParallelControllerHatchUEV");
+    public static final String ParallelControllerHatchUIV = texter(
+        "Parallel Controller Hatch (UIV)",
+        "ParallelControllerHatchUIV");
+    public static final String ParallelControllerHatchUMV = texter(
+        "Parallel Controller Hatch (UMV)",
+        "ParallelControllerHatchUMV");
+    public static final String ParallelControllerHatchUXV = texter(
+        "Parallel Controller Hatch (UXV)",
+        "ParallelControllerHatchUXV");
+    public static final String ParallelControllerHatchMAX = texter(
+        "Parallel Controller Hatch (MAX)",
+        "ParallelControllerHatchMAX");
 
     public static final String NinefoldInputHatchEV = texter("Ninefold Input Hatch (EV)", "NinefoldInputHatchEV");
     public static final String NinefoldInputHatchIV = texter("Ninefold Input Hatch (IV)", "NinefoldInputHatchIV");
@@ -1414,26 +1458,17 @@ public class TextLocalization {
         "Unfortunately, it is fracturing the central finite curve.",
         "Tooltip_HandOfJohnDavisonRockefeller_01");
     public static final String Tooltip_HandOfJohnDavisonRockefeller_02 = texter(
-        "Each level of voltage parallelism +4, each level of glass parallelism +2.",
+        "Energy hatch limited by glass tier - 1, UIV Glass unlocks all",
         "Tooltip_HandOfJohnDavisonRockefeller_02");
     public static final String Tooltip_HandOfJohnDavisonRockefeller_03 = texter(
-        "Initial Parallel Behavior 16",
+        "For each level increase in glass or voltage, the EU consumption multiplies by 95%%",
         "Tooltip_HandOfJohnDavisonRockefeller_03");
     public static final String Tooltip_HandOfJohnDavisonRockefeller_04 = texter(
-        "Energy hatch limited by glass tier - 1, UIV Glass unlocks all",
+        "For each level increase in glass or voltage, the speed increases by 2.5%%, but it will not be less than 0.1 times the recipe duration",
         "Tooltip_HandOfJohnDavisonRockefeller_04");
     public static final String Tooltip_HandOfJohnDavisonRockefeller_05 = texter(
-        "For each level increase in glass or voltage, the EU consumption multiplies by 95%%",
-        "Tooltip_HandOfJohnDavisonRockefeller_05");
-    public static final String Tooltip_HandOfJohnDavisonRockefeller_06 = texter(
-        "For each level increase in glass or voltage, the speed increases by 2.5%%, but it will not be less than 0.1 times the recipe duration",
-        "Tooltip_HandOfJohnDavisonRockefeller_06");
-    public static final String Tooltip_HandOfJohnDavisonRockefeller_07 = texter(
         "Ignore the required tier of the recipe!",
-        "Tooltip_HandOfJohnDavisonRockefeller_07");
-    public static final String Tooltip_HandOfJohnDavisonRockefeller_08 = texter(
-        "Enable §cperfect overclock§7 when the energy tier is greater than UIV.",
-        "Tooltip_HandOfJohnDavisonRockefeller_08");
+        "Tooltip_HandOfJohnDavisonRockefeller_05");
     public static final String Tooltip_HandOfJohnDavisonRockefeller_Casing = texter(
         "Any Pressure Containment Casing",
         "Tooltip_HandOfJohnDavisonRockefeller_Casing");
