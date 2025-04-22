@@ -24,7 +24,7 @@ import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameData;
 
-public class GTGiveTrackerMod {
+public class GiveCommandMonitor {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onCommand(CommandEvent event) {
@@ -57,11 +57,11 @@ public class GTGiveTrackerMod {
         World world = senderPlayer.getEntityWorld();
         File worldDir = world.getSaveHandler()
             .getWorldDirectory();
-        File gtDir = new File(worldDir, "GTNL");
+        File gtDir = new File(worldDir, "GTNotLeisure");
         if (!gtDir.exists()) gtDir.mkdirs();
 
-        File usesFile = new File(gtDir, "uses.xml");
-        File itemsFile = new File(gtDir, "items.xml");
+        File usesFile = new File(gtDir, "player_give_count.xml");
+        File itemsFile = new File(gtDir, "player_give_item.xml");
 
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

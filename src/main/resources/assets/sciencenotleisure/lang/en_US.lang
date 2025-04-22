@@ -13,6 +13,12 @@ Welcome_GTNL_Debug=GTNL Debug mode is enabled.
 Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabled。
 Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: 
 
+NameGiveCountBook=Give Count Book - 
+Info_GiveCountBook_00=GTNL - Give Counter
+Info_GiveCountBook_01=Player: 
+Info_GiveCountBook_02=Give Count: 
+Info_GiveCountBook_03=Give Item: 
+
 Adder=Add Mod: 
 Tooltip_Tectech_Hatch=Supports §9Tec§1Tech§r laser hatches!
 Tooltip_PerfectOverclock=Machine can perform §clossless overclocking§7
@@ -1597,13 +1603,10 @@ NameHandOfJohnDavisonRockefeller=Hand of John Davison Rockefeller
 HandOfJohnDavisonRockefellerRecipeType=Chemical Plant
 Tooltip_HandOfJohnDavisonRockefeller_00=§8§oA mysterious machine from the ExxonMobil Central Curve.
 Tooltip_HandOfJohnDavisonRockefeller_01=§8§oUnfortunately, it's fracturing the Central Finite Curve.
-Tooltip_HandOfJohnDavisonRockefeller_02=+4 parallels per voltage tier, +2 parallels per glass tier.
-Tooltip_HandOfJohnDavisonRockefeller_03=Base parallels is 16.
-Tooltip_HandOfJohnDavisonRockefeller_04=Glass tier - 1 limits Energy Hatch tier, UMV glass unlocks all tiers.
-Tooltip_HandOfJohnDavisonRockefeller_05=EU consumption multiplied by 95%% per glass or voltage tier increase.
-Tooltip_HandOfJohnDavisonRockefeller_06=Speed increases by 2.5%% per glass or voltage tier increase
-Tooltip_HandOfJohnDavisonRockefeller_07=Ignores recipe tier requirements!
-Tooltip_HandOfJohnDavisonRockefeller_08=§cLossless Overclocking enabled when Energy Hatch tier is above UIV.
+Tooltip_HandOfJohnDavisonRockefeller_02=Glass tier - 1 limits Energy Hatch tier, UMV glass unlocks all tiers.
+Tooltip_HandOfJohnDavisonRockefeller_03=EU consumption multiplied by 95%% per glass or voltage tier increase.
+Tooltip_HandOfJohnDavisonRockefeller_04=Speed increases by 2.5%% per glass or voltage tier increase
+Tooltip_HandOfJohnDavisonRockefeller_05=Ignores recipe tier requirements!
 Tooltip_HandOfJohnDavisonRockefeller_Casing=Any Pressure Suppression Machine Block
 
 NameBrickedBlastFurnace=Bricked Blast Furnace

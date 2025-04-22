@@ -13,6 +13,12 @@ Welcome_GTNL_Debug=GTNL Debug模式已启用
 Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
 Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: 
 
+NameGiveCountBook=掏掏不绝宝典 - 
+Info_GiveCountBook_00=GTNL - 掏掏计数器
+Info_GiveCountBook_01=玩家: 
+Info_GiveCountBook_02=掏掏次数: 
+Info_GiveCountBook_03=掏过的物品: 
+
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
 Tooltip_PerfectOverclock=机器可进行§c无损超频§7
@@ -1597,10 +1603,10 @@ NameHandOfJohnDavisonRockefeller=洛克菲勒之手
 HandOfJohnDavisonRockefellerRecipeType=化工厂
 Tooltip_HandOfJohnDavisonRockefeller_00=§8§o来自埃克森美孚中央曲线的神秘机器。
 Tooltip_HandOfJohnDavisonRockefeller_01=§8§o不幸的是，它在压裂中央有限曲线。
-Tooltip_HandOfJohnDavisonRockefeller_04=玻璃等级 - 1 限制了能源仓等级，UMV玻璃解锁所有等级
-Tooltip_HandOfJohnDavisonRockefeller_05=每增加一级玻璃或电压等级，EU消耗乘以95%%
-Tooltip_HandOfJohnDavisonRockefeller_06=每增加一级玻璃或电压等级，速度加快2.5%%
-Tooltip_HandOfJohnDavisonRockefeller_07=无视配方要求的等级!
+Tooltip_HandOfJohnDavisonRockefeller_02=玻璃等级 - 1 限制了能源仓等级，UMV玻璃解锁所有等级
+Tooltip_HandOfJohnDavisonRockefeller_03=每增加一级玻璃或电压等级，EU消耗乘以95%%
+Tooltip_HandOfJohnDavisonRockefeller_04=每增加一级玻璃或电压等级，速度加快2.5%%
+Tooltip_HandOfJohnDavisonRockefeller_05=无视配方要求的等级!
 Tooltip_HandOfJohnDavisonRockefeller_Casing=任意压力抑制机械方块
 
 NameBrickedBlastFurnace=砖高炉

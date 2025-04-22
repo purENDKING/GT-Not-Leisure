@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.early;
 
 import static codechicken.nei.NEIServerUtils.sendNotice;
 import static codechicken.nei.NEIServerUtils.setColour;
@@ -71,16 +71,16 @@ public abstract class NEIServerUtils_Mixin {
     private static void recordGiveAction(EntityPlayerMP player, ItemStack stack, int given) {
         String executor = player.getCommandSenderName();
         String displayName = resolveDisplayName(stack);
-        if (displayName == null || given > 64) return;
+        if (displayName == null) return;
 
         World world = player.getEntityWorld();
         File worldDir = world.getSaveHandler()
             .getWorldDirectory();
-        File gtDir = new File(worldDir, "GTNL");
+        File gtDir = new File(worldDir, "GTNotLeisure");
         if (!gtDir.exists()) gtDir.mkdirs();
 
-        File usesFile = new File(gtDir, "uses.xml");
-        File itemsFile = new File(gtDir, "items.xml");
+        File usesFile = new File(gtDir, "player_give_count.xml");
+        File itemsFile = new File(gtDir, "player_give_item.xml");
 
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance()

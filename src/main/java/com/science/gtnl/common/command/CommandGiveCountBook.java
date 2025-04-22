@@ -1,4 +1,4 @@
-package com.science.gtnl;
+package com.science.gtnl.common.command;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,16 +28,16 @@ import org.w3c.dom.Element;
 
 import cpw.mods.fml.common.registry.GameData;
 
-public class CommandGTNLCheatBook extends CommandBase {
+public class CommandGiveCountBook extends CommandBase {
 
     @Override
     public String getCommandName() {
-        return "gtnl_cheatbook";
+        return "gtnl_givecountbook";
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/gtnl_cheatbook [playerName]";
+        return "/gtnl_givecountbook [playerName] [page]";
     }
 
     @Override
@@ -49,8 +49,17 @@ public class CommandGTNLCheatBook extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) {
         String targetName;
         EntityPlayerMP targetPlayer = null;
+        int pageIndex = 1;
+
         if (args.length >= 1 && args[0].length() > 0) {
             targetName = args[0];
+            if (args.length >= 2) {
+                try {
+                    pageIndex = Math.max(1, Integer.parseInt(args[1]));
+                } catch (NumberFormatException ignored) {
+                    pageIndex = 1;
+                }
+            }
         } else if (sender instanceof EntityPlayerMP) {
             targetPlayer = (EntityPlayerMP) sender;
             targetName = sender.getCommandSenderName();
@@ -64,19 +73,18 @@ public class CommandGTNLCheatBook extends CommandBase {
         File gtDir = new File(
             world.getSaveHandler()
                 .getWorldDirectory(),
-            "GTNL");
-        File usesFile = new File(gtDir, "uses.xml");
-        File itemsFile = new File(gtDir, "items.xml");
+            "GTNotLeisure");
+        File usesFile = new File(gtDir, "player_give_count.xml");
+        File itemsFile = new File(gtDir, "player_give_item.xml");
 
         if (!usesFile.exists() || !itemsFile.exists()) {
-            sender.addChatMessage(new ChatComponentText("GTNL data not found."));
+            sender.addChatMessage(new ChatComponentText("Player data not found."));
             return;
         }
 
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder();
-
             Document docUses = db.parse(usesFile);
             Element rootUses = docUses.getDocumentElement();
             int totalUses = 0;
@@ -112,17 +120,17 @@ public class CommandGTNLCheatBook extends CommandBase {
 
             ItemStack book = new ItemStack(Items.written_book);
             NBTTagCompound bookTag = new NBTTagCompound();
-            bookTag.setString("title", "GTNL Cheatbook - " + targetName);
-            bookTag.setString("author", "GTNL Tracker");
+            bookTag.setString(
+                "title",
+                StatCollector.translateToLocal("NameGiveCountBook") + targetName + " - " + pageIndex);
+            bookTag.setString("author", StatCollector.translateToLocal("Info_GiveCountBook_00"));
 
             NBTTagList pages = new NBTTagList();
-            StringBuilder page = new StringBuilder();
-            page.append("Player: ")
-                .append(targetName)
-                .append("\n");
-            page.append("Total /give: ")
-                .append(totalUses)
-                .append("\n");
+            List<String> allLines = new ArrayList<>();
+
+            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_01") + targetName);
+            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_02") + totalUses);
+            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_03"));
 
             for (int i = 0; i < targetEl.getElementsByTagName("item")
                 .getLength(); i++) {
@@ -130,17 +138,11 @@ public class CommandGTNLCheatBook extends CommandBase {
                     .item(i);
                 String regWithMeta = itemEl.getAttribute("name");
                 int count = Integer.parseInt(itemEl.getAttribute("count"));
-
                 String[] parts = regWithMeta.split(":");
                 if (parts.length < 2) continue;
 
                 String regName = parts[0] + ":" + parts[1];
-                int meta = 0;
-                if (parts.length >= 3) {
-                    try {
-                        meta = Integer.parseInt(parts[2]);
-                    } catch (NumberFormatException ignored) {}
-                }
+                int meta = (parts.length >= 3) ? Integer.parseInt(parts[2]) : 0;
 
                 Item item = GameData.getItemRegistry()
                     .getObject(regName);
@@ -151,31 +153,56 @@ public class CommandGTNLCheatBook extends CommandBase {
                 if (unlocName == null) continue;
 
                 String localized = StatCollector.translateToLocal(unlocName + ".name");
-                String line = localized + ": " + count + "\n";
+                allLines.add(localized + ": " + count);
+            }
 
-                if (page.length() + line.length() > 240) {
-                    pages.appendTag(new NBTTagString(page.toString()));
-                    page = new StringBuilder();
+            int startLine = (pageIndex - 1) * 50 * 14;
+            int endLine = pageIndex * 50 * 14;
+            List<String> linesToPrint = allLines
+                .subList(Math.min(startLine, allLines.size()), Math.min(endLine, allLines.size()));
+
+            int maxLinesFirstPage = 11;
+            int maxLinesPerPage = 14;
+            int lineCounter = 0;
+            StringBuilder currentPage = new StringBuilder();
+
+            for (int i = 0; i < linesToPrint.size(); i++) {
+                String line = linesToPrint.get(i);
+
+                line = line.replaceAll("§[0-9a-fk-or]", "");
+
+                int maxLines = (pages.tagCount() == 0) ? maxLinesFirstPage : maxLinesPerPage;
+
+                if (lineCounter >= maxLines) {
+                    pages.appendTag(new NBTTagString(currentPage.toString()));
+                    currentPage = new StringBuilder();
+                    lineCounter = 0;
+                    maxLines = maxLinesPerPage;
                 }
-                page.append(line);
+
+                currentPage.append(line)
+                    .append("\n");
+                lineCounter++;
             }
 
-            if (page.length() > 0) {
-                pages.appendTag(new NBTTagString(page.toString()));
+            if (currentPage.length() > 0 && pages.tagCount() < 50) {
+                pages.appendTag(new NBTTagString(currentPage.toString()));
             }
+
             bookTag.setTag("pages", pages);
             book.setTagCompound(bookTag);
 
             if (sender instanceof EntityPlayerMP) {
                 ((EntityPlayerMP) sender).inventory.addItemStackToInventory(book);
-                sender.addChatMessage(new ChatComponentText("Cheatbook given to " + sender.getCommandSenderName()));
+                sender
+                    .addChatMessage(new ChatComponentText("Give " + sender.getCommandSenderName() + "Give Count Book"));
             } else {
                 sender.addChatMessage(new ChatComponentText("Cannot give book to console."));
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            sender.addChatMessage(new ChatComponentText("Error reading GTNL data."));
+            sender.addChatMessage(new ChatComponentText("Error reading Player data."));
         }
     }
 
