@@ -30,6 +30,8 @@ import com.science.gtnl.common.block.blocks.artificialStar.BlockArtificialStarRe
 import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialStar;
 import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.BlockNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.items.SaplingBrickuoia;
@@ -49,6 +51,9 @@ public class BlockRegister {
         BasicBlocks.DenserNeutronCollector = new DenserNeutronCollector();
         BasicBlocks.DensestNeutronCollector = new DensestNeutronCollector();
         GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollectorTileEntity");
+
+        BasicBlocks.BlockNanoPhagocytosisPlantRender = new BlockNanoPhagocytosisPlant();
+        GameRegistry.registerTileEntity(TileEntityNanoPhagocytosisPlant.class, "NanoPhagocytosisPlantRenderTileEntity");
 
         BasicBlocks.BlockSoulFarmland = new BlockSoulFarmland();
 

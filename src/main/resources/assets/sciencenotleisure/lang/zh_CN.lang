@@ -13,11 +13,12 @@ Welcome_GTNL_Debug=GTNL Debug模式已启用
 Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
 Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: 
 
-NameGiveCountBook=掏掏不绝宝典 - 
-Info_GiveCountBook_00=GTNL - 掏掏计数器
-Info_GiveCountBook_01=玩家: 
-Info_GiveCountBook_02=掏掏次数: 
-Info_GiveCountBook_03=掏过的物品: 
+NameGiveCountBook=§r掏掏不绝宝典 - 
+Info_GiveCountBook_00=玩家: 
+Info_GiveCountBook_01=掏掏次数: 
+Info_GiveCountBook_02=掏过的物品 : 注册ID:数据值 : 数量 : 最后掏过时间
+Info_GiveCountBook_03=上次掏掏时间: 
+Info_GiveCountBook_04=超过行数限制! 使用翻页参数获取下一页内容
 
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
@@ -339,6 +340,7 @@ tile.Stargate_Coil_Compressed.9.name=压缩星门线圈-九重
 
 tile.LaserBeacon.name=激光诱导信标
 tile.RealArtificialStarRender.name=真·湮灭发电机渲染器
+tile.NanoPhagocytosisPlantRenderer.name=纳米吞噬厂渲染器
 tile.BlockSoulFarmland.name=灵魂耕地
 
 tile.playerDoll.name=玩偶

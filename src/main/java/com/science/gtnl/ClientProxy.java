@@ -1,5 +1,6 @@
 package com.science.gtnl;
 
+import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.PlayerDoll;
 
 import net.minecraft.item.Item;
@@ -12,6 +13,9 @@ import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAn
 import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.ItemRenderNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.RenderNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager;
@@ -49,6 +53,12 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
         MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
+
+        MinecraftForgeClient.registerItemRenderer(
+            Item.getItemFromBlock(BlockNanoPhagocytosisPlantRender),
+            new ItemRenderNanoPhagocytosisPlant());
+        ClientRegistry
+            .bindTileEntitySpecialRenderer(TileEntityNanoPhagocytosisPlant.class, new RenderNanoPhagocytosisPlant());
     }
 
     @Override

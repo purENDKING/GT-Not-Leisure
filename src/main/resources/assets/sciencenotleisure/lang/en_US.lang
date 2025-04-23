@@ -14,10 +14,11 @@ Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabl
 Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: 
 
 NameGiveCountBook=Give Count Book - 
-Info_GiveCountBook_00=GTNL - Give Counter
-Info_GiveCountBook_01=Player: 
-Info_GiveCountBook_02=Give Count: 
-Info_GiveCountBook_03=Give Item: 
+Info_GiveCountBook_00=Player: 
+Info_GiveCountBook_01=Give Count: 
+Info_GiveCountBook_02=Give Item: Registry ID:Meta : Count : Last Time
+Info_GiveCountBook_03=Last Give Time: 
+Info_GiveCountBook_04=Exceeded line limit! Use the page parameter to view the next page
 
 Adder=Add Mod: 
 Tooltip_Tectech_Hatch=Supports §9Tec§1Tech§r laser hatches!
@@ -339,6 +340,7 @@ tile.Stargate_Coil_Compressed.9.name=Compressed Stargate Coil - Tier 9
 
 tile.LaserBeacon.name=Laser Beacon
 tile.RealArtificialStarRender.name=True Annihilation Generator Renderer
+tile.NanoPhagocytosisPlantRenderer.name=Nano Phagocytosis Plant Renderer
 tile.BlockSoulFarmland.name=Soul Farmland
 
 tile.playerDoll.name=Doll

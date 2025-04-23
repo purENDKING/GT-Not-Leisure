@@ -1,8 +1,10 @@
 package com.science.gtnl.common.command;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -48,24 +50,23 @@ public class CommandGiveCountBook extends CommandBase {
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
         String targetName;
+        int page = 1;
         EntityPlayerMP targetPlayer = null;
-        int pageIndex = 1;
 
         if (args.length >= 1 && args[0].length() > 0) {
             targetName = args[0];
-            if (args.length >= 2) {
-                try {
-                    pageIndex = Math.max(1, Integer.parseInt(args[1]));
-                } catch (NumberFormatException ignored) {
-                    pageIndex = 1;
-                }
-            }
         } else if (sender instanceof EntityPlayerMP) {
             targetPlayer = (EntityPlayerMP) sender;
             targetName = sender.getCommandSenderName();
         } else {
             sender.addChatMessage(new ChatComponentText("Console must specify a player name."));
             return;
+        }
+
+        if (args.length >= 2) {
+            try {
+                page = Math.max(1, Integer.parseInt(args[1]));
+            } catch (NumberFormatException ignored) {}
         }
 
         World world = (targetPlayer != null) ? targetPlayer.getEntityWorld()
@@ -88,6 +89,7 @@ public class CommandGiveCountBook extends CommandBase {
             Document docUses = db.parse(usesFile);
             Element rootUses = docUses.getDocumentElement();
             int totalUses = 0;
+            String timeStamp = "";
             for (int i = 0; i < rootUses.getElementsByTagName("player")
                 .getLength(); i++) {
                 Element el = (Element) rootUses.getElementsByTagName("player")
@@ -95,6 +97,8 @@ public class CommandGiveCountBook extends CommandBase {
                 if (el.getAttribute("name")
                     .equals(targetName)) {
                     totalUses = Integer.parseInt(el.getAttribute("uses"));
+                    long lastTime = Long.parseLong(el.getAttribute("last_time"));
+                    timeStamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(lastTime));
                     break;
                 }
             }
@@ -118,26 +122,31 @@ public class CommandGiveCountBook extends CommandBase {
                 return;
             }
 
-            ItemStack book = new ItemStack(Items.written_book);
-            NBTTagCompound bookTag = new NBTTagCompound();
-            bookTag.setString(
-                "title",
-                StatCollector.translateToLocal("NameGiveCountBook") + targetName + " - " + pageIndex);
-            bookTag.setString("author", StatCollector.translateToLocal("Info_GiveCountBook_00"));
+            ItemStack book = new ItemStack(Items.book);
+            NBTTagCompound tag = new NBTTagCompound();
+            NBTTagList lore = new NBTTagList();
 
-            NBTTagList pages = new NBTTagList();
-            List<String> allLines = new ArrayList<>();
+            lore.appendTag(new NBTTagString(StatCollector.translateToLocal("Info_GiveCountBook_00") + targetName));
+            lore.appendTag(new NBTTagString(StatCollector.translateToLocal("Info_GiveCountBook_01") + totalUses));
+            lore.appendTag(new NBTTagString(StatCollector.translateToLocal("Info_GiveCountBook_02")));
+            lore.appendTag(new NBTTagString(StatCollector.translateToLocal("Info_GiveCountBook_03") + timeStamp));
 
-            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_01") + targetName);
-            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_02") + totalUses);
-            allLines.add(StatCollector.translateToLocal("Info_GiveCountBook_03"));
+            System.out.println("[GTNL] GiveCountBook for: " + targetName);
+            System.out.println("[GTNL] Total Uses: " + totalUses + ", Last Time: " + timeStamp);
 
-            for (int i = 0; i < targetEl.getElementsByTagName("item")
-                .getLength(); i++) {
+            int start = (page - 1) * 250;
+            int end = start + 250;
+            int totalItems = targetEl.getElementsByTagName("item")
+                .getLength();
+
+            for (int i = start; i < Math.min(end, totalItems); i++) {
                 Element itemEl = (Element) targetEl.getElementsByTagName("item")
                     .item(i);
                 String regWithMeta = itemEl.getAttribute("name");
                 int count = Integer.parseInt(itemEl.getAttribute("count"));
+                long last = Long.parseLong(itemEl.getAttribute("last_time"));
+                String itemTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(last));
+
                 String[] parts = regWithMeta.split(":");
                 if (parts.length < 2) continue;
 
@@ -153,51 +162,31 @@ public class CommandGiveCountBook extends CommandBase {
                 if (unlocName == null) continue;
 
                 String localized = StatCollector.translateToLocal(unlocName + ".name");
-                allLines.add(localized + ": " + count);
-            }
-
-            int startLine = (pageIndex - 1) * 50 * 14;
-            int endLine = pageIndex * 50 * 14;
-            List<String> linesToPrint = allLines
-                .subList(Math.min(startLine, allLines.size()), Math.min(endLine, allLines.size()));
-
-            int maxLinesFirstPage = 11;
-            int maxLinesPerPage = 14;
-            int lineCounter = 0;
-            StringBuilder currentPage = new StringBuilder();
-
-            for (int i = 0; i < linesToPrint.size(); i++) {
-                String line = linesToPrint.get(i);
-
+                String line = localized + " : " + regName + ":" + meta + " : " + count + " : " + itemTime;
                 line = line.replaceAll("§[0-9a-fk-or]", "");
+                line = "§r§e" + line;
+                lore.appendTag(new NBTTagString(line));
 
-                int maxLines = (pages.tagCount() == 0) ? maxLinesFirstPage : maxLinesPerPage;
-
-                if (lineCounter >= maxLines) {
-                    pages.appendTag(new NBTTagString(currentPage.toString()));
-                    currentPage = new StringBuilder();
-                    lineCounter = 0;
-                    maxLines = maxLinesPerPage;
-                }
-
-                currentPage.append(line)
-                    .append("\n");
-                lineCounter++;
+                System.out.println("[GTNL] " + line);
             }
 
-            if (currentPage.length() > 0 && pages.tagCount() < 50) {
-                pages.appendTag(new NBTTagString(currentPage.toString()));
+            if (totalItems > end) {
+                String moreLine = "§r§a" + StatCollector.translateToLocal("Info_GiveCountBook_04");
+                lore.appendTag(new NBTTagString(moreLine));
             }
 
-            bookTag.setTag("pages", pages);
-            book.setTagCompound(bookTag);
+            NBTTagCompound display = new NBTTagCompound();
+            display.setTag("Lore", lore);
+            tag.setTag("display", display);
+            book.setTagCompound(tag);
+            book.setStackDisplayName(StatCollector.translateToLocal("NameGiveCountBook") + targetName + " - " + page);
 
             if (sender instanceof EntityPlayerMP) {
                 ((EntityPlayerMP) sender).inventory.addItemStackToInventory(book);
-                sender
-                    .addChatMessage(new ChatComponentText("Give " + sender.getCommandSenderName() + "Give Count Book"));
+                sender.addChatMessage(
+                    new ChatComponentText("Give " + sender.getCommandSenderName() + " Give Count Paper"));
             } else {
-                sender.addChatMessage(new ChatComponentText("Cannot give book to console."));
+                sender.addChatMessage(new ChatComponentText("Cannot give paper to console."));
             }
 
         } catch (Exception e) {
