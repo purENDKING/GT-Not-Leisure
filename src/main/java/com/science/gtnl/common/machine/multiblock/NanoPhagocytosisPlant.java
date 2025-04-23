@@ -380,15 +380,17 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     }
 
     private ChunkCoordinates getRenderPos() {
-        IGregTechTileEntity gregTechTileEntity = this.getBaseMetaTileEntity();
-        int x = gregTechTileEntity.getXCoord();
-        int y = gregTechTileEntity.getYCoord();
-        int z = gregTechTileEntity.getZCoord();
-        double xOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetX;
-        double yOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetY;
-        double zOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetZ;
+        IGregTechTileEntity tile = this.getBaseMetaTileEntity();
+        int x = tile.getXCoord();
+        int y = tile.getYCoord();
+        int z = tile.getZCoord();
 
-        yOffset += 13;
+        ForgeDirection back = getExtendedFacing().getRelativeBackInWorld();
+        ForgeDirection up = getExtendedFacing().getRelativeUpInWorld();
+
+        double xOffset = 9 * back.offsetX + 13 * up.offsetX;
+        double yOffset = 9 * back.offsetY + 13 * up.offsetY;
+        double zOffset = 9 * back.offsetZ + 13 * up.offsetZ;
 
         return new ChunkCoordinates((int) (x + xOffset), (int) (y + yOffset), (int) (z + zOffset));
     }

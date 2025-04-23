@@ -183,7 +183,7 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
 
         float cx = (float) x + .5f;
         float cy = (float) y + .5f;
-        float cz = (float) z + .5f;
+        float cz = (float) z + 1;
         float size = modelNormalize;
         starModelMatrix.clear();
         starModelMatrix.translate(cx, cy, cz);
