@@ -501,7 +501,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                     return false;
                 }
 
-        if (!isRenderActive && !isRendererDisabled && mLastWorkingTick > 0) {
+        if (!isRenderActive && !isRendererDisabled && mTotalRunTime > 0) {
             createRenderer();
         }
 
