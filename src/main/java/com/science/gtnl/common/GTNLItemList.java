@@ -38,6 +38,7 @@ public enum GTNLItemList implements IItemContainer {
     Stargate_Coil_Compressed,
     LaserBeacon,
     ArtificialStarRender,
+    NanoPhagocytosisPlantRender,
     SoulFarmland,
     NeutronCollector,
     DenseNeutronCollector,

@@ -5,7 +5,6 @@ import static tectech.rendering.EOH.EOHTileEntitySR.*;
 
 import java.nio.FloatBuffer;
 
-import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -35,7 +34,7 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
 
     private static ShaderProgram starProgram;
     private static IModelCustom starModel;
-    private static final float modelNormalize = .0067f * 2;
+    private static final float modelNormalize = 0.003f;
 
     private static boolean initialized = false;
     private static boolean failedInit = false;
@@ -218,148 +217,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         GL11.glPopAttrib();
     }
 
-    public void bufferSoftBeam(TileEntityNanoPhagocytosisPlant tile) {
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(maxSegments * 3);
-
-        float angle = tile.getStartAngle();
-        float radius = tile.getStarRadius() * 1.1f;
-        float startx = -radius * ((float) Math.cos(angle));
-        float starty = radius * ((float) Math.sin(angle));
-
-        buffer.put(starty);
-        buffer.put(startx);
-        buffer.put(0);
-
-        for (int i = 2; i >= 0; i--) {
-            buffer.put(tile.getLenRadius(i));
-            buffer.put(tile.getLensDistance(i));
-            buffer.put(1f);
-        }
-
-        buffer.put(TileEntityNanoPhagocytosisPlant.BACK_PLATE_RADIUS);
-        buffer.put(TileEntityNanoPhagocytosisPlant.BACK_PLATE_DISTANCE);
-        buffer.put(-.05f);
-
-        buffer.rewind();
-        GL20.glUniform3(u_SegmentArray, buffer);
-    }
-
-    public void bufferIntenseBeam(TileEntityNanoPhagocytosisPlant tile) {
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(maxSegments * 3);
-        float angle = tile.getStartAngle();
-        float radius = tile.getStarRadius() * 1.05f;
-        float startx = -radius * ((float) Math.cos(angle));
-        float starty = radius * ((float) Math.sin(angle));
-
-        // first lens means the one closest to the star
-        int firstLens = 2;
-
-        float nextx = tile.getLensDistance(firstLens);
-        float nexty = tile.getLenRadius(firstLens) * .75f;
-
-        float backx = Math.max(-radius, (nextx + radius) / 2);
-        float backy = TileEntityNanoPhagocytosisPlant.interpolate(startx, nextx, starty, nexty, backx);
-
-        buffer.put(backy);
-        buffer.put(backx);
-        buffer.put(0);
-
-        float transparency = .2f;
-        for (int i = 2; i >= 0; i--) {
-            buffer.put(tile.getLenRadius(i) / 2);
-            buffer.put(tile.getLensDistance(i));
-            buffer.put(transparency);
-            transparency += .3f;
-        }
-
-        float currx = tile.getLensDistance(0);
-        float curry = tile.getLenRadius(0) / 2;
-        float lastx = TileEntityNanoPhagocytosisPlant.BACK_PLATE_DISTANCE;
-        float lasty = Math.min(tile.getLenRadius(firstLens), TileEntityNanoPhagocytosisPlant.BACK_PLATE_RADIUS);
-
-        float midx = lastx + 8f;
-        float midy = TileEntityNanoPhagocytosisPlant.interpolate(currx, lastx, curry, lasty, midx);
-
-        buffer.put(midy);
-        buffer.put(midx);
-        buffer.put(transparency);
-
-        buffer.put(lasty);
-        buffer.put(lastx);
-        buffer.put(0f);
-
-        buffer.rewind();
-        GL20.glUniform3(u_SegmentArray, buffer);
-        // return buffer;
-    }
-
-    public void RenderBeamSegment(TileEntityNanoPhagocytosisPlant tile, double x, double y, double z, float timer) {
-        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-        // GL11.glDisable(GL11.GL_TEXTURE_2D);
-        // GL11.glDisable(GL11.GL_CULL_FACE);
-        GL11.glDisable(GL11.GL_ALPHA_TEST);
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        this.bindTexture(new ResourceLocation(Reference.MODID, "models/spaceLayer.png"));
-
-        float scaleFactor = 1.0f / 8.0f;
-        float cx = (float) x + .5f;
-        float cy = (float) y + .5f;
-        float cz = (float) z + .5f;
-        beamModelMatrix.clear();
-        beamModelMatrix.translate(cx, cy, cz);
-
-        beamModelMatrix.rotate(
-            tile.getRotAngle() / 180 * ((float) Math.PI),
-            tile.getRotAxisX(),
-            tile.getRotAxisY(),
-            tile.getRotAxisZ());
-        beamModelMatrix.rotate((float) Math.PI / 2f, 0, 1, 0);
-        beamModelMatrix.scale(scaleFactor, scaleFactor, scaleFactor);
-
-        beamProgram.use();
-
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glDepthMask(false); // Disable depth writing for transparency
-
-        bufferSoftBeam(tile);
-
-        FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
-        GL20.glUniformMatrix4(u_BeamModelMatrix, false, beamModelMatrix.get(matrixBuffer));
-
-        beamModelMatrix.invert();
-
-        Vector4f cameraPosition = new Vector4f(
-            ActiveRenderInfo.objectX,
-            ActiveRenderInfo.objectY,
-            ActiveRenderInfo.objectZ,
-            1);
-        cameraPosition = beamModelMatrix.transform(cameraPosition);
-        GL20.glUniform3f(u_CameraPosition, cameraPosition.x, cameraPosition.y, cameraPosition.z);
-        GL20.glUniform3f(u_BeamColor, tile.getColorR(), tile.getColorG(), tile.getColorB());
-        GL20.glUniform1f(u_BeamIntensity, 2);
-        GL20.glUniform1f(u_BeamTime, timer);
-
-        GL20.glEnableVertexAttribArray(a_VertexID);
-        GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
-
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, maxSegments * beamSegmentQuads * 6);
-
-        GL20.glUniform3f(u_BeamColor, 1, 1, 1);
-        GL20.glUniform1f(u_BeamIntensity, 4);
-        bufferIntenseBeam(tile);
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, maxSegments * beamSegmentQuads * 6);
-
-        GL20.glDisableVertexAttribArray(a_VertexID);
-        GL11.glDisableClientState(GL11.GL_VERTEX_ARRAY);
-
-        GL11.glPopAttrib();
-        ShaderProgram.clear();
-    }
-
     private void RenderRings(TileEntityNanoPhagocytosisPlant tile, double x, double y, double z, float timer) {
         bindTexture(TextureMap.locationBlocksTexture);
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
@@ -428,8 +285,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
 
         RenderEntireStar(forgeTile, x, y, z, timer);
         RenderRings(forgeTile, x, y, z, timer);
-
-        RenderBeamSegment(forgeTile, x, y, z, timer);
 
     }
 

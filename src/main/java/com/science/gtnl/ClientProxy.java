@@ -13,7 +13,7 @@ import com.science.gtnl.common.block.ReAvaritia.ExtremeAnvil.TileEntityExtremeAn
 import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
-import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.ItemRenderNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.ItemBlockNanoPhagocytosisPlantRender;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.RenderNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
@@ -56,7 +56,7 @@ public class ClientProxy extends CommonProxy {
 
         MinecraftForgeClient.registerItemRenderer(
             Item.getItemFromBlock(BlockNanoPhagocytosisPlantRender),
-            new ItemRenderNanoPhagocytosisPlant());
+            new ItemBlockNanoPhagocytosisPlantRender(BlockNanoPhagocytosisPlantRender));
         ClientRegistry
             .bindTileEntitySpecialRenderer(TileEntityNanoPhagocytosisPlant.class, new RenderNanoPhagocytosisPlant());
     }

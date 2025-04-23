@@ -203,19 +203,13 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
             true);
     }
 
-    public boolean checkHatches() {
-        return !mInputHatches.isEmpty() && !mInputBusses.isEmpty()
-            && !mOutputBusses.isEmpty()
-            && mOutputHatches.isEmpty();
-    }
-
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
         casingTier = -2;
         tCountCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing <= 1200 && !checkHatches()) {
+        if (tCountCasing <= 1200) {
             updateHatchTexture();
             return false;
         }

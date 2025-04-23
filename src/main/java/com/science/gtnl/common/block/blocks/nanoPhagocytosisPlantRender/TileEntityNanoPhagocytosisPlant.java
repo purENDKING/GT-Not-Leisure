@@ -18,7 +18,7 @@ import tectech.thing.metaTileEntity.multi.godforge.color.StarColorSetting;
 
 public class TileEntityNanoPhagocytosisPlant extends TileEntity {
 
-    private float radius = 4;
+    private float radius = 1;
     private float rotationSpeed = 10;
     private float rotAngle = 0, rotAxisX = 1, rotAxisY = 0, rotAxisZ = 0;
     private AxisAlignedBB renderBoundingBox;
@@ -46,7 +46,6 @@ public class TileEntityNanoPhagocytosisPlant extends TileEntity {
     private static final String ROT_AXIS_Z_NBT_TAG = NBT_TAG + "ROT_AXIS_Z";
     private static final String STAR_COLOR_TAG = NBT_TAG + "STAR_COLOR";
 
-    public static final float BACK_PLATE_DISTANCE = -121.5f, BACK_PLATE_RADIUS = 13f;
     private static final double RING_RADIUS = 63;
     private static final double BEAM_LENGTH = 59;
 

@@ -12,21 +12,23 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockNanoPhagocytosisPlant extends Block {
+public class BlockNanoPhagocytosisPlantRender extends Block {
 
-    public BlockNanoPhagocytosisPlant() {
+    public BlockNanoPhagocytosisPlantRender() {
         super(Material.iron);
         this.setResistance(20f);
         this.setHardness(-1.0f);
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureBlock);
         this.setBlockName("NanoPhagocytosisPlantRenderer");
         this.setLightLevel(100.0f);
-        registerOther(this);
+        GameRegistry.registerBlock(this, ItemBlockNanoPhagocytosisPlantRender.class, getUnlocalizedName());
+        GTNLItemList.NanoPhagocytosisPlantRender.set(new ItemStack(this, 1));
     }
 
     @Override
@@ -58,10 +60,6 @@ public class BlockNanoPhagocytosisPlant extends Block {
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         return new TileEntityNanoPhagocytosisPlant();
-    }
-
-    public static void registerOther(Block block) {
-        GameRegistry.registerBlock(block, "NanoPhagocytosisPlantRendererBlock");
     }
 
     @Override

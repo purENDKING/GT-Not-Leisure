@@ -30,7 +30,7 @@ import com.science.gtnl.common.block.blocks.artificialStar.BlockArtificialStarRe
 import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialStar;
 import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
-import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.BlockNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.BlockNanoPhagocytosisPlantRender;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDoll;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
@@ -52,7 +52,7 @@ public class BlockRegister {
         BasicBlocks.DensestNeutronCollector = new DensestNeutronCollector();
         GameRegistry.registerTileEntity(TileEntityNeutronCollector.class, "NeutronCollectorTileEntity");
 
-        BasicBlocks.BlockNanoPhagocytosisPlantRender = new BlockNanoPhagocytosisPlant();
+        BasicBlocks.BlockNanoPhagocytosisPlantRender = new BlockNanoPhagocytosisPlantRender();
         GameRegistry.registerTileEntity(TileEntityNanoPhagocytosisPlant.class, "NanoPhagocytosisPlantRenderTileEntity");
 
         BasicBlocks.BlockSoulFarmland = new BlockSoulFarmland();

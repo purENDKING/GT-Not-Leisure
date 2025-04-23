@@ -6,12 +6,18 @@ import static tectech.thing.block.RenderForgeOfGods.*;
 
 import java.awt.*;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-public class ItemRenderNanoPhagocytosisPlant implements IItemRenderer {
+public class ItemBlockNanoPhagocytosisPlantRender extends ItemBlock implements IItemRenderer {
+
+    public ItemBlockNanoPhagocytosisPlantRender(Block block) {
+        super(block);
+    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {

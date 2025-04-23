@@ -253,16 +253,10 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
         return -1;
     }
 
-    public boolean checkHatches() {
-        return !mInputHatches.isEmpty() && !mInputBusses.isEmpty()
-            && !mOutputBusses.isEmpty()
-            && mOutputHatches.isEmpty();
-    }
-
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tCountCasing = 0;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        return tCountCasing >= 10000 && checkHatches();
+        return tCountCasing >= 10000;
     }
 
     @Override

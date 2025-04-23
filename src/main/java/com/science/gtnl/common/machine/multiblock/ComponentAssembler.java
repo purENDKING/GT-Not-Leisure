@@ -319,10 +319,6 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         }
     }
 
-    public boolean checkHatches() {
-        return !mMaintenanceHatches.isEmpty() && !mEnergyHatches.isEmpty();
-    }
-
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         casingTier = -2;

@@ -39,7 +39,6 @@ import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -50,7 +49,6 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
@@ -269,7 +267,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            true);
+            false);
 
         builtOne = survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_ONE,
@@ -280,7 +278,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            true);
+            false);
 
         builtTwo = survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_TWO,
@@ -291,7 +289,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            true);
+            false);
 
         builtThree = survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_THREE,
@@ -302,7 +300,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            true);
+            false);
         return built + builtOne + builtTwo + builtThree;
     }
 
@@ -455,31 +453,24 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             DEPTH_OFF_SET_RING_THREE);
     }
 
-    public boolean checkHatches() {
-        return !mInputHatches.isEmpty() && !mInputBusses.isEmpty()
-            && !mOutputBusses.isEmpty()
-            && mOutputHatches.isEmpty();
-    }
-
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
         tCountCasing = 0;
         wirelessMode = false;
-        boolean isNanite = false;
         if (isRenderActive) {
             if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
-                && !checkPiece(
+                || !checkPiece(
                     STRUCTURE_PIECE_MAIN_RING_ONE_AIR,
                     HORIZONTAL_OFF_SET_RING_ONE,
                     VERTICAL_OFF_SET_RING_ONE,
                     DEPTH_OFF_SET_RING_ONE)
-                && !checkPiece(
+                || !checkPiece(
                     STRUCTURE_PIECE_MAIN_RING_TWO_AIR,
                     HORIZONTAL_OFF_SET_RING_TWO,
                     VERTICAL_OFF_SET_RING_TWO,
                     DEPTH_OFF_SET_RING_TWO)
-                && !checkPiece(
+                || !checkPiece(
                     STRUCTURE_PIECE_MAIN_RING_THREE_AIR,
                     HORIZONTAL_OFF_SET_RING_THREE,
                     VERTICAL_OFF_SET_RING_THREE,
@@ -488,38 +479,42 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                 return false;
             }
         } else if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
-            && !checkPiece(
+            || !checkPiece(
                 STRUCTURE_PIECE_MAIN_RING_ONE,
                 HORIZONTAL_OFF_SET_RING_ONE,
                 VERTICAL_OFF_SET_RING_ONE,
                 DEPTH_OFF_SET_RING_ONE)
-            && !checkPiece(
+            || !checkPiece(
                 STRUCTURE_PIECE_MAIN_RING_TWO,
                 HORIZONTAL_OFF_SET_RING_TWO,
                 VERTICAL_OFF_SET_RING_TWO,
                 DEPTH_OFF_SET_RING_TWO)
-            && !checkPiece(
+            || !checkPiece(
                 STRUCTURE_PIECE_MAIN_RING_THREE,
                 HORIZONTAL_OFF_SET_RING_THREE,
                 VERTICAL_OFF_SET_RING_THREE,
                 DEPTH_OFF_SET_RING_THREE)) {
                     return false;
                 }
-        ItemStack controllerSlot = getControllerSlot();
-        if (controllerSlot != null) {
-            isNanite = controllerSlot.isItemEqual(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 1L));
-        }
 
-        if (isNanite && !isRenderActive && !isRendererDisabled) {
+        if (!isRenderActive && !isRendererDisabled) {
             createRenderer();
         }
 
-        if (tCountCasing <= 200 && !checkHatches()) {
+        if (tCountCasing <= 1) {
             updateHatchTexture();
             return false;
         }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return true;
+    }
+
+    @Override
+    public void onBlockDestroyed() {
+        super.onBlockDestroyed();
+        if (isRenderActive) {
+            destroyRenderer();
+        }
     }
 
     @Override
@@ -561,12 +556,21 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setByte("mGlassTier", mGlassTier);
+        aNBT.setBoolean("isRenderActive", isRenderActive);
+        aNBT.setBoolean("isRendererDisabled", isRendererDisabled);
+        aNBT.setInteger("rotationSpeed", rotationSpeed);
+        aNBT.setString("selectedStarColor", selectedStarColor);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         mGlassTier = aNBT.getByte("mGlassTier");
+        if (aNBT.hasKey("rotationSpeed")) rotationSpeed = aNBT.getInteger("rotationSpeed");
+        if (aNBT.hasKey("starSize")) starSize = aNBT.getInteger("starSize");
+        if (aNBT.hasKey("selectedStarColor")) selectedStarColor = aNBT.getString("selectedStarColor");
+        isRenderActive = aNBT.getBoolean("isRenderActive");
+        isRendererDisabled = aNBT.getBoolean("isRendererDisabled");
     }
 
 }

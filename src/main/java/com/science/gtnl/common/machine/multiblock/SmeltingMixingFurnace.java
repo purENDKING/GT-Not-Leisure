@@ -199,19 +199,13 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             true);
     }
 
-    public boolean checkHatches() {
-        return !mInputHatches.isEmpty() && !mInputBusses.isEmpty()
-            && !mOutputBusses.isEmpty()
-            && mOutputHatches.isEmpty();
-    }
-
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
         mCasing = 0;
         wirelessMode = false;
         hasRequiredItem = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (mCasing <= 15 && !checkHatches() && mGlassTier < VoltageIndex.UEV) {
+        if (mCasing <= 15 && mGlassTier < VoltageIndex.UEV) {
             updateHatchTexture();
             return false;
         }
