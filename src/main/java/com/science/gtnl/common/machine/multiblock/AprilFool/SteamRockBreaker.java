@@ -230,7 +230,7 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
                     .setEUtDiscount(1.25 * tierMachine)
                     .setSpeedBoost(1.6 / tierMachine);
             }

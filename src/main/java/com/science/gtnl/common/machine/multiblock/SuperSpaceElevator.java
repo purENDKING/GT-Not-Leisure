@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.Utils.Utils.multiBuildPiece;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
@@ -686,15 +687,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
         public IGTHatchAdder<? super SuperSpaceElevator> adder() {
             return adder;
         }
-    }
-
-    public static int multiBuildPiece(int... buildPieces) {
-        int out = 0x80000000;
-        for (int v : buildPieces) {
-            out &= (v & 0x80000000) | 0x7fffffff;
-            if (v != -1) out += v;
-        }
-        return out < 0 ? -1 : out;
     }
 
 }

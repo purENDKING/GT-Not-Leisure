@@ -1,8 +1,5 @@
 package com.science.gtnl.mixins.early;
 
-import static codechicken.nei.NEIServerUtils.sendNotice;
-import static codechicken.nei.NEIServerUtils.setColour;
-
 import java.io.File;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,17 +11,17 @@ import javax.xml.transform.stream.StreamResult;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import codechicken.lib.inventory.InventoryUtils;
 import codechicken.nei.NEIServerUtils;
 import cpw.mods.fml.common.registry.GameData;
 
@@ -32,39 +29,13 @@ import cpw.mods.fml.common.registry.GameData;
 @Mixin(value = NEIServerUtils.class, remap = false)
 public abstract class NEIServerUtils_Mixin {
 
-    /**
-     * @reason Overwrites the original NEIServerUtils#givePlayerItem method.
-     *         This overwrite allows tracking of items given via NEI by recording
-     *         both the executor and the received item count to XML files for later analysis.
-     *         The tracking system mirrors the structure used in CommandGive,
-     *         ensuring consistency across both manual and NEI-based item grants.
-     * @author GTNotLeisure
-     */
-    @Overwrite
-    public static void givePlayerItem(EntityPlayerMP player, ItemStack stack, boolean infinite, boolean doGive) {
-        if (stack.getItem() == null) {
-            player.addChatComponentMessage(
-                setColour(new ChatComponentTranslation("nei.chat.give.noitem"), EnumChatFormatting.WHITE));
-            return;
-        }
-
-        int given = stack.stackSize;
-        if (doGive) {
-            if (infinite) player.inventory.addItemStackToInventory(stack);
-            else given -= InventoryUtils.insertItem(player.inventory, stack, false);
-        }
-
-        sendNotice(
-            player,
-            new ChatComponentTranslation(
-                "commands.give.success",
-                stack.func_151000_E(),
-                infinite ? "\u221E" : Integer.toString(given),
-                player.getCommandSenderName()),
-            "notify-item");
-        player.openContainer.detectAndSendChanges();
-
-        if (!doGive || stack.getItem() == null || given <= 0) return;
+    @Inject(
+        method = "givePlayerItem",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Container;detectAndSendChanges()V"),
+        locals = LocalCapture.CAPTURE_FAILEXCEPTION)
+    private static void afterGivePlayerItem(EntityPlayerMP player, ItemStack stack, boolean infinite, boolean doGive,
+        CallbackInfo ci, int given) {
+        if (!doGive || stack == null || stack.getItem() == null || given <= 0) return;
         recordGiveAction(player, stack, given);
     }
 
@@ -82,10 +53,13 @@ public abstract class NEIServerUtils_Mixin {
         File usesFile = new File(gtDir, "player_give_count.xml");
         File itemsFile = new File(gtDir, "player_give_item.xml");
 
+        long currentTime = System.currentTimeMillis();
+
         try {
             DocumentBuilder db = DocumentBuilderFactory.newInstance()
                 .newDocumentBuilder();
 
+            // --- Handle player_give_count.xml ---
             Document docUses = usesFile.exists() ? db.parse(usesFile) : db.newDocument();
             Element rootUses = docUses.getDocumentElement();
             if (rootUses == null) {
@@ -111,6 +85,8 @@ public abstract class NEIServerUtils_Mixin {
             }
             int prevUses = Integer.parseInt(playerEl.getAttribute("uses"));
             playerEl.setAttribute("uses", String.valueOf(prevUses + 1));
+            playerEl.setAttribute("last_time", String.valueOf(currentTime));
+
             Transformer t = TransformerFactory.newInstance()
                 .newTransformer();
             t.transform(new DOMSource(docUses), new StreamResult(usesFile));
@@ -156,6 +132,8 @@ public abstract class NEIServerUtils_Mixin {
             }
             int prevCount = Integer.parseInt(itemEl.getAttribute("count"));
             itemEl.setAttribute("count", String.valueOf(prevCount + given));
+            itemEl.setAttribute("last_time", String.valueOf(currentTime));
+
             t.transform(new DOMSource(docItems), new StreamResult(itemsFile));
 
         } catch (Exception e) {

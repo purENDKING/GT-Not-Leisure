@@ -118,7 +118,7 @@ public class AnimatedText {
 
     public static final Supplier<String> QYZG = chain(
         animatedText(
-            "犰狳重工",
+            "犰狳重工 GT-Odyssey",
             1,
             80,
             YELLOW + BOLD + UNDERLINE + ITALIC,

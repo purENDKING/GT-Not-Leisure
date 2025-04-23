@@ -6,7 +6,6 @@ import net.minecraft.util.EnumChatFormatting;
 
 import gregtech.api.util.GTLanguageManager;
 
-@Deprecated
 public class TextLocalization {
 
     public static final String Tooltip_Tectech_Hatch = texter(

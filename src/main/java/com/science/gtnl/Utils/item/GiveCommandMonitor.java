@@ -64,6 +64,8 @@ public class GiveCommandMonitor {
         File itemsFile = new File(gtDir, "player_give_item.xml");
 
         try {
+            long now = System.currentTimeMillis();
+
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
 
@@ -96,6 +98,8 @@ public class GiveCommandMonitor {
             }
             int prevUses = Integer.parseInt(playerEl.getAttribute("uses"));
             playerEl.setAttribute("uses", String.valueOf(prevUses + 1));
+            playerEl.setAttribute("last_time", String.valueOf(now));
+
             Transformer t = TransformerFactory.newInstance()
                 .newTransformer();
             t.transform(new DOMSource(docUses), new StreamResult(usesFile));
@@ -145,6 +149,8 @@ public class GiveCommandMonitor {
             }
             int prevCount = Integer.parseInt(itemEl.getAttribute("count"));
             itemEl.setAttribute("count", String.valueOf(prevCount + count));
+            itemEl.setAttribute("last_time", String.valueOf(now));
+
             t.transform(new DOMSource(docItems), new StreamResult(itemsFile));
 
         } catch (Exception e) {
@@ -169,7 +175,6 @@ public class GiveCommandMonitor {
                 }
             }
         } else {
-
             Item item = GameData.getItemRegistry()
                 .getObject(raw);
             if (item != null) {

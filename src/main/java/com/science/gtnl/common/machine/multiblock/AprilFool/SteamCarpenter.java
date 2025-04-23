@@ -163,7 +163,7 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }

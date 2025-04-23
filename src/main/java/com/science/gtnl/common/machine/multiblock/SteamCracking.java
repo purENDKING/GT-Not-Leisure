@@ -231,7 +231,7 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
             @Override
             @Nonnull
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.max(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
                     .setEUtDiscount(tierMachine)
                     .setSpeedBoost(1.0 / tierMachine);
             }

@@ -1,18 +1,27 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.Utils.Utils.multiBuildPiece;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
+import static tectech.util.TTUtility.replaceLetters;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +31,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.misc.OverclockType;
@@ -45,19 +55,54 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings9;
 import gtnhlanth.common.register.LanthItemList;
+import tectech.thing.metaTileEntity.multi.godforge.color.ForgeOfGodsStarColor;
+import tectech.thing.metaTileEntity.multi.godforge.color.StarColorStorage;
 
 public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPhagocytosisPlant>
     implements IWirelessEnergyHatchInformation {
 
+    private static final int DEFAULT_ROTATION_SPEED = 5;
+    private static final int DEFAULT_STAR_SIZE = 20;
+    private final StarColorStorage starColors = new StarColorStorage();
+    private static final String DEFAULT_STAR_COLOR = ForgeOfGodsStarColor.DEFAULT.getName();
+    private String selectedStarColor = DEFAULT_STAR_COLOR;
+    private int rotationSpeed = DEFAULT_ROTATION_SPEED;
+    private int starSize = DEFAULT_STAR_SIZE;
+    private boolean isRendererDisabled;
+    private boolean isRenderActive;
     private byte mGlassTier = 0;
     private static final int HORIZONTAL_OFF_SET = 10;
     private static final int VERTICAL_OFF_SET = 22;
     private static final int DEPTH_OFF_SET = 0;
+    private static final int HORIZONTAL_OFF_SET_RING_ONE = 1;
+    private static final int VERTICAL_OFF_SET_RING_ONE = 22;
+    private static final int DEPTH_OFF_SET_RING_ONE = 0;
+    private static final int HORIZONTAL_OFF_SET_RING_TWO = 8;
+    private static final int VERTICAL_OFF_SET_RING_TWO = 14;
+    private static final int DEPTH_OFF_SET_RING_TWO = -1;
+    private static final int HORIZONTAL_OFF_SET_RING_THREE = 1;
+    private static final int VERTICAL_OFF_SET_RING_THREE = 19;
+    private static final int DEPTH_OFF_SET_RING_THREE = -3;
     private int tCountCasing = 0;
     private static IStructureDefinition<NanoPhagocytosisPlant> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String NPP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant"; // 文件路径
+    private static final String STRUCTURE_PIECE_MAIN_RING_ONE = "main_ring_one";
+    private static final String STRUCTURE_PIECE_MAIN_RING_TWO = "main_ring_two";
+    private static final String STRUCTURE_PIECE_MAIN_RING_THREE = "main_ring_three";
+    private static final String STRUCTURE_PIECE_MAIN_RING_ONE_AIR = "main_ring_one_air";
+    private static final String STRUCTURE_PIECE_MAIN_RING_TWO_AIR = "main_ring_two_air";
+    private static final String STRUCTURE_PIECE_MAIN_RING_THREE_AIR = "main_ring_three_air";
+    private static final String NPP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant";
+    private static final String NPPRO_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_one";
+    private static final String NPPRT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_two";
+    private static final String NPPRTh_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_three";
     private static final String[][] shape = StructureUtils.readStructureFromFile(NPP_STRUCTURE_FILE_PATH);
+    public static final String[][] shapeRingOne = StructureUtils.readStructureFromFile(NPPRO_STRUCTURE_FILE_PATH);
+    public static final String[][] shapeRingTwo = StructureUtils.readStructureFromFile(NPPRT_STRUCTURE_FILE_PATH);
+    public static final String[][] shapeRingThree = StructureUtils.readStructureFromFile(NPPRTh_STRUCTURE_FILE_PATH);
+    public static final String[][] shapeRingOneAir = replaceLetters(shapeRingOne, "Z");
+    public static final String[][] shapeRingTwoAir = replaceLetters(shapeRingTwo, "Z");
+    public static final String[][] shapeRingThreeAir = replaceLetters(shapeRingThree, "Z");
 
     public NanoPhagocytosisPlant(String aName) {
         super(aName);
@@ -129,36 +174,44 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<NanoPhagocytosisPlant>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 2))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_ONE, transpose(shapeRingOne))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_TWO, transpose(shapeRingTwo))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_THREE, transpose(shapeRingThree))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_ONE_AIR, transpose(shapeRingOneAir))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_TWO_AIR, transpose(shapeRingTwoAir))
+                .addShape(STRUCTURE_PIECE_MAIN_RING_THREE_AIR, transpose(shapeRingThreeAir))
+                .addElement('A', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
+                .addElement('B', ofBlock(MetaCasing, 2))
+                .addElement('C', ofBlock(MetaCasing, 4))
+                .addElement('D', ofBlock(MetaCasing, 18))
+                .addElement('E', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
+                .addElement('F', ofBlock(sBlockCasings1, 15))
+                .addElement('G', ofBlock(sBlockCasings10, 3))
+                .addElement('H', ofBlock(sBlockCasings10, 7))
+                .addElement('I', ofBlock(sBlockCasings10, 8))
+                .addElement('J', ofBlock(sBlockCasings3, 10))
+                .addElement('K', ofBlock(sBlockCasings4, 11))
+                .addElement('L', ofBlock(sBlockCasings4, 12))
+                .addElement('M', ofBlock(sBlockCasings8, 7))
+                .addElement('N', ofBlock(sBlockCasings8, 10))
+                .addElement('O', ofBlock(sBlockCasings8, 11))
+                .addElement('P', ofBlock(sBlockCasings9, 12))
+                .addElement('Q', ofBlock(sBlockCasings9, 13))
+                .addElement('R', ofBlock(sBlockCasingsTT, 0))
+                .addElement('S', ofBlock(sBlockCasingsTT, 6))
+                .addElement('T', ofFrame(Materials.EnrichedHolmium))
+                .addElement('U', ofBlock(sBlockMetal5, 1))
+                .addElement('V', ofBlock(blockCasingsMisc, 5))
+                .addElement('W', ofBlock(sBlockCasings4, 7))
+                .addElement('X', ofBlock(Loaders.compactFusionCoil, 2))
+                .addElement('Y', ofBlock(Loaders.compactFusionCoil, 0))
+                .addElement('Z', ofBlock(Blocks.air, 0))
                 .addElement(
-                    'B',
-                    buildHatchAdder(NanoPhagocytosisPlant.class).atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy))
+                    'a',
+                    buildHatchAdder(NanoPhagocytosisPlant.class).atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), ParallelController)
                         .casingIndex(((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings9, 12))))
-                .addElement('C', ofBlock(sBlockCasingsTT, 0))
-                .addElement('D', ofBlock(sBlockCasings10, 7))
-                .addElement('E', ofBlock(sBlockCasings8, 7))
-                .addElement('F', ofBlock(sBlockCasings1, 15))
-                .addElement('G', ofBlock(sBlockCasings4, 7))
-                .addElement('H', ofBlock(sBlockCasings4, 11))
-                .addElement('I', ofBlock(sBlockCasings4, 12))
-                .addElement('J', ofBlock(Loaders.compactFusionCoil, 2))
-                .addElement('K', ofBlock(sBlockCasings10, 3))
-                .addElement('L', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
-                .addElement('M', ofBlock(sBlockCasings8, 11))
-                .addElement('N', ofBlock(sBlockCasings9, 13))
-                .addElement('O', ofFrame(Materials.EnrichedHolmium))
-                .addElement('P', ofBlock(sBlockCasings8, 10))
-                .addElement('Q', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
-                .addElement('R', ofBlock(sBlockMetal5, 1))
-                .addElement('S', ofBlock(sBlockCasings10, 8))
-                .addElement('T', ofBlock(MetaCasing, 4))
-                .addElement('U', ofBlock(sBlockCasingsTT, 6))
-                .addElement('V', ofBlock(sBlockCasings3, 10))
-                .addElement('W', ofBlock(MetaCasing, 18))
-                .addElement('X', ofBlock(blockCasingsMisc, 5))
-                .addElement('Y', ofBlock(Loaders.compactFusionCoil, 0))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -173,21 +226,230 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             HORIZONTAL_OFF_SET,
             VERTICAL_OFF_SET,
             DEPTH_OFF_SET);
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_ONE,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET_RING_ONE,
+            VERTICAL_OFF_SET_RING_ONE,
+            DEPTH_OFF_SET_RING_ONE);
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_TWO,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET_RING_TWO,
+            VERTICAL_OFF_SET_RING_TWO,
+            DEPTH_OFF_SET_RING_TWO);
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_THREE,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET_RING_THREE,
+            VERTICAL_OFF_SET_RING_THREE,
+            DEPTH_OFF_SET_RING_THREE);
     }
 
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (this.mMachine) return -1;
-        return this.survivialBuildPiece(
+        int realBudget = elementBudget >= 2000 ? elementBudget : Math.min(2000, elementBudget * 5);
+
+        int built = 0;
+        int builtOne = 0;
+        int builtTwo = 0;
+        int builtThree = 0;
+        built = survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
             HORIZONTAL_OFF_SET,
             VERTICAL_OFF_SET,
             DEPTH_OFF_SET,
-            elementBudget,
+            realBudget,
             env,
             false,
             true);
+
+        builtOne = survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN_RING_ONE,
+            stackSize,
+            HORIZONTAL_OFF_SET_RING_ONE,
+            VERTICAL_OFF_SET_RING_ONE,
+            DEPTH_OFF_SET_RING_ONE,
+            realBudget,
+            env,
+            false,
+            true);
+
+        builtTwo = survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN_RING_TWO,
+            stackSize,
+            HORIZONTAL_OFF_SET_RING_TWO,
+            VERTICAL_OFF_SET_RING_TWO,
+            DEPTH_OFF_SET_RING_TWO,
+            realBudget,
+            env,
+            false,
+            true);
+
+        builtThree = survivialBuildPiece(
+            STRUCTURE_PIECE_MAIN_RING_THREE,
+            stackSize,
+            HORIZONTAL_OFF_SET_RING_THREE,
+            VERTICAL_OFF_SET_RING_THREE,
+            DEPTH_OFF_SET_RING_THREE,
+            realBudget,
+            env,
+            false,
+            true);
+        return built + builtOne + builtTwo + builtThree;
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        if (isRendererDisabled) {
+            isRendererDisabled = false;
+            // let the renderer automatically rebuild itself as needed through normal logic
+        } else {
+            isRendererDisabled = true;
+            if (isRenderActive) destroyRenderer();
+        }
+        aPlayer.addChatMessage(
+            new ChatComponentText("Animations are now " + (isRendererDisabled ? "disabled" : "enabled") + "."));
+    }
+
+    private TileEntityNanoPhagocytosisPlant getRenderer() {
+        ChunkCoordinates renderPos = getRenderPos();
+        TileEntity tile = this.getBaseMetaTileEntity()
+            .getWorld()
+            .getTileEntity(renderPos.posX, renderPos.posY, renderPos.posZ);
+
+        if (tile instanceof TileEntityNanoPhagocytosisPlant nanoTile) {
+            return nanoTile;
+        }
+        return null;
+    }
+
+    private void updateRenderer() {
+        TileEntityNanoPhagocytosisPlant tile = getRenderer();
+        if (tile == null) return;
+
+        tile.setStarRadius(starSize);
+        tile.setRotationSpeed(rotationSpeed);
+        tile.setColor(starColors.getByName(selectedStarColor));
+
+        tile.updateToClient();
+    }
+
+    private void createRenderer() {
+        ChunkCoordinates renderPos = getRenderPos();
+
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockNanoPhagocytosisPlantRender);
+        TileEntityNanoPhagocytosisPlant rendererTileEntity = (TileEntityNanoPhagocytosisPlant) this.getBaseMetaTileEntity()
+            .getWorld()
+            .getTileEntity(renderPos.posX, renderPos.posY, renderPos.posZ);
+
+        destroyFirstRing();
+        destroySecondRing();
+        destroyThirdRing();
+
+        rendererTileEntity.setRenderRotation(getRotation(), getDirection());
+        updateRenderer();
+
+        isRenderActive = true;
+        enableWorking();
+    }
+
+    private void destroyRenderer() {
+        ChunkCoordinates renderPos = getRenderPos();
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
+
+        buildFirstRing();
+        buildSecondRing();
+        buildThirdRing();
+
+        isRenderActive = false;
+        disableWorking();
+    }
+
+    private ChunkCoordinates getRenderPos() {
+        IGregTechTileEntity gregTechTileEntity = this.getBaseMetaTileEntity();
+        int x = gregTechTileEntity.getXCoord();
+        int y = gregTechTileEntity.getYCoord();
+        int z = gregTechTileEntity.getZCoord();
+        double xOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetX;
+        double yOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetY;
+        double zOffset = 9 * getExtendedFacing().getRelativeBackInWorld().offsetZ;
+
+        yOffset += 13;
+
+        return new ChunkCoordinates((int) (x + xOffset), (int) (y + yOffset), (int) (z + zOffset));
+    }
+
+    private void destroyFirstRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_ONE_AIR,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_ONE,
+            VERTICAL_OFF_SET_RING_ONE,
+            DEPTH_OFF_SET_RING_ONE);
+    }
+
+    private void destroySecondRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_TWO_AIR,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_TWO,
+            VERTICAL_OFF_SET_RING_TWO,
+            DEPTH_OFF_SET_RING_TWO);
+    }
+
+    private void destroyThirdRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_THREE_AIR,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_THREE,
+            VERTICAL_OFF_SET_RING_THREE,
+            DEPTH_OFF_SET_RING_THREE);
+    }
+
+    private void buildFirstRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_ONE,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_ONE,
+            VERTICAL_OFF_SET_RING_ONE,
+            DEPTH_OFF_SET_RING_ONE);
+    }
+
+    private void buildSecondRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_TWO,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_TWO,
+            VERTICAL_OFF_SET_RING_TWO,
+            DEPTH_OFF_SET_RING_TWO);
+    }
+
+    private void buildThirdRing() {
+        buildPiece(
+            STRUCTURE_PIECE_MAIN_RING_THREE,
+            null,
+            false,
+            HORIZONTAL_OFF_SET_RING_THREE,
+            VERTICAL_OFF_SET_RING_THREE,
+            DEPTH_OFF_SET_RING_THREE);
     }
 
     public boolean checkHatches() {
@@ -201,7 +463,48 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         repairMachine();
         tCountCasing = 0;
         wirelessMode = false;
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
+        if (isRenderActive) {
+            if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
+                && !checkPiece(
+                STRUCTURE_PIECE_MAIN_RING_ONE_AIR,
+                HORIZONTAL_OFF_SET_RING_ONE,
+                VERTICAL_OFF_SET_RING_ONE,
+                DEPTH_OFF_SET_RING_ONE)
+                && !checkPiece(
+                STRUCTURE_PIECE_MAIN_RING_TWO_AIR,
+                HORIZONTAL_OFF_SET_RING_TWO,
+                VERTICAL_OFF_SET_RING_TWO,
+                DEPTH_OFF_SET_RING_TWO)
+                && !checkPiece(
+                STRUCTURE_PIECE_MAIN_RING_THREE_AIR,
+                HORIZONTAL_OFF_SET_RING_THREE,
+                VERTICAL_OFF_SET_RING_THREE,
+                DEPTH_OFF_SET_RING_THREE)) {
+                destroyRenderer();
+                return false;
+            }
+        } else if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && !checkPiece(
+            STRUCTURE_PIECE_MAIN_RING_ONE,
+            HORIZONTAL_OFF_SET_RING_ONE,
+            VERTICAL_OFF_SET_RING_ONE,
+            DEPTH_OFF_SET_RING_ONE)
+            && !checkPiece(
+            STRUCTURE_PIECE_MAIN_RING_TWO,
+            HORIZONTAL_OFF_SET_RING_TWO,
+            VERTICAL_OFF_SET_RING_TWO,
+            DEPTH_OFF_SET_RING_TWO)
+            && !checkPiece(
+            STRUCTURE_PIECE_MAIN_RING_THREE,
+            HORIZONTAL_OFF_SET_RING_THREE,
+            VERTICAL_OFF_SET_RING_THREE,
+            DEPTH_OFF_SET_RING_THREE)) {
+            return false;
+        }
+
+        if (!isRenderActive && !isRendererDisabled) {
+            createRenderer();
+        }
+
         if (tCountCasing <= 200 && !checkHatches()) {
             updateHatchTexture();
             return false;

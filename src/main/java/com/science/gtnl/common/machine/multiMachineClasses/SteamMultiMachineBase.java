@@ -85,7 +85,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> extends MTESteamMultiBase<T> {
 
     private static final int OC_WINDOW_ID = 11;
-    protected static int RecipeOcCount = 0;
+    protected int RecipeOcCount = 0;
     protected int tierAdvancedCasing = -1;
     protected int tierBrickCasing = -1;
     protected int tierPlatedCasing = -1;
@@ -403,6 +403,23 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             }
         }
         for (MteHatchSteamBusInput tHatch : validMTEList(mSteamInputs)) {
+            tHatch.mRecipeMap = getRecipeMap();
+            for (int i = tHatch.getBaseMetaTileEntity()
+                .getSizeInventory() - 1; i >= 0; i--) {
+                if (GTUtility.areStacksEqual(
+                    aStack,
+                    tHatch.getBaseMetaTileEntity()
+                        .getStackInSlot(i))) {
+                    if (tHatch.getBaseMetaTileEntity()
+                        .getStackInSlot(0).stackSize >= aStack.stackSize) {
+                        tHatch.getBaseMetaTileEntity()
+                            .decrStackSize(0, aStack.stackSize);
+                        return true;
+                    }
+                }
+            }
+        }
+        for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) {
             tHatch.mRecipeMap = getRecipeMap();
             for (int i = tHatch.getBaseMetaTileEntity()
                 .getSizeInventory() - 1; i >= 0; i--) {
