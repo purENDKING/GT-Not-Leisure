@@ -35,7 +35,6 @@ import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.misc.OverclockType;
 
-import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -54,6 +53,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings9;
 import gtnhlanth.common.register.LanthItemList;
+import tectech.thing.block.BlockQuantumGlass;
 import tectech.thing.metaTileEntity.multi.godforge.color.ForgeOfGodsStarColor;
 import tectech.thing.metaTileEntity.multi.godforge.color.StarColorStorage;
 
@@ -69,7 +69,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     private int starSize = DEFAULT_STAR_SIZE;
     private boolean isRendererDisabled;
     private boolean isRenderActive;
-    private byte mGlassTier = 0;
     private static final int HORIZONTAL_OFF_SET = 10;
     private static final int VERTICAL_OFF_SET = 22;
     private static final int DEPTH_OFF_SET = 0;
@@ -179,7 +178,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                 .addShape(STRUCTURE_PIECE_MAIN_RING_ONE_AIR, transpose(shapeRingOneAir))
                 .addShape(STRUCTURE_PIECE_MAIN_RING_TWO_AIR, transpose(shapeRingTwoAir))
                 .addShape(STRUCTURE_PIECE_MAIN_RING_THREE_AIR, transpose(shapeRingThreeAir))
-                .addElement('A', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
+                .addElement('A', ofBlock(BlockQuantumGlass.INSTANCE, 0))
                 .addElement('B', ofBlock(MetaCasing, 2))
                 .addElement('C', ofBlock(MetaCasing, 4))
                 .addElement('D', ofBlock(MetaCasing, 18))
@@ -255,9 +254,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         int realBudget = elementBudget >= 2000 ? elementBudget : Math.min(2000, elementBudget * 5);
 
         int built = 0;
-        int builtOne = 0;
-        int builtTwo = 0;
-        int builtThree = 0;
         built = survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
@@ -267,9 +263,11 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            false);
+            true);
 
-        builtOne = survivialBuildPiece(
+        if (built >= 0) return built;
+
+        built += survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_ONE,
             stackSize,
             HORIZONTAL_OFF_SET_RING_ONE,
@@ -278,9 +276,11 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            false);
+            true);
 
-        builtTwo = survivialBuildPiece(
+        if (built >= 0) return built;
+
+        built += this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_TWO,
             stackSize,
             HORIZONTAL_OFF_SET_RING_TWO,
@@ -289,9 +289,11 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            false);
+            true);
 
-        builtThree = survivialBuildPiece(
+        if (built >= 0) return built;
+
+        built += this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN_RING_THREE,
             stackSize,
             HORIZONTAL_OFF_SET_RING_THREE,
@@ -300,8 +302,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             realBudget,
             env,
             false,
-            false);
-        return built + builtOne + builtTwo + builtThree;
+            true);
+        return built;
     }
 
     @Override
@@ -499,7 +501,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                     return false;
                 }
 
-        if (!isRenderActive && !isRendererDisabled) {
+        if (!isRenderActive && !isRendererDisabled && mLastWorkingTick > 0) {
             createRenderer();
         }
 
@@ -508,6 +510,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             return false;
         }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
+        updateHatchTexture();
         return true;
     }
 
@@ -538,8 +541,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
                 return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
                     : super.createOverclockCalculator(recipe)
-                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
-                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
+                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, getMaxInputVoltage()))
+                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, getMaxInputVoltage()));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
@@ -557,7 +560,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setByte("mGlassTier", mGlassTier);
         aNBT.setBoolean("isRenderActive", isRenderActive);
         aNBT.setBoolean("isRendererDisabled", isRendererDisabled);
         aNBT.setInteger("rotationSpeed", rotationSpeed);
@@ -567,7 +569,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        mGlassTier = aNBT.getByte("mGlassTier");
         if (aNBT.hasKey("rotationSpeed")) rotationSpeed = aNBT.getInteger("rotationSpeed");
         if (aNBT.hasKey("starSize")) starSize = aNBT.getInteger("starSize");
         if (aNBT.hasKey("selectedStarColor")) selectedStarColor = aNBT.getString("selectedStarColor");

@@ -1853,7 +1853,7 @@ Tooltip_NeutroniumWireCutting_Casing=Any Superconductor Reinforced Sterile Water
 NameNanoPhagocytosisPlant=Nano Phagocytosis Plant
 NanoPhagocytosisPlantRecipeType=Macerator
 Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nanites
-Tooltip_NanoPhagocytosisPlant_01=Each glass tier provides an additional 5%% speed and power reduction (multiplicative).
+Tooltip_NanoPhagocytosisPlant_01=Each voltage tier provides an additional 5%% speed and power reduction (multiplicative).
 Tooltip_NanoPhagocytosisPlant_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
 
 NameMagneticEnergyReactionFurnace=Magnetic Energy Reaction Furnace

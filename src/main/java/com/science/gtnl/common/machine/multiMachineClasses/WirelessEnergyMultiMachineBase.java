@@ -186,12 +186,16 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     @Override
     public int getMaxParallelRecipes() {
         if (mParallelControllerHatches.size() == 1) {
-            return getMaxParallel();
+            for (ParallelControllerHatch module : mParallelControllerHatches) {
+                ParallelTier = module.mTier;
+                return module.getParallel();
+            }
         } else if (ParallelTier <= 1) {
             return 8;
         } else {
-            return (int) Math.pow(4, ParallelTier - 2) * 16;
+            return (int) Math.pow(4, ParallelTier - 2);
         }
+        return 8;
     }
 
     public int getParallelTier(ItemStack inventory) {
@@ -232,7 +236,8 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
     @Override
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        int ParallelTierItem = getParallelTier(controllerItem);
+        ParallelTier = Math.max(ParallelTier, ParallelTierItem);
         costingEU = BigInteger.ZERO;
         costingEUText = ZERO_STRING;
         prepareProcessing();

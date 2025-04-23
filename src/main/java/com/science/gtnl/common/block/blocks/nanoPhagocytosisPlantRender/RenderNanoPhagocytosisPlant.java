@@ -49,7 +49,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
     private static int beam_vboID = -1;
     private static int maxSegments = -1;
     private static final int beamSegmentQuads = 16;
-    private static final Matrix4fStack beamModelMatrix = new Matrix4fStack(2);
 
     private VertexBuffer ringOne, ringTwo, ringThree;
     // These are nudges/translations for each ring to align with the structure
@@ -286,19 +285,5 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         RenderEntireStar(forgeTile, x, y, z, timer);
         RenderRings(forgeTile, x, y, z, timer);
 
-    }
-
-    public static void enablePseudoTransparentColorInversion() {
-        GL11.glEnable(GL11.GL_COLOR_LOGIC_OP);
-        GL11.glLogicOp(GL11.GL_OR_INVERTED);
-    }
-
-    public static void enableOpaqueColorInversion() {
-        GL11.glEnable(GL11.GL_COLOR_LOGIC_OP);
-        GL11.glLogicOp(GL11.GL_COPY_INVERTED);
-    }
-
-    public static void disableOpaqueColorInversion() {
-        GL11.glDisable(GL11.GL_COLOR_LOGIC_OP);
     }
 }

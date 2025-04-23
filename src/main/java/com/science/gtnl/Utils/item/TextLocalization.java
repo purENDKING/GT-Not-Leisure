@@ -851,7 +851,7 @@ public class TextLocalization {
         "Ruthlessly shred everything with a swarm of Nanites",
         "Tooltip_NanoPhagocytosisPlant_00");
     public static final String Tooltip_NanoPhagocytosisPlant_01 = texter(
-        "Each level of glass grade provides an additional 5%% acceleration and power consumption reduction (multiplication and superposition)",
+        "Each voltage tier provides an additional 5%% speed and power reduction (multiplicative).",
         "Tooltip_NanoPhagocytosisPlant_01");
     public static final String Tooltip_NanoPhagocytosisPlant_Casing = texter(
         "Ang Naquadria-Reinforced Water Plant Casing",

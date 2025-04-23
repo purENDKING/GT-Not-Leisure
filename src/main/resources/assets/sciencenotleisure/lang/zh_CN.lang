@@ -1853,7 +1853,7 @@ Tooltip_NeutroniumWireCutting_Casing=任意超能硅岩强化无菌净水厂机�
 NameNanoPhagocytosisPlant=纳米吞噬厂
 NanoPhagocytosisPlantRecipeType=粉碎机
 Tooltip_NanoPhagocytosisPlant_00=使用纳米蜂群无情的撕碎一切
-Tooltip_NanoPhagocytosisPlant_01=每级玻璃等级额外提供5%%的加速和耗电减免(乘算叠加)
+Tooltip_NanoPhagocytosisPlant_01=每级电压等级额外提供5%%的加速和耗电减免(乘算叠加)
 Tooltip_NanoPhagocytosisPlant_Casing=任意超能硅岩强化无菌净水厂机械方块
 
 NameMagneticEnergyReactionFurnace=磁能反应炉
