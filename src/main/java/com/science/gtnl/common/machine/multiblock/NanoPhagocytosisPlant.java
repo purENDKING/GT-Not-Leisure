@@ -1,7 +1,6 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static com.science.gtnl.Utils.Utils.multiBuildPiece;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
@@ -40,6 +39,7 @@ import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -50,6 +50,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
@@ -208,7 +209,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                 .addElement('Z', ofBlock(Blocks.air, 0))
                 .addElement(
                     'a',
-                    buildHatchAdder(NanoPhagocytosisPlant.class).atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), ParallelController)
+                    buildHatchAdder(NanoPhagocytosisPlant.class)
+                        .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), ParallelController)
                         .casingIndex(((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings9, 12))))
@@ -349,7 +351,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         this.getBaseMetaTileEntity()
             .getWorld()
             .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockNanoPhagocytosisPlantRender);
-        TileEntityNanoPhagocytosisPlant rendererTileEntity = (TileEntityNanoPhagocytosisPlant) this.getBaseMetaTileEntity()
+        TileEntityNanoPhagocytosisPlant rendererTileEntity = (TileEntityNanoPhagocytosisPlant) this
+            .getBaseMetaTileEntity()
             .getWorld()
             .getTileEntity(renderPos.posX, renderPos.posY, renderPos.posZ);
 
@@ -466,42 +469,46 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         if (isRenderActive) {
             if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
                 && !checkPiece(
-                STRUCTURE_PIECE_MAIN_RING_ONE_AIR,
-                HORIZONTAL_OFF_SET_RING_ONE,
-                VERTICAL_OFF_SET_RING_ONE,
-                DEPTH_OFF_SET_RING_ONE)
+                    STRUCTURE_PIECE_MAIN_RING_ONE_AIR,
+                    HORIZONTAL_OFF_SET_RING_ONE,
+                    VERTICAL_OFF_SET_RING_ONE,
+                    DEPTH_OFF_SET_RING_ONE)
                 && !checkPiece(
-                STRUCTURE_PIECE_MAIN_RING_TWO_AIR,
-                HORIZONTAL_OFF_SET_RING_TWO,
-                VERTICAL_OFF_SET_RING_TWO,
-                DEPTH_OFF_SET_RING_TWO)
+                    STRUCTURE_PIECE_MAIN_RING_TWO_AIR,
+                    HORIZONTAL_OFF_SET_RING_TWO,
+                    VERTICAL_OFF_SET_RING_TWO,
+                    DEPTH_OFF_SET_RING_TWO)
                 && !checkPiece(
-                STRUCTURE_PIECE_MAIN_RING_THREE_AIR,
-                HORIZONTAL_OFF_SET_RING_THREE,
-                VERTICAL_OFF_SET_RING_THREE,
-                DEPTH_OFF_SET_RING_THREE)) {
+                    STRUCTURE_PIECE_MAIN_RING_THREE_AIR,
+                    HORIZONTAL_OFF_SET_RING_THREE,
+                    VERTICAL_OFF_SET_RING_THREE,
+                    DEPTH_OFF_SET_RING_THREE)) {
                 destroyRenderer();
                 return false;
             }
-        } else if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && !checkPiece(
-            STRUCTURE_PIECE_MAIN_RING_ONE,
-            HORIZONTAL_OFF_SET_RING_ONE,
-            VERTICAL_OFF_SET_RING_ONE,
-            DEPTH_OFF_SET_RING_ONE)
+        } else if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
             && !checkPiece(
-            STRUCTURE_PIECE_MAIN_RING_TWO,
-            HORIZONTAL_OFF_SET_RING_TWO,
-            VERTICAL_OFF_SET_RING_TWO,
-            DEPTH_OFF_SET_RING_TWO)
+                STRUCTURE_PIECE_MAIN_RING_ONE,
+                HORIZONTAL_OFF_SET_RING_ONE,
+                VERTICAL_OFF_SET_RING_ONE,
+                DEPTH_OFF_SET_RING_ONE)
             && !checkPiece(
-            STRUCTURE_PIECE_MAIN_RING_THREE,
-            HORIZONTAL_OFF_SET_RING_THREE,
-            VERTICAL_OFF_SET_RING_THREE,
-            DEPTH_OFF_SET_RING_THREE)) {
-            return false;
-        }
+                STRUCTURE_PIECE_MAIN_RING_TWO,
+                HORIZONTAL_OFF_SET_RING_TWO,
+                VERTICAL_OFF_SET_RING_TWO,
+                DEPTH_OFF_SET_RING_TWO)
+            && !checkPiece(
+                STRUCTURE_PIECE_MAIN_RING_THREE,
+                HORIZONTAL_OFF_SET_RING_THREE,
+                VERTICAL_OFF_SET_RING_THREE,
+                DEPTH_OFF_SET_RING_THREE)) {
+                    return false;
+                }
+        ItemStack controllerSlot = getControllerSlot();
 
-        if (!isRenderActive && !isRendererDisabled) {
+        if (controllerSlot.isItemEqual(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 1L))
+            && !isRenderActive
+            && !isRendererDisabled) {
             createRenderer();
         }
 
