@@ -466,6 +466,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         repairMachine();
         tCountCasing = 0;
         wirelessMode = false;
+        boolean isNanite = false;
         if (isRenderActive) {
             if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
                 && !checkPiece(
@@ -505,10 +506,11 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                     return false;
                 }
         ItemStack controllerSlot = getControllerSlot();
+        if (controllerSlot != null) {
+            isNanite = controllerSlot.isItemEqual(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 1L));
+        }
 
-        if (controllerSlot.isItemEqual(GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Carbon, 1L))
-            && !isRenderActive
-            && !isRendererDisabled) {
+        if (isNanite && !isRenderActive && !isRendererDisabled) {
             createRenderer();
         }
 
