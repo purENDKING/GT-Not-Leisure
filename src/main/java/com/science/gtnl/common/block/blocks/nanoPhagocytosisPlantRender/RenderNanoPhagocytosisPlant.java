@@ -41,15 +41,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
     private static int u_Color = -1, u_ModelMatrix = -1, u_Gamma = -1;
     private final Matrix4fStack starModelMatrix = new Matrix4fStack(3);
 
-    private static ShaderProgram beamProgram;
-    private static int a_VertexID = -1;
-    private static int u_BeamModelMatrix = -1;
-    private static int u_CameraPosition = -1, u_SegmentArray = -1, u_SegmentQuads = -1;
-    private static int u_BeamIntensity = -1, u_BeamColor = -1, u_BeamTime = -1;
-    private static int beam_vboID = -1;
-    private static int maxSegments = -1;
-    private static final int beamSegmentQuads = 16;
-
     private VertexBuffer ringOne, ringTwo, ringThree;
     // These are nudges/translations for each ring to align with the structure
     private static final Vector3f ringOneNudge = new Vector3f(0, -1, 0);
@@ -73,54 +64,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         }
 
         starModel = AdvancedModelLoader.loadModel(new ResourceLocation(Reference.MODID, "models/Star.obj"));
-
-        try {
-            beamProgram = new ShaderProgram(
-                Reference.MODID,
-                "shaders/gorgeBeam.vert.glsl",
-                "shaders/gorgeBeam.frag.glsl");
-
-            u_BeamModelMatrix = beamProgram.getUniformLocation("u_ModelMatrix");
-            u_CameraPosition = beamProgram.getUniformLocation("u_CameraPosition");
-            u_SegmentQuads = beamProgram.getUniformLocation("u_SegmentQuads");
-            u_SegmentArray = beamProgram.getUniformLocation("u_SegmentArray");
-            u_BeamColor = beamProgram.getUniformLocation("u_Color");
-            u_BeamIntensity = beamProgram.getUniformLocation("u_Intensity");
-            u_BeamTime = beamProgram.getUniformLocation("u_Time");
-
-            a_VertexID = beamProgram.getAttribLocation("a_VertexID");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
-
-        beamProgram.use();
-        GL20.glUniform1f(u_SegmentQuads, (float) beamSegmentQuads);
-        maxSegments = 10;// GL20.glGetActiveUniformSize(beamProgram.getProgram(), u_SegmentArray);
-
-        FloatBuffer buffer = BufferUtils.createFloatBuffer(maxSegments * beamSegmentQuads * 6 * 3);
-
-        for (int i = 0; i < maxSegments; i++) {
-            for (int j = 0; j < beamSegmentQuads; j++) {
-                for (int v = 0; v < 6; v++) {
-                    int segID = i * beamSegmentQuads * 6;
-                    int quadID = j * 6;
-                    int vertID = segID + quadID + v;
-                    buffer.put(vertID);
-                    buffer.put(0);
-                    buffer.put(0);
-                }
-            }
-        }
-
-        buffer.flip();
-        beam_vboID = GL15.glGenBuffers();
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, beam_vboID);
-        GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-        GL20.glVertexAttribPointer(a_VertexID, 1, GL11.GL_FLOAT, false, 3 * Float.BYTES, 0);
-        GL11.glVertexPointer(3, GL11.GL_FLOAT, 0, 0);
-
-        GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
         ShaderProgram.clear();
         initialized = true;
     }
@@ -182,7 +125,7 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
 
         float cx = (float) x + .5f;
         float cy = (float) y + .5f;
-        float cz = (float) z + 1;
+        float cz = (float) z + .5f;
         float size = modelNormalize;
         starModelMatrix.clear();
         starModelMatrix.translate(cx, cy, cz);
@@ -229,9 +172,9 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
         GL11.glRotatef(timer / 6 * 7, 1, 0, 0);
         GL11.glTranslated(ringOneNudge.x, ringOneNudge.y, ringOneNudge.z);
-
         ringOne.render();
         GL11.glPopMatrix();
+
         GL11.glPushMatrix();
         GL11.glTranslated(x + .5f, y + .5f, z + .5f);
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
@@ -242,7 +185,7 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
 
         GL11.glPushMatrix();
-        GL11.glTranslated(x + .5f, y + .5f, z + .5f);
+        GL11.glTranslated(x, y + .5f, z + .5f);
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
         GL11.glRotatef(timer * 3, 1, 0, 0);
         GL11.glTranslated(ringThreeNudge.x, ringThreeNudge.y, ringThreeNudge.z);
