@@ -18,7 +18,8 @@ public enum Mods {
     QzMiner(Names.QZMINER),
     OTHTechnology(Names.OTHTECHNOLOGY),
     Baubles(Names.BAUBLES),
-    Overpowered(Names.OVERPOWERED);
+    Overpowered(Names.OVERPOWERED),
+    GiveCount(Names.GIVECOUNT);
 
     public static class Names {
 
@@ -33,6 +34,7 @@ public enum Mods {
         public static final String OTHTECHNOLOGY = "123Technology";
         public static final String BAUBLES = "Baubles";
         public static final String OVERPOWERED = "Overpowered";
+        public static final String GIVECOUNT = "givecount";
     }
 
     public final String ID;
