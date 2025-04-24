@@ -62,6 +62,7 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.metatileentity.implementations.MTEHatchMultiInput;
 import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.metatileentity.implementations.MTEHatchOutputBus;
 import gregtech.api.objects.GTRenderedTexture;
@@ -73,6 +74,7 @@ import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.MTEHatchCraftingInputME;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
+import gregtech.common.tileentities.machines.MTEHatchInputME;
 import gregtech.common.tileentities.machines.MTEHatchOutputBusME;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MTEHatchSteamBusOutput;
@@ -614,6 +616,39 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             }
         }
         return aFluids;
+    }
+
+    @Override
+    public ArrayList<FluidStack> getStoredFluids() {
+        ArrayList<FluidStack> rList = new ArrayList<>();
+        Map<Fluid, FluidStack> inputsFromME = new HashMap<>();
+        for (MTEHatchInput tHatch : validMTEList(mInputHatches)) {
+            setHatchRecipeMap(tHatch);
+            if (tHatch instanceof MTEHatchMultiInput multiInputHatch) {
+                for (FluidStack tFluid : multiInputHatch.getStoredFluid()) {
+                    if (tFluid != null) {
+                        rList.add(tFluid);
+                    }
+                }
+            } else if (tHatch instanceof MTEHatchInputME meHatch) {
+                for (FluidStack fluidStack : meHatch.getStoredFluids()) {
+                    if (fluidStack != null) {
+                        // Prevent the same fluid from different ME hatches from being recognized
+                        inputsFromME.put(fluidStack.getFluid(), fluidStack);
+                    }
+                }
+            } else {
+                FluidStack fillableStack = tHatch.getFillableStack();
+                if (fillableStack != null) {
+                    rList.add(fillableStack);
+                }
+            }
+        }
+
+        if (!inputsFromME.isEmpty()) {
+            rList.addAll(inputsFromME.values());
+        }
+        return rList;
     }
 
     @Override
