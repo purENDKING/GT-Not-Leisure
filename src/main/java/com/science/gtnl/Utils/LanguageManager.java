@@ -150,6 +150,8 @@ public class LanguageManager {
         addStringLocalization("Interaction_DESCRIPTION_Index_706", "需要采矿无人机MK-XII x 16");
         addStringLocalization("Interaction_DESCRIPTION_Index_707", "需要采矿无人机MK-XIII x 16");
         addStringLocalization("Interaction_DESCRIPTION_Index_708", "需要压缩超高压聚变反应堆");
+        addStringLocalization("Interaction_DESCRIPTION_Index_709", "需要无菌环境");
+        addStringLocalization("Interaction_DESCRIPTION_Index_710", "需要绝对洁净环境");
         addStringLocalization("GT5U.gui.text.no_mining_drone", "§7未找到采矿无人机");
         addStringLocalization("bw.itemtype.plateSuperdense", "超致密%material板");
         addStringLocalization("bw.itemtype.nanite", "%material纳米蜂群");
