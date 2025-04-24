@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.science.gtnl.Mods;
+import cpw.mods.fml.common.Loader;
 
 public class EarlyMixinPlugin {
 
     public static List<String> getEarlyMixins(Set<String> loadedMods) {
         final List<String> mixins = new ArrayList<>();
-        if (!Mods.GiveCount.isModLoaded()) {
+        if (!Loader.isModLoaded("givecount")) {
             mixins.add("NEIServerUtils_Mixin");
         }
         return mixins;
