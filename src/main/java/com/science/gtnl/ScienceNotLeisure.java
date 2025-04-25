@@ -5,9 +5,6 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
 import java.io.File;
 
-import bartworks.API.WerkstoffAdderRegistry;
-import com.science.gtnl.common.item.ItemRegister;
-import com.science.gtnl.common.materials.MaterialPool;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -35,7 +32,6 @@ import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoader;
-import com.science.gtnl.loader.RecipeLoaderRunnable;
 import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;

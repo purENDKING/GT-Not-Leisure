@@ -1,13 +1,13 @@
 package com.science.gtnl.loader;
 
-import bartworks.API.WerkstoffAdderRegistry;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.BlockRegister;
 import com.science.gtnl.common.item.ItemRegister;
 import com.science.gtnl.common.item.items.MilledOre;
-
-import codechicken.nei.api.API;
 import com.science.gtnl.common.materials.MaterialPool;
+
+import bartworks.API.WerkstoffAdderRegistry;
+import codechicken.nei.api.API;
 
 public class MaterialLoader {
 
