@@ -124,7 +124,6 @@ public class PolymerTwistingModule extends NanitesBaseModule<PolymerTwistingModu
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         tCountCasing = 0;
         isPolModule = false;
 

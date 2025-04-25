@@ -315,4 +315,22 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         return false;
     }
 
+    @Override
+    public void checkMaintenance() {}
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCheckMaintenance() {
+        return false;
+    }
+
+    @Override
+    public boolean doRandomMaintenanceDamage() {
+        return true;
+    }
+
 }

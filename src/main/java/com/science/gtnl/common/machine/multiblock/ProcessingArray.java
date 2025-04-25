@@ -48,7 +48,6 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
-import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.metatileentity.implementations.MTETieredMachineBlock;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -507,40 +506,6 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
             currentTip.add("Machine: " + EnumChatFormatting.YELLOW + tag.getString("type"));
         } else {
             currentTip.add("Machine: " + EnumChatFormatting.YELLOW + "None");
-        }
-    }
-
-    @Override
-    public boolean getDefaultHasMaintenanceChecks() {
-        return true;
-    }
-
-    @Override
-    public boolean shouldCheckMaintenance() {
-        return true;
-    }
-
-    @Override
-    public void checkMaintenance() {
-        if (!shouldCheckMaintenance()) return;
-
-        if (getRepairStatus() != getIdealStatus()) {
-            for (MTEHatchMaintenance tHatch : validMTEList(mMaintenanceHatches)) {
-                if (tHatch.mAuto) tHatch.autoMaintainance();
-                if (tHatch.mWrench) mWrench = true;
-                if (tHatch.mScrewdriver) mScrewdriver = true;
-                if (tHatch.mSoftHammer) mSoftHammer = true;
-                if (tHatch.mHardHammer) mHardHammer = true;
-                if (tHatch.mSolderingTool) mSolderingTool = true;
-                if (tHatch.mCrowbar) mCrowbar = true;
-
-                tHatch.mWrench = false;
-                tHatch.mScrewdriver = false;
-                tHatch.mSoftHammer = false;
-                tHatch.mHardHammer = false;
-                tHatch.mSolderingTool = false;
-                tHatch.mCrowbar = false;
-            }
         }
     }
 }

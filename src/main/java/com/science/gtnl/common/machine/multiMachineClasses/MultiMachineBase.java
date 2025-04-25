@@ -866,24 +866,6 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
         return true;
     }
 
-    @Override
-    public boolean doRandomMaintenanceDamage() {
-        return true;
-    }
-
-    @Override
-    public void checkMaintenance() {}
-
-    @Override
-    public boolean getDefaultHasMaintenanceChecks() {
-        return false;
-    }
-
-    @Override
-    public boolean shouldCheckMaintenance() {
-        return false;
-    }
-
     /**
      * Gets the maximum Efficiency that spare Part can get (0 - 10000)
      *

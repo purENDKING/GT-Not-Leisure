@@ -132,7 +132,6 @@ public class OreExtractionModule extends NanitesBaseModule<OreExtractionModule> 
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         tCountCasing = 0;
         isOreModule = false;
 

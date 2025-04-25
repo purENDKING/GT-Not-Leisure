@@ -8,12 +8,13 @@ import static com.science.gtnl.common.item.ItemAdder.initItem;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
 
 public class ItemRegister {
@@ -425,58 +426,52 @@ public class ItemRegister {
     }
 
     public static void registryOreDictionary() {
-        ItemStack CircuitResonaticULV = new ItemStack(MetaItem, 1, 9);
-        ItemStack CircuitResonaticLV = new ItemStack(MetaItem, 1, 10);
-        ItemStack CircuitResonaticMV = new ItemStack(MetaItem, 1, 11);
-        ItemStack CircuitResonaticHV = new ItemStack(MetaItem, 1, 12);
-        ItemStack CircuitResonaticEV = new ItemStack(MetaItem, 1, 13);
-        ItemStack CircuitResonaticIV = new ItemStack(MetaItem, 1, 14);
-        ItemStack CircuitResonaticLuV = new ItemStack(MetaItem, 1, 15);
-        ItemStack CircuitResonaticZPM = new ItemStack(MetaItem, 1, 16);
-        ItemStack CircuitResonaticUV = new ItemStack(MetaItem, 1, 17);
-        ItemStack CircuitResonaticUHV = new ItemStack(MetaItem, 1, 18);
-        ItemStack CircuitResonaticUEV = new ItemStack(MetaItem, 1, 19);
-        ItemStack CircuitResonaticUIV = new ItemStack(MetaItem, 1, 20);
-        ItemStack VerySimpleCircuit = new ItemStack(MetaItem, 1, 21);
-        ItemStack SimpleCircuit = new ItemStack(MetaItem, 1, 22);
-        ItemStack BasicCircuit = new ItemStack(MetaItem, 1, 23);
-        ItemStack AdvancedCircuit = new ItemStack(MetaItem, 1, 24);
-        ItemStack EliteCircuit = new ItemStack(MetaItem, 1, 25);
 
-        OreDictionary.registerOre("circuitPrimitive", CircuitResonaticULV);
-        OreDictionary.registerOre("circuitBasic", CircuitResonaticLV);
-        OreDictionary.registerOre("circuitGood", CircuitResonaticMV);
-        OreDictionary.registerOre("circuitAdvanced", CircuitResonaticHV);
-        OreDictionary.registerOre("circuitData", CircuitResonaticEV);
-        OreDictionary.registerOre("circuitElite", CircuitResonaticIV);
-        OreDictionary.registerOre("circuitMaster", CircuitResonaticLuV);
-        OreDictionary.registerOre("circuitUltimate", CircuitResonaticZPM);
-        OreDictionary.registerOre("circuitSuperconductor", CircuitResonaticUV);
-        OreDictionary.registerOre("circuitInfinite", CircuitResonaticUHV);
-        OreDictionary.registerOre("circuitBio", CircuitResonaticUEV);
-        OreDictionary.registerOre("circuitOptical", CircuitResonaticUIV);
-        OreDictionary.registerOre("circuitPrimitive", VerySimpleCircuit);
-        OreDictionary.registerOre("circuitBasic", SimpleCircuit);
-        OreDictionary.registerOre("circuitGood", BasicCircuit);
-        OreDictionary.registerOre("circuitAdvanced", AdvancedCircuit);
-        OreDictionary.registerOre("circuitData", EliteCircuit);
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.ULV), GTNLItemList.CircuitResonaticULV.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.LV), GTNLItemList.CircuitResonaticLV.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.MV), GTNLItemList.CircuitResonaticMV.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.HV), GTNLItemList.CircuitResonaticHV.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.EV), GTNLItemList.CircuitResonaticEV.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.IV), GTNLItemList.CircuitResonaticIV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.LuV), GTNLItemList.CircuitResonaticLuV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.ZPM), GTNLItemList.CircuitResonaticZPM.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.UV), GTNLItemList.CircuitResonaticUV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.UHV), GTNLItemList.CircuitResonaticUHV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.UEV), GTNLItemList.CircuitResonaticUEV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.UIV), GTNLItemList.CircuitResonaticUIV.get(1));
+        GTOreDictUnificator
+            .registerOre(OrePrefixes.circuit.get(Materials.MAX), GTNLItemList.CircuitResonaticUIV.get(1));
 
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticULV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticLV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticMV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticHV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticEV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticIV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticLuV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticZPM);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticUV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticUHV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticUEV);
-        GTOreDictUnificator.addToBlacklist(CircuitResonaticUIV);
-        GTOreDictUnificator.addToBlacklist(VerySimpleCircuit);
-        GTOreDictUnificator.addToBlacklist(SimpleCircuit);
-        GTOreDictUnificator.addToBlacklist(BasicCircuit);
-        GTOreDictUnificator.addToBlacklist(AdvancedCircuit);
-        GTOreDictUnificator.addToBlacklist(EliteCircuit);
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.ULV), GTNLItemList.VerySimpleCircuit.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.LV), GTNLItemList.SimpleCircuit.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.MV), GTNLItemList.BasicCircuit.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.HV), GTNLItemList.AdvancedCircuit.get(1));
+        GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.EV), GTNLItemList.EliteCircuit.get(1));
+    }
+
+    public static void registryOreBlackList() {
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticULV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticLV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticMV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticHV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticEV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticIV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticLuV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticZPM.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticUV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticUHV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticUEV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.CircuitResonaticUIV.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.VerySimpleCircuit.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.SimpleCircuit.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.BasicCircuit.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.AdvancedCircuit.get(1));
+        GTOreDictUnificator.addToBlacklist(GTNLItemList.EliteCircuit.get(1));
     }
 }

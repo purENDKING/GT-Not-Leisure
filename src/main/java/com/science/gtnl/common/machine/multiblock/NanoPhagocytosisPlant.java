@@ -459,7 +459,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         tCountCasing = 0;
         wirelessMode = false;
         if (isRenderActive) {

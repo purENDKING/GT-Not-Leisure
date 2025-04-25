@@ -117,7 +117,7 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
                     'C',
                     buildHatchAdder(ElementCopying.class).casingIndex(CASING_INDEX)
                         .dot(1)
-                        .atLeast(InputHatch, InputBus, OutputBus, OutputHatch, Energy.or(ExoticEnergy))
+                        .atLeast(InputHatch, InputBus, OutputBus, OutputHatch, Energy.or(ExoticEnergy), Maintenance)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 4))))
                 .addElement('D', ofBlock(sBlockCasingsTT, 6))
                 .addElement('E', ofBlock(sBlockCasingsTT, 7))
@@ -178,15 +178,5 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
                     .setSpeedBoost(1 - (ParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
-    }
-
-    @Override
-    public boolean getDefaultHasMaintenanceChecks() {
-        return false;
-    }
-
-    @Override
-    public boolean shouldCheckMaintenance() {
-        return false;
     }
 }

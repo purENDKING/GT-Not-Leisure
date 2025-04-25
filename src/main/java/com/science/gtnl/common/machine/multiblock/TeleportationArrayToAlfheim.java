@@ -65,16 +65,11 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public final int depthOffSet = 2;
     public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
     public static String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
-    protected static GTNL_ItemID Bread;
     private int mCasing;
     private static final int PORTAL_MODE = 0;
     private static final int NATURE_MODE = 1;
     private static final int MANA_MODE = 2;
     private static final int RUNE_MODE = 3;
-
-    public static void initStatics() {
-        Bread = GTNL_ItemID.createNoNBT(new ItemStack(Items.bread));
-    }
 
     public TeleportationArrayToAlfheim(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -171,7 +166,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
         long Strength = 0;
         IGregTechTileEntity aBaseMetaTileEntity = getBaseMetaTileEntity();
         for (ItemStack items : getAllStoredInputs()) {
-            if (Bread.equalItemStack(items)) {
+            if (items.isItemEqual(new ItemStack(Items.bread, 1))) {
                 Strength += 50L * items.stackSize;
                 shouldExplode = true;
                 items.stackSize = 0;
@@ -248,7 +243,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
                     'E',
                     ofChain(
                         buildHatchAdder(TeleportationArrayToAlfheim.class)
-                            .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
+                            .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy), Maintenance)
                             .dot(1)
                             .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10))
                             .build(),
@@ -326,7 +321,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         FluidManaInputHatch.clear();
-        repairMachine();
         return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && mCasing >= 350
             && checkHatch();
     }

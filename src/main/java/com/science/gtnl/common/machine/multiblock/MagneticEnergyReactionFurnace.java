@@ -196,7 +196,6 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         heatLevel = HeatingCoilLevel.None;
         tCountCasing = 0;
         coilTier = 0;

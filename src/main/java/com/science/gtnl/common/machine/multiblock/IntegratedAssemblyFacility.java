@@ -204,7 +204,6 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     }
 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         casingTier = -2;
         tCountCasing = 0;
         wirelessMode = false;

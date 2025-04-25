@@ -99,13 +99,13 @@ import gregtech.api.util.GTModHandler;
 
 public class RecipeLoader {
 
-    public static void loadRecipes() {
+    public static void loadRecipesCompleteInit() {
 
         registerCustomMeteors();
 
         IRecipePool[] recipePools = new IRecipePool[] { new ChemicalRecipes(), new ElectrolyzerRecipes(),
             new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AutoclaveRecipes(),
-            new AlloyBlastSmelterRecipes(), new AssemblingLineRecipes(), new CompressorRecipes(),
+            new AlloyBlastSmelterRecipes(), new CompressorRecipes(),
             new ReFusionReactorRecipes(), new RealArtificialStarRecipes(), new PortalToAlfheimRecipes(),
             new NatureSpiritArrayRecipes(), new ManaInfusionRecipes(), new TranscendentPlasmaMixerRecipes(),
             new PlasmaForgeRecipes(), new CraftingTableRecipes(), new ChemicalBathRecipes(), new SteamCrackerRecipes(),
@@ -152,6 +152,10 @@ public class RecipeLoader {
             PortalToAlfheimOreRecipes.addManaInfusionOreRecipes(stone);
         }
 
+    }
+
+    public static void loadRecipesPostInit() {
+        new AssemblingLineRecipes().loadRecipes();
     }
 
     public static void registerCustomMeteors() {

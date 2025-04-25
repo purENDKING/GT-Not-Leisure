@@ -12,6 +12,5 @@ public class LazyStaticsInitLoader {
 
     public void initStaticsOnCompleteInit() {
         RealArtificialStar.initStatics();
-        TeleportationArrayToAlfheim.initStatics();
     }
 }

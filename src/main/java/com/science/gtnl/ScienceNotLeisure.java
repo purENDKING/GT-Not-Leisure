@@ -5,6 +5,9 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
 import java.io.File;
 
+import bartworks.API.WerkstoffAdderRegistry;
+import com.science.gtnl.common.item.ItemRegister;
+import com.science.gtnl.common.materials.MaterialPool;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -100,9 +103,18 @@ public class ScienceNotLeisure {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+        proxy.makeThingsPretty();
         new LazyStaticsInitLoader().initStaticsOnInit();
         MachineLoader.run();
         PlayerDollWaila.init();
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
+        MinecraftForge.EVENT_BUS.register(new ToolEvents());
+        MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
+        MinecraftForge.EVENT_BUS.register(new GiveCommandMonitor());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new LoginMessage());
     }
 
     @Mod.EventHandler
@@ -110,16 +122,17 @@ public class ScienceNotLeisure {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         EIGBucketLoader.LoadEIGBuckets();
-        MachineLoader.loadMachinesPostInit();
         ItemLoader.registerItems();
+        MaterialLoader.loadPostInit();
+        MachineLoader.loadMachinesPostInit();
+        RecipeLoader.loadRecipesPostInit();
     }
 
     @Mod.EventHandler
-    // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void completeInit(FMLLoadCompleteEvent event) {
         ScriptLoader.run();
-        RecipeLoader.loadRecipes();
         MeteorMiner.initializeBlacklist();
+        RecipeLoader.loadRecipesCompleteInit();
 
         new LazyStaticsInitLoader().initStaticsOnCompleteInit();
     }
@@ -138,11 +151,10 @@ public class ScienceNotLeisure {
     public void preInit(FMLPreInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         proxy.registerMessages();
-        BlazeSword.registerEntity();
         proxy.preInit(event);
-        MaterialLoader.load();
+        BlazeSword.registerEntity();
+        MaterialLoader.loadPreInit();
         LanguageManager.init();
-        new RecipeLoaderRunnable().run();
 
         FMLCommonHandler.instance()
             .bus()
@@ -154,17 +166,5 @@ public class ScienceNotLeisure {
             .registries()
             .interfaceTerminal()
             .register(SuperCraftingInputHatchME.class);
-    }
-
-    @Mod.EventHandler
-    public void midGame(FMLInitializationEvent event) {
-        proxy.makeThingsPretty();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
-        MinecraftForge.EVENT_BUS.register(new ToolEvents());
-        MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new GiveCommandMonitor());
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new LoginMessage());
     }
 }

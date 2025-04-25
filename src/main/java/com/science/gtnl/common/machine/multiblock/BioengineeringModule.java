@@ -126,7 +126,6 @@ public class BioengineeringModule extends NanitesBaseModule<BioengineeringModule
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        repairMachine();
         tCountCasing = 0;
         isBioModule = false;
 
