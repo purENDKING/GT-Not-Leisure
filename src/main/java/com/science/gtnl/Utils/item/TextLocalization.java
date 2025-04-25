@@ -1616,6 +1616,15 @@ public class TextLocalization {
         "Any Cutting Factory Frame",
         "Tooltip_LargeCentrifuge_Casing");
 
+    public static final String NameLargeBioLab = texter("Large Bio Lab", "NameLargeBioLab");
+    public static final String LargeBioLabRecipeType = texter("Large Bio Lab", "LargeBioLabRecipeType");
+    public static final String Tooltip_LargeBioLab_00 = texter(
+        "This absolutely violates the principle of slot machines!",
+        "Tooltip_LargeBioLab_00");
+    public static final String Tooltip_LargeBioLab_Casing = texter(
+        "Any Naquadria-Reinforced Water Plant Casing",
+        "Tooltip_LargeBioLab_Casing");
+
     public static final String NameLargeBrewer = texter("Large Brewer", "NameLargeBrewer");
     public static final String LargeBrewerRecipeType = texter(
         "Brewery / Fermenter / Fluid Heater",

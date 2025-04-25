@@ -1571,6 +1571,12 @@ LargeCentrifuge_Mode_1=热力离心机
 Tooltip_LargeCentrifuge_01=比相同电压的机器快160%%
 Tooltip_LargeCentrifuge_Casing=任意离心机机械方块
 
+NameLargeBioLab=大型生物实验室
+gtnl.recipe.LargeBioLabRecipes=大型生物实验室
+LargeBioLabRecipeType=大型生物实验室
+Tooltip_LargeBioLab_00=§o这绝对违背了老虎机的原则!
+Tooltip_LargeBioLab_Casing=任意超能硅岩强化无菌净水厂机械方块
+
 NameLargeAssembler=大型组装厂
 LargeAssemblerRecipeType=组装机
 Tooltip_LargeAssembler_00=能源仓限制了机器工作的电压等级+1

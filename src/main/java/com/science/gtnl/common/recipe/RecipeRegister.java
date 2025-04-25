@@ -507,4 +507,13 @@ public class RecipeRegister {
         .disableOptimize()
         .frontend(ExtremeExtremeEntityCrusherFrontend::new)
         .build();
+
+    public static RecipeMap<RecipeMapBackend> LargeBioLabRecipes = RecipeMapBuilder.of("gtnl.recipe.LargeBioLabRecipes")
+        .maxIO(6, 6, 3, 3)
+        .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.LargeBioLab.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
 }

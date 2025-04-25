@@ -11,6 +11,7 @@ import com.science.gtnl.common.recipe.GregTech.ServerStart.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
+import bartworks.API.recipe.BartWorksRecipeMaps;
 import gregtech.api.enums.Mods;
 import gregtech.api.recipe.RecipeMaps;
 
@@ -33,6 +34,11 @@ public class RecipeLoaderServerStart {
             for (IRecipePool recipePool : recipePools) {
                 recipePool.loadRecipes();
             }
+
+            RecipeUtil.generateRecipesNotUsingCells(
+                BartWorksRecipeMaps.bioLabRecipes,
+                RecipeRegister.LargeBioLabRecipes,
+                true);
 
         }
 

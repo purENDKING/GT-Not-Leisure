@@ -1571,6 +1571,12 @@ LargeCentrifuge_Mode_1=Thermal Centrifuge
 Tooltip_LargeCentrifuge_01=160%% faster than machines of the same voltage.
 Tooltip_LargeCentrifuge_Casing=Any Centrifuge Machine Block
 
+NameLargeBioLab=Large Bio Lab
+gtnl.recipe.LargeBioLabRecipes=Large Bio Lab
+LargeBioLabRecipeType=Large Bio Lab
+Tooltip_LargeBioLab_00=§oThis absolutely violates the principle of slot machines!
+Tooltip_LargeBioLab_Casing=Any Naquadria-Reinforced Water Plant Casing
+
 NameLargeAssembler=Large Assembler
 LargeAssemblerRecipeType=Assembler
 Tooltip_LargeAssembler_00=The Energy Hatch limits the machine's working voltage tier +1.

@@ -72,6 +72,7 @@ import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
 import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
 import com.science.gtnl.common.machine.multiblock.IntegratedAssemblyFacility;
 import com.science.gtnl.common.machine.multiblock.LapotronChip;
+import com.science.gtnl.common.machine.multiblock.LargeBioLab;
 import com.science.gtnl.common.machine.multiblock.LargeBrewer;
 import com.science.gtnl.common.machine.multiblock.LargeCircuitAssembler;
 import com.science.gtnl.common.machine.multiblock.LargeIncubator;
@@ -771,6 +772,9 @@ public class MachineLoader {
          *
          * @see #loadMachinesPostInit()
          */
+
+        GTNLItemList.LargeBioLab.set(new LargeBioLab(21136, "LargeBioLab", TextLocalization.NameLargeBioLab));
+        addItemTooltip(GTNLItemList.LargeBioLab.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
