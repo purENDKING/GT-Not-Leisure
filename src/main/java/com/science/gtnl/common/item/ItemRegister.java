@@ -445,8 +445,6 @@ public class ItemRegister {
             .registerOre(OrePrefixes.circuit.get(Materials.UEV), GTNLItemList.CircuitResonaticUEV.get(1));
         GTOreDictUnificator
             .registerOre(OrePrefixes.circuit.get(Materials.UIV), GTNLItemList.CircuitResonaticUIV.get(1));
-        GTOreDictUnificator
-            .registerOre(OrePrefixes.circuit.get(Materials.MAX), GTNLItemList.CircuitResonaticUIV.get(1));
 
         GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.ULV), GTNLItemList.VerySimpleCircuit.get(1));
         GTOreDictUnificator.registerOre(OrePrefixes.circuit.get(Materials.LV), GTNLItemList.SimpleCircuit.get(1));
