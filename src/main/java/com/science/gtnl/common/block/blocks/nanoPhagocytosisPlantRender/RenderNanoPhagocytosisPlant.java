@@ -41,10 +41,6 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
     private final Matrix4fStack starModelMatrix = new Matrix4fStack(3);
 
     private VertexBuffer ringOne, ringTwo, ringThree;
-    // These are nudges/translations for each ring to align with the structure
-    private static final Vector3f ringOneNudge = new Vector3f(0, -1, 0);
-    private static final Vector3f ringTwoNudge = new Vector3f(0, -1, 0);
-    private static final Vector3f ringThreeNudge = new Vector3f(.5f, -1, 0);
 
     private static ShaderProgram fadeBypassProgram;
     private static TextureUpdateRequester textureUpdater;
@@ -167,27 +163,27 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
         fadeBypassProgram.use();
 
         GL11.glPushMatrix();
-        GL11.glTranslated(x + .5f, y + .5f, z + .5f);
+        GL11.glTranslated(x + 0.5f, y + 0.5f, z + 0.5f);
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
         GL11.glRotatef(timer / 6 * 7, 1, 0, 0);
-        GL11.glTranslated(ringOneNudge.x, ringOneNudge.y, ringOneNudge.z);
+        GL11.glTranslated(0, -1, 0);
         ringOne.render();
         GL11.glPopMatrix();
 
         GL11.glPushMatrix();
-        GL11.glTranslated(x + .5f, y + .5f, z + .5f);
+        GL11.glTranslated(x + 0.5f, y + 0.5f, z + 0.5f);
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
         GL11.glRotatef(90.0f, 0.0f, 1.0f, 0.0f);
         GL11.glRotatef(-timer / 4 * 5, 0, 0, 1);
-        GL11.glTranslated(ringTwoNudge.x, ringTwoNudge.y, ringTwoNudge.z);
+        GL11.glTranslated(0, -1, 0);
         ringTwo.render();
         GL11.glPopMatrix();
 
         GL11.glPushMatrix();
-        GL11.glTranslated(x, y + .5f, z + .5f);
+        GL11.glTranslated(x + 0.5f, y + 0.5f, z + 0.5f);
         GL11.glRotatef(tile.getRotAngle(), tile.getRotAxisX(), tile.getRotAxisY(), tile.getRotAxisZ());
         GL11.glRotatef(timer * 3, 1, 0, 0);
-        GL11.glTranslated(ringThreeNudge.x, ringThreeNudge.y, ringThreeNudge.z);
+        GL11.glTranslated(0, -1, 0);
         ringThree.render();
         GL11.glPopMatrix();
 
