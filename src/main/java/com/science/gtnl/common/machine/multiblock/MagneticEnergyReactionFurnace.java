@@ -202,13 +202,9 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
         coilTier = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing <= 200) {
-            updateHatchTexture();
-            return false;
-        }
         coilTier = getCoilLevel().getTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        return true;
+        return tCountCasing > 200;
     }
 
     @Override

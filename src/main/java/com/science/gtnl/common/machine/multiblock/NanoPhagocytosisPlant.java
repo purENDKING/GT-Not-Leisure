@@ -505,13 +505,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             createRenderer();
         }
 
-        if (tCountCasing <= 1) {
-            updateHatchTexture();
-            return false;
-        }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        updateHatchTexture();
-        return true;
+        return tCountCasing > 1;
     }
 
     @Override

@@ -202,6 +202,7 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
             }
             if (--mUpdate == 0 || --mStartUpCheck == 0) {
                 checkStructure(true, aBaseMetaTileEntity);
+                updateHatchTexture();
             }
 
             if (mStartUpCheck < 0) {

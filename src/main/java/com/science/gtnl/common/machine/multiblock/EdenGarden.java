@@ -446,11 +446,6 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         }
     }
 
-    @Override
-    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        super.onPostTick(aBaseMetaTileEntity, aTick);
-    }
-
     public int getTotalSeedCount() {
         // null check is to prevent a occasional weird NPE from MUI
         return this.buckets.parallelStream()

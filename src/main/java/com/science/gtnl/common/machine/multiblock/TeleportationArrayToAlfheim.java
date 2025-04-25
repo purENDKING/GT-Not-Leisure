@@ -7,7 +7,6 @@ import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
@@ -67,7 +66,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
     public static String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
     protected static GTNL_ItemID Bread;
-    public final ArrayList<CustomFluidHatch> FluidManaInputHatch = new ArrayList<>();
     private int mCasing;
     private static final int PORTAL_MODE = 0;
     private static final int NATURE_MODE = 1;
@@ -336,19 +334,6 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     @Override
     public boolean checkHatch() {
         return super.checkHatch() && !FluidManaInputHatch.isEmpty();
-    }
-
-    public boolean addFluidManaInputHatch(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
-        if (aTileEntity == null) {
-            return false;
-        } else {
-            IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
-            if (aMetaTileEntity instanceof CustomFluidHatch && aMetaTileEntity.getBaseMetaTileEntity()
-                .getMetaTileID() == 21501) {
-                return addToMachineListInternal(FluidManaInputHatch, aTileEntity, aBaseCasingIndex);
-            }
-        }
-        return false;
     }
 
     @Override

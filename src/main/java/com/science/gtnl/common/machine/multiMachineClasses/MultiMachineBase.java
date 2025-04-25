@@ -102,6 +102,9 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
      */
     public ArrayList<MTEHatch> mTecTechDynamoHatches = new ArrayList<>();
     public ArrayList<ParallelControllerHatch> mParallelControllerHatches = new ArrayList<>();
+    public ArrayList<CustomFluidHatch> FluidIceInputHatch = new ArrayList<>();
+    public ArrayList<CustomFluidHatch> FluidBlazeInputHatch = new ArrayList<>();
+    public ArrayList<CustomFluidHatch> FluidManaInputHatch = new ArrayList<>();
 
     /**
      * This is the array Used to Store the Tectech Multi-Amp Energy hatches.
@@ -1008,8 +1011,55 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
         if (aMetaTileEntity == null) {
             return false;
         }
-        if (aMetaTileEntity instanceof ParallelControllerHatch) {
-            return mParallelControllerHatches.add((ParallelControllerHatch) aMetaTileEntity);
+        if (aMetaTileEntity instanceof ParallelControllerHatch hatch) {
+            hatch.updateTexture(aBaseCasingIndex);
+            hatch.updateCraftingIcon(this.getMachineCraftingIcon());
+            return mParallelControllerHatches.add(hatch);
+        }
+        return false;
+    }
+
+    public boolean addFluidManaInputHatch(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
+            return false;
+        } else {
+            IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+            if (aMetaTileEntity instanceof CustomFluidHatch hatch && aMetaTileEntity.getBaseMetaTileEntity()
+                .getMetaTileID() == 21501) {
+                hatch.updateTexture(aBaseCasingIndex);
+                hatch.updateCraftingIcon(this.getMachineCraftingIcon());
+                return addToMachineListInternal(FluidManaInputHatch, aTileEntity, aBaseCasingIndex);
+            }
+        }
+        return false;
+    }
+
+    public boolean addFluidIceInputHatch(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
+            return false;
+        } else {
+            IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+            if (aMetaTileEntity instanceof CustomFluidHatch hatch && aMetaTileEntity.getBaseMetaTileEntity()
+                .getMetaTileID() == 21502) {
+                hatch.updateTexture(aBaseCasingIndex);
+                hatch.updateCraftingIcon(this.getMachineCraftingIcon());
+                return addToMachineListInternal(FluidIceInputHatch, aTileEntity, aBaseCasingIndex);
+            }
+        }
+        return false;
+    }
+
+    public boolean addFluidBlazeInputHatch(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
+        if (aTileEntity == null) {
+            return false;
+        } else {
+            IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
+            if (aMetaTileEntity instanceof CustomFluidHatch hatch && aMetaTileEntity.getBaseMetaTileEntity()
+                .getMetaTileID() == 21503) {
+                hatch.updateTexture(aBaseCasingIndex);
+                hatch.updateCraftingIcon(this.getMachineCraftingIcon());
+                return addToMachineListInternal(FluidBlazeInputHatch, aTileEntity, aBaseCasingIndex);
+            }
         }
         return false;
     }

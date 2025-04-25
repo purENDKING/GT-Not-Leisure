@@ -127,11 +127,6 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
         }
     }
 
-    @Override
-    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        super.onPostTick(aBaseMetaTileEntity, aTick);
-    }
-
     @NotNull
     @Override
     public CheckRecipeResult checkProcessing() {
@@ -183,13 +178,9 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
                 this.multiTier = getMultiTier(aStack);
         }
 
-        if (tCountCasing <= 25) {
-            updateHatchTexture();
-            return false;
-        }
         wirelessMode = mDynamoHatches.isEmpty();
         currentOutputEU = 300L * multiTier;
-        return multiTier > 0;
+        return multiTier > 0 && tCountCasing > 25;
     }
 
     @Override

@@ -233,18 +233,10 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
         return false;
     }
 
-    public boolean checkHatches() {
-        return !mInputBusses.isEmpty() && !mOutputBusses.isEmpty();
-    }
-
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
-        if (checkHatches()) {
-            updateHatchTexture();
-            return true;
-        }
-        return true;
+        return checkHatch();
     }
 
     @Override

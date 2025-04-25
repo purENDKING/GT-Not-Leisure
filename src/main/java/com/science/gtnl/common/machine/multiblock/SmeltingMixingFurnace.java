@@ -206,7 +206,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         hasRequiredItem = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         if (mCasing <= 15 && mGlassTier < VoltageIndex.UEV) {
-            updateHatchTexture();
             return false;
         }
 

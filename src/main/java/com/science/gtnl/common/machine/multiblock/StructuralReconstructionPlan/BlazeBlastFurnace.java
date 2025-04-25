@@ -80,7 +80,6 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
         Materials.CarbonMonoxide.getGas(1000), Materials.SulfurDioxide.getGas(1000) };
 
     protected final ArrayList<MTEHatchOutput> mPollutionOutputHatches = new ArrayList<>();
-    public final ArrayList<CustomFluidHatch> FluidBlazeInputHatch = new ArrayList<>();
 
     public BlazeBlastFurnace(final int aID, final String aName, final String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -263,19 +262,6 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     @Override
     public boolean checkHatch() {
         return super.checkHatch() && !FluidBlazeInputHatch.isEmpty();
-    }
-
-    private boolean addFluidBlazeInputHatch(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {
-        if (aTileEntity == null) {
-            return false;
-        } else {
-            IMetaTileEntity aMetaTileEntity = aTileEntity.getMetaTileEntity();
-            if (aMetaTileEntity instanceof CustomFluidHatch && aMetaTileEntity.getBaseMetaTileEntity()
-                .getMetaTileID() == 21503) {
-                return addToMachineListInternal(FluidBlazeInputHatch, aTileEntity, aBaseCasingIndex);
-            }
-        }
-        return false;
     }
 
     @Override

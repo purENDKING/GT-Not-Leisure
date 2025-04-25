@@ -189,7 +189,6 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (glassTier < VoltageIndex.UV & mEnergyHatch.mTier > glassTier) {
-                updateHatchTexture();
                 return false;
             }
         }
@@ -197,7 +196,6 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
         if (MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
-                    updateHatchTexture();
                     return false;
                 }
             }
@@ -206,7 +204,6 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
 
         ParallelTier = getParallelTier(aStack);
         if (this.mEnergyHatches.size() >= 2) return false;
-        updateHatchTexture();
         return mCasing >= 30;
     }
 }

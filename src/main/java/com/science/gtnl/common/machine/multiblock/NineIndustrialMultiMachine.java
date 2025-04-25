@@ -214,7 +214,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
         if (mCasing <= 256 && !checkHatch()) {
-            updateHatchTexture();
             return false;
         }
 

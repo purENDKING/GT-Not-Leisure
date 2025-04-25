@@ -345,27 +345,23 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         glassTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
-            updateHatchTexture();
             return false;
         }
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
             if (machineTier < VoltageIndex.UHV & mEnergyHatch.mTier > machineTier) {
-                updateHatchTexture();
                 return false;
             }
         }
 
         for (MTEHatch mExoEnergyHatch : this.mExoticEnergyHatches) {
             if (machineTier < VoltageIndex.UHV & mExoEnergyHatch.mTier > machineTier) {
-                updateHatchTexture();
                 return false;
             }
         }
 
         energyHatchTier = checkEnergyHatchTier();
 
-        updateHatchTexture();
         updateTexture(aBaseMetaTileEntity, getCasingTextureID());
         if (aBaseMetaTileEntity instanceof MTEHatch mteHatch) {
             mteHatch.updateTexture(getCasingTextureID());

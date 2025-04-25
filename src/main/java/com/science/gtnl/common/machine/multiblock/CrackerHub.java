@@ -189,12 +189,8 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
         tCountCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (tCountCasing <= 100) {
-            updateHatchTexture();
-            return false;
-        }
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        return mMufflerHatches.size() == 16;
+        return mMufflerHatches.size() == 16 && tCountCasing > 100;
     }
 
     @Override
