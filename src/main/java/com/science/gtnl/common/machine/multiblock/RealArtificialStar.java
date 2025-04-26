@@ -44,7 +44,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.Utils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.Utils.rewrites.GTNL_ItemID;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
@@ -78,16 +77,11 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     private static IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
     public static final String RAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/real_artificial_star";
     public static String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
-    protected static GTNL_ItemID DepletedExcitedNaquadahFuelRod;
-    protected static GTNL_ItemID EnhancementCore;
-    protected static GTNL_ItemID Antimatter;
-    protected static GTNL_ItemID AntimatterFuelRod;
-    protected static GTNL_ItemID StrangeAnnihilationFuelRod;
-    protected static long MaxOfDepletedExcitedNaquadahFuelRod;
-    protected static long MaxOfEnhancementCore;
-    protected static long MaxOfAntimatter;
-    protected static long MaxOfAntimatterFuelRod;
-    protected static long MaxOfStrangeAnnihilationFuelRod;
+    protected static long MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
+    protected static long MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
+    protected static long MaxOfAntimatter = 3;
+    protected static long MaxOfAntimatterFuelRod = 1024;
+    protected static long MaxOfStrangeAnnihilationFuelRod = 32768;
     public String ownerName;
     public UUID ownerUUID;
     public long storageEU = 0;
@@ -121,23 +115,6 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     @Override
     public int getCasingTextureID() {
         return 13;
-    }
-
-    public static void initStatics() {
-        DepletedExcitedNaquadahFuelRod = GTNL_ItemID.createNoNBT(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1));
-        EnhancementCore = GTNL_ItemID.createNoNBT(GTNLItemList.EnhancementCore.get(1));
-        MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
-        MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
-        if (TwistSpaceTechnology.isModLoaded()) {
-            Antimatter = GTNL_ItemID.createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 14));
-            AntimatterFuelRod = GTNL_ItemID
-                .createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 16));
-            StrangeAnnihilationFuelRod = GTNL_ItemID
-                .createNoNBT(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 29));
-            MaxOfAntimatter = 3;
-            MaxOfAntimatterFuelRod = 1024;
-            MaxOfStrangeAnnihilationFuelRod = 32768;
-        }
     }
 
     @Override
@@ -221,22 +198,22 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         // * Integer.MAX_VALUE
         currentOutputEU = 0;
         for (ItemStack items : getStoredInputs()) {
-            if (DepletedExcitedNaquadahFuelRod.equalItemStack(items)) {
+            if (items.isItemEqual(GTNLItemList.DepletedExcitedNaquadahFuelRod.get(1))) {
                 currentOutputEU += MaxOfDepletedExcitedNaquadahFuelRod * items.stackSize;
                 flag = true;
-            } else if (EnhancementCore.equalItemStack(items)) {
+            } else if (items.isItemEqual(GTNLItemList.EnhancementCore.get(1))) {
                 currentOutputEU += MaxOfEnhancementCore * items.stackSize;
                 // recoveryAmount += items.stackSize;
                 flag = true;
             } else if (TwistSpaceTechnology.isModLoaded()) {
-                if (Antimatter.equalItemStack(items)) {
+                if (items.isItemEqual(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 14))) {
                     currentOutputEU += MaxOfAntimatter * items.stackSize;
                     flag = true;
-                } else if (AntimatterFuelRod.equalItemStack(items)) {
+                } else if (items.isItemEqual(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 16))) {
                     currentOutputEU += MaxOfAntimatterFuelRod * items.stackSize;
                     recoveryAmountTST += items.stackSize;
                     flag = true;
-                } else if (StrangeAnnihilationFuelRod.equalItemStack(items)) {
+                } else if (items.isItemEqual(GTModHandler.getModItem(TwistSpaceTechnology.ID, "MetaItem01", 1, 29))) {
                     currentOutputEU += MaxOfStrangeAnnihilationFuelRod * items.stackSize;
                     recoveryAmountTST += items.stackSize;
                     flag = true;

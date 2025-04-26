@@ -69,7 +69,7 @@ public class VacuumFurnaceRecipes implements IRecipePool {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 64),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Nickel, 64),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Bismuth, 64),
-                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 48),
+                MaterialsElements.getInstance().RUTHENIUM.getDust(48),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Promethium, 32),
                 MaterialsElements.getInstance().HAFNIUM.getDust(16))
             .fluidInputs(FluidUtils.getFluidStack(MilledOreProcessing.PentlanditeFlotationFroth, 4000))

@@ -14,6 +14,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialMisc;
+import gtPlusPlus.core.material.MaterialsElements;
 
 public class PlatinumBasedTreatmentRecipes implements IRecipePool {
 
@@ -33,7 +34,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(138, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Platinum, 1)),
                 GTUtility.copyAmountUnsafe(176, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Palladium, 1)),
                 WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 29),
-                GTUtility.copyAmountUnsafe(99, WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 1)),
+                GTUtility.copyAmountUnsafe(99, MaterialsElements.getInstance().RUTHENIUM.getDust(1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 42),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 5),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 17),
@@ -63,7 +64,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(100, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)))
             .itemOutputs(
                 WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 20),
-                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 72),
+                GTUtility.copyAmountUnsafe(72, MaterialsElements.getInstance().RUTHENIUM.getDust(1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 30),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 3),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 12),
@@ -89,7 +90,7 @@ public class PlatinumBasedTreatmentRecipes implements IRecipePool {
                 GTUtility.copyAmountUnsafe(64, GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1)),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 25))
             .itemOutputs(
-                WerkstoffLoader.Ruthenium.get(OrePrefixes.dust, 46),
+                MaterialsElements.getInstance().RUTHENIUM.getDust(46),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iridium, 20),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Osmium, 2),
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Gold, 8),
