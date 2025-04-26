@@ -49,8 +49,19 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
     modid = MODID,
     version = Tags.VERSION,
     name = MODNAME,
-    dependencies = "required-after:eternalsingularity;" + "after:GalacticraftCore;"
+    dependencies = "required-after:IC2;" + "required-after:structurelib;"
+        + "required-after:Avaritia;"
+        + "required-after:eternalsingularity;"
+        + "required-after:AWWayofTime;"
+        + "required-after:BloodArsenal;"
+        + "required-after:modularui;"
+        + "required-after:Botania;"
+        + "after:GalacticraftCore;"
+        + "required-after:bartworks;"
+        + "after:miscutils;"
+        + "required-after:dreamcraft;"
         + "after:GalacticraftMars;"
+        + "required-after:gregtech;"
         + "after:TwistSpaceTechnology;"
         + "after:GalacticraftPlanets",
     acceptedMinecraftVersions = "1.7.10")
@@ -137,7 +148,7 @@ public class ScienceNotLeisure {
         proxy.registerMessages();
         proxy.preInit(event);
         BlazeSword.registerEntity();
-        // MaterialLoader.loadPreInit();
+        MaterialLoader.loadPreInit();
         LanguageManager.init();
 
         FMLCommonHandler.instance()
