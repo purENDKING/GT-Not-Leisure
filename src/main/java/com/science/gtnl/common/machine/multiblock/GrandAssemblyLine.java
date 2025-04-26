@@ -423,7 +423,8 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                         adjustedTime *= 4;
                     }
 
-                    adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE)).intValue();
+                    adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE))
+                        .intValue();
 
                 } else {
 
@@ -438,15 +439,23 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     }
 
                     // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
-                    adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt).multiply(BigInteger.valueOf(4).pow(overclockCount));
+                    adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt)
+                        .multiply(
+                            BigInteger.valueOf(4)
+                                .pow(overclockCount));
                     adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
 
                     // 检查功耗是否超过 int 的最大值或时间是否小于 1
-                    while ((adjustedPowerBigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0 || adjustedTime < 1) && overclockCount > 0) {
+                    while ((adjustedPowerBigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0
+                        || adjustedTime < 1) && overclockCount > 0) {
                         overclockCount--; // 减少超频次数
-                        adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt).multiply(BigInteger.valueOf(4).pow(overclockCount)); // 重新计算功耗
+                        adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt)
+                            .multiply(
+                                BigInteger.valueOf(4)
+                                    .pow(overclockCount)); // 重新计算功耗
                         adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
-                        adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE)).intValue();
+                        adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE))
+                            .intValue();
                     }
                 }
 
