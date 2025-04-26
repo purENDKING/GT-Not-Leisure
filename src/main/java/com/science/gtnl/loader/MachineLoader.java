@@ -1319,6 +1319,5 @@ public class MachineLoader {
         registerMTEWireAndPipe();
         registerBasicMachine();
         registerCovers();
-        registerGlasses();
     }
 }

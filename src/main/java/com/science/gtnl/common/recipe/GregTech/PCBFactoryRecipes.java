@@ -13,6 +13,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.metadata.PCBFactoryTierKey;
 import gregtech.api.util.GTOreDictUnificator;
+import gtPlusPlus.core.material.MaterialsElements;
 
 public class PCBFactoryRecipes implements IRecipePool {
 
@@ -26,7 +27,7 @@ public class PCBFactoryRecipes implements IRecipePool {
             .itemInputs(
                 GTOreDictUnificator.get(OrePrefixes.plate, MaterialsKevlar.Kevlar, 1),
                 WerkstoffLoader.Rhodium.get(OrePrefixes.foil, 32),
-                WerkstoffLoader.Ruthenium.get(OrePrefixes.foil, 32))
+                MaterialsElements.getInstance().RUTHENIUM.getFoil(32))
             .itemOutputs(ItemList.Circuit_Board_Optical.get(1))
             .fluidInputs(
                 Materials.SulfuricAcid.getFluid(1000),

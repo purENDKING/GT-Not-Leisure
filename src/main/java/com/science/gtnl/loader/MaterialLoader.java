@@ -2,6 +2,7 @@ package com.science.gtnl.loader;
 
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.BlockRegister;
+import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.ItemRegister;
 import com.science.gtnl.common.item.items.MilledOre;
 import com.science.gtnl.common.materials.MaterialPool;
@@ -14,13 +15,14 @@ public class MaterialLoader {
     public static void loadPreInit() {
 
         ItemRegister.registry();
-        new MilledOre();
+        ItemLoader.registerItems();
+        ItemRegister.registryOreDictionary();
+        ItemRegister.registryOreBlackList();
+        WerkstoffAdderRegistry.addWerkstoffAdder(new MaterialPool());
 
         BlockRegister.registry();
         BlockRegister.registryAnotherData();
         BlockRegister.registerTreeBrickuoia();
-
-        new RecipeLoaderRunnable().run();
 
         API.hideItem(GTNLItemList.NanoPhagocytosisPlantRender.get(1));
         API.hideItem(GTNLItemList.ArtificialStarRender.get(1));
@@ -28,8 +30,6 @@ public class MaterialLoader {
     }
 
     public static void loadPostInit() {
-        WerkstoffAdderRegistry.addWerkstoffAdder(new MaterialPool());
-        ItemRegister.registryOreDictionary();
-        ItemRegister.registryOreBlackList();
+        new MilledOre();
     }
 }

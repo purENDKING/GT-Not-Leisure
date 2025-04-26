@@ -18,6 +18,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.util.GTUtility;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.material.MaterialsElements;
 import gtnhlanth.common.register.WerkstoffMaterialPool;
@@ -124,7 +125,7 @@ public class ElementCopyingRecipes implements IRecipePool {
             .addTo(ECR);
 
         GTValues.RA.stdBuilder()
-            .itemInputs()
+            .itemInputs(GTUtility.getIntegratedCircuit(1))
             .itemOutputs(
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 16),
                 MaterialsElements.getInstance().RUTHENIUM.getDust(16),
@@ -138,7 +139,7 @@ public class ElementCopyingRecipes implements IRecipePool {
             .addTo(ECR);
 
         GTValues.RA.stdBuilder()
-            .itemInputs()
+            .itemInputs(GTUtility.getIntegratedCircuit(2))
             .itemOutputs(
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Cobalt, 16),
                 WerkstoffLoader.Rhodium.get(OrePrefixes.dust, 16),

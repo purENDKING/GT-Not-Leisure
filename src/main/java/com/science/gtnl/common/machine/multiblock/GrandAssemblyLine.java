@@ -409,21 +409,29 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                 long energyRatio = energyEU / Math.max(1, recipe.mEUt); // EnergyEU 与 recipe.mEUt 的比值，避免除以0
                 long threshold = 1; // 初始阈值是 4^0 = 1
                 int adjustedTime;
-                long adjustedPower;
+                int adjustedPower = 0;
+                BigInteger adjustedPowerBigInt;
 
                 if (wirelessMode) {
                     adjustedTime = minRecipeTime;
-                    adjustedPower = Math.max(1, recipe.mEUt * (recipe.mDuration / adjustedTime));
-                    while (adjustedPower > Integer.MAX_VALUE) {
-                        adjustedPower /= 4;
+                    adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt)
+                        .multiply(BigInteger.valueOf(recipe.mDuration))
+                        .divide(BigInteger.valueOf(adjustedTime));
+
+                    while (adjustedPowerBigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {
+                        adjustedPowerBigInt = adjustedPowerBigInt.divide(BigInteger.valueOf(4));
                         adjustedTime *= 4;
                     }
+
+                    adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE))
+                        .intValue();
+
                 } else {
 
                     // 计算最大可能的超频次数
                     while (energyRatio >= threshold * 4) { // 判断是否可以进行下一次超频
                         overclockCount++;
-                        threshold *= 4; // 阈值更新为 4^n
+                        threshold *= 4;
                     }
 
                     if (CircuitOC >= 0) {
@@ -431,21 +439,25 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     }
 
                     // 同时计算 adjustedPower 和 adjustedTime，并确保满足所有约束条件
-                    adjustedPower = Math.max(1, recipe.mEUt * (long) Math.pow(4, overclockCount));
-                    adjustedTime = Math
-                        .max(1, recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount));
+                    adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt)
+                        .multiply(
+                            BigInteger.valueOf(4)
+                                .pow(overclockCount));
+                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
 
                     // 检查功耗是否超过 int 的最大值或时间是否小于 1
-                    while ((adjustedPower > Integer.MAX_VALUE || adjustedTime < 1) && overclockCount > 0) {
+                    while ((adjustedPowerBigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0
+                        || adjustedTime < 1) && overclockCount > 0) {
                         overclockCount--; // 减少超频次数
-                        adjustedPower = recipe.mEUt * (long) Math.pow(4, overclockCount); // 重新计算功耗
-                        adjustedTime = Math
-                            .max(1, recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount)); // 重新计算时间
+                        adjustedPowerBigInt = BigInteger.valueOf(recipe.mEUt)
+                            .multiply(
+                                BigInteger.valueOf(4)
+                                    .pow(overclockCount)); // 重新计算功耗
+                        adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
+                        adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE))
+                            .intValue();
                     }
                 }
-
-                // 确保时间最小为 1
-                adjustedTime = Math.max(1, adjustedTime);
 
                 // 构建超频后的临时配方
                 GTRecipe.RecipeAssemblyLine overclockedRecipe = new GTRecipe.RecipeAssemblyLine(
@@ -455,7 +467,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     inputFluids, // 输入流体
                     outputItem, // 输出物品
                     adjustedTime, // 调整后的时间
-                    (int) Math.min(adjustedPower, Integer.MAX_VALUE), // 调整后的功率
+                    adjustedPower, // 调整后的功率
                     recipe.mOreDictAlt // 替代物品
                 );
 

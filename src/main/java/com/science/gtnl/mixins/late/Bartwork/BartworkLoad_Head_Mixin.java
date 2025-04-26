@@ -17,11 +17,15 @@ import gregtech.api.recipe.RecipeMaps;
 @Mixin(value = MainMod.class, remap = false)
 public class BartworkLoad_Head_Mixin {
 
+    private static boolean recipesDel;
+
     @Inject(method = "runOnPlayerJoined(ZZ)V", at = @At("HEAD"), remap = false)
     private static void onRunOnPlayerJoined(boolean classicMode, boolean disableExtraGasRecipes, CallbackInfo ci) {
-        if (MainConfig.enableDeleteRecipe) {
+        if (MainConfig.enableDeleteRecipe && !recipesDel) {
             RemoveRecipes.removeRecipes();
         }
         RecipeUtil.removeMatchingRecipes(RecipeRegister.ConvertToCircuitAssembler, RecipeMaps.circuitAssemblerRecipes);
+
+        recipesDel = true;
     }
 }

@@ -19,7 +19,6 @@ import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandGiveCountBook;
 import com.science.gtnl.common.command.CommandReloadConfig;
-import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
 import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
@@ -28,7 +27,6 @@ import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.config.ClientEventHandler;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.config.ServerEventHandler;
-import com.science.gtnl.loader.LazyStaticsInitLoader;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoader;
@@ -70,7 +68,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class ScienceNotLeisure {
 
-    @Mod.Instance
+    @Mod.Instance("ScienceNotLeisure")
     public static ScienceNotLeisure instance;
     public static final String MODID = "ScienceNotLeisure";
     public static final String MODNAME = "GTNotLeisure";
@@ -100,9 +98,8 @@ public class ScienceNotLeisure {
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         proxy.makeThingsPretty();
-        new LazyStaticsInitLoader().initStaticsOnInit();
-        MachineLoader.run();
         PlayerDollWaila.init();
+        MachineLoader.registerGlasses();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
         MinecraftForge.EVENT_BUS.register(new ToolEvents());
@@ -118,19 +115,21 @@ public class ScienceNotLeisure {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         EIGBucketLoader.LoadEIGBuckets();
-        ItemLoader.registerItems();
         MaterialLoader.loadPostInit();
+        MachineLoader.run();
         MachineLoader.loadMachinesPostInit();
-        RecipeLoader.loadRecipesPostInit();
+        MeteorMiner.initializeBlacklist();
+
+        AEApi.instance()
+            .registries()
+            .interfaceTerminal()
+            .register(SuperCraftingInputHatchME.class);
     }
 
     @Mod.EventHandler
     public void completeInit(FMLLoadCompleteEvent event) {
         ScriptLoader.run();
-        MeteorMiner.initializeBlacklist();
         RecipeLoader.loadRecipesCompleteInit();
-
-        new LazyStaticsInitLoader().initStaticsOnCompleteInit();
     }
 
     @Mod.EventHandler
@@ -158,9 +157,5 @@ public class ScienceNotLeisure {
         FMLCommonHandler.instance()
             .bus()
             .register(new ClientEventHandler());
-        AEApi.instance()
-            .registries()
-            .interfaceTerminal()
-            .register(SuperCraftingInputHatchME.class);
     }
 }
