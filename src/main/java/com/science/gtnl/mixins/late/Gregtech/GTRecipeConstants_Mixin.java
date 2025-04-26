@@ -28,6 +28,7 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.IRecipeMap;
 import gregtech.api.recipe.RecipeMaps;
+import gregtech.api.util.AssemblyLineUtils;
 import gregtech.api.util.GTLog;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTRecipeConstants;
