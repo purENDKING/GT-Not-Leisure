@@ -179,6 +179,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
+        repairMachine();
         ParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
@@ -246,7 +247,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
                 .addElement('Y', ofBlockAnyMeta(ModBlocks.ritualStone))
                 .addElement(
                     'Z',
-                    buildHatchAdder(BloodSoulSacrificialArray.class).atLeast(InputBus, OutputBus, Maintenance)
+                    buildHatchAdder(BloodSoulSacrificialArray.class).atLeast(InputBus, OutputBus)
                         .adder(BloodSoulSacrificialArray::addToMachineList)
                         .dot(1)
                         .casingIndex(getCasingTextureID())
@@ -334,7 +335,6 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
             .beginStructureBlock(33, 14, 30, false)
-            .addInputHatch(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
             .addInputBus(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
             .addOutputBus(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
             .toolTipFinisher();
