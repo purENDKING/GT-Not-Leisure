@@ -33,8 +33,8 @@ import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import net.minecraftforge.fluids.IFluidHandler;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -56,7 +56,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
         setUnlocalizedName("InfinityBucket");
         setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityBucket");
         setCreativeTab(CreativeTabs.tabTools);
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         MinecraftForge.EVENT_BUS.register(this);
         registerFluidContainerData();
         ReAvaItemList.InfinityBucket.set(new ItemStack(this, 1));

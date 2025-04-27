@@ -20,9 +20,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.reavaritia.ClientProxy;
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.ReAvaritia;
-import com.reavaritia.ReCreativeTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -34,7 +34,7 @@ public class BlockExtremeAnvil extends BlockFalling {
         super(Material.anvil);
         setBlockName("ExtremeAnvil");
         setBlockTextureName(RESOURCE_ROOT_ID + ":" + "ExtremeAnvil");
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         setStepSound(Block.soundTypeAnvil);
         setHardness(10.0F);
         setResistance(2000.0F);

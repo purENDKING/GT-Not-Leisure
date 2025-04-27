@@ -29,8 +29,8 @@ import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.playSound;
@@ -51,7 +51,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
         this.setUnlocalizedName("InfinityTotem");
         this.setCreativeTab(CreativeTabs.tabCombat);
         this.setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityTotem");
         this.setMaxDamage(99);
         this.setMaxStackSize(1);

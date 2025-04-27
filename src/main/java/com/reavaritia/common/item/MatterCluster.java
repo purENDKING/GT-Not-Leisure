@@ -20,8 +20,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.ItemLoader;
 
@@ -49,7 +49,7 @@ public class MatterCluster extends Item implements ICosmicRenderItem {
         this.setUnlocalizedName("MatterCluster");
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "MatterCluster");
         setCreativeTab(CreativeTabs.tabTools);
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         ReAvaItemList.MatterCluster.set(new ItemStack(this, 1));
     }
 

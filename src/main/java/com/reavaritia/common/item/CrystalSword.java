@@ -21,8 +21,8 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
@@ -35,7 +35,7 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
         super(EnumHelper.addToolMaterial("CRYSTAL", 3, 8888, 8.0F, 48.0F, 10));
         this.setUnlocalizedName("CrystalSword");
         this.setCreativeTab(CreativeTabs.tabCombat);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "CrystalSword");
         this.setMaxDamage(8888);
         ReAvaItemList.CrystalSword.set(new ItemStack(this, 1));

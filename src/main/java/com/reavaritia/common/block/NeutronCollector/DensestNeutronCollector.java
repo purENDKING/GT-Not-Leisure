@@ -18,9 +18,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.ReAvaritia;
-import com.reavaritia.ReCreativeTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -37,7 +37,7 @@ public class DensestNeutronCollector extends BlockContainer {
         setHardness(20.0F);
         setBlockName("DensestNeutronCollector");
         setHarvestLevel("pickaxe", 3);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         GameRegistry.registerBlock(this, ItemBlockDensestNeutronCollector.class, getUnlocalizedName());
         ReAvaItemList.DensestNeutronCollector.set(new ItemStack(this, 1));
     }

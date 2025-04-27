@@ -31,8 +31,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -49,7 +49,7 @@ public class BlazeSword extends ItemSword {
         this.setUnlocalizedName("BlazeSword");
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "BlazeSword");
         this.setCreativeTab(CreativeTabs.tabCombat);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setMaxDamage(7777);
         MinecraftForge.EVENT_BUS.register(this);
         ReAvaItemList.BlazeSword.set(new ItemStack(this, 1));

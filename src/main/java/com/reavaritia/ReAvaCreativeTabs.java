@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 import com.reavaritia.common.ItemLoader;
 
-public class ReCreativeTabs {
+public class ReAvaCreativeTabs {
 
     public static net.minecraft.creativetab.CreativeTabs ReAvaritia = new net.minecraft.creativetab.CreativeTabs(
         "ReAvaritia") {

@@ -27,8 +27,8 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
@@ -49,7 +49,7 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
     public InfinityShovel() {
         super(INFINITY);
         this.setUnlocalizedName("InfinityShovel");
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityShovel");
         ReAvaItemList.InfinityShovel.set(new ItemStack(this, 1));
     }

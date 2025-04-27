@@ -26,8 +26,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.ItemLoader;
 
@@ -43,7 +43,7 @@ public class InfinityHoe extends ItemHoe {
         setUnlocalizedName("InfinityHoe");
         setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityHoe");
         this.setCreativeTab(CreativeTabs.tabTools);
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setMaxDamage(9999);
         ReAvaItemList.InfinityHoe.set(new ItemStack(this, 1));
     }

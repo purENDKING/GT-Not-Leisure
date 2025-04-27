@@ -25,8 +25,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.world.BlockEvent;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
@@ -42,7 +42,7 @@ public class BlazeShovel extends ItemSpade implements SubtitleDisplay {
         super(BLAZE);
         this.setUnlocalizedName("BlazeShovel");
         setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "BlazeShovel");
         this.setMaxDamage(7777);
         MinecraftForge.EVENT_BUS.register(this);

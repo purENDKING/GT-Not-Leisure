@@ -16,8 +16,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -32,7 +32,7 @@ public class CrystalShovel extends ItemSpade {
         super(CRYSTAL);
         this.setUnlocalizedName("CrystalShovel");
         this.setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "CrystalShovel");
         this.setMaxDamage(8888);
         MinecraftForge.EVENT_BUS.register(this);

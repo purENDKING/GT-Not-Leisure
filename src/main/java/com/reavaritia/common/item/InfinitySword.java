@@ -44,8 +44,8 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 import com.science.gtnl.config.MainConfig;
@@ -90,7 +90,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         setUnlocalizedName("InfinitySword");
         setTextureName(RESOURCE_ROOT_ID + ":" + "InfinitySword");
         setCreativeTab(CreativeTabs.tabCombat);
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setMaxDamage(9999);
         MinecraftForge.EVENT_BUS.register(this);
         ReAvaItemList.InfinitySword.set(new ItemStack(this, 1));

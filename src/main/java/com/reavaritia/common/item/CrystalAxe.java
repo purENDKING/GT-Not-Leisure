@@ -17,8 +17,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
@@ -33,7 +33,7 @@ public class CrystalAxe extends ItemAxe {
         this.setUnlocalizedName("CrystalAxe");
         this.setCreativeTab(CreativeTabs.tabCombat);
         this.setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "CrystalAxe");
         this.setMaxDamage(8888);
         ReAvaItemList.CrystalAxe.set(new ItemStack(this, 1));

@@ -28,8 +28,8 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
@@ -50,7 +50,7 @@ public class InfinityPickaxe extends ItemPickaxe implements SubtitleDisplay {
     public InfinityPickaxe() {
         super(INFINITY);
         this.setUnlocalizedName("InfinityPickaxe");
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityPickaxe");
         ReAvaItemList.InfinityPickaxe.set(new ItemStack(this, 1));
     }

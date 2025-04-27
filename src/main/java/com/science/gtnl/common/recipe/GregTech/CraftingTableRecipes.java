@@ -22,6 +22,7 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.material.MaterialsAlloy;
+import gtPlusPlus.xmod.bop.blocks.BOPBlockRegistrator;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
 public class CraftingTableRecipes implements IRecipePool {
@@ -544,36 +545,9 @@ public class CraftingTableRecipes implements IRecipePool {
                 MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
             9);
 
-        GTModHandler.addMachineCraftingRecipe(
-            GTNLItemList.GasCollectorUEV.get(1),
-            bitsd,
-            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
-                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
-                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
-            10);
-
-        GTModHandler.addMachineCraftingRecipe(
-            GTNLItemList.GasCollectorUIV.get(1),
-            bitsd,
-            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
-                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
-                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
-            11);
-
-        GTModHandler.addMachineCraftingRecipe(
-            GTNLItemList.GasCollectorUMV.get(1),
-            bitsd,
-            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
-                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
-                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
-            12);
-
-        GTModHandler.addMachineCraftingRecipe(
-            GTNLItemList.GasCollectorUXV.get(1),
-            bitsd,
-            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
-                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
-                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
-            13);
+        addCraftingRecipe(
+            GTNLItemList.SaplingBrickuoia.get(1),
+            new Object[] { "AAA", "ABA", "ACA", 'A', new ItemStack(Blocks.brick_block, 1), 'B',
+                new ItemStack(BOPBlockRegistrator.sapling_Rainforest, 1), 'C', new ItemStack(Items.dye, 1, 15) });
     }
 }

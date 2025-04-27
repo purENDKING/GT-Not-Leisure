@@ -525,7 +525,7 @@ public class RecipeRegister {
 
     public static RecipeMap<RecipeMapBackend> GasCollectorRecipes = RecipeMapBuilder
         .of("gtnl.recipe.GasCollectorRecipes")
-        .maxIO(1, 0, 0, 1)
+        .maxIO(3, 3, 1, 1)
         .progressBar(PROGRESSBAR_GAS_COLLECTOR)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.LargeGasCollector.get(1))

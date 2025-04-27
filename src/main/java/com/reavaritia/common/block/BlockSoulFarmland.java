@@ -18,8 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -31,7 +31,7 @@ public class BlockSoulFarmland extends BlockFarmland {
     public BlockSoulFarmland() {
         super();
         this.setBlockName("BlockSoulFarmland");
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setHardness(0.6F);
         this.setStepSound(soundTypeSand);
         this.setBlockTextureName(RESOURCE_ROOT_ID + ":" + "BlockSoulFarmland");

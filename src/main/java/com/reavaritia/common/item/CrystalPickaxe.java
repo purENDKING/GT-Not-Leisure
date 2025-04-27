@@ -19,8 +19,8 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
@@ -35,7 +35,7 @@ public class CrystalPickaxe extends ItemPickaxe implements SubtitleDisplay {
         super(CRYSTAL);
         this.setUnlocalizedName("CrystalPickaxe");
         setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "CrystalPickaxe");
         this.setMaxDamage(8888);
         ReAvaItemList.CrystalPickaxe.set(new ItemStack(this, 1));

@@ -17,8 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
@@ -33,7 +33,7 @@ public class CrystalHoe extends ItemHoe {
         super(CRYSTAL);
         this.setUnlocalizedName("CrystalHoe");
         this.setCreativeTab(CreativeTabs.tabTools);
-        this.setCreativeTab(ReCreativeTabs.ReAvaritia);
+        this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "CrystalHoe");
         this.setMaxDamage(8888);
         ReAvaItemList.CrystalHoe.set(new ItemStack(this, 1));

@@ -28,8 +28,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
+import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReCreativeTabs;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.ItemLoader;
 
@@ -45,7 +45,7 @@ public class InfinityAxe extends ItemAxe {
         super(INFINITY);
         setUnlocalizedName("InfinityAxe");
         setTextureName(RESOURCE_ROOT_ID + ":" + "InfinityAxe");
-        setCreativeTab(ReCreativeTabs.ReAvaritia);
+        setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         setMaxDamage(9999);
         ReAvaItemList.InfinityAxe.set(new ItemStack(this, 1));
     }
