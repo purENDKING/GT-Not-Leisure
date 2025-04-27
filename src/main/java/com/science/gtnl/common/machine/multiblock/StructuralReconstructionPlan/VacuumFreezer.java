@@ -38,9 +38,7 @@ import gregtech.common.blocks.BlockCasings2;
 
 public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements ISurvivalConstructable {
 
-    private int energyHatchTier;
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(1);
-    private int mCasing;
     private static IStructureDefinition<VacuumFreezer> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String VF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/vacuum_freezer";

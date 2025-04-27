@@ -790,7 +790,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         super.addUIWidgets(builder, buildContext);
     }
 
-    protected ModularWindow createRecipeOcCountWindow(final EntityPlayer player) {
+    public ModularWindow createRecipeOcCountWindow(final EntityPlayer player) {
         final int WIDTH = 158;
         final int HEIGHT = 52;
         final int PARENT_WIDTH = getGUIWidth();
@@ -828,14 +828,13 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return builder.build();
     }
 
-    protected static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamBigInput(
-        Class<T> typeToken) {
+    public static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamBigInput(Class<T> typeToken) {
         return buildHatchAdder(typeToken).adder(SteamMultiMachineBase::addToMachineList)
             .hatchIds(22518)
             .shouldReject(t -> !t.mSteamBigInputFluids.isEmpty());
     }
 
-    protected enum SteamTypes {
+    public enum SteamTypes {
 
         STEAM("Steam", FluidUtils.getSteam(1)
             .getFluid(), 1),

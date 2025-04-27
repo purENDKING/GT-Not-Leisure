@@ -45,7 +45,6 @@ import gregtech.common.blocks.BlockCasings1;
 public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace> implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    private int energyHatchTier;
     private int mHeatingCapacity = 0;
     private static IStructureDefinition<ElectricBlastFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";

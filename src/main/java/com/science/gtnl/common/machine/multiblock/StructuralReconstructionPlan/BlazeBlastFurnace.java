@@ -60,9 +60,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> implements ISurvivalConstructable {
 
-    protected int energyHatchTier;
     public static final int CASING_INDEX = TAE.GTPP_INDEX(15);
-    private int mCasing;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String BBF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blaze_blast_furnace";
     public static String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);

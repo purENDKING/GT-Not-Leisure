@@ -46,10 +46,8 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISurvivalConstructable {
 
-    private int energyHatchTier;
     private HeatingCoilLevel mHeatingCapacity;
     private int mLevel = 0;
-    private int mCasing;
     private static IStructureDefinition<Desulfurizer> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String Desu_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/desulfurizer";

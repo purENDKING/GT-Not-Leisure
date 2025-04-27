@@ -66,8 +66,6 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     public int casingTier;
     public byte glassTier = 0;
-    public int casingAmount;
-    protected int energyHatchTier;
     private static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
     private static final String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -107,7 +105,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
                         .atLeast(InputBus, OutputBus, InputHatch, Maintenance, Energy.or(ExoticEnergy))
                         .dot(1)
                         .casingIndex(getCasingTextureID())
-                        .buildAndChain(onElementPass(ComponentAssembler::onCasingAdded, ofBlock(sBlockCasings2, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings2, 0))))
                 .addElement('D', ofBlock(sBlockCasings2, 5))
                 .addElement('E', ofBlock(sBlockCasings2, 6))
                 .addElement('F', ofBlock(sBlockCasings3, 10))
@@ -250,21 +248,6 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         logic.setAmperageOC(useSingleAmp);
     }
 
-    protected long getMachineVoltageLimit() {
-        return GTValues.V[energyHatchTier];
-    }
-
-    protected int checkEnergyHatchTier() {
-        int tier = 0;
-        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        for (MTEHatch tHatch : validMTEList(mExoticEnergyHatches)) {
-            tier = Math.max(tHatch.mTier, tier);
-        }
-        return tier;
-    }
-
     @Override
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
         if (mMachine) return -1;
@@ -280,14 +263,10 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
             true);
     }
 
-    public void onCasingAdded() {
-        casingAmount++;
-    }
-
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         casingTier = -2;
-        casingAmount = 0;
+        mCasing = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -309,7 +288,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return casingAmount >= 50 && mEnergyHatches.size() <= 2 && mMaintenanceHatches.size() == 1;
+        return mCasing >= 50 && mEnergyHatches.size() <= 2 && mMaintenanceHatches.size() == 1;
     }
 
     @Override

@@ -54,9 +54,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements ISurvivalConstructable {
 
-    protected int energyHatchTier;
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(1);
-    private int mCasing;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String CIF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/cold_ice_freeze";
     public static String[][] shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);

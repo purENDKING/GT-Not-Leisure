@@ -48,13 +48,11 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
 
     private HeatingCoilLevel mCoilLevel;
     private byte glassTier = 0;
-    private int energyHatchTier;
     private static IStructureDefinition<PlatinumBasedTreatment> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String PBT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/platinum_based_treatment";
     private static final int CASING_INDEX = TAE.getIndexFromPage(2, 2);
     private static final String[][] shape = StructureUtils.readStructureFromFile(PBT_STRUCTURE_FILE_PATH);
-    private int mCasing;
     private final int horizontalOffSet = 7;
     private final int verticalOffSet = 15;
     private final int depthOffSet = 0;
