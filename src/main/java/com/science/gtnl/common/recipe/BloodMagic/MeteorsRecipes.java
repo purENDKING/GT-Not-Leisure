@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.GTNL.BloodMagic;
+package com.science.gtnl.common.recipe.BloodMagic;
 
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 

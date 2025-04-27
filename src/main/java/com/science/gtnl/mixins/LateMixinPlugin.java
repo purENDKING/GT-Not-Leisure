@@ -24,9 +24,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Gregtech.AssLineRemover.GTRecipeBuilderHook_Mixin");
         mixins.add("Gregtech.AssLineRemover.ForGTPreLoadHook_Mixin");
         mixins.add("Gregtech.AssLineRemover.TTAssLineBuilderHook_Mixin");
-        mixins.add("Gregtech.GTRecipeConstants_Mixin");
         mixins.add("Gregtech.MTETreeFarm_Mixin");
-        mixins.add("TecTech.TTRecipeAdder_Mixin");
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");
         mixins.add("Bartwork.WerkstoffLoader_Mixin");
         mixins.add("Bartwork.Werkstoff_Mixin");
@@ -40,6 +38,11 @@ public class LateMixinPlugin implements ILateMixinLoader {
         if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
             mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
             mixins.add("Gregtech.BehaviourScanner_Mixin");
+        }
+
+        if (MainConfig.enableFixResonaticPatternBug) {
+            mixins.add("Gregtech.GTRecipeConstants_Mixin");
+            mixins.add("TecTech.TTRecipeAdder_Mixin");
         }
 
         return mixins;
