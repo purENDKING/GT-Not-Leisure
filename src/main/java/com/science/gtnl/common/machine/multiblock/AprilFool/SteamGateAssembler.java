@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -39,12 +40,13 @@ import gregtech.common.blocks.BlockCasings2;
 
 public class SteamGateAssembler extends SteamMultiMachineBase<SteamGateAssembler> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_FRONT_STEAM_GATE_ASSEMBLER = "sciencenotleisure:iconsets/OVERLAY_FRONT_STEAM_GATE_ASSEMBLER";
+    public static final String TEXTURE_OVERLAY_FRONT_STEAM_GATE_ASSEMBLER = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_FRONT_STEAM_GATE_ASSEMBLER";
     public static Textures.BlockIcons.CustomIcon OVERLAY_FRONT_STEAM_GATE_ASSEMBLER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_FRONT_STEAM_GATE_ASSEMBLER);
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<SteamGateAssembler> STRUCTURE_DEFINITION = null;
-    private static final String SGA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_gate_assembler"; // 文件路径
+    private static final String SGA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_gate_assembler"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(SGA_STRUCTURE_FILE_PATH);
     public static final int HORIZONTAL_OFF_SET = 10;
     public static final int VERTICAL_OFF_SET = 11;

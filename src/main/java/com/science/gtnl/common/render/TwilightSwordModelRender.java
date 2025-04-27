@@ -1,5 +1,7 @@
 package com.science.gtnl.common.render;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -18,7 +20,8 @@ public class TwilightSwordModelRender implements IItemRenderer {
     private final IModelCustom swordModel;
 
     public TwilightSwordModelRender() {
-        swordModel = AdvancedModelLoader.loadModel(new ResourceLocation("sciencenotleisure:model/TwilightSword.obj"));
+        swordModel = AdvancedModelLoader
+            .loadModel(new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/TwilightSword.obj"));
     }
 
     @Override
@@ -65,7 +68,7 @@ public class TwilightSwordModelRender implements IItemRenderer {
         }
 
         Minecraft.getMinecraft().renderEngine
-            .bindTexture(new ResourceLocation("sciencenotleisure:model/TwilightSword.png"));
+            .bindTexture(new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/TwilightSword.png"));
         swordModel.renderAll();
 
         GL11.glPopMatrix();

@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -40,15 +41,16 @@ import gregtech.api.util.OverclockCalculator;
 
 public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_CARPENTER = "sciencenotleisure:iconsets/OVERLAY_CARPENTER";
-    public static final String TEXTURE_OVERLAY_CARPENTER_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_CARPENTER_ACTIVE";
+    public static final String TEXTURE_OVERLAY_CARPENTER = RESOURCE_ROOT_ID + ":" + "iconsets/OVERLAY_CARPENTER";
+    public static final String TEXTURE_OVERLAY_CARPENTER_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_CARPENTER_ACTIVE";
     public static Textures.BlockIcons.CustomIcon OVERLAY_CARPENTER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_CARPENTER);
     public static Textures.BlockIcons.CustomIcon OVERLAY_CARPENTER_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_CARPENTER_ACTIVE);
     private static IStructureDefinition<SteamCarpenter> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_carpenter";
+    private static final String SC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_carpenter";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SC_STRUCTURE_FILE_PATH);
     private static final int HORIZONTAL_OFF_SET = 1;
     private static final int VERTICAL_OFF_SET = 2;

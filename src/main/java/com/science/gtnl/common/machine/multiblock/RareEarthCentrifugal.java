@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -44,7 +45,7 @@ public class RareEarthCentrifugal extends MultiMachineBase<RareEarthCentrifugal>
     public int mCasing;
     public static IStructureDefinition<RareEarthCentrifugal> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String REC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/rare_earth_centrifugal";
+    public static final String REC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/rare_earth_centrifugal";
     public static String[][] shape = StructureUtils.readStructureFromFile(REC_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;

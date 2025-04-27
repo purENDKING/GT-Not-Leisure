@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items.FuelRod;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +39,7 @@ public class RadioactiveItem extends Item {
 
     @Override
     public Item setTextureName(String textureName) {
-        this.iconString = "sciencenotleisure:" + textureName;
+        this.iconString = RESOURCE_ROOT_ID + ":" + "" + textureName;
         return this;
     }
 

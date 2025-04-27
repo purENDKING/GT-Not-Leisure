@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasingsAdvanced;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.metaItemEqual;
 import static com.science.gtnl.Utils.Utils.setStackSize;
 import static com.science.gtnl.common.machine.OreProcessing.OP_Values.*;
@@ -58,7 +59,8 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<CheatOreProcessingFactory> STRUCTURE_DEFINITION = null;
-    public static final String COPF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/cheat_ore_processing_factory"; // 文件路径
+    public static final String COPF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/cheat_ore_processing_factory"; // 文件路径
     public static String[][] shape = StructureUtils.readStructureFromFile(COPF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 20;
     public final int verticalOffSet = 24;

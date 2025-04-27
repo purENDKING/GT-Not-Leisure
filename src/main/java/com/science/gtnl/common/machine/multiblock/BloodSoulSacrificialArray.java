@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.sBlockCasings8;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.Avaritia;
@@ -68,7 +69,8 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacrificialArray> {
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String BSSA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/blood_soul_sacrificial_array"; // 文件路径
+    public static final String BSSA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/blood_soul_sacrificial_array"; // 文件路径
     public final int horizontalOffSet = 16;
     public final int verticalOffSet = 10;
     public final int depthOffSet = 9;

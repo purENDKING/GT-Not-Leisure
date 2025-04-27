@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -70,11 +71,13 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     protected static final String STRUCTURE_PIECE_LAYER_HINT = "layerHint";
     protected static final String STRUCTURE_PIECE_TOP_HINT = "topHint";
     protected static final String STRUCTURE_PIECE_TOP = "top";
-    public static final String LDB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/base";
-    public static final String LDL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer";
-    public static final String LDLH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/layer_hint";
-    public static final String LDTH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/top_hint";
-    public static final String LDT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_distillery/top";
+    public static final String LDB_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_distillery/base";
+    public static final String LDL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_distillery/layer";
+    public static final String LDLH_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/large_distillery/layer_hint";
+    public static final String LDTH_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/large_distillery/top_hint";
+    public static final String LDT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_distillery/top";
     public static String[][] shape_base = StructureUtils.readStructureFromFile(LDB_STRUCTURE_FILE_PATH);
     public static String[][] shape_layer = StructureUtils.readStructureFromFile(LDL_STRUCTURE_FILE_PATH);
     public static String[][] shape_layer_hint = StructureUtils.readStructureFromFile(LDLH_STRUCTURE_FILE_PATH);

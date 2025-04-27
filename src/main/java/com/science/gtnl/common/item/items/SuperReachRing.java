@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -18,7 +20,7 @@ public class SuperReachRing extends ItemBauble {
 
     public SuperReachRing() {
         super("SuperReachRing");
-        this.setTextureName("sciencenotleisure:SuperReachRing");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "SuperReachRing");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         GTNLItemList.SuperReachRing.set(new ItemStack(this, 1));
     }

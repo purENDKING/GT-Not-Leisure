@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings1;
 import static gregtech.api.enums.HatchElement.*;
@@ -40,7 +41,7 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
     private int mCasing;
     private static IStructureDefinition<BrickedBlastFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String BBF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/bricked_blast_furnace";
+    public static final String BBF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/bricked_blast_furnace";
     public static String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 7;
     public final int verticalOffSet = 12;

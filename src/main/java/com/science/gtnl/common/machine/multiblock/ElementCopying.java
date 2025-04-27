@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -37,7 +38,7 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
     public int mCasing;
     public static IStructureDefinition<ElementCopying> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String EC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/element_copying";
+    public static final String EC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/element_copying";
     public static String[][] shape = StructureUtils.readStructureFromFile(EC_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 7;
     public final int verticalOffSet = 0;

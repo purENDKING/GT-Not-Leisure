@@ -1,5 +1,7 @@
 package com.science.gtnl.common.effect.effects;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -58,7 +60,7 @@ public class AweEffect extends GTNLEffectUtil {
                     player.attackEntityFrom(awe_damage, damage);
                     affectedPlayers.add(player);
 
-                    player.worldObj.playSoundAtEntity(player, "sciencenotleisure:awe.warning2", 1.0F, 1.0F);
+                    player.worldObj.playSoundAtEntity(player, RESOURCE_ROOT_ID + ":" + "awe.warning2", 1.0F, 1.0F);
                 }
 
                 player.capabilities.isFlying = false;

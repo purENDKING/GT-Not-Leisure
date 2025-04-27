@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.sBlockCasings1;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -67,7 +68,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<PrecisionAssembler> STRUCTURE_DEFINITION = null;
-    public static final String LPA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/precise_assembler";
+    public static final String LPA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/precise_assembler";
     private static final int MACHINEMODE_ASSEMBLER = 0;
     private static final int MACHINEMODE_PRECISION = 1;
     private static final int CASING_INDEX = 1540;

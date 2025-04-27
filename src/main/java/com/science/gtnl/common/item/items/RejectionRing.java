@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +25,7 @@ public class RejectionRing extends Item implements IBauble {
     public RejectionRing() {
         this.setMaxStackSize(1);
         this.setUnlocalizedName("RejectionRing");
-        this.setTextureName("sciencenotleisure:RejectionRing");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "RejectionRing");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         GTNLItemList.RejectionRing.set(new ItemStack(this, 1));
     }

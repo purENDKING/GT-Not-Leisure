@@ -1,6 +1,7 @@
 package com.science.gtnl.common.item.ReAvaritia;
 
 import static com.science.gtnl.Mods.Baubles;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
 import java.util.List;
 import java.util.UUID;
@@ -87,7 +88,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
     @SideOnly(Side.CLIENT)
     @Override
     public void playSoundIfReady(EntityPlayer player) {
-        player.worldObj.playSoundAtEntity(player, "sciencenotleisure:totem.enable", 1.0F, 1.0F);
+        player.worldObj.playSoundAtEntity(player, RESOURCE_ROOT_ID + ":" + "totem.enable", 1.0F, 1.0F);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

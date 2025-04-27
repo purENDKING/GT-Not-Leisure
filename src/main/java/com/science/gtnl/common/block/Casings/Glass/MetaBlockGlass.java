@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.Casings.Glass;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.block.Casings.Glass.ItemBlockGlass.MetaBlockSet;
 
@@ -81,10 +82,10 @@ public class MetaBlockGlass extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister reg) {
-        this.blockIcon = reg.registerIcon("sciencenotleisure:MetaBlockGlass/0");
+        this.blockIcon = reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlockGlass/0");
         for (int Meta : MetaBlockSet) {
             BlockStaticDataClientOnly.iconsBlockMapGlass
-                .put(Meta, reg.registerIcon("sciencenotleisure:MetaBlockGlass/" + Meta));
+                .put(Meta, reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlockGlass/" + Meta));
         }
     }
 

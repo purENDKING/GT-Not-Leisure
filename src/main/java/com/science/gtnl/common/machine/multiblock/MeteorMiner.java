@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.LaserBeacon;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.*;
@@ -254,10 +255,14 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         return new MeteorMiner(this.mName);
     }
 
-    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_GLOW = "sciencenotleisure:iconsets/OVERLAY_FRONT_METEOR_MINER_GLOW";
-    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER = "sciencenotleisure:iconsets/OVERLAY_FRONT_METEOR_MINER";
-    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_FRONT_METEOR_MINER_ACTIVE";
-    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_ACTIVE_GLOW = "sciencenotleisure:iconsets/OVERLAY_FRONT_METEOR_MINER_ACTIVE_GLOW";
+    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_GLOW = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_FRONT_METEOR_MINER_GLOW";
+    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_FRONT_METEOR_MINER";
+    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_FRONT_METEOR_MINER_ACTIVE";
+    public static final String TEXTURE_OVERLAY_FRONT_METEOR_MINER_ACTIVE_GLOW = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_FRONT_METEOR_MINER_ACTIVE_GLOW";
 
     public static Textures.BlockIcons.CustomIcon OVERLAY_FRONT_METEOR_MINER_GLOW = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_FRONT_METEOR_MINER_GLOW);

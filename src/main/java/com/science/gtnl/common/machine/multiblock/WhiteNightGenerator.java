@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.EternalSingularity;
@@ -62,7 +63,7 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
     protected boolean wirelessMode = false;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static IStructureDefinition<WhiteNightGenerator> STRUCTURE_DEFINITION = null;
-    public static final String WNG_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/white_night_generator";
+    public static final String WNG_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/white_night_generator";
     public static String[][] shape = StructureUtils.readStructureFromFile(WNG_STRUCTURE_FILE_PATH);
     public static final int CASING_INDEX = ((BlockCasings10) GregTechAPI.sBlockCasings10).getTextureIndex(13);
     public int multiTier = 0;

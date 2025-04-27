@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -57,7 +58,8 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamFormingPress> STRUCTURE_DEFINITION = null;
-    private static final String LSFP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_forming_press"; // 文件路径
+    private static final String LSFP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/large_steam_forming_press"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(LSFP_STRUCTURE_FILE_PATH);
 
     public LargeSteamFormingPress(String aName) {

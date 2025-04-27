@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -56,7 +57,7 @@ public class LargeSteamCentrifuge extends SteamMultiMachineBase<LargeSteamCentri
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamCentrifuge> STRUCTURE_DEFINITION = null;
-    public static final String LSCen_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_centrifuge";
+    public static final String LSCen_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_steam_centrifuge";
     public static String[][] shape = StructureUtils.readStructureFromFile(LSCen_STRUCTURE_FILE_PATH);
 
     public LargeSteamCentrifuge(String aName) {

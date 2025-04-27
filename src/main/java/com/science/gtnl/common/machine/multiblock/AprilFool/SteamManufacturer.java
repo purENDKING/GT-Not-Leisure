@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.InputBus;
@@ -42,15 +43,16 @@ import gregtech.api.util.OverclockCalculator;
 
 public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_MANUFACTURER = "sciencenotleisure:iconsets/OVERLAY_MANUFACTURER";
+    public static final String TEXTURE_OVERLAY_MANUFACTURER = RESOURCE_ROOT_ID + ":" + "iconsets/OVERLAY_MANUFACTURER";
     public static Textures.BlockIcons.CustomIcon OVERLAY_MANUFACTURER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_MANUFACTURER);
-    public static final String TEXTURE_OVERLAY_MANUFACTURER_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_MANUFACTURER_ACTIVE";
+    public static final String TEXTURE_OVERLAY_MANUFACTURER_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_MANUFACTURER_ACTIVE";
     public static Textures.BlockIcons.CustomIcon OVERLAY_MANUFACTURER_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_MANUFACTURER_ACTIVE);
     private static IStructureDefinition<SteamManufacturer> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_manufacturer";
+    private static final String SM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_manufacturer";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SM_STRUCTURE_FILE_PATH);
     private static final int HORIZONTAL_OFF_SET = 3;
     private static final int VERTICAL_OFF_SET = 5;

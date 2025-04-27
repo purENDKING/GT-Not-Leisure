@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofCoil;
@@ -51,7 +52,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<VacuumDryingFurnace> STRUCTURE_DEFINITION = null;
-    public static final String VDF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/vacuum_drying_furnace";
+    public static final String VDF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/vacuum_drying_furnace";
     private static final int MACHINEMODE_VACUUMFURNACE = 0;
     private static final int MACHINEMODE_DEHYDRATOR = 1;
     private static final int MACHINEMODE_COLD_TRAP = 2;

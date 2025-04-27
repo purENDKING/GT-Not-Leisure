@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -41,7 +42,7 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(1);
     private static IStructureDefinition<VacuumFreezer> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String VF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/vacuum_freezer";
+    public static final String VF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/vacuum_freezer";
     public static String[][] shape = StructureUtils.readStructureFromFile(VF_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 3;
     public final int verticalOffSet = 5;

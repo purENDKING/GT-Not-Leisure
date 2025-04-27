@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -51,9 +52,12 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCokeOven>
     implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN = "sciencenotleisure:iconsets/OVERLAY_STEAM_COKE_OVEN";
-    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_STEAM_COKE_OVEN_ACTIVE";
-    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW = "sciencenotleisure:iconsets/OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW";
+    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_STEAM_COKE_OVEN";
+    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_STEAM_COKE_OVEN_ACTIVE";
+    public static final String TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW";
     public static Textures.BlockIcons.CustomIcon OVERLAY_STEAM_COKE_OVEN = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_STEAM_COKE_OVEN);
     public static Textures.BlockIcons.CustomIcon OVERLAY_STEAM_COKE_OVEN_ACTIVE = new Textures.BlockIcons.CustomIcon(
@@ -62,7 +66,7 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
         TEXTURE_OVERLAY_STEAM_COKE_OVEN_ACTIVE_GLOW);
     private static IStructureDefinition<SteamInfernalCokeOven> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SICO = "sciencenotleisure:multiblock/steam_infernal_coke_oven";
+    private static final String SICO = RESOURCE_ROOT_ID + ":" + "multiblock/steam_infernal_coke_oven";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SICO);
     private static final int HORIZONTAL_OFF_SET = 2;
     private static final int VERTICAL_OFF_SET = 3;

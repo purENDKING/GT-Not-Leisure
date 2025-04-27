@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +22,7 @@ public class KFCFamily extends ItemFood {
     public KFCFamily(int hunger, float saturation, boolean isWolfFood) {
         super(hunger, saturation, isWolfFood);
         this.setUnlocalizedName("KFCFamily");
-        this.setTextureName("sciencenotleisure:KFCFamily");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "KFCFamily");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         this.setAlwaysEdible();
         GTNLItemList.KFCFamily.set(new ItemStack(this, 1));

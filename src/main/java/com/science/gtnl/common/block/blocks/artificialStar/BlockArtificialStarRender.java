@@ -1,5 +1,7 @@
 package com.science.gtnl.common.block.blocks.artificialStar;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
@@ -40,7 +42,7 @@ public class BlockArtificialStarRender extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("sciencenotleisure:air");
+        blockIcon = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "air");
     }
 
     @Override

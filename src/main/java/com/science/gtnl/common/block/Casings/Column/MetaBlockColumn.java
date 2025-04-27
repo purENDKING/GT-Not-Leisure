@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.Casings.Column;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.block.Casings.Column.ItemBlockColumn.MetaBlockSet;
 
@@ -61,7 +62,8 @@ public class MetaBlockColumn extends Block {
         for (int meta : MetaBlockSet) {
             IIcon[] textures = new IIcon[TextureName.length];
             for (int i = 0; i < this.TextureName.length; ++i) {
-                textures[i] = reg.registerIcon("sciencenotleisure:MetaBlockColumn/" + meta + "_" + TextureName[i]);
+                textures[i] = reg
+                    .registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlockColumn/" + meta + "_" + TextureName[i]);
             }
             this.TextureMap.put(meta, textures);
         }

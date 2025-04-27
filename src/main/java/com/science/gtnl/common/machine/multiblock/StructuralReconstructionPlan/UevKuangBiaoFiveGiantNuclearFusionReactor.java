@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static gregtech.api.GregTechAPI.sBlockCasings10;
 import static gregtech.api.GregTechAPI.sBlockCasings8;
@@ -63,7 +64,8 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
     public long mEUStore;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<UevKuangBiaoFiveGiantNuclearFusionReactor> STRUCTURE_DEFINITION = null;
-    public static final String KBFR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/kuang_biao_giant_nuclear_fusion_reactor";
+    public static final String KBFR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/kuang_biao_giant_nuclear_fusion_reactor";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(52);
     public final int horizontalOffSet = 19;
     public final int verticalOffSet = 14;

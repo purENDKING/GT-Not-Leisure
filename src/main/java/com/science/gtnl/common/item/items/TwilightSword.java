@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +62,7 @@ public class TwilightSword extends ItemSword implements playSound {
     public TwilightSword() {
         super(TWILIGHT_MATERIALS[0]);
         this.setUnlocalizedName("TwilightSword");
-        this.setTextureName("sciencenotleisure:TwilightSword");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "TwilightSword");
         setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         setMaxDamage(9999);
         MinecraftForge.EVENT_BUS.register(this);
@@ -128,7 +130,7 @@ public class TwilightSword extends ItemSword implements playSound {
     @Override
     public void playSoundIfReady(World world, EntityPlayer player) {
         UUID playerId = player.getUniqueID();
-        world.playSoundAtEntity(player, "sciencenotleisure:twilight.sword.attack", 1, 1);
+        world.playSoundAtEntity(player, RESOURCE_ROOT_ID + ":" + "twilight.sword.attack", 1, 1);
         cooldownMap.put(playerId, 50);
     }
 

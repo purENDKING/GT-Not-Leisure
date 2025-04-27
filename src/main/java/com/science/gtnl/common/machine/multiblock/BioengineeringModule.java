@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
@@ -31,7 +32,7 @@ public class BioengineeringModule extends NanitesBaseModule<BioengineeringModule
     public static final int CASING_INDEX = ((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(7);
     private static IStructureDefinition<BioengineeringModule> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String BM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/bioengineering_module";
+    private static final String BM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/bioengineering_module";
     private static final String[][] shape = StructureUtils.readStructureFromFile(BM_STRUCTURE_FILE_PATH);
 
     public BioengineeringModule(String aName) {

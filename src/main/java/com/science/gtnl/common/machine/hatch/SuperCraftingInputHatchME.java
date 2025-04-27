@@ -1,5 +1,6 @@
 package com.science.gtnl.common.machine.hatch;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_BUFFER;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_BUS;
 
@@ -106,7 +107,7 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
     implements IConfigurationCircuitSupport, IAddGregtechLogo, IAddUIWidgets, IPowerChannelState, ICraftingProvider,
     IGridProxyable, IDualInputHatch, ICustomNameObject, IInterfaceViewable {
 
-    public static final UITexture OVERLAY_BUTTON_X2 = UITexture.fullImage("sciencenotleisure", "gui/overlay_button/x2");
+    public static final UITexture OVERLAY_BUTTON_X2 = UITexture.fullImage(RESOURCE_ROOT_ID, "gui/overlay_button/x2");
 
     public static class PatternSlot implements IDualInputInventory {
 

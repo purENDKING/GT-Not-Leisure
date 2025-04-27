@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_PYROLYSE_OVEN;
@@ -38,7 +39,7 @@ public class LargePyrolyseOven extends GTMMultiMachineBase<LargePyrolyseOven> im
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargePyrolyseOven> STRUCTURE_DEFINITION = null;
-    public static final String LPO_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_pyrolyse_oven";
+    public static final String LPO_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_pyrolyse_oven";
     public static final int CASING_INDEX = ((BlockCasings4) sBlockCasings4).getTextureIndex(1);
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 4;

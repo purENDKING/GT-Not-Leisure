@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -44,7 +45,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
     private int mCasing;
     private static IStructureDefinition<ChemicalPlant> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String CP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/chemical_plant";
+    public static final String CP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/chemical_plant";
     public final int horizontalOffSet = 0;
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;

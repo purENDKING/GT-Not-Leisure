@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -36,7 +37,7 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<DecayHastener> STRUCTURE_DEFINITION = null;
-    public static final String DH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/decay_hastener";
+    public static final String DH_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/decay_hastener";
     protected static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(10);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 11;

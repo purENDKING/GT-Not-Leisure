@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_EMS_GLOW;
@@ -48,7 +49,7 @@ public class LargeElectromagnet extends GTMMultiMachineBase<LargeElectromagnet> 
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeElectromagnet> STRUCTURE_DEFINITION = null;
-    public static final String LEM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_electromagnet";
+    public static final String LEM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_electromagnet";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(5);
     private static final int MACHINEMODE_ELECTROMAGNETIC = 0;
     private static final int MACHINEMODE_POLARIZER = 1;

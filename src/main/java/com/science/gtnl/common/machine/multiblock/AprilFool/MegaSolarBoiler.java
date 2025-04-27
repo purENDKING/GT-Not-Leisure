@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -51,12 +52,12 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_SOLAR_CELL_TOP = "sciencenotleisure:iconsets/SOLAR_CELL_TOP";
+    public static final String TEXTURE_SOLAR_CELL_TOP = RESOURCE_ROOT_ID + ":" + "iconsets/SOLAR_CELL_TOP";
     public static Textures.BlockIcons.CustomIcon SOLAR_CELL_TOP = new Textures.BlockIcons.CustomIcon(
         TEXTURE_SOLAR_CELL_TOP);
     private static IStructureDefinition<MegaSolarBoiler> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String MSB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/mega_solar_boiler";
+    private static final String MSB_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/mega_solar_boiler";
     private static final String[][] shape = StructureUtils.readStructureFromFile(MSB_STRUCTURE_FILE_PATH);
     private static final int HORIZONTAL_OFF_SET = 10;
     private static final int VERTICAL_OFF_SET = 4;

@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -51,7 +52,7 @@ public class LargePacker extends GTMMultiMachineBase<LargePacker> implements ISu
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargePacker> STRUCTURE_DEFINITION = null;
-    public static final String LP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_packer";
+    public static final String LP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_packer";
     public static final int CASING_INDEX = ((BlockCasings4) sBlockCasings4).getTextureIndex(0);
     public final int horizontalOffSet = 1;
     public final int verticalOffSet = 1;

@@ -10,6 +10,8 @@
  */
 package com.science.gtnl.Utils;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
@@ -20,7 +22,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class GTNLEffectUtil extends Potion {
 
-    private static final ResourceLocation resource = new ResourceLocation("sciencenotleisure:textures/gui/potions.png");
+    private static final ResourceLocation resource = new ResourceLocation(
+        RESOURCE_ROOT_ID + ":" + "textures/gui/potions.png");
 
     public GTNLEffectUtil(int id, String name, boolean badEffect, int color, int iconIndex) {
         super(id, badEffect, color);

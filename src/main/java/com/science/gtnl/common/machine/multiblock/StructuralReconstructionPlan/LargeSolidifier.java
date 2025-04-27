@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_CANNER;
@@ -56,7 +57,7 @@ public class LargeSolidifier extends GTMMultiMachineBase<LargeSolidifier> implem
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSolidifier> STRUCTURE_DEFINITION = null;
-    public static final String LS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_solidifier";
+    public static final String LS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_solidifier";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(11);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 2;

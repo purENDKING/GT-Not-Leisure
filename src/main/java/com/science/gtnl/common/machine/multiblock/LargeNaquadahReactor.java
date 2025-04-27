@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings8;
 import static gregtech.api.enums.HatchElement.*;
@@ -62,7 +63,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     private long SetEUt = 0;
     private static IStructureDefinition<LargeNaquadahReactor> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String LNR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_naquadah_reactor";
+    public static final String LNR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_naquadah_reactor";
     public static String[][] shape = StructureUtils.readStructureFromFile(LNR_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 12;
     public final int verticalOffSet = 12;

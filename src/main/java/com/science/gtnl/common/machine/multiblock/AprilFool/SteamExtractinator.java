@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -44,15 +45,17 @@ import gregtech.api.util.OverclockCalculator;
 
 public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_EXTRACTINATOR = "sciencenotleisure:iconsets/OVERLAY_EXTRACTINATOR";
-    public static final String TEXTURE_OVERLAY_EXTRACTINATOR_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_EXTRACTINATOR_ACTIVE";
+    public static final String TEXTURE_OVERLAY_EXTRACTINATOR = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_EXTRACTINATOR";
+    public static final String TEXTURE_OVERLAY_EXTRACTINATOR_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_EXTRACTINATOR_ACTIVE";
     public static Textures.BlockIcons.CustomIcon OVERLAY_EXTRACTINATOR = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_EXTRACTINATOR);
     public static Textures.BlockIcons.CustomIcon OVERLAY_EXTRACTINATOR_ACTIVE = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_EXTRACTINATOR_ACTIVE);
     private static IStructureDefinition<SteamExtractinator> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_extractinator";
+    private static final String SE_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_extractinator";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SE_STRUCTURE_FILE_PATH);
     private static final int HORIZONTAL_OFF_SET = 1;
     private static final int VERTICAL_OFF_SET = 8;

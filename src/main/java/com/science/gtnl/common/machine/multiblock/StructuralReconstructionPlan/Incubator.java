@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -96,7 +97,7 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     private boolean isVisibleFluid = false;
     public static IStructureDefinition<Incubator> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String INCUBATOR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/incubator";
+    public static final String INCUBATOR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/incubator";
     public static String[][] shape = StructureUtils.readStructureFromFile(INCUBATOR_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 4;

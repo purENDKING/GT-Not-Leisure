@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -57,8 +58,10 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_CACTUS_WONDER = "sciencenotleisure:iconsets/OVERLAY_CACTUS_WONDER";
-    public static final String TEXTURE_OVERLAY_CACTUS_WONDER_ACTIVE = "sciencenotleisure:iconsets/OVERLAY_CACTUS_WONDER_ACTIVE";
+    public static final String TEXTURE_OVERLAY_CACTUS_WONDER = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_CACTUS_WONDER";
+    public static final String TEXTURE_OVERLAY_CACTUS_WONDER_ACTIVE = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_CACTUS_WONDER_ACTIVE";
     public static Textures.BlockIcons.CustomIcon OVERLAY_CACTUS_WONDER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_CACTUS_WONDER);
     public static Textures.BlockIcons.CustomIcon OVERLAY_CACTUS_WONDER_ACTIVE = new Textures.BlockIcons.CustomIcon(
@@ -66,7 +69,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
     private static IStructureDefinition<SteamCactusWonder> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String STRUCTURE_PIECE_MAIN_SURVIVAL = "nei";
-    private static final String SCW_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steam_cactus_wonder";
+    private static final String SCW_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_cactus_wonder";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SCW_STRUCTURE_FILE_PATH);
     private static final int HORIZONTAL_OFF_SET = 4;
     private static final int VERTICAL_OFF_SET = 8;

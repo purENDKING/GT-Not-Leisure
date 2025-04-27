@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
@@ -55,7 +56,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
     public int tCountCasing = 0;
     private static IStructureDefinition<CrackerHub> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String CrH_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/cracker_hub"; // 文件路径
+    public static final String CrH_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/cracker_hub"; // 文件路径
     public static String[][] shape = StructureUtils.readStructureFromFile(CrH_STRUCTURE_FILE_PATH);
 
     public CrackerHub(String aName) {

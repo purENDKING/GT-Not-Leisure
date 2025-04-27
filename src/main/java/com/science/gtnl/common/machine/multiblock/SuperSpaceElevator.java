@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.multiBuildPiece;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
@@ -118,8 +119,10 @@ public class SuperSpaceElevator extends TTMultiblockBase
     private static final int STRUCTURE_PIECE_EXTENDED_HOR_OFFSET = 32;
     private static final int STRUCTURE_PIECE_EXTENDED_VERT_OFFSET = -4;
     private static final int STRUCTURE_PIECE_EXTENDED_DEPTH_OFFSET = 28;
-    private static final String SSEB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_base";
-    private static final String SSEE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/super_space_elevator_extended";
+    private static final String SSEB_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/super_space_elevator_base";
+    private static final String SSEE_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/super_space_elevator_extended";
     private static final String[][] shapeBase = StructureUtils.readStructureFromFile(SSEB_STRUCTURE_FILE_PATH);
     private static final String[][] shapeExtended = StructureUtils.readStructureFromFile(SSEE_STRUCTURE_FILE_PATH);
 

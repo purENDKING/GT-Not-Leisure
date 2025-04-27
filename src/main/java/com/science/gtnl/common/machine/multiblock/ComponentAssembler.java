@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -66,7 +67,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     public int casingTier;
     public byte glassTier = 0;
-    private static final String CA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/component_assembler";
+    private static final String CA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/component_assembler";
     private static final String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private final int horizontalOffSet = 3;

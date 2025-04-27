@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.ItemUtils.readItemStackFromNBT;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static gregtech.api.GregTechAPI.*;
@@ -122,7 +123,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     public int mCasing = 0;
     public static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(5);
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String EG_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/eden_garden";
+    public static final String EG_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/eden_garden";
     public static String[][] shape = StructureUtils.readStructureFromFile(EG_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 43;

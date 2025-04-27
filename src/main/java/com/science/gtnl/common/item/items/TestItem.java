@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +23,7 @@ public class TestItem extends Item {
         super();
         this.setUnlocalizedName("TestItem");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
-        this.setTextureName("sciencenotleisure:TestItem");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "TestItem");
         GTNLItemList.TestItem.set(new ItemStack(this, 1));
     }
 

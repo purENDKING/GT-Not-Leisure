@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,15 +32,16 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 
 public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements ISurvivalConstructable {
 
-    public static final String TEXTURE_OVERLAY_STEAMGATE_CONTROLLER = "sciencenotleisure:iconsets/OVERLAY_STEAMGATE_CONTROLLER";
-    public static final String TEXTURE_STEAMGATE_CASING = "sciencenotleisure:MetaCasing/22";
+    public static final String TEXTURE_OVERLAY_STEAMGATE_CONTROLLER = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_STEAMGATE_CONTROLLER";
+    public static final String TEXTURE_STEAMGATE_CASING = RESOURCE_ROOT_ID + ":" + "MetaCasing/22";
     public static Textures.BlockIcons.CustomIcon OVERLAY_STEAMGATE_CONTROLLER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_STEAMGATE_CONTROLLER);
     public static Textures.BlockIcons.CustomIcon STEAMGATE_CASING = new Textures.BlockIcons.CustomIcon(
         TEXTURE_STEAMGATE_CASING);
     private static IStructureDefinition<Steamgate> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String SG_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/steamgate";
+    private static final String SG_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steamgate";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SG_STRUCTURE_FILE_PATH);
 
     private static final int HORIZONTAL_OFF_SET = 4;

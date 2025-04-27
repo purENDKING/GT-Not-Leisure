@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -37,7 +38,7 @@ public class LargeBioLab extends GTMMultiMachineBase<LargeBioLab> implements ISu
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeBioLab> STRUCTURE_DEFINITION = null;
-    private static final String LBL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_bio_lab";
+    private static final String LBL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_bio_lab";
     private final int horizontalOffSet = 3;
     private final int verticalOffSet = 2;
     private final int depthOffSet = 0;

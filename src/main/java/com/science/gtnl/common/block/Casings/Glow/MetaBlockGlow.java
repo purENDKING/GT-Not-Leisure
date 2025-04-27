@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.Casings.Glow;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.block.Casings.Glow.ItemBlockGlow.MetaBlockSet;
 
@@ -80,10 +81,10 @@ public class MetaBlockGlow extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister reg) {
-        this.blockIcon = reg.registerIcon("sciencenotleisure:MetaBlockGlow/0");
+        this.blockIcon = reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlockGlow/0");
         for (int Meta : MetaBlockSet) {
             BlockStaticDataClientOnly.iconsBlockMapGlow
-                .put(Meta, reg.registerIcon("sciencenotleisure:MetaBlockGlow/" + Meta));
+                .put(Meta, reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlockGlow/" + Meta));
         }
     }
 

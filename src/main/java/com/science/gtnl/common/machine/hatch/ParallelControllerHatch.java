@@ -1,5 +1,7 @@
 package com.science.gtnl.common.machine.hatch;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
@@ -24,7 +26,8 @@ import gregtech.api.render.TextureFactory;
 
 public class ParallelControllerHatch extends MTEHatch {
 
-    public static final String TEXTURE_OVERLAY_PARALLEL_CONTROLLER = "sciencenotleisure:iconsets/OVERLAY_PARALLEL_CONTROLLER";
+    public static final String TEXTURE_OVERLAY_PARALLEL_CONTROLLER = RESOURCE_ROOT_ID + ":"
+        + "iconsets/OVERLAY_PARALLEL_CONTROLLER";
     public static Textures.BlockIcons.CustomIcon OVERLAY_PARALLEL_CONTROLLER = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_PARALLEL_CONTROLLER);
     protected int maxParallel;

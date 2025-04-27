@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager.fetchUUID;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class BlockPlayerDoll extends BlockContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        blockIcon = iconRegister.registerIcon("sciencenotleisure:air");
+        blockIcon = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "air");
     }
 
     @Override

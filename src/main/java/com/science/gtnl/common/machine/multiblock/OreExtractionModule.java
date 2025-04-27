@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings4;
@@ -34,7 +35,7 @@ public class OreExtractionModule extends NanitesBaseModule<OreExtractionModule> 
     public static final int CASING_INDEX = ((BlockCasings4) GregTechAPI.sBlockCasings4).getTextureIndex(0);
     private static IStructureDefinition<OreExtractionModule> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String OEM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/ore_extraction_module";
+    private static final String OEM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/ore_extraction_module";
     private static final String[][] shape = StructureUtils.readStructureFromFile(OEM_STRUCTURE_FILE_PATH);
 
     public OreExtractionModule(String aName) {

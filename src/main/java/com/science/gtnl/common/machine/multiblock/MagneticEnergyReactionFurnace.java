@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static goodgenerator.loader.Loaders.FRF_Coil_1;
 import static gregtech.api.GregTechAPI.*;
@@ -68,7 +69,8 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
     public static final int CASING_INDEX = TAE.getIndexFromPage(3, 3);
     private static IStructureDefinition<MagneticEnergyReactionFurnace> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String MERF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/magnetic_energy_reaction_furnace"; // 文件路径
+    private static final String MERF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/magnetic_energy_reaction_furnace"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(MERF_STRUCTURE_FILE_PATH);
 
     public MagneticEnergyReactionFurnace(String aName) {

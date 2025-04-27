@@ -1,5 +1,7 @@
 package com.science.gtnl.common.block.blocks.playerDoll;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,14 +50,16 @@ public class PlayerDollRenderManager {
     public static Set<String> BLACKLISTED_CAPE_URLS = Sets.newConcurrentHashSet();
     public static Map<String, String> UUID_CACHE = new HashMap<>();
     public static Map<String, ResourceLocation> textureCache = new HashMap<>();
-    public static ResourceLocation DEFAULT_SKIN = new ResourceLocation("sciencenotleisure:model/skin.png");
-    public static ResourceLocation DEFAULT_CAPE = new ResourceLocation("sciencenotleisure:model/cape.png");
-    public static ResourceLocation MODEL_STEVE = new ResourceLocation("sciencenotleisure:model/PlayerDollSteve.obj");
-    public static ResourceLocation MODEL_ALEX = new ResourceLocation("sciencenotleisure:model/PlayerDollAlex.obj");
+    public static ResourceLocation DEFAULT_SKIN = new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/skin.png");
+    public static ResourceLocation DEFAULT_CAPE = new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/cape.png");
+    public static ResourceLocation MODEL_STEVE = new ResourceLocation(
+        RESOURCE_ROOT_ID + ":" + "model/PlayerDollSteve.obj");
+    public static ResourceLocation MODEL_ALEX = new ResourceLocation(
+        RESOURCE_ROOT_ID + ":" + "model/PlayerDollAlex.obj");
     public static ResourceLocation MODEL_STEVE_ELYTRA = new ResourceLocation(
-        "sciencenotleisure:model/PlayerDollSteve.obj");
+        RESOURCE_ROOT_ID + ":" + "model/PlayerDollSteve.obj");
     public static ResourceLocation MODEL_ALEX_ELYTRA = new ResourceLocation(
-        "sciencenotleisure:model/PlayerDollAlexElytra.obj");
+        RESOURCE_ROOT_ID + ":" + "model/PlayerDollAlexElytra.obj");
     public static IModelCustom modelSteve = AdvancedModelLoader.loadModel(MODEL_STEVE);
     public static IModelCustom modelAlex = AdvancedModelLoader.loadModel(MODEL_ALEX);
     public static IModelCustom modelSteveElytra = AdvancedModelLoader.loadModel(MODEL_STEVE_ELYTRA);

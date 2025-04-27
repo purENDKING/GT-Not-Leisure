@@ -1,5 +1,6 @@
 package com.science.gtnl.common.block.Casings.Base;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.block.Casings.Base.ItemBlockBase.MetaBlockSet;
 
@@ -77,10 +78,10 @@ public class MetaBlockBase extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister reg) {
-        this.blockIcon = reg.registerIcon("sciencenotleisure:MetaBlocks/0");
+        this.blockIcon = reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlocks/0");
         for (int Meta : MetaBlockSet) {
             BlockStaticDataClientOnly.iconsBlockMapBase
-                .put(Meta, reg.registerIcon("sciencenotleisure:MetaBlocks/" + Meta));
+                .put(Meta, reg.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaBlocks/" + Meta));
         }
     }
 

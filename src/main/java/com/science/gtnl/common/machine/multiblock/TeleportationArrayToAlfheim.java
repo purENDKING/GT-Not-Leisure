@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -58,7 +59,8 @@ import tectech.thing.casing.TTCasingsContainer;
 public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationArrayToAlfheim> {
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String TATA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/teleportation_array_to_alfheim";
+    public static final String TATA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/teleportation_array_to_alfheim";
     public final int horizontalOffSet = 11;
     public final int verticalOffSet = 15;
     public final int depthOffSet = 2;
@@ -177,7 +179,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
         }
         if (shouldExplode) {
             World world = aBaseMetaTileEntity.getWorld();
-            world.playSoundEffect(0, 0, 0, "sciencenotleisure:protal.boom", 1.0F, 1.0F);
+            world.playSoundEffect(0, 0, 0, RESOURCE_ROOT_ID + ":" + "protal.boom", 1.0F, 1.0F);
             triggerExplosion(aBaseMetaTileEntity, Strength);
             return CheckRecipeResultRegistry.SUCCESSFUL;
         }

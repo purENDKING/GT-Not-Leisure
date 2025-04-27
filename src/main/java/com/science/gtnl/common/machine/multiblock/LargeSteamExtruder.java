@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
@@ -58,7 +59,7 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamExtruder> STRUCTURE_DEFINITION = null;
-    private static final String LSE_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_extruder"; // 文件路径
+    private static final String LSE_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_steam_extruder"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(LSE_STRUCTURE_FILE_PATH);
 
     public LargeSteamExtruder(String aName) {

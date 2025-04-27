@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -46,7 +47,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     private static final int RECIPE_DURATION = 128;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<ReactionFurnace> STRUCTURE_DEFINITION = null;
-    public static final String RF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/reaction_furnace";
+    public static final String RF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/reaction_furnace";
     public static final int CASING_INDEX = ((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(7);
     public final int horizontalOffSet = 15;
     public final int verticalOffSet = 18;

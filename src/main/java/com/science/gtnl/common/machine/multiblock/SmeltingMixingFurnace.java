@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings9;
@@ -68,7 +69,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     protected static final int CASING_INDEX = BlockGTCasingsTT.textureOffset;
     private static IStructureDefinition<SmeltingMixingFurnace> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String SMF_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/smelting_mixing_furnace";
+    public static final String SMF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/smelting_mixing_furnace";
     public static String[][] shape = StructureUtils.readStructureFromFile(SMF_STRUCTURE_FILE_PATH);
 
     public SmeltingMixingFurnace(String aName) {

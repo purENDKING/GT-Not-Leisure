@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -36,7 +37,7 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<MolecularTransformer> STRUCTURE_DEFINITION = null;
-    public static final String MT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/molecular_transformer";
+    public static final String MT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/molecular_transformer";
     public static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(0);
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 9;

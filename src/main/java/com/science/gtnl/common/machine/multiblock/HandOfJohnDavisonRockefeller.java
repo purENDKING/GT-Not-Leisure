@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -51,7 +52,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
     public int SpeedCount = 0;
     public static IStructureDefinition<HandOfJohnDavisonRockefeller> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String HODR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/hand_of_john_davison_rockefeller";
+    public static final String HODR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/hand_of_john_davison_rockefeller";
     public static String[][] shape = StructureUtils.readStructureFromFile(HODR_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 20;
     public final int verticalOffSet = 4;

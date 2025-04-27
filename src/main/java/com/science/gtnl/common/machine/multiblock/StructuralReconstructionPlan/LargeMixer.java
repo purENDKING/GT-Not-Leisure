@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
@@ -43,7 +44,7 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeMixer> STRUCTURE_DEFINITION = null;
-    public static final String LIL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_mixer";
+    public static final String LIL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_mixer";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(11);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 4;

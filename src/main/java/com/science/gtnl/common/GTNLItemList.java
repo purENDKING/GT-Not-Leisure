@@ -358,6 +358,7 @@ public enum GTNLItemList implements IItemContainer {
     LargeSteamMixer,
     ElectricBlastFurnace,
 
+    LargeGasCollector,
     LargeBioLab,
     SuperSpaceElevator,
     NanitesIntegratedProcessingCenter,
@@ -436,9 +437,9 @@ public enum GTNLItemList implements IItemContainer {
     LargeSteamCircuitAssembler,
     GenerationEarthEngine,
 
-    LvSteamTurbine,
-    MvSteamTurbine,
-    HvSteamTurbine,
+    SteamTurbineLV,
+    SteamTurbineMV,
+    SteamTurbineHV,
     SteamAssemblerBronze,
     SteamAssemblerSteel,
     ManaTank,
@@ -516,7 +517,20 @@ public enum GTNLItemList implements IItemContainer {
     ManaEnergyHatchLV,
     ManaEnergyHatchHV,
     ManaEnergyHatchIV,
-    ManaEnergyHatchZPM;
+    ManaEnergyHatchZPM,
+    GasCollectorLV,
+    GasCollectorMV,
+    GasCollectorHV,
+    GasCollectorEV,
+    GasCollectorIV,
+    GasCollectorLuV,
+    GasCollectorZPM,
+    GasCollectorUV,
+    GasCollectorUHV,
+    GasCollectorUEV,
+    GasCollectorUIV,
+    GasCollectorUMV,
+    GasCollectorUXV;
 
     public boolean mHasNotBeenSet;
     public boolean mDeprecated;

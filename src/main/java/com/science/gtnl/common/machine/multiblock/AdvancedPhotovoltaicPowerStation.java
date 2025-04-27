@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings4;
 import static gregtech.api.enums.HatchElement.*;
@@ -48,7 +49,8 @@ public class AdvancedPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<
 
     private static IStructureDefinition<AdvancedPhotovoltaicPowerStation> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String PPS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/photovoltaic_power_station";
+    public static final String PPS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/photovoltaic_power_station";
     public static String[][] shape = StructureUtils.readStructureFromFile(PPS_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 4;
     public final int verticalOffSet = 4;

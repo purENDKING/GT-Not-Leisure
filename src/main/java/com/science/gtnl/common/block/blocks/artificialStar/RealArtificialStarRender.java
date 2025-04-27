@@ -1,5 +1,7 @@
 package com.science.gtnl.common.block.blocks.artificialStar;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.List;
 
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -19,9 +21,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RealArtificialStarRender extends TileEntitySpecialRenderer {
 
     public static final ResourceLocation STARTEXTURE1 = new ResourceLocation(
-        "sciencenotleisure:model/ArtificialStarRender.png");
+        RESOURCE_ROOT_ID + ":" + "model/ArtificialStarRender.png");
     public static final IModelCustom MODEL1 = AdvancedModelLoader
-        .loadModel(new ResourceLocation("sciencenotleisure:model/ArtificialStarRender.obj"));
+        .loadModel(new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/ArtificialStarRender.obj"));
 
     public RealArtificialStarRender() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityArtificialStar.class, this);

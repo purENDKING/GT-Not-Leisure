@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -50,7 +51,8 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
     private byte glassTier = 0;
     private static IStructureDefinition<PlatinumBasedTreatment> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String PBT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/platinum_based_treatment";
+    private static final String PBT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/platinum_based_treatment";
     private static final int CASING_INDEX = TAE.getIndexFromPage(2, 2);
     private static final String[][] shape = StructureUtils.readStructureFromFile(PBT_STRUCTURE_FILE_PATH);
     private final int horizontalOffSet = 7;

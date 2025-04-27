@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.GTPlusPlus;
@@ -57,7 +58,8 @@ public class LargeSteamChemicalBath extends SteamMultiMachineBase<LargeSteamChem
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<LargeSteamChemicalBath> STRUCTURE_DEFINITION = null;
-    private static final String LSCB_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_steam_chemical_bath"; // 文件路径
+    private static final String LSCB_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/large_steam_chemical_bath"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(LSCB_STRUCTURE_FILE_PATH);
 
     public LargeSteamChemicalBath(String aName) {

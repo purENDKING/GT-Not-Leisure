@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static goodgenerator.loader.Loaders.FRF_Coil_1;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
@@ -51,7 +52,8 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
 
     private static IStructureDefinition<AdvancedCircuitAssemblyLine> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String ACAL_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/advanced_circuit_assembly_line";
+    private static final String ACAL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/advanced_circuit_assembly_line";
     private static final int CASING_INDEX = BlockGTCasingsTT.textureOffset + 3;
     private static final String[][] shape = StructureUtils.readStructureFromFile(ACAL_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 0;

@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
 import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
@@ -43,7 +44,7 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<AlloyBlastSmelter> STRUCTURE_DEFINITION = null;
-    public static final String ABS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/alloy_blast_smelter";
+    public static final String ABS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/alloy_blast_smelter";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(15);
     private int mHeatingCapacity = 0;
     private HeatingCoilLevel heatLevel;

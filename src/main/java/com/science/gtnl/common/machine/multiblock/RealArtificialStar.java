@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.Mods.TwistSpaceTechnology;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.copyAmount;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
 import static com.science.gtnl.common.GTNLItemList.StellarConstructionFrameMaterial;
@@ -75,7 +76,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
-    public static final String RAS_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/real_artificial_star";
+    public static final String RAS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/real_artificial_star";
     public static String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
     protected static long MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
     protected static long MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;

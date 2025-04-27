@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.ThaumicEnergistics;
@@ -55,7 +56,8 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
     private int mCasing;
     private static IStructureDefinition<IndustrialArcaneAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String LAA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/industrial_arcane_assembler";
+    public static final String LAA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/industrial_arcane_assembler";
     public static String[][] shape = StructureUtils.readStructureFromFile(LAA_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 45;
     public final int verticalOffSet = 84;

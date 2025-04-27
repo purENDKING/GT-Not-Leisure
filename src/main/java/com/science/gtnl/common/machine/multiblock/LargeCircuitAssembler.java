@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -41,7 +42,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
     public byte glassTier = 0;
     public static IStructureDefinition<LargeCircuitAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String LCA_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_circuit_assembler";
+    public static final String LCA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_circuit_assembler";
     public static String[][] shape = StructureUtils.readStructureFromFile(LCA_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 5;
     public final int verticalOffSet = 1;

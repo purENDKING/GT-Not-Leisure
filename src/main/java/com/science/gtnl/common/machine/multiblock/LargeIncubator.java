@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.HatchElement.ExoticEnergy;
@@ -71,7 +72,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     private boolean isVisibleFluid = false;
     public static IStructureDefinition<LargeIncubator> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String L_INCUBATOR_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/large_incubator";
+    public static final String L_INCUBATOR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_incubator";
     public static String[][] shape = StructureUtils.readStructureFromFile(L_INCUBATOR_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 7;

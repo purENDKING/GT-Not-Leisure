@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item.items;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +18,7 @@ public class FakeItemSiren extends Item {
         super();
         this.setUnlocalizedName("FakeItemSiren");
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
-        this.setTextureName("sciencenotleisure:FakeItemSiren");
+        this.setTextureName(RESOURCE_ROOT_ID + ":" + "FakeItemSiren");
         GTNLItemList.FakeItemSiren.set(new ItemStack(this, 1));
     }
 

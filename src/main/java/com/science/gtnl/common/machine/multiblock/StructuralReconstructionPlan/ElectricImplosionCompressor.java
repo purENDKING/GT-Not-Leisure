@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -40,7 +41,8 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<ElectricImplosionCompressor> STRUCTURE_DEFINITION = null;
-    public static final String ELC_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/electric_implosion_compressor";
+    public static final String ELC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/electric_implosion_compressor";
     public static final int CASING_INDEX = ((BlockCasings4) sBlockCasings4).getTextureIndex(0);
     public final int horizontalOffSet = 2;
     public final int verticalOffSet = 7;

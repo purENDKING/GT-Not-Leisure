@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static bartworks.common.loaders.ItemRegistry.bw_realglas2;
 import static com.dreammaster.gthandler.casings.GT_Container_CasingsNH.sBlockCasingsNH;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.Utils.Utils.mergeArray;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
@@ -82,7 +83,8 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
     protected static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(12);
     private static IStructureDefinition<NineIndustrialMultiMachine> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
-    public static final String NIMM_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nine_industrial_multi_machine";
+    public static final String NIMM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/nine_industrial_multi_machine";
     public static String[][] shape = StructureUtils.readStructureFromFile(NIMM_STRUCTURE_FILE_PATH);
     public final int horizontalOffSet = 14;
     public final int verticalOffSet = 27;

@@ -1,5 +1,7 @@
 package com.science.gtnl.common.item;
 
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -96,10 +98,10 @@ public class ItemAdder extends ItemAdder_Basic {
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister) {
         super.registerIcons(iconRegister);
-        this.itemIcon = iconRegister.registerIcon("sciencenotleisure:MetaItem/0");
+        this.itemIcon = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaItem/0");
         for (int meta : MetaSet) {
             ItemStaticDataClientOnly.iconsMap01
-                .put(meta, iconRegister.registerIcon("sciencenotleisure:MetaItem/" + meta));
+                .put(meta, iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaItem/" + meta));
         }
     }
 

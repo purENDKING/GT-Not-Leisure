@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
@@ -90,10 +91,13 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     private static final String STRUCTURE_PIECE_MAIN_RING_ONE_AIR = "main_ring_one_air";
     private static final String STRUCTURE_PIECE_MAIN_RING_TWO_AIR = "main_ring_two_air";
     private static final String STRUCTURE_PIECE_MAIN_RING_THREE_AIR = "main_ring_three_air";
-    private static final String NPP_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant";
-    private static final String NPPRO_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_one";
-    private static final String NPPRT_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_two";
-    private static final String NPPRTh_STRUCTURE_FILE_PATH = "sciencenotleisure:multiblock/nano_phagocytosis_plant_ring_three";
+    private static final String NPP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/nano_phagocytosis_plant";
+    private static final String NPPRO_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/nano_phagocytosis_plant_ring_one";
+    private static final String NPPRT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/nano_phagocytosis_plant_ring_two";
+    private static final String NPPRTh_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/nano_phagocytosis_plant_ring_three";
     private static final String[][] shape = StructureUtils.readStructureFromFile(NPP_STRUCTURE_FILE_PATH);
     public static final String[][] shapeRingOne = StructureUtils.readStructureFromFile(NPPRO_STRUCTURE_FILE_PATH);
     public static final String[][] shapeRingTwo = StructureUtils.readStructureFromFile(NPPRT_STRUCTURE_FILE_PATH);
