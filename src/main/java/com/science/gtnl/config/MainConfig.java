@@ -23,7 +23,6 @@ public class MainConfig {
     public static boolean enableAprilFoolRecipe = false;
     public static boolean enableInfinitySwordBypassMechanism = true;
     public static boolean enableRecipeOutputChance = true;
-    public static boolean enableFixResonaticPatternBug = false;
     public static double recipeOutputChance = 2.5;
 
     private static Configuration config;
@@ -156,13 +155,6 @@ public class MainConfig {
         enableRecipeOutputChance = config
             .get("Enable Output Change Function", "enable", enableRecipeOutputChance, "Enable Chance")
             .getBoolean(enableRecipeOutputChance);
-
-        enableFixResonaticPatternBug = config.get(
-            "Fix assembling line recipes pattern always Use resonatic circuit, but this will cause all of your assembly line recipes data stick expire!",
-            "enable",
-            enableFixResonaticPatternBug,
-            "Enable Bug Fix")
-            .getBoolean(enableFixResonaticPatternBug);
 
         if (config.hasChanged()) {
             config.save();

@@ -14,12 +14,6 @@ public class BasicBlocks {
 
     public static Block BlockArtificialStarRender;
     public static Block LaserBeacon;
-    public static Block BlockSoulFarmland;
-    public static Block NeutronCollector;
-    public static Block DenseNeutronCollector;
-    public static Block DenserNeutronCollector;
-    public static Block DensestNeutronCollector;
-    public static Block ExtremeAnvil;
     public static Block PlayerDoll;
     public static Block BlockNanoPhagocytosisPlantRender;
     public static final Block MetaBlock = new MetaBlockBase("MetaBlock", "MetaBlock");

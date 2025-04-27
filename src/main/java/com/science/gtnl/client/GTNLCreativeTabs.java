@@ -37,14 +37,6 @@ public final class GTNLCreativeTabs {
         }
     };
 
-    public static CreativeTabs ReAvaritia = new CreativeTabs("ReAvaritia") {
-
-        @Override
-        public Item getTabIconItem() {
-            return ItemLoader.InfinityPickaxe;
-        }
-    };
-
     private static final List<ItemStack> GTNotLeisureMachineStack = new ArrayList<>();
 
     public static void addToMachineList(ItemStack stack) {

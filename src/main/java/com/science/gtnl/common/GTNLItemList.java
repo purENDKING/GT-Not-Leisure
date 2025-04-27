@@ -39,12 +39,6 @@ public enum GTNLItemList implements IItemContainer {
     LaserBeacon,
     ArtificialStarRender,
     NanoPhagocytosisPlantRender,
-    SoulFarmland,
-    NeutronCollector,
-    DenseNeutronCollector,
-    DenserNeutronCollector,
-    DensestNeutronCollector,
-    ExtremeAnvil,
     PlayerDoll,
 
     BronzeBrickCasing,
@@ -240,24 +234,6 @@ public enum GTNLItemList implements IItemContainer {
 
     SaplingBrickuoia,
 
-    BlazeAxe,
-    BlazeHoe,
-    BlazePickaxe,
-    BlazeShovel,
-    BlazeSword,
-    CrystalAxe,
-    CrystalHoe,
-    CrystalPickaxe,
-    CrystalShovel,
-    CrystalSword,
-    InfinityAxe,
-    InfinityBucket,
-    InfinityHoe,
-    InfinityPickaxe,
-    InfinityShovel,
-    InfinitySword,
-    InfinityTotem,
-    MatterCluster,
     TwilightSword,
 
     GaiaGlass,
@@ -567,7 +543,7 @@ public enum GTNLItemList implements IItemContainer {
         sanityCheck();
         // if invalid, return a replacements
         if (Utils.isStackInvalid(mStack)) {
-            GTLog.out.println("Object in the ItemList is null at:");
+            GTLog.out.println("Object in the ReAvaItemList is null at:");
             new NullPointerException().printStackTrace(GTLog.out);
             return Utils.copyAmount(Math.toIntExact(aAmount), TestMetaBlock01_0.get(1));
         }

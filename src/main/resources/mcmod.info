@@ -1,7 +1,7 @@
 {
 	"modListVersion": 2,
 	"modList": [{
-		"modid": "ScienceNotLeisure",
+		"modid": "sciencenotleisure",
 		"name": "GTNotLeisure",
 		"description": "GT Not Leisure For GTNH, maybe nerf everything",
 		"version": "${modVersion}",

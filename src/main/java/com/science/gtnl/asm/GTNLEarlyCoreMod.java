@@ -39,7 +39,7 @@ public class GTNLEarlyCoreMod implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     @Override
     public String getMixinConfig() {
-        return "mixins.ScienceNotLeisure.early.json";
+        return "mixins.sciencenotleisure.early.json";
     }
 
     @Override

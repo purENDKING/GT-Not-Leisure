@@ -13,10 +13,10 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
+import com.reavaritia.common.block.ReAvaBasicBlocks;
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import bartworks.system.material.WerkstoffLoader;
@@ -830,7 +830,7 @@ public class AssemblerRecipes implements IRecipePool {
                 ItemList.Emitter_UV.get(4L),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Infinity, 4),
                 GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UV, 4))
-            .itemOutputs(new ItemStack(Item.getItemFromBlock(BasicBlocks.NeutronCollector), 1))
+            .itemOutputs(new ItemStack(ReAvaBasicBlocks.NeutronCollector, 1))
             .specialValue(0)
             .noOptimize()
             .duration(200)

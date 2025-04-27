@@ -1,6 +1,6 @@
 package com.science.gtnl.mixins.late;
 
-import static com.science.gtnl.common.item.ReAvaritia.InfinitySword.cancelDragonArmor;
+import static com.reavaritia.common.item.InfinitySword.cancelDragonArmor;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;

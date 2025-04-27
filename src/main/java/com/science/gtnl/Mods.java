@@ -19,11 +19,12 @@ public enum Mods {
     OTHTechnology(Names.OTHTECHNOLOGY),
     Baubles(Names.BAUBLES),
     Overpowered(Names.OVERPOWERED),
+    ReAvaritia(Names.REAVARITIA),
     GiveCount(Names.GIVECOUNT);
 
     public static class Names {
 
-        public static final String SCIENCENOTLEISURE = "ScienceNotLeisure";
+        public static final String SCIENCENOTLEISURE = "sciencenotleisure";
         public static final String EYEOFHARMONYBUFFER = "eyeofharmonybuffer";
         public static final String PROGRAMMABLEHATCHES = "programmablehatches";
         public static final String TWISTSPACETECHNOLOGY = "TwistSpaceTechnology";
@@ -35,6 +36,7 @@ public enum Mods {
         public static final String BAUBLES = "Baubles";
         public static final String OVERPOWERED = "Overpowered";
         public static final String GIVECOUNT = "givecount";
+        public static final String REAVARITIA = "reavaritia";
     }
 
     public final String ID;

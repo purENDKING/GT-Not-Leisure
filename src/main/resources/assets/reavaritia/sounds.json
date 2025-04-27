@@ -1,0 +1,11 @@
+{
+  "totem.enable": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "totem.enable",
+        "stream": false
+      }
+    ]
+  }
+}

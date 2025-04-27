@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.science.gtnl.common.block.ICasing;
+import com.science.gtnl.common.block.blocks.ICasing;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.util.GTUtility;

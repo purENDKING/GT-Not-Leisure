@@ -1,6 +1,6 @@
 package com.science.gtnl.mixins.late;
 
-import static com.science.gtnl.common.item.ReAvaritia.InfinitySword.cancelBloodSword;
+import static com.reavaritia.common.item.InfinitySword.cancelBloodSword;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

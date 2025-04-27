@@ -31,8 +31,6 @@ public class CommonProxy {
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {}
 
-    public void makeThingsPretty() {}
-
     public void registerMessages() {
         SimpleNetworkWrapper net = ScienceNotLeisure.network;
         net.registerMessage(ConfigSyncMessage.Handler.class, ConfigSyncMessage.class, 0, Side.CLIENT);

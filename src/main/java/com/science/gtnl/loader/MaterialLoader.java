@@ -1,7 +1,7 @@
 package com.science.gtnl.loader;
 
 import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.BlockRegister;
+import com.science.gtnl.common.block.blocks.BlockRegister;
 import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.ItemRegister;
 import com.science.gtnl.common.item.items.MilledOre;

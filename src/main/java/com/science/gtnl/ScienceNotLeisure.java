@@ -14,13 +14,11 @@ import org.apache.logging.log4j.Logger;
 import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.Utils.LoginMessage;
 import com.science.gtnl.Utils.item.GiveCommandMonitor;
+import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
-import com.science.gtnl.common.block.ReAvaritia.GooeyHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandGiveCountBook;
 import com.science.gtnl.common.command.CommandReloadConfig;
-import com.science.gtnl.common.item.ReAvaritia.BlazeSword;
-import com.science.gtnl.common.item.ReAvaritia.ToolEvents;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
@@ -38,6 +36,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
@@ -68,13 +67,13 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
 public class ScienceNotLeisure {
 
-    @Mod.Instance("ScienceNotLeisure")
+    @Mod.Instance(Mods.Names.SCIENCENOTLEISURE)
     public static ScienceNotLeisure instance;
-    public static final String MODID = "ScienceNotLeisure";
+    public static final String MODID = Mods.Names.SCIENCENOTLEISURE;
     public static final String MODNAME = "GTNotLeisure";
     public static final String VERSION = Tags.VERSION;
     public static final String Arthor = "HFstudio";
-    public static final String RESOURCE_ROOT_ID = "sciencenotleisure";
+    public static final String RESOURCE_ROOT_ID = Mods.Names.SCIENCENOTLEISURE;
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     public static SimpleNetworkWrapper network;
@@ -97,12 +96,9 @@ public class ScienceNotLeisure {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        proxy.makeThingsPretty();
         PlayerDollWaila.init();
         MachineLoader.registerGlasses();
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
-        MinecraftForge.EVENT_BUS.register(new ToolEvents());
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new GiveCommandMonitor());
         FMLCommonHandler.instance()
@@ -147,7 +143,6 @@ public class ScienceNotLeisure {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         proxy.registerMessages();
         proxy.preInit(event);
-        BlazeSword.registerEntity();
         MaterialLoader.loadPreInit();
         LanguageManager.init();
 
@@ -157,5 +152,10 @@ public class ScienceNotLeisure {
         FMLCommonHandler.instance()
             .bus()
             .register(new ClientEventHandler());
+    }
+
+    @Mod.EventHandler
+    public void onMissingMappings(FMLMissingMappingsEvent event) {
+        MissingMappingsHandler.handleMappings(event.getAll());
     }
 }

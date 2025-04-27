@@ -15,7 +15,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
 
     @Override
     public String getMixinConfig() {
-        return "mixins.ScienceNotLeisure.late.json";
+        return "mixins.sciencenotleisure.late.json";
     }
 
     @Override
@@ -38,11 +38,6 @@ public class LateMixinPlugin implements ILateMixinLoader {
         if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
             mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
             mixins.add("Gregtech.BehaviourScanner_Mixin");
-        }
-
-        if (MainConfig.enableFixResonaticPatternBug) {
-            mixins.add("Gregtech.GTRecipeConstants_Mixin");
-            mixins.add("TecTech.TTRecipeAdder_Mixin");
         }
 
         return mixins;

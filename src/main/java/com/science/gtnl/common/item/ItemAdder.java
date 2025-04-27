@@ -51,7 +51,7 @@ public class ItemAdder extends ItemAdder_Basic {
 
     /**
      * The method about creating Items with ItemStack form by Meta Item System.
-     * Use this method to create Items at ItemList.
+     * Use this method to create Items at ReAvaItemList.
      *
      * @param aName The name of your creating item.
      * @param aMeta The MetaValue of your creating item.
