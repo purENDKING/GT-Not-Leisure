@@ -18,10 +18,10 @@ import com.science.gtnl.common.recipe.AprilFool.SteamFusionReactorRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamGateAssemblerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamManufacturerRecipes;
 import com.science.gtnl.common.recipe.AprilFool.SteamWoodcutterRecipes;
+import com.science.gtnl.common.recipe.BloodMagic.MeteorsRecipes;
 import com.science.gtnl.common.recipe.GTNL.AdvancedCircuitAssemblyLineRecipes;
 import com.science.gtnl.common.recipe.GTNL.AlchemicChemistrySetRecipes;
 import com.science.gtnl.common.recipe.GTNL.BloodDemonInjectionRecipes;
-import com.science.gtnl.common.recipe.GTNL.BloodMagic.MeteorsRecipes;
 import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
 import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
@@ -29,6 +29,7 @@ import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
 import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
 import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
+import com.science.gtnl.common.recipe.GTNL.GasCollectorRecipes;
 import com.science.gtnl.common.recipe.GTNL.IsaMillRecipes;
 import com.science.gtnl.common.recipe.GTNL.ManaInfusionRecipes;
 import com.science.gtnl.common.recipe.GTNL.MatterFabricatorRecipes;
@@ -108,7 +109,8 @@ public class RecipeLoader {
             new CrackingRecipes(), new DistillationTowerRecipes(), new SpaceMinerRecipes(), new SpaceDrillRecipes(),
             new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
             new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(), new AlchemicChemistrySetRecipes(),
-            new AdvancedCircuitAssemblyLineRecipes(), new FallingTowerRecipes(), new AssemblingLineRecipes() };
+            new AdvancedCircuitAssemblyLineRecipes(), new FallingTowerRecipes(), new AssemblingLineRecipes(),
+            new GasCollectorRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),

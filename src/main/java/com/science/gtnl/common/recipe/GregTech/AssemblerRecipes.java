@@ -2092,5 +2092,22 @@ public class AssemblerRecipes implements IRecipePool {
             .duration(160)
             .eut(TierEU.RECIPE_ZPM)
             .addTo(As);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.GasCollectorMV.get(1),
+                GTNLItemList.GasCollectorHV.get(1),
+                GTNLItemList.GasCollectorEV.get(1),
+                ItemList.Field_Generator_MV.get(2),
+                ItemList.Field_Generator_HV.get(2),
+                ItemList.Field_Generator_EV.get(2),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 2L),
+                GTOreDictUnificator.get(OrePrefixes.pipeHuge, Materials.NiobiumTitanium, 1L),
+                GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.SterlingSilver, 4L))
+            .fluidInputs(Materials.SolderingAlloy.getMolten(1296))
+            .itemOutputs(GTNLItemList.LargeGasCollector.get(1))
+            .duration(400)
+            .eut(TierEU.RECIPE_EV)
+            .addTo(As);
     }
 }

@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -75,6 +77,7 @@ import com.science.gtnl.common.machine.multiblock.LapotronChip;
 import com.science.gtnl.common.machine.multiblock.LargeBioLab;
 import com.science.gtnl.common.machine.multiblock.LargeBrewer;
 import com.science.gtnl.common.machine.multiblock.LargeCircuitAssembler;
+import com.science.gtnl.common.machine.multiblock.LargeGasCollector;
 import com.science.gtnl.common.machine.multiblock.LargeIncubator;
 import com.science.gtnl.common.machine.multiblock.LargeNaquadahReactor;
 import com.science.gtnl.common.machine.multiblock.LargeSteamAlloySmelter;
@@ -169,11 +172,14 @@ import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStatio
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
 import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.util.CrackRecipeAdder;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.SoundResource;
+import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
 import gregtech.api.render.TextureFactory;
 import gregtech.common.covers.CoverConveyor;
 import gregtech.common.covers.CoverFluidRegulator;
@@ -776,6 +782,10 @@ public class MachineLoader {
         GTNLItemList.LargeBioLab.set(new LargeBioLab(21136, "LargeBioLab", TextLocalization.NameLargeBioLab));
         addItemTooltip(GTNLItemList.LargeBioLab.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
+        GTNLItemList.LargeGasCollector
+            .set(new LargeGasCollector(21137, "LargeGasCollector", TextLocalization.NameLargeGasCollector));
+        addItemTooltip(GTNLItemList.LargeGasCollector.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
             new CheatOreProcessingFactory(
@@ -1186,17 +1196,17 @@ public class MachineLoader {
     }
 
     public static void registerBasicMachine() {
-        GTNLItemList.LvSteamTurbine
-            .set(new SteamTurbine(22501, "BasicSteamTurbine", TextLocalization.LvSteamTurbine, 1));
-        addItemTooltip(GTNLItemList.LvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        GTNLItemList.SteamTurbineLV
+            .set(new SteamTurbine(22501, "BasicSteamTurbine", TextLocalization.SteamTurbineLV, 1));
+        addItemTooltip(GTNLItemList.SteamTurbineLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.MvSteamTurbine
-            .set(new SteamTurbine(22502, "AdvancedSteamTurbine", TextLocalization.MvSteamTurbine, 2));
-        addItemTooltip(GTNLItemList.MvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        GTNLItemList.SteamTurbineMV
+            .set(new SteamTurbine(22502, "AdvancedSteamTurbine", TextLocalization.SteamTurbineMV, 2));
+        addItemTooltip(GTNLItemList.SteamTurbineMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.HvSteamTurbine
-            .set(new SteamTurbine(22503, "AdvancedSteamTurbineII", TextLocalization.HvSteamTurbine, 3));
-        addItemTooltip(GTNLItemList.HvSteamTurbine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        GTNLItemList.SteamTurbineHV
+            .set(new SteamTurbine(22503, "AdvancedSteamTurbineII", TextLocalization.SteamTurbineHV, 3));
+        addItemTooltip(GTNLItemList.SteamTurbineHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.SteamAssemblerBronze
             .set(new SteamAssemblerBronze(22504, "SteamAssembler", TextLocalization.SteamAssemblerBronze));
@@ -1240,6 +1250,266 @@ public class MachineLoader {
         GTNLItemList.ManaEnergyHatchZPM
             .set(new ManaEnergyHatch(22547, "ManaEnergyHatchZPM", TextLocalization.ManaEnergyHatchZPM, 7, 16));
         addItemTooltip(GTNLItemList.ManaEnergyHatchZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.GasCollectorLV.set(
+            new MTEBasicMachineWithRecipe(
+                22562,
+                "GasCollectorLV",
+                TextLocalization.GasCollectorLV,
+                1,
+                new String[] { TextLocalization.Tooltip_GasCollector_00,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorMV.set(
+            new MTEBasicMachineWithRecipe(
+                22563,
+                "GasCollectorMV",
+                TextLocalization.GasCollectorMV,
+                2,
+                new String[] { TextLocalization.Tooltip_GasCollector_00,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorHV.set(
+            new MTEBasicMachineWithRecipe(
+                22564,
+                "GasCollectorHV",
+                TextLocalization.GasCollectorHV,
+                3,
+                new String[] { TextLocalization.Tooltip_GasCollector_00,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorEV.set(
+            new MTEBasicMachineWithRecipe(
+                22565,
+                "GasCollectorEV",
+                TextLocalization.GasCollectorEV,
+                4,
+                new String[] { TextLocalization.Tooltip_GasCollector_00,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorIV.set(
+            new MTEBasicMachineWithRecipe(
+                22566,
+                "GasCollectorIV",
+                TextLocalization.GasCollectorIV,
+                5,
+                new String[] { TextLocalization.Tooltip_GasCollector_01,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorLuV.set(
+            new MTEBasicMachineWithRecipe(
+                22567,
+                "GasCollectorLuV",
+                TextLocalization.GasCollectorLuV,
+                6,
+                new String[] { TextLocalization.Tooltip_GasCollector_01,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorZPM.set(
+            new MTEBasicMachineWithRecipe(
+                22568,
+                "GasCollectorZPM",
+                TextLocalization.GasCollectorZPM,
+                7,
+                new String[] { TextLocalization.Tooltip_GasCollector_01,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUV.set(
+            new MTEBasicMachineWithRecipe(
+                22569,
+                "GasCollectorUV",
+                TextLocalization.GasCollectorUV,
+                8,
+                new String[] { TextLocalization.Tooltip_GasCollector_02,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUHV.set(
+            new MTEBasicMachineWithRecipe(
+                22570,
+                "GasCollectorUHV",
+                TextLocalization.GasCollectorUHV,
+                9,
+                new String[] { TextLocalization.Tooltip_GasCollector_02,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUEV.set(
+            new MTEBasicMachineWithRecipe(
+                22571,
+                "GasCollectorUEV",
+                TextLocalization.GasCollectorUEV,
+                10,
+                new String[] { TextLocalization.Tooltip_GasCollector_02,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUIV.set(
+            new MTEBasicMachineWithRecipe(
+                22572,
+                "GasCollectorUIV",
+                TextLocalization.GasCollectorUIV,
+                11,
+                new String[] { TextLocalization.Tooltip_GasCollector_02,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUMV.set(
+            new MTEBasicMachineWithRecipe(
+                22573,
+                "GasCollectorUMV",
+                TextLocalization.GasCollectorUMV,
+                12,
+                new String[] { TextLocalization.Tooltip_GasCollector_02,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
+
+        GTNLItemList.GasCollectorUXV.set(
+            new MTEBasicMachineWithRecipe(
+                22574,
+                "GasCollectorUXV",
+                TextLocalization.GasCollectorUXV,
+                13,
+                new String[] { TextLocalization.Tooltip_GasCollector_03,
+                    StatCollector.translateToLocal("GT5U.MBTT.MachineType") + ": "
+                        + EnumChatFormatting.YELLOW
+                        + TextLocalization.GasCollectorRecipeType
+                        + EnumChatFormatting.RESET },
+                RecipeRegister.GasCollectorRecipes,
+                1,
+                1,
+                true,
+                SoundResource.NONE,
+                MTEBasicMachineWithRecipe.SpecialEffects.NONE,
+                "GAS_COLLECTOR",
+                null).getStackForm(1L));
     }
 
     public static void registerMTEWireAndPipe() {

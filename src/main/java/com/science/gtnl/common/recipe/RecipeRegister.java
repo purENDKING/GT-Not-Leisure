@@ -1,10 +1,13 @@
 package com.science.gtnl.common.recipe;
 
+import static gregtech.api.enums.Mods.GregTech;
+
 import java.util.Collections;
 import java.util.Comparator;
 
 import net.minecraft.util.StatCollector;
 
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.science.gtnl.Utils.recipes.BloodSoulFrontend;
 import com.science.gtnl.Utils.recipes.ExtremeExtremeEntityCrusherFrontend;
 import com.science.gtnl.Utils.recipes.FallingTowerFrontend;
@@ -30,6 +33,9 @@ import gregtech.api.util.GTRecipe;
 import gregtech.nei.formatter.HeatingCoilSpecialValueFormatter;
 
 public class RecipeRegister {
+
+    public static final UITexture PROGRESSBAR_GAS_COLLECTOR = UITexture
+        .fullImage(GregTech.ID, "gui/progressbar/gas_collector");
 
     public static final RecipeMap<RecipeMapBackend> RecombinationFusionReactorRecipes = RecipeMapBuilder
         .of("gtnl.recipe.RecombinationFusionReactorRecipes", RecipeMapBackend::new)
@@ -513,6 +519,16 @@ public class RecipeRegister {
         .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
         .neiHandlerInfo(
             builder -> builder.setDisplayStack(GTNLItemList.LargeBioLab.get(1))
+                .setMaxRecipesPerPage(1))
+        .disableOptimize()
+        .build();
+
+    public static RecipeMap<RecipeMapBackend> GasCollectorRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.GasCollectorRecipes")
+        .maxIO(1, 0, 0, 1)
+        .progressBar(PROGRESSBAR_GAS_COLLECTOR)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.LargeGasCollector.get(1))
                 .setMaxRecipesPerPage(1))
         .disableOptimize()
         .build();

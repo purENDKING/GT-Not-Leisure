@@ -208,13 +208,32 @@ HumongousInputBusMAX=Humongous Input Bus (MAX)
 SuperDataAccessHatch=Super Data Access Hatch
 Tooltip_SuperDataAccessHatch_00=Adds 81 additional slots for placing flash memory
 
-LvSteamTurbine=Basic Steam Turbine
-MvSteamTurbine=Advanced Steam Turbine
-HvSteamTurbine=Advanced Steam Turbine II
+SteamTurbineLV=Basic Steam Turbine
+SteamTurbineMV=Advanced Steam Turbine
+SteamTurbineHV=Advanced Steam Turbine II
 Tooltip_SteamTurbine_00=Converts steam into EU
 Tooltip_SteamTurbine_01=Base efficiency: 2L steam/EU
 Tooltip_SteamTurbine_02=Fuel efficiency: 
 Tooltip_SteamTurbine_03=Fluid capacity: 
+
+GasCollectorLV=Basic Gas Collector
+GasCollectorMV=Advanced Gas Collector
+GasCollectorHV=Advanced Gas Collector II
+GasCollectorEV=Advanced Gas Collector III
+GasCollectorIV=Elite Gas Collector
+GasCollectorLuV=Elite Gas Collector II
+GasCollectorZPM=Elite Gas Collector III
+GasCollectorUV=Ultimate Gas Collector
+GasCollectorUHV=Epic Gas Collector
+GasCollectorUEV=Epic Gas Collector II
+GasCollectorUIV=Epic Gas Collector III
+GasCollectorUMV=Epic Gas Collector IV
+GasCollectorUXV=Legendary Gas Collector
+GasCollectorRecipeType=Gas Collector
+Tooltip_GasCollector_00=Collects various types of gases from the air
+Tooltip_GasCollector_01=Collects various types of gases from the atmosphere
+Tooltip_GasCollector_02=Collects various types of gases from the solar system
+Tooltip_GasCollector_03=Collects various types of gases from the universe
 
 SteamAssemblerBronze=Steam Assembler
 SteamAssemblerSteel=High-Pressure Steam Assembler
@@ -1373,6 +1392,13 @@ LargeSiftingFunnelRecipeType=Sifter
 Tooltip_LargeSiftingFunnel_00=400%% faster than machines of the same voltage
 Tooltip_LargeSiftingFunnel_01=Only requires 60%% of the recipe's power demand
 Tooltip_LargeSiftingFunnel_Casing=Any centrifuge machine block
+
+NameLargeGasCollector=Large Gas Collector
+gtnl.recipe.GasCollectorRecipes=Gas Collector
+LargeGasCollectorRecipeType=Gas Collector
+Tooltip_LargeGasCollector_00=Large version of the Gas Collector
+Tooltip_LargeGasCollector_01=Maximum parallel is 1,000,000
+Tooltip_LargeGasCollector_Casing=Any Solid Steel Machine Casing
 
 NameLargeCutter=Large Cutter
 LargeCutterRecipeType=Cutter / Slicer

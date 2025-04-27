@@ -208,13 +208,32 @@ HumongousInputBusMAX=巨型输入总线 (MAX)
 SuperDataAccessHatch=超级数据访问仓
 Tooltip_SuperDataAccessHatch_00=增加81个额外的格子以放置闪存
 
-LvSteamTurbine=基础蒸汽轮机
-MvSteamTurbine=进阶蒸汽轮机
-HvSteamTurbine=进阶蒸汽轮机 II
+SteamTurbineLV=基础蒸汽轮机
+SteamTurbineMV=进阶蒸汽轮机
+SteamTurbineHV=进阶蒸汽轮机 II
 Tooltip_SteamTurbine_00=将蒸汽转换为EU
 Tooltip_SteamTurbine_01=基础效率: 2L蒸汽/EU
 Tooltip_SteamTurbine_02=燃料效率: 
 Tooltip_SteamTurbine_03=流体容量: 
+
+GasCollectorLV=基础集气室
+GasCollectorMV=进阶集气室
+GasCollectorHV=进阶集气室 II
+GasCollectorEV=进阶集气室 III
+GasCollectorIV=精英集气室
+GasCollectorLuV=精英集气室 II
+GasCollectorZPM=精英集气室 III
+GasCollectorUV=终极集气室
+GasCollectorUHV=史诗集气室
+GasCollectorUEV=史诗集气室 II
+GasCollectorUIV=史诗集气室 III
+GasCollectorUMV=史诗集气室 IV
+GasCollectorUXV=传奇集气室
+GasCollectorRecipeType=集气室
+Tooltip_GasCollector_00=从空气中收集种类各异的气体
+Tooltip_GasCollector_01=从大气层中收集种类各异的气体
+Tooltip_GasCollector_02=从太阳系中收集种类各异的气体
+Tooltip_GasCollector_03=从宇宙中收集种类各异的气体
 
 SteamAssemblerBronze=蒸汽组装机
 SteamAssemblerSteel=高压蒸汽组装机
@@ -1373,6 +1392,13 @@ LargeSiftingFunnelRecipeType=筛选机
 Tooltip_LargeSiftingFunnel_00=比相同电压的机器快400%%
 Tooltip_LargeSiftingFunnel_01=只需要使用配方要求功率的60%%
 Tooltip_LargeSiftingFunnel_Casing=任意离心机机械方块
+
+NameLargeGasCollector=大型集气室
+gtnl.recipe.GasCollectorRecipes=集气室
+LargeGasCollectorRecipeType=集气室
+Tooltip_LargeGasCollector_00=集气室的大型版本
+Tooltip_LargeGasCollector_01=最大并行数为1000000
+Tooltip_LargeGasCollector_Casing=任意脱氧钢机械方块
 
 NameLargeCutter=大型切割机
 LargeCutterRecipeType=切割机 / 切片机

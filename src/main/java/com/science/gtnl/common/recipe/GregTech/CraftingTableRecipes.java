@@ -17,6 +17,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsBotania;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.core.item.ModItems;
@@ -24,6 +25,10 @@ import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 
 public class CraftingTableRecipes implements IRecipePool {
+
+    private static final long bits = GTModHandler.RecipeBits.NOT_REMOVABLE | GTModHandler.RecipeBits.REVERSIBLE
+        | GTModHandler.RecipeBits.BUFFERED;
+    private static final long bitsd = GTModHandler.RecipeBits.DISMANTLEABLE | bits;
 
     @Override
     public void loadRecipes() {
@@ -423,19 +428,19 @@ public class CraftingTableRecipes implements IRecipePool {
                 ItemList.Casing_Gearbox_Bronze.get(1) });
 
         addCraftingRecipe(
-            GTNLItemList.LvSteamTurbine.get(1),
+            GTNLItemList.SteamTurbineLV.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_LV.get(1), 'B', "circuitBasic", 'C',
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Steel, 1L), 'D', ItemList.Hull_LV.get(1), 'E',
                 GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Tin, 1L) });
 
         addCraftingRecipe(
-            GTNLItemList.MvSteamTurbine.get(1),
+            GTNLItemList.SteamTurbineMV.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_MV.get(1), 'B', "circuitGood", 'C',
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Aluminium, 1L), 'D', ItemList.Hull_MV.get(1), 'E',
                 GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.AnnealedCopper, 1L) });
 
         addCraftingRecipe(
-            GTNLItemList.HvSteamTurbine.get(1),
+            GTNLItemList.SteamTurbineHV.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', ItemList.Electric_Pump_HV.get(1), 'B', "circuitAdvanced", 'C',
                 GTOreDictUnificator.get(OrePrefixes.rotor, Materials.StainlessSteel, 1L), 'D', ItemList.Hull_HV.get(1),
                 'E', GTOreDictUnificator.get(OrePrefixes.cableGt16, Materials.Gold, 1L) });
@@ -466,5 +471,109 @@ public class CraftingTableRecipes implements IRecipePool {
                 ItemList.Machine_Multi_BlastFurnace.get(1), 'C', "circuitData", 'D',
                 ItemList.Casing_CleanStainlessSteel.get(1), 'E',
                 GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L) });
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorLV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            1);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorMV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            2);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorHV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            3);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorEV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            4);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorIV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            5);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorLuV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            6);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorZPM.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            7);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            8);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUHV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            9);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUEV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            10);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUIV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            11);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUMV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            12);
+
+        GTModHandler.addMachineCraftingRecipe(
+            GTNLItemList.GasCollectorUXV.get(1),
+            bitsd,
+            new Object[] { "ABA", "CDC", "AEA", 'A', new ItemStack(Blocks.iron_bars, 1), 'B',
+                ItemList.FluidFilter.get(1), 'C', MTEBasicMachineWithRecipe.X.PUMP, 'D',
+                MTEBasicMachineWithRecipe.X.HULL, 'E', MTEBasicMachineWithRecipe.X.CIRCUIT },
+            13);
     }
 }

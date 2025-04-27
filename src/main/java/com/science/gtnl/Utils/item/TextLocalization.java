@@ -273,6 +273,33 @@ public class TextLocalization {
         "Parallel Controller Hatch (MAX)",
         "ParallelControllerHatchMAX");
 
+    public static final String GasCollectorLV = texter("Gas Collector (LV)", "GasCollectorLV");
+    public static final String GasCollectorMV = texter("Gas Collector (MV)", "GasCollectorMV");
+    public static final String GasCollectorHV = texter("Gas Collector (HV)", "GasCollectorHV");
+    public static final String GasCollectorEV = texter("Gas Collector (EV)", "GasCollectorEV");
+    public static final String GasCollectorIV = texter("Gas Collector (IV)", "GasCollectorIV");
+    public static final String GasCollectorLuV = texter("Gas Collector (LuV)", "GasCollectorLuV");
+    public static final String GasCollectorZPM = texter("Gas Collector (ZPM)", "GasCollectorZPM");
+    public static final String GasCollectorUV = texter("Gas Collector (UV)", "GasCollectorUV");
+    public static final String GasCollectorUHV = texter("Gas Collector (UHV)", "GasCollectorUHV");
+    public static final String GasCollectorUEV = texter("Gas Collector (UEV)", "GasCollectorUEV");
+    public static final String GasCollectorUIV = texter("Gas Collector (UIV)", "GasCollectorUIV");
+    public static final String GasCollectorUMV = texter("Gas Collector (UMV)", "GasCollectorUMV");
+    public static final String GasCollectorUXV = texter("Gas Collector (UXV)", "GasCollectorUXV");
+    public static final String GasCollectorRecipeType = texter("Gas Collector", "GasCollectorRecipeType");
+    public static final String Tooltip_GasCollector_00 = texter(
+        "Harvests a variety of gases from the air",
+        "Tooltip_GasCollector_00");
+    public static final String Tooltip_GasCollector_01 = texter(
+        "Harvests a variety of gases from the atmosphere",
+        "Tooltip_GasCollector_01");
+    public static final String Tooltip_GasCollector_02 = texter(
+        "Harvests a variety of gases from the solar system",
+        "Tooltip_GasCollector_02");
+    public static final String Tooltip_GasCollector_03 = texter(
+        "Harvests a variety of gases from the universe",
+        "Tooltip_GasCollector_03");
+
     public static final String NinefoldInputHatchEV = texter("Ninefold Input Hatch (EV)", "NinefoldInputHatchEV");
     public static final String NinefoldInputHatchIV = texter("Ninefold Input Hatch (IV)", "NinefoldInputHatchIV");
     public static final String NinefoldInputHatchLuV = texter("Ninefold Input Hatch (LuV)", "NinefoldInputHatchLuV");
@@ -648,9 +675,9 @@ public class TextLocalization {
         "Ang Bronze Plated Bricks or Solid Steel Machine Casing",
         "Tooltip_LargeSteamCircuitAssembler_Casing");
 
-    public static final String LvSteamTurbine = texter("Basic Steam Turbine", "LvSteamTurbine");
-    public static final String MvSteamTurbine = texter("Advanced Steam Turbine", "MvSteamTurbine");
-    public static final String HvSteamTurbine = texter("Advanced Steam Turbine II", "HvSteamTurbine");
+    public static final String SteamTurbineLV = texter("Basic Steam Turbine", "SteamTurbineLV");
+    public static final String SteamTurbineMV = texter("Advanced Steam Turbine", "SteamTurbineMV");
+    public static final String SteamTurbineHV = texter("Advanced Steam Turbine II", "SteamTurbineHV");
     public static final String Tooltip_SteamTurbine_00 = texter("Converts Steam into EU", "Tooltip_SteamTurbine_00");
     public static final String Tooltip_SteamTurbine_01 = texter(
         "Base rate: 2L of Steam -> 1 EU",
@@ -1492,6 +1519,18 @@ public class TextLocalization {
     public static final String Tooltip_LargeSiftingFunnel_Casing = texter(
         "Any Centrifuge Casing",
         "Tooltip_LargeSiftingFunnel_Casing");
+
+    public static final String NameLargeGasCollector = texter("Large Gas Collector", "NameLargeGasCollector");
+    public static final String LargeGasCollectorRecipeType = texter("Gas Collector", "LargeGasCollectorRecipeType");
+    public static final String Tooltip_LargeGasCollector_00 = texter(
+        "Large version of the Gas Collector",
+        "Tooltip_LargeGasCollector_00");
+    public static final String Tooltip_LargeGasCollector_01 = texter(
+        "Maximum parallel is 1,000,000",
+        "Tooltip_LargeGasCollector_01");
+    public static final String Tooltip_LargeGasCollector_Casing = texter(
+        "Any Solid Steel Machine Casing",
+        "Tooltip_LargeGasCollector_Casing");
 
     public static final String NameLargeExtractor = texter("Large Extractor", "NameLargeExtractor");
     public static final String LargeExtractorRecipeType = texter(
