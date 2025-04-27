@@ -158,7 +158,7 @@ public class MainConfig {
             .getBoolean(enableRecipeOutputChance);
 
         enableFixResonaticPatternBug = config.get(
-            "Fix assembling line recipes pattern always Use resonatic cirucit, but this will cause all of your assembly line recipes data stick to fail!",
+            "Fix assembling line recipes pattern always Use resonatic circuit, but this will cause all of your assembly line recipes data stick expire!",
             "enable",
             enableFixResonaticPatternBug,
             "Enable Bug Fix")
