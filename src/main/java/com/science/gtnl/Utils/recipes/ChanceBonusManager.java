@@ -104,9 +104,9 @@ public class ChanceBonusManager {
                     int baseTier = GTUtility.getTier(recipe.mEUt);
                     double bonusPerTier = MainConfig.recipeOutputChance / 100.0;
 
-                    return getTierChanceBonus(machineTier, baseTier, bonusPerTier);
+                    return getTierChanceBonus(Math.min(16, machineTier), baseTier, bonusPerTier);
                 } catch (Exception e) {
-                    ScienceNotLeisure.LOG.warn("Error reading MTEMultiBlockBase voltage tier", e);
+                    ScienceNotLeisure.LOG.warn("Error reading MTEMultiBlockBase voltage tier:" + mte, e);
                 }
             }
             return null;
