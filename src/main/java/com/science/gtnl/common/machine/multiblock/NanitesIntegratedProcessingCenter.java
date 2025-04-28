@@ -200,9 +200,11 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
                 .addElement('F', ofBlock(MetaCasing, 5))
                 .addElement(
                     'G',
-                    ofCoil(
-                        NanitesIntegratedProcessingCenter::setCoilLevel,
-                        NanitesIntegratedProcessingCenter::getCoilLevel))
+                    withChannel(
+                        "coil",
+                        ofCoil(
+                            NanitesIntegratedProcessingCenter::setCoilLevel,
+                            NanitesIntegratedProcessingCenter::getCoilLevel)))
                 .addElement('H', ofBlock(sBlockCasings4, 10))
                 .addElement('I', ofBlock(sBlockCasings10, 3))
                 .addElement('J', ofBlock(GSBlocks.DysonSwarmBlocks, 9))

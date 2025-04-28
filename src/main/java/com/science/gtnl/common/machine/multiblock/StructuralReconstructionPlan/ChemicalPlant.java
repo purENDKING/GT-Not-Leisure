@@ -138,7 +138,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<ChemicalPlant>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofCoil(ChemicalPlant::setCoilLevel, ChemicalPlant::getCoilLevel))
+                .addElement('A', withChannel("coil", ofCoil(ChemicalPlant::setCoilLevel, ChemicalPlant::getCoilLevel)))
                 .addElement(
                     'B',
                     buildHatchAdder(ChemicalPlant.class).casingIndex(CASING_INDEX)

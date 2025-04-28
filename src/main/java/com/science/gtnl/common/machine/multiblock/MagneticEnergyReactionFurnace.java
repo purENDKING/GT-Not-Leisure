@@ -152,7 +152,11 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
                 .addElement('G', ofBlock(sBlockCasings4, 12))
                 .addElement(
                     'H',
-                    ofCoil(MagneticEnergyReactionFurnace::setCoilLevel, MagneticEnergyReactionFurnace::getCoilLevel))
+                    withChannel(
+                        "coil",
+                        ofCoil(
+                            MagneticEnergyReactionFurnace::setCoilLevel,
+                            MagneticEnergyReactionFurnace::getCoilLevel)))
                 .addElement('I', ofBlock(sBlockCasings9, 13))
                 .addElement('J', ofFrame(Materials.Neutronium))
                 .addElement('K', ofBlock(sBlockMetal5, 1))

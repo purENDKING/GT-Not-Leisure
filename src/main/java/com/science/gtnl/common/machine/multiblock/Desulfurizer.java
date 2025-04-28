@@ -155,7 +155,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
                         .casingIndex(((BlockCasings4) sBlockCasings4).getTextureIndex(1))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 1))))
-                .addElement('F', ofCoil(Desulfurizer::setCoilLevel, Desulfurizer::getCoilLevel))
+                .addElement('F', withChannel("coil", ofCoil(Desulfurizer::setCoilLevel, Desulfurizer::getCoilLevel)))
                 .addElement('G', ofBlock(sBlockCasings6, 2))
                 .build();
         }

@@ -85,7 +85,9 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
                 .addElement('B', ofBlock(sBlockCasings2, 0))
                 .addElement('C', ofBlock(sBlockCasings3, 10))
                 .addElement('D', ofBlock(sBlockCasings4, 1))
-                .addElement('E', ofCoil(ElectricBlastFurnace::setCoilLevel, ElectricBlastFurnace::getCoilLevel))
+                .addElement(
+                    'E',
+                    withChannel("coil", ofCoil(ElectricBlastFurnace::setCoilLevel, ElectricBlastFurnace::getCoilLevel)))
                 .addElement('F', ofFrame(Materials.StainlessSteel))
                 .addElement('G', Muffler.newAny(CASING_INDEX, 1))
                 .build();

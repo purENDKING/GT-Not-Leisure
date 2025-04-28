@@ -150,7 +150,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 0))))
                 .addElement('C', ofBlock(sBlockCasings4, 1))
-                .addElement('D', ofCoil(Digester::setCoilLevel, Digester::getCoilLevel))
+                .addElement('D', withChannel("coil", ofCoil(Digester::setCoilLevel, Digester::getCoilLevel)))
                 .build();
         }
         return STRUCTURE_DEFINITION;

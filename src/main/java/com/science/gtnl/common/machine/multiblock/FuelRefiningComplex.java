@@ -136,7 +136,9 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
                 .addElement('C', ofBlock(sBlockCasings2, 5))
                 .addElement('D', ofBlock(sBlockCasings4, 0))
                 .addElement('E', ofBlock(sBlockCasings4, 1))
-                .addElement('F', ofCoil(FuelRefiningComplex::setCoilLevel, FuelRefiningComplex::getCoilLevel))
+                .addElement(
+                    'F',
+                    withChannel("coil", ofCoil(FuelRefiningComplex::setCoilLevel, FuelRefiningComplex::getCoilLevel)))
                 .addElement('G', ofBlock(sBlockCasings6, 6))
                 .addElement('H', ofBlock(sBlockCasings8, 0))
                 .addElement('I', ofBlock(sBlockCasings8, 1))

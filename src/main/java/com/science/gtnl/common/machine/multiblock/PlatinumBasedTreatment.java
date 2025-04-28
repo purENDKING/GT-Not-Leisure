@@ -93,7 +93,11 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                 .addElement('E', ofBlock(sBlockCasings10, 14))
                 .addElement('F', ofBlock(sBlockCasings4, 0))
                 .addElement('G', ofBlock(sBlockCasings4, 1))
-                .addElement('H', ofCoil(PlatinumBasedTreatment::setCoilLevel, PlatinumBasedTreatment::getCoilLevel))
+                .addElement(
+                    'H',
+                    withChannel(
+                        "coil",
+                        ofCoil(PlatinumBasedTreatment::setCoilLevel, PlatinumBasedTreatment::getCoilLevel)))
                 .addElement('I', ofBlock(sBlockCasings8, 0))
                 .addElement('J', ofBlock(sBlockCasings8, 1))
                 .addElement('K', ofFrame(Materials.BlackSteel))

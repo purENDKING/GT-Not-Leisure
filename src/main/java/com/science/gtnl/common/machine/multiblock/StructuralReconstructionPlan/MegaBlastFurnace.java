@@ -101,7 +101,9 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                 .addElement('I', ofBlock(sBlockCasings3, 15))
                 .addElement('J', ofBlock(sBlockCasings4, 3))
                 .addElement('K', ofBlock(sBlockCasings4, 13))
-                .addElement('L', ofCoil(MegaBlastFurnace::setCoilLevel, MegaBlastFurnace::getCoilLevel))
+                .addElement(
+                    'L',
+                    withChannel("coil", ofCoil(MegaBlastFurnace::setCoilLevel, MegaBlastFurnace::getCoilLevel)))
                 .addElement('M', ofBlock(sBlockCasings8, 1))
                 .addElement('N', ofBlock(sBlockCasings8, 2))
                 .addElement('O', ofBlock(Loaders.FRF_Casings, 0))

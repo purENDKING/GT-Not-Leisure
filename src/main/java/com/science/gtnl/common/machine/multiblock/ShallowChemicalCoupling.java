@@ -94,7 +94,11 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                             Byte.MAX_VALUE,
                             (te, t) -> te.glassTier = t,
                             te -> te.glassTier)))
-                .addElement('C', ofCoil(ShallowChemicalCoupling::setCoilLevel, ShallowChemicalCoupling::getCoilLevel))
+                .addElement(
+                    'C',
+                    withChannel(
+                        "coil",
+                        ofCoil(ShallowChemicalCoupling::setCoilLevel, ShallowChemicalCoupling::getCoilLevel)))
                 .addElement('D', ofBlock(sBlockCasings8, 1))
                 .addElement('E', ofFrame(Materials.NaquadahAlloy))
                 .build();

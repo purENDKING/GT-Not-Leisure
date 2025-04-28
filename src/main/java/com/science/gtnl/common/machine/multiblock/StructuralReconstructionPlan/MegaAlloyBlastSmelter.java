@@ -148,7 +148,11 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
                 .addElement('C', ofBlock(sBlockCasings3, 14))
                 .addElement('D', ofBlock(sBlockCasings3, 15))
                 .addElement('E', ofBlock(sBlockCasings4, 3))
-                .addElement('F', ofCoil(MegaAlloyBlastSmelter::setCoilLevel, MegaAlloyBlastSmelter::getCoilLevel))
+                .addElement(
+                    'F',
+                    withChannel(
+                        "coil",
+                        ofCoil(MegaAlloyBlastSmelter::setCoilLevel, MegaAlloyBlastSmelter::getCoilLevel)))
                 .addElement('G', ofBlock(sBlockCasings8, 4))
                 .addElement('H', ofBlock(blockCasingsMisc, 14))
                 .addElement(

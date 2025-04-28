@@ -1,6 +1,7 @@
 package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
+import static com.science.gtnl.common.GTNLMachineID.EDEN_GARDEN;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
@@ -196,7 +197,7 @@ public class MachineLoader {
 
     public static void loadMachines() {
 
-        GTNLItemList.EdenGarden.set(new EdenGarden(21004, "EdenGarden", TextLocalization.NameEdenGarden));
+        GTNLItemList.EdenGarden.set(new EdenGarden(EDEN_GARDEN.ID, "EdenGarden", TextLocalization.NameEdenGarden));
         addItemTooltip(GTNLItemList.EdenGarden.get(1), AnimatedText.SNL_EDEN_GARDEN);
 
         GTNLItemList.LargeSteamCircuitAssembler.set(

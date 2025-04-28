@@ -127,7 +127,9 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings1, 11))))
                 .addElement('B', ofBlock(sBlockCasings2, 0))
                 .addElement('C', ofBlock(sBlockCasings2, 13))
-                .addElement('D', ofCoil(LargeAlloySmelter::setCoilLevel, LargeAlloySmelter::getCoilLevel))
+                .addElement(
+                    'D',
+                    withChannel("coil", ofCoil(LargeAlloySmelter::setCoilLevel, LargeAlloySmelter::getCoilLevel)))
                 .addElement('E', Muffler.newAny(CASING_INDEX, 1))
                 .build();
         }

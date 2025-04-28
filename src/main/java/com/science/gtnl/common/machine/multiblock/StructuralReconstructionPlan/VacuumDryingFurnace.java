@@ -152,7 +152,9 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<VacuumDryingFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofCoil(VacuumDryingFurnace::setCoilLevel, VacuumDryingFurnace::getCoilLevel))
+                .addElement(
+                    'A',
+                    withChannel("coil", ofCoil(VacuumDryingFurnace::setCoilLevel, VacuumDryingFurnace::getCoilLevel)))
                 .addElement(
                     'B',
                     buildHatchAdder(VacuumDryingFurnace.class)
