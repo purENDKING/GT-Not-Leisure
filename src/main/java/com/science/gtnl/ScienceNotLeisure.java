@@ -13,11 +13,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.science.gtnl.Utils.LanguageManager;
 import com.science.gtnl.Utils.LoginMessage;
-import com.science.gtnl.Utils.item.GiveCommandMonitor;
 import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
-import com.science.gtnl.common.command.CommandGiveCountBook;
 import com.science.gtnl.common.command.CommandReloadConfig;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
@@ -101,7 +99,6 @@ public class ScienceNotLeisure {
         MachineLoader.registerGlasses();
 
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new GiveCommandMonitor());
         FMLCommonHandler.instance()
             .bus()
             .register(new LoginMessage());
@@ -134,7 +131,6 @@ public class ScienceNotLeisure {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
-        event.registerServerCommand(new CommandGiveCountBook());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
