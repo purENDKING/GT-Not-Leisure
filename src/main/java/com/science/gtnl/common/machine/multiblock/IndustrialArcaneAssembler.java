@@ -5,7 +5,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.Mods.ThaumicEnergistics;
+import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -49,11 +49,9 @@ import tectech.thing.block.BlockQuantumGlass;
 public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcaneAssembler>
     implements ISurvivalConstructable {
 
-    public int multiTier = 0;
     protected static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(12);
     private static final int ShapedArcaneCrafting = 0;
     private static final int InfusionCrafting = 1;
-    private int mCasing;
     private static IStructureDefinition<IndustrialArcaneAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String LAA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
@@ -212,22 +210,14 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        this.multiTier = getMultiTier(aStack);
+        ItemStack item = getControllerSlot();
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
-        if (multiTier != 1) {
-            return false;
-        }
-
-        return mCasing >= 3;
-    }
-
-    public int getMultiTier(ItemStack inventory) {
-        if (inventory == null) return 0;
-        return inventory.isItemEqual(GTModHandler.getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 4)) ? 1 : 0;
+        return mCasing >= 3 && item != null
+            && item.isItemEqual(GTModHandler.getModItem(Thaumcraft.ID, "WandCasting", 1, 9000));
     }
 
     @Override
