@@ -20,6 +20,7 @@ public enum Mods {
     Baubles(Names.BAUBLES),
     Overpowered(Names.OVERPOWERED),
     ReAvaritia(Names.REAVARITIA),
+    Sudoku(Names.SUDOKU),
     GiveCount(Names.GIVECOUNT);
 
     public static class Names {
@@ -37,6 +38,7 @@ public enum Mods {
         public static final String OVERPOWERED = "Overpowered";
         public static final String GIVECOUNT = "givecount";
         public static final String REAVARITIA = "reavaritia";
+        public static final String SUDOKU = "sudoku";
     }
 
     public final String ID;

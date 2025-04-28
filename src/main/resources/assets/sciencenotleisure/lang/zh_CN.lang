@@ -381,6 +381,11 @@ tile.RealArtificialStarRender.name=真·湮灭发电机渲染器
 tile.NanoPhagocytosisPlantRenderer.name=纳米吞噬厂渲染器
 tile.BlockSoulFarmland.name=灵魂耕地
 
+tile.lootgames.sdk_activator.name=数独
+tile.lootgames.sdk_master.name=数独
+Info_Sudoku_00=剩余: %d
+Info_Sudoku_01=上次点击时间: %d
+
 tile.playerDoll.name=玩偶
 Tooltip_PlayerDoll_00=设置正版玩家名
 Tooltip_PlayerDoll_01=确认

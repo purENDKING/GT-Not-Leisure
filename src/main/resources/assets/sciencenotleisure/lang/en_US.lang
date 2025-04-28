@@ -381,6 +381,11 @@ tile.RealArtificialStarRender.name=True Annihilation Generator Renderer
 tile.NanoPhagocytosisPlantRenderer.name=Nano Phagocytosis Plant Renderer
 tile.BlockSoulFarmland.name=Soul Farmland
 
+tile.lootgames.sdk_activator.name=Sudoku
+tile.lootgames.sdk_master.name=Sudoku
+Info_Sudoku_00=Renaming: %d
+Info_Sudoku_01=Last Click Time: %d
+
 tile.playerDoll.name=Doll
 Tooltip_PlayerDoll_00=Set the official player name
 Tooltip_PlayerDoll_01=Confirm
