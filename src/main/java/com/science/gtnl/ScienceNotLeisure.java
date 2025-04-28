@@ -28,6 +28,7 @@ import com.science.gtnl.config.ServerEventHandler;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoader;
+import com.science.gtnl.loader.RecipeLoaderRunnable;
 import com.science.gtnl.loader.ScriptLoader;
 
 import appeng.api.AEApi;
@@ -145,6 +146,8 @@ public class ScienceNotLeisure {
         proxy.preInit(event);
         MaterialLoader.loadPreInit();
         LanguageManager.init();
+
+        new RecipeLoaderRunnable().run();
 
         FMLCommonHandler.instance()
             .bus()

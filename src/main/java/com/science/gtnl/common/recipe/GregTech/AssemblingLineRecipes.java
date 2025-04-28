@@ -73,7 +73,7 @@ public class AssemblingLineRecipes implements IRecipePool {
         }
 
         TTRecipeAdder.addResearchableAssemblylineRecipe(
-            ItemList.Circuit_Parts_Chip_Bioware.get(1),
+            ItemList.Circuit_Chip_Biocell.get(1),
             10000000,
             2500,
             (int) TierEU.RECIPE_UV,

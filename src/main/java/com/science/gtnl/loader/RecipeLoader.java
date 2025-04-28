@@ -141,7 +141,6 @@ public class RecipeLoader {
             PortalToAlfheimOreRecipes.addManaInfusionOreRecipes(stone);
         }
 
-        new RecipeLoaderRunnable().run();
         MeteorsRecipes.registerMeteors();
     }
 }
