@@ -42,7 +42,6 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-// after
 @Mod(
     modid = MODID,
     version = Tags.VERSION,
@@ -60,10 +59,9 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
         + "required-after:dreamcraft;"
         + "after:GalacticraftMars;"
         + "required-after:gregtech;"
-        + "after:TwistSpaceTechnology;"
+        + "before:TwistSpaceTechnology;"
         + "after:GalacticraftPlanets",
     acceptedMinecraftVersions = "1.7.10")
-
 public class ScienceNotLeisure {
 
     @Mod.Instance(Mods.Names.SCIENCENOTLEISURE)

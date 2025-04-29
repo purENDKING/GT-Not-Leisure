@@ -1,6 +1,7 @@
 package com.science.gtnl.common.recipe.GregTech;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
+import static gregtech.api.enums.MetaTileEntityIDs.BioLab_LuV;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.*;
@@ -25,6 +26,7 @@ import bartworks.system.material.WerkstoffLoader;
 import ggfab.GGItemList;
 import goodgenerator.items.GGMaterial;
 import goodgenerator.util.ItemRefer;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -1033,15 +1035,13 @@ public class AssemblingLineRecipes implements IRecipePool {
             .addTo(AssemblyLine);
 
         TTRecipeAdder.addResearchableAssemblylineRecipe(
-            getModItem(GregTech.ID, "gt.blockmachines", 1, 12735),
+            new ItemStack(ItemRegistry.cal.getItem(), 1),
             256000,
             1024,
             (int) TierEU.RECIPE_UHV,
             1,
-            new Object[] { getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
-                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
-                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
-                getModItem(GregTech.ID, "gt.blockmachines", 4, 12735),
+            new Object[] { new ItemStack(ItemRegistry.cal.getItem(), 4), new ItemStack(ItemRegistry.cal.getItem(), 4),
+                new ItemStack(ItemRegistry.cal.getItem(), 4), new ItemStack(ItemRegistry.cal.getItem(), 4),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Infinity, 16),
                 new Object[] { OrePrefixes.circuit.get(Materials.UHV), 32 },
                 GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUHV, 64L),
@@ -1077,19 +1077,16 @@ public class AssemblingLineRecipes implements IRecipePool {
             (int) TierEU.RECIPE_ZPM);
 
         TTRecipeAdder.addResearchableAssemblylineRecipe(
-            GTNLItemList.SuperSpaceElevator.get(1),
+            ItemList.SpaceElevatorController.get(1),
             96000,
             256,
             (int) TierEU.RECIPE_UEV,
             1,
-            new Object[] { getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
-                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
-                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
-                getModItem(GregTech.ID, "gt.blockmachines", 3, 14003),
+            new Object[] { ItemList.SpaceElevatorController.get(2), ItemList.SpaceElevatorController.get(2),
+                ItemList.SpaceElevatorController.get(2), ItemList.SpaceElevatorController.get(2),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, MaterialsUEVplus.TranscendentMetal, 32),
                 ItemList.Field_Generator_UEV.get(32), new Object[] { OrePrefixes.circuit.get(Materials.UHV), 64 },
-                new Object[] { OrePrefixes.circuit.get(Materials.UEV), 32 },
-                getModItem(GregTech.ID, "gt.metaitem.03", 64, 32165),
+                new Object[] { OrePrefixes.circuit.get(Materials.UEV), 32 }, ItemList.Circuit_Chip_QPIC.get(64),
                 getModItem(GalacticraftAmunRa.ID, "item.baseItem", 64, 15),
                 GTOreDictUnificator.get(OrePrefixes.screw, Materials.Infinity, 64),
                 new ItemStack(IGBlocks.SpaceElevatorCasing, 64, 0) },
@@ -1118,6 +1115,31 @@ public class AssemblingLineRecipes implements IRecipePool {
             .itemOutputs(ItemList.WormholeGenerator.get(1))
             .eut(TierEU.RECIPE_LuV)
             .duration(120 * SECONDS)
+            .addTo(AssemblyLine);
+
+        GTValues.RA.stdBuilder()
+            .metadata(RESEARCH_ITEM, new ItemStack(GregTechAPI.sBlockMachines, 1, BioLab_LuV.ID))
+            .metadata(RESEARCH_TIME, 4 * HOURS)
+            .itemInputs(
+                new ItemStack(GregTechAPI.sBlockMachines, 8, BioLab_LuV.ID),
+                WerkstoffLoader.LuVTierMaterial.get(OrePrefixes.plateSuperdense, 1),
+                WerkstoffLoader.LuVTierMaterial.get(OrePrefixes.ring, 32),
+                GTOreDictUnificator.get(OrePrefixes.rotor, Materials.Naquadah, 4),
+                ItemList.Field_Generator_LuV.get(2),
+                ItemList.Emitter_LuV.get(4),
+                ItemList.Sensor_LuV.get(4),
+                ItemList.Electric_Pump_LuV.get(16),
+                new Object[] { OrePrefixes.circuit.get(Materials.UV), 4L },
+                new Object[] { OrePrefixes.circuit.get(Materials.ZPM), 8L },
+                new Object[] { OrePrefixes.circuit.get(Materials.LuV), 16L },
+                ItemList.Casing_Vent.get(32))
+            .fluidInputs(
+                MaterialPool.Polyetheretherketone.getMolten(1152),
+                MaterialsAlloy.INDALLOY_140.getFluidStack(1152),
+                Materials.Lubricant.getFluid(32000))
+            .itemOutputs(GTNLItemList.LargeBioLab.get(1))
+            .eut(TierEU.RECIPE_LuV)
+            .duration(60 * SECONDS)
             .addTo(AssemblyLine);
     }
 }

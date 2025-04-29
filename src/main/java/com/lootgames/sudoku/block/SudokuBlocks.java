@@ -9,7 +9,7 @@ import ru.timeconqueror.lootgames.LootGames;
 import ru.timeconqueror.lootgames.api.block.GameMasterBlock;
 import ru.timeconqueror.lootgames.api.block.tile.GameMasterTile;
 
-public class LGBlocks {
+public class SudokuBlocks {
 
     public static final GameMasterBlock SDK_MASTER = gameMaster(SudokuTile::new);
 

@@ -4,6 +4,7 @@ import static com.science.gtnl.Utils.Utils.setStackSize;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.GTNLItemList;
@@ -19,6 +20,7 @@ import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTRecipeConstants;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.item.chemistry.GenericChem;
 import gtPlusPlus.core.material.MaterialMisc;
 import gtPlusPlus.core.material.nuclear.MaterialsFluorides;
 import gtPlusPlus.core.material.nuclear.MaterialsNuclides;
@@ -87,7 +89,7 @@ public class ChemicalRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs()
             .fluidInputs(
-                FluidRegistry.getFluidStack("boricacid", 1000),
+                new FluidStack(GenericChem.BoricAcid, 1000),
                 FluidRegistry.getFluidStack("hydrofluoricacid_gt5u", 4000))
             .itemOutputs()
             .fluidOutputs(
@@ -144,7 +146,7 @@ public class ChemicalRecipes implements IRecipePool {
             .itemOutputs(MaterialPool.Tetraacetyldinitrohexaazaisowurtzitane.get(OrePrefixes.dust, 46))
             .fluidOutputs(
                 FluidRegistry.getFluidStack("hydrofluoricacid_gt5u", 24000),
-                FluidRegistry.getFluidStack("boricacid", 6000),
+                new FluidStack(GenericChem.BoricAcid, 6000),
                 FluidRegistry.getFluidStack("nitricoxide", 4000),
                 MaterialPool.Benzaldehyde.getFluidOrGas(2000))
             .specialValue(0)

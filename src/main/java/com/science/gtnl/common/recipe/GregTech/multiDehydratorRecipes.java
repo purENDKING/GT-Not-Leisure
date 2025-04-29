@@ -1,15 +1,17 @@
 package com.science.gtnl.common.recipe.GregTech;
 
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
 
+import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.core.item.chemistry.GenericChem;
 
 public class multiDehydratorRecipes implements IRecipePool {
 
@@ -21,7 +23,7 @@ public class multiDehydratorRecipes implements IRecipePool {
             .fluidInputs(MaterialPool.SilicaGelBase.getFluidOrGas(1000))
             .itemOutputs(
                 MaterialPool.SilicaGel.get(OrePrefixes.dust, 3),
-                GTModHandler.getModItem("gregtech", "gt.metaitem.01", 2, 2817))
+                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Salt, 2))
             .specialValue(0)
             .noOptimize()
             .duration(130)
@@ -29,7 +31,7 @@ public class multiDehydratorRecipes implements IRecipePool {
             .addTo(mD);
 
         RecipeBuilder.builder()
-            .fluidInputs(FluidRegistry.getFluidStack("boricacid", 2000))
+            .fluidInputs(new FluidStack(GenericChem.BoricAcid, 2000))
             .itemOutputs(MaterialPool.BoronTrioxide.get(OrePrefixes.dust, 5))
             .specialValue(0)
             .noOptimize()

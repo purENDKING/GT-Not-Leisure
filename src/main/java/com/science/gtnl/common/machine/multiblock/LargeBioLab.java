@@ -90,6 +90,7 @@ public class LargeBioLab extends GTMMultiMachineBase<LargeBioLab> implements ISu
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(TextLocalization.LargeBioLabRecipeType)
             .addInfo(TextLocalization.Tooltip_LargeBioLab_00)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)

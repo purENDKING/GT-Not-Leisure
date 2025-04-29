@@ -8,9 +8,10 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.lootgames.sudoku.block.LGBlocks;
+import com.lootgames.sudoku.block.SudokuBlocks;
 import com.lootgames.sudoku.config.LGConfigs;
 import com.lootgames.sudoku.packet.GamePackets;
+import com.lootgames.sudoku.sudoku.GameSudoku;
 import com.lootgames.sudoku.sudoku.SudokuOverlayHandler;
 import com.science.gtnl.Mods;
 
@@ -18,6 +19,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import ru.timeconqueror.lootgames.api.LootGamesAPI;
 
 @Mod(modid = MODID, version = "0.0.1", name = MODNAME, acceptedMinecraftVersions = "1.7.10")
 public class Sudoku {
@@ -39,6 +41,7 @@ public class Sudoku {
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
         GamePackets.register();
+        LootGamesAPI.registerGameGenerator(new GameSudoku.Factory());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -46,7 +49,7 @@ public class Sudoku {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
-        LGBlocks.register();
+        SudokuBlocks.register();
         LGConfigs.load();
         MinecraftForge.EVENT_BUS.register(new SudokuOverlayHandler());
     }

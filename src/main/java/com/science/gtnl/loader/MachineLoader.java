@@ -1,7 +1,7 @@
 package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
-import static com.science.gtnl.common.GTNLMachineID.EDEN_GARDEN;
+import static com.science.gtnl.common.GTNLMachineID.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
@@ -202,24 +202,30 @@ public class MachineLoader {
 
         GTNLItemList.LargeSteamCircuitAssembler.set(
             new LargeSteamCircuitAssembler(
-                21005,
+                LARGE_STEAM_CIRCUIT_ASSEMBLER.ID,
                 "LargeSteamCircuitAssembler",
                 TextLocalization.NameLargeSteamCircuitAssembler));
         addItemTooltip(GTNLItemList.LargeSteamCircuitAssembler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.GenerationEarthEngine
-            .set(new GenerationEarthEngine(21006, "GenerationEarthEngine", TextLocalization.NameGenerationEarthEngine));
+        GTNLItemList.GenerationEarthEngine.set(
+            new GenerationEarthEngine(
+                GENERATION_EARTH_ENGINE.ID,
+                "GenerationEarthEngine",
+                TextLocalization.NameGenerationEarthEngine));
         addItemTooltip(GTNLItemList.GenerationEarthEngine.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.BloodSoulSacrificialArray.set(
             new BloodSoulSacrificialArray(
-                21007,
+                BLOOD_SOUL_SACRIFICIAL_ARRAY.ID,
                 "BloodSoulSacrificialArray",
                 TextLocalization.NameBloodSoulSacrificialArray));
         addItemTooltip(GTNLItemList.BloodSoulSacrificialArray.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
-        GTNLItemList.RealArtificialStar
-            .set(new RealArtificialStar(21008, "RealArtificialStar", TextLocalization.NameRealArtificialStar));
+        GTNLItemList.RealArtificialStar.set(
+            new RealArtificialStar(
+                REAL_ARTIFICIAL_STAR.ID,
+                "RealArtificialStar",
+                TextLocalization.NameRealArtificialStar));
         addItemTooltip(GTNLItemList.RealArtificialStar.get(1), AnimatedText.SNL_SRP);
 
         GTNLItemList.TeleportationArrayToAlfheim.set(

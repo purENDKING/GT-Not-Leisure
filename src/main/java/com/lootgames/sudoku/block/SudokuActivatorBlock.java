@@ -35,7 +35,7 @@ public class SudokuActivatorBlock extends GameBlock {
                     9,
                     1, // y radius of field (thickness)
                     9,
-                    LGBlocks.SDK_MASTER,
+                    SudokuBlocks.SDK_MASTER,
                     player)
                 .forTileIfSucceed(SudokuTile.class, master -> master.init(snapshot))
                 .isSucceed();

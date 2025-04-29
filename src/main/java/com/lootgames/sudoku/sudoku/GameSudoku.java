@@ -11,6 +11,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
+import com.lootgames.sudoku.block.SudokuBlocks;
 import com.lootgames.sudoku.config.ConfigSudoku;
 import com.lootgames.sudoku.config.LGConfigs;
 import com.lootgames.sudoku.packet.SPMSSpawnLevelBeatParticles;
@@ -18,10 +19,12 @@ import com.lootgames.sudoku.packet.SPSSyncBoard;
 import com.lootgames.sudoku.packet.SPSSyncCell;
 
 import ru.timeconqueror.lootgames.api.minigame.BoardLootGame;
+import ru.timeconqueror.lootgames.api.minigame.ILootGameFactory;
 import ru.timeconqueror.lootgames.api.util.Pos2i;
 import ru.timeconqueror.lootgames.api.util.RewardUtils;
 import ru.timeconqueror.lootgames.common.packet.game.SPMSResetFlags;
 import ru.timeconqueror.lootgames.utils.MouseClickType;
+import ru.timeconqueror.lootgames.utils.future.BlockPos;
 import ru.timeconqueror.lootgames.utils.future.WorldExt;
 import ru.timeconqueror.lootgames.utils.sanity.Sounds;
 import ru.timeconqueror.timecore.api.common.tile.SerializationType;
@@ -72,6 +75,15 @@ public class GameSudoku extends BoardLootGame<GameSudoku> {
     @Override
     public int getAllocatedBoardSize() {
         return SudokuBoard.SIZE;
+    }
+
+    public static class Factory implements ILootGameFactory {
+
+        @Override
+        public void genOnPuzzleMasterClick(World world, BlockPos puzzleMasterPos) {
+            BlockPos floorCenterPos = puzzleMasterPos.offset(0, -2, 0);
+            WorldExt.setBlock(world, floorCenterPos, SudokuBlocks.SDK_ACTIVATOR);
+        }
     }
 
     private void onLevelSuccessfullyFinished() {
