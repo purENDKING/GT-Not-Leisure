@@ -12,6 +12,7 @@ Welcome_GTNL_DeleteRecipe=配方移除已启用，注意部分配方可能与原
 Welcome_GTNL_Debug=GTNL Debug模式已启用
 Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
 Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: 
+Welcome_GTNL_reload=配置文件已重新加载!
 
 NameGiveCountBook=§r掏掏不绝宝典 - 
 Info_GiveCountBook_00=玩家: 

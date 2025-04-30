@@ -1,5 +1,6 @@
 package com.science.gtnl.common.command;
 
+import static com.science.gtnl.Utils.Utils.repeatExclamation;
 import static net.minecraft.util.EnumChatFormatting.*;
 
 import net.minecraft.command.CommandBase;
@@ -41,8 +42,11 @@ public class CommandReloadConfig extends CommandBase {
             }
 
             if (MainConfig.enableDeleteRecipe) {
-                sender.addChatMessage(
-                    new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+                for (int i = 1; i <= 5; i++) {
+                    String message = StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe");
+                    String exclamations = repeatExclamation(i);
+                    sender.addChatMessage(new ChatComponentText(YELLOW + message + exclamations));
+                }
             }
 
             if (MainConfig.enableDebugMode) {
@@ -59,6 +63,8 @@ public class CommandReloadConfig extends CommandBase {
                             + MainConfig.recipeOutputChance
                             + "%"));
             }
+
+            sender.addChatMessage(new ChatComponentText(GREEN + StatCollector.translateToLocal("Welcome_GTNL_reload")));
 
         } catch (Exception e) {
             sender.addChatMessage(new ChatComponentText("Error Reload GTNL config: " + e.getMessage()));

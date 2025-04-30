@@ -1,5 +1,6 @@
 package com.science.gtnl.Utils;
 
+import static com.science.gtnl.Utils.Utils.repeatExclamation;
 import static net.minecraft.util.EnumChatFormatting.*;
 
 import net.minecraft.util.ChatComponentText;
@@ -20,26 +21,11 @@ public class LoginMessage {
         event.player.addChatMessage(new ChatComponentText(GREEN + StatCollector.translateToLocal("Welcome_GTNL_02")));
 
         if (MainConfig.enableDeleteRecipe) {
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
-            event.player.addChatMessage(
-                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            for (int i = 1; i <= 5; i++) {
+                String message = StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe");
+                String exclamations = repeatExclamation(i);
+                event.player.addChatMessage(new ChatComponentText(YELLOW + message + exclamations));
+            }
         }
 
         if (MainConfig.enableDebugMode) {

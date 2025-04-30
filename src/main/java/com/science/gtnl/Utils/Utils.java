@@ -386,4 +386,11 @@ public final class Utils {
         return 1 + Math.max(0, (Math.log(voltage) / LOG2) - 5) / 2;
     }
 
+    public static String repeatExclamation(int count) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            sb.append("!");
+        }
+        return sb.toString();
+    }
 }

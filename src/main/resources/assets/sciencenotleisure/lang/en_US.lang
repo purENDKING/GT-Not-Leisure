@@ -12,6 +12,7 @@ Welcome_GTNL_DeleteRecipe=Recipe removal is enabled. Note that some recipes may 
 Welcome_GTNL_Debug=GTNL Debug mode is enabled.
 Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabled。
 Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: 
+Welcome_GTNL_reload=Configuration file has been reloaded!
 
 NameGiveCountBook=Give Count Book - 
 Info_GiveCountBook_00=Player: 
