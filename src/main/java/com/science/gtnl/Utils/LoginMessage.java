@@ -22,6 +22,24 @@ public class LoginMessage {
         if (MainConfig.enableDeleteRecipe) {
             event.player.addChatMessage(
                 new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
+            event.player.addChatMessage(
+                new ChatComponentText(YELLOW + StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe")));
         }
 
         if (MainConfig.enableDebugMode) {

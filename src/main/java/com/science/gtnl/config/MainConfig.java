@@ -25,6 +25,9 @@ public class MainConfig {
     public static boolean enableRecipeOutputChance = true;
     public static double recipeOutputChance = 2.5;
 
+    public static int MeteorMinerMaxBlockPerCycle = 1;
+    public static int MeteorMinerMaxRowPerCycle = 1;
+
     private static Configuration config;
 
     public static void init(File configFile) {
@@ -56,6 +59,30 @@ public class MainConfig {
                 recipeOutputChance,
                 "Change Recipe Item Output, like QFT")
             .getDouble(recipeOutputChance);
+
+        MeteorMinerMaxBlockPerCycle = config
+            .get(
+                "Meteor Miner Max Block Per Cycle",
+                "Count",
+                MeteorMinerMaxBlockPerCycle,
+                "Set the Meteor Miner how many every cycle break a block")
+            .getInt(MeteorMinerMaxBlockPerCycle);
+
+        MeteorMinerMaxRowPerCycle = config
+            .get(
+                "Meteor Miner Max Raw Per Cycle",
+                "Count",
+                MeteorMinerMaxRowPerCycle,
+                "Set the Meteor Miner how many every cycle break row blocks")
+            .getInt(MeteorMinerMaxRowPerCycle);
+
+        EUEveryEnhancementCore = config
+            .get(
+                "EU Every Enhancement Core",
+                "EUEveryEnhancementCore",
+                EUEveryEnhancementCore,
+                "Set the power generation of EU Every Enhancement Core")
+            .getInt(EUEveryEnhancementCore);
 
         EUEveryEnhancementCore = config
             .get(

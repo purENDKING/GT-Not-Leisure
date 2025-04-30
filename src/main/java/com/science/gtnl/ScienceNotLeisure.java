@@ -19,7 +19,6 @@ import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandReloadConfig;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
-import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.config.ClientEventHandler;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.config.ServerEventHandler;
@@ -110,7 +109,6 @@ public class ScienceNotLeisure {
         MaterialLoader.loadPostInit();
         MachineLoader.run();
         MachineLoader.loadMachinesPostInit();
-        MeteorMiner.initializeBlacklist();
 
         AEApi.instance()
             .registries()

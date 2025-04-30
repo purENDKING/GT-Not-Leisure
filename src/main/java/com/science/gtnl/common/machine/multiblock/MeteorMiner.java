@@ -11,11 +11,13 @@ import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,13 +43,13 @@ import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
+import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
+import com.science.gtnl.config.MainConfig;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TAE;
@@ -74,7 +76,6 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings8;
 import gtPlusPlus.core.block.ModBlocks;
 import gtPlusPlus.core.util.minecraft.PlayerUtils;
-import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 
@@ -83,76 +84,44 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String STRUCTURE_PIECE_TIER2 = "tier2";
     public static IStructureDefinition<MeteorMiner> STRUCTURE_DEFINITION = null;
+    public static final String MMO_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/meteor_miner_one";
+    public static final String MMT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/meteor_miner_two";
+    public static String[][] shape_t1 = StructureUtils.readStructureFromFile(MMO_STRUCTURE_FILE_PATH);
+    public static String[][] shape_t2 = StructureUtils.readStructureFromFile(MMT_STRUCTURE_FILE_PATH);
+
     public TileEntityLaserBeacon renderer;
-    public static final int MAX_RADIUS = 34;
-    public int currentRadius = MAX_RADIUS - 2;
-    public int xDrill, yDrill, zDrill;
     public int xStart, yStart, zStart;
     public int fortuneTier = 0;
     public boolean isStartInitialized = false;
     public boolean hasFinished = true;
     public boolean isWaiting = false;
     public boolean isResetting = false;
-    Collection<ItemStack> res = new HashSet<>();
+    public boolean stopAllRendering = false;
+    private final Collection<ItemStack> itemDrop = new ArrayList<>();
     public int multiTier = 0;
+    public int mCasing;
+
+    private final Deque<BlockPos> scanQueue = new ArrayDeque<>();
+    private final Deque<List<BlockPos>> rowQueue = new ArrayDeque<>();
+
+    private static final int SCAN_WIDTH = 60;
+    private static final int SCAN_HEIGHT = 150;
+    private static final int SCAN_DEPTH = 60;
+    private static final int MAX_BLOCKS_PER_CYCLE = MainConfig.MeteorMinerMaxBlockPerCycle;
+    private static final int MAX_ROWS_PER_CYCLE = MainConfig.MeteorMinerMaxRowPerCycle;
 
     @Override
     public IStructureDefinition<MeteorMiner> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<MeteorMiner>builder()
-                // spotless:off
-                .addShape(STRUCTURE_PIECE_MAIN, (transpose(new String[][] {
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         D         ","        D D        ","         D         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","         D         ","        D D        ","       D   D       ","        D D        ","         D         ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","         D         ","       D   D       ","                   ","      D     D      ","                   ","       D   D       ","         D         ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","         D         ","      D     D      ","                   ","                   ","     D   G   D     ","                   ","                   ","      D     D      ","         D         ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","         D         ","     D       D     ","                   ","                   ","    D              ","    D    B    D    ","                   ","                   ","                   ","     D       D     ","         D         ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","         D         ","    D         D    ","                   ","                   ","                   ","         C         ","   D    CBC    D   ","         C         ","                   ","                   ","                   ","    D         D    ","         D         ","                   ","                   ","                   "},
-                            {"                   ","                   ","    DDDDDDDDDDD    ","   DDFFFFFFFFFDD   ","  DDFF       FFDD  ","  DFF         FFD  ","  DF           FD  ","  DF           FD  ","  DF     C     FD  ","  DF    CBC    FD  ","  DF     C     FD  ","  DF           FD  ","  DF           FD  ","  DFF         FFD  ","  DDFF       FFDD  ","   DDFFFFFFFFFDD   ","    DDDDDDDDDDD    ","                   ","                   "},
-                            {"                   ","                   ","                   ","         D         ","      FFFFFFF      ","     FF     FF     ","    FF       FF    ","    F         F    ","    F    C    F    ","   DF   CBC   FD   ","    F    C    F    ","    F         F    ","    FF       FF    ","     FF     FF     ","      FFFFFFF      ","         D         ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","         D         ","       FFFFF       ","      FF   FF      ","     FF  C  FF     ","     F  CCC  F     ","    DF CCBCC FD    ","     F  CCC  F     ","     FF  C  FF     ","      FF   FF      ","       FFFFF       ","         D         ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","         D         ","        FFF        ","       FFFFF       ","      FFFFFFF      ","     DFFFBFFFD     ","      FFFFFFF      ","       FFFFF       ","        FFF        ","         D         ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","         D         ","        DDD        ","       DEAED       ","      DDABADD      ","       DEAED       ","        DDD        ","         D         ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","        EAE        ","        ABA        ","        EAE        ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","        EAE        ","        ABA        ","        EAE        ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","        H~H        ","       HEEEH       ","       HEBEH       ","       HEEEH       ","        HHH        ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","        EIE        ","       EEEEE       ","      EEBBBEE      ","      EEBBBEE      ","      EEBBBEE      ","       EEEEE       ","        EEE        ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","        E E        ","       E   E       ","      A     A      ","     E       E     ","    E         E    ","                   ","    E         E    ","     E       E     ","      A     A      ","       E   E       ","        E E        ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","        E E        ","                   ","       E   E       ","      A     A      ","     E       E     ","   E           E   ","                   ","   E           E   ","     E       E     ","      A     A      ","       E   E       ","                   ","        E E        ","                   ","                   ","                   "},
-                            {"                   ","                   ","        E E        ","                   ","                   ","       E   E       ","      A     A      ","     E       E     ","  E             E  ","                   ","  E             E  ","     E       E     ","      A     A      ","       E   E       ","                   ","                   ","        E E        ","                   ","                   "},
-                            {"         E         ","        E E        ","       E   E       ","       E   E       ","       E   E       ","      E     E      ","     EE     EE     ","  EEE         EEE  "," E               E ","E                 E"," E               E ","  EEE         EEE  ","     EE     EE     ","      E     E      ","       E   E       ","       E   E       ","       E   E       ","        E E        ","         E         "}
-                        })))
-                .addShape(STRUCTURE_PIECE_TIER2, (transpose(new String[][] {
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         G         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         B         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         B         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        eBe        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        eBe        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        eBe        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        ece        ","       ecBce       ","        ece        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        ece        ","       ecBce       ","        ece        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        ccc        ","       ecBce       ","        ccc        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","         e         ","         e         ","        c c        ","      ee B ee      ","        c c        ","         e         ","         e         ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","         e         ","        heh        ","       hc ch       ","      ee B ee      ","       hc ch       ","        heh        ","         e         ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","                   ","        heh        ","       h c h       ","      h c c h      ","      ec B ce      ","      h c c h      ","       h c h       ","        heh        ","                   ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","         e         ","        AeA        ","       e c e       ","      A     A      ","     eec B cee     ","      A     A      ","       e c e       ","        AeA        ","         e         ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","                   ","         e         ","        A A        ","       e c e       ","      A     A      ","     e c B c e     ","      A     A      ","       e c e       ","        A A        ","         e         ","                   ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","                   ","         e         ","         e         ","       eA Ae       ","      ee   ee      ","      A     A      ","    ee       ee    ","      A     A      ","      ee   ee      ","       eA Ae       ","         e         ","         e         ","                   ","                   ","                   ","                   "},
-                            {"                   ","                   ","                   ","         ~         ","       dd dd       ","      d     d      ","     d  fff  d     ","    d  f   f  d    ","    d f     f d    ","   e  f     f  e   ","    d f     f d    ","    d  f   f  d    ","     d  fff  d     ","      d     d      ","       dd dd       ","         e         ","                   ","                   ","                   "},
-                            {"                   ","                   ","         d         ","        e e        ","                   ","                   ","                   ","                   ","   e           e   ","  d             d  ","   e           e   ","                   ","                   ","                   ","                   ","        e e        ","         d         ","                   ","                   "},
-                            {"                   ","         d         ","        d d        ","      ggg ggg      ","     gg     gg     ","    gg       gg    ","   gg         gg   ","   g           g   ","  dg           gd  "," d               d ","  dg           gd  ","   g           g   ","   gg         gg   ","    gg       gg    ","     gg     gg     ","      ggg ggg      ","        d d        ","         d         ","                   "},
-                            {"         d         ","        j j        ","       d   d       ","                   ","                   ","                   ","                   ","  d             d  "," d               d ","d                 d"," d               d ","  d             d  ","                   ","                   ","                   ","                   ","       d   d       ","        d d        ","         d         "},
-                            {"         d         ","        j j        ","       d   d       ","                   ","                   ","                   ","                   ","  d             d  "," d               d ","d                 d"," d               d ","  d             d  ","                   ","                   ","                   ","                   ","       d   d       ","        d d        ","         d         "},
-                            {"         d         ","        j j        ","                   ","                   ","                   ","                   ","                   ","                   "," d               d ","d                 d"," d               d ","                   ","                   ","                   ","                   ","                   ","                   ","        d d        ","         d         "},
-                            {"         d         ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","d                 d","                   ","                   ","                   ","                   ","                   ","                   ","                   ","                   ","         d         "}
-                        })))
-                // spotless:on
+                .addShape(STRUCTURE_PIECE_MAIN, transpose(shape_t1))
+                .addShape(STRUCTURE_PIECE_TIER2, transpose(shape_t2))
                 .addElement('A', Glasses.chainAllGlasses())
-                .addElement('B', ofBlock(GregTechAPI.sBlockCasings1, 15)) // Superconducting Coil
-                .addElement('C', ofBlock(GregTechAPI.sBlockCasings5, 5)) // Naquadah Coil
+                .addElement('B', ofBlock(GregTechAPI.sBlockCasings1, 15))
+                .addElement('C', ofBlock(GregTechAPI.sBlockCasings5, 5))
                 .addElement('D', ofFrame(Materials.StainlessSteel))
-                .addElement('E', ofBlock(ModBlocks.blockSpecialMultiCasings, 6)) // Structural Solar Casings
-                .addElement('F', ofBlock(ModBlocks.blockSpecialMultiCasings, 8)) // Thermally Insulated Casing
+                .addElement('E', ofBlock(ModBlocks.blockSpecialMultiCasings, 6))
+                .addElement('F', ofBlock(ModBlocks.blockSpecialMultiCasings, 8))
                 .addElement('G', ofBlock(LaserBeacon, 0))
                 .addElement(
                     'H',
@@ -169,17 +138,17 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
                         .dot(2)
                         .buildAndChain(
                             onElementPass(MeteorMiner::onCasingAdded, ofBlock(ModBlocks.blockSpecialMultiCasings, 6))))
-                .addElement('c', ofBlock(GregTechAPI.sBlockCasings4, 7)) // Fusion Coil Block
-                .addElement('d', ofBlock(GregTechAPI.sBlockCasings8, 2)) // Mining Neutronium Casing
-                .addElement('e', ofBlock(GregTechAPI.sBlockCasings8, 3)) // Mining Black Plutonium Casing
-                .addElement('f', ofBlock(GregTechAPI.sBlockCasings9, 11)) // Heat-Resistant Trinium Plated Casing
-                .addElement('g', ofFrame(Materials.Neutronium)) // Neutronium Frame
-                .addElement('h', ofFrame(Materials.BlackPlutonium)) // Black Plutonium Frame
+                .addElement('c', ofBlock(GregTechAPI.sBlockCasings4, 7))
+                .addElement('d', ofBlock(GregTechAPI.sBlockCasings8, 2))
+                .addElement('e', ofBlock(GregTechAPI.sBlockCasings8, 3))
+                .addElement('f', ofBlock(GregTechAPI.sBlockCasings9, 11))
+                .addElement('g', ofFrame(Materials.Neutronium))
+                .addElement('h', ofFrame(Materials.BlackPlutonium))
                 .addElement(
                     'j',
                     buildHatchAdder(MeteorMiner.class).atLeast(OutputBus, Energy, Maintenance)
                         .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(2))
-                        .dot(3)
+                        .dot(1)
                         .buildAndChain(
                             onElementPass(MeteorMiner::onCasingAdded, ofBlock(GregTechAPI.sBlockCasings8, 2))))
                 .build();
@@ -201,13 +170,10 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         super(aName);
     }
 
-    public int aCasingAmount;
-
     @Override
     public void clearHatches() {
         super.clearHatches();
-
-        aCasingAmount = 0;
+        mCasing = 0;
     }
 
     @Override
@@ -223,7 +189,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     }
 
     public void onCasingAdded() {
-        aCasingAmount++;
+        mCasing++;
     }
 
     public boolean addInjector(IGregTechTileEntity aBaseMetaTileEntity, int aBaseCasingIndex) {
@@ -359,8 +325,6 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         return false;
     }
 
-    public boolean stopAllRendering = false;
-
     @Override
     public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
         stopAllRendering = !stopAllRendering;
@@ -377,7 +341,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        aCasingAmount = 0;
+        mCasing = 0;
         this.multiTier = 0;
         if (aStack != null) {
             if (checkPiece(STRUCTURE_PIECE_MAIN, 9, 13, 7)) this.multiTier = getMultiTier(aStack);
@@ -410,11 +374,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         return false;
     }
 
-    public int getLaserToEndHeight() {
-        return (this.multiTier == 1 ? 3 : 0);
-    }
-
-    private void setFortuneTier() {
+    public void setFortuneTier() {
         this.fortuneTier = 0;
 
         if (this.multiTier == 2) {
@@ -434,7 +394,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         }
     }
 
-    private int getFortuneTierForItem(ItemStack stack) {
+    public int getFortuneTierForItem(ItemStack stack) {
         if (isSpecificItem(stack, Botania.ID, "terraPick")) {
             return 3;
         } else if (isSpecificItem(stack, BloodMagic.ID, "boundPickaxe")) {
@@ -446,7 +406,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         }
     }
 
-    private boolean isSpecificItem(ItemStack stack, String modId, String itemName) {
+    public boolean isSpecificItem(ItemStack stack, String modId, String itemName) {
         ItemStack specificItem = getModItem(modId, itemName, 1, 0);
         return stack.getItem() == specificItem.getItem() && stack.getItemDamage() == specificItem.getItemDamage();
     }
@@ -454,10 +414,6 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setInteger("currentRadius", currentRadius);
-        aNBT.setInteger("xDrill", xDrill);
-        aNBT.setInteger("yDrill", yDrill);
-        aNBT.setInteger("zDrill", zDrill);
         aNBT.setInteger("xStart", xStart);
         aNBT.setInteger("yStart", yStart);
         aNBT.setInteger("zStart", zStart);
@@ -472,10 +428,6 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        currentRadius = aNBT.getInteger("currentRadius");
-        xDrill = aNBT.getInteger("xDrill");
-        yDrill = aNBT.getInteger("yDrill");
-        zDrill = aNBT.getInteger("zDrill");
         xStart = aNBT.getInteger("xStart");
         yStart = aNBT.getInteger("yStart");
         zStart = aNBT.getInteger("zStart");
@@ -491,13 +443,15 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         this.isResetting = false;
         this.hasFinished = true;
         this.isWaiting = false;
-        currentRadius = MAX_RADIUS;
+        scanQueue.clear();
+        rowQueue.clear();
         this.initializeDrillPos();
     }
 
     public void startReset() {
         this.isResetting = true;
         stopMachine(ShutDownReasonRegistry.NONE);
+        checkMachine(this.getBaseMetaTileEntity(), mInventory[1]);
         enableWorking();
     }
 
@@ -508,9 +462,11 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
             stopMachine(ShutDownReasonRegistry.NONE);
             return SimpleCheckRecipeResult.ofFailure("missing_schematic");
         }
+
         if (renderer != null) {
             renderer.setColors(1, 0, 0);
         }
+
         if (isResetting) {
             this.reset();
             return SimpleCheckRecipeResult.ofSuccess("meteor_reset");
@@ -522,135 +478,128 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
             return SimpleCheckRecipeResult.ofFailure("not_enough_energy");
         }
 
+        if (hasFinished) {
+            if (!isWaiting) {
+                isWaiting = true;
+                if (renderer != null) renderer.setShouldRender(false);
+            }
+            setElectricityStats();
+            boolean centerReady = checkCenter();
+            if (centerReady) {
+                isWaiting = false;
+                isStartInitialized = false;
+                hasFinished = false;
+            }
+            return SimpleCheckRecipeResult.ofSuccess("meteor_waiting");
+        }
+
         if (!isStartInitialized) {
-            this.setStartCoords();
-            this.findBestRadius();
-            this.initializeDrillPos();
+            setStartCoords();
+            if (multiTier == 1) {
+                prepareScanQueue();
+            } else {
+                prepareRowQueue();
+            }
         }
 
         if (!hasFinished) {
-            renderer.setShouldRender(true);
-            renderer.setRange(this.currentRadius + 32.5 + this.getLaserToEndHeight());
-            this.setFortuneTier();
-            this.startMining(this.multiTier);
-            mOutputItems = res.toArray(new ItemStack[0]);
-            res.clear();
-        } else {
-            renderer.setShouldRender(false);
-            this.isWaiting = true;
-            this.setElectricityStats();
-            boolean isReady = checkCenter();
-            if (isReady) {
-                this.isWaiting = false;
-                this.setElectricityStats();
-                this.setReady();
-                this.hasFinished = false;
-            } else return SimpleCheckRecipeResult.ofSuccess("meteor_waiting");
+            setFortuneTier();
+            if (multiTier == 1) {
+                int done = 0;
+                while (done < MAX_BLOCKS_PER_CYCLE && !scanQueue.isEmpty()) {
+                    BlockPos pos = scanQueue.pollFirst();
+                    mineAt(pos.x, pos.y, pos.z);
+                    done++;
+                }
+            } else {
+                int rows = 0;
+                while (rows < MAX_ROWS_PER_CYCLE && !rowQueue.isEmpty()) {
+                    List<BlockPos> row = rowQueue.pollFirst();
+                    for (BlockPos pos : row) {
+                        mineAt(pos.x, pos.y, pos.z);
+                    }
+                    rows++;
+                }
+            }
+
+            mOutputItems = itemDrop.toArray(new ItemStack[0]);
+            itemDrop.clear();
+
+            boolean queueEmpty = (multiTier == 1 ? scanQueue.isEmpty() : rowQueue.isEmpty());
+            if (queueEmpty) {
+                hasFinished = true;
+                if (renderer != null) renderer.setShouldRender(false);
+                checkMachine(this.getBaseMetaTileEntity(), mInventory[1]);
+            } else {
+                if (renderer != null) {
+                    renderer.setShouldRender(true);
+                    renderer.setRange(150);
+                }
+            }
         }
 
         return SimpleCheckRecipeResult.ofSuccess("meteor_mining");
     }
 
-    public void startMining(int tier) {
-        switch (tier) {
-            case 1 -> this.mineSingleBlock();
-            case 2 -> this.mineRow();
-            default -> throw new IllegalArgumentException("Invalid Multiblock Tier");
+    public void prepareScanQueue() {
+        scanQueue.clear();
+        World w = getBaseMetaTileEntity().getWorld();
+        int x0 = xStart - SCAN_WIDTH / 2;
+        int y0 = yStart;
+        int z0 = zStart - SCAN_DEPTH / 2;
+        for (int dy = 0; dy < SCAN_HEIGHT; dy++) {
+            for (int dx = 0; dx < SCAN_WIDTH; dx++) {
+                for (int dz = 0; dz < SCAN_DEPTH; dz++) {
+                    int x = x0 + dx, y = y0 + dy, z = z0 + dz;
+                    if (!w.isAirBlock(x, y, z)) {
+                        scanQueue.addLast(new BlockPos(x, y, z));
+                    }
+                }
+            }
         }
+        isStartInitialized = true;
+        hasFinished = false;
     }
 
-    private static final Set<ItemStack> blacklist = new HashSet<>();
-
-    public static void addToBlacklist(ItemStack item) {
-        blacklist.add(item);
-    }
-
-    public static void initializeBlacklist() {
-        ItemStack CasingCoilNaquadah = ItemList.Casing_Coil_Naquadah.get(1);
-        addToBlacklist(CasingCoilNaquadah);
-        ItemStack CasingSolarTower = GregtechItemList.Casing_SolarTower_Structural.get(1);
-        addToBlacklist(CasingSolarTower);
-        ItemStack CasingCoilSuperconductor = ItemList.Casing_Coil_Superconductor.get(1);
-        addToBlacklist(CasingCoilSuperconductor);
-        ItemStack CasingSolarTowerHeatContainment = GregtechItemList.Casing_SolarTower_HeatContainment.get(1);
-        addToBlacklist(CasingSolarTowerHeatContainment);
-        ItemStack HatchInputBusULV = ItemList.Hatch_Input_Bus_ULV.get(1);
-        addToBlacklist(HatchInputBusULV);
-        ItemStack LaserBeacon = GTNLItemList.LaserBeacon.get(1);
-        addToBlacklist(LaserBeacon);
-        ItemStack MeteorMiner = GTNLItemList.MeteorMiner.get(1);
-        addToBlacklist(MeteorMiner);
-        ItemStack CasingMiningNeutronium = ItemList.Casing_MiningNeutronium.get(1);
-        addToBlacklist(CasingMiningNeutronium);
-        ItemStack CasingFusionCoil = ItemList.Casing_Fusion_Coil.get(1);
-        addToBlacklist(CasingFusionCoil);
-        ItemStack CasingMiningBlackPlutonium = ItemList.Casing_MiningBlackPlutonium.get(1);
-        addToBlacklist(CasingMiningBlackPlutonium);
-        ItemStack BlockPlasmaHeatingCasing = ItemList.BlockPlasmaHeatingCasing.get(1);
-        addToBlacklist(BlockPlasmaHeatingCasing);
-        ItemStack BlackPlutoniumFrame = GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.BlackPlutonium, 1);
-        addToBlacklist(BlackPlutoniumFrame);
-        ItemStack StainlessSteelFrame = GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.StainlessSteel, 1);
-        addToBlacklist(StainlessSteelFrame);
-        ItemStack NeutroniumFrame = GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 1);
-        addToBlacklist(NeutroniumFrame);
-        Block AlloyGlass = GameRegistry.findBlock(IndustrialCraft2.ID, "blockAlloyGlass");
-        ItemStack AlloyGlassBlock = new ItemStack(AlloyGlass, 1, 0);
-        addToBlacklist(AlloyGlassBlock);
-    }
-
-    private boolean isInBlacklist(int x, int y, int z) {
-        Block target = getBaseMetaTileEntity().getBlock(x, y, z);
-        int meta = getBaseMetaTileEntity().getMetaID(x, y, z);
-        ItemStack itemStack = new ItemStack(target, 1, meta);
-        return blacklist.contains(itemStack);
-    }
-
-    public void mineSingleBlock() {
-        while (getBaseMetaTileEntity().getWorld()
-            .isAirBlock(this.xDrill, this.yDrill, this.zDrill)) {
-            this.moveToNextBlock();
-            if (this.hasFinished) return;
+    public void prepareRowQueue() {
+        rowQueue.clear();
+        World w = getBaseMetaTileEntity().getWorld();
+        int x0 = xStart - SCAN_WIDTH / 2;
+        int y0 = yStart;
+        int z0 = zStart - SCAN_DEPTH / 2;
+        for (int dy = 0; dy < SCAN_HEIGHT; dy++) {
+            for (int dx = 0; dx < SCAN_WIDTH; dx++) {
+                List<BlockPos> row = new ArrayList<>(SCAN_DEPTH);
+                for (int dz = 0; dz < SCAN_DEPTH; dz++) {
+                    int x = x0 + dx, y = y0 + dy, z = z0 + dz;
+                    if (!w.isAirBlock(x, y, z)) {
+                        row.add(new BlockPos(x, y, z));
+                    }
+                }
+                if (!row.isEmpty()) {
+                    rowQueue.addLast(row);
+                }
+            }
         }
-        if (!isInBlacklist(this.xDrill, this.yDrill, this.zDrill)) {
-            this.mineBlock(this.xDrill, this.yDrill, this.zDrill);
-        }
-        this.moveToNextBlock();
+        isStartInitialized = true;
+        hasFinished = false;
     }
 
-    public void mineRow() {
-        int currentX = this.xDrill;
-        int currentY = this.yDrill;
-        while (getBaseMetaTileEntity().getWorld() // Skips empty rows
-            .isAirBlock(currentX, currentY, this.zStart)) {
-            this.moveToNextColumn();
-            if (this.hasFinished) return;
-            currentX = this.xDrill;
-            currentY = this.yDrill;
-        }
+    public void mineAt(int x, int y, int z) {
+        World w = getBaseMetaTileEntity().getWorld();
+        if (w.isAirBlock(x, y, z)) return;
 
-        int opposite = 0;
-        for (int z = -currentRadius; z <= (currentRadius - opposite); z++) {
-            int currentZ = this.zStart + z;
-            if (!getBaseMetaTileEntity().getWorld()
-                .isAirBlock(this.xDrill, this.yDrill, currentZ) && !isInBlacklist(this.xDrill, this.yDrill, currentZ)) {
-                this.mineBlock(this.xDrill, this.yDrill, currentZ);
-            } else opposite++;
-        }
-        this.moveToNextColumn();
-    }
+        Block target = w.getBlock(x, y, z);
+        int meta = w.getBlockMetadata(x, y, z);
+        if (target.getBlockHardness(w, x, y, z) < 0) return;
 
-    public void mineBlock(int currentX, int currentY, int currentZ) {
-        Block target = getBaseMetaTileEntity().getBlock(currentX, currentY, currentZ);
-        if (target.getBlockHardness(getBaseMetaTileEntity().getWorld(), currentX, currentY, currentZ) > 0) {
-            final int targetMeta = getBaseMetaTileEntity().getMetaID(currentX, currentY, currentZ);
-            Collection<ItemStack> drops = target
-                .getDrops(getBaseMetaTileEntity().getWorld(), currentX, currentY, currentZ, targetMeta, 0);
-            if (GTUtility.isOre(target, targetMeta)) {
-                res.addAll(getOutputByDrops(drops));
-            } else res.addAll(drops);
-            getBaseMetaTileEntity().getWorld()
-                .setBlockToAir(currentX, currentY, currentZ);
+        Collection<ItemStack> drops = target.getDrops(w, x, y, z, meta, 0);
+        w.setBlockToAir(x, y, z);
+
+        if (GTUtility.isOre(target, meta)) {
+            itemDrop.addAll(getOutputByDrops(drops));
+        } else {
+            itemDrop.addAll(drops);
         }
     }
 
@@ -697,30 +646,17 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
             && itemData.mMaterial.mMaterial != Materials.Oilsands;
     }
 
-    public void moveToNextBlock() {
-        if (this.zDrill <= this.zStart + currentRadius) {
-            this.zDrill++;
-        } else {
-            this.zDrill = this.zStart - currentRadius;
-            this.moveToNextColumn();
+    public static class BlockPos {
+
+        final int x, y, z;
+
+        BlockPos(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
     }
 
-    public void moveToNextColumn() {
-        if (this.xDrill <= this.xStart + currentRadius) {
-            this.xDrill++;
-        } else if (this.yDrill <= this.yStart + currentRadius) {
-            this.xDrill = this.xStart - currentRadius;
-            this.yDrill++;
-        } else {
-            this.hasFinished = true;
-        }
-    }
-
-    /**
-     * Sets the coordinates of the center to the max range meteor center
-     *
-     */
     public void setStartCoords() {
         ForgeDirection facing = getBaseMetaTileEntity().getBackFacing();
         if (facing == ForgeDirection.NORTH || facing == ForgeDirection.SOUTH) {
@@ -732,39 +668,17 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
                 + getBaseMetaTileEntity().getXCoord();
             zStart = getBaseMetaTileEntity().getZCoord();
         }
-        yStart = (this.multiTier == 1 ? 45 : 47) + getBaseMetaTileEntity().getYCoord();
-    }
-
-    public void setReady() {
-        this.findBestRadius();
-        this.initializeDrillPos();
+        yStart = (this.multiTier == 1 ? 14 : 16) + getBaseMetaTileEntity().getYCoord();
     }
 
     public void initializeDrillPos() {
-        this.xDrill = this.xStart - currentRadius;
-        this.yDrill = this.yStart - currentRadius;
-        this.zDrill = this.zStart - currentRadius;
-
         this.isStartInitialized = true;
         this.hasFinished = false;
     }
 
     public boolean checkCenter() {
         return !getBaseMetaTileEntity().getWorld()
-            .isAirBlock(xStart, yStart + 1, zStart);
-    }
-
-    public void findBestRadius() {
-        currentRadius = MAX_RADIUS;
-        int delta = 0;
-        for (int zCoord = zStart - currentRadius; delta < MAX_RADIUS - 1; zCoord++) {
-            if (!getBaseMetaTileEntity().getWorld()
-                .isAirBlock(xStart, yStart, zCoord)) {
-                break;
-            }
-            delta++;
-        }
-        currentRadius -= delta;
+            .isAirBlock(xStart, yStart + 32, zStart);
     }
 
     public void setElectricityStats() {
@@ -821,12 +735,12 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         super.getWailaBody(itemStack, currentTip, accessor, config);
         final NBTTagCompound tag = accessor.getNBTData();
         currentTip.add(
-            (this.multiTier > 0 ? "Current Tier: " : "") + EnumChatFormatting.WHITE
-                + StatCollector.translateToLocal("GT5U.METEOR_MINER_CONTROLLER.tier." + tag.getInteger("tier"))
+            StatCollector.translateToLocal("Info_MeteorMiner_00") + EnumChatFormatting.WHITE
+                + tag.getInteger("tier")
                 + EnumChatFormatting.RESET);
         currentTip.add(
-            "Augment: " + EnumChatFormatting.WHITE
-                + StatCollector.translateToLocal("GT5U.METEOR_MINER_CONTROLLER.fortune." + tag.getInteger("fortune"))
+            StatCollector.translateToLocal("Info_MeteorMiner_01") + EnumChatFormatting.WHITE
+                + tag.getInteger("fortune")
                 + EnumChatFormatting.RESET);
     }
 }
