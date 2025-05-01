@@ -21,7 +21,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -91,9 +90,6 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     private byte glassTier;
     private int mSievert;
     private int mNeededSievert;
-    private int mCasing = 0;
-    private int mExpectedMultiplier = 0;
-    private int mTimes = 0;
     private boolean isVisibleFluid = false;
     public static IStructureDefinition<Incubator> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
@@ -268,36 +264,29 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     }
 
     protected GTRecipe recipeWithMultiplier(GTRecipe recipe, FluidStack[] fluidInputs) {
-        // 检查 recipe 和 fluidInputs 是否为 null
         if (recipe == null || fluidInputs == null) {
-            return recipe; // 直接返回原始 recipe
+            return recipe;
         }
 
-        // 检查 recipe.mFluidInputs 和 recipe.mFluidOutputs 是否为 null 或空数组
         if (recipe.mFluidInputs == null || recipe.mFluidInputs.length == 0
             || recipe.mFluidOutputs == null
             || recipe.mFluidOutputs.length == 0) {
-            return recipe; // 直接返回原始 recipe
+            return recipe;
         }
 
-        // 检查 recipe.mFluidInputs[0] 和 recipe.mFluidOutputs[0] 是否为 null
         if (recipe.mFluidInputs[0] == null || recipe.mFluidOutputs[0] == null) {
-            return recipe; // 直接返回原始 recipe
+            return recipe;
         }
 
-        // 检查 fluidInputs 中是否存在 null
         for (FluidStack fluid : fluidInputs) {
             if (fluid == null) {
-                return recipe; // 直接返回原始 recipe
+                return recipe;
             }
         }
 
-        // 如果所有检查通过，继续处理
         GTRecipe tRecipe = recipe.copy();
-        int multiplier = 0;
-        mExpectedMultiplier = multiplier;
+        int multiplier;
 
-        // 计算基于输入流体的最大倍数
         long fluidAmount = 0;
         for (FluidStack fluid : fluidInputs) {
             if (recipe.mFluidInputs[0].isFluidEqual(fluid)) {
@@ -305,12 +294,9 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
             }
         }
 
-        // 计算倍数
-        multiplier = (int) fluidAmount / recipe.mFluidInputs[0].amount / 1001;
+        multiplier = (int) fluidAmount / (recipe.mFluidInputs[0].amount * 1001);
         multiplier = Math.max(Math.min(multiplier, getMaxParallelRecipes()), 1);
-        mTimes = multiplier * 1001;
 
-        // 更新流体输入和输出的量
         tRecipe.mFluidInputs[0].amount *= multiplier * 1001;
         tRecipe.mFluidOutputs[0].amount *= multiplier * 1001;
 
@@ -392,7 +378,6 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
                 .isActive() && this.mNeededSievert > this.mSievert) this.mOutputFluids = null;
         }
         if (aBaseMetaTileEntity.isServerSide() && this.mMaxProgresstime <= 0) {
-            this.mTimes = 0;
             this.mMaxProgresstime = 0;
         }
     }
@@ -476,26 +461,6 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
             env,
             false,
             true);
-    }
-
-    @Override
-    public String[] getInfoData() {
-        final String[] baseInfoData = super.getInfoData();
-        final String[] infoData = new String[baseInfoData.length + 2];
-        System.arraycopy(baseInfoData, 0, infoData, 0, baseInfoData.length);
-        // See https://github.com/GTNewHorizons/GT-New-Horizons-Modpack/issues/11923
-        // here we must check the machine is well-formed as otherwise getExpectedMultiplier might error out!
-        infoData[infoData.length - 2] = StatCollector.translateToLocal("BW.infoData.BioVat.expectedProduction") + ": "
-            + EnumChatFormatting.GREEN
-            + (this.mMachine ? (this.mMaxProgresstime <= 0 ? 1001 : this.mExpectedMultiplier) * 100 : -1)
-            + EnumChatFormatting.RESET
-            + " %";
-        infoData[infoData.length - 1] = StatCollector.translateToLocal("BW.infoData.BioVat.production") + ": "
-            + EnumChatFormatting.GREEN
-            + (this.mMaxProgresstime <= 0 ? 0 : this.mTimes) * 100
-            + EnumChatFormatting.RESET
-            + " %";
-        return infoData;
     }
 
     @Override
