@@ -7,10 +7,19 @@ import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gregtech.api.util.GTUtility.validMTEList;
 import static kekztech.common.Blocks.lscLapotronicEnergyUnit;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,20 +35,23 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.SimpleCheckRecipeResult;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.common.tileentities.machines.MTEHatchInputBusME;
 import ic2.api.item.ElectricItem;
 import ic2.api.item.IElectricItem;
 import tectech.TecTech;
-import tectech.loader.ConfigHandler;
 import tectech.thing.casing.TTCasingsContainer;
+import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyMulti;
 import tectech.thing.metaTileEntity.multi.base.TTMultiblockBase;
 
 public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
 
+    private List<ItemStack> mStoredItems = new ArrayList<>();
+    private boolean outputAllItems = false;
     private static final int maxRepairedDamagePerOperation = 10000;
     private static final long usedEuPerDurability = 1000;
     private static final int usedUumPerDurability = 1;
@@ -86,67 +98,6 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
         eDismantleBoom = true;
     }
 
-    private boolean isItemStackFullyCharged(ItemStack stack) {
-        if (stack == null) {
-            return true;
-        }
-        Item item = stack.getItem();
-        if (stack.stackSize == 1) {
-            if (item instanceof IElectricItem) {
-                return ElectricItem.manager.getCharge(stack) >= ((IElectricItem) item).getMaxCharge(stack);
-            } else if (TecTech.hasCOFH && item instanceof IEnergyContainerItem) {
-                return ((IEnergyContainerItem) item).getEnergyStored(stack)
-                    >= ((IEnergyContainerItem) item).getMaxEnergyStored(stack);
-            }
-        }
-        return true;
-    }
-
-    private boolean isItemStackFullyRepaired(ItemStack stack) {
-        if (stack == null) {
-            return true;
-        }
-        Item item = stack.getItem();
-        return !item.isRepairable() || item.getMaxDamage(stack) <= 0 || item.getDamage(stack) <= 0;
-    }
-
-    private long doChargeItemStack(IElectricItem item, ItemStack stack) {
-        try {
-            double euDiff = item.getMaxCharge(stack) - ElectricItem.manager.getCharge(stack);
-            long remove = (long) Math.ceil(
-                ElectricItem.manager.charge(stack, Math.min(euDiff, getEUVar()), item.getTier(stack), true, false));
-            setEUVar(getEUVar() - remove);
-            if (getEUVar() < 0) {
-                setEUVar(0);
-            }
-            return remove;
-        } catch (Exception e) {
-            if (ConfigHandler.debug.DEBUG_MODE) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
-    }
-
-    private long doChargeItemStackRF(IEnergyContainerItem item, ItemStack stack) {
-        try {
-            long RF = Math
-                .min(item.getMaxEnergyStored(stack) - item.getEnergyStored(stack), getEUVar() * mEUtoRF / 10L);
-            RF = item.receiveEnergy(stack, RF > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) RF, false);
-            RF = RF * 10L / mEUtoRF;
-            setEUVar(getEUVar() - RF);
-            if (getEUVar() < 0) {
-                setEUVar(0);
-            }
-            return RF;
-        } catch (Exception e) {
-            if (ConfigHandler.debug.DEBUG_MODE) {
-                e.printStackTrace();
-            }
-        }
-        return 0;
-    }
-
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new EnergyInfuser(this.mName);
@@ -160,77 +111,241 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
     @Override
     @NotNull
     protected CheckRecipeResult checkProcessing_EM() {
+        mEfficiencyIncrease = 10000;
+        mMaxProgresstime = 1;
+        List<ItemStack> toStore = new ArrayList<>();
+
         for (MTEHatchInputBus inputBus : mInputBusses) {
-            if (inputBus instanceof MTEHatchInputBusME) continue;
-            for (int i = 0; i < inputBus.getSizeInventory(); i++) {
-                ItemStack itemStackInBus = inputBus.getStackInSlot(i);
-                if (itemStackInBus == null) continue;
-                Item item = itemStackInBus.getItem();
-                if (itemStackInBus.stackSize != 1 || item == null) continue;
-                if (isItemStackFullyCharged(itemStackInBus) && isItemStackFullyRepaired(itemStackInBus)) {
-                    if (addOutput(itemStackInBus)) {
-                        this.depleteInput(itemStackInBus);
-                    }
-                } else {
-                    mEfficiencyIncrease = 10000;
-                    mMaxProgresstime = 1;
-                    return SimpleCheckRecipeResult.ofSuccess("charging");
+            if (!inputBus.isValid()) continue;
+            for (int i = 0; i < inputBus.getSizeInventory() - 1; i++) {
+                ItemStack stack = inputBus.getStackInSlot(i);
+                if (stack == null || stack.getItem() == null) continue;
+                if (!isItemStackFullyCharged(stack) || !isItemStackFullyRepaired(stack)) {
+                    toStore.add(stack.copy());
+                    inputBus.decrStackSize(i, stack.stackSize);
                 }
+
             }
         }
-        return SimpleCheckRecipeResult.ofFailure("no_chargeable_item");
+
+        mStoredItems.addAll(toStore);
+        saveNBTData(new NBTTagCompound());
+
+        if (!mStoredItems.isEmpty()) {
+            return SimpleCheckRecipeResult.ofSuccess("charging");
+        }
+
+        if (toStore.isEmpty()) {
+            return SimpleCheckRecipeResult.ofFailure("no_chargeable_item");
+        }
+
+        return SimpleCheckRecipeResult.ofSuccess("charging");
     }
 
     @Override
     public void outputAfterRecipe_EM() {
-        boolean itemProcessed = false;
-        startRecipeProcessing();
-        for (MTEHatchInputBus inputBus : mInputBusses) {
-            if (inputBus instanceof MTEHatchInputBusME) continue;
-            for (int i = 0; i < inputBus.getSizeInventory(); i++) {
-                ItemStack itemStackInBus = inputBus.getStackInSlot(i);
-                if (itemStackInBus == null) continue;
-                Item item = itemStackInBus.getItem();
-                if (itemStackInBus.stackSize != 1 || item == null) continue;
-                if (isItemStackFullyCharged(itemStackInBus) && isItemStackFullyRepaired(itemStackInBus)) {
-                    itemProcessed = true;
-                    if (addOutput(itemStackInBus)) {
-                        this.depleteInput(itemStackInBus);
-                    }
-                } else {
-                    if (item.isRepairable()) {
-                        FluidStack uum = getStoredFluids().stream()
+        if (mStoredItems.isEmpty()) {
+            afterRecipeCheckFailed();
+            return;
+        }
+
+        List<ItemStack> remaining = new ArrayList<>();
+        long totalEU = getMaxStoredEU();
+        long euPerItem = totalEU / mStoredItems.size();
+
+        for (ItemStack stack : mStoredItems) {
+            if (stack == null || stack.getItem() == null) continue;
+
+            int stackSize = stack.stackSize;
+            ItemStack[] stackArray = new ItemStack[stackSize];
+            for (int i = 0; i < stackSize; i++) {
+                stackArray[i] = stack.copy();
+                stackArray[i].stackSize = 1;
+            }
+
+            for (ItemStack individualStack : stackArray) {
+                Item item = individualStack.getItem();
+                long euRemaining = euPerItem;
+
+                if (item.isRepairable()) {
+                    int currentDamage = item.getDamage(individualStack);
+                    if (currentDamage > 0) {
+                        int maxRepair = Math.min(currentDamage, maxRepairedDamagePerOperation);
+                        long possibleRepair = Math.min(maxRepair, euRemaining / usedEuPerDurability);
+                        int uumNeeded = (int) (possibleRepair * usedUumPerDurability);
+
+                        FluidStack availableUUM = getStoredFluids().stream()
                             .filter(
                                 fluid -> Materials.UUMatter.getFluid(1)
                                     .isFluidEqual(fluid))
                             .findAny()
                             .orElse(null);
-                        if (uum != null) {
-                            int repairedDamage = Math
-                                .min(item.getDamage(itemStackInBus), maxRepairedDamagePerOperation);
-                            long euCost = repairedDamage * usedEuPerDurability;
-                            if (getEUVar() >= euCost && depleteInput(
-                                new FluidStack(Materials.UUMatter.mFluid, repairedDamage * usedUumPerDurability))) {
-                                item.setDamage(
-                                    itemStackInBus,
-                                    Math.max(item.getDamage(itemStackInBus) - repairedDamage, 0));
-                                setEUVar(Math.min(getEUVar() - euCost, 0));
-                            }
+
+                        if (availableUUM != null
+                            && depleteInput(new FluidStack(Materials.UUMatter.mFluid, uumNeeded))) {
+                            item.setDamage(individualStack, currentDamage - (int) possibleRepair);
+                            euRemaining -= possibleRepair * usedEuPerDurability;
                         }
                     }
-                    if (item instanceof IElectricItem) {
-                        doChargeItemStack((IElectricItem) item, itemStackInBus);
-                        return;
-                    } else if (TecTech.hasCOFH && item instanceof IEnergyContainerItem) {
-                        doChargeItemStackRF((IEnergyContainerItem) item, itemStackInBus);
-                        return;
+                }
+
+                if (item instanceof IElectricItem) {
+                    long charged = (long) ElectricItem.manager.charge(
+                        individualStack,
+                        euRemaining,
+                        ((IElectricItem) item).getTier(individualStack),
+                        true,
+                        false);
+                    euRemaining -= charged;
+                } else if (TecTech.hasCOFH && item instanceof IEnergyContainerItem) {
+                    long rf = Math.min(
+                        ((IEnergyContainerItem) item).getMaxEnergyStored(individualStack)
+                            - ((IEnergyContainerItem) item).getEnergyStored(individualStack),
+                        euRemaining * mEUtoRF / 10L);
+                    rf = ((IEnergyContainerItem) item)
+                        .receiveEnergy(individualStack, rf > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) rf, false);
+                    euRemaining -= rf * 10L / mEUtoRF;
+                }
+
+                setEUValue(euPerItem - euRemaining);
+
+                if ((isItemStackFullyCharged(individualStack) && isItemStackFullyRepaired(individualStack))
+                    || outputAllItems) {
+                    if (addOutput(individualStack)) {
+                        continue;
                     }
+                }
+
+                remaining.add(individualStack);
+            }
+        }
+
+        mStoredItems.clear();
+        mStoredItems.addAll(remaining);
+        saveNBTData(new NBTTagCompound());
+        outputAllItems = false;
+    }
+
+    private boolean isItemStackFullyCharged(ItemStack stack) {
+        if (stack == null || stack.getItem() == null) {
+            return true;
+        }
+        Item item = stack.getItem();
+
+        for (int i = 0; i < stack.stackSize; i++) {
+            if (item instanceof IElectricItem) {
+                if (ElectricItem.manager.getCharge(stack) < ((IElectricItem) item).getMaxCharge(stack)) {
+                    return false;
+                }
+            } else if (TecTech.hasCOFH && item instanceof IEnergyContainerItem) {
+                if (((IEnergyContainerItem) item).getEnergyStored(stack)
+                    < ((IEnergyContainerItem) item).getMaxEnergyStored(stack)) {
+                    return false;
                 }
             }
         }
-        endRecipeProcessing();
-        if (!itemProcessed) {
-            afterRecipeCheckFailed();
+        return true;
+    }
+
+    private boolean isItemStackFullyRepaired(ItemStack stack) {
+        if (stack == null || stack.getItem() == null) {
+            return true;
+        }
+        Item item = stack.getItem();
+
+        for (int i = 0; i < stack.stackSize; i++) {
+            if (item.isRepairable() && item.getDamage(stack) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected long getMaxStoredEU() {
+        long maxStoredEU = 0;
+
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            maxStoredEU = Math.max(
+                maxStoredEU,
+                tHatch.getBaseMetaTileEntity()
+                    .getStoredEU());
+        }
+
+        for (MTEHatchEnergyMulti tHatch : validMTEList(eEnergyMulti)) {
+            maxStoredEU = Math.max(
+                maxStoredEU,
+                tHatch.getBaseMetaTileEntity()
+                    .getStoredEU());
+        }
+
+        return maxStoredEU;
+    }
+
+    protected void setEUValue(long newEnergyValue) {
+        long maxStoredEU = 0;
+        MTEHatchEnergy targetEnergyHatch = null;
+        MTEHatchEnergyMulti targetEnergyMulti = null;
+
+        for (MTEHatchEnergy tHatch : validMTEList(mEnergyHatches)) {
+            long storedEU = tHatch.getBaseMetaTileEntity()
+                .getStoredEU();
+            if (storedEU > maxStoredEU) {
+                maxStoredEU = storedEU;
+                targetEnergyHatch = tHatch;
+            }
+        }
+
+        for (MTEHatchEnergyMulti tHatch : validMTEList(eEnergyMulti)) {
+            long storedEU = tHatch.getBaseMetaTileEntity()
+                .getStoredEU();
+            if (storedEU > maxStoredEU) {
+                maxStoredEU = storedEU;
+                targetEnergyMulti = tHatch;
+            }
+        }
+
+        if (targetEnergyHatch != null) {
+            targetEnergyHatch.getBaseMetaTileEntity()
+                .decreaseStoredEnergyUnits(newEnergyValue, false);
+        } else if (targetEnergyMulti != null) {
+            targetEnergyMulti.getBaseMetaTileEntity()
+                .decreaseStoredEnergyUnits(newEnergyValue, false);
+        }
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        outputAllItems = true;
+        GTUtility.sendChatToPlayer(aPlayer, StatCollector.translateToLocal("Info_EnergyInfuser_00" + this.machineMode));
+    }
+
+    @Override
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+
+        NBTTagList storedItemsList = new NBTTagList();
+        for (ItemStack stack : mStoredItems) {
+            if (stack != null) {
+                NBTTagCompound itemTag = new NBTTagCompound();
+                stack.writeToNBT(itemTag);
+                storedItemsList.appendTag(itemTag);
+            }
+        }
+        aNBT.setTag("mStoredItems", storedItemsList);
+    }
+
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+
+        NBTTagList storedItemsList = aNBT.getTagList("mStoredItems", 10);
+        mStoredItems.clear();
+        for (int i = 0; i < storedItemsList.tagCount(); i++) {
+            NBTTagCompound itemTag = storedItemsList.getCompoundTagAt(i);
+            ItemStack stack = ItemStack.loadItemStackFromNBT(itemTag);
+            if (stack != null) {
+                mStoredItems.add(stack);
+            }
         }
     }
 
@@ -242,6 +357,7 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
             .addInfo(TextLocalization.Tooltip_EnergyInfuser_01)
             .addInfo(TextLocalization.Tooltip_EnergyInfuser_02)
             .addInfo(TextLocalization.Tooltip_EnergyInfuser_03)
+            .addInfo(TextLocalization.Tooltip_EnergyInfuser_04)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -269,4 +385,12 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
     public boolean isSafeVoidButtonEnabled() {
         return false;
     }
+
+    @Override
+    public long maxEUStore() {
+        return 0;
+    }
+
+    @Override
+    protected void chargeController_EM(IGregTechTileEntity aBaseMetaTileEntity) {}
 }

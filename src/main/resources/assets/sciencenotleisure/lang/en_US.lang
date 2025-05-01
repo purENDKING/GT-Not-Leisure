@@ -2183,7 +2183,9 @@ EnergyInfuserRecipeType=Energy Infuser
 Tooltip_EnergyInfuser_00=Faster than the vanilla Energy Infuser!
 Tooltip_EnergyInfuser_01=Can be used to charge items (lossless).
 Tooltip_EnergyInfuser_02=Provides UU-Matter to repair items.
-Tooltip_EnergyInfuser_03=Does not support storage input buses.
+Tooltip_EnergyInfuser_03=Store inside the machine during charging
+Tooltip_EnergyInfuser_04=Right-click with the screwdriver to immediately output all items
+Info_EnergyInfuser_00=Immediately output all items
 Tooltip_EnergyInfuser_Casing=Any Molecular Machine Block
 
 NameChemicalPlant=Chemical Plant

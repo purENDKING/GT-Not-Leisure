@@ -2485,8 +2485,11 @@ public class TextLocalization {
         "Can be fed with UU-Matter to repair items",
         "Tooltip_EnergyInfuser_02");
     public static final String Tooltip_EnergyInfuser_03 = texter(
-        "Stocking Bus is not supported",
+        "Store inside the machine during charging",
         "Tooltip_EnergyInfuser_03");
+    public static final String Tooltip_EnergyInfuser_04 = texter(
+        "Right-click with the screwdriver to immediately output all items",
+        "Tooltip_EnergyInfuser_04");
     public static final String Tooltip_EnergyInfuser_Casing = texter(
         "Any Molecular Casing",
         "Tooltip_EnergyInfuser_Casing");

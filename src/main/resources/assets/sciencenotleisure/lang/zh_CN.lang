@@ -2183,7 +2183,9 @@ EnergyInfuserRecipeType=能量注入仪
 Tooltip_EnergyInfuser_00=比原版的能量注入仪更快!
 Tooltip_EnergyInfuser_01=可用于为物品充电(无损)
 Tooltip_EnergyInfuser_02=提供UU物质可修复物品
-Tooltip_EnergyInfuser_03=不支持存储输入总线
+Tooltip_EnergyInfuser_03=充电时将存储在机器内部
+Tooltip_EnergyInfuser_04=使用螺丝刀右键立即输出所有物品
+Info_EnergyInfuser_00=立即输出所有物品
 Tooltip_EnergyInfuser_Casing=任意分子机械方块
 
 NameChemicalPlant=化工厂
