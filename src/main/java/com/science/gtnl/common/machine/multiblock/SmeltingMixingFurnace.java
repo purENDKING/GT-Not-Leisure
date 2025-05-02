@@ -4,6 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings9;
 import static gregtech.api.enums.HatchElement.*;
@@ -165,7 +166,14 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
                 .addElement(
                     'R',
                     buildHatchAdder(SmeltingMixingFurnace.class)
-                        .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy, Energy.or(ExoticEnergy))
+                        .atLeast(
+                            InputBus,
+                            OutputBus,
+                            InputHatch,
+                            OutputHatch,
+                            Energy,
+                            Energy.or(ExoticEnergy),
+                            ParallelController)
                         .casingIndex(CASING_INDEX)
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 0))))
@@ -237,16 +245,15 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
-
-        ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
-        for (ItemStack item : getAllStoredInputs()) {
-            if (item != null && item.isItemEqual(requiredItem)) {
-                hasRequiredItem = true;
-                break;
-            }
-        }
+        hasRequiredItem = false;
 
         if (this.getRecipeMap() == RecipeMaps.plasmaForgeRecipes) {
+            ItemStack requiredItem = ItemList.Transdimensional_Alignment_Matrix.get(1);
+            ItemStack item = getControllerSlot();
+            if (item != null && item.isItemEqual(requiredItem)) {
+                hasRequiredItem = true;
+            }
+
             if (!hasRequiredItem) {
                 return CheckRecipeResultRegistry.NO_RECIPE;
             }

@@ -2162,7 +2162,7 @@ SmeltingMixingFurnace_Mode_0=合金搅拌
 SmeltingMixingFurnace_Mode_1=超维度等离子锻炉
 Tooltip_SmeltingMixingFurnace_00=§9§l以极高效的方式操纵物质
 Tooltip_SmeltingMixingFurnace_01=§9§l使合金的制作摆脱冶炼的桎梏
-Tooltip_SmeltingMixingFurnace_02=输入超维校准矩阵来启用超维度等离子锻炉配方
+Tooltip_SmeltingMixingFurnace_02=在控制器放入超维校准矩阵来启用超维度等离子锻炉配方
 Tooltip_SmeltingMixingFurnace_Casing=任意超能机械方块
 
 NameProcessingArrayGTNL=处理阵列：重生
@@ -2185,8 +2185,8 @@ Tooltip_EnergyInfuser_01=可用于为物品充电(无损)
 Tooltip_EnergyInfuser_02=提供UU物质可修复物品
 Tooltip_EnergyInfuser_03=充电时将存储在机器内部
 Tooltip_EnergyInfuser_04=使用螺丝刀右键立即输出所有物品
-Info_EnergyInfuser_00=立即输出所有物品
 Tooltip_EnergyInfuser_Casing=任意分子机械方块
+Info_EnergyInfuser_00=立即输出所有物品
 
 NameChemicalPlant=化工厂
 ChemicalPlantRecipeType=化学反应釜

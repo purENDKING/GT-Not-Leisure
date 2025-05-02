@@ -50,7 +50,7 @@ import tectech.thing.metaTileEntity.multi.base.TTMultiblockBase;
 
 public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
 
-    private List<ItemStack> mStoredItems = new ArrayList<>();
+    private final List<ItemStack> mStoredItems = new ArrayList<>();
     private boolean outputAllItems = false;
     private static final int maxRepairedDamagePerOperation = 10000;
     private static final long usedEuPerDurability = 1000;
@@ -167,7 +167,7 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
                 Item item = individualStack.getItem();
                 long euRemaining = euPerItem;
 
-                if (item.isRepairable()) {
+                if (item != null && item.isRepairable()) {
                     int currentDamage = item.getDamage(individualStack);
                     if (currentDamage > 0) {
                         int maxRepair = Math.min(currentDamage, maxRepairedDamagePerOperation);
