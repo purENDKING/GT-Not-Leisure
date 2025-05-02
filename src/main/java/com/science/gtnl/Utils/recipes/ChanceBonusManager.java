@@ -100,7 +100,7 @@ public class ChanceBonusManager {
         addLastBonusProvider((machine, recipeTier, prevBonus, recipe) -> {
             if (machine instanceof MTEMultiBlockBase mte) {
                 try {
-                    int machineTier = GTUtility.getTier(mte.getMaxInputVoltage());
+                    int machineTier = GTUtility.getTier(Math.min(Integer.MAX_VALUE, mte.getMaxInputVoltage()));
                     int baseTier = GTUtility.getTier(recipe.mEUt);
                     double bonusPerTier = MainConfig.recipeOutputChance / 100.0;
 
