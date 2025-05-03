@@ -50,6 +50,8 @@ public class PlayerDollRenderManager {
     public static Set<String> BLACKLISTED_CAPE_URLS = Sets.newConcurrentHashSet();
     public static Map<String, String> UUID_CACHE = new HashMap<>();
     public static Map<String, ResourceLocation> textureCache = new HashMap<>();
+    private static final Map<String, BufferedImage> pendingTextures = new HashMap<>();
+    private static final Map<String, Integer> uploadedTextureIds = new HashMap<>();
     public static ResourceLocation DEFAULT_SKIN = new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/skin.png");
     public static ResourceLocation DEFAULT_CAPE = new ResourceLocation(RESOURCE_ROOT_ID + ":" + "model/cape.png");
     public static ResourceLocation MODEL_STEVE = new ResourceLocation(
@@ -406,9 +408,7 @@ public class PlayerDollRenderManager {
     }
 
     public static ResourceLocation getLocalTextureFromFile(File file) {
-        if (file == null || !file.exists()) {
-            return null;
-        }
+        if (file == null || !file.exists()) return null;
 
         String fileName = file.getName();
 
@@ -419,9 +419,11 @@ public class PlayerDollRenderManager {
         try {
             BufferedImage image = ImageIO.read(file);
             if (image != null) {
-                int textureId = TextureUtil.uploadTextureImage(GL11.glGenTextures(), image);
-                ResourceLocation textureLocation = new ResourceLocation("custom", "texture_" + textureId);
+                pendingTextures.put(fileName, image);
+
+                ResourceLocation textureLocation = new ResourceLocation("custom", "texture_" + fileName);
                 textureCache.put(fileName, textureLocation);
+
                 return textureLocation;
             }
         } catch (IOException e) {
@@ -482,10 +484,19 @@ public class PlayerDollRenderManager {
 
         if (texture.getResourceDomain()
             .equals("custom")) {
-            int textureId = Integer.parseInt(
-                texture.getResourcePath()
-                    .replace("texture_", ""));
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureId);
+            String key = texture.getResourcePath()
+                .replace("texture_", "");
+
+            if (!uploadedTextureIds.containsKey(key)) {
+                BufferedImage image = pendingTextures.remove(key);
+                if (image != null) {
+                    int textureId = TextureUtil.uploadTextureImage(GL11.glGenTextures(), image);
+                    uploadedTextureIds.put(key, textureId);
+                } else {
+                    return;
+                }
+            }
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, uploadedTextureIds.get(key));
         } else {
             Minecraft.getMinecraft().renderEngine.bindTexture(texture);
         }

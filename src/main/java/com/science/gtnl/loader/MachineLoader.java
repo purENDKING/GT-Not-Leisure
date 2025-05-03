@@ -1336,72 +1336,72 @@ public class MachineLoader {
 
     @Deprecated
     public static void registerTestMachine() {
-        GTNLItemList.QuadrupleOutputHatchEV.set(
-            new DualOutputHatch(21700, 4, "Quadruple Output Hatch EV", TextLocalization.QuadrupleOutputHatchEV, 4));
+        GTNLItemList.QuadrupleOutputHatchEV
+            .set(new DualOutputHatch(21700, 4, "QuadrupleOutputHatchEV", TextLocalization.QuadrupleOutputHatchEV, 4));
         addItemTooltip(GTNLItemList.QuadrupleOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.NinefoldOutputHatchEV
-            .set(new DualOutputHatch(21701, 9, "Ninefold Output Hatch EV", TextLocalization.NinefoldOutputHatchEV, 4));
+            .set(new DualOutputHatch(21701, 9, "NinefoldOutputHatchEV", TextLocalization.NinefoldOutputHatchEV, 4));
         addItemTooltip(GTNLItemList.NinefoldOutputHatchEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusULV
-            .set(new HumongousInputBus(21702, "Humongous Input Bus ULV", TextLocalization.HumongousInputBusULV, 0));
+            .set(new HumongousInputBus(21702, "HumongousInputBusULV", TextLocalization.HumongousInputBusULV, 0));
         addItemTooltip(GTNLItemList.HumongousInputBusULV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusLV
-            .set(new HumongousInputBus(21703, "Humongous Input Bus LV", TextLocalization.HumongousInputBusLV, 1));
+            .set(new HumongousInputBus(21703, "HumongousInputBusLV", TextLocalization.HumongousInputBusLV, 1));
         addItemTooltip(GTNLItemList.HumongousInputBusLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusMV
-            .set(new HumongousInputBus(21704, "Humongous Input Bus MV", TextLocalization.HumongousInputBusMV, 2));
+            .set(new HumongousInputBus(21704, "HumongousInputBusMV", TextLocalization.HumongousInputBusMV, 2));
         addItemTooltip(GTNLItemList.HumongousInputBusMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusHV
-            .set(new HumongousInputBus(21705, "Humongous Input Bus HV", TextLocalization.HumongousInputBusHV, 3));
+            .set(new HumongousInputBus(21705, "HumongousInputBusHV", TextLocalization.HumongousInputBusHV, 3));
         addItemTooltip(GTNLItemList.HumongousInputBusHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusEV
-            .set(new HumongousInputBus(21706, "Humongous Input Bus EV", TextLocalization.HumongousInputBusEV, 4));
+            .set(new HumongousInputBus(21706, "HumongousInputBusEV", TextLocalization.HumongousInputBusEV, 4));
         addItemTooltip(GTNLItemList.HumongousInputBusEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusIV
-            .set(new HumongousInputBus(21707, "Humongous Input Bus IV", TextLocalization.HumongousInputBusIV, 5));
+            .set(new HumongousInputBus(21707, "HumongousInputBusIV", TextLocalization.HumongousInputBusIV, 5));
         addItemTooltip(GTNLItemList.HumongousInputBusIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusLuV
-            .set(new HumongousInputBus(21708, "Humongous Input Bus LuV", TextLocalization.HumongousInputBusLuV, 6));
+            .set(new HumongousInputBus(21708, "HumongousInputBusLuV", TextLocalization.HumongousInputBusLuV, 6));
         addItemTooltip(GTNLItemList.HumongousInputBusLuV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusZPM
-            .set(new HumongousInputBus(21709, "Humongous Input Bus ZPM", TextLocalization.HumongousInputBusZPM, 7));
+            .set(new HumongousInputBus(21709, "HumongousInputBusZPM", TextLocalization.HumongousInputBusZPM, 7));
         addItemTooltip(GTNLItemList.HumongousInputBusZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUV
-            .set(new HumongousInputBus(21710, "Humongous Input Bus UV", TextLocalization.HumongousInputBusUV, 8));
+            .set(new HumongousInputBus(21710, "HumongousInputBusUV", TextLocalization.HumongousInputBusUV, 8));
         addItemTooltip(GTNLItemList.HumongousInputBusUV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUHV
-            .set(new HumongousInputBus(21711, "Humongous Input Bus UHV", TextLocalization.HumongousInputBusUHV, 9));
+            .set(new HumongousInputBus(21711, "HumongousInputBusUHV", TextLocalization.HumongousInputBusUHV, 9));
         addItemTooltip(GTNLItemList.HumongousInputBusUHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUEV
-            .set(new HumongousInputBus(21712, "Humongous Input Bus UEV", TextLocalization.HumongousInputBusUEV, 10));
+            .set(new HumongousInputBus(21712, "HumongousInputBusUEV", TextLocalization.HumongousInputBusUEV, 10));
         addItemTooltip(GTNLItemList.HumongousInputBusUEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUIV
-            .set(new HumongousInputBus(21713, "Humongous Input Bus UIV", TextLocalization.HumongousInputBusUIV, 11));
+            .set(new HumongousInputBus(21713, "HumongousInputBusUIV", TextLocalization.HumongousInputBusUIV, 11));
         addItemTooltip(GTNLItemList.HumongousInputBusUIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUMV
-            .set(new HumongousInputBus(21714, "Humongous Input Bus UMV", TextLocalization.HumongousInputBusUMV, 12));
+            .set(new HumongousInputBus(21714, "HumongousInputBusUMV", TextLocalization.HumongousInputBusUMV, 12));
         addItemTooltip(GTNLItemList.HumongousInputBusUMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusUXV
-            .set(new HumongousInputBus(21715, "Humongous Input Bus UXV", TextLocalization.HumongousInputBusUXV, 13));
+            .set(new HumongousInputBus(21715, "HumongousInputBusUXV", TextLocalization.HumongousInputBusUXV, 13));
         addItemTooltip(GTNLItemList.HumongousInputBusUXV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.HumongousInputBusMAX
-            .set(new HumongousInputBus(21716, "Humongous Input Bus MAX", TextLocalization.HumongousInputBusMAX, 14));
+            .set(new HumongousInputBus(21716, "HumongousInputBusMAX", TextLocalization.HumongousInputBusMAX, 14));
         addItemTooltip(GTNLItemList.HumongousInputBusMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
