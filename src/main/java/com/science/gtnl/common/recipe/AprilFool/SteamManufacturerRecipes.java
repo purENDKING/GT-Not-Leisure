@@ -635,7 +635,7 @@ public class SteamManufacturerRecipes implements IRecipePool {
         // Supercompressor
         RA.stdBuilder()
             .itemInputs(GregtechItemList.Controller_SteamCompressorMulti.get(64), GTNLItemList.HydraulicPump.get(4))
-            .itemOutputs(GTNLItemList.SteamMegaCompressor.get(1))
+            .itemOutputs(GTNLItemList.MegaSteamCompressor.get(1))
             .duration(120 * SECONDS)
             .eut(1600)
             .addTo(SMFR);

@@ -1683,12 +1683,12 @@ Tooltip_SteamGateAssembler_01=§b§o无数压力在每个精密调校的仓室�
 Tooltip_SteamGateAssembler_02=§b§o是什么样的疯狂驱使着某人打造如此机械奇迹？这究竟承载着怎样的宏伟构想？
 Tooltip_SteamGateAssembler_03=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
 
-NameSteamMegaCompressor=超级蒸汽压缩机
-SteamMegaCompressorRecipeType=超级压缩
-Tooltip_SteamMegaCompressor_00=拥有256并行
-Tooltip_SteamMegaCompressor_01=§b§o喷射超乎想象的高压蒸汽流，以强力压缩材料。
-Tooltip_SteamMegaCompressor_02=§b§o可制造超致密金属板……
-Tooltip_SteamMegaCompressor_03=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
+NameMegaSteamCompressor=超级蒸汽压缩机
+MegaSteamCompressorRecipeType=超级压缩
+Tooltip_MegaSteamCompressor_00=拥有256并行
+Tooltip_MegaSteamCompressor_01=§b§o喷射超乎想象的高压蒸汽流，以强力压缩材料。
+Tooltip_MegaSteamCompressor_02=§b§o可制造超致密金属板……
+Tooltip_MegaSteamCompressor_03=作者: §d§oSteam§f§oIs§d§oThe§f§oNumber
 
 NameSteamExtractinator=蒸汽精萃机
 gtnl.recipe.SteamExtractinator=萃取

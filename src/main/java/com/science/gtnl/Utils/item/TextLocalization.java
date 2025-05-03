@@ -370,22 +370,22 @@ public class TextLocalization {
         "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
         "Tooltip_SteamGateAssembler_03");
 
-    public static final String NameSteamMegaCompressor = texter("Steam Supercompressor", "NameSteamMegaCompressor");
-    public static final String SteamMegaCompressorRecipeType = texter(
+    public static final String NameMegaSteamCompressor = texter("Steam Supercompressor", "NameMegaSteamCompressor");
+    public static final String MegaSteamCompressorRecipeType = texter(
         "Supercompressor",
-        "SteamMegaCompressorRecipeType");
-    public static final String Tooltip_SteamMegaCompressor_00 = texter(
+        "MegaSteamCompressorRecipeType");
+    public static final String Tooltip_MegaSteamCompressor_00 = texter(
         "Has 256 parallels",
-        "Tooltip_SteamMegaCompressor_00");
-    public static final String Tooltip_SteamMegaCompressor_01 = texter(
+        "Tooltip_MegaSteamCompressor_00");
+    public static final String Tooltip_MegaSteamCompressor_01 = texter(
         "§b§oShoots impossibly pressurized jets of steam at material to compress it.",
-        "Tooltip_SteamMegaCompressor_01");
-    public static final String Tooltip_SteamMegaCompressor_02 = texter(
+        "Tooltip_MegaSteamCompressor_01");
+    public static final String Tooltip_MegaSteamCompressor_02 = texter(
         "§b§oCapable of creating superdense plates...",
-        "Tooltip_SteamMegaCompressor_02");
-    public static final String Tooltip_SteamMegaCompressor_03 = texter(
+        "Tooltip_MegaSteamCompressor_02");
+    public static final String Tooltip_MegaSteamCompressor_03 = texter(
         "Author: §d§oSteam§f§oIs§d§oThe§f§oNumber",
-        "Tooltip_SteamMegaCompressor_03");
+        "Tooltip_MegaSteamCompressor_03");
 
     public static final String NameSteamExtractinator = texter("Steam Extractinator", "NameSteamExtractinator");
     public static final String SteamExtractinatorRecipeType = texter(

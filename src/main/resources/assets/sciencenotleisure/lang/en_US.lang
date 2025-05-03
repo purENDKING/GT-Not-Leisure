@@ -1683,12 +1683,12 @@ Tooltip_SteamGateAssembler_01=§b§oEach chamber is carefully calibrated with ne
 Tooltip_SteamGateAssembler_02=§b§oWhat would drive someone to create such a device? What purpose could this possibly serve?
 Tooltip_SteamGateAssembler_03=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
 
-NameSteamMegaCompressor=Steam Supercompressor
-SteamMegaCompressorRecipeType=Supercompressor
-Tooltip_SteamMegaCompressor_00=Has 256 parallels
-Tooltip_SteamMegaCompressor_01=§b§oShoots impossibly pressurized jets of steam at material to compress it.
-Tooltip_SteamMegaCompressor_02=§b§oCapable of creating superdense plates...
-Tooltip_SteamMegaCompressor_03=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
+NameMegaSteamCompressor=Steam Supercompressor
+MegaSteamCompressorRecipeType=Supercompressor
+Tooltip_MegaSteamCompressor_00=Has 256 parallels
+Tooltip_MegaSteamCompressor_01=§b§oShoots impossibly pressurized jets of steam at material to compress it.
+Tooltip_MegaSteamCompressor_02=§b§oCapable of creating superdense plates...
+Tooltip_MegaSteamCompressor_03=Author: §d§oSteam§f§oIs§d§oThe§f§oNumber
 
 NameSteamExtractinator=Steam Extractinator
 gtnl.recipe.SteamExtractinator=Extractination

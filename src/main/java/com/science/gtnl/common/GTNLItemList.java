@@ -355,7 +355,7 @@ public enum GTNLItemList implements IItemContainer {
     SteamManufacturer,
     MegaSolarBoiler,
     SteamCactusWonder,
-    SteamMegaCompressor,
+    MegaSteamCompressor,
     SteamGateAssembler,
     Steamgate,
     AdvancedInfiniteDriller,

@@ -40,7 +40,7 @@ import gregtech.api.util.OverclockCalculator;
 import gregtech.common.blocks.BlockCasings2;
 import gregtech.common.tileentities.render.TileEntityBlackhole;
 
-public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompressor> implements ISurvivalConstructable {
+public class MegaSteamCompressor extends SteamMultiMachineBase<MegaSteamCompressor> implements ISurvivalConstructable {
 
     public static final String TEXTURE_OVERLAY_MULTI_STEAMHOLE_GLOW = RESOURCE_ROOT_ID + ":"
         + "iconsets/OVERLAY_MULTI_STEAMHOLE_GLOW";
@@ -59,24 +59,24 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
     public static Textures.BlockIcons.CustomIcon OVERLAY_MULTI_STEAMHOLE_ACTIVE_GLOW = new Textures.BlockIcons.CustomIcon(
         TEXTURE_OVERLAY_MULTI_STEAMHOLE_ACTIVE_GLOW);
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static IStructureDefinition<SteamMegaCompressor> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<MegaSteamCompressor> STRUCTURE_DEFINITION = null;
     private static final String SMC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_mega_compressor"; // 文件路径
     private static final String[][] shape = StructureUtils.readStructureFromFile(SMC_STRUCTURE_FILE_PATH);
     public static final int HORIZONTAL_OFF_SET = 17;
     public static final int VERTICAL_OFF_SET = 27;
     public static final int DEPTH_OFF_SET = 10;
 
-    public SteamMegaCompressor(String aName) {
+    public MegaSteamCompressor(String aName) {
         super(aName);
     }
 
-    public SteamMegaCompressor(int aID, String aName, String aNameRegional) {
+    public MegaSteamCompressor(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamMegaCompressorRecipeType;
+        return TextLocalization.MegaSteamCompressorRecipeType;
     }
 
     @Override
@@ -85,23 +85,23 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
     }
 
     @Override
-    public IStructureDefinition<SteamMegaCompressor> getStructureDefinition() {
+    public IStructureDefinition<MegaSteamCompressor> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<SteamMegaCompressor>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<MegaSteamCompressor>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', chainAllGlasses())
                 .addElement(
                     'B',
                     ofChain(
-                        buildSteamBigInput(SteamMegaCompressor.class)
+                        buildSteamBigInput(MegaSteamCompressor.class)
                             .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
                             .dot(1)
                             .build(),
-                        buildSteamInput(SteamMegaCompressor.class)
+                        buildSteamInput(MegaSteamCompressor.class)
                             .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
                             .dot(1)
                             .build(),
-                        buildHatchAdder(SteamMegaCompressor.class)
+                        buildHatchAdder(MegaSteamCompressor.class)
                             .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
                             .dot(1)
                             .atLeast(
@@ -150,10 +150,10 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamMegaCompressor_00)
-            .addInfo(TextLocalization.Tooltip_SteamMegaCompressor_01)
-            .addInfo(TextLocalization.Tooltip_SteamMegaCompressor_02)
-            .addInfo(TextLocalization.Tooltip_SteamMegaCompressor_03)
+            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_00)
+            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_01)
+            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_02)
+            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_03)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
@@ -252,7 +252,7 @@ public class SteamMegaCompressor extends SteamMultiMachineBase<SteamMegaCompress
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new SteamMegaCompressor(this.mName);
+        return new MegaSteamCompressor(this.mName);
     }
 
     @Override

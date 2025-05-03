@@ -1578,7 +1578,6 @@ public class MaterialPool implements Runnable {
         new Werkstoff.Stats().setToxic(true),
         Werkstoff.Types.MIXTURE,
         new Werkstoff.GenerationFeatures().onlyDust()
-            .addPrefix(OrePrefixes.ore)
             .addMolten()
             .addMetalItems()
             .addCraftingMetalWorkingItems()
