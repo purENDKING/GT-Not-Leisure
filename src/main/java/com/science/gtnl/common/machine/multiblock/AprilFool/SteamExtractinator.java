@@ -229,7 +229,7 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
             .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .beginStructureBlock(15, 10, 14, true)
+            .beginStructureBlock(15, 10, 17, true)
             .addInputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_00)
             .addOutputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_01)
             .addEnergyHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_02)

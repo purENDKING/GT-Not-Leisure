@@ -132,7 +132,7 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.UraniumSlag, "铀矿渣");
         addWerkstoffLocalization(MaterialPool.UraniumChlorideSlag, "氯化铀矿渣");
         addWerkstoffLocalization(MaterialPool.RadiumChloride, "氯化镭");
-        addWerkstoffLocalization(MaterialPool.GravelSluice, "砂砾泥浆");
+        addWerkstoffLocalization(MaterialPool.GravelSluice, "沙砾泥浆");
         addWerkstoffLocalization(MaterialPool.SandSluice, "沙子泥浆");
         addWerkstoffLocalization(MaterialPool.ObsidianSluice, "黑曜石泥浆");
         addWerkstoffLocalization(MaterialPool.GemSluice, "宝石泥浆");
