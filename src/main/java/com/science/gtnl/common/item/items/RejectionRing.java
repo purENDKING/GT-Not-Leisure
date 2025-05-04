@@ -5,7 +5,6 @@ import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
@@ -13,14 +12,11 @@ import net.minecraft.world.World;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.item.BaubleItem;
 
 import baubles.api.BaubleType;
-import baubles.api.IBauble;
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
-import vazkii.botania.common.entity.EntityDoppleganger;
 
-public class RejectionRing extends Item implements IBauble {
+public class RejectionRing extends BaubleItem {
 
     public RejectionRing() {
         this.setMaxStackSize(1);
@@ -68,48 +64,7 @@ public class RejectionRing extends Item implements IBauble {
     }
 
     @Override
-    public void onEquipped(ItemStack itemstack, EntityLivingBase player) {}
-
-    @Override
-    public void onUnequipped(ItemStack itemstack, EntityLivingBase player) {}
-
-    @Override
-    public boolean canEquip(ItemStack itemstack, EntityLivingBase player) {
-        return true;
-    }
-
-    @Override
     public boolean canUnequip(ItemStack itemstack, EntityLivingBase player) {
         return false;
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        if (!EntityDoppleganger.isTruePlayer(par3EntityPlayer)) return par1ItemStack;
-
-        if (canEquip(par1ItemStack, par3EntityPlayer)) {
-            InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(par3EntityPlayer);
-            for (int i = 0; i < baubles.getSizeInventory(); i++) {
-                if (baubles.isItemValidForSlot(i, par1ItemStack)) {
-                    ItemStack stackInSlot = baubles.getStackInSlot(i);
-                    if (stackInSlot == null
-                        || ((IBauble) stackInSlot.getItem()).canUnequip(stackInSlot, par3EntityPlayer)) {
-                        if (!par2World.isRemote) {
-                            baubles.setInventorySlotContents(i, par1ItemStack.copy());
-                            if (!par3EntityPlayer.capabilities.isCreativeMode) par3EntityPlayer.inventory
-                                .setInventorySlotContents(par3EntityPlayer.inventory.currentItem, null);
-                        }
-
-                        if (stackInSlot != null) {
-                            ((IBauble) stackInSlot.getItem()).onUnequipped(stackInSlot, par3EntityPlayer);
-                            return stackInSlot.copy();
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-
-        return par1ItemStack;
     }
 }

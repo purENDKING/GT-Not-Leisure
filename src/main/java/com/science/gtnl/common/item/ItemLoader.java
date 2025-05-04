@@ -8,6 +8,7 @@ import com.science.gtnl.common.item.items.FakeItemSiren;
 import com.science.gtnl.common.item.items.FuelRod.FuelRod;
 import com.science.gtnl.common.item.items.FuelRod.FuelRodDepleted;
 import com.science.gtnl.common.item.items.KFCFamily;
+import com.science.gtnl.common.item.items.PhysicsCape;
 import com.science.gtnl.common.item.items.RejectionRing;
 import com.science.gtnl.common.item.items.SatietyRing;
 import com.science.gtnl.common.item.items.SuperReachRing;
@@ -26,6 +27,7 @@ public class ItemLoader {
     public static Item SatietyRing = new SatietyRing();
     public static Item RejectionRing = new RejectionRing();
     public static Item TwilightSword = new TwilightSword();
+    public static Item PhysicsCape = new PhysicsCape();
     public static Item SuperReachRing = new SuperReachRing();
     public static Item RecordSus = new ItemRecord("sus");
     public static Item RecordNewHorizons = new ItemRecord("newhorizons");
@@ -54,6 +56,7 @@ public class ItemLoader {
         IRegistry(SatietyRing, "SatietyRing");
         IRegistry(RejectionRing, "RejectionRing");
         IRegistry(TwilightSword, "TwilightSword");
+        IRegistry(PhysicsCape, "PhysicsCape");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 

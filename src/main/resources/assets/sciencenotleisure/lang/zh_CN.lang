@@ -77,6 +77,10 @@ Tooltip_ManaEnergyHatch_02=基础效率: 250EU / 1mana
 Tooltip_ManaEnergyHatch_03=流体容量: 
 Info_ManaEnergyHatch_00=存储魔力: 
 
+TapDynamoHatchLV=动能动力仓
+Tooltip_TapDynamoHatch_00=有钱能使鬼推磨!
+Tooltip_TapDynamoHatch_01=点击推动动力仓发电
+
 BigSteamInputHatch=大型蒸汽仓
 AllSteamCapacity=总蒸汽数量: 
 
@@ -647,6 +651,9 @@ gtnl.potion.perfect_physique=完美体魄
 item.SatietyRing.name=饱食指环
 item.SuperReachRing.name=超级触物指环
 item.RejectionRing.name=排斥指环
+
+item.PhysicsCape.name=物理学披风
+Tooltip_PhysicsCape_00=利用强大的切割磁感线进行发电!
 
 item.InfinityFuelRod.name=燃料棒(无尽)
 item.InfinityFuelRodDepleted.name=枯竭燃料棒(无尽)

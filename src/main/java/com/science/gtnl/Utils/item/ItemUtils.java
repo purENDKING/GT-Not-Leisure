@@ -1,7 +1,15 @@
 package com.science.gtnl.Utils.item;
 
+import static com.science.gtnl.Mods.Baubles;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.reavaritia.common.item.InfinityTotem;
+
+import baubles.api.BaublesApi;
 
 public class ItemUtils {
 
@@ -22,5 +30,31 @@ public class ItemUtils {
         if (compound.hasKey("IntCount")) stack.stackSize = compound.getInteger("IntCount");
 
         return stack;
+    }
+
+    public static void removeItemFromPlayer(EntityPlayer player, ItemStack stack) {
+        // 从物品栏中移除
+        for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+            ItemStack inventoryStack = player.inventory.getStackInSlot(i);
+            if (inventoryStack != null && inventoryStack.getItem() instanceof InfinityTotem
+                && inventoryStack == stack) {
+                player.inventory.setInventorySlotContents(i, null);
+                return;
+            }
+        }
+
+        // 从饰品栏中移除
+        if (Baubles.isModLoaded()) {
+            IInventory baublesInventory = BaublesApi.getBaubles(player);
+            if (baublesInventory != null) {
+                for (int i = 0; i < baublesInventory.getSizeInventory(); i++) {
+                    ItemStack baubleStack = baublesInventory.getStackInSlot(i);
+                    if (baubleStack != null && baubleStack.getItem() instanceof InfinityTotem && baubleStack == stack) {
+                        baublesInventory.setInventorySlotContents(i, null);
+                        return;
+                    }
+                }
+            }
+        }
     }
 }

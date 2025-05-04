@@ -77,6 +77,10 @@ Tooltip_ManaEnergyHatch_02=Base rate: 250 of EU -> 1 Mana
 Tooltip_ManaEnergyHatch_03=Fluid capacity:
 Info_ManaEnergyHatch_00=Mana storage:
 
+TapDynamoHatchLV=Tap Dynamo Hatch (LV)
+Tooltip_TapDynamoHatch_00=Money talks！
+Tooltip_TapDynamoHatch_01=Click to generate EU
+
 BigSteamInputHatch=Large Steam Hatch
 AllSteamCapacity=All Steam Capacity: 
 
@@ -647,6 +651,9 @@ gtnl.potion.perfect_physique=Perfect Physique
 item.SatietyRing.name=Ring of Satiety
 item.SuperReachRing.name=Super Reach Ring
 item.RejectionRing.name=Ring of Rejection
+
+item.PhysicsCape.name=Physics Cape
+Tooltip_PhysicsCape_00=Generate electricity by harnessing powerful magnetic flux cutting!
 
 item.InfinityFuelRod.name=Fuel Rod (Infinite)
 item.InfinityFuelRodDepleted.name=Depleted Fuel Rod (Infinite)
