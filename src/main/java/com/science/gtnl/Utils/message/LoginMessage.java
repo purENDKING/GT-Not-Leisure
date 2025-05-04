@@ -1,9 +1,9 @@
 package com.science.gtnl.Utils.message;
 
-import static net.minecraft.util.EnumChatFormatting.*;
-
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.util.*;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 
 import com.science.gtnl.Mods;
 import com.science.gtnl.config.MainConfig;

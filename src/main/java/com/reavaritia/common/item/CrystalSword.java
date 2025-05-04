@@ -12,7 +12,13 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -51,7 +57,7 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (player.isSneaking()) {
-            toggleSwordMode(stack, world, player);
+            toggleSwordMode(stack, world);
             return stack;
         } else {
             if (isSwordAuraActive(stack)) {
@@ -71,7 +77,7 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
         return EnumAction.block;
     }
 
-    private void toggleSwordMode(ItemStack stack, World world, EntityPlayer player) {
+    private void toggleSwordMode(ItemStack stack, World world) {
         NBTTagCompound nbt = getOrCreateNBT(stack);
         boolean currentMode = nbt.getBoolean("SwordAuraMode");
         nbt.setBoolean("SwordAuraMode", !currentMode);
