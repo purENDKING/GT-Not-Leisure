@@ -19,9 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
@@ -79,10 +77,9 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
     @SideOnly(Side.CLIENT)
     @Override
     public void showSubtitle() {
-        String localized = TextLocalization.Tooltip_InfinityTotem_Enable;
-        ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
-
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+        IChatComponent component = new ChatComponentTranslation("Tooltip_InfinityTotem_Enable");
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText(), true);
     }
 
     @SideOnly(Side.CLIENT)

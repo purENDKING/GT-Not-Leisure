@@ -4,7 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
-import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -20,7 +20,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -211,7 +211,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                 .addElement(
                     'a',
                     buildHatchAdder(NanoPhagocytosisPlant.class)
-                        .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), ParallelController)
+                        .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy), ParallelCon)
                         .casingIndex(((BlockCasings9) GregTechAPI.sBlockCasings9).getTextureIndex(12))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings9, 12))))
@@ -320,7 +320,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             if (isRenderActive) destroyRenderer();
         }
         aPlayer.addChatMessage(
-            new ChatComponentText("Animations are now " + (isRendererDisabled ? "disabled" : "enabled") + "."));
+            new ChatComponentTranslation(
+                isRendererDisabled ? "Render_NanoPhagocytosisPlant_Disabled" : "Render_NanoPhagocytosisPlant_Enabled"));
     }
 
     private TileEntityNanoPhagocytosisPlant getRenderer() {

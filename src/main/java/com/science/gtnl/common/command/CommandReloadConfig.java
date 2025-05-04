@@ -1,14 +1,10 @@
 package com.science.gtnl.common.command;
 
-import static com.science.gtnl.Utils.Utils.repeatExclamation;
-import static net.minecraft.util.EnumChatFormatting.*;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 
 import com.science.gtnl.Mods;
 import com.science.gtnl.ScienceNotLeisure;
@@ -42,29 +38,32 @@ public class CommandReloadConfig extends CommandBase {
             }
 
             if (MainConfig.enableDeleteRecipe) {
-                for (int i = 1; i <= 5; i++) {
-                    String message = StatCollector.translateToLocal("Welcome_GTNL_DeleteRecipe");
-                    String exclamations = repeatExclamation(i);
-                    sender.addChatMessage(new ChatComponentText(YELLOW + message + exclamations));
-                }
+                sender.addChatMessage(
+                    new ChatComponentTranslation("Welcome_GTNL_DeleteRecipe")
+                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.YELLOW)));
             }
 
             if (MainConfig.enableDebugMode) {
-                sender
-                    .addChatMessage(new ChatComponentText(RED + StatCollector.translateToLocal("Welcome_GTNL_Debug")));
+                sender.addChatMessage(
+                    new ChatComponentTranslation("Welcome_GTNL_Debug")
+                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
             }
 
             if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
                 sender.addChatMessage(
-                    new ChatComponentText(GOLD + StatCollector.translateToLocal("Welcome_GTNL_RecipeOutputChance_00")));
+                    new ChatComponentTranslation("Welcome_GTNL_RecipeOutputChance_00")
+                        .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
+
                 sender.addChatMessage(
-                    new ChatComponentText(
-                        GOLD + StatCollector.translateToLocal("Welcome_GTNL_RecipeOutputChance_01")
-                            + MainConfig.recipeOutputChance
-                            + "%"));
+                    new ChatComponentTranslation(
+                        "Welcome_GTNL_RecipeOutputChance_01",
+                        MainConfig.recipeOutputChance + "%")
+                            .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
             }
 
-            sender.addChatMessage(new ChatComponentText(GREEN + StatCollector.translateToLocal("Welcome_GTNL_reload")));
+            sender.addChatMessage(
+                new ChatComponentTranslation("Welcome_GTNL_reload")
+                    .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GREEN)));
 
         } catch (Exception e) {
             sender.addChatMessage(new ChatComponentText("Error Reload GTNL config: " + e.getMessage()));

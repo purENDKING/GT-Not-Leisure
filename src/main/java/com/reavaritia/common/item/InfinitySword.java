@@ -25,14 +25,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -526,9 +519,10 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void showSubtitle(String message) {
-        IChatComponent text = new ChatComponentText(EnumChatFormatting.WHITE + message);
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+    public void showSubtitle(String messageKey) {
+        IChatComponent component = new ChatComponentTranslation(messageKey);
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText(), true);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

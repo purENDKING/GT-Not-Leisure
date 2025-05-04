@@ -6,12 +6,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.effect.effects.AweEffect;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -34,9 +33,9 @@ public class GuiEventHandler {
 
             if (effect != null && event.gui instanceof GuiInventory) {
                 event.setCanceled(true);
-                String[] messages = { TextLocalization.Awe_Cancel_02_01, TextLocalization.Awe_Cancel_02_02 };
+                String[] messages = { "Awe_Cancel_02_01", "Awe_Cancel_02_02" };
                 String message = messages[random.nextInt(messages.length)];
-                IChatComponent chatComponent = new ChatComponentText(message);
+                IChatComponent chatComponent = new ChatComponentTranslation(message);
                 player.addChatMessage(chatComponent);
 
             }

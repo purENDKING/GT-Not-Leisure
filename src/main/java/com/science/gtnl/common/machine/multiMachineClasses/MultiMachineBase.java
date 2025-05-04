@@ -957,7 +957,7 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
 
     public enum ParallelControllerElement implements IHatchElement<MultiMachineBase<?>> {
 
-        ParallelController(MultiMachineBase::addParallelControllerToMachineList, ParallelControllerHatch.class) {
+        ParallelCon(MultiMachineBase::addParallelControllerToMachineList, ParallelControllerHatch.class) {
 
             @Override
             public long count(MultiMachineBase<?> tileEntity) {

@@ -5,7 +5,6 @@ import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,11 +12,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -81,8 +76,7 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
         boolean currentMode = nbt.getBoolean("SwordAuraMode");
         nbt.setBoolean("SwordAuraMode", !currentMode);
 
-        String messageKey = !currentMode ? TextLocalization.Tooltip_CrystalSword_Aura_On
-            : TextLocalization.Tooltip_CrystalSword_Aura_Off;
+        String messageKey = !currentMode ? "Tooltip_CrystalSword_Aura_On" : "Tooltip_CrystalSword_Aura_Off";
 
         if (world.isRemote) {
             showSubtitle(messageKey, 0);
@@ -97,10 +91,7 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
         if (System.currentTimeMillis() - lastUsed < cooldown) {
             if (world.isRemote) {
                 long remainingTime = (cooldown - (System.currentTimeMillis() - lastUsed)) / 1000;
-                showSubtitle(
-                    TextLocalization.Tooltip_CrystalSword_Aura_00 + remainingTime
-                        + TextLocalization.Tooltip_CrystalSword_Aura_01,
-                    remainingTime);
+                showSubtitle("Tooltip_CrystalSword_Aura_00", remainingTime);
             }
             return;
         }
@@ -200,8 +191,8 @@ public class CrystalSword extends ItemSword implements SubtitleDisplay {
     @SideOnly(Side.CLIENT)
     @Override
     public void showSubtitle(String messageKey, long cooldown) {
-        String message = cooldown > 0 ? messageKey : I18n.format(messageKey);
-        ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + message);
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+        IChatComponent component = new ChatComponentTranslation(messageKey);
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText() + cooldown, true);
     }
 }

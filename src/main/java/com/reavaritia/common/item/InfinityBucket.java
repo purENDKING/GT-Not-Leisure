@@ -17,9 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -577,13 +575,15 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
 
     @SideOnly(Side.CLIENT)
     private void showFluidInfo(String displayName, int remainingAmount) {
-        String message = String.format(
+        String amountText = (remainingAmount == INFINITE_FLUID_AMOUNT) ? "∞" : remainingAmount + "L";
+
+        IChatComponent component = new ChatComponentTranslation(
             TextLocalization.Tooltip_InfinityBucket_01,
             displayName,
-            remainingAmount == INFINITE_FLUID_AMOUNT ? "∞" : remainingAmount + "L");
-        ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + message);
+            amountText);
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
 
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText(), true);
     }
 
     @SubscribeEvent
@@ -595,7 +595,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
             if (stack != null && stack.getItem() == this && player.isSneaking()) {
 
                 clearFluids(stack);
-                player.addChatMessage(new ChatComponentText(TextLocalization.Tooltip_InfinityBucket_02));
+                player.addChatMessage(new ChatComponentTranslation("Tooltip_InfinityBucket_02"));
                 event.setCanceled(true);
             }
         }

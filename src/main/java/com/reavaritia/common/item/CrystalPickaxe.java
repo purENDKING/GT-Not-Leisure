@@ -13,9 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
@@ -88,10 +86,9 @@ public class CrystalPickaxe extends ItemPickaxe implements SubtitleDisplay {
     @SideOnly(Side.CLIENT)
     @Override
     public void showSubtitle(String messageKey) {
-        String localized = StatCollector.translateToLocal(messageKey);
-        ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
-
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+        IChatComponent component = new ChatComponentTranslation(messageKey);
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText(), true);
     }
 
     @Override

@@ -282,9 +282,6 @@ public class TextLocalization {
     public static final String Tooltip_SuperCraftingInputHatchME_04 = texter(
         "Change ME connection behavior by right-clicking with wire cutter",
         "Tooltip_SuperCraftingInputHatchME_04");
-    public static final String Tooltip_SuperCraftingInputHatchME_05 = texter(
-        "Saved Link Data to Data Stick",
-        "Tooltip_SuperCraftingInputHatchME_05");
     public static final String Button_Tooltip_SuperCraftingInputHatchME_00 = texter(
         "Place manual items",
         "Button_Tooltip_SuperCraftingInputHatchME_00");
@@ -331,12 +328,6 @@ public class TextLocalization {
     public static final String Chat_SuperCraftingInputProxy_01 = texter(
         "This bus is not linked to any Crafting Input Buffer.",
         "Chat_SuperCraftingInputProxy_01");
-    public static final String Chat_SuperCraftingInputProxy_02 = texter(
-        "Link successful",
-        "Chat_SuperCraftingInputProxy_02");
-    public static final String Chat_SuperCraftingInputProxy_03 = texter(
-        "Link failed",
-        "Chat_SuperCraftingInputProxy_03");
 
     public static final String SuperDataAccessHatch = texter("Super Data Access Hatch", "SuperDataAccessHatch");
     public static final String Tooltip_SuperDataAccessHatch_00 = texter(
@@ -2549,7 +2540,7 @@ public class TextLocalization {
         "After each voltage level exceeds MV, the temperature will increase by 100K",
         "Tooltip_MegaBlastFurnace_02");
     public static final String Tooltip_MegaBlastFurnace_03 = texter(
-        "Parallel = 4 * Parallel provided by the parallel control core",
+        "Parallel Control Core provides 4x additional parallel!",
         "Tooltip_MegaBlastFurnace_03");
     public static final String Tooltip_MegaBlastFurnace_04 = texter(
         "400%% faster than Blast Furnace",
@@ -2828,15 +2819,6 @@ public class TextLocalization {
     public static final String Tooltip_WhiteNightGenerator_51 = texter(
         "§r§c§oWarning, during machine operation, internal EU buffer is generated. Breaking it will cause an immediate explosion!",
         "Tooltip_WhiteNightGenerator_51");
-    public static final String Awe_Cancel_01 = texter(
-        "§f§lDon't be afraid, I am with you. You can never leave unless I allow it.",
-        "Awe_Cancel_01");
-    public static final String Awe_Cancel_02_01 = texter(
-        "§f§lDon't deny my existence, I am right in front of you.",
-        "Awe_Cancel_02_01");
-    public static final String Awe_Cancel_02_02 = texter(
-        "§f§lMy deeds are unknown and nowhere to be found.",
-        "Awe_Cancel_02_02");
     public static final String Awe_Kick = texter("§f§l!!!at a loss!!!", "Awe_Kick");
 
     public static final String NameRealArtificialStar = texter("Real Artificial Star", "NameRealArtificialStar");

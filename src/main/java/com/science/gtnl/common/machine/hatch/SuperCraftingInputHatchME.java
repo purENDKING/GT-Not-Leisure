@@ -26,7 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -964,7 +963,7 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
         dataStick.setStackDisplayName(
             "Super Crafting Input Buffer Link Data Stick (" + aBaseMetaTileEntity
                 .getXCoord() + ", " + aBaseMetaTileEntity.getYCoord() + ", " + aBaseMetaTileEntity.getZCoord() + ")");
-        aPlayer.addChatMessage(new ChatComponentText(TextLocalization.Tooltip_SuperCraftingInputHatchME_05));
+        aPlayer.addChatMessage(new ChatComponentTranslation("Tooltip_SuperCraftingInputHatchME_05"));
     }
 
     @Override

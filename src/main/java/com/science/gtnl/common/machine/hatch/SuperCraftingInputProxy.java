@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -312,9 +312,8 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
                     nbt.getInteger("ySuper"),
                     nbt.getInteger("zSuper")) != null;
                 aPlayer.addChatMessage(
-                    new ChatComponentText(
-                        success ? TextLocalization.Chat_SuperCraftingInputProxy_02
-                            : TextLocalization.Chat_SuperCraftingInputProxy_03));
+                    new ChatComponentTranslation(
+                        success ? "Chat_SuperCraftingInputProxy_02" : "Chat_SuperCraftingInputProxy_03"));
                 return true;
             }
             // 处理Crafting类型链接
@@ -325,7 +324,8 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
                     nbt.getInteger("y"),
                     nbt.getInteger("z")) != null;
                 aPlayer.addChatMessage(
-                    new ChatComponentText(success ? "Crafting Link successful" : "Crafting Link failed"));
+                    new ChatComponentTranslation(
+                        success ? "Chat_SuperCraftingInputProxy_02" : "Chat_SuperCraftingInputProxy_03"));
                 return true;
             }
         }

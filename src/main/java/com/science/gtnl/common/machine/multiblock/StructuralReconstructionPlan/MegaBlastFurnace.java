@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ELECTRIC_BLAST_FURNACE;
@@ -86,7 +87,14 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                 .addElement(
                     'A',
                     buildHatchAdder(MegaBlastFurnace.class)
-                        .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(
+                            InputHatch,
+                            OutputHatch,
+                            InputBus,
+                            OutputBus,
+                            Maintenance,
+                            Energy.or(ExoticEnergy),
+                            ParallelCon)
                         .casingIndex(TAE.GTPP_INDEX(15))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(ModBlocks.blockCasingsMisc, 15))))
@@ -125,6 +133,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_03)
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_04)
             .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_05)
+            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
             .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()

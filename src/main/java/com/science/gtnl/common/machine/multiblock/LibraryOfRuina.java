@@ -4,7 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
-import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelController;
+import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static goodgenerator.loader.Loaders.gravityStabilizationCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -163,7 +163,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
                             OutputBus,
                             Maintenance,
                             Energy.or(ExoticEnergy),
-                            ParallelController)
+                            ParallelCon)
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlockAnyMeta(SHIELDED_ACCELERATOR_CASING))))

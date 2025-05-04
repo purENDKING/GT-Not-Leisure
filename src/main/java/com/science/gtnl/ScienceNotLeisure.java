@@ -11,12 +11,14 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.science.gtnl.Utils.LanguageManager;
-import com.science.gtnl.Utils.LoginMessage;
 import com.science.gtnl.Utils.item.MissingMappingsHandler;
+import com.science.gtnl.Utils.message.LanguageManager;
+import com.science.gtnl.Utils.message.LoginMessage;
+import com.science.gtnl.Utils.message.TitleNetwork;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandReloadConfig;
+import com.science.gtnl.common.command.CommandTitle;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.config.ClientEventHandler;
@@ -127,6 +129,7 @@ public class ScienceNotLeisure {
     public void serverStarting(FMLServerStartingEvent event) {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
+        event.registerServerCommand(new CommandTitle());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -147,6 +150,8 @@ public class ScienceNotLeisure {
         FMLCommonHandler.instance()
             .bus()
             .register(new ClientEventHandler());
+
+        TitleNetwork.init();
     }
 
     @Mod.EventHandler

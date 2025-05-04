@@ -17,11 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.EnumHelper;
@@ -145,9 +141,9 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
     @SideOnly(Side.CLIENT)
     @Override
     public void showSubtitle(String messageKey) {
-        String localized = StatCollector.translateToLocal(messageKey);
-        ChatComponentText text = new ChatComponentText(EnumChatFormatting.WHITE + localized);
-        Minecraft.getMinecraft().ingameGUI.func_110326_a(text.getFormattedText(), true);
+        IChatComponent component = new ChatComponentTranslation(messageKey);
+        component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));
+        Minecraft.getMinecraft().ingameGUI.func_110326_a(component.getFormattedText(), true);
     }
 
     private void breakOtherBlock(EntityPlayer player, ItemStack stack, int x, int y, int z, int originX, int originY,

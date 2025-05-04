@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -178,7 +178,8 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
             tag.setInteger("z", aBaseMetaTileEntity.getZCoord());
 
             device.stackTagCompound = tag;
-            aPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("Tooltip_Steamgate_04")));
+            aPlayer
+                .addChatMessage(new ChatComponentTranslation(StatCollector.translateToLocal("Tooltip_Steamgate_04")));
         }
     }
 
@@ -215,9 +216,9 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
         // Try to link, and report the result back to the player.
         boolean result = trySetControllerFromCoord(x, y, z);
         if (result) {
-            aPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("Tooltip_Steamgate_05")));
+            aPlayer.addChatMessage(new ChatComponentTranslation("Tooltip_Steamgate_05"));
         } else {
-            aPlayer.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("Tooltip_Steamgate_06")));
+            aPlayer.addChatMessage(new ChatComponentTranslation("Tooltip_Steamgate_06"));
         }
 
     }

@@ -13,7 +13,7 @@ import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.client.event.GuiOpenEvent;
@@ -99,7 +99,7 @@ public class AweEffect extends GTNLEffectUtil {
             if (effect != null && event.gui instanceof GuiIngameMenu) {
                 event.setCanceled(true);
 
-                IChatComponent chatComponent = new ChatComponentText(TextLocalization.Awe_Cancel_01);
+                IChatComponent chatComponent = new ChatComponentTranslation("Awe_Cancel_01");
                 player.addChatMessage(chatComponent);
 
             }
