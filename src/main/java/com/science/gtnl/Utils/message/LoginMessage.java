@@ -48,6 +48,6 @@ public class LoginMessage {
                     .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
         }
 
-        TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 1000, 0xFFFF55, 2);
+        TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 200, 0xFFFF55, 2);
     }
 }

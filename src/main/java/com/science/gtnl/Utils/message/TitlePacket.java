@@ -21,7 +21,7 @@ public class TitlePacket implements IMessage {
     public double scaleText;
 
     public TitlePacket() {
-        this.durationTicks = 600;
+        this.durationTicks = 70;
         this.colorText = 0xFFFFFF;
         this.scaleText = 3;
         this.fadeIn = 10;
@@ -38,7 +38,7 @@ public class TitlePacket implements IMessage {
     }
 
     public TitlePacket(String message) {
-        this(message, 600, 0xFFFFFF, 3, 10, 20);
+        this(message, 70, 0xFFFFFF, 3, 10, 20);
     }
 
     public TitlePacket(String message, int durationTicks) {
