@@ -11,7 +11,7 @@ Welcome_GTNL_02=本模组添加了大量的机器和新的配方
 Welcome_GTNL_DeleteRecipe=配方移除已启用，注意部分配方可能与原版不一致
 Welcome_GTNL_Debug=GTNL Debug模式已启用
 Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
-Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: 
+Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: %s
 Welcome_GTNL_reload=配置文件已重新加载!
 
 NameGiveCountBook=§r掏掏不绝宝典 - 
@@ -857,6 +857,10 @@ bw.werkstoff.25112.name=沥青铀矿渣
 bw.werkstoff.25113.name=铀矿渣
 bw.werkstoff.25114.name=氯化铀矿渣
 bw.werkstoff.25115.name=氯化镭
+bw.werkstoff.25116.name=砂砾泥浆
+bw.werkstoff.25117.name=沙子泥浆
+bw.werkstoff.25118.name=黑曜石泥浆
+bw.werkstoff.25119.name=宝石泥浆
 bw.werkstoff.25200.name=錭錤錶
 bw.werkstoff.25201.name=星门
 
@@ -975,6 +979,10 @@ Material.pitchblendeslag=沥青铀矿渣
 Material.uraniumslag=铀矿渣
 Material.uraniumchlorideslag=氯化铀矿渣
 Material.radiumchloride=氯化镭
+Material.gravelsluice.name=砂砾泥浆
+Material.sandsluice.name=沙子泥浆
+Material.obsidiansluice.name=黑曜石泥浆
+Material.gemsluice.name=宝石泥浆
 Material.periodicium=錭錤錶
 Material.stargate=星门
 
@@ -1094,6 +1102,10 @@ fluid.pitchblendeslag=沥青铀矿渣
 fluid.uraniumslag=铀矿渣
 fluid.uraniumchlorideslag=氯化铀矿渣
 fluid.radiumchloride=氯化镭
+fluid.gravelsluice.name=砂砾泥浆
+fluid.sandsluice.name=沙子泥浆
+fluid.obsidiansluice.name=黑曜石泥浆
+fluid.gemsluice.name=宝石泥浆
 fluid.periodicium=錭錤錶
 fluid.stargate=星门
 
@@ -1213,6 +1225,10 @@ fluid.molten.pitchblendeslag=沥青铀矿渣
 fluid.molten.uraniumslag=铀矿渣
 fluid.molten.uraniumchlorideslag=氯化铀矿渣
 fluid.molten.radiumchloride=氯化镭
+fluid.molten.gravelsluice.name=砂砾泥浆
+fluid.molten.sandsluice.name=沙子泥浆
+fluid.molten.obsidiansluice.name=黑曜石泥浆
+fluid.molten.gemsluice.name=宝石泥浆
 fluid.molten.periodicium=錭錤錶
 fluid.molten.stargate=星门
 
@@ -1906,6 +1922,8 @@ NanoPhagocytosisPlantRecipeType=粉碎机
 Tooltip_NanoPhagocytosisPlant_00=使用纳米蜂群无情的撕碎一切
 Tooltip_NanoPhagocytosisPlant_01=每级电压等级额外提供5%%的加速和耗电减免(乘算叠加)
 Tooltip_NanoPhagocytosisPlant_Casing=任意超能硅岩强化无菌净水厂机械方块
+Render_NanoPhagocytosisPlant_Enabled=渲染已开启
+Render_NanoPhagocytosisPlant_Disabled=渲染已关闭
 
 NameMagneticEnergyReactionFurnace=磁能反应炉
 MagneticEnergyReactionFurnaceRecipeType=电弧炉 / 等离子电弧炉
@@ -2363,7 +2381,7 @@ Tooltip_MegaBlastFurnaceRecipeType=工业高炉
 Tooltip_MegaBlastFurnace_00=每超过配方温度900K，耗能均将乘以95%%（不计超频）
 Tooltip_MegaBlastFurnace_01=每超过配方温度1800K，将进行一次无损超频
 Tooltip_MegaBlastFurnace_02=超过MV后的每一级电压，都会将温度提高100K
-Tooltip_MegaBlastFurnace_03=并行数 = 4 * 并行控制核心提供的并行
+Tooltip_MegaBlastFurnace_03=并行控制核心额外提供4倍并行!
 Tooltip_MegaBlastFurnace_04=比工业高炉快400%%
 Tooltip_MegaBlastFurnace_05=安装UHV及以上的并行控制核心解锁§c无损超频§7
 Tooltip_MegaBlastFurnace_Casing_00=任意冶炼炉机械方块

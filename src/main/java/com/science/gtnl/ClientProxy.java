@@ -8,6 +8,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GuiEventHandler;
+import com.science.gtnl.Utils.message.TitleDisplayHandler;
 import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
@@ -50,6 +51,8 @@ public class ClientProxy extends CommonProxy {
             new ItemBlockNanoPhagocytosisPlantRender(BlockNanoPhagocytosisPlantRender));
         ClientRegistry
             .bindTileEntitySpecialRenderer(TileEntityNanoPhagocytosisPlant.class, new RenderNanoPhagocytosisPlant());
+
+        MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
     }
 
     @Override

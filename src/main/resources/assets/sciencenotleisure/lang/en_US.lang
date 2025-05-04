@@ -11,7 +11,7 @@ Welcome_GTNL_02=This mod adds a large number of machines and new recipes.
 Welcome_GTNL_DeleteRecipe=Recipe removal is enabled. Note that some recipes may differ from the original.
 Welcome_GTNL_Debug=GTNL Debug mode is enabled.
 Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabled。
-Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: 
+Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: %s
 Welcome_GTNL_reload=Configuration file has been reloaded!
 
 NameGiveCountBook=Give Count Book - 
@@ -857,6 +857,10 @@ bw.werkstoff.25112.name=Pitchblende Slag
 bw.werkstoff.25113.name=Uranium Slag
 bw.werkstoff.25114.name=Uranium Chloride Slag
 bw.werkstoff.25115.name=Radium Chloride
+bw.werkstoff.25116.name=Gravel Sluice
+bw.werkstoff.25117.name=Sand Sluice
+bw.werkstoff.25118.name=Obsidian Sluice
+bw.werkstoff.25119.name=Gem Sluice
 bw.werkstoff.25200.name=Periodicium
 bw.werkstoff.25201.name=Stargate
 
@@ -975,6 +979,10 @@ Material.pitchblendeslag=Pitchblende Slag
 Material.uraniumslag=Uranium Slag
 Material.uraniumchlorideslag=Uranium Chloride Slag
 Material.radiumchloride=Radium Chloride
+Material.gravelsluice.name=Gravel Sluice
+Material.sandsluice.name=Sand Sluice
+Material.obsidiansluice.name=Obsidian Sluice
+Material.gemsluice.name=Gem Sluice
 Material.periodicium=Periodicium
 Material.stargate=Stargate
 
@@ -1094,6 +1102,10 @@ fluid.pitchblendeslag=Pitchblende Slag
 fluid.uraniumslag=Uranium Slag
 fluid.uraniumchlorideslag=Uranium Chloride Slag
 fluid.radiumchloride=Radium Chloride
+fluid.gravelsluice.name=Gravel Sluice
+fluid.sandsluice.name=Sand Sluice
+fluid.obsidiansluice.name=Obsidian Sluice
+fluid.gemsluice.name=Gem Sluice
 fluid.periodicium=Periodicium
 fluid.stargate=Stargate
 
@@ -1213,8 +1225,12 @@ fluid.molten.pitchblendeslag=Pitchblende Slag
 fluid.molten.uraniumslag=Uranium Slag
 fluid.molten.uraniumchlorideslag=Uranium Chloride Slag
 fluid.molten.radiumchloride=Radium Chloride
-fluid.molten.periodicium=Molten Periodicium
-fluid.molten.stargate=Molten Stargate
+fluid.molten.gravelsluice.name=Gravel Sluice
+fluid.molten.sandsluice.name=Sand Sluice
+fluid.molten.obsidiansluice.name=Obsidian Sluice
+fluid.molten.gemsluice.name=Gem Sluice
+fluid.molten.periodicium=Periodicium
+fluid.molten.stargate=Stargate
 
 gt.blockmachines.wire.stargate.01.name=1x Stargate Wire
 gt.blockmachines.wire.stargate.02.name=2x Stargate Wire
@@ -1906,6 +1922,8 @@ NanoPhagocytosisPlantRecipeType=Macerator
 Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nanites
 Tooltip_NanoPhagocytosisPlant_01=Each voltage tier provides an additional 5%% speed and power reduction (multiplicative).
 Tooltip_NanoPhagocytosisPlant_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
+Render_NanoPhagocytosisPlant_Enabled=Render Enabled
+Render_NanoPhagocytosisPlant_Disabled=Render Disabled
 
 NameMagneticEnergyReactionFurnace=Magnetic Energy Reaction Furnace
 MagneticEnergyReactionFurnaceRecipeType=Arc Furnace / Plasma Arc Furnace
@@ -2363,7 +2381,7 @@ Tooltip_MegaBlastFurnaceRecipeType=Industrial Blast Furnace
 Tooltip_MegaBlastFurnace_00=For every 900K above the recipe temperature, energy consumption will multiply by 95%% (excluding overclocking)
 Tooltip_MegaBlastFurnace_01=For every 1800K above the recipe temperature, it will perform a lossless overclock
 Tooltip_MegaBlastFurnace_02=For every voltage level above MV, temperature will increase by 100K
-Tooltip_MegaBlastFurnace_03=Parallelism = 4 * parallelism provided by the parallel control core
+Tooltip_MegaBlastFurnace_03=Parallel Control Core provides 4x additional parallel!
 Tooltip_MegaBlastFurnace_04=400%% faster than the Industrial Blast Furnace
 Tooltip_MegaBlastFurnace_05=Install a UHV or higher Parallel Control Core to unlock §cperfect overclock§7
 Tooltip_MegaBlastFurnace_Casing_00=Any Smelting Furnace Mechanical Block
