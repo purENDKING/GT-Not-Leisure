@@ -39,6 +39,7 @@ import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
+import com.science.gtnl.common.machine.hatch.TapDynamoHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedCircuitAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
@@ -1332,6 +1333,14 @@ public class MachineLoader {
                 TextLocalization.ParallelControllerHatchMAX,
                 14));
         addItemTooltip(GTNLItemList.ParallelControllerHatchMAX.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.TapDynamoHatchLV.set(
+            new TapDynamoHatch(
+                TAP_DYNAMO_HATCH.ID,
+                "TapDynamoHatchLV",
+                StatCollector.translateToLocal("TapDynamoHatchLV"),
+                1));
+        addItemTooltip(GTNLItemList.TapDynamoHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

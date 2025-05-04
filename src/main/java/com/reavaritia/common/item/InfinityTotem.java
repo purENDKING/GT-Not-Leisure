@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Mods.Baubles;
+import static com.science.gtnl.Utils.item.ItemUtils.removeItemFromPlayer;
 
 import java.util.List;
 import java.util.UUID;
@@ -169,39 +170,13 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
                 if (stack.getItemDamage() == stack.getMaxDamage() - 1) {
                     event.setCanceled(true);
                     triggerFinalEffect(player.worldObj, player, stack);
-                    removeTotemFromPlayer(player, stack);
+                    removeItemFromPlayer(player, stack);
                 } else {
                     event.setCanceled(true);
                     triggerNormalEffect(player.worldObj, player, stack);
                 }
                 showSubtitle();
                 playSoundIfReady(player);
-            }
-        }
-    }
-
-    private void removeTotemFromPlayer(EntityPlayer player, ItemStack stack) {
-        // 从物品栏中移除
-        for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
-            ItemStack inventoryStack = player.inventory.getStackInSlot(i);
-            if (inventoryStack != null && inventoryStack.getItem() instanceof InfinityTotem
-                && inventoryStack == stack) {
-                player.inventory.setInventorySlotContents(i, null);
-                return;
-            }
-        }
-
-        // 从饰品栏中移除
-        if (Baubles.isModLoaded()) {
-            IInventory baublesInventory = BaublesApi.getBaubles(player);
-            if (baublesInventory != null) {
-                for (int i = 0; i < baublesInventory.getSizeInventory(); i++) {
-                    ItemStack baubleStack = baublesInventory.getStackInSlot(i);
-                    if (baubleStack != null && baubleStack.getItem() instanceof InfinityTotem && baubleStack == stack) {
-                        baublesInventory.setInventorySlotContents(i, null);
-                        return;
-                    }
-                }
             }
         }
     }

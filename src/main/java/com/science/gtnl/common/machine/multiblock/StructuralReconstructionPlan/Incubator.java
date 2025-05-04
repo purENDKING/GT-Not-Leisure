@@ -692,7 +692,7 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
             this.sendRenderPackets(xDir, zDir);
         } else if (this.getBaseMetaTileEntity()
             .getWorld()
-            .getWorldTime() % 20 == 7) {
+            .getTotalWorldTime() % 20 == 7) {
                 this.sendRenderPackets();
             }
 

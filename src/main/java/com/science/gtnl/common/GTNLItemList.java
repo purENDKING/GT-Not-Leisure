@@ -228,6 +228,7 @@ public enum GTNLItemList implements IItemContainer {
     RecordSus,
     RecordNewHorizons,
     FakeItemSiren,
+    PhysicsCape,
 
     InfinityFuelRod,
     InfinityFuelRodDepleted,
@@ -443,6 +444,7 @@ public enum GTNLItemList implements IItemContainer {
     ParallelControllerHatchUMV,
     ParallelControllerHatchUXV,
     ParallelControllerHatchMAX,
+    TapDynamoHatchLV,
     NinefoldInputHatchEV,
     NinefoldInputHatchIV,
     NinefoldInputHatchLuV,
