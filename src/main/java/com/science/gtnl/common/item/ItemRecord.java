@@ -17,7 +17,7 @@ public class ItemRecord extends net.minecraft.item.ItemRecord {
 
     @Override
     public ResourceLocation getRecordResource(String name) {
-        return new ResourceLocation(RESOURCE_ROOT_ID + ":" + "" + "record." + recordName);
+        return new ResourceLocation(RESOURCE_ROOT_ID + ":" + "record." + recordName);
     }
 
 }

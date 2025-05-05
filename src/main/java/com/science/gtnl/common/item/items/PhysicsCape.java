@@ -29,11 +29,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import vazkii.botania.api.item.IBaubleRender;
-import vazkii.botania.client.lib.LibResources;
 
 public class PhysicsCape extends BaubleItem implements IBaubleRender {
 
-    private static final ResourceLocation texture = new ResourceLocation(LibResources.MODEL_HOLY_CLOAK);
+    private static final ResourceLocation texture = new ResourceLocation(
+        RESOURCE_ROOT_ID + ":" + "textures/model/PhysicsCape.png");
+
     @SideOnly(Side.CLIENT)
     private static ModelBiped model;
 
@@ -93,8 +94,10 @@ public class PhysicsCape extends BaubleItem implements IBaubleRender {
                         TileEntity te = world.getTileEntity(px + dx, py + dy, pz + dz);
                         if (te instanceof IGregTechTileEntity) {
                             MetaTileEntity mte = (MetaTileEntity) ((IGregTechTileEntity) te).getMetaTileEntity();
-                            mte.setEUVar(mte.maxEUStore());
-                            itemstack.damageItem(1, player);
+                            if (mte.getEUVar() != mte.maxEUStore()) {
+                                mte.setEUVar(mte.maxEUStore());
+                                itemstack.damageItem(1, player);
+                            }
                             if (itemstack.getItemDamage() == itemstack.getMaxDamage() - 1) {
                                 removeItemFromPlayer((EntityPlayer) player, itemstack);
                                 break;
@@ -126,8 +129,7 @@ public class PhysicsCape extends BaubleItem implements IBaubleRender {
             clientLastY = clientCurrY;
             clientLastZ = clientCurrZ;
 
-            world.spawnParticle("hugeexplosion", clientLastX, clientLastY, clientLastZ, 1.0D, 0.0D, 0.0D);
-            world.spawnParticle("largeexplode", clientLastX, clientLastY, clientLastZ, 1.0D, 0.0D, 0.0D);
+            world.spawnParticle("largeexplode", clientLastX, clientLastY - 1, clientLastZ, 1.0D, 0.0D, 0.0D);
         }
     }
 
