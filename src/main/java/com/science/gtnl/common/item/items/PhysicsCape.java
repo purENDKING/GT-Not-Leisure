@@ -2,6 +2,7 @@ package com.science.gtnl.common.item.items;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.ItemUtils.removeItemFromPlayer;
+import static gregtech.api.enums.GTValues.V;
 
 import java.util.List;
 
@@ -94,8 +95,10 @@ public class PhysicsCape extends BaubleItem implements IBaubleRender {
                         TileEntity te = world.getTileEntity(px + dx, py + dy, pz + dz);
                         if (te instanceof IGregTechTileEntity) {
                             MetaTileEntity mte = (MetaTileEntity) ((IGregTechTileEntity) te).getMetaTileEntity();
-                            if (mte.getEUVar() != mte.maxEUStore()) {
-                                mte.setEUVar(mte.maxEUStore());
+                            if (mte.getEUVar() <= mte.maxEUStore()) {
+                                long storeEU = mte.getEUVar();
+                                long addedEU = V[4];
+                                mte.setEUVar(Math.min(storeEU + addedEU, mte.maxEUStore()));
                                 itemstack.damageItem(1, player);
                             }
                             if (itemstack.getItemDamage() == itemstack.getMaxDamage() - 1) {
