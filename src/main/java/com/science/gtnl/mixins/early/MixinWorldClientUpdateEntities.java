@@ -14,7 +14,7 @@ import com.science.gtnl.common.item.TimeStopManager;
 @Mixin(World.class)
 public abstract class MixinWorldClientUpdateEntities {
 
-    @Redirect(
+    /*@Redirect(
         method = "updateEntities",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;onUpdate()V"))
     private void redirectWeatherEntityOnUpdate(Entity entityInstance) {
@@ -30,5 +30,5 @@ public abstract class MixinWorldClientUpdateEntities {
         if (TimeStopManager.isTimeStopped() && p_72870_1_ instanceof EntityPlayer) {
             instance.updateEntity(p_72870_1_);
         }
-    }
+    }*/
 }
