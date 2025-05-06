@@ -730,6 +730,8 @@ item.ChronarchsClock.name=Chronarch's Clock
 Tooltip_ChronarchsClock_00=§8§oControl time...
 Tooltip_ChronarchsClock_01=Clock is cooling down!
 
+item.TimeStopPocketWatch.name=Time Stop Pocket Watch
+
 item.InfinityBucket.name=§6Bucket of the Distant Sea
 Tooltip_InfinityBucket_00=§8§oDevours everything…
 Tooltip_InfinityBucket_01=Current Fluid: %%s | Remaining: %%s

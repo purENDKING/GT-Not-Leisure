@@ -730,6 +730,8 @@ item.ChronarchsClock.name=时序僭越之钟
 Tooltip_ChronarchsClock_00=§8§o掌控时间…
 Tooltip_ChronarchsClock_01=时钟冷却中!
 
+item.TimeStopPocketWatch.name=时停怀表
+
 item.InfinityBucket.name=§6远海鲸吞之桶
 Tooltip_InfinityBucket_00=§8§o吞噬一切…
 Tooltip_InfinityBucket_01=当前流体：%%s | 剩余量：%%s

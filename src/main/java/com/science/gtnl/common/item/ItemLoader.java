@@ -13,6 +13,7 @@ import com.science.gtnl.common.item.items.RejectionRing;
 import com.science.gtnl.common.item.items.SatietyRing;
 import com.science.gtnl.common.item.items.SuperReachRing;
 import com.science.gtnl.common.item.items.TestItem;
+import com.science.gtnl.common.item.items.TimeStopPocketWatch;
 import com.science.gtnl.common.item.items.TwilightSword;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -28,6 +29,7 @@ public class ItemLoader {
     public static Item RejectionRing = new RejectionRing();
     public static Item TwilightSword = new TwilightSword();
     public static Item PhysicsCape = new PhysicsCape();
+    public static Item TimeStopPocketWatch = new TimeStopPocketWatch();
     public static Item SuperReachRing = new SuperReachRing();
     public static Item RecordSus = new ItemRecord("sus");
     public static Item RecordNewHorizons = new ItemRecord("newhorizons");
@@ -57,6 +59,7 @@ public class ItemLoader {
         IRegistry(RejectionRing, "RejectionRing");
         IRegistry(TwilightSword, "TwilightSword");
         IRegistry(PhysicsCape, "PhysicsCape");
+        IRegistry(TimeStopPocketWatch, "TimeStopPocketWatch");
         IRegistry(RecordSus, "RecordSus");
         IRegistry(RecordNewHorizons, "RecordNewHorizons");
 

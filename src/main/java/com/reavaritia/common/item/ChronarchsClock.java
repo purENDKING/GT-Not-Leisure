@@ -5,7 +5,6 @@ import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -30,8 +29,6 @@ import com.reavaritia.ReAvaItemList;
 import com.reavaritia.ReAvaritia;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.entity.EntityChronarchPoint;
-import com.reavaritia.common.render.CustomEntityRenderer;
-import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.config.MainConfig;
 
@@ -117,7 +114,6 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
     private static float originalTickrate = -1f;
     private static float currentTickrate = -1f;
     private static boolean restoring = false;
-    private boolean playSound = false;
 
     private static final int BOOST_DURATION_TICKS = 20 * 20;
     private static final int RESTORE_DURATION_TICKS = 20 * 20;
@@ -130,15 +126,7 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
             nbt = new NBTTagCompound();
             stack.setTagCompound(nbt);
         }
-        if (player.worldObj.isRemote) {
-            if (!nbt.getBoolean("ShaderApplied")) {
-                EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
-                if (renderer instanceof CustomEntityRenderer) {
-                    ((CustomEntityRenderer) renderer).activateDesaturateShader();
-                    nbt.setBoolean("ShaderApplied", true);
-                }
-            }
-        } else if (currentTickrate < MainConfig.maxTickrate) {
+        if (currentTickrate < MainConfig.maxTickrate && !player.worldObj.isRemote) {
             player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 200, 4));
             if (originalTickrate < 0f) {
                 originalTickrate = TickrateAPI.getServerTickrate();
@@ -149,12 +137,6 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
             currentTickrate = Math.min(currentTickrate + delta, MainConfig.maxTickrate);
 
             TickrateAPI.changeTickrate(currentTickrate);
-
-            if (!playSound) {
-                player.worldObj
-                    .playSoundAtEntity(player, ScienceNotLeisure.RESOURCE_ROOT_ID + ":" + "time.stop", 1.0F, 1.0F);
-                playSound = true;
-            }
             nbt.setBoolean("ClockActive", true);
         }
     }
@@ -162,22 +144,12 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
         player.removePotionEffect(Potion.moveSpeed.id);
-
-        playSound = false;
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt != null) {
             nbt.setBoolean("ClockActive", false);
             nbt.setBoolean("ShaderApplied", false);
         }
-
-        if (!world.isRemote) {
-            restoring = true;
-        } else {
-            EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
-            if (renderer instanceof CustomEntityRenderer) {
-                ((CustomEntityRenderer) renderer).resetShader();
-            }
-        }
+        restoring = true;
     }
 
     @SubscribeEvent
