@@ -1,15 +1,25 @@
 package com.science.gtnl.Utils.message;
 
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.world.GameRules;
+import net.minecraftforge.client.event.ClientChatReceivedEvent;
 
 import com.science.gtnl.Mods;
+import com.science.gtnl.api.TickrateAPI;
+import com.science.gtnl.asm.GTNLEarlyCoreMod;
+import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent;
+import cpw.mods.fml.relauncher.Side;
 
 public class LoginMessage {
 
@@ -49,5 +59,62 @@ public class LoginMessage {
         }
 
         TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 200, 0xFFFF55, 2);
+
+        if (FMLCommonHandler.instance()
+            .getEffectiveSide() == Side.SERVER) {
+            float tickrate = MainConfig.defaultTickrate;
+            try {
+                GameRules rules = MinecraftServer.getServer()
+                    .getEntityWorld()
+                    .getGameRules();
+                if (rules.hasRule(GTNLEarlyCoreMod.GAME_RULE)) {
+                    tickrate = Float.parseFloat(rules.getGameRuleStringValue(GTNLEarlyCoreMod.GAME_RULE));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            TickrateAPI.changeClientTickrate(event.player, tickrate);
+        }
+    }
+
+    @SubscribeEvent
+    public void connect(FMLNetworkEvent.ClientConnectedToServerEvent event) {
+        if (event.isLocal) {
+            float tickrate = MainConfig.defaultTickrate;
+            try {
+                GameRules rules = MinecraftServer.getServer()
+                    .getEntityWorld()
+                    .getGameRules();
+                if (rules.hasRule(GTNLEarlyCoreMod.GAME_RULE)) {
+                    tickrate = Float.parseFloat(rules.getGameRuleStringValue(GTNLEarlyCoreMod.GAME_RULE));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            TickrateAPI.changeServerTickrate(tickrate);
+            TickrateAPI.changeClientTickrate(null, tickrate);
+        } else {
+            TickrateAPI.changeClientTickrate(null, 20F);
+        }
+    }
+
+    @SubscribeEvent
+    public void disconnect(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) {
+        TickrateAPI.changeServerTickrate(MainConfig.defaultTickrate);
+        TickrateAPI.changeClientTickrate(null, MainConfig.defaultTickrate);
+    }
+
+    @SubscribeEvent
+    public void chat(ClientChatReceivedEvent event) {
+        if (event.message instanceof ChatComponentTranslation) {
+            ChatComponentTranslation t = (ChatComponentTranslation) event.message;
+            if (t.getKey()
+                .equals("GTNLEarlyCoreMod.show.clientside")) {
+                event.message = new ChatComponentText("");
+                event.message.appendSibling(CommandTickrate.c("Your Current Client Tickrate: ", 'f', 'l'));
+                event.message
+                    .appendSibling(CommandTickrate.c(TickrateAPI.getClientTickrate() + " ticks per second", 'a'));
+            }
+        }
     }
 }

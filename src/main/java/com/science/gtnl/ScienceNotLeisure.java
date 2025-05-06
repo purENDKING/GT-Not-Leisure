@@ -6,7 +6,6 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,9 +14,12 @@ import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.Utils.message.LanguageManager;
 import com.science.gtnl.Utils.message.LoginMessage;
 import com.science.gtnl.Utils.message.TitleNetwork;
+import com.science.gtnl.api.TickrateAPI;
+import com.science.gtnl.asm.TickrateMessageHandler;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandReloadConfig;
+import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.command.CommandTitle;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
@@ -42,6 +44,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(
     modid = MODID,
@@ -75,7 +78,6 @@ public class ScienceNotLeisure {
     public static final Logger LOG = LogManager.getLogger(MODID);
 
     public static SimpleNetworkWrapper network;
-    public static Configuration config;
 
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
     public static CommonProxy proxy;
@@ -98,9 +100,12 @@ public class ScienceNotLeisure {
         MachineLoader.registerGlasses();
 
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
+        MinecraftForge.EVENT_BUS.register(new LoginMessage());
         FMLCommonHandler.instance()
             .bus()
             .register(new LoginMessage());
+
+        TickrateAPI.changeTickrate(MainConfig.defaultTickrate);
     }
 
     @Mod.EventHandler
@@ -130,6 +135,7 @@ public class ScienceNotLeisure {
         proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
         event.registerServerCommand(new CommandTitle());
+        event.registerServerCommand(new CommandTickrate());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -152,6 +158,12 @@ public class ScienceNotLeisure {
             .register(new ClientEventHandler());
 
         TitleNetwork.init();
+
+        network.registerMessage(
+            TickrateMessageHandler.class,
+            TickrateMessageHandler.TickrateMessage.class,
+            0,
+            Side.CLIENT);
     }
 
     @Mod.EventHandler
