@@ -38,6 +38,7 @@ public abstract class Minecraft_Mixin {
             Minecraft mc = Minecraft.getMinecraft();
             mc.ingameGUI.updateTick();
             mc.playerController.updateController();
+            mc.theWorld.updateEntities();
             this.isGamePaused = true;
         }
     }

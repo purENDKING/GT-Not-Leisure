@@ -9,6 +9,8 @@ public class EarlyMixinPlugin {
     public static List<String> getEarlyMixins(Set<String> loadedMods) {
         final List<String> mixins = new ArrayList<>();
         mixins.add("Minecraft_Mixin");
+        mixins.add("AccessorEntityRenderer");
+        mixins.add("MixinWorldUpdateEntities_Wrap");
         return mixins;
     }
 }
