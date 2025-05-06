@@ -7,6 +7,7 @@ import com.reavaritia.common.item.BlazeHoe;
 import com.reavaritia.common.item.BlazePickaxe;
 import com.reavaritia.common.item.BlazeShovel;
 import com.reavaritia.common.item.BlazeSword;
+import com.reavaritia.common.item.ChronarchsClock;
 import com.reavaritia.common.item.CrystalAxe;
 import com.reavaritia.common.item.CrystalHoe;
 import com.reavaritia.common.item.CrystalPickaxe;
@@ -45,6 +46,7 @@ public class ItemLoader {
     public static Item InfinityTotem = new InfinityTotem();
     public static Item InfinityBucket = new InfinityBucket();
     public static Item MatterCluster = new MatterCluster();
+    public static Item ChronarchsClock = new ChronarchsClock();
 
     public static void registerItems() {
         IRegistry(CrystalPickaxe, "CrystalPickaxe");
@@ -65,6 +67,7 @@ public class ItemLoader {
         IRegistry(InfinityTotem, "InfinityTotem");
         IRegistry(InfinityBucket, "InfinityBucket");
         IRegistry(MatterCluster, "MatterCluster");
+        IRegistry(ChronarchsClock, "ChronarchsClock");
 
     }
 

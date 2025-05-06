@@ -72,8 +72,6 @@ public class TapDynamoHatch extends MTEHatchDynamo {
             (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F);
         world.spawnParticle("hugeexplosion", x, y, z, 1.0D, 0.0D, 0.0D);
         world.spawnParticle("largeexplode", x, y, z, 1.0D, 0.0D, 0.0D);
-        world.spawnParticle("hugeexplosion", x, y, z, 1.0D, 0.0D, 0.0D);
-        world.spawnParticle("largeexplode", x, y, z, 1.0D, 0.0D, 0.0D);
 
         if (world.getTotalWorldTime() > lastClickTime + 20) {
             lastClickTime = world.getTotalWorldTime();

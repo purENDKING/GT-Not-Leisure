@@ -8,6 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 // spotless:off
 public class MainConfig {
 
+    public static int ChronarchsClockCooldown = 200;
     public static int EUEveryEnhancementCore = 1;
     public static int EUEveryDepletedExcitedNaquadahFuelRod = 2750000;
     public static double secondsOfArtificialStarProgressCycleTime = 6.4;
@@ -51,6 +52,14 @@ public class MainConfig {
     }
 
     public static void loadConfig() {
+
+        ChronarchsClockCooldown = config
+            .get(
+                "Change Chronarchs Clock Cooldown",
+                "Cooldown",
+                ChronarchsClockCooldown,
+                "Change Chronarchs Clock Cooldown")
+            .getInt(ChronarchsClockCooldown);
 
         recipeOutputChance = config
             .get(

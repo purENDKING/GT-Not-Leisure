@@ -35,6 +35,7 @@ import com.reavaritia.common.SubtitleDisplay;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fox.spiteful.avaritia.entity.EntityEndestPearl;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 
 public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
@@ -115,6 +116,13 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
                     : TextLocalization.Tooltip_Infinity_Mode_1;
                 showSubtitle(key);
             }
+            return stack;
+        }
+
+        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+        if (!world.isRemote) {
+            world.spawnEntityInWorld(new EntityEndestPearl(world, player));
         }
         return stack;
     }

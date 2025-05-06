@@ -726,6 +726,10 @@ Tooltip_InfinityShovel_00=§8§o吞土裂壤，瞬如狂风。
 Tooltip_Infinity_Mode_1=切换到 普通模式
 Tooltip_Infinity_Mode_2=切换到 范围模式
 
+item.ChronarchsClock.name=时序僭越之钟
+Tooltip_ChronarchsClock_00=§8§o掌控时间…
+Tooltip_ChronarchsClock_01=时钟冷却中!
+
 item.InfinityBucket.name=§6远海鲸吞之桶
 Tooltip_InfinityBucket_00=§8§o吞噬一切…
 Tooltip_InfinityBucket_01=当前流体：%%s | 剩余量：%%s

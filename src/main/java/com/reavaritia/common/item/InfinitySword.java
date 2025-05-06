@@ -261,9 +261,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
         }
         long lastUsed = nbt.getLong("LastUsed");
 
-        if (System.currentTimeMillis() - lastUsed < COOLDOWN) {
+        if (world.getTotalWorldTime() - lastUsed < COOLDOWN) {
             if (world.isRemote) {
-                long remainingTime = (COOLDOWN - (System.currentTimeMillis() - lastUsed)) / 1000;
+                long remainingTime = (COOLDOWN - (world.getTotalWorldTime() - lastUsed)) / 1000;
                 showSubtitle(
                     TextLocalization.Tooltip_InfinitySword_Aura_00 + remainingTime
                         + TextLocalization.Tooltip_InfinitySword_Aura_01);
@@ -275,7 +275,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             executeSweepAttack(world, player);
         }
 
-        nbt.setLong("LastUsed", System.currentTimeMillis());
+        nbt.setLong("LastUsed", world.getTotalWorldTime());
     }
 
     private void executeSweepAttack(World world, EntityPlayer player) {

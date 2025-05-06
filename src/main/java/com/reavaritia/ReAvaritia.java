@@ -11,6 +11,7 @@ import com.reavaritia.common.ItemLoader;
 import com.reavaritia.common.block.BlockRegister;
 import com.reavaritia.common.block.GooeyHandler;
 import com.reavaritia.common.item.BlazeSword;
+import com.reavaritia.common.item.ChronarchsClock;
 import com.reavaritia.common.item.ToolEvents;
 import com.science.gtnl.Mods;
 
@@ -59,5 +60,6 @@ public class ReAvaritia {
         ItemLoader.registerItems();
         BlockRegister.registryAnotherData();
         BlazeSword.registerEntity();
+        ChronarchsClock.registerEntity();
     }
 }
