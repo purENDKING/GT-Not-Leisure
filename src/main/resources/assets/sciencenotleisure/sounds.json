@@ -1,4 +1,13 @@
 {
+  "time.stop": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "time.stop",
+        "stream": false
+      }
+    ]
+  },
   "twilight.sword.attack": {
     "category": "player",
     "sounds": [

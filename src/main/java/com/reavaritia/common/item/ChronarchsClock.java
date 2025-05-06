@@ -5,16 +5,21 @@ import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +30,8 @@ import com.reavaritia.ReAvaItemList;
 import com.reavaritia.ReAvaritia;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.entity.EntityChronarchPoint;
+import com.reavaritia.common.render.CustomEntityRenderer;
+import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.config.MainConfig;
 
@@ -36,6 +43,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChronarchsClock extends Item implements SubtitleDisplay {
+
+    private IIcon iconOn;
 
     public ChronarchsClock() {
         this.setUnlocalizedName("ChronarchsClock");
@@ -108,31 +117,66 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
     private static float originalTickrate = -1f;
     private static float currentTickrate = -1f;
     private static boolean restoring = false;
+    private boolean playSound = false;
 
     private static final int BOOST_DURATION_TICKS = 20 * 20;
     private static final int RESTORE_DURATION_TICKS = 20 * 20;
 
     @Override
     public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-        if (player.worldObj.isRemote || !player.isSneaking()) return;
-
-        if (originalTickrate < 0f) {
-            originalTickrate = TickrateAPI.getServerTickrate();
-            currentTickrate = originalTickrate;
+        if (!player.isSneaking()) return;
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt == null) {
+            nbt = new NBTTagCompound();
+            stack.setTagCompound(nbt);
         }
+        if (player.worldObj.isRemote) {
+            if (!nbt.getBoolean("ShaderApplied")) {
+                EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
+                if (renderer instanceof CustomEntityRenderer) {
+                    ((CustomEntityRenderer) renderer).activateDesaturateShader();
+                    nbt.setBoolean("ShaderApplied", true);
+                }
+            }
+        } else if (currentTickrate < MainConfig.maxTickrate) {
+            player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 200, 4));
+            if (originalTickrate < 0f) {
+                originalTickrate = TickrateAPI.getServerTickrate();
+                currentTickrate = originalTickrate;
+            }
 
-        restoring = false;
+            float delta = (MainConfig.maxTickrate - originalTickrate) / BOOST_DURATION_TICKS;
+            currentTickrate = Math.min(currentTickrate + delta, MainConfig.maxTickrate);
 
-        float delta = (MainConfig.maxTickrate - originalTickrate) / BOOST_DURATION_TICKS;
-        currentTickrate = Math.min(currentTickrate + delta, MainConfig.maxTickrate);
+            TickrateAPI.changeTickrate(currentTickrate);
 
-        TickrateAPI.changeTickrate(currentTickrate);
+            if (!playSound) {
+                player.worldObj
+                    .playSoundAtEntity(player, ScienceNotLeisure.RESOURCE_ROOT_ID + ":" + "time.stop", 1.0F, 1.0F);
+                playSound = true;
+            }
+            nbt.setBoolean("ClockActive", true);
+        }
     }
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
+        player.removePotionEffect(Potion.moveSpeed.id);
+
+        playSound = false;
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null) {
+            nbt.setBoolean("ClockActive", false);
+            nbt.setBoolean("ShaderApplied", false);
+        }
+
         if (!world.isRemote) {
             restoring = true;
+        } else {
+            EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
+            if (renderer instanceof CustomEntityRenderer) {
+                ((CustomEntityRenderer) renderer).resetShader();
+            }
         }
     }
 
@@ -151,6 +195,40 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
             originalTickrate = -1f;
             restoring = false;
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister register) {
+        this.itemIcon = register.registerIcon(RESOURCE_ROOT_ID + ":ChronarchsClock");
+        this.iconOn = register.registerIcon(RESOURCE_ROOT_ID + ":ChronarchsClock_On");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(ItemStack stack, int pass) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null && nbt.getBoolean("ClockActive")) {
+            return iconOn;
+        }
+        return super.getIcon(stack, pass);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconIndex(ItemStack stack) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null && nbt.getBoolean("ClockActive")) {
+            return iconOn;
+        }
+        return super.getIconIndex(stack);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack, int pass) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        return nbt != null && nbt.getBoolean("ClockActive");
     }
 
     @SideOnly(Side.CLIENT)
