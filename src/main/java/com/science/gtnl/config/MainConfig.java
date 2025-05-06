@@ -26,6 +26,15 @@ public class MainConfig {
     public static boolean enableRecipeOutputChance = true;
     public static double recipeOutputChance = 2.5;
 
+    public static float defaultTickrate = 20.0f;
+    public static float minTickrate = 0.1f;
+    public static float maxTickrate = 1000f;
+    public static boolean showTickrateMessages = true;
+
+    public static int ChronarchsClockRadius = 6;
+    public static int ChronarchsClockSpeedMultiplier = 100;
+    public static int ChronarchsClockDurationTicks = 200;
+
     public static int MeteorMinerMaxBlockPerCycle = 1;
     public static int MeteorMinerMaxRowPerCycle = 1;
 
@@ -52,6 +61,58 @@ public class MainConfig {
     }
 
     public static void loadConfig() {
+
+        ChronarchsClockRadius = config
+            .get("Chronarch's Clock", "radius", ChronarchsClockRadius, "Effective radius in blocks")
+            .getInt(ChronarchsClockRadius);
+
+        ChronarchsClockSpeedMultiplier = config
+            .get(
+                "Chronarch's Clock",
+                "speedMultiplier",
+                ChronarchsClockSpeedMultiplier,
+                "Speed multiplier for the clock")
+            .getInt(ChronarchsClockSpeedMultiplier);
+
+        ChronarchsClockDurationTicks = config
+            .get(
+                "Chronarch's Clock",
+                "durationTicks",
+                ChronarchsClockDurationTicks,
+                "Duration of the clock's effect in ticks")
+            .getInt(ChronarchsClockDurationTicks);
+
+        defaultTickrate = (float) config
+            .get(
+                "Tickrate - Default",
+                "tickrate",
+                defaultTickrate,
+                "Default tickrate. The game will always initialize with this value.")
+            .getDouble(defaultTickrate);
+
+        minTickrate = (float) config
+            .get(
+                "Tickrate - Minimum",
+                "tickrate",
+                minTickrate,
+                "Minimum tickrate from servers. Prevents really low tickrate values.")
+            .getDouble(minTickrate);
+
+        maxTickrate = (float) config
+            .get(
+                "Tickrate - Maximum",
+                "tickrate",
+                maxTickrate,
+                "Maximum tickrate from servers. Prevents really high tickrate values.")
+            .getDouble(maxTickrate);
+
+        showTickrateMessages = config
+            .get(
+                "Tickrate - Miscellaneous",
+                "show-messages",
+                showTickrateMessages,
+                "If it will show log messages in the console and the game")
+            .getBoolean(showTickrateMessages);
 
         ChronarchsClockCooldown = config
             .get(

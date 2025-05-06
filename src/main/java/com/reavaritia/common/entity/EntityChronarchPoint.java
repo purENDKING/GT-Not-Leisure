@@ -1,7 +1,5 @@
 package com.reavaritia.common.entity;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,20 +7,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.science.gtnl.Mods;
+import com.science.gtnl.api.ITileEntityTickAcceleration;
+
 public class EntityChronarchPoint extends Entity {
 
     private final int radius;
     private final int speedMultiplier;
     private final int maxTicks;
     private int age = 0;
-    private final Random rand;
 
     public EntityChronarchPoint(World world) {
         super(world);
         this.radius = 0;
         this.speedMultiplier = 0;
         this.maxTicks = 0;
-        this.rand = new Random();
         initInvisible();
     }
 
@@ -34,7 +33,6 @@ public class EntityChronarchPoint extends Entity {
         this.radius = radius;
         this.speedMultiplier = speedMultiplier;
         this.maxTicks = durationTicks;
-        this.rand = world.rand;
         initInvisible();
     }
 
@@ -57,33 +55,37 @@ public class EntityChronarchPoint extends Entity {
         super.onUpdate();
         if (worldObj.isRemote) return;
 
-        int cx = MathHelper.floor_double(posX);
-        int cy = MathHelper.floor_double(posY);
-        int cz = MathHelper.floor_double(posZ);
+        final int cx = MathHelper.floor_double(posX);
+        final int cy = MathHelper.floor_double(posY);
+        final int cz = MathHelper.floor_double(posZ);
+
+        final long tMaxTime = System.nanoTime() + 1000000;
 
         for (int dx = -radius; dx <= radius; dx++) {
             for (int dy = -radius; dy <= radius; dy++) {
                 for (int dz = -radius; dz <= radius; dz++) {
-                    int x = cx + dx;
-                    int y = cy + dy;
-                    int z = cz + dz;
+                    final int x = cx + dx;
+                    final int y = cy + dy;
+                    final int z = cz + dz;
 
                     TileEntity te = worldObj.getTileEntity(x, y, z);
-                    if (te != null) {
-                        try {
-                            for (int i = 0; i < speedMultiplier; i++) {
-                                te.updateEntity();
+                    if (shouldAccelerate(te)) {
+
+                        if (!Mods.NHUtilities.isModLoaded()) {
+                            if (te instanceof ITileEntityTickAcceleration accelerated) {
+                                if (accelerated.tickAcceleration(speedMultiplier)) continue;
                             }
-                        } catch (Throwable ignored) {}
+                        } else {
+                            if (te instanceof com.xir.NHUtilities.common.api.interfaces.ITileEntityTickAcceleration accelerated) {
+                                if (accelerated.tickAcceleration(speedMultiplier)) continue;
+                            }
+                        }
+                        safeAccelerateTileEntity(te, tMaxTime);
                     }
 
                     Block block = worldObj.getBlock(x, y, z);
-                    if (block != null && block.getTickRandomly()) {
-                        try {
-                            for (int i = 0; i < speedMultiplier; i++) {
-                                block.updateTick(worldObj, x, y, z, rand);
-                            }
-                        } catch (Throwable ignored) {}
+                    if (shouldAccelerate(block)) {
+                        safeAccelerateBlock(block, x, y, z, tMaxTime);
                     }
                 }
             }
@@ -91,6 +93,36 @@ public class EntityChronarchPoint extends Entity {
 
         if (++age >= maxTicks) {
             setDead();
+        }
+    }
+
+    private boolean shouldAccelerate(TileEntity te) {
+        return te != null && !te.isInvalid() && te.canUpdate();
+    }
+
+    private boolean shouldAccelerate(Block block) {
+        return block != null && block.getTickRandomly() && worldObj.getTotalWorldTime() % 2 == 0;
+    }
+
+    private void safeAccelerateTileEntity(TileEntity te, long tMaxTime) {
+        try {
+            for (int i = 0; i < speedMultiplier; i++) {
+                te.updateEntity();
+                if (System.nanoTime() > tMaxTime) break;
+            }
+        } catch (Throwable t) {
+            // log warn if needed
+        }
+    }
+
+    private void safeAccelerateBlock(Block block, int x, int y, int z, long tMaxTime) {
+        try {
+            for (int i = 0; i < speedMultiplier; i++) {
+                block.updateTick(worldObj, x, y, z, worldObj.rand);
+                if (System.nanoTime() > tMaxTime) break;
+            }
+        } catch (Throwable t) {
+            // log warn if needed
         }
     }
 

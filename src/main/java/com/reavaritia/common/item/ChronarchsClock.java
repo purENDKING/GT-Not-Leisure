@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,29 +17,36 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 
 import com.reavaritia.ReAvaCreativeTabs;
+import com.reavaritia.ReAvaItemList;
 import com.reavaritia.ReAvaritia;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.entity.EntityChronarchPoint;
+import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class ChronarchsClock extends Item implements SubtitleDisplay {
 
-    private static final int RADIUS = 6;
-    private static final int SPEED_MULTIPLIER = 100;
-    private static final int DURATION_TICKS = 200;
-
     public ChronarchsClock() {
         this.setUnlocalizedName("ChronarchsClock");
         this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "ChronarchsClock");
+        MinecraftForge.EVENT_BUS.register(this);
+        FMLCommonHandler.instance()
+            .bus()
+            .register(this);
         this.setMaxStackSize(1);
+        ReAvaItemList.ChronarchsClock.set(new ItemStack(this, 1));
     }
 
     @Override
@@ -53,7 +61,22 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
     }
 
     @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return 72000;
+    }
+
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.bow;
+    }
+
+    @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (player.isSneaking()) {
+            player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+            return stack;
+        }
+
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt == null) {
             nbt = new NBTTagCompound();
@@ -72,14 +95,62 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
                 player.posX,
                 player.posY,
                 player.posZ,
-                RADIUS,
-                SPEED_MULTIPLIER,
-                DURATION_TICKS);
+                MainConfig.ChronarchsClockRadius,
+                MainConfig.ChronarchsClockSpeedMultiplier,
+                MainConfig.ChronarchsClockDurationTicks);
             world.spawnEntityInWorld(point);
         }
 
         nbt.setLong("LastUsed", world.getTotalWorldTime());
         return stack;
+    }
+
+    private static float originalTickrate = -1f;
+    private static float currentTickrate = -1f;
+    private static boolean restoring = false;
+
+    private static final int BOOST_DURATION_TICKS = 20 * 20;
+    private static final int RESTORE_DURATION_TICKS = 20 * 20;
+
+    @Override
+    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+        if (player.worldObj.isRemote || !player.isSneaking()) return;
+
+        if (originalTickrate < 0f) {
+            originalTickrate = TickrateAPI.getServerTickrate();
+            currentTickrate = originalTickrate;
+        }
+
+        restoring = false;
+
+        float delta = (MainConfig.maxTickrate - originalTickrate) / BOOST_DURATION_TICKS;
+        currentTickrate = Math.min(currentTickrate + delta, MainConfig.maxTickrate);
+
+        TickrateAPI.changeTickrate(currentTickrate);
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int count) {
+        if (!world.isRemote) {
+            restoring = true;
+        }
+    }
+
+    @SubscribeEvent
+    public void onServerTick(TickEvent.ServerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !restoring || originalTickrate < 0f) return;
+
+        float delta = (MainConfig.maxTickrate - originalTickrate) / RESTORE_DURATION_TICKS;
+        currentTickrate = Math.max(currentTickrate - delta, originalTickrate);
+
+        TickrateAPI.changeTickrate(currentTickrate);
+
+        if (currentTickrate <= originalTickrate + 0.5f) {
+            TickrateAPI.changeTickrate(originalTickrate);
+            currentTickrate = -1f;
+            originalTickrate = -1f;
+            restoring = false;
+        }
     }
 
     @SideOnly(Side.CLIENT)

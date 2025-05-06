@@ -49,7 +49,8 @@ public enum ReAvaItemList implements IItemContainer {
     InfinityShovel,
     InfinitySword,
     InfinityTotem,
-    MatterCluster;
+    MatterCluster,
+    ChronarchsClock;
 
     public boolean mHasNotBeenSet;
     public boolean mDeprecated;

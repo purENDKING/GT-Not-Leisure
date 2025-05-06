@@ -40,6 +40,15 @@ public class LateMixinPlugin implements ILateMixinLoader {
             mixins.add("Gregtech.BehaviourScanner_Mixin");
         }
 
+        if (!Mods.NHUtilities.isModLoaded()) {
+            mixins.add("Gregtech.BaseMetaTileEntityAcceleration_Mixin");
+            mixins.add("Gregtech.MTEAdvAssLineAcceleration_Mixin");
+            mixins.add("Gregtech.ResearchStationAcceleration_Mixin");
+            mixins.add("EnderIO.AccelerateEnergyReceive_Mixin");
+            mixins.add("EnderIO.AccelerateTileEntity_Mixin");
+            mixins.add("EnderIO.Modify_CapBankMaxIO_Mixin");
+        }
+
         return mixins;
     }
 
