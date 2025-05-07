@@ -14,13 +14,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(EffectRenderer.class)
-@SideOnly(Side.CLIENT)
 public abstract class EffectRenderer_Mixin {
 
-    @Inject(method = "updateEffects", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method = "updateEffects", at = @At("HEAD"), cancellable = true)
     private void onUpdateEffects(CallbackInfo ci) {
         if (TimeStopManager.isTimeStopped()) {
             ci.cancel();
         }
-    }
+    }*/
 }

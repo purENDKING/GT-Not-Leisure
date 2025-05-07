@@ -14,10 +14,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(EntityFX.class)
-@SideOnly(Side.CLIENT)
 public abstract class EntityFX_Mixin {
 
-    @Inject(
+    /*@Inject(
         method = "onUpdate()V",
         at = @At(
             value = "INVOKE",
@@ -28,5 +27,5 @@ public abstract class EntityFX_Mixin {
         if (TimeStopManager.isTimeStopped()) {
             ci.cancel();
         }
-    }
+    }*/
 }

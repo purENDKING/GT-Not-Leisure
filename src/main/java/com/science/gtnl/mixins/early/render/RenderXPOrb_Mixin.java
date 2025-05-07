@@ -22,10 +22,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(RenderXPOrb.class)
-@SideOnly(Side.CLIENT)
 public abstract class RenderXPOrb_Mixin extends Render {
 
-    @Unique
+    /*@Unique
     private static final Map<Integer, FrozenStateXP> FROZEN_STATES_XP = new HashMap<>();
 
     @Inject(method = "doRender(Lnet/minecraft/entity/item/EntityXPOrb;DDDFF)V", at = @At("HEAD"))
@@ -82,5 +81,5 @@ public abstract class RenderXPOrb_Mixin extends Render {
             }
         }
         return originalRenderZ;
-    }
+    }*/
 }

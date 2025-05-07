@@ -15,10 +15,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(RenderItem.class)
-@SideOnly(Side.CLIENT)
 public abstract class RenderItem_Mixin {
 
-    @ModifyVariable(
+    /*@ModifyVariable(
         method = "doRender(Lnet/minecraft/entity/item/EntityItem;DDDFF)V",
         at = @At(value = "STORE", ordinal = 0),
         name = "f4")
@@ -45,5 +44,5 @@ public abstract class RenderItem_Mixin {
         if (!TimeStopManager.isTimeStopped()) {
             GL11.glRotatef(angle, x, y, z);
         }
-    }
+    }*/
 }
