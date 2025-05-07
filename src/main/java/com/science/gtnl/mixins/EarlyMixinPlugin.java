@@ -22,7 +22,7 @@ public class EarlyMixinPlugin {
         mixins.add("render.RenderItem_Mixin");
         mixins.add("render.RenderManager_Mixin");
         mixins.add("render.RenderXPOrb_Mixin");
-        // mixins.add("render.");
+        //mixins.add("render.");
         return mixins;
     }
 }
