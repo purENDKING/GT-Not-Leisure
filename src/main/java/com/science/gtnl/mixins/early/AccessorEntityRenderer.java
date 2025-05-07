@@ -11,7 +11,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(EntityRenderer.class)
-@SideOnly(Side.CLIENT)
 public interface AccessorEntityRenderer {
 
     @Accessor("theShaderGroup")

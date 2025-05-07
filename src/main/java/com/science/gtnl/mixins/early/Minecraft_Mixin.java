@@ -19,7 +19,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(value = Minecraft.class)
-@SideOnly(Side.CLIENT)
 public abstract class Minecraft_Mixin {
 
     @Shadow
@@ -32,7 +31,7 @@ public abstract class Minecraft_Mixin {
         return new CustomEntityRenderer(mc, resourceManager);
     }
 
-    @Inject(method = "runTick", at = @At("HEAD"))
+    /*@Inject(method = "runTick", at = @At("HEAD"))
     private void onRunTick(CallbackInfo ci) {
         if (TimeStopManager.isTimeStopped()) {
             Minecraft mc = Minecraft.getMinecraft();
@@ -41,5 +40,5 @@ public abstract class Minecraft_Mixin {
             mc.theWorld.updateEntities();
             this.isGamePaused = true;
         }
-    }
+    }*/
 }
