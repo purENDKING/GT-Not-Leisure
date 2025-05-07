@@ -61,6 +61,7 @@ public abstract class MixinWorldUpdateEntities_Wrap {
         CrashReport crashreport;
         CrashReportCategory crashreportcategory;
 
+        // 时停后不执行部分
         if (!isStop) {
             for (i = 0; i < this.weatherEffects.size(); ++i)
             {
@@ -118,14 +119,13 @@ public abstract class MixinWorldUpdateEntities_Wrap {
         this.unloadedEntityList.clear();
         this.theProfiler.endStartSection("regular");
 
-        for (i = 0; i < this.loadedEntityList.size(); ++i)
-        {
-            entity = (Entity)this.loadedEntityList.get(i);
 
-            if (entity.ridingEntity != null)
-            {
-                if (!entity.ridingEntity.isDead && entity.ridingEntity.riddenByEntity == entity)
-                {
+        for (i = 0; i < this.loadedEntityList.size(); ++i) {
+            entity = this.loadedEntityList.get(i);
+            // 跳过不是玩家的更新
+            if (!(entity instanceof EntityPlayer)) continue;
+            if (entity.ridingEntity != null) {
+                if (!entity.ridingEntity.isDead && entity.ridingEntity.riddenByEntity == entity) {
                     continue;
                 }
 
@@ -135,27 +135,18 @@ public abstract class MixinWorldUpdateEntities_Wrap {
 
             this.theProfiler.startSection("tick");
 
-            if (!entity.isDead)
-            {
-                try
-                {
-                    if (entity instanceof EntityPlayer entityPlayer) {
-                        ((World) ((Object) this)).updateEntity(entityPlayer);
-                    }
-                }
-                catch (Throwable throwable1)
-                {
+            if (!entity.isDead) {
+                try {
+                    ((World) ((Object) this)).updateEntity(entity);
+                } catch (Throwable throwable1) {
                     crashreport = CrashReport.makeCrashReport(throwable1, "Ticking entity");
                     crashreportcategory = crashreport.makeCategory("Entity being ticked");
                     entity.addEntityCrashInfo(crashreportcategory);
 
-                    if (ForgeModContainer.removeErroringEntities)
-                    {
+                    if (ForgeModContainer.removeErroringEntities) {
                         FMLLog.getLogger().log(org.apache.logging.log4j.Level.ERROR, crashreport.getCompleteReport());
-                        ((World)((Object)this)).removeEntity(entity);
-                    }
-                    else
-                    {
+                        ((World) ((Object) this)).removeEntity(entity);
+                    } else {
                         throw new ReportedException(crashreport);
                     }
                 }
@@ -164,18 +155,16 @@ public abstract class MixinWorldUpdateEntities_Wrap {
             this.theProfiler.endSection();
             this.theProfiler.startSection("remove");
 
-            if (entity.isDead)
-            {
+            if (entity.isDead) {
                 j = entity.chunkCoordX;
                 l = entity.chunkCoordZ;
 
-                if (entity.addedToChunk && (this.chunkProvider.chunkExists(j, l)))
-                {
-                    ((World)((Object)this)).getChunkFromChunkCoords(j, l).removeEntity(entity);
+                if (entity.addedToChunk && (this.chunkProvider.chunkExists(j, l))) {
+                    ((World) ((Object) this)).getChunkFromChunkCoords(j, l).removeEntity(entity);
                 }
 
                 this.loadedEntityList.remove(i--);
-                ((World)((Object)this)).onEntityRemoved(entity);
+                ((World) ((Object) this)).onEntityRemoved(entity);
             }
 
             this.theProfiler.endSection();
@@ -269,7 +258,6 @@ public abstract class MixinWorldUpdateEntities_Wrap {
     public void mixin$tick(CallbackInfo ci) {
         boolean isStop = TimeStopManager.isTimeStopped();
         if (isStop) {
-            LOG.info("已时停");
             ci.cancel();
         }
     }
