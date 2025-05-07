@@ -59,8 +59,6 @@ public class AweEffect extends GTNLEffectUtil {
                     float damage = 50.0F + random.nextFloat() * 10.0F;
                     player.attackEntityFrom(awe_damage, damage);
                     affectedPlayers.add(player);
-
-                    player.worldObj.playSoundAtEntity(player, RESOURCE_ROOT_ID + ":" + "awe.warning2", 1.0F, 1.0F);
                 }
 
                 player.capabilities.isFlying = false;

@@ -26,24 +26,6 @@
       }
     ]
   },
-  "awe.warning2": {
-    "category": "player",
-    "sounds": [
-      {
-        "name": "awe.warning2",
-        "stream": false
-      }
-    ]
-  },
-  "awe.warning3": {
-    "category": "player",
-    "sounds": [
-      {
-        "name": "awe.warning3",
-        "stream": false
-      }
-    ]
-  },
   "record.sus": {
     "category": "record",
     "sounds": [
