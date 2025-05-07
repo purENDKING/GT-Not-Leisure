@@ -1,7 +1,5 @@
 package com.science.gtnl.common.effect.effects;
 
-import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
