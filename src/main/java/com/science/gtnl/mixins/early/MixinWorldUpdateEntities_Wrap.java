@@ -29,7 +29,7 @@ import com.science.gtnl.common.item.TimeStopManager;
 import cpw.mods.fml.common.FMLLog;
 
 @SuppressWarnings("UnusedMixin")
-@Mixin(value = World.class, remap = true)
+@Mixin(value = World.class)
 public abstract class MixinWorldUpdateEntities_Wrap {
 
     @Unique

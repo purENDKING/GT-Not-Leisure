@@ -7,10 +7,17 @@ import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.util.ResourceLocation;
+
+import org.apache.logging.log4j.Logger;
 
 import com.google.gson.JsonSyntaxException;
 import com.science.gtnl.mixins.early.AccessorEntityRenderer;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class CustomEntityRenderer extends EntityRenderer {
 
     public CustomEntityRenderer(Minecraft mc) {
@@ -21,53 +28,58 @@ public class CustomEntityRenderer extends EntityRenderer {
         super(mc, resourceManager);
     }
 
-    public void setShaderIndex(int index) {
-        this.shaderIndex = index;
-    }
-
     public void activateDesaturateShader(int index) {
         if (OpenGlHelper.shadersSupported) {
-            ShaderGroup shaderGroup = ((AccessorEntityRenderer) this).getTheShaderGroup();
+            AccessorEntityRenderer accessor = (AccessorEntityRenderer) this;
+
+            ShaderGroup shaderGroup = accessor.getTheShaderGroup();
             if (shaderGroup != null) {
                 shaderGroup.deleteShaderGroup();
             }
 
-            this.shaderIndex = index;
+            accessor.setShaderIndex(index);
+
+            ResourceLocation[] shaderResources = AccessorEntityRenderer.getShaderResourceLocations();
+            Logger logger = AccessorEntityRenderer.getLogger();
 
             try {
-                logger.info("Selecting effect " + shaderResourceLocations[this.shaderIndex]);
+                logger.info("Selecting effect " + shaderResources[index]);
                 shaderGroup = new ShaderGroup(
-                    this.mc.getTextureManager(),
-                    this.resourceManager,
-                    this.mc.getFramebuffer(),
-                    shaderResourceLocations[this.shaderIndex]);
-                shaderGroup.createBindFramebuffers(this.mc.displayWidth, this.mc.displayHeight);
+                    accessor.getMinecraft()
+                        .getTextureManager(),
+                    accessor.getResourceManager(),
+                    accessor.getMinecraft()
+                        .getFramebuffer(),
+                    shaderResources[index]);
+                shaderGroup.createBindFramebuffers(
+                    accessor.getMinecraft().displayWidth,
+                    accessor.getMinecraft().displayHeight);
 
-                // Set the shader group using the accessor
-                ((AccessorEntityRenderer) this).setTheShaderGroup(shaderGroup);
-            } catch (IOException ioexception) {
-                logger.warn("Failed to load shader: " + shaderResourceLocations[this.shaderIndex], ioexception);
-                this.shaderIndex = shaderCount;
-            } catch (JsonSyntaxException jsonsyntaxexception) {
-                logger.warn("Failed to load shader: " + shaderResourceLocations[this.shaderIndex], jsonsyntaxexception);
-                this.shaderIndex = shaderCount;
+                accessor.setTheShaderGroup(shaderGroup);
+            } catch (IOException | JsonSyntaxException e) {
+                logger.warn("Failed to load shader: " + shaderResources[index], e);
+                accessor.setShaderIndex(AccessorEntityRenderer.getShaderCount());
             }
         }
     }
 
     public void resetShader() {
-        ShaderGroup shaderGroup = ((AccessorEntityRenderer) this).getTheShaderGroup();
+        AccessorEntityRenderer accessor = (AccessorEntityRenderer) this;
+
+        ShaderGroup shaderGroup = accessor.getTheShaderGroup();
         if (shaderGroup != null) {
             shaderGroup.deleteShaderGroup();
         }
 
-        this.shaderIndex = shaderCount;
+        accessor.setShaderIndex(AccessorEntityRenderer.getShaderCount());
 
         try {
-            logger.info("Resetting shader to default");
-            ((AccessorEntityRenderer) this).setTheShaderGroup(null);
+            AccessorEntityRenderer.getLogger()
+                .info("Resetting shader to default");
+            accessor.setTheShaderGroup(null);
         } catch (Exception e) {
-            logger.warn("Failed to reset shader", e);
+            AccessorEntityRenderer.getLogger()
+                .warn("Failed to reset shader", e);
         }
     }
 }
