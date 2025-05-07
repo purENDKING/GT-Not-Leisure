@@ -21,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TimeStopPocketWatch extends Item {
 
-    private boolean playSound = false;
+    public static boolean playSound = false;
 
     public TimeStopPocketWatch() {
         this.setUnlocalizedName("TimeStopPocketWatch");

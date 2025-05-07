@@ -732,8 +732,8 @@ public class AssemblingLineRecipes implements IRecipePool {
 
         TTRecipeAdder.addResearchableAssemblylineRecipe(
             ItemList.Machine_Multi_Furnace.get(1),
-            512000000,
-            51200,
+            512000,
+            512,
             (int) TierEU.RECIPE_UEV,
             1,
             new Object[] { ItemList.Machine_Multi_Furnace.get(16), ItemList.Machine_Multi_Furnace.get(16),

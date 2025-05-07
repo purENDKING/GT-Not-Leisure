@@ -66,9 +66,4 @@ public class ClientProxy extends CommonProxy {
         super.preInit(event);
     }
 
-    @Override
-    public void registerMessages() {
-        super.registerMessages();
-        // You could register any client‐only handlers here.
-    }
 }

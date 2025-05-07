@@ -12,13 +12,13 @@ import net.minecraft.event.HoverEvent;
 import net.minecraft.event.HoverEvent.Action;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.GameRules;
 
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
+import com.science.gtnl.common.item.TimeStopManager;
 import com.science.gtnl.config.MainConfig;
 
 /**
@@ -41,7 +41,7 @@ public class CommandTickrate extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/tickrate [ticks per second] [all/server/client/playername]";
+        return "/tickrate [ticks/freeze] [all/server/client/playername]";
     }
 
     @Override
@@ -70,6 +70,7 @@ public class CommandTickrate extends CommandBase {
             }
             tab.add("setdefault");
             tab.add("setmap");
+            tab.add("freeze");
         } else if (args.length == 2) {
             if ((args[0].equalsIgnoreCase("setdefault")) || (args[0].equalsIgnoreCase("setmap"))) {
                 tab.addAll(suggestedTickrateValues);
@@ -101,7 +102,6 @@ public class CommandTickrate extends CommandBase {
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         boolean showMessages = MainConfig.showTickrateMessages;
         if (args.length < 1) {
-            sender.addChatMessage(new ChatComponentTranslation("GTNLEarlyCoreMod.show.clientside"));
             chat(
                 sender,
                 c("Current Server Tickrate: ", 'f', 'l'),
@@ -250,6 +250,15 @@ public class CommandTickrate extends CommandBase {
             }
             if (showMessages)
                 chat(sender, c("Map tickrate successfully changed to", 'a'), c(" " + ticksPerSecond, 'f'), c(".", 'a'));
+            return;
+        } else if (args[0].equalsIgnoreCase("freeze")) {
+            if (TimeStopManager.isTimeStopped()) {
+                TimeStopManager.setTimeStopped(false);
+                sender.addChatMessage(new ChatComponentText("Tickrate Unfreeze!"));
+            } else {
+                TimeStopManager.setTimeStopped(true);
+                sender.addChatMessage(new ChatComponentText("Tickrate Freeze!"));
+            }
             return;
         }
 

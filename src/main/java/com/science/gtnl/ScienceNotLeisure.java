@@ -13,9 +13,9 @@ import org.apache.logging.log4j.Logger;
 import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.Utils.message.LanguageManager;
 import com.science.gtnl.Utils.message.LoginMessage;
-import com.science.gtnl.Utils.message.TitleNetwork;
+import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.api.TickrateAPI;
-import com.science.gtnl.asm.TickrateMessageHandler;
+import com.science.gtnl.asm.TickrateMessage;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandReloadConfig;
@@ -24,6 +24,7 @@ import com.science.gtnl.common.command.CommandTitle;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.config.ClientEventHandler;
+import com.science.gtnl.config.ConfigSyncMessage;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.config.ServerEventHandler;
 import com.science.gtnl.loader.MachineLoader;
@@ -132,7 +133,6 @@ public class ScienceNotLeisure {
     @Mod.EventHandler
     // register server commands in this event handler (Remove if not needed)
     public void serverStarting(FMLServerStartingEvent event) {
-        proxy.serverStarting(event);
         event.registerServerCommand(new CommandReloadConfig());
         event.registerServerCommand(new CommandTitle());
         event.registerServerCommand(new CommandTickrate());
@@ -143,7 +143,6 @@ public class ScienceNotLeisure {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-        proxy.registerMessages();
         proxy.preInit(event);
         MaterialLoader.loadPreInit();
         LanguageManager.init();
@@ -157,13 +156,9 @@ public class ScienceNotLeisure {
             .bus()
             .register(new ClientEventHandler());
 
-        TitleNetwork.init();
-
-        network.registerMessage(
-            TickrateMessageHandler.class,
-            TickrateMessageHandler.TickrateMessage.class,
-            0,
-            Side.CLIENT);
+        network.registerMessage(TitlePacket.Handler.class, TitlePacket.class, 0, Side.CLIENT);
+        network.registerMessage(TickrateMessage.Handler.class, TickrateMessage.class, 1, Side.CLIENT);
+        network.registerMessage(ConfigSyncMessage.Handler.class, ConfigSyncMessage.class, 2, Side.CLIENT);
     }
 
     @Mod.EventHandler

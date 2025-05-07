@@ -6,9 +6,6 @@ import net.minecraft.client.shader.ShaderGroup;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 @SuppressWarnings("UnusedMixin")
 @Mixin(EntityRenderer.class)
 public interface AccessorEntityRenderer {

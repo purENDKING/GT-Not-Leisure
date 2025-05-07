@@ -100,11 +100,11 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
         ItemMiningDrones.DroneTiers.UXV.ordinal());
 
     public ResourceCollectionModule(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional, 40, 5, 1);
+        super(aID, aName, aNameRegional, 14, 5, 1);
     }
 
     public ResourceCollectionModule(String aName) {
-        super(aName, 40, 5, 1);
+        super(aName, 14, 5, 1);
     }
 
     @Override
