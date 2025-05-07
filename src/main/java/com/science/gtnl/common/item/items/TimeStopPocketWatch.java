@@ -10,6 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.reavaritia.common.render.CustomEntityRenderer;
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.client.GTNLCreativeTabs;
@@ -21,7 +24,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TimeStopPocketWatch extends Item {
 
-    public static boolean playSound = false;
+    static Logger LOG = LogManager.getLogger();
+
+    private boolean playSound = false;
 
     public TimeStopPocketWatch() {
         this.setUnlocalizedName("TimeStopPocketWatch");
@@ -46,10 +51,10 @@ public class TimeStopPocketWatch extends Item {
                     customEntityRenderer.resetShader();
                 }
             } else {
-                TimeStopManager.setTimeStopped(false);
                 nbt.setBoolean("WatchActive", false);
                 playSound = false;
             }
+            TimeStopManager.setTimeStopped(false);
         } else {
             if (player.worldObj.isRemote) {
                 EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
@@ -57,7 +62,6 @@ public class TimeStopPocketWatch extends Item {
                     customEntityRenderer.activateDesaturateShader(16);
                 }
             } else {
-                TimeStopManager.setTimeStopped(true);
                 if (!playSound) {
                     player.worldObj
                         .playSoundAtEntity(player, ScienceNotLeisure.RESOURCE_ROOT_ID + ":" + "time.stop", 1.0F, 1.0F);
@@ -65,6 +69,7 @@ public class TimeStopPocketWatch extends Item {
                 }
                 nbt.setBoolean("WatchActive", true);
             }
+            TimeStopManager.setTimeStopped(true);
         }
 
         return stack;

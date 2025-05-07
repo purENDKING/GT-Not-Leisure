@@ -8,7 +8,6 @@ import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.science.gtnl.Utils.MoreMaterialToolUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -18,6 +17,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import com.google.common.collect.ImmutableSet;
 import com.science.gtnl.Mods;
 import com.science.gtnl.Utils.AnimatedText;
+import com.science.gtnl.Utils.MoreMaterialToolUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;

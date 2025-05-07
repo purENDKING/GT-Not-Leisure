@@ -1,6 +1,5 @@
 package com.science.gtnl.Utils;
 
-import com.science.gtnl.Utils.message.TitlePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,6 +14,7 @@ import net.minecraftforge.event.world.WorldEvent;
 
 import com.reavaritia.common.render.CustomEntityRenderer;
 import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
 import com.science.gtnl.common.command.CommandTickrate;
