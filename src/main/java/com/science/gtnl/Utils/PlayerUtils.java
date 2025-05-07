@@ -1,11 +1,9 @@
-package com.science.gtnl.Utils.message;
+package com.science.gtnl.Utils;
 
+import com.science.gtnl.Utils.message.TitlePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
@@ -20,9 +18,7 @@ import com.science.gtnl.Mods;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
 import com.science.gtnl.common.command.CommandTickrate;
-import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.item.TimeStopManager;
-import com.science.gtnl.common.item.items.TimeStopPocketWatch;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -32,29 +28,12 @@ import cpw.mods.fml.common.network.FMLNetworkEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LoginMessage {
+public class PlayerUtils {
 
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayerMP player = (EntityPlayerMP) event.player;
-        InventoryPlayer playerInventory = player.inventory;
-        TimeStopPocketWatch.playSound = false;
-        for (int i = 0; i < playerInventory.mainInventory.length; ++i) {
-            ItemStack stack = playerInventory.mainInventory[i];
-            if (stack != null && stack.getItem() == ItemLoader.TimeStopPocketWatch) {
-
-                NBTTagCompound tags = stack.getTagCompound();
-
-                if (tags == null) {
-                    continue;
-                }
-
-                if (tags.hasKey("WatchActive", 1)) {
-                    tags.setBoolean("WatchActive", false);
-                    TimeStopManager.setTimeStopped(false);
-                }
-            }
-        }
+        TimeStopManager.setTimeStopped(false);
 
         player.addChatMessage(
             new ChatComponentTranslation("Welcome_GTNL_00")
@@ -107,7 +86,21 @@ public class LoginMessage {
     }
 
     @SubscribeEvent
-    public void onPlayerLoginOut(PlayerEvent.PlayerLoggedOutEvent event) {}
+    public void onPlayerLoginOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        TimeStopManager.setTimeStopped(false);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void onWorldLoad(WorldEvent.Load event) {
+        if (event.world.isRemote) {
+            EntityRenderer renderer = Minecraft.getMinecraft().entityRenderer;
+            if (renderer instanceof CustomEntityRenderer customEntityRenderer) {
+                customEntityRenderer.resetShader();
+            }
+        }
+        TimeStopManager.setTimeStopped(false);
+    }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent

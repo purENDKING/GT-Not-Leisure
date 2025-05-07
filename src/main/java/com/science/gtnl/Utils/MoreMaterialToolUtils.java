@@ -17,7 +17,7 @@ import gtPlusPlus.core.material.Material;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechOrePrefixes;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.GTPPMTEFluid;
 
-public class MoreMaterialToolUtil {
+public class MoreMaterialToolUtils {
 
     public static void generateNonGTFluidPipes(final GregtechOrePrefixes.GT_Materials material, final int startID,
         final int transferRatePerSec, final int heatResistance, final boolean isGasProof) {

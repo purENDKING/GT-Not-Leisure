@@ -20,12 +20,12 @@ import net.minecraft.util.ResourceLocation;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class GTNLEffectUtil extends Potion {
+public class GTNLEffectUtils extends Potion {
 
     private static final ResourceLocation resource = new ResourceLocation(
         RESOURCE_ROOT_ID + ":" + "textures/gui/potions.png");
 
-    public GTNLEffectUtil(int id, String name, boolean badEffect, int color, int iconIndex) {
+    public GTNLEffectUtils(int id, String name, boolean badEffect, int color, int iconIndex) {
         super(id, badEffect, color);
         setPotionName("gtnl.potion." + name);
         int x = ((iconIndex - 1) % 13 + 1);

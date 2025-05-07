@@ -4,7 +4,7 @@ import static com.science.gtnl.ScienceNotLeisure.network;
 
 import net.minecraftforge.common.MinecraftForge;
 
-import com.science.gtnl.Utils.message.LoginMessage;
+import com.science.gtnl.Utils.PlayerUtils;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
@@ -41,10 +41,10 @@ public class CommonProxy {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new LoginMessage());
+        MinecraftForge.EVENT_BUS.register(new PlayerUtils());
         FMLCommonHandler.instance()
             .bus()
-            .register(new LoginMessage());
+            .register(new PlayerUtils());
         PlayerDollWaila.init();
     }
 

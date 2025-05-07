@@ -18,14 +18,14 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
-import com.science.gtnl.Utils.GTNLEffectUtil;
+import com.science.gtnl.Utils.GTNLEffectUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class AweEffect extends GTNLEffectUtil {
+public class AweEffect extends GTNLEffectUtils {
 
     public static final AweEffect instance = new AweEffect();
 
