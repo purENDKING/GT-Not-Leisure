@@ -21,8 +21,11 @@ import com.science.gtnl.common.item.TimeStopManager;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TimeStopPocketWatch extends Item {
+    static Logger LOG = LogManager.getLogger();
 
     static Logger LOG = LogManager.getLogger();
 
