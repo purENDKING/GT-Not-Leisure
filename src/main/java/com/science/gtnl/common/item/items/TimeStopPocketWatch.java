@@ -10,9 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.reavaritia.common.render.CustomEntityRenderer;
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.client.GTNLCreativeTabs;
@@ -21,13 +18,8 @@ import com.science.gtnl.common.item.TimeStopManager;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class TimeStopPocketWatch extends Item {
-    static Logger LOG = LogManager.getLogger();
-
-    static Logger LOG = LogManager.getLogger();
 
     private boolean playSound = false;
 

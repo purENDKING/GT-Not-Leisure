@@ -1,6 +1,8 @@
 package com.science.gtnl.mixins.early;
 
-import cpw.mods.fml.common.FMLCommonHandler;
+import java.util.Queue;
+import java.util.concurrent.Callable;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
@@ -20,7 +22,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
-
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.crash.CrashReport;
@@ -34,6 +35,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Timer;
 import net.minecraft.world.EnumDifficulty;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -48,37 +50,60 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.reavaritia.common.render.CustomEntityRenderer;
 import com.science.gtnl.common.item.TimeStopManager;
 
-import java.util.Queue;
-import java.util.concurrent.Callable;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(value = Minecraft.class)
 public abstract class Minecraft_Mixin {
 
-    @Shadow private boolean isGamePaused;
-    @Shadow public Profiler mcProfiler;
-    @Shadow public Queue field_152351_aB;
-    @Shadow public int rightClickDelayTimer;
-    @Shadow public GuiIngame ingameGUI;
-    @Shadow public EntityRenderer entityRenderer;
-    @Shadow public WorldClient theWorld;
-    @Shadow public PlayerControllerMP playerController;
-    @Shadow public TextureManager renderEngine;
-    @Shadow public GuiScreen currentScreen;
-    @Shadow public EntityClientPlayerMP thePlayer;
-    @Shadow public int leftClickCounter;
-    @Shadow public long systemTime;
-    @Shadow public GameSettings gameSettings;
-    @Shadow public boolean inGameHasFocus;
-    @Shadow public long field_83002_am;
-    @Shadow public int joinPlayerCounter;
-    @Shadow public RenderGlobal renderGlobal;
-    @Shadow public MusicTicker mcMusicTicker;
-    @Shadow public SoundHandler mcSoundHandler;
-    @Shadow public EffectRenderer effectRenderer;
-    @Shadow public NetworkManager myNetworkManager;
-    @Shadow public Timer timer;
-    @Shadow public boolean refreshTexturePacksScheduled;
+    @Shadow
+    private boolean isGamePaused;
+    @Shadow
+    public Profiler mcProfiler;
+    @Shadow
+    public Queue field_152351_aB;
+    @Shadow
+    public int rightClickDelayTimer;
+    @Shadow
+    public GuiIngame ingameGUI;
+    @Shadow
+    public EntityRenderer entityRenderer;
+    @Shadow
+    public WorldClient theWorld;
+    @Shadow
+    public PlayerControllerMP playerController;
+    @Shadow
+    public TextureManager renderEngine;
+    @Shadow
+    public GuiScreen currentScreen;
+    @Shadow
+    public EntityClientPlayerMP thePlayer;
+    @Shadow
+    public int leftClickCounter;
+    @Shadow
+    public long systemTime;
+    @Shadow
+    public GameSettings gameSettings;
+    @Shadow
+    public boolean inGameHasFocus;
+    @Shadow
+    public long field_83002_am;
+    @Shadow
+    public int joinPlayerCounter;
+    @Shadow
+    public RenderGlobal renderGlobal;
+    @Shadow
+    public MusicTicker mcMusicTicker;
+    @Shadow
+    public SoundHandler mcSoundHandler;
+    @Shadow
+    public EffectRenderer effectRenderer;
+    @Shadow
+    public NetworkManager myNetworkManager;
+    @Shadow
+    public Timer timer;
+    @Shadow
+    public boolean refreshTexturePacksScheduled;
 
     @Redirect(
         method = "startGame",
@@ -92,20 +117,19 @@ public abstract class Minecraft_Mixin {
         boolean isStop = TimeStopManager.isTimeStopped();
         if (!isStop) {
             return;
-        }
-        else {
+        } else {
             ci.cancel();
         }
         this.mcProfiler.startSection("scheduledExecutables");
 
         this.mcProfiler.endSection();
 
-        if (this.rightClickDelayTimer > 0)
-        {
+        if (this.rightClickDelayTimer > 0) {
             --this.rightClickDelayTimer;
         }
 
-        FMLCommonHandler.instance().onPreClientTick();
+        FMLCommonHandler.instance()
+            .onPreClientTick();
 
         this.mcProfiler.startSection("gui");
 
@@ -117,90 +141,71 @@ public abstract class Minecraft_Mixin {
         this.entityRenderer.getMouseOver(1.0F);
         this.mcProfiler.endStartSection("gameMode");
 
-        if (!this.isGamePaused && this.theWorld != null)
-        {
+        if (!this.isGamePaused && this.theWorld != null) {
             this.playerController.updateController();
         }
 
         this.mcProfiler.endStartSection("textures");
 
-        if (!this.isGamePaused)
-        {
+        if (!this.isGamePaused) {
             if (!isStop) {
                 this.renderEngine.tick();
-            }
-            else {
+            } else {
                 // 获取自身物品栏
                 ItemStack[] itemStacks = ((Minecraft) ((Object) this)).thePlayer.inventory.mainInventory;
                 for (int i = 0; i < itemStacks.length; i++) {
                     ItemStack stack = itemStacks[i];
                     if (stack == null) continue;
-                    stack.updateAnimation(theWorld,thePlayer,i,thePlayer.inventory.currentItem==i);
+                    stack.updateAnimation(theWorld, thePlayer, i, thePlayer.inventory.currentItem == i);
                 }
             }
         }
 
-        if (this.currentScreen == null && this.thePlayer != null)
-        {
-            if (this.thePlayer.getHealth() <= 0.0F)
-            {
-                ((Minecraft)((Object)this)).displayGuiScreen((GuiScreen)null);
+        if (this.currentScreen == null && this.thePlayer != null) {
+            if (this.thePlayer.getHealth() <= 0.0F) {
+                ((Minecraft) ((Object) this)).displayGuiScreen((GuiScreen) null);
+            } else if (this.thePlayer.isPlayerSleeping() && this.theWorld != null) {
+                ((Minecraft) ((Object) this)).displayGuiScreen(new GuiSleepMP());
             }
-            else if (this.thePlayer.isPlayerSleeping() && this.theWorld != null)
-            {
-                ((Minecraft)((Object)this)).displayGuiScreen(new GuiSleepMP());
+        } else if (this.currentScreen != null && this.currentScreen instanceof GuiSleepMP
+            && !this.thePlayer.isPlayerSleeping()) {
+                ((Minecraft) ((Object) this)).displayGuiScreen((GuiScreen) null);
             }
-        }
-        else if (this.currentScreen != null && this.currentScreen instanceof GuiSleepMP && !this.thePlayer.isPlayerSleeping())
-        {
-            ((Minecraft)((Object)this)).displayGuiScreen((GuiScreen)null);
-        }
 
-        if (this.currentScreen != null)
-        {
+        if (this.currentScreen != null) {
             this.leftClickCounter = 10000;
         }
 
         CrashReport crashreport;
         CrashReportCategory crashreportcategory;
 
-        if (this.currentScreen != null)
-        {
-            try
-            {
+        if (this.currentScreen != null) {
+            try {
                 this.currentScreen.handleInput();
-            }
-            catch (Throwable throwable1)
-            {
+            } catch (Throwable throwable1) {
                 crashreport = CrashReport.makeCrashReport(throwable1, "Updating screen events");
                 crashreportcategory = crashreport.makeCategory("Affected screen");
-                crashreportcategory.addCrashSectionCallable("Screen name", new Callable()
-                {
-                    private static final String __OBFID = "CL_00000640";
-                    public String call()
-                    {
-                        return ((Minecraft)((Object)this)).currentScreen.getClass().getCanonicalName();
+                crashreportcategory.addCrashSectionCallable("Screen name", new Callable() {
+
+                    public String call() {
+                        return ((Minecraft) ((Object) this)).currentScreen.getClass()
+                            .getCanonicalName();
                     }
                 });
                 throw new ReportedException(crashreport);
             }
 
-            if (this.currentScreen != null)
-            {
-                try
-                {
+            if (this.currentScreen != null) {
+                try {
                     this.currentScreen.updateScreen();
-                }
-                catch (Throwable throwable)
-                {
+                } catch (Throwable throwable) {
                     crashreport = CrashReport.makeCrashReport(throwable, "Ticking screen");
                     crashreportcategory = crashreport.makeCategory("Affected screen");
-                    crashreportcategory.addCrashSectionCallable("Screen name", new Callable()
-                    {
-                        private static final String __OBFID = "CL_00000642";
-                        public String call()
-                        {
-                            return ((Minecraft)((Object)this)).currentScreen.getClass().getCanonicalName();
+                    crashreportcategory.addCrashSectionCallable("Screen name", new Callable() {
+
+                        public String call() {
+                            return ((Minecraft) ((Object) this)).currentScreen.getClass()
+                                .getCanonicalName();
                         }
                     });
                     throw new ReportedException(crashreport);
@@ -208,262 +213,208 @@ public abstract class Minecraft_Mixin {
             }
         }
 
-        if (this.currentScreen == null || this.currentScreen.allowUserInput)
-        {
+        if (this.currentScreen == null || this.currentScreen.allowUserInput) {
             this.mcProfiler.endStartSection("mouse");
             int j;
 
-            while (Mouse.next())
-            {
+            while (Mouse.next()) {
                 if (net.minecraftforge.client.ForgeHooksClient.postMouseEvent()) continue;
 
                 j = Mouse.getEventButton();
                 KeyBinding.setKeyBindState(j - 100, Mouse.getEventButtonState());
 
-                if (Mouse.getEventButtonState())
-                {
+                if (Mouse.getEventButtonState()) {
                     KeyBinding.onTick(j - 100);
                 }
 
                 long k = Minecraft.getSystemTime() - this.systemTime;
 
-                if (k <= 200L)
-                {
+                if (k <= 200L) {
                     int i = Mouse.getEventDWheel();
 
-                    if (i != 0)
-                    {
+                    if (i != 0) {
                         this.thePlayer.inventory.changeCurrentItem(i);
 
-                        if (this.gameSettings.noclip)
-                        {
-                            if (i > 0)
-                            {
+                        if (this.gameSettings.noclip) {
+                            if (i > 0) {
                                 i = 1;
                             }
 
-                            if (i < 0)
-                            {
+                            if (i < 0) {
                                 i = -1;
                             }
 
-                            this.gameSettings.noclipRate += (float)i * 0.25F;
+                            this.gameSettings.noclipRate += (float) i * 0.25F;
                         }
                     }
 
-                    if (this.currentScreen == null)
-                    {
-                        if (!this.inGameHasFocus && Mouse.getEventButtonState())
-                        {
-                            ((Minecraft)((Object)this)).setIngameFocus();
+                    if (this.currentScreen == null) {
+                        if (!this.inGameHasFocus && Mouse.getEventButtonState()) {
+                            ((Minecraft) ((Object) this)).setIngameFocus();
                         }
-                    }
-                    else if (this.currentScreen != null)
-                    {
+                    } else if (this.currentScreen != null) {
                         this.currentScreen.handleMouseInput();
                     }
                 }
-                FMLCommonHandler.instance().fireMouseInput();
+                FMLCommonHandler.instance()
+                    .fireMouseInput();
             }
 
-            if (this.leftClickCounter > 0)
-            {
+            if (this.leftClickCounter > 0) {
                 --this.leftClickCounter;
             }
 
             this.mcProfiler.endStartSection("keyboard");
             boolean flag;
 
-            while (Keyboard.next())
-            {
+            while (Keyboard.next()) {
                 KeyBinding.setKeyBindState(Keyboard.getEventKey(), Keyboard.getEventKeyState());
 
-                if (Keyboard.getEventKeyState())
-                {
+                if (Keyboard.getEventKeyState()) {
                     KeyBinding.onTick(Keyboard.getEventKey());
                 }
 
-                if (this.field_83002_am > 0L)
-                {
-                    if (Minecraft.getSystemTime() - this.field_83002_am >= 6000L)
-                    {
+                if (this.field_83002_am > 0L) {
+                    if (Minecraft.getSystemTime() - this.field_83002_am >= 6000L) {
                         throw new ReportedException(new CrashReport("Manually triggered debug crash", new Throwable()));
                     }
 
-                    if (!Keyboard.isKeyDown(46) || !Keyboard.isKeyDown(61))
-                    {
+                    if (!Keyboard.isKeyDown(46) || !Keyboard.isKeyDown(61)) {
                         this.field_83002_am = -1L;
                     }
-                }
-                else if (Keyboard.isKeyDown(46) && Keyboard.isKeyDown(61))
-                {
+                } else if (Keyboard.isKeyDown(46) && Keyboard.isKeyDown(61)) {
                     this.field_83002_am = Minecraft.getSystemTime();
                 }
 
-                ((Minecraft)((Object)this)).func_152348_aa();
+                ((Minecraft) ((Object) this)).func_152348_aa();
 
-                if (Keyboard.getEventKeyState())
-                {
-                    if (Keyboard.getEventKey() == 62 && this.entityRenderer != null)
-                    {
+                if (Keyboard.getEventKeyState()) {
+                    if (Keyboard.getEventKey() == 62 && this.entityRenderer != null) {
                         this.entityRenderer.deactivateShader();
                     }
 
-                    if (this.currentScreen != null)
-                    {
+                    if (this.currentScreen != null) {
                         this.currentScreen.handleKeyboardInput();
-                    }
-                    else
-                    {
-                        if (Keyboard.getEventKey() == 1)
-                        {
-                            ((Minecraft)((Object)this)).displayInGameMenu();
+                    } else {
+                        if (Keyboard.getEventKey() == 1) {
+                            ((Minecraft) ((Object) this)).displayInGameMenu();
                         }
 
-                        if (Keyboard.getEventKey() == 31 && Keyboard.isKeyDown(61))
-                        {
-                            ((Minecraft)((Object)this)).refreshResources();
+                        if (Keyboard.getEventKey() == 31 && Keyboard.isKeyDown(61)) {
+                            ((Minecraft) ((Object) this)).refreshResources();
                         }
 
-                        if (Keyboard.getEventKey() == 20 && Keyboard.isKeyDown(61))
-                        {
-                            ((Minecraft)((Object)this)).refreshResources();
+                        if (Keyboard.getEventKey() == 20 && Keyboard.isKeyDown(61)) {
+                            ((Minecraft) ((Object) this)).refreshResources();
                         }
 
-                        if (Keyboard.getEventKey() == 33 && Keyboard.isKeyDown(61))
-                        {
+                        if (Keyboard.getEventKey() == 33 && Keyboard.isKeyDown(61)) {
                             flag = Keyboard.isKeyDown(42) | Keyboard.isKeyDown(54);
                             this.gameSettings.setOptionValue(GameSettings.Options.RENDER_DISTANCE, flag ? -1 : 1);
                         }
 
-                        if (Keyboard.getEventKey() == 30 && Keyboard.isKeyDown(61))
-                        {
-                            ((Minecraft)((Object)this)).renderGlobal.loadRenderers();
+                        if (Keyboard.getEventKey() == 30 && Keyboard.isKeyDown(61)) {
+                            ((Minecraft) ((Object) this)).renderGlobal.loadRenderers();
                         }
 
-                        if (Keyboard.getEventKey() == 35 && Keyboard.isKeyDown(61))
-                        {
+                        if (Keyboard.getEventKey() == 35 && Keyboard.isKeyDown(61)) {
                             this.gameSettings.advancedItemTooltips = !this.gameSettings.advancedItemTooltips;
                             this.gameSettings.saveOptions();
                         }
 
-                        if (Keyboard.getEventKey() == 48 && Keyboard.isKeyDown(61))
-                        {
+                        if (Keyboard.getEventKey() == 48 && Keyboard.isKeyDown(61)) {
                             RenderManager.debugBoundingBox = !RenderManager.debugBoundingBox;
                         }
 
-                        if (Keyboard.getEventKey() == 25 && Keyboard.isKeyDown(61))
-                        {
+                        if (Keyboard.getEventKey() == 25 && Keyboard.isKeyDown(61)) {
                             this.gameSettings.pauseOnLostFocus = !this.gameSettings.pauseOnLostFocus;
                             this.gameSettings.saveOptions();
                         }
 
-                        if (Keyboard.getEventKey() == 59)
-                        {
+                        if (Keyboard.getEventKey() == 59) {
                             this.gameSettings.hideGUI = !this.gameSettings.hideGUI;
                         }
 
-                        if (Keyboard.getEventKey() == 61)
-                        {
+                        if (Keyboard.getEventKey() == 61) {
                             this.gameSettings.showDebugInfo = !this.gameSettings.showDebugInfo;
                             this.gameSettings.showDebugProfilerChart = GuiScreen.isShiftKeyDown();
                         }
 
-                        if (this.gameSettings.keyBindTogglePerspective.isPressed())
-                        {
+                        if (this.gameSettings.keyBindTogglePerspective.isPressed()) {
                             ++this.gameSettings.thirdPersonView;
 
-                            if (this.gameSettings.thirdPersonView > 2)
-                            {
+                            if (this.gameSettings.thirdPersonView > 2) {
                                 this.gameSettings.thirdPersonView = 0;
                             }
                         }
 
-                        if (this.gameSettings.keyBindSmoothCamera.isPressed())
-                        {
+                        if (this.gameSettings.keyBindSmoothCamera.isPressed()) {
                             this.gameSettings.smoothCamera = !this.gameSettings.smoothCamera;
                         }
                     }
 
-                    if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart)
-                    {
-                        if (Keyboard.getEventKey() == 11)
-                        {
-                            ((Minecraft)((Object)this)).updateDebugProfilerName(0);
+                    if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart) {
+                        if (Keyboard.getEventKey() == 11) {
+                            ((Minecraft) ((Object) this)).updateDebugProfilerName(0);
                         }
 
-                        for (j = 0; j < 9; ++j)
-                        {
-                            if (Keyboard.getEventKey() == 2 + j)
-                            {
-                                ((Minecraft)((Object)this)).updateDebugProfilerName(j + 1);
+                        for (j = 0; j < 9; ++j) {
+                            if (Keyboard.getEventKey() == 2 + j) {
+                                ((Minecraft) ((Object) this)).updateDebugProfilerName(j + 1);
                             }
                         }
                     }
                 }
-                FMLCommonHandler.instance().fireKeyInput();
+                FMLCommonHandler.instance()
+                    .fireKeyInput();
             }
 
-            for (j = 0; j < 9; ++j)
-            {
-                if (this.gameSettings.keyBindsHotbar[j].isPressed())
-                {
+            for (j = 0; j < 9; ++j) {
+                if (this.gameSettings.keyBindsHotbar[j].isPressed()) {
                     this.thePlayer.inventory.currentItem = j;
                 }
             }
 
             flag = this.gameSettings.chatVisibility != EntityPlayer.EnumChatVisibility.HIDDEN;
 
-            while (this.gameSettings.keyBindInventory.isPressed())
-            {
-                if (this.playerController.func_110738_j())
-                {
+            while (this.gameSettings.keyBindInventory.isPressed()) {
+                if (this.playerController.func_110738_j()) {
                     this.thePlayer.func_110322_i();
-                }
-                else
-                {
-                    ((Minecraft)((Object)this)).getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT));
-                    ((Minecraft)((Object)this)).displayGuiScreen(new GuiInventory(this.thePlayer));
+                } else {
+                    ((Minecraft) ((Object) this)).getNetHandler()
+                        .addToSendQueue(
+                            new C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT));
+                    ((Minecraft) ((Object) this)).displayGuiScreen(new GuiInventory(this.thePlayer));
                 }
             }
 
-            while (this.gameSettings.keyBindDrop.isPressed())
-            {
+            while (this.gameSettings.keyBindDrop.isPressed()) {
                 this.thePlayer.dropOneItem(GuiScreen.isCtrlKeyDown());
             }
 
-            while (this.gameSettings.keyBindChat.isPressed() && flag)
-            {
-                ((Minecraft)((Object)this)).displayGuiScreen(new GuiChat());
+            while (this.gameSettings.keyBindChat.isPressed() && flag) {
+                ((Minecraft) ((Object) this)).displayGuiScreen(new GuiChat());
             }
 
-            if (this.currentScreen == null && this.gameSettings.keyBindCommand.isPressed() && flag)
-            {
-                ((Minecraft)((Object)this)).displayGuiScreen(new GuiChat("/"));
+            if (this.currentScreen == null && this.gameSettings.keyBindCommand.isPressed() && flag) {
+                ((Minecraft) ((Object) this)).displayGuiScreen(new GuiChat("/"));
             }
 
-            if (this.thePlayer.isUsingItem())
-            {
-                if (!this.gameSettings.keyBindUseItem.getIsKeyPressed())
-                {
+            if (this.thePlayer.isUsingItem()) {
+                if (!this.gameSettings.keyBindUseItem.getIsKeyPressed()) {
                     this.playerController.onStoppedUsingItem(this.thePlayer);
                 }
 
                 label391:
 
-                while (true)
-                {
-                    if (!this.gameSettings.keyBindAttack.isPressed())
-                    {
-                        while (this.gameSettings.keyBindUseItem.isPressed())
-                        {
+                while (true) {
+                    if (!this.gameSettings.keyBindAttack.isPressed()) {
+                        while (this.gameSettings.keyBindUseItem.isPressed()) {
                             ;
                         }
 
-                        while (true)
-                        {
-                            if (this.gameSettings.keyBindPickBlock.isPressed())
-                            {
+                        while (true) {
+                            if (this.gameSettings.keyBindPickBlock.isPressed()) {
                                 continue;
                             }
 
@@ -471,41 +422,34 @@ public abstract class Minecraft_Mixin {
                         }
                     }
                 }
-            }
-            else
-            {
-                while (this.gameSettings.keyBindAttack.isPressed())
-                {
-                    ((Minecraft)((Object)this)).func_147116_af();
+            } else {
+                while (this.gameSettings.keyBindAttack.isPressed()) {
+                    ((Minecraft) ((Object) this)).func_147116_af();
                 }
 
-                while (this.gameSettings.keyBindUseItem.isPressed())
-                {
-                    ((Minecraft)((Object)this)).func_147121_ag();
+                while (this.gameSettings.keyBindUseItem.isPressed()) {
+                    ((Minecraft) ((Object) this)).func_147121_ag();
                 }
 
-                while (this.gameSettings.keyBindPickBlock.isPressed())
-                {
-                    ((Minecraft)((Object)this)).func_147112_ai();
+                while (this.gameSettings.keyBindPickBlock.isPressed()) {
+                    ((Minecraft) ((Object) this)).func_147112_ai();
                 }
             }
 
-            if (this.gameSettings.keyBindUseItem.getIsKeyPressed() && this.rightClickDelayTimer == 0 && !this.thePlayer.isUsingItem())
-            {
-                ((Minecraft)((Object)this)).func_147121_ag();
+            if (this.gameSettings.keyBindUseItem.getIsKeyPressed() && this.rightClickDelayTimer == 0
+                && !this.thePlayer.isUsingItem()) {
+                ((Minecraft) ((Object) this)).func_147121_ag();
             }
 
-            ((Minecraft)((Object)this)).func_147115_a(this.currentScreen == null && this.gameSettings.keyBindAttack.getIsKeyPressed() && this.inGameHasFocus);
+            ((Minecraft) ((Object) this)).func_147115_a(
+                this.currentScreen == null && this.gameSettings.keyBindAttack.getIsKeyPressed() && this.inGameHasFocus);
         }
 
-        if (this.theWorld != null)
-        {
-            if (this.thePlayer != null)
-            {
+        if (this.theWorld != null) {
+            if (this.thePlayer != null) {
                 ++this.joinPlayerCounter;
 
-                if (this.joinPlayerCounter == 30)
-                {
+                if (this.joinPlayerCounter == 30) {
                     this.joinPlayerCounter = 0;
                     this.theWorld.joinEntityInSurroundings(this.thePlayer);
                 }
@@ -513,24 +457,20 @@ public abstract class Minecraft_Mixin {
 
             this.mcProfiler.endStartSection("gameRenderer");
 
-            if (!this.isGamePaused)
-            {
+            if (!this.isGamePaused) {
                 this.entityRenderer.updateRenderer();
             }
 
             this.mcProfiler.endStartSection("levelRenderer");
 
-            if (!this.isGamePaused)
-            {
+            if (!this.isGamePaused) {
                 if (!isStop) this.renderGlobal.updateClouds();
             }
 
             this.mcProfiler.endStartSection("level");
 
-            if (!this.isGamePaused)
-            {
-                if (this.theWorld.lastLightningBolt > 0)
-                {
+            if (!this.isGamePaused) {
+                if (this.theWorld.lastLightningBolt > 0) {
                     if (!isStop) --this.theWorld.lastLightningBolt;
                 }
 
@@ -538,33 +478,25 @@ public abstract class Minecraft_Mixin {
             }
         }
 
-        if (!this.isGamePaused)
-        {
+        if (!this.isGamePaused) {
             if (!isStop) this.mcMusicTicker.update();
             if (!isStop) this.mcSoundHandler.update();
         }
 
-        if (this.theWorld != null)
-        {
-            if (!this.isGamePaused)
-            {
-                if (!isStop) this.theWorld.setAllowedSpawnTypes(this.theWorld.difficultySetting != EnumDifficulty.PEACEFUL, true);
+        if (this.theWorld != null) {
+            if (!this.isGamePaused) {
+                if (!isStop) this.theWorld
+                    .setAllowedSpawnTypes(this.theWorld.difficultySetting != EnumDifficulty.PEACEFUL, true);
 
-                try
-                {
+                try {
                     if (!isStop) this.theWorld.tick();
-                }
-                catch (Throwable throwable2)
-                {
+                } catch (Throwable throwable2) {
                     crashreport = CrashReport.makeCrashReport(throwable2, "Exception in world tick");
 
-                    if (this.theWorld == null)
-                    {
+                    if (this.theWorld == null) {
                         crashreportcategory = crashreport.makeCategory("Affected level");
                         crashreportcategory.addCrashSection("Problem", "Level is null!");
-                    }
-                    else
-                    {
+                    } else {
                         this.theWorld.addWorldInfoToCrashReport(crashreport);
                     }
 
@@ -574,71 +506,65 @@ public abstract class Minecraft_Mixin {
 
             this.mcProfiler.endStartSection("animateTick");
 
-            if (!this.isGamePaused && this.theWorld != null)
-            {
-                if (!isStop) this.theWorld.doVoidFogParticles(MathHelper.floor_double(this.thePlayer.posX), MathHelper.floor_double(this.thePlayer.posY), MathHelper.floor_double(this.thePlayer.posZ));
+            if (!this.isGamePaused && this.theWorld != null) {
+                if (!isStop) this.theWorld.doVoidFogParticles(
+                    MathHelper.floor_double(this.thePlayer.posX),
+                    MathHelper.floor_double(this.thePlayer.posY),
+                    MathHelper.floor_double(this.thePlayer.posZ));
             }
 
             this.mcProfiler.endStartSection("particles");
 
-            if (!this.isGamePaused)
-            {
+            if (!this.isGamePaused) {
                 if (!isStop) this.effectRenderer.updateEffects();
             }
-        }
-        else if (this.myNetworkManager != null)
-        {
+        } else if (this.myNetworkManager != null) {
             this.mcProfiler.endStartSection("pendingConnection");
             this.myNetworkManager.processReceivedPackets();
         }
 
-        FMLCommonHandler.instance().onPostClientTick();
+        FMLCommonHandler.instance()
+            .onPostClientTick();
 
         this.mcProfiler.endSection();
         this.systemTime = Minecraft.getSystemTime();
     }
 
-
-    @Inject(method = "runGameLoop",at=@At("HEAD"),cancellable = true)
+    @Inject(method = "runGameLoop", at = @At("HEAD"), cancellable = true)
     private void mixin$runGameLoop(CallbackInfo ci) {
         if (TimeStopManager.isTimeStopped()) {
             ci.cancel();
-        }
-        else return;
+        } else return;
 
         this.mcProfiler.startSection("root");
 
-        if (Display.isCreated() && Display.isCloseRequested())
-        {
-            ((Minecraft)((Object)this)).shutdown();
+        if (Display.isCreated() && Display.isCloseRequested()) {
+            ((Minecraft) ((Object) this)).shutdown();
         }
 
         if (this.isGamePaused && this.theWorld != null) {
             float f = this.timer.renderPartialTicks;
             this.timer.updateTimer();
             this.timer.renderPartialTicks = f;
-        }
-        else {
+        } else {
             this.timer.updateTimer();
         }
 
-        if ((this.theWorld == null || this.currentScreen == null) && this.refreshTexturePacksScheduled)
-        {
+        if ((this.theWorld == null || this.currentScreen == null) && this.refreshTexturePacksScheduled) {
             this.refreshTexturePacksScheduled = false;
-            ((Minecraft)((Object)this)).refreshResources();
+            ((Minecraft) ((Object) this)).refreshResources();
         }
 
         long j = System.nanoTime();
         this.mcProfiler.startSection("tick");
 
-        for (int i = 0; i < this.timer.elapsedTicks; ++i)
-        {
-            ((Minecraft)((Object)this)).runTick();
+        for (int i = 0; i < this.timer.elapsedTicks; ++i) {
+            ((Minecraft) ((Object) this)).runTick();
         }
 
         this.mcProfiler.endStartSection("preRenderErrors");
         long k = System.nanoTime() - j;
-        ((Minecraft)((Object)this)).checkGLError("Pre render");
+        ((Minecraft) ((Object) this)).checkGLError("Pre render");
         RenderBlocks.fancyGrass = this.gameSettings.fancyGraphics;
         this.mcProfiler.endStartSection("sound");
         this.mcSoundHandler.setListener(this.thePlayer, this.timer.renderPartialTicks);
@@ -646,116 +572,114 @@ public abstract class Minecraft_Mixin {
         this.mcProfiler.startSection("render");
         GL11.glPushMatrix();
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-        ((Minecraft)((Object)this)).framebufferMc.bindFramebuffer(true);
+        ((Minecraft) ((Object) this)).framebufferMc.bindFramebuffer(true);
         this.mcProfiler.startSection("display");
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        if (this.thePlayer != null && this.thePlayer.isEntityInsideOpaqueBlock())
-        {
+        if (this.thePlayer != null && this.thePlayer.isEntityInsideOpaqueBlock()) {
             this.gameSettings.thirdPersonView = 0;
         }
 
         this.mcProfiler.endSection();
 
-        if (!((Minecraft)((Object)this)).skipRenderWorld) {
-            FMLCommonHandler.instance().onRenderTickStart(this.timer.renderPartialTicks);
+        if (!((Minecraft) ((Object) this)).skipRenderWorld) {
+            FMLCommonHandler.instance()
+                .onRenderTickStart(this.timer.renderPartialTicks);
             this.mcProfiler.endStartSection("gameRenderer");
             this.entityRenderer.updateCameraAndRender(this.timer.renderPartialTicks);
             this.mcProfiler.endSection();
-            FMLCommonHandler.instance().onRenderTickEnd(this.timer.renderPartialTicks);
+            FMLCommonHandler.instance()
+                .onRenderTickEnd(this.timer.renderPartialTicks);
         }
 
         GL11.glFlush();
         this.mcProfiler.endSection();
 
-        if (!Display.isActive() && ((Minecraft)((Object)this)).fullscreen)
-        {
-            ((Minecraft)((Object)this)).toggleFullscreen();
+        if (!Display.isActive() && ((Minecraft) ((Object) this)).fullscreen) {
+            ((Minecraft) ((Object) this)).toggleFullscreen();
         }
 
-        if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart)
-        {
-            if (!this.mcProfiler.profilingEnabled)
-            {
+        if (this.gameSettings.showDebugInfo && this.gameSettings.showDebugProfilerChart) {
+            if (!this.mcProfiler.profilingEnabled) {
                 this.mcProfiler.clearProfiling();
             }
 
             this.mcProfiler.profilingEnabled = true;
-            ((Minecraft)((Object)this)).displayDebugInfo(k);
-        }
-        else
-        {
+            ((Minecraft) ((Object) this)).displayDebugInfo(k);
+        } else {
             this.mcProfiler.profilingEnabled = false;
-            ((Minecraft)((Object)this)).prevFrameTime = System.nanoTime();
+            ((Minecraft) ((Object) this)).prevFrameTime = System.nanoTime();
         }
 
-        ((Minecraft)((Object)this)).guiAchievement.func_146254_a();
-        ((Minecraft)((Object)this)).framebufferMc.unbindFramebuffer();
+        ((Minecraft) ((Object) this)).guiAchievement.func_146254_a();
+        ((Minecraft) ((Object) this)).framebufferMc.unbindFramebuffer();
         GL11.glPopMatrix();
         GL11.glPushMatrix();
-        ((Minecraft)((Object)this)).framebufferMc.framebufferRender(((Minecraft)((Object)this)).displayWidth, ((Minecraft)((Object)this)).displayHeight);
+        ((Minecraft) ((Object) this)).framebufferMc
+            .framebufferRender(((Minecraft) ((Object) this)).displayWidth, ((Minecraft) ((Object) this)).displayHeight);
         GL11.glPopMatrix();
         GL11.glPushMatrix();
         this.entityRenderer.func_152430_c(this.timer.renderPartialTicks);
         GL11.glPopMatrix();
         this.mcProfiler.startSection("root");
-        ((Minecraft)((Object)this)).func_147120_f();
+        ((Minecraft) ((Object) this)).func_147120_f();
         Thread.yield();
         this.mcProfiler.startSection("stream");
         this.mcProfiler.startSection("update");
-        ((Minecraft)((Object)this)).field_152353_at.func_152935_j();
+        ((Minecraft) ((Object) this)).field_152353_at.func_152935_j();
         this.mcProfiler.endStartSection("submit");
-        ((Minecraft)((Object)this)).field_152353_at.func_152922_k();
+        ((Minecraft) ((Object) this)).field_152353_at.func_152922_k();
         this.mcProfiler.endSection();
         this.mcProfiler.endSection();
-        ((Minecraft)((Object)this)).checkGLError("Post render");
-        ++((Minecraft)((Object)this)).fpsCounter;
-        this.isGamePaused = ((Minecraft)((Object)this)).isSingleplayer() && this.currentScreen != null && this.currentScreen.doesGuiPauseGame() && !((Minecraft)((Object)this)).theIntegratedServer.getPublic();
+        ((Minecraft) ((Object) this)).checkGLError("Post render");
+        ++((Minecraft) ((Object) this)).fpsCounter;
+        this.isGamePaused = ((Minecraft) ((Object) this)).isSingleplayer() && this.currentScreen != null
+            && this.currentScreen.doesGuiPauseGame()
+            && !((Minecraft) ((Object) this)).theIntegratedServer.getPublic();
 
-        while (Minecraft.getSystemTime() >= ((Minecraft)((Object)this)).debugUpdateTime + 1000L)
-        {
-            Minecraft.debugFPS = ((Minecraft)((Object)this)).fpsCounter;
-            ((Minecraft)((Object)this)).debug = Minecraft.debugFPS + " fps, " + WorldRenderer.chunksUpdated + " chunk updates";
+        while (Minecraft.getSystemTime() >= ((Minecraft) ((Object) this)).debugUpdateTime + 1000L) {
+            Minecraft.debugFPS = ((Minecraft) ((Object) this)).fpsCounter;
+            ((Minecraft) ((Object) this)).debug = Minecraft.debugFPS + " fps, "
+                + WorldRenderer.chunksUpdated
+                + " chunk updates";
             WorldRenderer.chunksUpdated = 0;
-            ((Minecraft)((Object)this)).debugUpdateTime += 1000L;
-            ((Minecraft)((Object)this)).fpsCounter = 0;
-            ((Minecraft)((Object)this)).usageSnooper.addMemoryStatsToSnooper();
+            ((Minecraft) ((Object) this)).debugUpdateTime += 1000L;
+            ((Minecraft) ((Object) this)).fpsCounter = 0;
+            ((Minecraft) ((Object) this)).usageSnooper.addMemoryStatsToSnooper();
 
-            if (!((Minecraft)((Object)this)).usageSnooper.isSnooperRunning())
-            {
-                ((Minecraft)((Object)this)).usageSnooper.startSnooper();
+            if (!((Minecraft) ((Object) this)).usageSnooper.isSnooperRunning()) {
+                ((Minecraft) ((Object) this)).usageSnooper.startSnooper();
             }
         }
 
         this.mcProfiler.endSection();
 
-        if (((Minecraft)((Object)this)).isFramerateLimitBelowMax())
-        {
-            Display.sync(((Minecraft)((Object)this)).getLimitFramerate());
+        if (((Minecraft) ((Object) this)).isFramerateLimitBelowMax()) {
+            Display.sync(((Minecraft) ((Object) this)).getLimitFramerate());
         }
     }
 
-    /*@Redirect(
-        method = "runGameLoop",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/util/Timer;updateTimer()V",
-            ordinal = 1
-        )
-    )
-    private void onElseUpdateTimer(Timer timer) {
-        if (TimeStopManager.isTimeStopped()) {
-            // 保存旧的renderPartialTicks值
-            float partialTicks = timer.renderPartialTicks;
-
-            // 执行原版updateTimer逻辑
-            timer.updateTimer();
-
-            // 恢复renderPartialTicks值
-            timer.renderPartialTicks = partialTicks;
-        } else {
-            // 正常执行原版逻辑
-            timer.updateTimer();
-        }
-    }*/
+    /*
+     * @Redirect(
+     * method = "runGameLoop",
+     * at = @At(
+     * value = "INVOKE",
+     * target = "Lnet/minecraft/util/Timer;updateTimer()V",
+     * ordinal = 1
+     * )
+     * )
+     * private void onElseUpdateTimer(Timer timer) {
+     * if (TimeStopManager.isTimeStopped()) {
+     * // 保存旧的renderPartialTicks值
+     * float partialTicks = timer.renderPartialTicks;
+     * // 执行原版updateTimer逻辑
+     * timer.updateTimer();
+     * // 恢复renderPartialTicks值
+     * timer.renderPartialTicks = partialTicks;
+     * } else {
+     * // 正常执行原版逻辑
+     * timer.updateTimer();
+     * }
+     * }
+     */
 }

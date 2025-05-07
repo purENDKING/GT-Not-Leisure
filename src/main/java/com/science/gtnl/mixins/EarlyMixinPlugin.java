@@ -15,14 +15,6 @@ public class EarlyMixinPlugin {
         mixins.add("World_Mixin");
         mixins.add("WorldClient_Mixin");
         mixins.add("WorldServer_Mixin");
-        mixins.add("render.EffectRenderer_Mixin");
-        mixins.add("render.EntityFX_Mixin");
-        mixins.add("render.RenderArrow_Mixin");
-        mixins.add("render.RendererLivingEntity_Mixin");
-        mixins.add("render.RenderItem_Mixin");
-        mixins.add("render.RenderManager_Mixin");
-        mixins.add("render.RenderXPOrb_Mixin");
-        //mixins.add("render.");
         return mixins;
     }
 }
