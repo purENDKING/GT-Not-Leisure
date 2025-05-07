@@ -38,6 +38,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.TextLocalization;
+import com.reavaritia.common.SubtitleDisplay;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -45,7 +46,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.objects.GTItemStack;
 import gregtech.api.util.GTUtility;
 
-public class InfinityBucket extends Item implements IFluidContainerItem {
+public class InfinityBucket extends Item implements IFluidContainerItem, SubtitleDisplay {
 
     protected boolean Stop = false;
     private static final int BASE_MAX_TYPES = 128;
@@ -383,7 +384,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
                 }
             }
             ensureNonEmptyFluids(fluids);
-            showFluidInfo(fluidName, fluidTag.getInteger("Amount"));
+            showSubtitle(fluidName, fluidTag.getInteger("Amount"));
             return true;
         }
         return false;
@@ -514,7 +515,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
                     }
                     stack.setTagCompound(nbt);
                 }
-                showFluidInfo(fluidName, amount - 1000);
+                showSubtitle(fluidName, amount - 1000);
             }
         }
     }
@@ -547,7 +548,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
                 String fluidName = fluidTag.getString("FluidName");
                 int remainingAmount = fluidTag.getInteger("Amount");
 
-                showFluidInfo(fluidName, remainingAmount);
+                showSubtitle(fluidName, remainingAmount);
             }
         }
 
@@ -578,7 +579,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
     }
 
     @SideOnly(Side.CLIENT)
-    private void showFluidInfo(String displayName, int remainingAmount) {
+    public void showSubtitle(String displayName, int remainingAmount) {
         String amountText = (remainingAmount == INFINITE_FLUID_AMOUNT) ? "∞" : remainingAmount + "L";
 
         IChatComponent component = new ChatComponentTranslation(
@@ -625,7 +626,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem {
                                 String fluidName = fluidTag.getString("FluidName");
                                 int remainingAmount = fluidTag.getInteger("Amount");
 
-                                showFluidInfo(fluidName, remainingAmount);
+                                showSubtitle(fluidName, remainingAmount);
                             }
                         }
                         lastUpdateTime = currentTime;
