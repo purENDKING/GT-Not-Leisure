@@ -5,36 +5,24 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
 import java.io.File;
 
-import net.minecraftforge.common.MinecraftForge;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.Utils.message.LanguageManager;
-import com.science.gtnl.Utils.message.LoginMessage;
-import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.api.TickrateAPI;
-import com.science.gtnl.asm.TickrateMessage;
-import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
-import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.command.CommandReloadConfig;
 import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.command.CommandTitle;
-import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
+import com.science.gtnl.common.effect.GTNLEffect;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
-import com.science.gtnl.config.ClientEventHandler;
-import com.science.gtnl.config.ConfigSyncMessage;
 import com.science.gtnl.config.MainConfig;
-import com.science.gtnl.config.ServerEventHandler;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoader;
 import com.science.gtnl.loader.RecipeLoaderRunnable;
 import com.science.gtnl.loader.ScriptLoader;
 
-import appeng.api.AEApi;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -45,7 +33,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 
 @Mod(
     modid = MODID,
@@ -93,35 +80,34 @@ public class ScienceNotLeisure {
         MainConfig.init(mainConfigFile);
     }
 
+    // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
+    // GameRegistry." (Remove if not needed)
     @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        proxy.preInit(event);
+        GTNLEffect.init();
+        MaterialLoader.loadPreInit();
+        LanguageManager.init();
+
+        new RecipeLoaderRunnable().run();
+    }
+
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
+    @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        PlayerDollWaila.init();
         MachineLoader.registerGlasses();
-
-        MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
-        MinecraftForge.EVENT_BUS.register(new LoginMessage());
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new LoginMessage());
-
         TickrateAPI.changeTickrate(MainConfig.defaultTickrate);
     }
 
-    @Mod.EventHandler
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
+    @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         EIGBucketLoader.LoadEIGBuckets();
         MaterialLoader.loadPostInit();
         MachineLoader.run();
-        MachineLoader.loadMachinesPostInit();
-
-        AEApi.instance()
-            .registries()
-            .interfaceTerminal()
-            .register(SuperCraftingInputHatchME.class);
     }
 
     @Mod.EventHandler
@@ -130,35 +116,12 @@ public class ScienceNotLeisure {
         RecipeLoader.loadRecipesCompleteInit();
     }
 
-    @Mod.EventHandler
     // register server commands in this event handler (Remove if not needed)
+    @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandReloadConfig());
         event.registerServerCommand(new CommandTitle());
         event.registerServerCommand(new CommandTickrate());
-    }
-
-    // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
-    // GameRegistry." (Remove if not needed)
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-        proxy.preInit(event);
-        MaterialLoader.loadPreInit();
-        LanguageManager.init();
-
-        new RecipeLoaderRunnable().run();
-
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new ServerEventHandler());
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new ClientEventHandler());
-
-        network.registerMessage(TitlePacket.Handler.class, TitlePacket.class, 0, Side.CLIENT);
-        network.registerMessage(TickrateMessage.Handler.class, TickrateMessage.class, 1, Side.CLIENT);
-        network.registerMessage(ConfigSyncMessage.Handler.class, ConfigSyncMessage.class, 2, Side.CLIENT);
     }
 
     @Mod.EventHandler

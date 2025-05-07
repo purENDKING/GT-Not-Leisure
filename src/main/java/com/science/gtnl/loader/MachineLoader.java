@@ -659,11 +659,12 @@ public class MachineLoader {
                 TextLocalization.NameFuelRefiningComplex));
         addItemTooltip(GTNLItemList.FuelRefiningComplex.get(1), AnimatedText.SNL_QYZG);
 
-        /**
-         * ResourceCollectionModule used 21092
-         *
-         * @see #loadMachinesPostInit()
-         */
+        ResourceCollectionModule = new ResourceCollectionModule(
+            RESOURCE_COLLECTION_MODULE.ID,
+            "ResourceCollectionModule",
+            TextLocalization.NameResourceCollectionModule).getStackForm(1);
+        GTNLItemList.ResourceCollectionModule.set(ResourceCollectionModule);
+        addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.LuvKuangBiaoOneGiantNuclearFusionReactor.set(
             new LuvKuangBiaoOneGiantNuclearFusionReactor(
@@ -922,11 +923,12 @@ public class MachineLoader {
                 TextLocalization.NameOreExtractionModule));
         addItemTooltip(GTNLItemList.OreExtractionModule.get(1), AnimatedText.SNL_QYZG);
 
-        /**
-         * SuperSpaceElevator used 21135
-         *
-         * @see #loadMachinesPostInit()
-         */
+        SuperSpaceElevator = new SuperSpaceElevator(
+            SUPER_SPACE_ELEVATOR.ID,
+            "SuperSpaceElevator",
+            TextLocalization.NameSuperSpaceElevator).getStackForm(1);
+        GTNLItemList.SuperSpaceElevator.set(SuperSpaceElevator);
+        addItemTooltip(GTNLItemList.SuperSpaceElevator.get(1), AnimatedText.SNL_QYZG);
 
         GTNLItemList.LargeBioLab
             .set(new LargeBioLab(LARGE_BIO_LAB.ID, "LargeBioLab", TextLocalization.NameLargeBioLab));
@@ -1786,22 +1788,6 @@ public class MachineLoader {
         // 这个可用 MoreMaterialToolUtil.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
         // 这个渲染炸了 MoreMaterialToolUtil.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
-    }
-
-    public static void loadMachinesPostInit() {
-        ResourceCollectionModule = new ResourceCollectionModule(
-            RESOURCE_COLLECTION_MODULE.ID,
-            "ResourceCollectionModule",
-            TextLocalization.NameResourceCollectionModule).getStackForm(1);
-        GTNLItemList.ResourceCollectionModule.set(ResourceCollectionModule);
-        addItemTooltip(GTNLItemList.ResourceCollectionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
-
-        SuperSpaceElevator = new SuperSpaceElevator(
-            SUPER_SPACE_ELEVATOR.ID,
-            "SuperSpaceElevator",
-            TextLocalization.NameSuperSpaceElevator).getStackForm(1);
-        GTNLItemList.SuperSpaceElevator.set(SuperSpaceElevator);
-        addItemTooltip(GTNLItemList.SuperSpaceElevator.get(1), AnimatedText.SNL_QYZG);
     }
 
     private static void registerCovers() {
