@@ -115,6 +115,9 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(SteamRockBreaker.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamRockBreaker.class).casingIndex(10)
                             .dot(1)
                             .build(),

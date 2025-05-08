@@ -75,6 +75,10 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
                 .addElement(
                     'D',
                     ofChain(
+                        buildSteamWirelessInput(SteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamFusionReactor.class)
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
                             .dot(1)

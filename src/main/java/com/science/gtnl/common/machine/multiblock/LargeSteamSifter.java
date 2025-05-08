@@ -97,6 +97,9 @@ public class LargeSteamSifter extends SteamMultiMachineBase<LargeSteamSifter> im
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamSifter.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamSifter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

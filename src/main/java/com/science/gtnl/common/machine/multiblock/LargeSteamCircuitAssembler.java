@@ -99,6 +99,9 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
                 .addElement(
                     'B',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamCircuitAssembler.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

@@ -98,6 +98,9 @@ public class LargeSteamCentrifuge extends SteamMultiMachineBase<LargeSteamCentri
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamCentrifuge.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamCentrifuge.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

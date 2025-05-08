@@ -93,7 +93,7 @@ public class MegaSteamCompressor extends SteamMultiMachineBase<MegaSteamCompress
                 .addElement(
                     'B',
                     ofChain(
-                        buildSteamBigInput(MegaSteamCompressor.class)
+                        buildSteamWirelessInput(MegaSteamCompressor.class)
                             .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
                             .dot(1)
                             .build(),

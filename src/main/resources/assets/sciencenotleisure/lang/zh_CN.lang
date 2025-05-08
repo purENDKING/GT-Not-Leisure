@@ -48,6 +48,28 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=时停怀表
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=掌握时间的秘密
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=在古老的时间学派手稿中，有关「时停怀表」的记载寥寥无几。据说，它最早是由一位厌倦战争与喧嚣的炼金术士打造，他渴望在流逝中捕捉永恒。怀表的构造并不复杂，真正的难点在于为其注入“停滞”的本质。传闻整个仪式必须在月相最黯淡之夜进行，四周环绕以安静的时空晶体与沉默的金属，施术者的每一缕意念都必须精确控制，否则整个注魔仪式会使时间本身反噬施法者。若仪式成功，便可暂时将世界之流冻结于此刻，但切记：时间从不会真正被掌控，它只是在等待反扑的时机。
 
+PipelessSteamHatch=无管蒸汽仓
+Tooltip_PipelessSteamHatch_00=§b§o它从哪儿来的? 能从看似虚无的地方提取蒸汽,
+Tooltip_PipelessSteamHatch_01=§b§o甚至无需任何管道, 你开始怀疑自己对烧水的理解.
+Tooltip_PipelessSteamHatch_02=§b§o但可以确定的是: 这可能仍然不够……
+PipelessJetstreamHatch=无管喷流仓
+Tooltip_PipelessJetstreamHatch_00=§b§o你梦中回忆起"无线能源仓", 却不记得有这种力量.
+Tooltip_PipelessJetstreamHatch_01=§b§o通过利用强大的除湿能力, 你发现了方法,
+Tooltip_PipelessJetstreamHatch_02=§b§o能将水的能量发挥到前所未有的高度……
+Tooltip_WirelessSteamEnergyHatch_00=将蒸汽存储于全局网络中，上限为2^(2^31)L.
+Tooltip_WirelessSteamEnergyHatch_01=不连接管道，此方块可以从网络中抽取蒸汽.
+
+PipelessSteamVent=无管蒸汽排气口
+Tooltip_PipelessSteamVent_00=§b§o梦中你记起了什么"无线动力仓", 大概是这么叫的.
+Tooltip_PipelessSteamVent_01=§b§o虽记不起它的用途, 但此物与其极其相似.
+Tooltip_PipelessSteamVent_02=§b§o可你曾嘲笑它的无用……如今这东西却如此好用.
+PipelessJetstreamVent=无管喷流排气口
+Tooltip_PipelessJetstreamVent_00=§b§o你曾听说过一种名为"蒸汽之门"的装置, 研究中你仍不明其意.
+Tooltip_PipelessJetstreamVent_01=§b§o这东西神秘而宏伟, 你尚不清楚要付出多少才能造出它.
+Tooltip_PipelessJetstreamVent_02=§b§o但可以肯定的是, 你将需要大量蒸汽, 而这个排气口是关键所在……
+Tooltip_WirelessSteamDynamoHatch_00=将蒸汽存储于全局网络中，上限为2^(2^31)L.
+Tooltip_WirelessSteamDynamoHatch_01=不连接管道，此方块可以为网络接收蒸汽.
+
 ManaTank=魔力缸
 Tooltip_ManaTank_00=可以从附近的魔力池和魔力花抽取魔力
 Tooltip_ManaTank_01=如果检查到永恒魔力池，将直接填满

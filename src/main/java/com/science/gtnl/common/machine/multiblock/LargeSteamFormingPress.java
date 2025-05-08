@@ -100,6 +100,9 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamFormingPress.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamFormingPress.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

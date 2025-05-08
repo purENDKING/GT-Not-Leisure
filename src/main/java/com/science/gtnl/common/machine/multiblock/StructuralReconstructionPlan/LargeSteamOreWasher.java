@@ -121,6 +121,9 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamOreWasher.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamOreWasher.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

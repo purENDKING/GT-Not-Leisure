@@ -72,6 +72,10 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
                 .addElement(
                     'B',
                     ofChain(
+                        buildSteamWirelessInput(SteamWoodcutter.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamWoodcutter.class)
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
                             .dot(1)

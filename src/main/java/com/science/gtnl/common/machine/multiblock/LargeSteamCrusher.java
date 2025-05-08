@@ -97,6 +97,9 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamCrusher.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamCrusher.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

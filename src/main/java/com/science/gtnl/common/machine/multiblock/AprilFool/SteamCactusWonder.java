@@ -125,6 +125,9 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
                 .addElement(
                     'C',
                     ofChain(
+                        buildSteamWirelessInput(SteamCactusWonder.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamCactusWonder.class).casingIndex(10)
                             .dot(1)
                             .build(),

@@ -96,6 +96,9 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(SteamCracking.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamCracking.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

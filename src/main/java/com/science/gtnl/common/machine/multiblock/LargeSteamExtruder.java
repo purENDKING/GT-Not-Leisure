@@ -100,6 +100,9 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamExtruder.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamExtruder.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

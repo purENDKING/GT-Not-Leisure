@@ -101,6 +101,9 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamMixer.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamMixer.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

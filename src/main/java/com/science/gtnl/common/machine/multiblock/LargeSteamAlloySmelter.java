@@ -97,6 +97,9 @@ public class LargeSteamAlloySmelter extends SteamMultiMachineBase<LargeSteamAllo
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamAlloySmelter.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

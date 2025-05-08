@@ -40,6 +40,8 @@ import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
 import com.science.gtnl.common.machine.hatch.TapDynamoHatch;
+import com.science.gtnl.common.machine.hatch.WirelessSteamDynamoHatch;
+import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedCircuitAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
@@ -1343,6 +1345,38 @@ public class MachineLoader {
                 StatCollector.translateToLocal("TapDynamoHatchLV"),
                 1));
         addItemTooltip(GTNLItemList.TapDynamoHatchLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.PipelessSteamHatch.set(
+            new WirelessSteamEnergyHatch(
+                PIPELESS_STEAM_HATCH.ID,
+                "PipelessSteamHatch",
+                StatCollector.translateToLocal("PipelessSteamHatch"),
+                0));
+        addItemTooltip(GTNLItemList.PipelessSteamHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.PipelessSteamVent.set(
+            new WirelessSteamDynamoHatch(
+                PIPELESS_STEAM_VENT.ID,
+                "PipelessSteamVent",
+                StatCollector.translateToLocal("PipelessSteamVent"),
+                0));
+        addItemTooltip(GTNLItemList.PipelessSteamVent.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.PipelessJetstreamHatch.set(
+            new WirelessSteamEnergyHatch(
+                PIPELESS_JETSTREAM_HATCH.ID,
+                "PipelessJetstreamHatch",
+                StatCollector.translateToLocal("PipelessJetstreamHatch"),
+                1));
+        addItemTooltip(GTNLItemList.PipelessJetstreamHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.PipelessJetstreamVent.set(
+            new WirelessSteamDynamoHatch(
+                PIPELESS_JETSTREAM_VENT.ID,
+                "PipelessJetstreamVent",
+                StatCollector.translateToLocal("PipelessJetstreamVent"),
+                1));
+        addItemTooltip(GTNLItemList.PipelessJetstreamVent.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

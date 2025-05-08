@@ -101,6 +101,9 @@ public class LargeSteamChemicalBath extends SteamMultiMachineBase<LargeSteamChem
                 .addElement(
                     'B',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamChemicalBath.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamChemicalBath.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

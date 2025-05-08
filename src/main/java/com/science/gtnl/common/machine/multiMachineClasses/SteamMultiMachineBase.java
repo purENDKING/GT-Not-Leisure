@@ -1,6 +1,8 @@
 package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
+import static com.science.gtnl.common.GTNLMachineID.BIG_STEAM_INPUT_HATCH;
+import static com.science.gtnl.common.GTNLMachineID.PIPELESS_STEAM_HATCH;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockFrames;
@@ -52,6 +54,7 @@ import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.GregTechAPI;
@@ -101,8 +104,9 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     protected int tCountCasing = 0;
     protected boolean isBroken = true;
     public ArrayList<CustomFluidHatch> mSteamBigInputFluids = new ArrayList<>();
-    private int uiSteamStored = 0;
-    private int uiSteamCapacity = 0;
+    public ArrayList<CustomFluidHatch> mSteamWirelessInputFluids = new ArrayList<>();
+    private long uiSteamStored = 0;
+    private long uiSteamCapacity = 0;
     private int uiSteamStoredOfAllTypes = 0;
     public static final UITexture STEAM_GAUGE_BG = UITexture.fullImage(GregTech.ID, "gui/background/steam_dial");
 
@@ -220,6 +224,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         for (MTEHatch h : mSteamOutputs) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mSteamInputFluids) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mSteamBigInputFluids) h.updateTexture(getCasingTextureID());
+        for (MTEHatch h : mSteamWirelessInputFluids) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mInputBusses) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mOutputBusses) h.updateTexture(getCasingTextureID());
         for (MTEHatch h : mInputHatches) h.updateTexture(getCasingTextureID());
@@ -243,7 +248,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     protected boolean checkHatches() {
-        return !mSteamInputFluids.isEmpty() || !mSteamBigInputFluids.isEmpty();
+        return !mSteamInputFluids.isEmpty() || !mSteamBigInputFluids.isEmpty() || !mSteamWirelessInputFluids.isEmpty();
     }
 
     @Override
@@ -316,6 +321,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
                 this.mInputHatches.clear();
                 this.mSteamInputFluids.clear();
                 this.mSteamBigInputFluids.clear();
+                this.mSteamWirelessInputFluids.clear();
             }
             if (mUpdate < -250) mUpdate = 50;
             if ((aTick % 1200) == 0) {
@@ -339,7 +345,10 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             return false;
         }
 
-        if (aMetaTileEntity instanceof CustomFluidHatch) {
+        if (aMetaTileEntity instanceof WirelessSteamEnergyHatch) {
+            log("Adding Steam Wireless Input Hatch");
+            aDidAdd = addToMachineListInternal(mSteamWirelessInputFluids, aMetaTileEntity, aBaseCasingIndex);
+        } else if (aMetaTileEntity instanceof CustomFluidHatch) {
             log("Adding Steam Big Input Hatch");
             aDidAdd = addToMachineListInternal(mSteamBigInputFluids, aMetaTileEntity, aBaseCasingIndex);
         }
@@ -361,6 +370,16 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             }
         }
         for (CustomFluidHatch tHatch : validMTEList(mSteamBigInputFluids)) {
+            FluidStack tLiquid = tHatch.getFluid();
+            if (tLiquid != null && tLiquid.isFluidEqual(aLiquid)) {
+                tLiquid = tHatch.drain(aLiquid.amount, false);
+                if (tLiquid != null && tLiquid.amount >= aLiquid.amount) {
+                    tLiquid = tHatch.drain(aLiquid.amount, true);
+                    return tLiquid != null && tLiquid.amount >= aLiquid.amount;
+                }
+            }
+        }
+        for (CustomFluidHatch tHatch : validMTEList(mSteamWirelessInputFluids)) {
             FluidStack tLiquid = tHatch.getFluid();
             if (tLiquid != null && tLiquid.isFluidEqual(aLiquid)) {
                 tLiquid = tHatch.drain(aLiquid.amount, false);
@@ -392,6 +411,19 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             }
         }
         for (CustomFluidHatch tHatch : validMTEList(mSteamBigInputFluids)) {
+            if (GTUtility.areStacksEqual(
+                aStack,
+                tHatch.getBaseMetaTileEntity()
+                    .getStackInSlot(0))) {
+                if (tHatch.getBaseMetaTileEntity()
+                    .getStackInSlot(0).stackSize >= aStack.stackSize) {
+                    tHatch.getBaseMetaTileEntity()
+                        .decrStackSize(0, aStack.stackSize);
+                    return true;
+                }
+            }
+        }
+        for (CustomFluidHatch tHatch : validMTEList(mSteamWirelessInputFluids)) {
             if (GTUtility.areStacksEqual(
                 aStack,
                 tHatch.getBaseMetaTileEntity()
@@ -444,6 +476,11 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     public ArrayList<FluidStack> getStoredSteamFluids() {
         ArrayList<FluidStack> rList = new ArrayList<>();
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) {
+            if (tHatch.getFillableStack() != null) {
+                rList.add(tHatch.getFillableStack());
+            }
+        }
+        for (CustomFluidHatch tHatch : validMTEList(mSteamWirelessInputFluids)) {
             if (tHatch.getFillableStack() != null) {
                 rList.add(tHatch.getFillableStack());
             }
@@ -578,12 +615,15 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return false;
     }
 
-    public int getTotalSteamCapacity() {
-        int aSteam = 0;
+    public long getTotalSteamCapacity() {
+        long aSteam = 0;
         for (MTEHatchCustomFluidBase tHatch : validMTEList(mSteamInputFluids)) {
             aSteam += tHatch.getRealCapacity();
         }
         for (CustomFluidHatch tHatch : validMTEList(mSteamBigInputFluids)) {
+            aSteam += tHatch.getRealCapacity();
+        }
+        for (CustomFluidHatch tHatch : validMTEList(mSteamWirelessInputFluids)) {
             aSteam += tHatch.getRealCapacity();
         }
         return aSteam;
@@ -651,9 +691,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         return rList;
     }
 
-    @Override
-    public int getTotalSteamStored() {
-        int total = 0;
+    public long getLongTotalSteamStored() {
+        long total = 0;
         for (FluidStack aFluid : getAllSteamStacks()) {
             total += aFluid.amount;
         }
@@ -694,6 +733,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public void updateSlots() {
         for (CustomFluidHatch tHatch : validMTEList(mSteamBigInputFluids)) tHatch.updateSlots();
+        for (CustomFluidHatch tHatch : validMTEList(mSteamWirelessInputFluids)) tHatch.updateSlots();
         for (MTEHatchInput tHatch : validMTEList(mInputHatches)) tHatch.updateSlots();
         for (MTEHatchInputBus tHatch : validMTEList(mInputBusses)) tHatch.updateSlots();
         super.updateSlots();
@@ -705,6 +745,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         mInputHatches.clear();
         mSteamInputFluids.clear();
         mSteamBigInputFluids.clear();
+        mSteamWirelessInputFluids.clear();
         mSteamInputs.clear();
         mSteamOutputs.clear();
     }
@@ -736,8 +777,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
         buildContext.addSyncedWindow(OC_WINDOW_ID, this::createRecipeOcCountWindow);
-        builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamCapacity, val -> uiSteamCapacity = val));
-        builder.widget(new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStored, val -> uiSteamStored = val));
+        builder.widget(new FakeSyncWidget.LongSyncer(this::getTotalSteamCapacity, val -> uiSteamCapacity = val));
+        builder.widget(new FakeSyncWidget.LongSyncer(this::getLongTotalSteamStored, val -> uiSteamStored = val));
         builder.widget(
             new FakeSyncWidget.IntegerSyncer(this::getTotalSteamStoredOfAnyType, val -> uiSteamStoredOfAllTypes = val));
 
@@ -830,8 +871,15 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
 
     public static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamBigInput(Class<T> typeToken) {
         return buildHatchAdder(typeToken).adder(SteamMultiMachineBase::addToMachineList)
-            .hatchIds(22518)
+            .hatchIds(BIG_STEAM_INPUT_HATCH.ID)
             .shouldReject(t -> !t.mSteamBigInputFluids.isEmpty());
+    }
+
+    public static <T extends SteamMultiMachineBase<T>> HatchElementBuilder<T> buildSteamWirelessInput(
+        Class<T> typeToken) {
+        return buildHatchAdder(typeToken).adder(SteamMultiMachineBase::addToMachineList)
+            .hatchIds(PIPELESS_STEAM_HATCH.ID)
+            .shouldReject(t -> !t.mSteamWirelessInputFluids.isEmpty());
     }
 
     public enum SteamTypes {

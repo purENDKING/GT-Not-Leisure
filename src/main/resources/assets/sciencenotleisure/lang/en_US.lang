@@ -48,6 +48,28 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=Time Stop Pocket Watch
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=Mastering the Secret of Time
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=In the ancient manuscripts of the Chronomantic school, records of the “Time Stop Pocket Watch” are scarce. It is said to have been first crafted by an alchemist weary of war and noise, longing to capture eternity within the flow of time. The construction of the watch itself is not complex—the true challenge lies in imbuing it with the essence of stillness. Rumors tell that the infusion must take place on the darkest night of the lunar cycle, surrounded by silent temporal crystals and hushed metals. Every thought of the practitioner must be held in perfect focus, lest the ritual turn awry and time itself lash back. If the ritual succeeds, one may briefly freeze the world’s flow at this very moment—but beware: time is never truly mastered. It merely waits for the moment to retaliate.
 
+PipelessSteamHatch=Pipeless Steam Hatch
+Tooltip_PipelessSteamHatch_00=§b§oWhere does it come from? Capable of extracting Steam from seemingly nowhere, and even
+Tooltip_PipelessSteamHatch_01=§b§owithout any type of Pipes, you begin to question what you thought you knew about this
+Tooltip_PipelessSteamHatch_02=§b§osimple action of boiling water. One thing's for sure though, it still may not be enough...
+PipelessJetstreamHatch=Pipeless Jetstream Hatch
+Tooltip_PipelessJetstreamHatch_00=§b§oYour dream recalled a 'Wireless Energy Hatch,' but you don't remember anything like the
+Tooltip_PipelessJetstreamHatch_01=§b§opower of this hatch. By utilizing the immense strength of dehumidification, you've found
+Tooltip_PipelessJetstreamHatch_02=§b§oa way to harness the incredible energy of water to heights you never thought possible...
+Tooltip_WirelessSteamEnergyHatch_00=Stores steam globally in a network, up to 2^(2^31) L.
+Tooltip_WirelessSteamEnergyHatch_01=Does not connect to pipes. This block withdraws Steam from the network.
+
+PipelessSteamVent=Pipeless Steam Vent
+Tooltip_PipelessSteamVent_00=§b§oIn a dream, you remember something named a 'Wireless Energy Dynamo,' or something like
+Tooltip_PipelessSteamVent_01=§b§othat. You don't remember what it did, but the similarities here are clear. However, you
+Tooltip_PipelessSteamVent_02=§b§oremember laughing at their uselessness. Hard to imagine that reality, when these are so useful...
+PipelessJetstreamVent=Pipeless Jetstream Vent
+Tooltip_PipelessJetstreamVent_00=§b§oYou've heard whispers of a mechanism called the 'Steamgate.' In your research, you're still unsure of
+Tooltip_PipelessJetstreamVent_01=§b§owhat this means or what all it will entail to produce something so elusive and monumental. However one
+Tooltip_PipelessJetstreamVent_02=§b§othing's for sure, you'll need a lot of steam to get there, and this vent is a key part of the puzzle...
+Tooltip_WirelessSteamDynamoHatch_00=Stores steam globally in a network, up to 2^(2^31) L.
+Tooltip_WirelessSteamDynamoHatch_01=Does not connect to wires. This block accepts Stam into the network.
+
 ManaTank=Mana Tank
 Tooltip_ManaTank_00=Extract mana from nearby mana pools
 Tooltip_ManaTank_01=If an Eternal Mana Pool is detected, it will be filled directly

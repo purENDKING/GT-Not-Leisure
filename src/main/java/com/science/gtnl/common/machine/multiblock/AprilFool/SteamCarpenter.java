@@ -77,6 +77,9 @@ public class SteamCarpenter extends SteamMultiMachineBase<SteamCarpenter> implem
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(SteamCarpenter.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamCarpenter.class).casingIndex(10)
                             .dot(1)
                             .build(),

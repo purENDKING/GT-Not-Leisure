@@ -15,6 +15,7 @@ public class EarlyMixinPlugin {
         mixins.add("World_Mixin");
         mixins.add("WorldClient_Mixin");
         mixins.add("WorldServer_Mixin");
+        mixins.add("FMLProxyPacket_Mixin");
         return mixins;
     }
 }

@@ -141,6 +141,9 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
                 .addElement(
                     'L',
                     ofChain(
+                        buildSteamWirelessInput(SteamExtractinator.class).casingIndex(10)
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamExtractinator.class).casingIndex(10)
                             .dot(1)
                             .build(),

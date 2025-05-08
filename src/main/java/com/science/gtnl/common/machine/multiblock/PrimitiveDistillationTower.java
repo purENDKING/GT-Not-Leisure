@@ -207,6 +207,10 @@ public class PrimitiveDistillationTower extends SteamMultiMachineBase<PrimitiveD
             .addElement(
                 'A',
                 ofChain(
+                    buildSteamWirelessInput(PrimitiveDistillationTower.class)
+                        .casingIndex(((BlockCasings3) GregTechAPI.sBlockCasings3).getTextureIndex(14))
+                        .dot(1)
+                        .build(),
                     buildSteamBigInput(PrimitiveDistillationTower.class)
                         .casingIndex(((BlockCasings3) GregTechAPI.sBlockCasings3).getTextureIndex(14))
                         .dot(1)

@@ -155,6 +155,10 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(SteamLavaMaker.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 27))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamLavaMaker.class)
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 27))
                             .dot(1)

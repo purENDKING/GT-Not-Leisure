@@ -97,6 +97,9 @@ public class LargeSteamCompressor extends SteamMultiMachineBase<LargeSteamCompre
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamCompressor.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamCompressor.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

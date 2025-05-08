@@ -70,6 +70,9 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamFurnace.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamFurnace.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

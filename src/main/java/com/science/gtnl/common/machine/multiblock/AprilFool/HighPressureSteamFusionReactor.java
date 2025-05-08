@@ -79,6 +79,10 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
                 .addElement(
                     'E',
                     ofChain(
+                        buildSteamWirelessInput(HighPressureSteamFusionReactor.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(HighPressureSteamFusionReactor.class)
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 32))
                             .dot(1)

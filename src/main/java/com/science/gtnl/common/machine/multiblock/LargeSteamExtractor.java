@@ -119,6 +119,9 @@ public class LargeSteamExtractor extends SteamMultiMachineBase<LargeSteamExtract
                 .addElement(
                     'D',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamExtractor.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

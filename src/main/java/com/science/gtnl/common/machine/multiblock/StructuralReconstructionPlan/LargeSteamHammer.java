@@ -97,6 +97,9 @@ public class LargeSteamHammer extends SteamMultiMachineBase<LargeSteamHammer> im
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(LargeSteamHammer.class).casingIndex(getCasingTextureID())
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(LargeSteamHammer.class).casingIndex(getCasingTextureID())
                             .dot(1)
                             .build(),

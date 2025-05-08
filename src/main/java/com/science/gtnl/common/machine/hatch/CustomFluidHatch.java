@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.hatch;
 import static gregtech.api.enums.Textures.BlockIcons.FLUID_STEAM_IN_SIGN;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_PIPE_IN;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -16,6 +17,7 @@ import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.GTMod;
+import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUIInfos;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -26,11 +28,10 @@ import gregtech.api.util.GTUtility;
 
 public class CustomFluidHatch extends MTEHatch {
 
-    public final Set<Fluid> mLockedFluids;
-    public final int mFluidCapacity;
+    public Set<Fluid> mLockedFluids;
+    public int mFluidCapacity;
 
-    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, final int aID, final String aName,
-        final String aNameRegional, int aTier) {
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier) {
         super(
             aID,
             aName,
@@ -43,15 +44,90 @@ public class CustomFluidHatch extends MTEHatch {
         this.mFluidCapacity = aAmount;
     }
 
-    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, final String aName, final int aTier,
-        final String[] aDescription, final ITexture[][][] aTextures) {
-        super(aName, aTier, 3, aDescription[0], aTextures);
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier,
+        String[] aDescription, ITexture... aTextures) {
+        super(aID, aName, aNameRegional, aTier, 3, aDescription, aTextures);
         this.mLockedFluids = aFluid;
         this.mFluidCapacity = aAmount;
     }
 
-    public boolean allowPutStack(final IGregTechTileEntity aBaseMetaTileEntity, final int aIndex,
-        final ForgeDirection side, final ItemStack aStack) {
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier,
+        String[] aDescription) {
+        super(aID, aName, aNameRegional, aTier, 3, aDescription);
+        this.mLockedFluids = aFluid;
+        this.mFluidCapacity = aAmount;
+    }
+
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, String aName, int aTier, String[] aDescription,
+        ITexture[][][] aTextures) {
+        super(aName, aTier, 3, aDescription, aTextures);
+        this.mLockedFluids = aFluid;
+        this.mFluidCapacity = aAmount;
+    }
+
+    @Override
+    public MetaTileEntity newMetaEntity(final IGregTechTileEntity aTileEntity) {
+        return new CustomFluidHatch(
+            this.mLockedFluids,
+            this.mFluidCapacity,
+            this.mName,
+            this.mTier,
+            this.mDescriptionArray,
+            this.mTextures);
+    }
+
+    @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+
+        int texturePointer = getUpdateData();
+        int mTexturePage;
+
+        try {
+            Class<?> hatchClass = MTEHatch.class;
+            Field texturePageField = hatchClass.getDeclaredField("mTexturePage");
+            texturePageField.setAccessible(true);
+            mTexturePage = (byte) texturePageField.get(this);
+            if (mTexturePage < 0 || mTexturePage >= Textures.BlockIcons.casingTexturePages.length) {
+                return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[0][0] };
+            }
+
+            int textureIndex = texturePointer | (mTexturePage << 7);
+
+            if (side != aFacing) {
+                if (textureIndex > 0 && texturePointer < Textures.BlockIcons.casingTexturePages[mTexturePage].length) {
+                    return new ITexture[] { Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer] };
+                } else {
+                    return new ITexture[] { getBaseTexture(colorIndex) };
+                }
+            } else {
+                if (textureIndex > 0 && texturePointer < Textures.BlockIcons.casingTexturePages[mTexturePage].length) {
+                    if (aActive) {
+                        return getTexturesActive(Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer]);
+                    } else {
+                        return getTexturesInactive(
+                            Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer]);
+                    }
+                } else {
+                    if (aActive) {
+                        return getTexturesActive(getBaseTexture(colorIndex));
+                    } else {
+                        return getTexturesInactive(getBaseTexture(colorIndex));
+                    }
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[0][0] };
+        }
+    }
+
+    protected ITexture getBaseTexture(int colorIndex) {
+        return Textures.BlockIcons.MACHINE_CASINGS[mTier][colorIndex + 1];
+    }
+
+    public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, final ForgeDirection side,
+        final ItemStack aStack) {
         if (side == aBaseMetaTileEntity.getFrontFacing() && aIndex == 0) {
             FluidStack fs = GTUtility.getFluidForFilledItem(aStack, true);
             return fs != null && mLockedFluids.contains(fs.getFluid());
@@ -170,17 +246,6 @@ public class CustomFluidHatch extends MTEHatch {
                 return true;
         }
         return false;
-    }
-
-    @Override
-    public MetaTileEntity newMetaEntity(final IGregTechTileEntity aTileEntity) {
-        return new CustomFluidHatch(
-            this.mLockedFluids,
-            this.mFluidCapacity,
-            this.mName,
-            this.mTier,
-            this.mDescriptionArray,
-            this.mTextures);
     }
 
     @Override

@@ -81,6 +81,10 @@ public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> 
                 .addElement(
                     'C',
                     ofChain(
+                        buildSteamWirelessInput(SteamManufacturer.class)
+                            .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 30))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamManufacturer.class)
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 30))
                             .dot(1)

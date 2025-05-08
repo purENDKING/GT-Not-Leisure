@@ -172,6 +172,10 @@ public class SteamGateAssembler extends SteamMultiMachineBase<SteamGateAssembler
                 .addElement(
                     'A',
                     ofChain(
+                        buildSteamWirelessInput(SteamGateAssembler.class)
+                            .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamGateAssembler.class)
                             .casingIndex(((BlockCasings1) GregTechAPI.sBlockCasings1).getTextureIndex(10))
                             .dot(1)
@@ -193,6 +197,10 @@ public class SteamGateAssembler extends SteamMultiMachineBase<SteamGateAssembler
                 .addElement(
                     'B',
                     ofChain(
+                        buildSteamWirelessInput(SteamGateAssembler.class)
+                            .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
+                            .dot(1)
+                            .build(),
                         buildSteamBigInput(SteamGateAssembler.class)
                             .casingIndex(((BlockCasings2) GregTechAPI.sBlockCasings2).getTextureIndex(0))
                             .dot(1)

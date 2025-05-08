@@ -4,6 +4,7 @@ import static com.science.gtnl.ScienceNotLeisure.network;
 
 import net.minecraftforge.common.MinecraftForge;
 
+import com.science.gtnl.Utils.GlobalSteamWorldSavedData;
 import com.science.gtnl.Utils.PlayerUtils;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
@@ -40,6 +41,7 @@ public class CommonProxy {
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new GlobalSteamWorldSavedData(""));
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerUtils());
         FMLCommonHandler.instance()
