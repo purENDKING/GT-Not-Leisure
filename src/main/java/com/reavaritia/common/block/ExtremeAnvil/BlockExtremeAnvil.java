@@ -181,9 +181,7 @@ public class BlockExtremeAnvil extends BlockFalling {
             if (shouldFall(world, x, y, z)) {
                 startFalling(world, x, y, z);
             }
-        }
-
-        else {
+        } else {
             ItemStack foundationStack = new ItemStack(foundationBlock, 1, world.getBlockMetadata(x, y - 1, z));
             if (!hasOreTag(foundationStack, "neutronUnbreak")) {
                 world.func_147480_a(x, y - 1, z, true);
