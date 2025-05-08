@@ -1,4 +1,4 @@
-package com.science.gtnl.common.recipe.GTNL.Thaumcraft;
+package com.science.gtnl.common.recipe.GTNL;
 
 import static com.science.gtnl.Utils.enums.TierEU.RECIPE_LV;
 import static fox.spiteful.avaritia.items.LudicrousItems.bigPearl;
@@ -13,13 +13,14 @@ import net.minecraft.item.ItemStack;
 import com.science.gtnl.Utils.Utils;
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.common.recipe.Thaumcraft.TCRecipeTools;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Mods;
 import gregtech.api.interfaces.IRecipeMap;
 
-public class InfusionCraftingRecipesPool implements IRecipePool {
+public class InfusionCraftingRecipes implements IRecipePool {
 
     protected ItemStack[] itemsUnconsumed = new ItemStack[] { new ItemStack(bigPearl) };
 

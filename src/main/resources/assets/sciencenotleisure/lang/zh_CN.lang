@@ -14,13 +14,6 @@ Welcome_GTNL_RecipeOutputChance_00=GTNL 电压配方概率修改已启用
 Welcome_GTNL_RecipeOutputChance_01=当前每级增加概率: %s
 Welcome_GTNL_reload=配置文件已重新加载!
 
-NameGiveCountBook=§r掏掏不绝宝典 - 
-Info_GiveCountBook_00=玩家: 
-Info_GiveCountBook_01=掏掏次数: 
-Info_GiveCountBook_02=掏过的物品 : 注册ID:数据值 : 数量 : 最后掏过时间
-Info_GiveCountBook_03=上次掏掏时间: 
-Info_GiveCountBook_04=超过行数限制! 使用翻页参数获取下一页内容
-
 Adder=添加模组: 
 Tooltip_Tectech_Hatch=支持§9Tec§1Tech§r激光仓！
 Tooltip_PerfectOverclock=机器可进行§c无损超频§7
@@ -45,6 +38,15 @@ Interaction_DESCRIPTION_Index_707=需要采矿无人机MK-XIII x 16
 Interaction_DESCRIPTION_Index_708=需要压缩超高压聚变反应堆
 Interaction_DESCRIPTION_Index_709=需要无菌环境
 Interaction_DESCRIPTION_Index_710=需要绝对洁净环境
+
+tc.research_category.GTNL=GTNL: 随想魔法
+tc.research_name.GTNL_WELCOME=你的新起点
+tc.research_text.GTNL_WELCOME=并不友善
+tc.research_text.GTNL_WELCOME.1=欢迎来到奇思妙想的新世界!
+
+tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=时停怀表
+tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=掌握时间的秘密
+tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=在古老的时间学派手稿中，有关「时停怀表」的记载寥寥无几。据说，它最早是由一位厌倦战争与喧嚣的炼金术士打造，他渴望在流逝中捕捉永恒。怀表的构造并不复杂，真正的难点在于为其注入“停滞”的本质。传闻整个仪式必须在月相最黯淡之夜进行，四周环绕以安静的时空晶体与沉默的金属，施术者的每一缕意念都必须精确控制，否则整个注魔仪式会使时间本身反噬施法者。若仪式成功，便可暂时将世界之流冻结于此刻，但切记：时间从不会真正被掌控，它只是在等待反扑的时机。
 
 ManaTank=魔力缸
 Tooltip_ManaTank_00=可以从附近的魔力池和魔力花抽取魔力

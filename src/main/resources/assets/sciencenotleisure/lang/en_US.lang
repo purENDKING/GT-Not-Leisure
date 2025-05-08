@@ -14,13 +14,6 @@ Welcome_GTNL_RecipeOutputChance_00=GTNL Voltage Recipe Chance Modification Enabl
 Welcome_GTNL_RecipeOutputChance_01=Current probability increase for each level: %s
 Welcome_GTNL_reload=Configuration file has been reloaded!
 
-NameGiveCountBook=Give Count Book - 
-Info_GiveCountBook_00=Player: 
-Info_GiveCountBook_01=Give Count: 
-Info_GiveCountBook_02=Give Item: Registry ID:Meta : Count : Last Time
-Info_GiveCountBook_03=Last Give Time: 
-Info_GiveCountBook_04=Exceeded line limit! Use the page parameter to view the next page
-
 Adder=Add Mod: 
 Tooltip_Tectech_Hatch=Supports §9Tec§1Tech§r laser hatches!
 Tooltip_PerfectOverclock=Machine can perform §clossless overclocking§7
@@ -45,6 +38,15 @@ Interaction_DESCRIPTION_Index_707=Requires MK-XIII Mining Drones x 16
 Interaction_DESCRIPTION_Index_708=Requires Compact Hyper Pressure Reactor
 Interaction_DESCRIPTION_Index_709=Requires Sterile Environment
 Interaction_DESCRIPTION_Index_710=Requires Absolute Cleaning Environment
+
+tc.research_category.GTNL=GTNL: Whimsical Thaumaturgy
+tc.research_name.GTNL_WELCOME=Your New Beginning
+tc.research_text.GTNL_WELCOME=并不友善
+tc.research_text.GTNL_WELCOME.1=Welcome to a world of curious thoughts and wonders!
+
+tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=Time Stop Pocket Watch
+tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=Mastering the Secret of Time
+tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=In the ancient manuscripts of the Chronomantic school, records of the “Time Stop Pocket Watch” are scarce. It is said to have been first crafted by an alchemist weary of war and noise, longing to capture eternity within the flow of time. The construction of the watch itself is not complex—the true challenge lies in imbuing it with the essence of stillness. Rumors tell that the infusion must take place on the darkest night of the lunar cycle, surrounded by silent temporal crystals and hushed metals. Every thought of the practitioner must be held in perfect focus, lest the ritual turn awry and time itself lash back. If the ritual succeeds, one may briefly freeze the world’s flow at this very moment—but beware: time is never truly mastered. It merely waits for the moment to retaliate.
 
 ManaTank=Mana Tank
 Tooltip_ManaTank_00=Extract mana from nearby mana pools

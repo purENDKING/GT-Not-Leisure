@@ -28,6 +28,7 @@ dependencies {
     implementation('com.github.GTNewHorizons:Universal-Singularities:8.8.0:dev')
     implementation('com.github.GTNewHorizons:Jabba:1.4.6:dev')
     implementation('com.github.GTNewHorizons:ThaumicTinkerer:2.10.2:dev')
+    implementation('com.github.GTNewHorizons:thaumicinsurgence:0.4.0:dev')
     implementation('com.github.GTNewHorizons:WarpTheory:1.4.3-GTNH:dev')
     implementation('com.github.GTNewHorizons:LootGames:2.2.0:dev')
 }

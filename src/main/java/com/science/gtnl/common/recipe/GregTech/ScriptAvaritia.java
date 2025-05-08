@@ -16,9 +16,12 @@ import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.loader.IScriptLoader;
 
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
+import fox.spiteful.avaritia.items.LudicrousItems;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 
 public class ScriptAvaritia implements IScriptLoader {
@@ -2372,5 +2375,56 @@ public class ScriptAvaritia implements IScriptLoader {
                 getModItem(Avaritia.ID, "Resource", 1, 1, missing),
                 'D',
                 GTOreDictUnificator.get(OrePrefixes.block, Materials.CosmicNeutronium, 1));
+
+        ExtremeCraftingManager.getInstance()
+            .addExtremeShapedOreRecipe(
+                ReAvaItemList.ChronarchsClock.get(1),
+                "ABCDDDCBA",
+                "BEFGEGHEB",
+                "CIJAJAJKC",
+                "DGALMLAGD",
+                "DEJNONJED",
+                "DGALPLAGD",
+                "CQJAJAJRC",
+                "BESGEGSEB",
+                "ABCDDDCBA",
+                'A',
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Infinity, 1),
+                'B',
+                GTOreDictUnificator.get(OrePrefixes.nanite, MaterialsUEVplus.TranscendentMetal, 1),
+                'C',
+                GTModHandler.getModItem(EternalSingularity.ID, "eternal_singularity", 1, 0, missing),
+                'D',
+                ItemList.Field_Generator_UEV.get(1),
+                'E',
+                GTModHandler.getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 56, missing),
+                'F',
+                ItemList.Quark_Creation_Catalyst_Up.get(1),
+                'G',
+                GTModHandler.getModItem(BloodMagic.ID, "speedRune", 1, 0, missing),
+                'H',
+                ItemList.Quark_Creation_Catalyst_Down.get(1),
+                'I',
+                ItemList.Quark_Creation_Catalyst_Top.get(1),
+                'J',
+                ItemList.AcceleratorUV.get(1),
+                'K',
+                ItemList.Quark_Creation_Catalyst_Bottom.get(1),
+                'L',
+                GTModHandler.getModItem(TwilightForest.ID, "tile.TFMagicLogSpecial", 1, 0, missing),
+                'M',
+                GTModHandler.getModItem(TaintedMagic.ID, "ItemFocusTime", 1, 0, missing),
+                'N',
+                GTModHandler.getModItem(DraconicEvolution.ID, "awakenedCore", 1, 0, missing),
+                'O',
+                new ItemStack(Items.clock, 1),
+                'P',
+                new ItemStack(LudicrousItems.bigPearl, 1),
+                'Q',
+                ItemList.Quark_Creation_Catalyst_Strange.get(1),
+                'R',
+                ItemList.Quark_Creation_Catalyst_Charm.get(1),
+                'S',
+                GTModHandler.getModItem(GalacticraftAmunRa.ID, "item.baseItem", 1, 28, missing));
     }
 }

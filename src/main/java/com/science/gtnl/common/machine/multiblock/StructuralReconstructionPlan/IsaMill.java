@@ -3,14 +3,12 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.enums.HatchElement.*;
-import static gregtech.api.enums.Mods.GTPlusPlus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings5Misc;
 
 import java.util.ArrayList;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -29,7 +27,6 @@ import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
 
 import bartworks.API.BorosilicateGlass;
-import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.TAE;
 import gregtech.api.enums.Textures;
 import gregtech.api.enums.VoltageIndex;
@@ -49,6 +46,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gtPlusPlus.core.item.chemistry.general.ItemGenericChemBase;
 import gtPlusPlus.core.util.math.MathUtils;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
 import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.nbthandlers.MTEHatchMillingBalls;
 import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
@@ -297,9 +295,8 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
     }
 
     private ItemStack findMillingBall(int recipeReq) {
-        final Item MillingBall = GameRegistry.findItem(GTPlusPlus.ID, "item.BasicGenericChemItem");
-        final ItemStack AluminaMillingBall = new ItemStack(MillingBall, 1, 7);
-        final ItemStack SoapstoneMillingBall = new ItemStack(MillingBall, 1, 8);
+        final ItemStack AluminaMillingBall = GregtechItemList.Milling_Ball_Alumina.get(1);
+        final ItemStack SoapstoneMillingBall = GregtechItemList.Milling_Ball_Soapstone.get(1);
         if (mMillingBallBuses.size() != 1) {
             return null;
         }

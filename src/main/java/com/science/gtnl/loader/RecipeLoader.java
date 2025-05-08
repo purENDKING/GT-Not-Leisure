@@ -30,6 +30,7 @@ import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
 import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
 import com.science.gtnl.common.recipe.GTNL.GasCollectorRecipes;
+import com.science.gtnl.common.recipe.GTNL.InfusionCraftingRecipes;
 import com.science.gtnl.common.recipe.GTNL.IsaMillRecipes;
 import com.science.gtnl.common.recipe.GTNL.ManaInfusionRecipes;
 import com.science.gtnl.common.recipe.GTNL.MatterFabricatorRecipes;
@@ -43,12 +44,11 @@ import com.science.gtnl.common.recipe.GTNL.RareEarthCentrifugalRecipes;
 import com.science.gtnl.common.recipe.GTNL.ReFusionReactorRecipes;
 import com.science.gtnl.common.recipe.GTNL.RealArtificialStarRecipes;
 import com.science.gtnl.common.recipe.GTNL.ShallowChemicalCouplingRecipes;
+import com.science.gtnl.common.recipe.GTNL.ShapedArcaneCraftingRecipes;
 import com.science.gtnl.common.recipe.GTNL.SmeltingMixingFurnaceRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceDrillRecipes;
 import com.science.gtnl.common.recipe.GTNL.SpaceMinerRecipes;
 import com.science.gtnl.common.recipe.GTNL.SteamCrackerRecipes;
-import com.science.gtnl.common.recipe.GTNL.Thaumcraft.InfusionCraftingRecipesPool;
-import com.science.gtnl.common.recipe.GTNL.Thaumcraft.ShapedArcaneCraftingRecipesPool;
 import com.science.gtnl.common.recipe.GTNL.TheTwilightForestRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloyBlastSmelterRecipes;
 import com.science.gtnl.common.recipe.GregTech.AlloySmelterRecipes;
@@ -84,6 +84,8 @@ import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
 import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRecipes;
+import com.science.gtnl.common.recipe.Thaumcraft.TCRecipePool;
+import com.science.gtnl.common.recipe.Thaumcraft.TCResearches;
 
 import goodgenerator.util.CrackRecipeAdder;
 
@@ -120,9 +122,12 @@ public class RecipeLoader {
 
         };
 
+        TCRecipePool.loadRecipes();
+        TCResearches.register();
+
         new OP_NormalProcessing().enumOreProcessingRecipes();
-        new ShapedArcaneCraftingRecipesPool().loadRecipes();
-        new InfusionCraftingRecipesPool().loadRecipes();
+        new ShapedArcaneCraftingRecipes().loadRecipes();
+        new InfusionCraftingRecipes().loadRecipes();
         GTNLProcessingArrayRecipeLoader.registerDefaultGregtechMaps();
 
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.MolybdenumDisilicide, 800, 1920, 2300, true);

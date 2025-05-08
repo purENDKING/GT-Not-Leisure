@@ -1,10 +1,12 @@
 package com.science.gtnl.Utils.item;
 
 import static com.science.gtnl.Mods.Baubles;
+import static gregtech.api.util.GTModHandler.getModItem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.reavaritia.common.item.InfinityTotem;
@@ -56,5 +58,17 @@ public class ItemUtils {
                 }
             }
         }
+    }
+
+    public static ItemStack createItemStack(String aModID, String aItem, long aAmount, int aMeta, String aNBTString,
+        ItemStack aReplacement) {
+        ItemStack s = getModItem(aModID, aItem, aAmount, aMeta);
+        if (s == null) return aReplacement;
+        try {
+            s.stackTagCompound = (NBTTagCompound) JsonToNBT.func_150315_a(aNBTString);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return s;
     }
 }
