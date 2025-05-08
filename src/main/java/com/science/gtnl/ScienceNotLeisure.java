@@ -12,6 +12,7 @@ import com.science.gtnl.Utils.item.MissingMappingsHandler;
 import com.science.gtnl.Utils.message.LanguageManager;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.common.command.CommandReloadConfig;
+import com.science.gtnl.common.command.CommandSteamNetwork;
 import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.command.CommandTitle;
 import com.science.gtnl.common.effect.GTNLEffect;
@@ -122,6 +123,7 @@ public class ScienceNotLeisure {
         event.registerServerCommand(new CommandReloadConfig());
         event.registerServerCommand(new CommandTitle());
         event.registerServerCommand(new CommandTickrate());
+        event.registerServerCommand(new CommandSteamNetwork());
     }
 
     @Mod.EventHandler
