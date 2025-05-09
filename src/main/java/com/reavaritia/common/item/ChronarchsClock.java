@@ -26,9 +26,9 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.ReAvaritia;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.entity.EntityChronarchPoint;
+import com.science.gtnl.Mods;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.config.MainConfig;
 
@@ -213,7 +213,7 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
 
     public static void registerEntity() {
         EntityRegistry
-            .registerModEntity(EntityChronarchPoint.class, "ChronarchPoint", 1, ReAvaritia.instance, 64, 20, true);
+            .registerModEntity(EntityChronarchPoint.class, "ChronarchPoint", 1, Mods.ReAvaritia.ID, 64, 20, true);
 
     }
 }

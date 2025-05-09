@@ -117,9 +117,11 @@ public class SudokuRenderer extends TileEntitySpecialRenderer {
                     }
 
                     GL11.glPushMatrix();
+                    GL11.glEnable(GL11.GL_DEPTH_TEST);
                     GL11.glScalef(0.1f, 0.1f, 0.1f);
-                    GL11.glTranslatef((cx + 0.33f) * 10f, (cz) * 10f, -0.004f);
+                    GL11.glTranslatef((cx + 0.33f) * 10f, (cz) * 10f, -0.2f);
                     DrawHelper.drawString(text, 0, 0, 0, color, true);
+                    GL11.glDisable(GL11.GL_DEPTH_TEST);
                     GL11.glPopMatrix();
                 }
             }

@@ -9,6 +9,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.reavaritia.common.ItemLoader;
 import com.reavaritia.common.block.BlockRegister;
+import com.reavaritia.common.block.ExtremeAnvil.EntityExtremeAnvil;
+import com.reavaritia.common.block.ExtremeAnvil.ExtremeAnvilPacket;
 import com.reavaritia.common.block.GooeyHandler;
 import com.reavaritia.common.item.BlazeSword;
 import com.reavaritia.common.item.ChronarchsClock;
@@ -20,6 +22,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import cpw.mods.fml.relauncher.Side;
 
 @Mod(
     modid = MODID,
@@ -39,6 +43,8 @@ public class ReAvaritia {
     public static final String RESOURCE_ROOT_ID = Mods.Names.REAVARITIA;
     public static final Logger LOG = LogManager.getLogger(MODID);
 
+    public static SimpleNetworkWrapper network;
+
     @SidedProxy(clientSide = "com.reavaritia.ClientProxy", serverSide = "com.reavaritia.CommonProxy")
     public static CommonProxy proxy;
 
@@ -55,11 +61,15 @@ public class ReAvaritia {
     // GameRegistry." (Remove if not needed)
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         proxy.preInit(event);
         BlockRegister.registryBlocks();
         ItemLoader.registerItems();
         BlockRegister.registryAnotherData();
         BlazeSword.registerEntity();
         ChronarchsClock.registerEntity();
+        EntityExtremeAnvil.registerEntity();
+
+        network.registerMessage(ExtremeAnvilPacket.Handler.class, ExtremeAnvilPacket.class, 0, Side.SERVER);
     }
 }

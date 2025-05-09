@@ -446,6 +446,7 @@ container.DensestNeutronCollector=终极致密中子态素收集器
 GUI_NeutronCollector_Progress=进度：
 
 tile.ExtremeAnvil.name=§c终焉之砧
+entity.reavaritia.ExtremeAnvil.name=§c终焉之砧
 container.ExtremeAnvil=终焉之砧
 
 MetaItem.0.name=愚人脸

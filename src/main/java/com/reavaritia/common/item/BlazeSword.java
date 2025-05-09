@@ -1,7 +1,6 @@
 package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
-import static com.science.gtnl.Mods.ScienceNotLeisure;
 
 import java.util.Iterator;
 import java.util.List;
@@ -28,6 +27,7 @@ import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.TextLocalization;
 import com.reavaritia.common.entity.EntityBlazeFireball;
+import com.science.gtnl.Mods;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -116,6 +116,6 @@ public class BlazeSword extends ItemSword {
 
     public static void registerEntity() {
         EntityRegistry
-            .registerModEntity(EntityBlazeFireball.class, "BlazeFireBall", 0, ScienceNotLeisure.ID, 64, 1, true);
+            .registerModEntity(EntityBlazeFireball.class, "BlazeFireBall", 0, Mods.ReAvaritia.ID, 64, 1, true);
     }
 }

@@ -3,7 +3,9 @@ package com.reavaritia;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.reavaritia.common.ItemLoader;
+import com.reavaritia.common.block.ExtremeAnvil.EntityExtremeAnvil;
 import com.reavaritia.common.block.ExtremeAnvil.RenderExtremeAnvil;
+import com.reavaritia.common.block.ExtremeAnvil.RenderFallingBlockExtremeAnvil;
 import com.reavaritia.common.block.ExtremeAnvil.TileEntityExtremeAnvil;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -24,6 +26,8 @@ public class ClientProxy extends CommonProxy {
         extremeAnvilRenderType = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new RenderExtremeAnvil());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityExtremeAnvil.class, new RenderExtremeAnvil());
+        RenderingRegistry
+            .registerEntityRenderingHandler(EntityExtremeAnvil.class, new RenderFallingBlockExtremeAnvil());
     }
 
     @Override

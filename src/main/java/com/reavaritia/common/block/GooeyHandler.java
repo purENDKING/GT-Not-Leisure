@@ -20,7 +20,7 @@ public class GooeyHandler implements IGuiHandler {
             return new NeutronCollectorGUI(player.inventory, (TileEntityNeutronCollector) world.getTileEntity(x, y, z));
         if (ID == 1) {
             TileEntityExtremeAnvil tileEntity = (TileEntityExtremeAnvil) world.getTileEntity(x, y, z);
-            return new ExtremeAnvilGUI(player.inventory, tileEntity, tileEntity);
+            return new ExtremeAnvilGUI(player.inventory, world, x, y, z, tileEntity, tileEntity, player);
         }
         return null;
     }
@@ -32,7 +32,7 @@ public class GooeyHandler implements IGuiHandler {
             (TileEntityNeutronCollector) world.getTileEntity(x, y, z));
         if (ID == 1) {
             TileEntityExtremeAnvil tileEntity = (TileEntityExtremeAnvil) world.getTileEntity(x, y, z);
-            return new ContainerExtremeAnvil(player.inventory, tileEntity, tileEntity);
+            return new ContainerExtremeAnvil(player.inventory, world, x, y, z, tileEntity, tileEntity, player);
         }
         return null;
     }

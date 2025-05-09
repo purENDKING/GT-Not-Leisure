@@ -5,13 +5,13 @@ import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -28,7 +28,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockExtremeAnvil extends BlockFalling {
+public class BlockExtremeAnvil extends Block {
 
     public BlockExtremeAnvil() {
         super(Material.anvil);
@@ -45,9 +45,9 @@ public class BlockExtremeAnvil extends BlockFalling {
 
     private IIcon Icon;
 
-    @Override
-    public void func_149828_a(World world, int x, int y, int z, int meta) {
-        world.setBlock(x, y, z, this, meta, 3);
+    public void isFalling(World world, int x, int y, int z, int meta) {
+        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
+        world.setTileEntity(x, y, z, TileEntityExtremeAnvil.createAndLoadEntity(new NBTTagCompound()));
         world.playSoundEffect(
             x + 0.5D,
             y + 0.5D,
@@ -61,7 +61,18 @@ public class BlockExtremeAnvil extends BlockFalling {
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase placer, ItemStack stack) {
         int direction = MathHelper.floor_double((placer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-        world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+        int i1 = world.getBlockMetadata(x, y, z) & 4;
+
+        switch (direction) {
+            case 0:
+                world.setBlockMetadataWithNotify(x, y, z, 2 | i1, 2);
+            case 1:
+                world.setBlockMetadataWithNotify(x, y, z, 1 | i1, 2);
+            case 2:
+                world.setBlockMetadataWithNotify(x, y, z, 3 | i1, 2);
+            case 3:
+                world.setBlockMetadataWithNotify(x, y, z, i1, 2);
+        }
     }
 
     @Override
@@ -168,6 +179,11 @@ public class BlockExtremeAnvil extends BlockFalling {
         }
     }
 
+    @Override
+    public int tickRate(World worldIn) {
+        return 2;
+    }
+
     private void checkAndFall(World world, int x, int y, int z) {
         if (world.getBlock(x, y, z) != this) return;
 
@@ -189,17 +205,17 @@ public class BlockExtremeAnvil extends BlockFalling {
         }
     }
 
-    private boolean shouldFall(World world, int x, int y, int z) {
+    public boolean shouldFall(World world, int x, int y, int z) {
         Block below = world.getBlock(x, y - 1, z);
         return below.isAir(world, x, y - 1, z) || below.getMaterial()
             .isLiquid() || below == Blocks.fire;
     }
 
-    private void startFalling(World world, int x, int y, int z) {
+    public void startFalling(World world, int x, int y, int z) {
         if (canFallInto(world, x, y - 1, z) && y >= 0) {
             int meta = world.getBlockMetadata(x, y, z);
 
-            EntityExtremeAnvil entity = new EntityExtremeAnvil(world, x + 0.5D, y + 0.5D, z + 0.5D, this, meta);
+            EntityExtremeAnvil entity = new EntityExtremeAnvil(world, x + 0.5D, y + 0.5D, z + 0.5D, meta);
             world.spawnEntityInWorld(entity);
         }
     }

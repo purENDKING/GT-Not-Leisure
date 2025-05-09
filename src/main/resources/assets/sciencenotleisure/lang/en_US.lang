@@ -446,6 +446,7 @@ container.DensestNeutronCollector=Ultimate Dense Neutronium Collector
 GUI_NeutronCollector_Progress=Progress:
 
 tile.ExtremeAnvil.name=§cThe Final Anvil
+entity.reavaritia.ExtremeAnvil.name=§cThe Final Anvil
 container.ExtremeAnvil=The Final Anvil
 
 MetaItem.0.name=Troll Face

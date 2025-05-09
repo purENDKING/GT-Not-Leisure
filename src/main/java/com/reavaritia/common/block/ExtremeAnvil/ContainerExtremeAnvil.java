@@ -9,54 +9,109 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class ContainerExtremeAnvil extends Container {
 
-    public final IInventory inputSlots;
-    public final IInventory outputSlot;
+    public IInventory inputSlots;
+    {
+        new InventoryBasic("Repair", true, 2) {
 
-    public final Slot inputSlot1;
-    public final Slot inputSlot2;
-    public final Slot outputSlotInstance;
+            @Override
+            public void markDirty() {
+                super.markDirty();
+                ContainerExtremeAnvil.this.onCraftMatrixChanged(this);
+            }
+        };
+    }
+
+    public World world;
+    public int anvilX;
+    public int anvilY;
+    public int anvilZ;
+    public EntityPlayer player;
+
+    public IInventory outputSlot;
 
     public String repairedItemName = "";
 
-    private int canTake = 0;
+    public int canTake = 0;
 
-    public ContainerExtremeAnvil(InventoryPlayer playerInv, IInventory inputSlots, IInventory outputSlot) {
+    public ContainerExtremeAnvil(InventoryPlayer playerInventory, World world, int x, int y, int z,
+        IInventory inputSlots, IInventory outputSlot, EntityPlayer player) {
+
         this.inputSlots = inputSlots;
         this.outputSlot = outputSlot;
+        this.world = world;
+        this.anvilX = x;
+        this.anvilY = y;
+        this.anvilZ = z;
+        this.player = player;
 
-        this.inputSlot1 = new Slot(inputSlots, 0, 27, 47);
-        this.addSlotToContainer(inputSlot1);
+        this.addSlotToContainer(new Slot(this.inputSlots, 0, 27, 47));
+        this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
+        this.addSlotToContainer(new Slot(this.outputSlot, 2, 134, 47) {
 
-        this.inputSlot2 = new Slot(inputSlots, 1, 76, 47);
-        this.addSlotToContainer(inputSlot2);
+            @Override
+            public boolean isItemValid(ItemStack stack) {
+                return false;
+            }
 
-        this.outputSlotInstance = new SlotExtremeAnvilResult(this, outputSlot, 2, 134, 47);
-        this.addSlotToContainer(outputSlotInstance);
+            @Override
+            public boolean canTakeStack(EntityPlayer player) {
+                return this.getHasStack();
+            }
 
-        for (int i = 0; i < 3; ++i) {
+            @Override
+            public void onPickupFromSlot(EntityPlayer player, ItemStack stack) {
+                if (!repairedItemName.isEmpty() && !repairedItemName.equals(stack.getDisplayName())) {
+                    stack.setStackDisplayName(repairedItemName);
+                }
+                repairedItemName = "";
+
+                ItemStack input2 = ContainerExtremeAnvil.this.inputSlots.getStackInSlot(1);
+                if (input2 != null) {
+                    input2.stackSize--;
+                    if (input2.stackSize <= 0) {
+                        input2 = null;
+                    }
+                }
+
+                ContainerExtremeAnvil.this.inputSlots.setInventorySlotContents(0, null);
+                ContainerExtremeAnvil.this.inputSlots.setInventorySlotContents(1, input2);
+
+                if (!world.isRemote) {
+                    world.playAuxSFX(1021, anvilX, anvilY, anvilZ, 0);
+                }
+            }
+        });
+
+        int i;
+        for (i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for (int i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
+        for (i = 0; i < 9; ++i) {
+            this.addSlotToContainer(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
-
-        this.onCraftMatrixChanged(inputSlots);
     }
 
     @Override
     public void addCraftingToCrafters(ICrafting crafter) {
-        super.addCraftingToCrafters(crafter);
+        if (this.crafters.contains(crafter)) {
+            return;
+        }
+        this.crafters.add(crafter);
         crafter.sendProgressBarUpdate(this, 0, this.canTake);
     }
 
@@ -68,17 +123,24 @@ public class ContainerExtremeAnvil extends Container {
         }
     }
 
-    public String getRepairedItemName() {
+    public String getItemName() {
         return this.repairedItemName;
     }
 
-    public void setRepairedItemName(String name) {
+    public void updateItemName(String name) {
         this.repairedItemName = name;
-        this.updateRepairOutput();
-    }
+        if (this.getSlot(2)
+            .getHasStack()) {
+            ItemStack itemstack = this.getSlot(2)
+                .getStack();
 
-    public Slot getInputSlot1() {
-        return this.inputSlot1;
+            if (StringUtils.isBlank(name)) {
+                itemstack.func_135074_t();
+            } else if (!this.repairedItemName.equals(itemstack.getDisplayName())) {
+                itemstack.setStackDisplayName(this.repairedItemName);
+            }
+        }
+        this.updateRepairOutput();
     }
 
     @Override
@@ -89,7 +151,9 @@ public class ContainerExtremeAnvil extends Container {
     @Override
     public void onCraftMatrixChanged(IInventory inventory) {
         super.onCraftMatrixChanged(inventory);
-        this.updateRepairOutput();
+        if (inventory == this.inputSlots) {
+            this.updateRepairOutput();
+        }
     }
 
     public void updateRepairOutput() {
@@ -105,34 +169,40 @@ public class ContainerExtremeAnvil extends Container {
                 } else if (material.getItem() instanceof ItemEnchantedBook) {
                     resultStack = input.copy();
                     resultStack = this.applyMergedEnchantments(resultStack, input, material);
-                } else if (input.getItem() == material.getItem()) {
-                    if (input.getItem()
-                        .isDamageable()) {
+                } else if (input.getItem()
+                    .getIsRepairable(input, material)) {
                         resultStack = input.copy();
-                        int inputDurability = input.getMaxDamage() - input.getItemDamage();
-                        int materialDurability = material.getMaxDamage() - material.getItemDamage();
-                        int repairedDurabilityAdded = (int) (materialDurability * 1.1);
-                        int totalRepairedDurability = inputDurability + repairedDurabilityAdded;
-                        int newDamage = Math.max(0, resultStack.getMaxDamage() - totalRepairedDurability);
-                        resultStack.setItemDamage(newDamage);
-                        resultStack = this.applyMergedEnchantments(resultStack, input, material);
+                        resultStack.setItemDamage(0);
+                    } else if (input.getItem() == material.getItem()) {
+                        if (input.getItem()
+                            .isDamageable()) {
+                            resultStack = input.copy();
+                            int inputDurability = input.getMaxDamage() - input.getItemDamage();
+                            int materialDurability = material.getMaxDamage() - material.getItemDamage();
+                            int repairedDurabilityAdded = (int) (materialDurability * 1.1);
+                            int totalRepairedDurability = inputDurability + repairedDurabilityAdded;
+                            int newDamage = Math.max(0, resultStack.getMaxDamage() - totalRepairedDurability);
+                            resultStack.setItemDamage(newDamage);
+                            resultStack = this.applyMergedEnchantments(resultStack, input, material);
+                        } else {
+                            outputSlot.setInventorySlotContents(2, null);
+                            this.canTake = 0;
+                            detectAndSendChanges();
+                            return;
+                        }
                     } else {
                         outputSlot.setInventorySlotContents(2, null);
                         this.canTake = 0;
                         detectAndSendChanges();
                         return;
                     }
-                } else {
-                    outputSlot.setInventorySlotContents(2, null);
-                    this.canTake = 0;
-                    detectAndSendChanges();
-                    return;
-                }
             } else {
-                if (!this.repairedItemName.isEmpty()) {
+                if (input.getDisplayName() != null) {
                     resultStack = input.copy();
                 }
             }
+        } else {
+            outputSlot.setInventorySlotContents(2, null);
         }
 
         if (resultStack != null) {
@@ -234,14 +304,8 @@ public class ContainerExtremeAnvil extends Container {
                 Enchantment ench = Enchantment.enchantmentsList[id];
                 if (ench != null) {
                     int currentLevel = map.getOrDefault(id, 0);
-
                     int mergedLevel = currentLevel + lvl;
-
-                    int maxLevelTenfold = ench.getMaxLevel() * 10;
-
-                    int finalLevel = Math.min(mergedLevel, maxLevelTenfold);
-
-                    map.put(id, finalLevel);
+                    map.put(id, mergedLevel);
                 }
             }
         }
