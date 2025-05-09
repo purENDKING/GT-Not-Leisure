@@ -2,9 +2,13 @@ package com.reavaritia.common.block.ExtremeAnvil;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import java.util.List;
+
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -17,15 +21,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ExtremeAnvilGUI extends GuiContainer {
+public class ExtremeAnvilGUI extends GuiContainer implements ICrafting {
 
     private static final ResourceLocation ANVIL_TEXTURE = new ResourceLocation(
         RESOURCE_ROOT_ID + ":" + "textures/gui/extreme_anvil.png");
+
     private GuiTextField nameField;
     private final ContainerExtremeAnvil containerAnvil;
     private boolean isTextFieldManuallyEdited = false;
     private ItemStack lastInputStack = null;
     private ItemStack lastMaterialStack = null;
+
+    private int clientCanTake = 0;
 
     public ExtremeAnvilGUI(InventoryPlayer playerInv, IInventory inputSlots, IInventory outputSlot) {
         super(new ContainerExtremeAnvil(playerInv, inputSlots, outputSlot));
@@ -36,6 +43,7 @@ public class ExtremeAnvilGUI extends GuiContainer {
     public void initGui() {
         super.initGui();
         Keyboard.enableRepeatEvents(true);
+
         this.nameField = new GuiTextField(this.fontRendererObj, this.guiLeft + 62, this.guiTop + 24, 103, 12);
         this.nameField.setMaxStringLength(256);
         this.nameField.setEnableBackgroundDrawing(false);
@@ -57,7 +65,8 @@ public class ExtremeAnvilGUI extends GuiContainer {
             this.containerAnvil.setRepairedItemName("");
         }
         this.isTextFieldManuallyEdited = false;
-        this.mc.playerController.sendEnchantPacket(this.containerAnvil.windowId, 0);
+
+        this.containerAnvil.addCraftingToCrafters(this);
     }
 
     @Override
@@ -128,6 +137,7 @@ public class ExtremeAnvilGUI extends GuiContainer {
         super.onGuiClosed();
         Keyboard.enableRepeatEvents(false);
         this.nameField.setText("");
+        this.containerAnvil.removeCraftingFromCrafters(this);
     }
 
     private boolean isPointInRegion(int x, int y, int width, int height, int mouseX, int mouseY) {
@@ -165,23 +175,23 @@ public class ExtremeAnvilGUI extends GuiContainer {
         int textFieldState = this.nameField.isFocused() ? 0 : 1;
         this.drawTexturedModalRect(x + 59, y + 23, 0, this.ySize + textFieldState * 16, 110, 16);
 
-        ItemStack input1 = containerAnvil.inputSlots.getStackInSlot(0);
-        ItemStack input2 = containerAnvil.inputSlots.getStackInSlot(1);
-        ItemStack outputStack = containerAnvil.outputSlot.getStackInSlot(2);
-
-        boolean showError = false;
-
-        if (outputStack == null) {
-            if (input1 != null) {
-                if (input2 == null && nameField.getText()
-                    .isEmpty()) {
-                    showError = true;
-                }
-            }
-        }
+        boolean showError = (this.clientCanTake == 0);
 
         if (showError) {
-            this.drawTexturedModalRect(x + 134, y + 47, 176, 0, 18, 18);
+            this.drawTexturedModalRect(x + 99, y + 47, this.xSize, 0, 28, 21);
+        }
+    }
+
+    @Override
+    public void sendContainerAndContentsToPlayer(Container container, List<ItemStack> itemStacks) {}
+
+    @Override
+    public void sendSlotContents(Container container, int slotID, ItemStack stack) {}
+
+    @Override
+    public void sendProgressBarUpdate(Container container, int id, int data) {
+        if (id == 0) {
+            this.clientCanTake = data;
         }
     }
 }

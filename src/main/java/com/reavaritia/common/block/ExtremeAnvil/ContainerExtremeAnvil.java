@@ -7,7 +7,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerRepair;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemEnchantedBook;
@@ -25,6 +25,8 @@ public class ContainerExtremeAnvil extends Container {
     public final Slot outputSlotInstance;
 
     public String repairedItemName = "";
+
+    private int canTake = 0;
 
     public ContainerExtremeAnvil(InventoryPlayer playerInv, IInventory inputSlots, IInventory outputSlot) {
         this.inputSlots = inputSlots;
@@ -50,6 +52,20 @@ public class ContainerExtremeAnvil extends Container {
         }
 
         this.onCraftMatrixChanged(inputSlots);
+    }
+
+    @Override
+    public void addCraftingToCrafters(ICrafting crafter) {
+        super.addCraftingToCrafters(crafter);
+        crafter.sendProgressBarUpdate(this, 0, this.canTake);
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        for (ICrafting icrafting : this.crafters) {
+            icrafting.sendProgressBarUpdate(this, 0, this.canTake);
+        }
     }
 
     public String getRepairedItemName() {
@@ -83,46 +99,12 @@ public class ContainerExtremeAnvil extends Container {
 
         if (input != null) {
             if (material != null) {
-                if (material.getItem() instanceof ItemEnchantedBook) {
+                if (input.getItem() instanceof ItemEnchantedBook && material.getItem() instanceof ItemEnchantedBook) {
+                    resultStack = new ItemStack(net.minecraft.init.Items.enchanted_book);
+                    resultStack = this.applyMergedEnchantments(resultStack, input, material);
+                } else if (material.getItem() instanceof ItemEnchantedBook) {
                     resultStack = input.copy();
-                    Map<Integer, Integer> enchantments = new HashMap<>();
-                    this.mergeEnchantments(enchantments, input);
-                    this.mergeEnchantments(enchantments, material);
-
-                    NBTTagCompound finalTag;
-                    if (input.hasTagCompound()) {
-                        finalTag = input.getTagCompound();
-                        finalTag.removeTag("ench");
-                        finalTag.removeTag("RepairCost");
-                    } else {
-                        finalTag = new NBTTagCompound();
-                    }
-
-                    NBTTagList enchList = new NBTTagList();
-                    for (Map.Entry<Integer, Integer> entry : enchantments.entrySet()) {
-                        NBTTagCompound tag = new NBTTagCompound();
-                        tag.setShort(
-                            "id",
-                            (short) entry.getKey()
-                                .intValue());
-                        tag.setShort(
-                            "lvl",
-                            (short) entry.getValue()
-                                .intValue());
-                        enchList.appendTag(tag);
-                    }
-
-                    if (enchList.tagCount() > 0) {
-                        finalTag.setTag("ench", enchList);
-                    }
-
-                    if (!finalTag.func_150296_c()
-                        .isEmpty()) {
-                        resultStack.setTagCompound(finalTag);
-                    } else {
-                        resultStack.setTagCompound(null);
-                    }
-
+                    resultStack = this.applyMergedEnchantments(resultStack, input, material);
                 } else if (input.getItem() == material.getItem()) {
                     if (input.getItem()
                         .isDamageable()) {
@@ -133,74 +115,101 @@ public class ContainerExtremeAnvil extends Container {
                         int totalRepairedDurability = inputDurability + repairedDurabilityAdded;
                         int newDamage = Math.max(0, resultStack.getMaxDamage() - totalRepairedDurability);
                         resultStack.setItemDamage(newDamage);
-
-                        Map<Integer, Integer> enchantments = new HashMap<>();
-                        this.mergeEnchantments(enchantments, input);
-                        this.mergeEnchantments(enchantments, material);
-
-                        NBTTagCompound finalTag;
-                        if (input.hasTagCompound()) {
-                            finalTag = input.getTagCompound();
-                            finalTag.removeTag("ench");
-                            finalTag.removeTag("RepairCost");
-                        } else {
-                            finalTag = new NBTTagCompound();
-                        }
-
-                        NBTTagList enchList = new NBTTagList();
-                        for (Map.Entry<Integer, Integer> entry : enchantments.entrySet()) {
-                            NBTTagCompound tag = new NBTTagCompound();
-                            tag.setShort(
-                                "id",
-                                (short) entry.getKey()
-                                    .intValue());
-                            tag.setShort(
-                                "lvl",
-                                (short) entry.getValue()
-                                    .intValue());
-                            enchList.appendTag(tag);
-                        }
-
-                        if (enchList.tagCount() > 0) {
-                            finalTag.setTag("ench", enchList);
-                        }
-
-                        if (!finalTag.func_150296_c()
-                            .isEmpty()) {
-                            resultStack.setTagCompound(finalTag);
-                        } else {
-                            resultStack.setTagCompound(null);
-                        }
+                        resultStack = this.applyMergedEnchantments(resultStack, input, material);
+                    } else {
+                        outputSlot.setInventorySlotContents(2, null);
+                        this.canTake = 0;
+                        detectAndSendChanges();
+                        return;
                     }
+                } else {
+                    outputSlot.setInventorySlotContents(2, null);
+                    this.canTake = 0;
+                    detectAndSendChanges();
+                    return;
                 }
             } else {
                 if (!this.repairedItemName.isEmpty()) {
                     resultStack = input.copy();
-                    NBTTagCompound finalTag;
-                    if (input.hasTagCompound()) {
-                        finalTag = input.getTagCompound();
-                        finalTag.removeTag("ench");
-                        finalTag.removeTag("RepairCost");
-                    } else {
-                        finalTag = new NBTTagCompound();
-                    }
-                    if (!finalTag.func_150296_c()
-                        .isEmpty()) {
-                        resultStack.setTagCompound(finalTag);
-                    } else {
-                        resultStack.setTagCompound(null);
-                    }
                 }
             }
         }
 
-        if (resultStack != null && !this.repairedItemName.isEmpty()) {
-            resultStack.setStackDisplayName(this.repairedItemName);
+        if (resultStack != null) {
+            if (!this.repairedItemName.isEmpty() && !this.repairedItemName.equals(resultStack.getDisplayName())) {
+                resultStack.setStackDisplayName(this.repairedItemName);
+            }
         }
 
         outputSlot.setInventorySlotContents(2, resultStack);
 
+        this.canTake = 1;
         detectAndSendChanges();
+    }
+
+    private ItemStack applyMergedEnchantments(ItemStack baseStack, ItemStack inputStack, ItemStack materialStack) {
+        if (baseStack == null) return null;
+
+        Map<Integer, Integer> enchantments = new HashMap<>();
+        this.mergeEnchantments(enchantments, inputStack);
+        this.mergeEnchantments(enchantments, materialStack);
+
+        NBTTagList enchList = new NBTTagList();
+        for (Map.Entry<Integer, Integer> entry : enchantments.entrySet()) {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setShort(
+                "id",
+                (short) entry.getKey()
+                    .intValue());
+            tag.setShort(
+                "lvl",
+                (short) entry.getValue()
+                    .intValue());
+            enchList.appendTag(tag);
+        }
+
+        NBTTagCompound finalTag;
+
+        if (baseStack.getItem() instanceof ItemEnchantedBook) {
+            finalTag = new NBTTagCompound();
+            if (baseStack.hasTagCompound()) {
+                NBTTagCompound baseTagCopy = baseStack.getTagCompound();
+                for (String key : baseTagCopy.func_150296_c()) {
+                    if (!key.equals("StoredEnchantments") && !key.equals("RepairCost")) {
+                        finalTag.setTag(
+                            key,
+                            baseTagCopy.getTag(key)
+                                .copy());
+                    }
+                }
+            }
+
+            if (enchList.tagCount() > 0) {
+                finalTag.setTag("StoredEnchantments", enchList);
+            }
+
+        } else {
+            if (baseStack.hasTagCompound()) {
+                finalTag = baseStack.getTagCompound();
+                finalTag.removeTag("ench");
+                finalTag.removeTag("RepairCost");
+            } else {
+                finalTag = new NBTTagCompound();
+            }
+
+            if (enchList.tagCount() > 0) {
+                finalTag.setTag("ench", enchList);
+            }
+        }
+
+        if (!finalTag.func_150296_c()
+            .isEmpty()) {
+            baseStack.setTagCompound(finalTag);
+        } else {
+            baseStack.setTagCompound(null);
+        }
+
+        return baseStack;
     }
 
     public void mergeEnchantments(Map<Integer, Integer> map, ItemStack stack) {
@@ -248,7 +257,6 @@ public class ContainerExtremeAnvil extends Container {
             stack = stackInSlot.copy();
             if (index == 2) {
                 if (!this.mergeItemStack(stackInSlot, 3, 39, true)) {
-
                     return null;
                 }
             } else if (index >= 3) {
