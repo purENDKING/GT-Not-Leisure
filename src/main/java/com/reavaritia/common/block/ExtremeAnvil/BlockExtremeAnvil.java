@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -46,8 +45,7 @@ public class BlockExtremeAnvil extends Block {
     private IIcon Icon;
 
     public void isFalling(World world, int x, int y, int z, int meta) {
-        world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-        world.setTileEntity(x, y, z, TileEntityExtremeAnvil.createAndLoadEntity(new NBTTagCompound()));
+        world.setBlock(x, y, z, this, meta, 3);
         world.playSoundEffect(
             x + 0.5D,
             y + 0.5D,

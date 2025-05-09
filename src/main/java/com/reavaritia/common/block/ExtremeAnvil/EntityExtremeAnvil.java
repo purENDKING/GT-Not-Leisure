@@ -25,7 +25,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityExtremeAnvil extends Entity {
 
-    private Block blockType = ExtremeAnvil;
+    private Block blockType;
     public int blockMetadata;
     public int timeSinceFalling;
     public boolean dropItem;
@@ -128,12 +128,8 @@ public class EntityExtremeAnvil extends Entity {
 
                         if (!this.hasBlockFallen
                             && this.worldObj.canPlaceEntityOnSide(this.blockType, i, j, k, true, 1, null, null)
-                            && !shouldFall(this.worldObj, i, j - 1, k)
-                            && this.worldObj.setBlock(i, j, k, this.blockType, 0, 3)) {
-                            if (this.blockType instanceof BlockExtremeAnvil) {
-                                ((BlockExtremeAnvil) this.blockType).isFalling(this.worldObj, i, j, k, 0);
-                            }
-
+                            && !shouldFall(this.worldObj, i, j - 1, k)) {
+                            ((BlockExtremeAnvil) this.blockType).isFalling(this.worldObj, i, j, k, 0);
                             if (this.tileEntityData != null && this.blockType instanceof ITileEntityProvider) {
                                 TileEntity tileentity = this.worldObj.getTileEntity(i, j, k);
 
@@ -231,6 +227,8 @@ public class EntityExtremeAnvil extends Entity {
 
         if (this.tileEntityData != null) {
             tagCompound.setTag("TileEntityData", this.tileEntityData);
+        } else {
+            tagCompound.setTag("TileEntityData", new NBTTagCompound());
         }
     }
 
