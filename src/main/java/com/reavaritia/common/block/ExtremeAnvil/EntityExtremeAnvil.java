@@ -3,16 +3,20 @@ package com.reavaritia.common.block.ExtremeAnvil;
 import static com.reavaritia.common.block.ReAvaBasicBlocks.ExtremeAnvil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -122,6 +126,31 @@ public class EntityExtremeAnvil extends Entity {
                     this.motionX *= 0.699999988079071D;
                     this.motionZ *= 0.699999988079071D;
                     this.motionY *= -0.5D;
+
+                    AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(
+                        this.posX - 0.5,
+                        this.posY - 0.5,
+                        this.posZ - 0.5,
+                        this.posX + 0.5,
+                        this.posY + 0.5,
+                        this.posZ + 0.5);
+
+                    List<EntityLivingBase> entities = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, aabb);
+
+                    for (EntityLivingBase entity : entities) {
+                        try {
+                            if (entity instanceof EntityPlayer) {
+                                for (int e = 0; e < 100; e++) {
+                                    entity.attackEntityFrom(DamageSource.anvil, Integer.MAX_VALUE);
+                                }
+                            } else {
+                                entity.attackEntityFrom(DamageSource.anvil, Integer.MAX_VALUE);
+                                entity.setHealth(0.0F);
+                                entity.onDeath(DamageSource.anvil);
+                                entity.setDead();
+                            }
+                        } catch (Exception ignored) {}
+                    }
 
                     if (this.worldObj.getBlock(i, j, k) != Blocks.piston_extension) {
                         this.setDead();
