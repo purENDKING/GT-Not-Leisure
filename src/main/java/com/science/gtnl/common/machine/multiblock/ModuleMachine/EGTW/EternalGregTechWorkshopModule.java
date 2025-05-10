@@ -4,7 +4,6 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop.ScreenOFF;
-import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop.ScreenON;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -33,12 +32,12 @@ import bartworks.common.loaders.ItemRegistry;
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.Mods;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.OverclockCalculator;
@@ -60,9 +59,14 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
         + "multiblock/eternal_gregTech_workshop/module";
     private static final String[][] shape = StructureUtils.readStructureFromFile(EGTWM_STRUCTURE_FILE_PATH);
     protected final int HORIZONTAL_OFF_SET = 4;
-    protected final int VERTICAL_OFF_SET = 2;
+    protected final int VERTICAL_OFF_SET = 3;
     protected final int DEPTH_OFF_SET = 0;
     public final int CASING_INDEX = 960;
+
+    public static final String TEXTURE_OVERLAY_FRONT_SCREEN_ON = Mods.GregTech.ID + ":"
+        + "iconsets/GODFORGE_MODULE_ACTIVE";
+    public static Textures.BlockIcons.CustomIcon ScreenON = new Textures.BlockIcons.CustomIcon(
+        TEXTURE_OVERLAY_FRONT_SCREEN_ON);
 
     public EternalGregTechWorkshopModule(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -105,12 +109,19 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
     }
 
     @Override
+    public int getMaxParallelRecipes() {
+        return Integer.MAX_VALUE;
+    }
+
+    @Override
     protected ProcessingLogic createProcessingLogic() {
         return new GTNLProcessingLogic() {
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
+                setAvailableVoltage(Integer.MAX_VALUE);
+                setAvailableAmperage(Integer.MAX_VALUE);
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
                 setOverclockType(OverclockType.PerfectOverclock);
@@ -120,16 +131,9 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
-                    .setMachineHeat(mHeatingCapacity)
+                return super.createOverclockCalculator(recipe).setMachineHeat(mHeatingCapacity)
                     .setEUtDiscount(mEUtDiscount)
                     .setSpeedBoost(mSpeedBoost);
-            }
-
-            @Override
-            protected @Nonnull CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
-                return recipe.mSpecialValue <= mHeatingCapacity ? CheckRecipeResultRegistry.SUCCESSFUL
-                    : CheckRecipeResultRegistry.insufficientHeat(recipe.mSpecialValue);
             }
         }.setMaxParallelSupplier(this::getMaxParallel);
     }
@@ -212,12 +216,15 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
             .addElement('A', ofBlock(ItemRegistry.bw_realglas2, 0))
             .addElement('B', ofBlock(Loaders.componentAssemblylineCasing, 12))
             .addElement('C', ofBlock(GregTechAPI.sBlockCasings1, 13))
-            .addElement('D', ofBlock(GregTechAPI.sBlockCasings10, 11))
-            .addElement('E', ofBlock(IGBlocks.SpaceElevatorMotor, 4))
-            .addElement('F', ofFrame(Materials.NaquadahAlloy))
-            .addElement('G', ofBlock(TTCasingsContainer.GodforgeCasings, 0))
+            .addElement('D', ofBlock(GregTechAPI.sBlockCasings1, 14))
+            .addElement('E', ofBlock(GregTechAPI.sBlockCasings10, 11))
+            .addElement('F', ofBlock(GregTechAPI.sBlockCasings9, 14))
+            .addElement('G', ofBlock(IGBlocks.SpaceElevatorMotor, 4))
+            .addElement('H', ofFrame(Materials.NaquadahAlloy))
+            .addElement('I', ofBlock(TTCasingsContainer.GodforgeCasings, 0))
+            .addElement('J', ofBlock(TTCasingsContainer.GodforgeCasings, 1))
             .addElement(
-                'H',
+                'K',
                 ofChain(
                     isAir(),
                     buildHatchAdder(EternalGregTechWorkshopModule.class)
@@ -260,5 +267,23 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
             env,
             false,
             true);
+    }
+
+    @Override
+    public void checkMaintenance() {}
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCheckMaintenance() {
+        return false;
+    }
+
+    @Override
+    public boolean doRandomMaintenanceDamage() {
+        return false;
     }
 }

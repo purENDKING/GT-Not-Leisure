@@ -401,8 +401,8 @@ public class SuperSpaceElevator extends TTMultiblockBase
         if (aMetaTileEntity == null) {
             return false;
         }
-        if (aMetaTileEntity instanceof TileEntityModuleBase) {
-            return mProjectModuleHatches.add((TileEntityModuleBase) aMetaTileEntity);
+        if (aMetaTileEntity instanceof TileEntityModuleBase moduleBase) {
+            return mProjectModuleHatches.add(moduleBase);
         }
         return false;
     }

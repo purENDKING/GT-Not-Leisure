@@ -15,6 +15,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
@@ -35,6 +37,8 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.HatchElementBuilder;
 import gregtech.api.util.IGTHatchAdder;
@@ -313,6 +317,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
             }
         }
 
+        mMachineTier = checkTier;
         return tCountCasing > 1;
     }
 
@@ -485,7 +490,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
 
     @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
-        if (aBaseMetaTileEntity.isServerSide()) {
+        if (aBaseMetaTileEntity.isServerSide() && getBaseMetaTileEntity().isAllowedToWork()) {
             if (!moduleHatches.isEmpty() && moduleHatches.size() <= mMachineTier * 4) {
                 for (EternalGregTechWorkshopModule module : moduleHatches) {
                     if (allowModuleConnection(module, this)) {
@@ -511,6 +516,29 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
         super.onPostTick(aBaseMetaTileEntity, aTick);
     }
 
+    @Override
+    public void onRemoval() {
+        if (moduleHatches != null && !moduleHatches.isEmpty()) {
+            for (EternalGregTechWorkshopModule module : moduleHatches) {
+                module.disconnect();
+            }
+        }
+        super.onRemoval();
+    }
+
+    @Override
+    public @NotNull CheckRecipeResult checkProcessing() {
+        if (getBaseMetaTileEntity().isAllowedToWork()) {
+            mEfficiencyIncrease = 10000;
+            mMaxProgresstime = 20;
+            return CheckRecipeResultRegistry.SUCCESSFUL;
+        }
+
+        mEfficiencyIncrease = 0;
+        mMaxProgresstime = 0;
+        return CheckRecipeResultRegistry.NO_RECIPE;
+    }
+
     public static boolean allowModuleConnection(EternalGregTechWorkshopModule module, EternalGregTechWorkshop center) {
 
         if (module instanceof EternalGregTechWorkshopModule) {
@@ -528,8 +556,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
         if (metaTileEntity == null) {
             return false;
         }
-        if (metaTileEntity instanceof EternalGregTechWorkshopModule) {
-            return moduleHatches.add((EternalGregTechWorkshopModule) metaTileEntity);
+        if (metaTileEntity instanceof EternalGregTechWorkshopModule module) {
+            return moduleHatches.add(module);
         }
         return false;
     }
@@ -597,4 +625,38 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
         return false;
     }
 
+    @Override
+    public boolean supportsBatchMode() {
+        return false;
+    }
+
+    @Override
+    public boolean getDefaultInputSeparationMode() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsInputSeparation() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsVoidProtection() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsSingleRecipeLocking() {
+        return false;
+    }
+
+    @Override
+    public boolean isRecipeLockingEnabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isInputSeparationEnabled() {
+        return false;
+    }
 }

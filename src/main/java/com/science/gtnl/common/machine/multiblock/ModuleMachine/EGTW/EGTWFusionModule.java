@@ -24,11 +24,6 @@ public class EGTWFusionModule extends EternalGregTechWorkshopModule {
     }
 
     @Override
-    public int getMaxParallelRecipes() {
-        return 1;
-    }
-
-    @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeMaps.fusionRecipes;
     }
