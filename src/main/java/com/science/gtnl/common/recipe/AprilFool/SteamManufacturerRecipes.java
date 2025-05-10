@@ -674,5 +674,56 @@ public class SteamManufacturerRecipes implements IRecipePool {
             .eut(1600)
             .addTo(SMFR);
 
+        // Pipeless
+        RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.BronzeReinforcedWood.get(4),
+                MaterialPool.Stronze.get(OrePrefixes.pipeHuge, 1),
+                MaterialPool.Breel.get(OrePrefixes.pipeHuge, 1),
+                ItemList.Hatch_Input_Bus_LV.get(1),
+                GTNLItemList.HydraulicRegulator.get(2),
+                GTUtility.getIntegratedCircuit(3))
+            .itemOutputs(GTNLItemList.PipelessSteamHatch.get(1))
+            .duration(2 * SECONDS)
+            .eut(16)
+            .addTo(SMFR);
+
+        RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.BronzeReinforcedWood.get(4),
+                MaterialPool.Stronze.get(OrePrefixes.pipeHuge, 1),
+                MaterialPool.Breel.get(OrePrefixes.pipeHuge, 1),
+                ItemList.Hatch_Output_Bus_LV.get(1),
+                GTNLItemList.HydraulicRegulator.get(2),
+                GTUtility.getIntegratedCircuit(3))
+            .itemOutputs(GTNLItemList.PipelessSteamVent.get(1))
+            .duration(2 * SECONDS)
+            .eut(16)
+            .addTo(SMFR);
+
+        // Jetstream Hatch
+        RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.PipelessSteamHatch.get(4),
+                GTNLItemList.HydraulicVaporGenerator.get(1),
+                MaterialPool.CompressedSteam.get(OrePrefixes.pipeHuge, 2),
+                MaterialPool.Breel.get(OrePrefixes.plateSuperdense, 1))
+            .itemOutputs(GTNLItemList.PipelessJetstreamHatch.get(1))
+            .duration(20 * SECONDS)
+            .eut(400)
+            .addTo(SMFR);
+
+        // Jetstream Vent
+        RA.stdBuilder()
+            .itemInputs(
+                GTNLItemList.PipelessSteamVent.get(4),
+                GTNLItemList.HydraulicVaporGenerator.get(1),
+                MaterialPool.CompressedSteam.get(OrePrefixes.pipeHuge, 2),
+                MaterialPool.Breel.get(OrePrefixes.plateSuperdense, 1))
+            .itemOutputs(GTNLItemList.PipelessJetstreamVent.get(1))
+            .duration(20 * SECONDS)
+            .eut(400)
+            .addTo(SMFR);
+
     }
 }

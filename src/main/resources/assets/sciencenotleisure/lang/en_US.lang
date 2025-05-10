@@ -1990,6 +1990,14 @@ NamePolymerTwistingModule=Polymer Twisting Module
 NameOreExtractionModule=Ore Extraction Module
 Tooltip_NanitesBaseModule_Casing=Hint 1 dots
 
+NameEternalGregTechWorkshop=Eternal GregTech Workshop
+EternalGregTechWorkshopRecipeType=Eternal GregTech Workshop Central Control Center
+Tooltip_EternalGregTechWorkshop_Casing=Hint 1 dots
+
+NameEGTWFusionModule=EGTW - Fusion Reactor
+EGTWFusionModuleRecipeType=Fusion Reactor
+Tooltip_EGTWFusionModule_Casing=Hint 1 dots
+
 NameCrackerHub=Cracker Hub
 CrackerHubRecipeType=Oil Cracker
 Tooltip_CrackerHub_00=For every 2 tiers above the coil tier, output increases by 10%%.

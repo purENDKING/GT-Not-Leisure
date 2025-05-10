@@ -98,6 +98,8 @@ import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
 import com.science.gtnl.common.machine.multiblock.MagneticEnergyReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EGTWFusionModule;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop;
 import com.science.gtnl.common.machine.multiblock.NanitesIntegratedProcessingCenter;
 import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
@@ -939,6 +941,17 @@ public class MachineLoader {
         GTNLItemList.LargeGasCollector.set(
             new LargeGasCollector(LARGE_GAS_COLLECTOR.ID, "LargeGasCollector", TextLocalization.NameLargeGasCollector));
         addItemTooltip(GTNLItemList.LargeGasCollector.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.EternalGregTechWorkshop.set(
+            new EternalGregTechWorkshop(
+                ETERNAL_GREG_TECH_WORKSHOP.ID,
+                "EternalGregTechWorkshop",
+                TextLocalization.NameEternalGregTechWorkshop));
+        addItemTooltip(GTNLItemList.EternalGregTechWorkshop.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.EGTWFusionModule.set(
+            new EGTWFusionModule(EGTW_FUSION_MODULE.ID, "EGTWFusionModule", TextLocalization.NameEGTWFusionModule));
+        addItemTooltip(GTNLItemList.EGTWFusionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

@@ -1990,6 +1990,14 @@ NamePolymerTwistingModule=聚合物扭曲模块
 NameOreExtractionModule=矿石萃取模块
 Tooltip_NanitesBaseModule_Casing=提示方块: 1号
 
+NameEternalGregTechWorkshop=永恒格雷工坊
+EternalGregTechWorkshopRecipeType=永恒格雷工坊中央控制中心
+Tooltip_EternalGregTechWorkshop_Casing=提示方块: 1号
+
+NameEGTWFusionModule=永恒格雷工坊 - 聚变模块
+EGTWFusionModuleRecipeType=聚变反应堆
+Tooltip_EGTWFusionModule_Casing=提示方块: 1号
+
 NameCrackerHub=裂解反应枢纽
 CrackerHubRecipeType=石油裂化机
 Tooltip_CrackerHub_00=线圈等级每高出2级，产出+10%%

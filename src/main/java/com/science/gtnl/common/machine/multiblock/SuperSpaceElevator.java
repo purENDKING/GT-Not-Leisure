@@ -4,7 +4,6 @@ import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.Utils.Utils.multiBuildPiece;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
@@ -315,9 +314,10 @@ public class SuperSpaceElevator extends TTMultiblockBase
         if (this.mMachine) return -1;
 
         int tMotorTier = Math.min(stackSize.stackSize, 6);
-        int[] built = new int[tMotorTier];
 
-        built[0] = this.survivialBuildPiece(
+        int built = 0;
+
+        built = this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
             STRUCTURE_PIECE_MAIN_HOR_OFFSET,
@@ -328,9 +328,11 @@ public class SuperSpaceElevator extends TTMultiblockBase
             false,
             true);
 
+        if (built >= 0) return built;
+
         if (tMotorTier > 1) {
             for (int i = 0; i < tMotorTier - 1; i++) {
-                built[i + 1] = this.survivialBuildPiece(
+                built = this.survivialBuildPiece(
                     STRUCTURE_PIECE_EXTENDED,
                     stackSize,
                     STRUCTURE_PIECE_EXTENDED_HOR_OFFSET,
@@ -340,10 +342,12 @@ public class SuperSpaceElevator extends TTMultiblockBase
                     env,
                     false,
                     true);
+
+                if (built >= 0) return built;
             }
         }
 
-        return multiBuildPiece(built);
+        return built;
     }
 
     @Override

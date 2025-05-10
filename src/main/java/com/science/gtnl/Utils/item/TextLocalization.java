@@ -829,6 +829,22 @@ public class TextLocalization {
         "Ang Radiant Naquadah Alloy Casing",
         "Tooltip_NanitesIntegratedProcessingCenter_Casing");
 
+    public static final String NameEternalGregTechWorkshop = texter(
+        "Eternal GregTech Workshop",
+        "NameEternalGregTechWorkshop");
+    public static final String EternalGregTechWorkshopRecipeType = texter(
+        "Eternal GregTech Workshop Central Control Center",
+        "EternalGregTechWorkshopRecipeType");
+    public static final String Tooltip_EternalGregTechWorkshop_Casing = texter(
+        "Hint 1 dots",
+        "Tooltip_EternalGregTechWorkshop_Casing");
+
+    public static final String NameEGTWFusionModule = texter("EGTW - Fusion Module", "NameEGTWFusionModule");
+    public static final String EGTWFusionModuleRecipeType = texter("Fusion Reactor", "EGTWFusionModuleRecipeType");
+    public static final String Tooltip_EGTWFusionModule_Casing = texter(
+        "Hint 1 dots",
+        "Tooltip_EGTWFusionModule_Casing");
+
     public static final String NameBioengineeringModule = texter("Bioengineering Module", "NameBioengineeringModule");
     public static final String NamePolymerTwistingModule = texter(
         "Polymer Twisting Module",
