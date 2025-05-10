@@ -326,9 +326,4 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         return false;
     }
 
-    @Override
-    public boolean doRandomMaintenanceDamage() {
-        return true;
-    }
-
 }

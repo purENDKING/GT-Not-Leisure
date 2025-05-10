@@ -24,9 +24,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.misc.OverclockType;
 
 import bartworks.common.loaders.ItemRegistry;
 import goodgenerator.loader.Loaders;
@@ -48,9 +46,9 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
 
     protected UUID ownerUUID;
     protected boolean isConnected = false;
-    protected double mEUtDiscount = 0;
-    protected double mSpeedBoost = 0;
-    protected int MaxParallel = 0;
+    protected double mEUtDiscount = 1;
+    protected double mSpeedBoost = 1;
+    protected int maxParallel = 1;
     protected int mHeatingCapacity = 0;
     protected int tCountCasing = 0;
 
@@ -100,31 +98,32 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
         mSpeedBoost = boost;
     }
 
+    @Override
     public int getMaxParallel() {
-        return MaxParallel;
+        return maxParallel;
     }
 
+    @Override
     public void setMaxParallel(int parallel) {
-        MaxParallel = parallel;
+        maxParallel = parallel;
     }
 
     @Override
     public int getMaxParallelRecipes() {
-        return Integer.MAX_VALUE;
+        return getMaxParallel();
     }
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
-                setAvailableVoltage(Integer.MAX_VALUE);
-                setAvailableAmperage(Integer.MAX_VALUE);
+                setAvailableVoltage(Long.MAX_VALUE);
+                setAvailableAmperage(1);
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(OverclockType.PerfectOverclock);
                 return super.process();
             }
 
@@ -279,11 +278,6 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
 
     @Override
     public boolean shouldCheckMaintenance() {
-        return false;
-    }
-
-    @Override
-    public boolean doRandomMaintenanceDamage() {
         return false;
     }
 }

@@ -68,8 +68,8 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
     private final int VERTICAL_OFF_SET = 20;
     private final int DEPTH_OFF_SET = 0;
     private int tCountCasing = 0;
-    private double setEUtDiscount = 0;
-    private double setSpeedBoost = 0;
+    private double setEUtDiscount = 1;
+    private double setSpeedBoost = 1;
     public ArrayList<NanitesBaseModule<?>> moduleHatches = new ArrayList<>();
     private static IStructureDefinition<NanitesIntegratedProcessingCenter> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";

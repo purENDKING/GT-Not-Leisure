@@ -121,8 +121,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     private int mHeatingCapacity = 0;
     private int mMachineTier = 0;
     private int mModuleTier = 0;
-    private double setEUtDiscount = 0;
-    private double setSpeedBoost = 0;
+    private double setEUtDiscount = 1;
+    private double setSpeedBoost = 1;
 
     public ArrayList<EternalGregTechWorkshopModule> moduleHatches = new ArrayList<>();
 
@@ -617,11 +617,6 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
 
     @Override
     public boolean shouldCheckMaintenance() {
-        return false;
-    }
-
-    @Override
-    public boolean doRandomMaintenanceDamage() {
         return false;
     }
 

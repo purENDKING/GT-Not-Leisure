@@ -648,11 +648,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
     }
 
     @Override
-    public boolean doRandomMaintenanceDamage() {
-        return false;
-    }
-
-    @Override
     public boolean willExplodeInRain() {
         return false;
     }
