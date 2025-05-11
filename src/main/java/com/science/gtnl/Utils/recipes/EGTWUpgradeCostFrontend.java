@@ -10,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 
 import com.gtnewhorizons.modularui.api.math.Pos2d;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
@@ -26,6 +27,9 @@ public class EGTWUpgradeCostFrontend extends RecipeMapFrontend {
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(uiPropertiesBuilder, neiPropertiesBuilder);
     }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder, Pos2d windowOffset) {}
 
     @Override
     public List<Pos2d> getItemInputPositions(int itemInputCount) {
