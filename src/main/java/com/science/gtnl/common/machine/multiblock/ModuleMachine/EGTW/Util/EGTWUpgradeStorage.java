@@ -1,4 +1,4 @@
-package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW;
+package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -3,7 +3,7 @@ package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshopUpgrade.*;
+import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUpgrade.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -64,6 +64,10 @@ import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EGTWUpgradeStorage;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUI;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUpgrade;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.UpgradeColor;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
 
@@ -96,7 +100,6 @@ import tectech.thing.casing.TTCasingsContainer;
 import tectech.thing.gui.TecTechUITextures;
 import tectech.thing.metaTileEntity.multi.godforge.util.MilestoneFormatter;
 import tectech.thing.metaTileEntity.multi.godforge.util.MilestoneIcon;
-import tectech.thing.metaTileEntity.multi.godforge.util.UpgradeColor;
 
 public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWorkshop>
     implements IWirelessEnergyHatchInformation {
