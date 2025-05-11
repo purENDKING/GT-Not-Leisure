@@ -1991,8 +1991,18 @@ NameOreExtractionModule=矿石萃取模块
 Tooltip_NanitesBaseModule_Casing=提示方块: 1号
 
 NameEternalGregTechWorkshop=永恒格雷工坊
+gtnl.recipe.EternalGregTechWorkshopUpgradeRecipes=永恒格雷工坊模块升级
 EternalGregTechWorkshopRecipeType=永恒格雷工坊中央控制中心
 Tooltip_EternalGregTechWorkshop_Casing=提示方块: 1号
+EGTW_UpdateStructureCheck=更新模块连接状态
+EGTW_ExtraModule=额外结构:
+EGTW_ExtraModule_On=已启用
+EGTW_ExtraModule_Off=启用失败
+EGTW_EnableExtraModule=启用额外结构
+EGTW_MachineTier=机器等级:
+EGTW_MachineRunning=§a机器运行中
+EGTW_MachineStandby=机器待机中
+EGTW_MachineIncomplete=§c结构不成型
 
 NameEGTWFusionModule=永恒格雷工坊 - 聚变模块
 EGTWFusionModuleRecipeType=聚变反应堆

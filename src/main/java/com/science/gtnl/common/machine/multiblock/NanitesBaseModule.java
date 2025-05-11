@@ -53,7 +53,7 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "150"))
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)

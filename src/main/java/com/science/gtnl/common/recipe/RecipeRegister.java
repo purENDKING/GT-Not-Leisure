@@ -9,6 +9,7 @@ import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.science.gtnl.Utils.recipes.BloodSoulFrontend;
+import com.science.gtnl.Utils.recipes.EGTWUpgradeCostFrontend;
 import com.science.gtnl.Utils.recipes.ExtremeExtremeEntityCrusherFrontend;
 import com.science.gtnl.Utils.recipes.FallingTowerFrontend;
 import com.science.gtnl.Utils.recipes.GeneralFrontend;
@@ -531,5 +532,17 @@ public class RecipeRegister {
             builder -> builder.setDisplayStack(GTNLItemList.LargeGasCollector.get(1))
                 .setMaxRecipesPerPage(1))
         .disableOptimize()
+        .build();
+
+    public static final RecipeMap<RecipeMapBackend> EternalGregTechWorkshopUpgradeRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.EternalGregTechWorkshopUpgradeRecipes")
+        .maxIO(20, 4, 0, 0)
+        .addSpecialTexture(98, 40, 35, 13, GTUITextures.PICTURE_ARROW_GRAY)
+        .dontUseProgressBar()
+        .neiTransferRect(98, 40, 35, 13)
+        .frontend(EGTWUpgradeCostFrontend::new)
+        .neiHandlerInfo(
+            builder -> builder.setDisplayStack(GTNLItemList.EternalGregTechWorkshop.get(1))
+                .setHeight(314))
         .build();
 }

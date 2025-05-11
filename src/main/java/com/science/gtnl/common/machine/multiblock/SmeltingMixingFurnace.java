@@ -101,7 +101,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "150"))
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
@@ -288,7 +288,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
 
     @Override
     public int getWirelessModeProcessingTime() {
-        return 150 - ParallelTier * 10;
+        return 1200 - ParallelTier * 10;
     }
 
     @Override

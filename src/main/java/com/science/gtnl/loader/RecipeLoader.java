@@ -26,6 +26,7 @@ import com.science.gtnl.common.recipe.GTNL.CellRegulatorRecipes;
 import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
 import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
+import com.science.gtnl.common.recipe.GTNL.EternalGregTechWorkshopUpgradeRecipes;
 import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
 import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
@@ -112,7 +113,7 @@ public class RecipeLoader {
             new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
             new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(), new AlchemicChemistrySetRecipes(),
             new AdvancedCircuitAssemblyLineRecipes(), new FallingTowerRecipes(), new AssemblingLineRecipes(),
-            new GasCollectorRecipes() };
+            new GasCollectorRecipes(), new EternalGregTechWorkshopUpgradeRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),

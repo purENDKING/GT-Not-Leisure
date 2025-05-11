@@ -86,7 +86,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "200"))
+            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "300"))
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
@@ -226,7 +226,7 @@ public class NeutroniumWireCutting extends WirelessEnergyMultiMachineBase<Neutro
 
     @Override
     public int getWirelessModeProcessingTime() {
-        return 200 - ParallelTier * 10;
+        return 300 - ParallelTier * 10;
     }
 
     @Override
