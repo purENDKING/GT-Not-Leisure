@@ -61,12 +61,10 @@ import tectech.thing.metaTileEntity.multi.godforge.color.StarColorStorage;
 public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPhagocytosisPlant>
     implements IWirelessEnergyHatchInformation {
 
-    private static final int DEFAULT_ROTATION_SPEED = 5;
     private static final int DEFAULT_STAR_SIZE = 20;
     private final StarColorStorage starColors = new StarColorStorage();
     private static final String DEFAULT_STAR_COLOR = ForgeOfGodsStarColor.DEFAULT.getName();
     private String selectedStarColor = DEFAULT_STAR_COLOR;
-    private int rotationSpeed = DEFAULT_ROTATION_SPEED;
     private int starSize = DEFAULT_STAR_SIZE;
     private boolean isRendererDisabled;
     private boolean isRenderActive;
@@ -341,7 +339,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         if (tile == null) return;
 
         tile.setStarRadius(starSize);
-        tile.setRotationSpeed(rotationSpeed);
         tile.setColor(starColors.getByName(selectedStarColor));
 
         tile.updateToClient();
@@ -365,7 +362,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         destroySecondRing();
         destroyThirdRing();
 
-        rendererTileEntity.setRenderRotation(getRotation(), getDirection());
+        rendererTileEntity.setRenderRotation(getDirection());
         updateRenderer();
 
         isRenderActive = true;
@@ -561,14 +558,12 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         super.saveNBTData(aNBT);
         aNBT.setBoolean("isRenderActive", isRenderActive);
         aNBT.setBoolean("isRendererDisabled", isRendererDisabled);
-        aNBT.setInteger("rotationSpeed", rotationSpeed);
         aNBT.setString("selectedStarColor", selectedStarColor);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        if (aNBT.hasKey("rotationSpeed")) rotationSpeed = aNBT.getInteger("rotationSpeed");
         if (aNBT.hasKey("starSize")) starSize = aNBT.getInteger("starSize");
         if (aNBT.hasKey("selectedStarColor")) selectedStarColor = aNBT.getString("selectedStarColor");
         isRenderActive = aNBT.getBoolean("isRenderActive");

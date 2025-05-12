@@ -127,7 +127,7 @@ public class RenderNanoPhagocytosisPlant extends TileEntitySpecialRenderer {
 
         size *= tile.getStarRadius();
 
-        timer *= tile.getRotationSpeed();
+        timer *= 10;
 
         float r = tile.getColorR(), g = tile.getColorG(), b = tile.getColorB();
         GL20.glUniform1f(u_Gamma, tile.getGamma());

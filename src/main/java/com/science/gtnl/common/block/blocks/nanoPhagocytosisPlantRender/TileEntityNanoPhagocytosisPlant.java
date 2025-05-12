@@ -10,7 +10,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.gtnewhorizon.structurelib.alignment.enumerable.Rotation;
 import com.gtnewhorizons.modularui.api.math.Color;
 
 import tectech.thing.metaTileEntity.multi.godforge.color.ForgeOfGodsStarColor;
@@ -83,14 +82,6 @@ public class TileEntityNanoPhagocytosisPlant extends TileEntity {
         return radius;
     }
 
-    public float getRotationSpeed() {
-        return rotationSpeed;
-    }
-
-    public void setRotationSpeed(float speed) {
-        this.rotationSpeed = speed;
-    }
-
     public float getColorR() {
         return Color.getRedF(currentColor);
     }
@@ -143,7 +134,7 @@ public class TileEntityNanoPhagocytosisPlant extends TileEntity {
         return rotAxisZ;
     }
 
-    public void setRenderRotation(Rotation rotation, ForgeDirection direction) {
+    public void setRenderRotation(ForgeDirection direction) {
         switch (direction) {
             case SOUTH -> rotAngle = 90;
             case NORTH -> rotAngle = 90;
@@ -157,32 +148,6 @@ public class TileEntityNanoPhagocytosisPlant extends TileEntity {
         rotAxisZ = direction.offsetY;
 
         updateToClient();
-    }
-
-    public float getLensDistance(int lensID) {
-        return switch (lensID) {
-            case 0 -> -7.6875f;
-            case 1 -> -6.8125f;
-            case 2 -> -5.5625f;
-            default -> throw new IllegalStateException("Unexpected value: " + lensID);
-        };
-    }
-
-    public float getLenRadius(int lensID) {
-        return switch (lensID) {
-            case 0 -> 0.1375f;
-            case 1 -> 0.4375f;
-            case 2 -> 0.625f;
-            default -> throw new IllegalStateException("Unexpected value: " + lensID);
-        };
-    }
-
-    public float getStartAngle() {
-        float x = -getLensDistance(2);
-        float y = getLenRadius(2);
-        float alpha = (float) Math.atan2(y, x);
-        float beta = (float) Math.asin(radius / Math.sqrt(x * x + y * y));
-        return alpha + ((float) Math.PI / 2 - beta);
     }
 
     public static float interpolate(float x0, float x1, float y0, float y1, float x) {

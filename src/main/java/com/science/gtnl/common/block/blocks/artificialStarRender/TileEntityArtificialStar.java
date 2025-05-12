@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.blocks.artificialStar;
+package com.science.gtnl.common.block.blocks.artificialStarRender;
 
 import java.util.ArrayList;
 import java.util.List;

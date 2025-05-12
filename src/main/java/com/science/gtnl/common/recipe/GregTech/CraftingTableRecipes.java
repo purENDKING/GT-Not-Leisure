@@ -142,7 +142,7 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.NeutroniumPipeCasing.get(1),
             new Object[] { "ABA", "BCB", "ABA", 'A',
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Neutronium, 1L), 'B',
-                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Neutronium, 1L), 'C',
+                GTOreDictUnificator.get(OrePrefixes.pipeHuge, Materials.Neutronium, 1L), 'C',
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Neutronium, 1L) });
 
         addCraftingRecipe(

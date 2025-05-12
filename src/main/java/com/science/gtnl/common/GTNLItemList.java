@@ -39,6 +39,7 @@ public enum GTNLItemList implements IItemContainer {
     LaserBeacon,
     ArtificialStarRender,
     NanoPhagocytosisPlantRender,
+    EternalGregTechWorkshopRender,
     PlayerDoll,
 
     BronzeBrickCasing,

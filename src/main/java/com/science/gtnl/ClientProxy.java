@@ -1,7 +1,6 @@
 package com.science.gtnl;
 
-import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.PlayerDoll;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -9,8 +8,11 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GuiEventHandler;
 import com.science.gtnl.Utils.message.TitleDisplayHandler;
-import com.science.gtnl.common.block.blocks.artificialStar.ArtificialStarRender;
-import com.science.gtnl.common.block.blocks.artificialStar.RealArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStarRender.ArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
+import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.ItemBlockEternalGregTechWorkshopRender;
+import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.RenderEternalGregTechWorkshop;
+import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.TileEntityEternalGregTechWorkshop;
 import com.science.gtnl.common.block.blocks.laserBeacon.MeteorMinerRenderer;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.ItemBlockNanoPhagocytosisPlantRender;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.RenderNanoPhagocytosisPlant;
@@ -51,6 +53,13 @@ public class ClientProxy extends CommonProxy {
             new ItemBlockNanoPhagocytosisPlantRender(BlockNanoPhagocytosisPlantRender));
         ClientRegistry
             .bindTileEntitySpecialRenderer(TileEntityNanoPhagocytosisPlant.class, new RenderNanoPhagocytosisPlant());
+
+        MinecraftForgeClient.registerItemRenderer(
+            Item.getItemFromBlock(BlockEternalGregTechWorkshopRender),
+            new ItemBlockEternalGregTechWorkshopRender(BlockEternalGregTechWorkshopRender));
+        ClientRegistry.bindTileEntitySpecialRenderer(
+            TileEntityEternalGregTechWorkshop.class,
+            new RenderEternalGregTechWorkshop());
 
         MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
     }

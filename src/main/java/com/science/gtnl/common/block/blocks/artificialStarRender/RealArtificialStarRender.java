@@ -1,4 +1,4 @@
-package com.science.gtnl.common.block.blocks.artificialStar;
+package com.science.gtnl.common.block.blocks.artificialStarRender;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 

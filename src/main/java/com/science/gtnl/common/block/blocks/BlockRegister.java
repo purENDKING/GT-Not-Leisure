@@ -18,8 +18,10 @@ import com.science.gtnl.common.block.Casings.Casing.MetaItemBlockCasing;
 import com.science.gtnl.common.block.Casings.Column.ItemBlockColumn;
 import com.science.gtnl.common.block.Casings.Glass.ItemBlockGlass;
 import com.science.gtnl.common.block.Casings.Glow.ItemBlockGlow;
-import com.science.gtnl.common.block.blocks.artificialStar.BlockArtificialStarRender;
-import com.science.gtnl.common.block.blocks.artificialStar.TileEntityArtificialStar;
+import com.science.gtnl.common.block.blocks.artificialStarRender.BlockArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStarRender.TileEntityArtificialStar;
+import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.BlockEternalGregTechWorkshopRender;
+import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.TileEntityEternalGregTechWorkshop;
 import com.science.gtnl.common.block.blocks.laserBeacon.BlockLaserBeacon;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.BlockNanoPhagocytosisPlantRender;
@@ -35,6 +37,10 @@ import gtPlusPlus.core.util.minecraft.ItemUtils;
 public class BlockRegister {
 
     public static void registryBlocks() {
+
+        BasicBlocks.BlockEternalGregTechWorkshopRender = new BlockEternalGregTechWorkshopRender();
+        GameRegistry
+            .registerTileEntity(TileEntityEternalGregTechWorkshop.class, "EternalGregTechWorkshopRenderTileEntity");
 
         BasicBlocks.BlockNanoPhagocytosisPlantRender = new BlockNanoPhagocytosisPlantRender();
         GameRegistry.registerTileEntity(TileEntityNanoPhagocytosisPlant.class, "NanoPhagocytosisPlantRenderTileEntity");
