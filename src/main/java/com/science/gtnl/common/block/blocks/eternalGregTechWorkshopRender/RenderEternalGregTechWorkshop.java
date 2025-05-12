@@ -68,44 +68,42 @@ public class RenderEternalGregTechWorkshop extends TileEntitySpecialRenderer {
         float rotAxisX = tile.getRotAxisX();
         float rotAxisY = tile.getRotAxisY();
         float rotAxisZ = tile.getRotAxisZ();
+        float offsetX = tile.getOffsetX();
+        float offsetY = tile.getOffsetY();
+        float offsetZ = tile.getOffsetZ();
+        int rotation = tile.getRotation();
+
+        float angle = (rotation * 90f + 90f) % 360f;
+        if (offsetY == 0) {
+            GL11.glRotatef(90.0f, 0, 1, 0);
+            GL11.glRotatef(90.0f, offsetX, offsetY, offsetZ);
+            GL11.glRotatef(angle, 0, 1, 0);
+        } else {
+            GL11.glRotatef(90.0f, 0, 0, 1);
+            GL11.glRotatef(angle, 1, 0, 0);
+        }
 
         for (int i = 0; i < renderCount; i++) {
             int layerOffset = i * 22;
-
             float baseRotation = ((i % 2) == 0 || spiralEnabled ? 1 : -1) * (timer / 6 * 7);
-
             float spiralRotation = spiralEnabled ? (i * 5.0f) % 360.0f : 0.0f;
+            double offsetMagnitude = 11 + layerOffset;
 
-            {
-                double offsetMagnitude = 14 + layerOffset;
+            GL11.glPushMatrix();
+            GL11.glTranslated(offsetX * offsetMagnitude, offsetY * offsetMagnitude, offsetZ * offsetMagnitude);
+            GL11.glRotatef(rotAngle, rotAxisX, rotAxisY, rotAxisZ);
+            GL11.glRotatef((spiralEnabled ? spiralRotation + baseRotation : baseRotation), 1, 0, 0);
+            GL11.glTranslated(0, -1, 0);
+            ring.render();
+            GL11.glPopMatrix();
 
-                GL11.glPushMatrix();
-                GL11.glTranslated(rotAxisZ * offsetMagnitude, rotAxisX * offsetMagnitude, rotAxisY * offsetMagnitude);
-                GL11.glRotatef(rotAngle, rotAxisX, rotAxisY, rotAxisZ);
-                GL11.glRotatef(90.0f, 0, 0, 1);
-                GL11.glRotatef((spiralEnabled ? spiralRotation + baseRotation : baseRotation), 1, 0, 0);
-                GL11.glTranslated(0, -1, 0);
-
-                ring.render();
-                GL11.glPopMatrix();
-            }
-
-            {
-                double offsetMagnitude = 8 + layerOffset;
-
-                GL11.glPushMatrix();
-                GL11.glTranslated(
-                    rotAxisZ * (-offsetMagnitude),
-                    rotAxisX * (-offsetMagnitude),
-                    rotAxisY * (-offsetMagnitude));
-                GL11.glRotatef(rotAngle, rotAxisX, rotAxisY, rotAxisZ);
-                GL11.glRotatef(90.0f, 0, 0, 1);
-                GL11.glRotatef((spiralEnabled ? -spiralRotation + baseRotation : -baseRotation), 1, 0, 0);
-                GL11.glTranslated(0, -1, 0);
-
-                ring.render();
-                GL11.glPopMatrix();
-            }
+            GL11.glPushMatrix();
+            GL11.glTranslated(offsetX * (-offsetMagnitude), offsetY * (-offsetMagnitude), offsetZ * (-offsetMagnitude));
+            GL11.glRotatef(rotAngle, rotAxisX, rotAxisY, rotAxisZ);
+            GL11.glRotatef((spiralEnabled ? -5f - spiralRotation + baseRotation : -baseRotation), 1, 0, 0);
+            GL11.glTranslated(0, -1, 0);
+            ring.render();
+            GL11.glPopMatrix();
         }
 
         GL11.glPopMatrix();

@@ -289,8 +289,8 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
 
         SetEUt *= multiplier;
         if (Oxygen) {
-            this.mMaxProgresstime /= 2;
-            SetEUt *= 2;
+            this.mMaxProgresstime /= 16;
+            SetEUt *= 16;
         }
 
         this.mEfficiency = 10000;

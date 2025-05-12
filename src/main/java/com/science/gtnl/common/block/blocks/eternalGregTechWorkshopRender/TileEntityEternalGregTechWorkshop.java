@@ -8,11 +8,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.gtnewhorizon.structurelib.alignment.enumerable.Rotation;
+
 public class TileEntityEternalGregTechWorkshop extends TileEntity {
 
-    private float rotAngle = 0, rotAxisX = 1, rotAxisY = 0, rotAxisZ = 0, offsetX, offsetY, offsetZ;
+    private float rotAngle = 0, rotAxisX = 1, rotAxisY = 0, rotAxisZ = 0, offsetX = 0, offsetY = 1, offsetZ = 0;
     private AxisAlignedBB renderBoundingBox;
-    private int renderCount = 1;
+    private int renderCount = 1, rot = 0;
 
     private static final String NBT_TAG = "EGTWRender:";
     private static final String ROT_ANGLE_NBT_TAG = NBT_TAG + "ROT_ANGLE";
@@ -22,10 +24,10 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
     private static final String OFFSET_X_NBT_TAG = NBT_TAG + "OFFSET__X";
     private static final String OFFSET_Y_NBT_TAG = NBT_TAG + "OFFSET_Y";
     private static final String OFFSET_Z_NBT_TAG = NBT_TAG + "OFFSET_Z";
+    private static final String ROTATION_NBT_TAG = NBT_TAG + "ROTATION";
     private static final String RENDERS_NBT_TAG = NBT_TAG + "RENDERS";
 
-    private static final double RING_RADIUS = 63;
-    private static final double BEAM_LENGTH = 59;
+    private static final double RING_RADIUS = 512;
 
     @Override
     public AxisAlignedBB getRenderBoundingBox() {
@@ -33,17 +35,13 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
             double x = this.xCoord;
             double y = this.yCoord;
             double z = this.zCoord;
-
-            // This could possibly be made smaller by figuring out the beam direction,
-            // but since this is not always known (set dynamically by the MTE), this
-            // currently just bounds as if the beam is in all 4 directions.
             renderBoundingBox = AxisAlignedBB.getBoundingBox(
-                x - RING_RADIUS - BEAM_LENGTH,
-                y - RING_RADIUS - BEAM_LENGTH,
-                z - RING_RADIUS - BEAM_LENGTH,
-                x + RING_RADIUS + BEAM_LENGTH + 1,
-                y + RING_RADIUS + BEAM_LENGTH + 1,
-                z + RING_RADIUS + BEAM_LENGTH + 1);
+                x - RING_RADIUS,
+                y - RING_RADIUS,
+                z - RING_RADIUS,
+                x + RING_RADIUS + 1,
+                y + RING_RADIUS + 1,
+                z + RING_RADIUS + 1);
         }
         return renderBoundingBox;
     }
@@ -90,18 +88,20 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
         return offsetZ;
     }
 
+    public int getRotation() {
+        return rot;
+    }
+
     public static float interpolate(float x0, float x1, float y0, float y1, float x) {
         return y0 + ((x - x0) * (y1 - y0)) / (x1 - x0);
     }
 
-    public void setRenderRotation(ForgeDirection direction) {
+    public void setRenderRotation(Rotation rotation, ForgeDirection direction) {
         switch (direction) {
-            case SOUTH -> rotAngle = 90;
-            case NORTH -> rotAngle = 90;
+            case SOUTH, NORTH -> rotAngle = 90;
             case WEST -> rotAngle = 0;
             case EAST -> rotAngle = 180;
-            case UP -> rotAngle = -90;
-            case DOWN -> rotAngle = -90;
+            case UP, DOWN -> rotAngle = -90;
         }
         rotAxisX = 0;
         rotAxisY = direction.offsetZ + direction.offsetX;
@@ -109,6 +109,7 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
         offsetX = direction.offsetX;
         offsetY = direction.offsetY;
         offsetZ = direction.offsetZ;
+        rot = rotation.getIndex();
 
         updateToClient();
     }
@@ -117,6 +118,7 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
     public void writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
         compound.setInteger(RENDERS_NBT_TAG, renderCount);
+        compound.setInteger(ROTATION_NBT_TAG, rot);
         compound.setFloat(ROT_ANGLE_NBT_TAG, rotAngle);
         compound.setFloat(ROT_AXIS_X_NBT_TAG, rotAxisX);
         compound.setFloat(ROT_AXIS_Y_NBT_TAG, rotAxisY);
@@ -133,6 +135,7 @@ public class TileEntityEternalGregTechWorkshop extends TileEntity {
         renderCount = compound.getInteger(RENDERS_NBT_TAG);
         if (renderCount < 1) renderCount = 1;
 
+        rot = compound.getInteger(ROTATION_NBT_TAG);
         rotAngle = compound.getFloat(ROT_ANGLE_NBT_TAG);
         rotAxisX = compound.getFloat(ROT_AXIS_X_NBT_TAG);
         rotAxisY = compound.getFloat(ROT_AXIS_Y_NBT_TAG);

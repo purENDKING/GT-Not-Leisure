@@ -410,6 +410,7 @@ Tooltip_LaserBeacon=Generates high-precision laser using powerful electric curre
 
 tile.RealArtificialStarRender.name=True Annihilation Generator Renderer
 tile.NanoPhagocytosisPlantRenderer.name=Nano Phagocytosis Plant Renderer
+tile.EternalGregTechWorkshopRenderer.name=Eternal GregTech Workshop Renderer
 tile.BlockSoulFarmland.name=Soul Farmland
 
 tile.lootgames.sdk_activator.name=Sudoku
@@ -1486,7 +1487,7 @@ LargeNaquadahReactor.Generates.0=Power Output:
 LargeNaquadahReactor.Generates.1=Oxygen Boost:
 Tooltip_LargeNaquadahReactor_00=Fixed parallelism of 4
 Tooltip_LargeNaquadahReactor_01=Can input oxygen at the start of the recipe
-Tooltip_LargeNaquadahReactor_02=This halves the time and doubles the power output
+Tooltip_LargeNaquadahReactor_02=This will make time 16 times shorter and power 16 times greater
 Tooltip_LargeNaquadahReactor_03=The cost is 2000L of oxygen consumed per second
 Tooltip_LargeNaquadahReactor_04=Can only be used when hydrogen is not being input!
 Tooltip_LargeNaquadahReactor_Casing=Any radioactive Naquadah alloy machine block
@@ -1991,8 +1992,20 @@ NameOreExtractionModule=Ore Extraction Module
 Tooltip_NanitesBaseModule_Casing=Hint 1 dots
 
 NameEternalGregTechWorkshop=Eternal GregTech Workshop
+gtnl.recipe.EternalGregTechWorkshopUpgradeRecipes=Eternal GregTech Workshop Module Upgrade
 EternalGregTechWorkshopRecipeType=Eternal GregTech Workshop Central Control Center
 Tooltip_EternalGregTechWorkshop_Casing=Hint 1 dots
+Render_EternalGregTechWorkshop_Enabled=Render Enabled
+Render_EternalGregTechWorkshop_Disabled=Render Disabled
+EGTW_UpdateStructureCheck=Refresh module connection status
+EGTW_ExtraModule=Extra Structure:
+EGTW_ExtraModule_On=Enable
+EGTW_ExtraModule_Off=Enable failed
+EGTW_EnableExtraModule=Enable Extra Structure
+EGTW_MachineTier=Machine Tier:
+EGTW_MachineRunning=§aMachine Running
+EGTW_MachineStandby=Machine Standby
+EGTW_MachineIncomplete=§cMachine Incomplete
 
 NameEGTWFusionModule=EGTW - Fusion Reactor
 EGTWFusionModuleRecipeType=Fusion Reactor

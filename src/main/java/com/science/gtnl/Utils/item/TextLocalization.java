@@ -1350,7 +1350,7 @@ public class TextLocalization {
         "Can input oxygen at the beginning of the recipe",
         "Tooltip_LargeNaquadahReactor_01");
     public static final String Tooltip_LargeNaquadahReactor_02 = texter(
-        "This will cut the time in half and double the power",
+        "This will make time 16 times shorter and power 16 times greater",
         "Tooltip_LargeNaquadahReactor_02");
     public static final String Tooltip_LargeNaquadahReactor_03 = texter(
         "The cost is that it will consume 2000L of oxygen per second",

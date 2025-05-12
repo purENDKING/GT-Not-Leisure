@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockEternalGregTechWorkshopRender;
 import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUpgrade.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
@@ -13,7 +14,6 @@ import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap
 import static java.lang.Math.*;
 import static java.lang.Math.floor;
 import static net.minecraft.util.StatCollector.translateToLocal;
-import static tectech.util.TTUtility.replaceLetters;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -27,6 +27,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -164,7 +165,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     public static String[][] shape_down = StructureUtils.readStructureFromFile(EGTWD_STRUCTURE_FILE_PATH);
     public static String[][] shape_bottom = StructureUtils.readStructureFromFile(EGTWB_STRUCTURE_FILE_PATH);
     public static String[][] shape_extra = StructureUtils.readStructureFromFile(EGTWE_STRUCTURE_FILE_PATH);
-    public static final String[][] shape_extra_air = replaceLetters(shape_extra, " ");
+    public static final String[][] shape_extra_air = StructureUtils.replaceLetters(shape_extra, "a");
 
     public final int CASING_INDEX = 960;
 
@@ -187,6 +188,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     private boolean mExtraModule;
     private boolean enableExtraModule;
     private boolean secretUpgrade;
+    private boolean isRendererDisabled;
+    private boolean isRenderActive;
 
     private static final MilestoneFormatter DEFAULT_FORMATTING_MODE = MilestoneFormatter.COMMA;
     private static final BigInteger DEFAULT_TOTAL_POWER = BigInteger.ZERO;
@@ -254,6 +257,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
         aNBT.setInteger("mMachineTier", mMachineTier);
         aNBT.setBoolean("enableExtraModule", enableExtraModule);
         aNBT.setBoolean("mExtraModule", mExtraModule);
+        aNBT.setBoolean("isRenderActive", isRenderActive);
+        aNBT.setBoolean("isRendererDisabled", isRendererDisabled);
     }
 
     @Override
@@ -264,6 +269,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
         enableExtraModule = NBT.getBoolean("enableExtraModule");
         mExtraModule = NBT.getBoolean("mExtraModule");
         gravitonShardsSpent = NBT.getInteger("gravitonShardsSpent");
+        isRenderActive = NBT.getBoolean("isRenderActive");
+        isRendererDisabled = NBT.getBoolean("isRendererDisabled");
 
         if (NBT.hasKey("totalPowerConsumed")) {
             totalPowerConsumed = new BigInteger(NBT.getByteArray("totalPowerConsumed"));
@@ -314,6 +321,21 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
 
     public void addTotalRecipesProcessed(long amount) {
         totalRecipesProcessed += amount;
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        if (isRendererDisabled) {
+            isRendererDisabled = false;
+            // let the renderer automatically rebuild itself as needed through normal logic
+        } else {
+            isRendererDisabled = true;
+            if (isRenderActive) destroyRenderer();
+        }
+        aPlayer.addChatMessage(
+            new ChatComponentTranslation(
+                isRendererDisabled ? "Render_EternalGregTechWorkshop_Disabled"
+                    : "Render_EternalGregTechWorkshop_Enabled"));
     }
 
     @Override
@@ -432,7 +454,10 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
                     .casingIndex(CASING_INDEX)
                     .dot(1)
                     .buildAndChain(TTCasingsContainer.GodforgeCasings, 0))
-            .addElement('Z', ofChain(ofBlock(GregTechAPI.sBlockCasings1, 14), ofBlock(Blocks.dirt, 0)))
+            .addElement(
+                'Z',
+                ofChain(ofBlock(GregTechAPI.sBlockCasings1, 14), ofBlock(BlockEternalGregTechWorkshopRender, 0)))
+            .addElement('a', isAir())
             .build();
     }
 
@@ -444,6 +469,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) {
             mMachineTier = 0;
+            mExtraModule = false;
+            if (isRenderActive) destroyRenderer();
             return false;
         }
 
@@ -471,6 +498,8 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
             VERTICAL_OFF_SET_TOP + (checkTier - 1) * 22,
             DEPTH_OFF_SET_TOP)) {
             mMachineTier = 0;
+            mExtraModule = false;
+            if (isRenderActive) destroyRenderer();
             return false;
         }
 
@@ -480,32 +509,57 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
             VERTICAL_OFF_SET_BOTTOM - (checkTier - 1) * 22,
             DEPTH_OFF_SET_BOTTOM)) {
             mMachineTier = 0;
+            mExtraModule = false;
+            if (isRenderActive) destroyRenderer();
             return false;
         }
 
-        if (enableExtraModule && checkTier > 5) {
+        if (enableExtraModule && checkTier > 0) {
             for (int i = 0; i < checkTier; i++) {
-                if (!checkPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_UP + i * 22,
-                    DEPTH_OFF_SET_EXTRA)) {
-                    mExtraModule = false;
-                    break;
-                }
-                if (!checkPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
-                    DEPTH_OFF_SET_EXTRA)) {
-                    mExtraModule = false;
-                    break;
+                if (isRenderActive) {
+                    if (!checkPiece(
+                        STRUCTURE_PIECE_MAIN_EXTRA_AIR,
+                        HORIZONTAL_OFF_SET_EXTRA,
+                        VERTICAL_OFF_SET_EXTRA_UP + i * 22,
+                        DEPTH_OFF_SET_EXTRA)) {
+                        destroyRenderer();
+                        mExtraModule = false;
+                        break;
+                    }
+                    if (!checkPiece(
+                        STRUCTURE_PIECE_MAIN_EXTRA_AIR,
+                        HORIZONTAL_OFF_SET_EXTRA,
+                        VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
+                        DEPTH_OFF_SET_EXTRA)) {
+                        mExtraModule = false;
+                        break;
+                    }
+                } else {
+                    if (!checkPiece(
+                        STRUCTURE_PIECE_MAIN_EXTRA,
+                        HORIZONTAL_OFF_SET_EXTRA,
+                        VERTICAL_OFF_SET_EXTRA_UP + i * 22,
+                        DEPTH_OFF_SET_EXTRA)) {
+                        mExtraModule = false;
+                        break;
+                    }
+                    if (!checkPiece(
+                        STRUCTURE_PIECE_MAIN_EXTRA,
+                        HORIZONTAL_OFF_SET_EXTRA,
+                        VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
+                        DEPTH_OFF_SET_EXTRA)) {
+                        mExtraModule = false;
+                        break;
+                    }
                 }
                 mExtraModule = true;
             }
         }
-
         mMachineTier = checkTier;
+
+        if (enableExtraModule && !isRenderActive && !isRendererDisabled && mTotalRunTime > 0) {
+            createRenderer();
+        }
         return tCountCasing > 1;
     }
 
@@ -775,6 +829,14 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
             }
         }
         super.onRemoval();
+    }
+
+    @Override
+    public void onBlockDestroyed() {
+        super.onBlockDestroyed();
+        if (isRenderActive) {
+            destroyRenderer();
+        }
     }
 
     @Override
@@ -1118,7 +1180,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
                     .setTooltipShowUpDelay(TOOLTIP_DELAY))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {
                 if (!widget.isClient()) {
-                    checkMachine(this.getBaseMetaTileEntity(), null);
+                    mMachine = checkMachine(this.getBaseMetaTileEntity(), null);
                 }
                 enableExtraModule = !enableExtraModule;
             })
@@ -1138,7 +1200,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
                 .setSize(16, 16))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {
                 if (!widget.isClient()) {
-                    checkMachine(this.getBaseMetaTileEntity(), null);
+                    mMachine = checkMachine(this.getBaseMetaTileEntity(), null);
                 }
             })
                 .setSize(16, 16)
@@ -1986,47 +2048,82 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     }
 
     private void destroyExtraModule() {
-        if (enableExtraModule) {
-            for (int i = 0; i < mMachineTier; i++) {
-                buildPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA_AIR,
-                    null,
-                    false,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_UP + i * 22,
-                    DEPTH_OFF_SET_EXTRA);
-                buildPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA_AIR,
-                    null,
-                    false,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
-                    DEPTH_OFF_SET_EXTRA);
-                mExtraModule = true;
-            }
+        for (int i = 0; i < mMachineTier; i++) {
+            buildPiece(
+                STRUCTURE_PIECE_MAIN_EXTRA_AIR,
+                null,
+                false,
+                HORIZONTAL_OFF_SET_EXTRA,
+                VERTICAL_OFF_SET_EXTRA_UP + i * 22,
+                DEPTH_OFF_SET_EXTRA);
+            buildPiece(
+                STRUCTURE_PIECE_MAIN_EXTRA_AIR,
+                null,
+                false,
+                HORIZONTAL_OFF_SET_EXTRA,
+                VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
+                DEPTH_OFF_SET_EXTRA);
+            mExtraModule = true;
         }
+
     }
 
     private void buildExtraModule() {
-        if (enableExtraModule) {
-            for (int i = 0; i < mMachineTier; i++) {
-                buildPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA,
-                    null,
-                    false,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_UP + i * 22,
-                    DEPTH_OFF_SET_EXTRA);
-                buildPiece(
-                    STRUCTURE_PIECE_MAIN_EXTRA,
-                    null,
-                    false,
-                    HORIZONTAL_OFF_SET_EXTRA,
-                    VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
-                    DEPTH_OFF_SET_EXTRA);
-                mExtraModule = true;
-            }
+        for (int i = 0; i < mMachineTier; i++) {
+            buildPiece(
+                STRUCTURE_PIECE_MAIN_EXTRA,
+                null,
+                false,
+                HORIZONTAL_OFF_SET_EXTRA,
+                VERTICAL_OFF_SET_EXTRA_UP + i * 22,
+                DEPTH_OFF_SET_EXTRA);
+            buildPiece(
+                STRUCTURE_PIECE_MAIN_EXTRA,
+                null,
+                false,
+                HORIZONTAL_OFF_SET_EXTRA,
+                VERTICAL_OFF_SET_EXTRA_DOWN - i * 22,
+                DEPTH_OFF_SET_EXTRA);
+            mExtraModule = true;
         }
+    }
+
+    private void destroyRenderer() {
+        ChunkCoordinates renderPos = getRenderPos();
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, GregTechAPI.sBlockCasings1, 14, 2);
+
+        buildExtraModule();
+
+        isRenderActive = false;
+        disableWorking();
+    }
+
+    private void createRenderer() {
+        ChunkCoordinates renderPos = getRenderPos();
+
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
+        this.getBaseMetaTileEntity()
+            .getWorld()
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockEternalGregTechWorkshopRender);
+        TileEntityEternalGregTechWorkshop rendererTileEntity = (TileEntityEternalGregTechWorkshop) this
+            .getBaseMetaTileEntity()
+            .getWorld()
+            .getTileEntity(renderPos.posX, renderPos.posY, renderPos.posZ);
+
+        destroyExtraModule();
+
+        rendererTileEntity.setRenderRotation(getRotation(), getDirection());
+        updateRenderer();
+
+        isRenderActive = true;
+        enableWorking();
     }
 
     private ChunkCoordinates getRenderPos() {

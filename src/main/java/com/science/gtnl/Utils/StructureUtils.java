@@ -172,4 +172,15 @@ public class StructureUtils {
             TargetBlock,
             0);
     }
+
+    public static String[][] replaceLetters(String[][] array, String replacement) {
+        String[][] outputArray = new String[array.length][];
+        for (int i = 0; i < array.length; i++) {
+            outputArray[i] = new String[array[i].length];
+            for (int j = 0; j < array[i].length; j++) {
+                outputArray[i][j] = array[i][j].replaceAll("[A-Z]", replacement);
+            }
+        }
+        return outputArray;
+    }
 }
