@@ -204,7 +204,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
-        this.multiTier = getMultiTier(aStack);
+        this.multiTier = getMultiTier(getControllerSlot());
 
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
 

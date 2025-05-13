@@ -1,19 +1,27 @@
 package com.science.gtnl.common.recipe.GregTech;
 
+import static goodgenerator.loader.Loaders.huiCircuit;
+import static gregtech.api.enums.MetaTileEntityIDs.SpaceElevatorModuleAssemblerT2;
+
 import net.minecraft.item.ItemStack;
 
+import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
 import com.science.gtnl.Utils.recipes.IRecipePool;
+import com.science.gtnl.common.GTNLItemList;
 
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
+import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.material.MaterialsAlloy;
+import gtPlusPlus.core.material.MaterialsElements;
 import tectech.thing.CustomItemList;
 
 public class SpaceAssemblerRecipes implements IRecipePool {
@@ -57,6 +65,30 @@ public class SpaceAssemblerRecipes implements IRecipePool {
             .specialValue(1)
             .duration(400)
             .eut(TierEU.RECIPE_UHV)
+            .addTo(SAR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(
+                new ItemStack(GregTechAPI.sBlockMachines, 1, SpaceElevatorModuleAssemblerT2.ID),
+                new ItemStack(GregTechAPI.sBlockMachines, 1, SpaceElevatorModuleAssemblerT2.ID),
+                new ItemStack(GregTechAPI.sBlockMachines, 1, SpaceElevatorModuleAssemblerT2.ID),
+                new ItemStack(GregTechAPI.sBlockMachines, 1, SpaceElevatorModuleAssemblerT2.ID),
+                new ItemStack(IGBlocks.SpaceElevatorCasing, 16, 0),
+                GTOreDictUnificator.get(OrePrefixes.circuit, Materials.UIV, 16),
+                MaterialsElements.STANDALONE.HYPOGEN.getScrew(32),
+                MaterialsElements.STANDALONE.HYPOGEN.getFrameBox(16),
+                GTOreDictUnificator.get(OrePrefixes.gearGt, MaterialsUEVplus.TranscendentMetal, 16),
+                GTOreDictUnificator.get(OrePrefixes.gearGtSmall, MaterialsUEVplus.ProtoHalkonite, 24),
+                new ItemStack(huiCircuit, 48, 4))
+            .fluidInputs(
+                Materials.Infinity.getMolten(14400),
+                MaterialsUEVplus.DimensionallyShiftedSuperfluid.getFluid(30000),
+                Materials.UUMatter.getFluid(32000),
+                MaterialsUEVplus.SpaceTime.getMolten(1296))
+            .itemOutputs(GTNLItemList.SpaceAssembler.get(1))
+            .specialValue(3)
+            .duration(2400)
+            .eut(TierEU.RECIPE_UIV)
             .addTo(SAR);
     }
 }

@@ -460,6 +460,9 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     }
                 }
 
+                adjustedTime = Math.max(1, adjustedTime);
+                adjustedPower = Math.max(1, adjustedPower);
+
                 // 构建超频后的临时配方
                 GTRecipe.RecipeAssemblyLine overclockedRecipe = new GTRecipe.RecipeAssemblyLine(
                     recipe.mResearchItem, // 研究物品
