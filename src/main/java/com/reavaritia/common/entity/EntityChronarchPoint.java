@@ -7,7 +7,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.science.gtnl.Mods;
 import com.science.gtnl.api.ITileEntityTickAcceleration;
 
 public class EntityChronarchPoint extends Entity {
@@ -70,15 +69,8 @@ public class EntityChronarchPoint extends Entity {
 
                     TileEntity te = worldObj.getTileEntity(x, y, z);
                     if (shouldAccelerate(te)) {
-
-                        if (!Mods.NHUtilities.isModLoaded()) {
-                            if (te instanceof ITileEntityTickAcceleration accelerated) {
-                                if (accelerated.tickAcceleration(speedMultiplier)) continue;
-                            }
-                        } else {
-                            if (te instanceof com.xir.NHUtilities.common.api.interfaces.ITileEntityTickAcceleration accelerated) {
-                                if (accelerated.tickAcceleration(speedMultiplier)) continue;
-                            }
+                        if (te instanceof ITileEntityTickAcceleration accelerated) {
+                            if (accelerated.tickAcceleration(speedMultiplier)) continue;
                         }
                         safeAccelerateTileEntity(te, tMaxTime);
                     }

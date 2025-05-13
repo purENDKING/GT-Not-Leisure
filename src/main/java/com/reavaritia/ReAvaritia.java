@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.Side;
     modid = MODID,
     version = VERSION,
     name = MODNAME,
-    dependencies = "required-before:sciencenotleisure;" + "required-after:eternalsingularity;",
+    dependencies = "required-before:sciencenotleisure;" + "after:eternalsingularity;",
     acceptedMinecraftVersions = "1.7.10")
 public class ReAvaritia {
 

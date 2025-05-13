@@ -1,6 +1,6 @@
 package com.science.gtnl.api;
 
-import com.xir.NHUtilities.common.entity.EntityTimeAccelerator;
+import com.science.gtnl.common.entity.EntityTimeAccelerator;
 
 /**
  * only used for EntityTimeAccelerator {@link EntityTimeAccelerator#onEntityUpdate()}

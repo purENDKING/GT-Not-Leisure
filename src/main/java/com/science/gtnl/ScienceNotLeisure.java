@@ -41,7 +41,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
     name = MODNAME,
     dependencies = "required-after:IC2;" + "required-after:structurelib;"
         + "required-after:Avaritia;"
-        + "required-after:eternalsingularity;"
+        + "after:eternalsingularity;"
         + "required-after:AWWayofTime;"
         + "required-after:BloodArsenal;"
         + "required-after:modularui;"
