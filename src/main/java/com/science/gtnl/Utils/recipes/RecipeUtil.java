@@ -273,11 +273,22 @@ public class RecipeUtil {
         return DimensionManager.getProvider(dimId)
             .getClass()
             .getName()
-            .endsWith("SS")
+            .endsWith("Space")
+            || DimensionManager.getProvider(dimId)
+                .getClass()
+                .getName()
+                .endsWith("SS")
             || DimensionManager.getProvider(dimId)
                 .getClass()
                 .getName()
                 .contains("SpaceStation");
+    }
+
+    public static boolean isValidForMothership(int dimId) {
+        return DimensionManager.getProvider(dimId)
+            .getClass()
+            .getName()
+            .contains("Mothership");
     }
 
     @Nonnull
