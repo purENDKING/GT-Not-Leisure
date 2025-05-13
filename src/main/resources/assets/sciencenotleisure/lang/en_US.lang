@@ -2232,6 +2232,14 @@ Tooltip_LargeCircuitAssembler_00=Glass tier limits the energy hatch tier, UV gla
 Tooltip_LargeCircuitAssembler_01=Only one energy hatch can be installed!
 Tooltip_LargeCircuitAssembler_Casing=Any Multi-Functional Machine Block
 
+NameSpaceAssembler=Space Assembler
+SpaceAssemblerRecipeType=Space Assembler
+Tooltip_SpaceAssembler_00=§d§lLiterally Assembled in Space
+Tooltip_SpaceAssembler_01=Must be operated on a space station!
+Tooltip_SpaceAssembler_02=Each tier of glass provides an additional 10%% speed boost (multiplicative)
+Tooltip_SpaceAssembler_Casing=Any Advanced Computer Casing
+GT5U.gui.text.not_in_space_station=Not in Space Station!
+
 NameSmeltingMixingFurnace=Smelting Mixing Furnace
 SmeltingMixingFurnaceRecipeType=Smelting Mixing
 gtnl.recipe.SmeltingMixingFurnaceRecipes=Smelting Mixing / Dimensionally Transcendent Plasma Forge

@@ -1378,6 +1378,21 @@ public class TextLocalization {
         "Any Multi-Use Casing",
         "Tooltip_LargeCircuitAssembler_Casing");
 
+    public static final String NameSpaceAssembler = texter("Space Assembler", "NameSpaceAssembler");
+    public static final String SpaceAssemblerRecipeType = texter("Space Assembler", "SpaceAssemblerRecipeType");
+    public static final String Tooltip_SpaceAssembler_00 = texter(
+        "Energy hatch limited by glass tier, UV Glass unlocks all",
+        "Tooltip_SpaceAssembler_00");
+    public static final String Tooltip_SpaceAssembler_01 = texter(
+        "Only one Energy Hatch!",
+        "Tooltip_SpaceAssembler_01");
+    public static final String Tooltip_SpaceAssembler_02 = texter(
+        "Only one Energy Hatch!",
+        "Tooltip_SpaceAssembler_02");
+    public static final String Tooltip_SpaceAssembler_Casing = texter(
+        "Any Advanced Computer Casing",
+        "Tooltip_SpaceAssembler_Casing");
+
     public static final String NameHandOfJohnDavisonRockefeller = texter(
         "Hand Of John Davison Rockefeller",
         "NameHandOfJohnDavisonRockefeller");

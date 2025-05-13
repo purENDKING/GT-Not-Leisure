@@ -116,6 +116,7 @@ import com.science.gtnl.common.machine.multiblock.RealArtificialStar;
 import com.science.gtnl.common.machine.multiblock.ResourceCollectionModule;
 import com.science.gtnl.common.machine.multiblock.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
+import com.science.gtnl.common.machine.multiblock.SpaceAssembler;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
@@ -952,6 +953,10 @@ public class MachineLoader {
         GTNLItemList.EGTWFusionModule.set(
             new EGTWFusionModule(EGTW_FUSION_MODULE.ID, "EGTWFusionModule", TextLocalization.NameEGTWFusionModule));
         addItemTooltip(GTNLItemList.EGTWFusionModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SpaceAssembler
+            .set(new SpaceAssembler(SPACE_ASSEMBLER.ID, "SpaceAssembler", TextLocalization.NameSpaceAssembler));
+        addItemTooltip(GTNLItemList.SpaceAssembler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

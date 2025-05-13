@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fluids.FluidStack;
 
 import gregtech.api.recipe.RecipeMap;
+import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.SimpleCheckRecipeResult;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gtPlusPlus.api.objects.Logger;
@@ -263,4 +268,19 @@ public class RecipeUtil {
         }
         return GTUtility.getFluidForFilledItem(ingot, true);
     }
+
+    public static boolean isValidForSpaceStation(int dimId) {
+        return DimensionManager.getProvider(dimId)
+            .getClass()
+            .getName()
+            .endsWith("SS")
+            || DimensionManager.getProvider(dimId)
+                .getClass()
+                .getName()
+                .contains("SpaceStation");
+    }
+
+    @Nonnull
+    public static final CheckRecipeResult NOT_IN_SPACE_STATION = SimpleCheckRecipeResult
+        .ofFailure("not_in_space_station");
 }

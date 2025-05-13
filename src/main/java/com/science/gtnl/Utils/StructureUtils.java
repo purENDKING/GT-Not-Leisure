@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.block.Block;
 
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.common.blocks.BlockCasingsAbstract;
 
 public class StructureUtils {
 
@@ -182,5 +183,9 @@ public class StructureUtils {
             }
         }
         return outputArray;
+    }
+
+    public static int getTextureIndex(Block block, int meta) {
+        return ((BlockCasingsAbstract) block).getTextureIndex(meta);
     }
 }
