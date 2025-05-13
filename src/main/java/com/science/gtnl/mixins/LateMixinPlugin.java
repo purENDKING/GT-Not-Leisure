@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
+import com.science.gtnl.Mods;
 import com.science.gtnl.config.MainConfig;
 
 @LateMixin
@@ -34,17 +35,19 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("DraconicEvolutionEventHandler_Mixin");
         mixins.add("BacteriaRegistry_Mixin");
 
-        if (MainConfig.enableRecipeOutputChance) {
+        if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
             mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
             mixins.add("Gregtech.BehaviourScanner_Mixin");
         }
 
-        mixins.add("Gregtech.BaseMetaTileEntityAcceleration_Mixin");
-        mixins.add("Gregtech.MTEAdvAssLineAcceleration_Mixin");
-        mixins.add("Gregtech.ResearchStationAcceleration_Mixin");
-        mixins.add("EnderIO.AccelerateEnergyReceive_Mixin");
-        mixins.add("EnderIO.AccelerateTileEntity_Mixin");
-        mixins.add("EnderIO.Modify_CapBankMaxIO_Mixin");
+        if (!Mods.NHUtilities.isModLoaded()) {
+            mixins.add("Gregtech.BaseMetaTileEntityAcceleration_Mixin");
+            mixins.add("Gregtech.MTEAdvAssLineAcceleration_Mixin");
+            mixins.add("Gregtech.ResearchStationAcceleration_Mixin");
+            mixins.add("EnderIO.AccelerateEnergyReceive_Mixin");
+            mixins.add("EnderIO.AccelerateTileEntity_Mixin");
+            mixins.add("EnderIO.Modify_CapBankMaxIO_Mixin");
+        }
 
         return mixins;
     }
