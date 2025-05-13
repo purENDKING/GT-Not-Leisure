@@ -78,8 +78,8 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     private static IStructureDefinition<RealArtificialStar> STRUCTURE_DEFINITION = null;
     public static final String RAS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/real_artificial_star";
     public static String[][] shape = StructureUtils.readStructureFromFile(RAS_STRUCTURE_FILE_PATH);
-    protected static long MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.EUEveryDepletedExcitedNaquadahFuelRod;
-    protected static long MaxOfEnhancementCore = MainConfig.EUEveryEnhancementCore;
+    protected static long MaxOfDepletedExcitedNaquadahFuelRod = MainConfig.euEveryDepletedExcitedNaquadahFuelRod;
+    protected static long MaxOfEnhancementCore = MainConfig.euEveryEnhancementCore;
     protected static long MaxOfAntimatter = 3;
     protected static long MaxOfAntimatterFuelRod = 1024;
     protected static long MaxOfStrangeAnnihilationFuelRod = 32768;

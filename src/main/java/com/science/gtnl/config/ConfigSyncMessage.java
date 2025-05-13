@@ -18,8 +18,8 @@ public class ConfigSyncMessage implements IMessage {
     public ConfigSyncMessage() {}
 
     public ConfigSyncMessage(MainConfig cfg) {
-        this.euEnhCore = cfg.EUEveryEnhancementCore;
-        this.euFuelRod = cfg.EUEveryDepletedExcitedNaquadahFuelRod;
+        this.euEnhCore = cfg.euEveryEnhancementCore;
+        this.euFuelRod = cfg.euEveryDepletedExcitedNaquadahFuelRod;
         this.starCycleTime = cfg.secondsOfArtificialStarProgressCycleTime;
         this.renderStar = cfg.enableRenderDefaultArtificialStar;
         this.portalBoom = cfg.enablePortalToAlfheimBigBoom;
@@ -75,8 +75,8 @@ public class ConfigSyncMessage implements IMessage {
         @Override
         public IMessage onMessage(ConfigSyncMessage msg, MessageContext ctx) {
             // apply immediately on CLIENT side
-            MainConfig.EUEveryEnhancementCore = msg.euEnhCore;
-            MainConfig.EUEveryDepletedExcitedNaquadahFuelRod = msg.euFuelRod;
+            MainConfig.euEveryEnhancementCore = msg.euEnhCore;
+            MainConfig.euEveryDepletedExcitedNaquadahFuelRod = msg.euFuelRod;
             MainConfig.secondsOfArtificialStarProgressCycleTime = msg.starCycleTime;
             MainConfig.enableRenderDefaultArtificialStar = msg.renderStar;
             MainConfig.enablePortalToAlfheimBigBoom = msg.portalBoom;

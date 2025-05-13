@@ -2276,7 +2276,7 @@ public class TextLocalization {
         "To work properly the center of the meteor has to be 32 blocks above the highest block of the multi.",
         "Tooltip_MeteorMiner_00");
     public static final String Tooltip_MeteorMiner_01 = texter(
-        "The laser will mine in a radius of up to 30 blocks in the XZ axis from the center of the meteor.",
+        "The laser will mine in a radius of up to 50 blocks in the XZ axis from the center of the meteor.",
         "Tooltip_MeteorMiner_01");
     public static final String Tooltip_MeteorMiner_02 = texter(
         "All the chunks involved must be chunkloaded.",

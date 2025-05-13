@@ -13,11 +13,11 @@ public class MainConfig {
     public static boolean enableMachineAmpLimit = true;
     public static double recipeOutputChance = 2.5;
 
-    public static int MeteorMinerMaxBlockPerCycle = 1;
-    public static int MeteorMinerMaxRowPerCycle = 1;
+    public static int meteorMinerMaxBlockPerCycle = 1;
+    public static int meteorMinerMaxRowPerCycle = 1;
 
-    public static int EUEveryEnhancementCore = 1;
-    public static int EUEveryDepletedExcitedNaquadahFuelRod = 2750000;
+    public static int euEveryEnhancementCore = 1;
+    public static int euEveryDepletedExcitedNaquadahFuelRod = 2750000;
     public static double secondsOfArtificialStarProgressCycleTime = 6.4;
     public static boolean enableRenderDefaultArtificialStar = true;
 
@@ -45,10 +45,14 @@ public class MainConfig {
     public static boolean enableRenderInfinitySwordSpecial = true;
 
     // Chronarch's Clock
-    public static int ChronarchsClockRadius = 6;
-    public static int ChronarchsClockSpeedMultiplier = 100;
-    public static int ChronarchsClockDurationTicks = 200;
-    public static int ChronarchsClockCooldown = 200;
+    public static int chronarchsClockRadius = 6;
+    public static int chronarchsClockSpeedMultiplier = 100;
+    public static int chronarchsClockDurationTicks = 200;
+    public static int chronarchsClockCooldown = 200;
+
+    // BloodMagic
+    public static int meteorParadigmChunkSize = 1024;
+    public static int meteorParadigmBatchUpdateInterval = 2048;
 
     // Debug
     public static boolean enableDebugMode = false;
@@ -89,37 +93,37 @@ public class MainConfig {
             .get("Machine", "RecipeChanceOutput", recipeOutputChance, "Change Recipe Item Output, like QFT")
             .getDouble(recipeOutputChance);
 
-        MeteorMinerMaxBlockPerCycle = config
+        meteorMinerMaxBlockPerCycle = config
             .get(
-                "Machine",
+                "Meteor Miner",
                 "MaxBlockCount",
-                MeteorMinerMaxBlockPerCycle,
+                meteorMinerMaxBlockPerCycle,
                 "Set the Meteor Miner how many every cycle break a block")
-            .getInt(MeteorMinerMaxBlockPerCycle);
+            .getInt(meteorMinerMaxBlockPerCycle);
 
-        MeteorMinerMaxRowPerCycle = config
+        meteorMinerMaxRowPerCycle = config
             .get(
                 "Meteor Miner",
                 "MaxRawCount",
-                MeteorMinerMaxRowPerCycle,
+                meteorMinerMaxRowPerCycle,
                 "Set the Meteor Miner how many every cycle break row blocks")
-            .getInt(MeteorMinerMaxRowPerCycle);
+            .getInt(meteorMinerMaxRowPerCycle);
 
-        EUEveryEnhancementCore = config
+        euEveryEnhancementCore = config
             .get(
                 "Artificial Star",
                 "EUEveryEnhancementCore",
-                EUEveryEnhancementCore,
+                euEveryEnhancementCore,
                 "Set the power generation of EU Every Enhancement Core")
-            .getInt(EUEveryEnhancementCore);
+            .getInt(euEveryEnhancementCore);
 
-        EUEveryDepletedExcitedNaquadahFuelRod = config
+        euEveryDepletedExcitedNaquadahFuelRod = config
             .get(
                 "Artificial Star",
                 "EUEveryDepletedExcitedNaquadahFuelRod",
-                EUEveryDepletedExcitedNaquadahFuelRod,
+                euEveryDepletedExcitedNaquadahFuelRod,
                 "Set the power generation of EU Every Depleted Excited Naquadah FuelRod")
-            .getInt(EUEveryDepletedExcitedNaquadahFuelRod);
+            .getInt(euEveryDepletedExcitedNaquadahFuelRod);
 
         secondsOfArtificialStarProgressCycleTime = config
             .get(
@@ -225,29 +229,46 @@ public class MainConfig {
             .getBoolean(enableRenderInfinitySwordSpecial);
 
         // Chronarch's Clock
-        ChronarchsClockRadius = config
-            .get("Chronarch's Clock", "radius", ChronarchsClockRadius, "Effective radius in blocks")
-            .getInt(ChronarchsClockRadius);
+        chronarchsClockRadius = config
+            .get("Chronarch's Clock", "radius", chronarchsClockRadius, "Effective radius in blocks")
+            .getInt(chronarchsClockRadius);
 
-        ChronarchsClockSpeedMultiplier = config
+        chronarchsClockSpeedMultiplier = config
             .get(
                 "Chronarch's Clock",
                 "speedMultiplier",
-                ChronarchsClockSpeedMultiplier,
+                chronarchsClockSpeedMultiplier,
                 "Speed multiplier for the clock")
-            .getInt(ChronarchsClockSpeedMultiplier);
+            .getInt(chronarchsClockSpeedMultiplier);
 
-        ChronarchsClockDurationTicks = config
+        chronarchsClockDurationTicks = config
             .get(
                 "Chronarch's Clock",
                 "durationTicks",
-                ChronarchsClockDurationTicks,
+                chronarchsClockDurationTicks,
                 "Duration of the clock's effect in ticks")
-            .getInt(ChronarchsClockDurationTicks);
+            .getInt(chronarchsClockDurationTicks);
 
-        ChronarchsClockCooldown = config
-            .get("Chronarch's Clock", "Cooldown", ChronarchsClockCooldown, "Change Chronarchs Clock Cooldown")
-            .getInt(ChronarchsClockCooldown);
+        chronarchsClockCooldown = config
+            .get("Chronarch's Clock", "Cooldown", chronarchsClockCooldown, "Change Chronarchs Clock Cooldown")
+            .getInt(chronarchsClockCooldown);
+
+        // Blood Magic
+        meteorParadigmChunkSize = config
+            .get(
+                "Meteor Paradigm",
+                "ChunkSize",
+                meteorParadigmChunkSize,
+                "Set the chunk size for meteor paradigm operations (default: 1024)")
+            .getInt(meteorParadigmChunkSize);
+
+        meteorParadigmBatchUpdateInterval = config
+            .get(
+                "Meteor Paradigm",
+                "BatchUpdateInterval",
+                meteorParadigmBatchUpdateInterval,
+                "Set the batch update interval for meteor paradigm operations (default: 2048)")
+            .getInt(meteorParadigmBatchUpdateInterval);
 
         // Debug
         enableDebugMode = config.get("Debug", "enable", enableDebugMode, "Enable Debug Print Log")

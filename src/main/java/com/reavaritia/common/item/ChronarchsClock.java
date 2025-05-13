@@ -90,7 +90,7 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
         }
         long lastUsed = nbt.getLong("LastUsed");
 
-        if (world.getTotalWorldTime() - lastUsed < MainConfig.ChronarchsClockCooldown) {
+        if (world.getTotalWorldTime() - lastUsed < MainConfig.chronarchsClockCooldown) {
             showSubtitle("Tooltip_ChronarchsClock_01");
             return stack;
         }
@@ -101,9 +101,9 @@ public class ChronarchsClock extends Item implements SubtitleDisplay {
                 player.posX,
                 player.posY,
                 player.posZ,
-                MainConfig.ChronarchsClockRadius,
-                MainConfig.ChronarchsClockSpeedMultiplier,
-                MainConfig.ChronarchsClockDurationTicks);
+                MainConfig.chronarchsClockRadius,
+                MainConfig.chronarchsClockSpeedMultiplier,
+                MainConfig.chronarchsClockDurationTicks);
             world.spawnEntityInWorld(point);
         }
 

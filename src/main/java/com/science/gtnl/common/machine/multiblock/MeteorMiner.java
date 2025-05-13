@@ -104,11 +104,11 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     private final Deque<BlockPos> scanQueue = new ArrayDeque<>();
     private final Deque<List<BlockPos>> rowQueue = new ArrayDeque<>();
 
-    private static final int SCAN_WIDTH = 60;
+    private static final int SCAN_WIDTH = 100;
     private static final int SCAN_HEIGHT = 150;
-    private static final int SCAN_DEPTH = 60;
-    private static final int MAX_BLOCKS_PER_CYCLE = MainConfig.MeteorMinerMaxBlockPerCycle;
-    private static final int MAX_ROWS_PER_CYCLE = MainConfig.MeteorMinerMaxRowPerCycle;
+    private static final int SCAN_DEPTH = 100;
+    private static final int MAX_BLOCKS_PER_CYCLE = MainConfig.meteorMinerMaxBlockPerCycle;
+    private static final int MAX_ROWS_PER_CYCLE = MainConfig.meteorMinerMaxRowPerCycle;
 
     @Override
     public IStructureDefinition<MeteorMiner> getStructureDefinition() {

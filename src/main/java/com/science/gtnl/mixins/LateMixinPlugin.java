@@ -34,6 +34,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("ItemBloodSword_Mixin");
         mixins.add("DraconicEvolutionEventHandler_Mixin");
         mixins.add("BacteriaRegistry_Mixin");
+        mixins.add("MeteorParadigm_Mixin");
 
         if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
             mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");
