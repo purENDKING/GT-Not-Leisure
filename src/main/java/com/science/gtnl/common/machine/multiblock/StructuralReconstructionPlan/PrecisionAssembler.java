@@ -78,7 +78,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     public static String[][] shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     protected int casingTier = 0;
     protected int machineTier = -1;
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
 
     public PrecisionAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -179,8 +179,8 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'B',
                     withChannel(
@@ -306,7 +306,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         mCasing = 0;
         casingTier = -1;
         machineTier = -1;
-        glassTier = 0;
+        mGlassTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -391,8 +391,8 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     @Override
     public int getMaxParallelRecipes() {
-        if (glassTier > 0) {
-            return (int) Math.pow(2, glassTier) + casingTier * 64;
+        if (mGlassTier > 0) {
+            return (int) Math.pow(2, mGlassTier) + casingTier * 64;
         } else {
             return 0;
         }

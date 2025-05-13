@@ -75,8 +75,7 @@ public class RenderEternalGregTechWorkshop extends TileEntitySpecialRenderer {
 
         float angle = (rotation * 90f + 90f) % 360f;
         if (offsetY == 0) {
-            GL11.glRotatef(90.0f, 0, 1, 0);
-            GL11.glRotatef(90.0f, offsetX, offsetY, offsetZ);
+            GL11.glRotatef(90.0f, offsetX, offsetY + 1f, offsetZ);
             GL11.glRotatef(angle, 0, 1, 0);
         } else {
             GL11.glRotatef(90.0f, 0, 0, 1);

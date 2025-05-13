@@ -52,7 +52,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
     public final int verticalOffSet = 3;
     public final int depthOffSet = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LEL_STRUCTURE_FILE_PATH);
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
 
     public LargeEngravingLaser(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -151,8 +151,8 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'B',
                     buildHatchAdder(LargeEngravingLaser.class).casingIndex(CASING_INDEX)
@@ -170,7 +170,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         ParallelTier = 0;
-        glassTier = 0;
+        mGlassTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -178,7 +178,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
 
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UHV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

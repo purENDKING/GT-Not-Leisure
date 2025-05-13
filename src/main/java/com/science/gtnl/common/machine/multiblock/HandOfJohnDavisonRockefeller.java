@@ -48,7 +48,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
     implements ISurvivalConstructable {
 
     public int mCasing;
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     public int SpeedCount = 0;
     public static IStructureDefinition<HandOfJohnDavisonRockefeller> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
@@ -149,8 +149,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(MetaCasing, 4))
                 .addElement('C', ofBlockAnyMeta(FOCUS_MANIPULATION_CASING))
                 .addElement(
@@ -192,7 +192,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        glassTier = 0;
+        mGlassTier = 0;
         SpeedCount = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -200,9 +200,9 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
         }
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            SpeedCount = glassTier + GTUtility.getTier(this.getMaxInputVoltage());
+            SpeedCount = mGlassTier + GTUtility.getTier(this.getMaxInputVoltage());
 
-            if (glassTier < VoltageIndex.UEV & mEnergyHatch.mTier > glassTier - 1) {
+            if (mGlassTier < VoltageIndex.UEV & mEnergyHatch.mTier > mGlassTier - 1) {
                 return false;
             }
         }
@@ -211,7 +211,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
 
     @Override
     public int getMaxParallelRecipes() {
-        return 16 + 4 * GTUtility.getTier(this.getMaxInputVoltage()) + 2 * glassTier;
+        return 16 + 4 * GTUtility.getTier(this.getMaxInputVoltage()) + 2 * mGlassTier;
     }
 
     @Override

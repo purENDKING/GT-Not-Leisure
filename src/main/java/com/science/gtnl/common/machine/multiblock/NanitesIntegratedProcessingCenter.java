@@ -59,7 +59,7 @@ import gtnhlanth.common.register.LanthItemList;
 public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachineBase<NanitesIntegratedProcessingCenter>
     implements IWirelessEnergyHatchInformation {
 
-    private byte glassTier = 0;
+    private byte mGlassTier = 0;
     private HeatingCoilLevel heatLevel;
     private int coilTier = 0;
     private int mHeatingCapacity = 0;
@@ -221,8 +221,8 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'Q',
                     ofChain(
@@ -273,7 +273,7 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
         tCountCasing = 0;
         coilTier = 0;
         moduleHatches.clear();
-        glassTier = 0;
+        mGlassTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         coilTier = getCoilLevel().getTier();
@@ -281,7 +281,7 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
         mHeatingCapacity = (int) this.getCoilLevel()
             .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
 
-        return mHeatingCapacity > 0 && glassTier > 0 && tCountCasing > 1;
+        return mHeatingCapacity > 0 && mGlassTier > 0 && tCountCasing > 1;
     }
 
     @Override
@@ -381,7 +381,7 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
     }
 
     public byte getGlassTier() {
-        return this.glassTier;
+        return this.mGlassTier;
     }
 
     public HeatingCoilLevel getCoilLevel() {

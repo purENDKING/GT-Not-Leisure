@@ -57,7 +57,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     public final int horizontalOffSet = 5;
     public final int verticalOffSet = 15;
     public final int depthOffSet = 0;
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(MABS_STRUCTURE_FILE_PATH);
 
     public MegaAlloyBlastSmelter(int aID, String aName, String aNameRegional) {
@@ -142,8 +142,8 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(sBlockCasings2, 15))
                 .addElement('C', ofBlock(sBlockCasings3, 14))
                 .addElement('D', ofBlock(sBlockCasings3, 15))
@@ -272,7 +272,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
         if (outputItems != null) {
             for (ItemStack itemStack : outputItems) {
                 if (itemStack != null) {
-                    if (random.nextInt(101) < (glassTier * 2)) {
+                    if (random.nextInt(101) < (mGlassTier * 2)) {
                         itemStack.stackSize *= 2;
                     }
                 }
@@ -284,7 +284,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
         if (outputFluids != null) {
             for (FluidStack fluidStack : outputFluids) {
                 if (fluidStack != null) {
-                    if (random.nextInt(101) < (glassTier * 2)) {
+                    if (random.nextInt(101) < (mGlassTier * 2)) {
                         fluidStack.amount *= 2;
                     }
                 }

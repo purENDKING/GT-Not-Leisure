@@ -13,6 +13,7 @@ import static gregtech.api.util.GTUtility.formatNumbers;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 import static net.minecraft.util.EnumChatFormatting.*;
 import static net.minecraft.util.EnumChatFormatting.RESET;
+import static net.minecraft.util.StatCollector.translateToLocal;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -168,7 +169,7 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
             @NotNull
             @Override
             public CheckRecipeResult process() {
-                setAvailableVoltage(maxUseEUt);
+                setAvailableVoltage(getMaxUseEUt());
                 setAvailableAmperage(1);
                 return super.process();
             }
@@ -194,9 +195,9 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setMachineHeat(mHeatingCapacity)
-                    .setEUtDiscount(mEUtDiscount)
-                    .setSpeedBoost(mSpeedBoost);
+                return super.createOverclockCalculator(recipe).setMachineHeat(getHeat())
+                    .setEUtDiscount(getEUtDiscount())
+                    .setSpeedBoost(getSpeedBoost());
             }
         }.setMaxParallelSupplier(this::getMaxParallel);
     }
@@ -385,6 +386,12 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
         buildContext.addSyncedWindow(GENERAL_INFO_WINDOW_ID, this::createGeneralInfoWindow);
 
         builder.widget(
+            new DrawableWidget().setSize(18, 18)
+                .setPos(172, 67)
+                .addTooltip(translateToLocal("gt.blockmachines.multimachine.FOG.clickhere"))
+                .setTooltipShowUpDelay(TOOLTIP_DELAY));
+
+        builder.widget(
             new DrawableWidget().setDrawable(TecTechUITextures.BACKGROUND_SCREEN_BLUE)
                 .setPos(4, 4)
                 .setSize(190, 85))
@@ -413,11 +420,6 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
                     })
                     .setSize(18, 18)
                     .setPos(172, 67)
-                    .setTooltipShowUpDelay(TOOLTIP_DELAY))
-            .widget(
-                new DrawableWidget().setSize(18, 18)
-                    .setPos(172, 67)
-                    .addTooltip(StatCollector.translateToLocal("gt.blockmachines.multimachine.FOG.clickhere"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {
                 if (isAllowedToWork()) {

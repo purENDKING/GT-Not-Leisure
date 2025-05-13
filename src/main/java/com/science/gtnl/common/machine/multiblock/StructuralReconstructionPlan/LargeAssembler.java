@@ -49,7 +49,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
     private static IStructureDefinition<LargeAssembler> STRUCTURE_DEFINITION = null;
     public static final String LA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_assembler";
     public static final int CASING_INDEX = TAE.getIndexFromPage(0, 10);
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 1;
     public final int depthOffSet = 0;
@@ -143,8 +143,8 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'B',
                     buildHatchAdder(LargeAssembler.class).casingIndex(CASING_INDEX)
@@ -168,7 +168,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
 
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UEV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UEV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

@@ -87,7 +87,7 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     private ItemStack mStack;
     private boolean needsVisualUpdate = true;
     private static final int CASING_INDEX = 210;
-    private byte glassTier;
+    private byte mGlassTier;
     private int mSievert;
     private int mNeededSievert;
     private boolean isVisibleFluid = false;
@@ -165,8 +165,8 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(sBlockCasings3, 11))
                 .addElement(
                     'C',
@@ -228,7 +228,7 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
                 int[] conditions = Incubator.specialValueUnpack(recipe.mSpecialValue);
                 Incubator.this.mNeededSievert = conditions[3];
 
-                if (Incubator.this.glassTier < conditions[0]) {
+                if (Incubator.this.mGlassTier < conditions[0]) {
                     return CheckRecipeResultRegistry.insufficientMachineTier(conditions[0]);
                 }
 
@@ -325,13 +325,13 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack itemStack) {
         this.mRadHatches.clear();
-        this.glassTier = 0;
+        this.mGlassTier = 0;
         this.mCasing = 0;
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UHV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

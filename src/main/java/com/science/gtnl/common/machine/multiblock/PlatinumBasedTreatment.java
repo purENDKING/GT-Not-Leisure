@@ -48,7 +48,7 @@ import gregtech.common.blocks.BlockCasings1;
 public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatment> implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    private byte glassTier = 0;
+    private byte mGlassTier = 0;
     private static IStructureDefinition<PlatinumBasedTreatment> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String PBT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
@@ -85,8 +85,8 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(sBlockCasings1, 11))
                 .addElement('C', ofBlock(sSolenoidCoilCasings, 3))
                 .addElement('D', ofBlock(sBlockCasings10, 13))
@@ -257,7 +257,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
         }
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UHV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

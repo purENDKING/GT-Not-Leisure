@@ -39,7 +39,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssembler>
     implements ISurvivalConstructable {
 
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     public static IStructureDefinition<LargeCircuitAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String LCA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_circuit_assembler";
@@ -136,8 +136,8 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(sBlockCasings2, 14))
                 .addElement('C', ofBlock(sBlockCasings3, 10))
                 .addElement(
@@ -174,7 +174,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        glassTier = 0;
+        mGlassTier = 0;
         ParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -183,7 +183,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
 
         energyHatchTier = checkEnergyHatchTier();
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

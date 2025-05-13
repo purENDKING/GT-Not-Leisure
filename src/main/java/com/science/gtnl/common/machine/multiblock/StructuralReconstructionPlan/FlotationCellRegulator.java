@@ -47,7 +47,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
     private static IStructureDefinition<FlotationCellRegulator> STRUCTURE_DEFINITION = null;
     public static final String FCR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/flotation_cell_regulator";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(18);
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     public final int horizontalOffSet = 6;
     public final int verticalOffSet = 4;
     public final int depthOffSet = 1;
@@ -155,8 +155,8 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(sBlockCasings2, 15))
                 .addElement('C', ofBlock(blockCasings2Misc, 1))
                 .addElement(
@@ -175,7 +175,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        glassTier = 0;
+        mGlassTier = 0;
         ParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -183,7 +183,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
         }
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UHV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UHV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

@@ -48,7 +48,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    private byte glassTier = 0;
+    private byte mGlassTier = 0;
     private int mHeatingCapacity = 0;
     private static IStructureDefinition<ShallowChemicalCoupling> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -92,8 +92,8 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'C',
                     withChannel(
@@ -250,13 +250,13 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
         energyHatchTier = checkEnergyHatchTier();
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UEV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UEV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }
 
         for (MTEHatch mExoEnergyHatch : this.mExoticEnergyHatches) {
-            if (glassTier < VoltageIndex.UEV & mExoEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UEV & mExoEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

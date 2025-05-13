@@ -66,7 +66,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> implements ISurvivalConstructable {
 
     public int casingTier;
-    public byte glassTier = 0;
+    public byte mGlassTier = 0;
     private static final String CA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/component_assembler";
     private static final String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -88,8 +88,8 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -274,7 +274,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         }
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            if (glassTier < VoltageIndex.UMV & mEnergyHatch.mTier > glassTier) {
+            if (mGlassTier < VoltageIndex.UMV & mEnergyHatch.mTier > mGlassTier) {
                 return false;
             }
         }

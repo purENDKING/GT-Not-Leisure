@@ -103,9 +103,9 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     @Override
     public RecipeMap<?> getRecipeMap() {
         return switch (machineMode) {
-            case 1 -> GTPPRecipeMaps.chemicalDehydratorNonCellRecipes;
-            case 2 -> GTPPRecipeMaps.coldTrapRecipes;
-            case 3 -> GTPPRecipeMaps.nuclearSaltProcessingPlantRecipes;
+            case MACHINEMODE_DEHYDRATOR -> GTPPRecipeMaps.chemicalDehydratorNonCellRecipes;
+            case MACHINEMODE_COLD_TRAP -> GTPPRecipeMaps.coldTrapRecipes;
+            case MACHINEMODE_NUCLEAR_SALT -> GTPPRecipeMaps.nuclearSaltProcessingPlantRecipes;
             default -> GTPPRecipeMaps.vacuumFurnaceRecipes;
         };
     }

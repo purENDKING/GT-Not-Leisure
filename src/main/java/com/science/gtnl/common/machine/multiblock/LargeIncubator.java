@@ -62,7 +62,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     private Fluid mFluid = FluidRegistry.LAVA;
     private BioCulture mCulture;
     private static final int CASING_INDEX = 210;
-    private byte glassTier;
+    private byte mGlassTier;
     private int mSievert;
     private int mNeededSievert;
     private boolean isVisibleFluid = false;
@@ -136,8 +136,8 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
                             (byte) 0,
                             (byte) 1,
                             Byte.MAX_VALUE,
-                            (te, t) -> te.glassTier = t,
-                            te -> te.glassTier)))
+                            (te, t) -> te.mGlassTier = t,
+                            te -> te.mGlassTier)))
                 .addElement('B', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
                 .addElement('C', ofBlock(sBlockCasings8, 1))
                 .addElement('D', ofBlock(sBlockCasings9, 1))
@@ -241,7 +241,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
 
     @Override
     public int getMaxParallelRecipes() {
-        return 4 * itemQuantity + 2 * GTUtility.getTier(this.getMaxInputVoltage()) * glassTier;
+        return 4 * itemQuantity + 2 * GTUtility.getTier(this.getMaxInputVoltage()) * mGlassTier;
     }
 
     protected GTRecipe recipeWithMultiplier(GTRecipe recipe, FluidStack[] fluidInputs) {
@@ -306,7 +306,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack itemStack) {
         this.mRadHatches.clear();
-        this.glassTier = 0;
+        this.mGlassTier = 0;
         this.mCasing = 0;
 
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
