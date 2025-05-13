@@ -91,6 +91,7 @@ import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.AssemblyLineUtils;
 import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTRecipeBuilder;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.IGTHatchAdder;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -764,8 +765,11 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
         // 优先检查完全匹配的物品
         for (ItemStack input : allInputs) {
-            if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
-                count += input.stackSize;
+            if (input != null) {
+                if ((input.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
+                    || (input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required))) {
+                    count += input.stackSize;
+                }
             }
         }
 
@@ -817,20 +821,23 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
         // 优先消耗完全匹配的物品
         for (ItemStack input : allInputs) {
-            if (input != null && input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required)) {
-                int available = input.stackSize;
+            if (input != null) {
+                if ((input.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
+                    || (input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required))) {
+                    int available = input.stackSize;
 
-                int toConsumeNow = (int) Math.min(available, Math.min(remaining, Integer.MAX_VALUE));
+                    int toConsumeNow = (int) Math.min(available, Math.min(remaining, Integer.MAX_VALUE));
 
-                input.stackSize -= toConsumeNow;
-                remaining -= toConsumeNow;
+                    input.stackSize -= toConsumeNow;
+                    remaining -= toConsumeNow;
 
-                if (input.stackSize <= 0) {
-                    input.stackSize = 0;
-                }
+                    if (input.stackSize <= 0) {
+                        input.stackSize = 0;
+                    }
 
-                if (remaining <= 0) {
-                    return; // 消耗完毕，直接返回
+                    if (remaining <= 0) {
+                        return; // 消耗完毕，直接返回
+                    }
                 }
             }
         }
