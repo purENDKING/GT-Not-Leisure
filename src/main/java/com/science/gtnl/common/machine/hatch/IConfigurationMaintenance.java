@@ -4,8 +4,10 @@ public interface IConfigurationMaintenance {
 
     boolean isConfiguration();
 
-    int minConfigTime();
+    int getMinConfigTime();
 
-    int maxConfigTime();
+    int getMaxConfigTime();
+
+    int getConfigTime();
 
 }

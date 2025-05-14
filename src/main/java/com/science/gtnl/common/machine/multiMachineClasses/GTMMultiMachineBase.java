@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 
@@ -80,7 +81,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setAmperageOC(true)
+                OverclockCalculator calc = super.createOverclockCalculator(recipe).setAmperageOC(true)
                     .setDurationDecreasePerOC(2)
                     .setEUtIncreasePerOC(4)
                     .setAmperage(availableAmperage)
@@ -88,6 +89,10 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
                     .setEUt(availableVoltage)
                     .setEUtDiscount(0.8 - (ParallelTier / 50.0))
                     .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+
+                ((IOverclockCalculatorExtension) calc).setMoreSpeedBoost(configSpeedBoost);
+
+                return calc;
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

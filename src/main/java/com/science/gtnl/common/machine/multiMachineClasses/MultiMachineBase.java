@@ -42,7 +42,9 @@ import com.gtnewhorizons.modularui.common.widget.DynamicPositionedColumn;
 import com.gtnewhorizons.modularui.common.widget.DynamicPositionedRow;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.CustomMaintenanceHatch;
 import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 
 import gregtech.api.enums.GTValues;
@@ -59,13 +61,16 @@ import gregtech.api.metatileentity.implementations.MTEHatchDynamo;
 import gregtech.api.metatileentity.implementations.MTEHatchEnergy;
 import gregtech.api.metatileentity.implementations.MTEHatchInput;
 import gregtech.api.metatileentity.implementations.MTEHatchInputBus;
+import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.metatileentity.implementations.MTEHatchMuffler;
 import gregtech.api.metatileentity.implementations.MTEHatchMultiInput;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.IGTHatchAdder;
+import gregtech.api.util.OverclockCalculator;
 import gregtech.common.tileentities.machines.IDualInputHatch;
 import gregtech.common.tileentities.machines.IDualInputInventory;
 import gregtech.common.tileentities.machines.MTEHatchInputBusME;
@@ -86,6 +91,8 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
     protected int ParallelTier;
     protected int energyHatchTier;
     protected int mMaxParallel = 0;
+    protected int cleanroomTier = 0;
+    protected double configSpeedBoost = 1;
 
     // region Class Constructor
     public MultiMachineBase(int aID, String aName, String aNameRegional) {
@@ -132,6 +139,30 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
 
     // region Processing Logic
 
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide()) {
+            if (aTick % 20 == 0) {
+                boolean found = false;
+                for (MTEHatchMaintenance module : mMaintenanceHatches) {
+                    if (module instanceof CustomMaintenanceHatch customMaintenanceHatch) {
+                        int maintenanceCleanroomTier = customMaintenanceHatch.getCleanroomTier();
+                        cleanroomTier = Math.max(cleanroomTier, maintenanceCleanroomTier);
+                        if (customMaintenanceHatch.isConfiguration())
+                            configSpeedBoost = customMaintenanceHatch.getConfigTime() / 100d;
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    configSpeedBoost = 1;
+                    cleanroomTier = 0;
+                }
+            }
+            if (mEfficiency < 0) mEfficiency = 0;
+        }
+        super.onPostTick(aBaseMetaTileEntity, aTick);
+    }
+
     /**
      * Creates logic to run recipe check based on recipemap. This runs only once, on class instantiation.
      * <p>
@@ -144,11 +175,18 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
             @NotNull
             @Override
             public CheckRecipeResult process() {
-
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
                 setOverclock(isEnablePerfectOverclock() ? 4 : 2, 4);
                 return super.process();
+            }
+
+            @NotNull
+            @Override
+            public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
+                OverclockCalculator calc = super.createOverclockCalculator(recipe);
+                ((IOverclockCalculatorExtension) calc).setMoreSpeedBoost(configSpeedBoost);
+                return calc;
             }
 
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);

@@ -1,12 +1,9 @@
 package com.science.gtnl.common.machine.hatch;
 
-import static net.minecraft.util.StatCollector.translateToLocal;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizons.modularui.api.math.Alignment;
@@ -26,31 +23,89 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatchMaintenance;
 import gregtech.api.render.TextureFactory;
-import tectech.util.CommonValues;
 
 public class CustomMaintenanceHatch extends MTEHatchMaintenance
     implements ICleanRoomMaintenance, IConfigurationMaintenance {
 
     private static Textures.BlockIcons.CustomIcon face;
-    protected int configTime = 100;
+    protected int mMinConfigTime;
+    protected int mMaxConfigTime;
+    protected int mConfigTime = 100;
+    protected int mCleanroomTier;
+    protected String[] mDescription;
 
-    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aTier) {
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aCleanroomTier, int aTier) {
         super(aID, aName, aNameRegional, aTier);
+        mCleanroomTier = aCleanroomTier;
+        mMinConfigTime = 100;
+        mMaxConfigTime = 100;
     }
 
-    public CustomMaintenanceHatch(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures) {
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aCleanroomTier, int aTier,
+        String[] aDescription) {
+        super(aID, aName, aNameRegional, aTier);
+        mDescription = aDescription;
+        mCleanroomTier = aCleanroomTier;
+        mMinConfigTime = 100;
+        mMaxConfigTime = 100;
+    }
+
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aCleanroomTier, int aMinConfigTime,
+        int aMaxConfigTime, int aTier) {
+        super(aID, aName, aNameRegional, aTier);
+        mCleanroomTier = aCleanroomTier;
+        mMinConfigTime = aMinConfigTime;
+        mMaxConfigTime = aMaxConfigTime;
+    }
+
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aCleanroomTier, int aMinConfigTime,
+        int aMaxConfigTime, int aTier, String[] aDescription) {
+        super(aID, aName, aNameRegional, aTier);
+        mDescription = aDescription;
+        mCleanroomTier = aCleanroomTier;
+        mMinConfigTime = aMinConfigTime;
+        mMaxConfigTime = aMaxConfigTime;
+    }
+
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aMinConfigTime, int aMaxConfigTime,
+        int aTier) {
+        super(aID, aName, aNameRegional, aTier);
+        mCleanroomTier = 0;
+        mMinConfigTime = aMinConfigTime;
+        mMaxConfigTime = aMaxConfigTime;
+    }
+
+    public CustomMaintenanceHatch(int aID, String aName, String aNameRegional, int aMinConfigTime, int aMaxConfigTime,
+        int aTier, String[] aDescription) {
+        super(aID, aName, aNameRegional, aTier);
+        mDescription = aDescription;
+        mCleanroomTier = 0;
+        mMinConfigTime = aMinConfigTime;
+        mMaxConfigTime = aMaxConfigTime;
+    }
+
+    public CustomMaintenanceHatch(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures,
+        int aMinConfigTime, int aMaxConfigTime) {
         super(aName, aTier, aDescription, aTextures, false);
+        mMinConfigTime = aMinConfigTime;
+        mMaxConfigTime = aMaxConfigTime;
+        mDescription = aDescription;
+    }
+
+    @Override
+    public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
+        return new CustomMaintenanceHatch(
+            this.mName,
+            this.mTier,
+            this.mDescriptionArray,
+            this.mTextures,
+            this.mMinConfigTime,
+            this.mMaxConfigTime);
     }
 
     @Override
     public String[] getDescription() {
-        return new String[] { CommonValues.THETA_MOVEMENT,
-            translateToLocal("gt.blockmachines.debug.tt.maintenance.desc.0"), // For automatically maintaining
-            // Multiblocks
-            translateToLocal("gt.blockmachines.debug.tt.maintenance.desc.1"), // Does fix everything but itself.
-            EnumChatFormatting.AQUA + translateToLocal("gt.blockmachines.debug.tt.maintenance.desc.2") // Fixing is
-            // for plebs!
-        };
+        return mDescription;
     }
 
     @Override
@@ -71,19 +126,8 @@ public class CustomMaintenanceHatch extends MTEHatchMaintenance
     }
 
     @Override
-    public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new CustomMaintenanceHatch(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
-    }
-
-    @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         this.mWrench = this.mScrewdriver = this.mSoftHammer = this.mHardHammer = this.mCrowbar = this.mSolderingTool = true;
-    }
-
-    @Override
-    public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer, ForgeDirection side,
-        float aX, float aY, float aZ) {
-        return false;
     }
 
     @Override
@@ -98,8 +142,9 @@ public class CustomMaintenanceHatch extends MTEHatchMaintenance
         return false;
     }
 
+    @Override
     public int getConfigTime() {
-        return configTime;
+        return this.mConfigTime;
     }
 
     @Override
@@ -109,37 +154,43 @@ public class CustomMaintenanceHatch extends MTEHatchMaintenance
 
     @Override
     public boolean isConfiguration() {
-        return false;
+        return getMinConfigTime() != 100 || getMaxConfigTime() != 100;
     }
 
     @Override
-    public int minConfigTime() {
-        return 100;
+    public int getMinConfigTime() {
+        return this.mMinConfigTime;
     }
 
     @Override
-    public int maxConfigTime() {
-        return 100;
+    public int getMaxConfigTime() {
+        return this.mMaxConfigTime;
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setInteger("configTime", configTime);
+        aNBT.setInteger("mConfigTime", mConfigTime);
+        aNBT.setInteger("mMinConfigTime", mMinConfigTime);
+        aNBT.setInteger("mMaxConfigTime", mMaxConfigTime);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        configTime = aNBT.getInteger("configTime");
+        mConfigTime = aNBT.getInteger("mConfigTime");
+        mMinConfigTime = aNBT.getInteger("mMinConfigTime");
+        mMaxConfigTime = aNBT.getInteger("mMaxConfigTime");
+    }
+
+    @Override
+    public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer, ForgeDirection side,
+        float aX, float aY, float aZ) {
+        return onRightclick(aBaseMetaTileEntity, aPlayer);
     }
 
     @Override
     public boolean onRightclick(IGregTechTileEntity aBaseMetaTileEntity, EntityPlayer aPlayer) {
-        if (aBaseMetaTileEntity.isClientSide()) {
-            return true;
-        }
-
         if (isConfiguration()) GTUIInfos.openGTTileEntityUI(aBaseMetaTileEntity, aPlayer);
         return true;
     }
@@ -152,10 +203,10 @@ public class CustomMaintenanceHatch extends MTEHatchMaintenance
                     .setPos(49, 18)
                     .setSize(81, 14))
                 .widget(
-                    new TextFieldWidget().setSetterInt(val -> configTime = val)
-                        .setGetterInt(() -> configTime)
-                        .setNumbers(minConfigTime(), maxConfigTime())
-                        .setOnScrollNumbers(1, 4, 64)
+                    new TextFieldWidget().setSetterInt(val -> mConfigTime = val)
+                        .setGetterInt(() -> mConfigTime)
+                        .setNumbers(getMinConfigTime(), getMaxConfigTime())
+                        .setOnScrollNumbers(1, 2, 5)
                         .setTextAlignment(Alignment.Center)
                         .setTextColor(Color.WHITE.normal)
                         .setSize(70, 18)

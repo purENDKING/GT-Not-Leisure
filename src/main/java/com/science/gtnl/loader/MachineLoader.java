@@ -26,6 +26,7 @@ import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
 import com.science.gtnl.common.machine.basicMachine.SteamTurbine;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
+import com.science.gtnl.common.machine.hatch.CustomMaintenanceHatch;
 import com.science.gtnl.common.machine.hatch.DebugEnergyHatch;
 import com.science.gtnl.common.machine.hatch.DualInputHatch;
 import com.science.gtnl.common.machine.hatch.DualOutputHatch;
@@ -1395,6 +1396,16 @@ public class MachineLoader {
                 StatCollector.translateToLocal("PipelessJetstreamVent"),
                 1));
         addItemTooltip(GTNLItemList.PipelessJetstreamVent.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.AutoConfigurationMaintenanceHatch.set(
+            new CustomMaintenanceHatch(
+                AUTO_CONFIGURATION_MAINTENANCE_HATCH.ID,
+                "AutoConfigurationMaintenanceHatch",
+                StatCollector.translateToLocal("AutoConfigurationMaintenanceHatch"),
+                80,
+                120,
+                5));
+        addItemTooltip(GTNLItemList.AutoConfigurationMaintenanceHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

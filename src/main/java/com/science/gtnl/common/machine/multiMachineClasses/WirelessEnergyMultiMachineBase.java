@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.Utils.item.TextLocalization;
+import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 import com.science.gtnl.misc.OverclockType;
@@ -150,7 +151,6 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             @NotNull
             @Override
             public CheckRecipeResult process() {
-
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
                 setOverclockType(OverclockType.PerfectOverclock);
@@ -160,9 +160,17 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
-                    : super.createOverclockCalculator(recipe).setEUtDiscount(0.4 - (ParallelTier / 50.0))
-                        .setSpeedBoost(1.0 / 10.0 * Math.pow(0.75, ParallelTier));
+                if (wirelessMode) {
+                    return OverclockCalculator.ofNoOverclock(recipe);
+                }
+
+                OverclockCalculator calc = super.createOverclockCalculator(recipe)
+                    .setEUtDiscount(0.4 - (ParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 10.0 * Math.pow(0.75, ParallelTier));
+
+                ((IOverclockCalculatorExtension) calc).setMoreSpeedBoost(configSpeedBoost);
+
+                return calc;
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
