@@ -37,9 +37,8 @@ addon.late.local.gradle
 addon.late.local.gradle.kts
 layout.json
 /ToDo
-/src/main/resources/assets/sciencenotleisure/multiblock/**
-!/src/main/resources/assets/sciencenotleisure/multiblock/
-!/src/main/resources/assets/sciencenotleisure/multiblock/**/*.mb
+/src/main/resources/assets/sciencenotleisure/multiblock/*.py
+/src/main/resources/assets/sciencenotleisure/multiblock/*.txt
 
 ### NetBeans ###
 /nbproject/private/
