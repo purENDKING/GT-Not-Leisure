@@ -658,28 +658,4 @@ public abstract class Minecraft_Mixin {
             Display.sync(((Minecraft) ((Object) this)).getLimitFramerate());
         }
     }
-
-    /*
-     * @Redirect(
-     * method = "runGameLoop",
-     * at = @At(
-     * value = "INVOKE",
-     * target = "Lnet/minecraft/util/Timer;updateTimer()V",
-     * ordinal = 1
-     * )
-     * )
-     * private void onElseUpdateTimer(Timer timer) {
-     * if (TimeStopManager.isTimeStopped()) {
-     * // 保存旧的renderPartialTicks值
-     * float partialTicks = timer.renderPartialTicks;
-     * // 执行原版updateTimer逻辑
-     * timer.updateTimer();
-     * // 恢复renderPartialTicks值
-     * timer.renderPartialTicks = partialTicks;
-     * } else {
-     * // 正常执行原版逻辑
-     * timer.updateTimer();
-     * }
-     * }
-     */
 }

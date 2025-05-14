@@ -6,6 +6,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GlobalSteamWorldSavedData;
 import com.science.gtnl.Utils.PlayerUtils;
+import com.science.gtnl.Utils.WorldUtils;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
@@ -44,6 +45,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new GlobalSteamWorldSavedData(""));
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerUtils());
+        MinecraftForge.EVENT_BUS.register(new WorldUtils());
         FMLCommonHandler.instance()
             .bus()
             .register(new PlayerUtils());
