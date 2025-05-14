@@ -766,7 +766,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
         // 优先检查完全匹配的物品
         for (ItemStack input : allInputs) {
             if (input != null) {
-                if ((input.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
+                if ((required.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
                     || (input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required))) {
                     count += input.stackSize;
                 }
@@ -822,7 +822,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
         // 优先消耗完全匹配的物品
         for (ItemStack input : allInputs) {
             if (input != null) {
-                if ((input.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
+                if ((required.getItemDamage() == GTRecipeBuilder.WILDCARD && input.getItem() == required.getItem())
                     || (input.isItemEqual(required) && ItemStack.areItemStackTagsEqual(input, required))) {
                     int available = input.stackSize;
 
