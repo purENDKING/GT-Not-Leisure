@@ -86,7 +86,7 @@ public class SpaceAssemblerRecipes implements IRecipePool {
                 Materials.UUMatter.getFluid(32000),
                 MaterialsUEVplus.SpaceTime.getMolten(1296))
             .itemOutputs(GTNLItemList.SpaceAssembler.get(1))
-            .specialValue(3)
+            .specialValue(2)
             .duration(2400)
             .eut(TierEU.RECIPE_UIV)
             .addTo(SAR);

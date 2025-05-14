@@ -25,6 +25,7 @@ import bartworks.common.loaders.ItemRegistry;
 import bartworks.system.material.WerkstoffLoader;
 import ggfab.GGItemList;
 import goodgenerator.items.GGMaterial;
+import goodgenerator.loader.Loaders;
 import goodgenerator.util.ItemRefer;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
@@ -1141,5 +1142,27 @@ public class AssemblingLineRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_LuV)
             .duration(60 * SECONDS)
             .addTo(AssemblyLine);
+
+        TTRecipeAdder.addResearchableAssemblylineRecipe(
+            GTNLItemList.LargeAssembler.get(1),
+            5000000,
+            48000,
+            (int) TierEU.RECIPE_UHV,
+            1,
+            new Object[] { GTNLItemList.LargeAssembler.get(64), GTNLItemList.PreciseAssembler.get(64),
+                ItemList.AssemblingMachineUEV.get(64), GregtechItemList.NeutronPulseManipulator.get(32),
+                new ItemStack(Loaders.componentAssemblylineCasing, 16, 9),
+                GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUEV, 8),
+                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Infinity, 4),
+                MaterialsElements.STANDALONE.HYPOGEN.getPlateDense(32),
+                new Object[] { OrePrefixes.circuit.get(Materials.UIV), 16 }, ItemList.Conveyor_Module_UEV.get(32),
+                ItemList.Robot_Arm_UEV.get(32), ItemList.Field_Generator_UEV.get(8), ItemList.Tesseract.get(16),
+                GTOreDictUnificator.get(OrePrefixes.nanite, Materials.Silver, 2) },
+            new FluidStack[] { MaterialPool.SuperMutatedLivingSolder.getFluidOrGas(16000),
+                Materials.SuperCoolant.getFluid(128000), Materials.Tin.getPlasma(36384),
+                Materials.Lubricant.getFluid(64000) },
+            GTNLItemList.IntegratedAssemblyFacility.get(1),
+            2400,
+            (int) TierEU.RECIPE_UIV);
     }
 }
