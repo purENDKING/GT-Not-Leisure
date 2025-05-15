@@ -2,9 +2,9 @@ package com.science.gtnl.common.machine.hatch;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
-import net.minecraft.util.StatCollector;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -49,7 +49,8 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
         mCapacityPer = getCapacityPerTank(aTier, aSlot);
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01")
+            + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
@@ -65,7 +66,8 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
                 fluid -> mStoredFluid[index] = fluid,
                 mCapacityPer);
         }
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01")
+            + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 

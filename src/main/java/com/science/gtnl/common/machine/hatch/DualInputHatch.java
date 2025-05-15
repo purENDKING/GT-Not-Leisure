@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.hatch;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
-import net.minecraft.util.StatCollector;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
@@ -11,6 +10,7 @@ import java.util.Optional;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -106,8 +106,10 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
         this.fluidTanks = new FluidStackTank[aTier];
         this.mCapacityPer = getCapacityPerTank(aTier);
         this.itemSlotAmount = aTier * aTier + 1;
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01") + GTUtility.formatNumbers(itemSlotAmount - 1);
-        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00") + GTUtility.formatNumbers(aTier)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01")
+            + GTUtility.formatNumbers(itemSlotAmount - 1);
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00")
+            + GTUtility.formatNumbers(aTier)
             + StatCollector.translateToLocal("Tooltip_DualInputHatch_02_01")
             + GTUtility.formatNumbers(mCapacityPer)
             + "L";
@@ -128,8 +130,10 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
         this.fluidTanks = new FluidStackTank[aTier];
         this.mCapacityPer = getCapacityPerTank(aTier);
         this.itemSlotAmount = aTier * aTier + 1;
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01") + GTUtility.formatNumbers(itemSlotAmount - 1);
-        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00") + GTUtility.formatNumbers(aTier)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01")
+            + GTUtility.formatNumbers(itemSlotAmount - 1);
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00")
+            + GTUtility.formatNumbers(aTier)
             + StatCollector.translateToLocal("Tooltip_DualInputHatch_02_01")
             + GTUtility.formatNumbers(mCapacityPer)
             + "L";

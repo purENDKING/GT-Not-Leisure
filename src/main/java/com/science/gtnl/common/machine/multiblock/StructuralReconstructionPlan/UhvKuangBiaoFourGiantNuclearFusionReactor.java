@@ -166,7 +166,8 @@ public class UhvKuangBiaoFourGiantNuclearFusionReactor
             .addInputBus(StatCollector.translateToLocal("Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing"))
             .addOutputBus(StatCollector.translateToLocal("Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing"))
             .addEnergyHatch(StatCollector.translateToLocal("Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing"))
-            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing"))
+            .addMaintenanceHatch(
+                StatCollector.translateToLocal("Tooltip_UhvKuangBiaoFourGiantNuclearFusionReactor_Casing"))
             .toolTipFinisher();
         return tt;
     }

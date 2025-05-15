@@ -37,7 +37,8 @@ public class ManaEnergyHatch extends MTEHatchEnergy implements IAddUIWidgets {
             aName,
             aNameRegional,
             aTier,
-            new String[] { StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_00"), StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_01"),
+            new String[] { StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_00"),
+                StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_01"),
                 StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_02"), "" });
         mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_03") + getCapacity() + "L";
         mAmp = aAmp;

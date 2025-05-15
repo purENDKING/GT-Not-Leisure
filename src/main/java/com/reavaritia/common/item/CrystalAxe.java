@@ -2,7 +2,6 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
-import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -15,6 +14,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 

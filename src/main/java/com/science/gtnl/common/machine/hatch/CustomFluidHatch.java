@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.Textures.BlockIcons.FLUID_STEAM_IN_SIGN;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_PIPE_IN;
-import net.minecraft.util.StatCollector;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.Set;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;

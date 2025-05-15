@@ -267,7 +267,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     public String[] getInfoData() {
         ArrayList<String> info = new ArrayList<>(Arrays.asList(super.getInfoData()));
         info.add(StatCollector.translateToLocal("MachineTierTooltip") + EnumChatFormatting.YELLOW + tierMachine);
-        info.add(StatCollector.translateToLocal("ParallelTooltip") + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
+        info.add(
+            StatCollector.translateToLocal("ParallelTooltip") + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
         return info.toArray(new String[0]);
     }
 

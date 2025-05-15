@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import net.minecraft.util.StatCollector;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
@@ -19,6 +18,7 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Pair;

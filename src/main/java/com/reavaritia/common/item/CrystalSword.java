@@ -2,7 +2,6 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
-import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -19,6 +18,7 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;

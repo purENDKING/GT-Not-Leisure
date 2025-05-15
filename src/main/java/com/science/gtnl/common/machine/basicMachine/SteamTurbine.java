@@ -2,8 +2,8 @@ package com.science.gtnl.common.machine.basicMachine;
 
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.Textures.BlockIcons.*;
-import net.minecraft.util.StatCollector;
 
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -23,8 +23,8 @@ public class SteamTurbine extends MTEBasicGenerator {
             aName,
             aNameRegional,
             aTier,
-            new String[] { StatCollector.translateToLocal("Tooltip_SteamTurbine_00"), StatCollector.translateToLocal("Tooltip_SteamTurbine_01"), "",
-                "" });
+            new String[] { StatCollector.translateToLocal("Tooltip_SteamTurbine_00"),
+                StatCollector.translateToLocal("Tooltip_SteamTurbine_01"), "", "" });
         mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_SteamTurbine_02") + getEfficiency() + "%";
         mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_SteamTurbine_03") + getCapacity() + "L";
     }

@@ -2,8 +2,9 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static gregtech.api.enums.GTValues.V;
 
-import net.minecraft.util.StatCollector;
 import javax.annotation.Nonnull;
+
+import net.minecraft.util.StatCollector;
 
 import org.jetbrains.annotations.NotNull;
 

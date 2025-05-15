@@ -2,8 +2,8 @@ package com.science.gtnl.common.machine.hatch;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.util.StatCollector;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import com.gtnewhorizons.modularui.api.ModularUITextures;
 import com.gtnewhorizons.modularui.api.forge.ItemStackHandler;

@@ -2,10 +2,10 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_INPUT_HATCH_2x2;
 
-import net.minecraft.util.StatCollector;
 import javax.annotation.Nonnull;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -44,7 +44,8 @@ public class DualOutputHatch extends MTEHatchOutput implements IAddUIWidgets {
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
         mCapacityPer = getCapacityPerTank(aTier, aSlot);
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01")
+            + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
@@ -60,7 +61,8 @@ public class DualOutputHatch extends MTEHatchOutput implements IAddUIWidgets {
                 fluid -> mStoredFluid[index] = fluid,
                 mCapacityPer);
         }
-        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01")
+            + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 

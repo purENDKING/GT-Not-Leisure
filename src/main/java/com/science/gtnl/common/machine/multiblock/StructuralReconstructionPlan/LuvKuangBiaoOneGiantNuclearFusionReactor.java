@@ -165,7 +165,8 @@ public class LuvKuangBiaoOneGiantNuclearFusionReactor
             .addInputBus(StatCollector.translateToLocal("Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing"))
             .addOutputBus(StatCollector.translateToLocal("Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing"))
             .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing"))
-            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing"))
+            .addMaintenanceHatch(
+                StatCollector.translateToLocal("Tooltip_LuvKuangBiaoOneGiantNuclearFusionReactor_Casing"))
             .toolTipFinisher();
         return tt;
     }

@@ -2,11 +2,11 @@ package com.science.gtnl.Utils;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 
-import net.minecraft.util.StatCollector;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import org.apache.commons.lang3.ArrayUtils;
 

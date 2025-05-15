@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.basicMachine;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 
 import net.minecraft.util.StatCollector;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;

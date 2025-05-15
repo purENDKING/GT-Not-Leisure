@@ -47,8 +47,10 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
             aName,
             aNameRegional,
             aTier,
-            new String[] { StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_00"), StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_01"),
-                StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_02"), "", StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_04") });
+            new String[] { StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_00"),
+                StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_01"),
+                StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_02"), "",
+                StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_04") });
         mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_03") + getCapacity() + "L";
         mAmp = aAmp;
     }

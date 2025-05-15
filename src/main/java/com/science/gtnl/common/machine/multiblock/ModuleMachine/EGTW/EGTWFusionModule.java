@@ -1,6 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW;
 
 import net.minecraft.util.StatCollector;
+
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.recipe.RecipeMap;

@@ -164,7 +164,8 @@ public class ZpmKuangBiaoTwoGiantNuclearFusionReactor
             .addInputBus(StatCollector.translateToLocal("Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing"))
             .addOutputBus(StatCollector.translateToLocal("Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing"))
             .addEnergyHatch(StatCollector.translateToLocal("Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing"))
-            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing"))
+            .addMaintenanceHatch(
+                StatCollector.translateToLocal("Tooltip_ZpmKuangBiaoTwoGiantNuclearFusionReactor_Casing"))
             .toolTipFinisher();
         return tt;
     }

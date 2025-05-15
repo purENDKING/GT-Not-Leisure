@@ -1,9 +1,5 @@
 package com.science.gtnl.common.block.Casings.Casing;
 
-import static com.science.gtnl.Utils.item.StatCollector.translateToLocal("mNoMobsToolTip");
-import static com.science.gtnl.Utils.item.StatCollector.translateToLocal("mNoTileEntityToolTip");
-import net.minecraft.util.StatCollector;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -50,8 +47,8 @@ public abstract class MetaItemBlockBase extends ItemBlock {
             theTooltipsList.addAll(Arrays.asList(tooltips));
         }
         if (!canCreatureSpawn()) {
-            theTooltipsList.add(mNoMobsToolTip);
-            theTooltipsList.add(mNoTileEntityToolTip);
+            theTooltipsList.add(StatCollector.translateToLocal("NoMobsSpawnInThisBlock"));
+            theTooltipsList.add(StatCollector.translateToLocal("NoTileEntitySpawnInThisBlock"));
         }
     }
 

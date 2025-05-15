@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static com.dreammaster.gthandler.IDSU.GT_MetaTileEntity_IDSU.mTier;
 import static com.science.gtnl.Utils.Utils.mergeArray;
-import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.GTValues.V;
 
 import java.util.List;
@@ -14,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;

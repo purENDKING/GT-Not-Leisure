@@ -2,11 +2,11 @@ package com.science.gtnl.common.block.blocks.laserBeacon;
 
 import java.util.List;
 
-import net.minecraft.util.StatCollector;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class ItemBlockLaserBeacon extends ItemBlock {
 

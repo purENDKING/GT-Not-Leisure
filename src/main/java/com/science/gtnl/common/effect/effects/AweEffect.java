@@ -2,7 +2,6 @@ package com.science.gtnl.common.effect.effects;
 
 import java.util.HashSet;
 import java.util.Random;
-import net.minecraft.util.StatCollector;
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;
@@ -15,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IChatComponent;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;

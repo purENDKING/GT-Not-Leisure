@@ -47,7 +47,8 @@ public class NeutronCollectorGUI extends GuiContainer {
             && mouseY >= l + progressBarY
             && mouseY <= l + progressBarY + progressBarHeight) {
             float percentage = machine.getProgressPercentage();
-            String progressText = String.format(StatCollector.translateToLocal("GUI_NeutronCollector_Progress") + "%.2f%%", percentage);
+            String progressText = String
+                .format(StatCollector.translateToLocal("GUI_NeutronCollector_Progress") + "%.2f%%", percentage);
             drawHoveringText(Arrays.asList(progressText), mouseX - k, mouseY - l, fontRendererObj);
         }
     }

@@ -736,7 +736,8 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
         })
             .setPlayClickSound(true)
             .setBackground(GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_PLUS_LARGE)
-            .addTooltips(ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_00")))
+            .addTooltips(
+                ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_00")))
             .setSize(16, 16)
             .setPos(170, 46))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {
@@ -746,7 +747,8 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
             })
                 .setPlayClickSound(true)
                 .setBackground(GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_EXPORT)
-                .addTooltips(ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_01")))
+                .addTooltips(
+                    ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_01")))
                 .setSize(16, 16)
                 .setPos(170, 28))
             .widget(

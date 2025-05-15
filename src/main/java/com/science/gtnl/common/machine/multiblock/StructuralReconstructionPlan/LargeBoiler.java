@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.GTValues.STEAM_PER_WATER;
-import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.ItemList.Circuit_Integrated;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 

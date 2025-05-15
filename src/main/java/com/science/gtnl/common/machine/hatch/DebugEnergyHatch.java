@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.GTValues.VN;
 
-import net.minecraft.util.StatCollector;
 import java.util.function.Consumer;
 import java.util.function.LongConsumer;
 import java.util.function.LongSupplier;
@@ -10,6 +9,7 @@ import java.util.function.LongSupplier;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizons.modularui.api.NumberFormatMUI;
@@ -51,7 +51,8 @@ public class DebugEnergyHatch extends MTEHatchEnergy implements IAddUIWidgets, I
             aName,
             aNameRegional,
             aTier,
-            new String[] { StatCollector.translateToLocal("Tooltip_DebugEnergyHatch_00"), StatCollector.translateToLocal("Tooltip_DebugEnergyHatch_01"),
+            new String[] { StatCollector.translateToLocal("Tooltip_DebugEnergyHatch_00"),
+                StatCollector.translateToLocal("Tooltip_DebugEnergyHatch_01"),
                 StatCollector.translateToLocal("Tooltip_DebugEnergyHatch_02") });
         TTUtility.setTier(aTier, this);
     }
