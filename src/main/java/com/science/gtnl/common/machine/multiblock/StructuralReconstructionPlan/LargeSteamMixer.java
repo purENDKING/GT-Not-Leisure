@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -22,7 +23,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -55,7 +55,7 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamMixerRecipeType;
+        return StatCollector.translateToLocal("LargeSteamMixerRecipeType");
     }
 
     private static boolean enableHVRecipe = false;
@@ -298,19 +298,19 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamMixerRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamMixer_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamMixerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 7, 7, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_LargeSteamMixer_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeSteamMixer_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

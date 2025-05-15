@@ -2,11 +2,10 @@ package com.science.gtnl.common.machine.basicMachine;
 
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.Textures.BlockIcons.*;
+import net.minecraft.util.StatCollector;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
-
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -24,10 +23,10 @@ public class SteamTurbine extends MTEBasicGenerator {
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_SteamTurbine_00, TextLocalization.Tooltip_SteamTurbine_01, "",
+            new String[] { StatCollector.translateToLocal("Tooltip_SteamTurbine_00"), StatCollector.translateToLocal("Tooltip_SteamTurbine_01"), "",
                 "" });
-        mDescriptionArray[2] = TextLocalization.Tooltip_SteamTurbine_02 + getEfficiency() + "%";
-        mDescriptionArray[3] = TextLocalization.Tooltip_SteamTurbine_03 + getCapacity() + "L";
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_SteamTurbine_02") + getEfficiency() + "%";
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_SteamTurbine_03") + getCapacity() + "L";
     }
 
     public SteamTurbine(String aName, int aTier, String aDescription, ITexture[][][] aTextures) {
@@ -36,8 +35,8 @@ public class SteamTurbine extends MTEBasicGenerator {
 
     public SteamTurbine(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures) {
         super(aName, aTier, aDescription, aTextures);
-        mDescriptionArray[2] = TextLocalization.Tooltip_SteamTurbine_02 + getEfficiency() + "%";
-        mDescriptionArray[3] = TextLocalization.Tooltip_SteamTurbine_03 + getCapacity() + "L";
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_SteamTurbine_02") + getEfficiency() + "%";
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_SteamTurbine_03") + getCapacity() + "L";
     }
 
     @Override

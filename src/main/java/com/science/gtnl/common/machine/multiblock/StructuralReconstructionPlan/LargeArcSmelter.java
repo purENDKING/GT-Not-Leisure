@@ -29,7 +29,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -119,22 +118,22 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeArcSmelterRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_00)
-            .addInfo(TextLocalization.Tooltip_LargeArcSmelter_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
+        tt.addMachineType(StatCollector.translateToLocal("LargeArcSmelterRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 4, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeArcSmelter_Casing)
-            .addInputBus(TextLocalization.Tooltip_LargeArcSmelter_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LargeArcSmelter_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeArcSmelter_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeArcSmelter_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeArcSmelter_Casing"))
             .toolTipFinisher();
         return tt;
     }

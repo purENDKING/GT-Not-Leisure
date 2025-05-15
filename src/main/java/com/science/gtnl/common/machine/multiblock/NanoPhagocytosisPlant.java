@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
@@ -31,7 +32,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
@@ -120,27 +120,27 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.NanoPhagocytosisPlantRecipeType)
-            .addInfo(TextLocalization.Tooltip_NanoPhagocytosisPlant_00)
-            .addInfo(TextLocalization.Tooltip_NanoPhagocytosisPlant_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("NanoPhagocytosisPlantRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NanoPhagocytosisPlant_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NanoPhagocytosisPlant_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(21, 24, 38, true)
-            .addInputBus(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_NanoPhagocytosisPlant_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_NanoPhagocytosisPlant_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_NanoPhagocytosisPlant_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_NanoPhagocytosisPlant_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

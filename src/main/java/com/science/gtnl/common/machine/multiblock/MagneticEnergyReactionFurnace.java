@@ -31,7 +31,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
 import galaxyspace.core.register.GSBlocks;
@@ -89,27 +88,27 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.MagneticEnergyReactionFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_00)
-            .addInfo(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("MagneticEnergyReactionFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MagneticEnergyReactionFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MagneticEnergyReactionFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(33, 14, 15, true)
-            .addInputBus(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_MagneticEnergyReactionFurnace_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_MagneticEnergyReactionFurnace_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_MagneticEnergyReactionFurnace_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_MagneticEnergyReactionFurnace_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

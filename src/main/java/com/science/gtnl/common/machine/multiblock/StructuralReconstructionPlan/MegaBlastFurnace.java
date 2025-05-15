@@ -25,7 +25,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.util.BWUtil;
@@ -126,27 +125,27 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.Tooltip_MegaBlastFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_00)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_01)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_02)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_03)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_04)
-            .addInfo(TextLocalization.Tooltip_MegaBlastFurnace_05)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("Tooltip_MegaBlastFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(23, 44, 23, true)
-            .addInputHatch(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addOutputHatch(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addInputBus(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addOutputBus(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addEnergyHatch(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addMaintenanceHatch(TextLocalization.Tooltip_MegaBlastFurnace_Casing_00)
-            .addMufflerHatch(TextLocalization.Tooltip_MegaBlastFurnace_Casing_01)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_00"))
+            .addMufflerHatch(StatCollector.translateToLocal("Tooltip_MegaBlastFurnace_Casing_01"))
             .toolTipFinisher();
         return tt;
     }

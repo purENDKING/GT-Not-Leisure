@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_INPUT_HATCH_2x2;
 
+import net.minecraft.util.StatCollector;
 import javax.annotation.Nonnull;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +15,6 @@ import com.gtnewhorizons.modularui.api.math.Pos2d;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.modularui.IAddUIWidgets;
@@ -37,14 +37,14 @@ public class DualOutputHatch extends MTEHatchOutput implements IAddUIWidgets {
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_DualOutputHatch_00, "",
-                TextLocalization.Tooltip_DualOutputHatch_02_00 + GTUtility.formatNumbers(aSlot)
-                    + TextLocalization.Tooltip_DualOutputHatch_02_01 },
+            new String[] { StatCollector.translateToLocal("Tooltip_DualOutputHatch_00"), "",
+                StatCollector.translateToLocal("Tooltip_DualOutputHatch_02_00") + GTUtility.formatNumbers(aSlot)
+                    + StatCollector.translateToLocal("Tooltip_DualOutputHatch_02_01") },
             4);
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
         mCapacityPer = getCapacityPerTank(aTier, aSlot);
-        mDescriptionArray[1] = TextLocalization.Tooltip_DualOutputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
@@ -60,7 +60,7 @@ public class DualOutputHatch extends MTEHatchOutput implements IAddUIWidgets {
                 fluid -> mStoredFluid[index] = fluid,
                 mCapacityPer);
         }
-        mDescriptionArray[1] = TextLocalization.Tooltip_DualOutputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualOutputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 

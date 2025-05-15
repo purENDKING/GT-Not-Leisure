@@ -2,6 +2,7 @@ package com.science.gtnl.common.item.items;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -32,20 +32,20 @@ public class TestItem extends Item {
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
         boolean advancedToolTips) {
 
-        toolTip.add(TextLocalization.Tooltip_Testitem_00);
-        toolTip.add(TextLocalization.Tooltip_Testitem_01);
-        toolTip.add(TextLocalization.Tooltip_Testitem_02);
-        toolTip.add(TextLocalization.Tooltip_Testitem_03);
-        toolTip.add(TextLocalization.Tooltip_Testitem_04);
-        toolTip.add(TextLocalization.Tooltip_Testitem_05);
-        toolTip.add(TextLocalization.Tooltip_Testitem_06);
-        toolTip.add(TextLocalization.Tooltip_Testitem_07);
-        toolTip.add(TextLocalization.Tooltip_Testitem_08);
-        toolTip.add(TextLocalization.Tooltip_Testitem_09);
-        toolTip.add(TextLocalization.Tooltip_Testitem_10);
-        toolTip.add(TextLocalization.Tooltip_Testitem_11);
-        toolTip.add(TextLocalization.Tooltip_Testitem_12);
-        toolTip.add(TextLocalization.Tooltip_Testitem_13);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_00"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_01"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_02"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_03"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_04"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_05"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_06"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_07"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_08"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_09"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_10"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_11"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_12"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_Testitem_13"));
 
     }
 

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -21,7 +22,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -51,7 +51,7 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamCircuitAssemblerRecipeType;
+        return StatCollector.translateToLocal("LargeSteamCircuitAssemblerRecipeType");
     }
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -236,19 +236,19 @@ public class LargeSteamCircuitAssembler extends SteamMultiMachineBase<LargeSteam
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamCircuitAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCircuitAssembler_03)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamCircuitAssemblerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_03"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(3, 4, 10, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamCircuitAssembler_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_LargeSteamCircuitAssembler_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamCircuitAssembler_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamCircuitAssembler_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

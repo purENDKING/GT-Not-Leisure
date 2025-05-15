@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static com.dreammaster.gthandler.IDSU.GT_MetaTileEntity_IDSU.mTier;
 import static com.science.gtnl.Utils.Utils.mergeArray;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.GTValues.V;
 
 import java.util.List;
@@ -16,8 +17,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
-
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -70,7 +69,7 @@ public abstract class EnergyBankMultiMachineBase<T extends EnergyBankMultiMachin
         final NBTTagCompound tag = accessor.getNBTData();
         if (tag.getBoolean("energyBankMode")) {
             currentTip.add(
-                EnumChatFormatting.AQUA + TextLocalization.Waila_CurrentEuCost
+                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_CurrentEuCost")
                     + EnumChatFormatting.RESET
                     + ": "
                     + EnumChatFormatting.GOLD

@@ -26,7 +26,6 @@ import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.gui.modularui.GTUITextures;
@@ -91,10 +90,10 @@ public class ManaTank extends MTEDigitalTankBase {
 
     @Override
     public void addAdditionalTooltipInformation(ItemStack stack, List<String> tooltip) {
-        tooltip.add(TextLocalization.Tooltip_ManaTank_00);
-        tooltip.add(TextLocalization.Tooltip_ManaTank_01);
-        tooltip.add(TextLocalization.Tooltip_ManaTank_02);
-        tooltip.add(TextLocalization.Tooltip_ManaTank_03);
+        tooltip.add(StatCollector.translateToLocal("Tooltip_ManaTank_00"));
+        tooltip.add(StatCollector.translateToLocal("Tooltip_ManaTank_01"));
+        tooltip.add(StatCollector.translateToLocal("Tooltip_ManaTank_02"));
+        tooltip.add(StatCollector.translateToLocal("Tooltip_ManaTank_03"));
         if (stack.hasTagCompound()
             && (stack.stackTagCompound.hasKey("mFluid") || stack.stackTagCompound.hasKey("lockedFluidName"))) {
             final FluidStack tContents = FluidStack

@@ -31,7 +31,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -131,22 +130,22 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeChemicalBathRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeChemicalBath_00)
-            .addInfo(TextLocalization.Tooltip_LargeChemicalBath_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("LargeChemicalBathRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 3, 7, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeChemicalBath_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_LargeChemicalBath_Casing)
-            .addInputBus(TextLocalization.Tooltip_LargeChemicalBath_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LargeChemicalBath_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeChemicalBath_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeChemicalBath_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeChemicalBath_Casing"))
             .toolTipFinisher();
         return tt;
     }

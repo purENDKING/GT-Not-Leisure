@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings2Misc;
@@ -17,7 +18,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -92,22 +92,22 @@ public class LargeSiftingFunnel extends GTMMultiMachineBase<LargeSiftingFunnel> 
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSiftingFunnelRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSiftingFunnel_00)
-            .addInfo(TextLocalization.Tooltip_LargeSiftingFunnel_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSiftingFunnelRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 5, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
-            .addInputBus(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeSiftingFunnel_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeSiftingFunnel_Casing"))
             .toolTipFinisher();
         return tt;
     }

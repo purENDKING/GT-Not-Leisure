@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.Utils.recipes.RecipeUtil.*;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
@@ -22,7 +23,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
@@ -116,24 +116,24 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.SpaceAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_SpaceAssembler_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_SpaceAssembler_01)
-            .addInfo(TextLocalization.Tooltip_SpaceAssembler_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("SpaceAssemblerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SpaceAssembler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SpaceAssembler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SpaceAssembler_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(11, 11, 11, true)
-            .addInputHatch(TextLocalization.Tooltip_SpaceAssembler_Casing)
-            .addInputBus(TextLocalization.Tooltip_SpaceAssembler_Casing)
-            .addOutputBus(TextLocalization.Tooltip_SpaceAssembler_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_SpaceAssembler_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_SpaceAssembler_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_SpaceAssembler_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_SpaceAssembler_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_SpaceAssembler_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_SpaceAssembler_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_SpaceAssembler_Casing"))
             .toolTipFinisher();
         return tt;
     }

@@ -25,7 +25,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import cpw.mods.fml.relauncher.Side;
@@ -80,7 +79,7 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamOreWasherRecipeType;
+        return StatCollector.translateToLocal("LargeSteamOreWasherRecipeType");
     }
 
     public LargeSteamOreWasher(String aName) {
@@ -256,17 +255,17 @@ public class LargeSteamOreWasher extends SteamMultiMachineBase<LargeSteamOreWash
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamOreWasherRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamOreWasher_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamOreWasherRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamOreWasher_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamOreWasher_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamOreWasher_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 5, 9, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamOreWasher_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamOreWasher_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamOreWasher_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamOreWasher_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

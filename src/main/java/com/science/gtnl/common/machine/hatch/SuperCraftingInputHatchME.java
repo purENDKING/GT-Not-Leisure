@@ -52,7 +52,6 @@ import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 
 import appeng.api.AEApi;
@@ -353,14 +352,14 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
             aNameRegional,
             supportFluids ? 11 : 6,
             MAX_INV_COUNT,
-            new String[] { TextLocalization.Tooltip_SuperCraftingInputHatchME_00,
-                TextLocalization.Tooltip_SuperCraftingInputHatchME_01,
-                supportFluids ? TextLocalization.Tooltip_SuperCraftingInputHatchME_01_00
-                    : TextLocalization.Tooltip_SuperCraftingInputHatchME_01_01,
-                TextLocalization.Tooltip_SuperCraftingInputHatchME_02,
-                supportFluids ? TextLocalization.Tooltip_SuperCraftingInputHatchME_03_00
-                    : TextLocalization.Tooltip_SuperCraftingInputHatchME_03_01,
-                TextLocalization.Tooltip_SuperCraftingInputHatchME_04 });
+            new String[] { StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_00"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_01"),
+                supportFluids ? StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_01_00")
+                    : StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_01_01"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_02"),
+                supportFluids ? StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_03_00")
+                    : StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_03_01"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputHatchME_04") });
         disableSort = true;
         this.supportFluids = supportFluids;
     }
@@ -737,7 +736,7 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
         })
             .setPlayClickSound(true)
             .setBackground(GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_PLUS_LARGE)
-            .addTooltips(ImmutableList.of(TextLocalization.Button_Tooltip_SuperCraftingInputHatchME_00))
+            .addTooltips(ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_00")))
             .setSize(16, 16)
             .setPos(170, 46))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {
@@ -747,7 +746,7 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
             })
                 .setPlayClickSound(true)
                 .setBackground(GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_EXPORT)
-                .addTooltips(ImmutableList.of(TextLocalization.Button_Tooltip_SuperCraftingInputHatchME_01))
+                .addTooltips(ImmutableList.of(StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_01")))
                 .setSize(16, 16)
                 .setPos(170, 28))
             .widget(
@@ -755,8 +754,8 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
                     .setToggle(() -> disablePatternOptimization, val -> disablePatternOptimization = val)
                     .setStaticTexture(GTUITextures.OVERLAY_BUTTON_PATTERN_OPTIMIZE)
                     .setVariableBackground(GTUITextures.BUTTON_STANDARD_TOGGLE)
-                    .addTooltip(0, TextLocalization.Button_Tooltip_SuperCraftingInputHatchME_02_00)
-                    .addTooltip(1, TextLocalization.Button_Tooltip_SuperCraftingInputHatchME_02_01)
+                    .addTooltip(0, StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_02_00"))
+                    .addTooltip(1, StatCollector.translateToLocal("Button_Tooltip_SuperCraftingInputHatchME_02_01"))
                     .setPos(170, 10)
                     .setSize(16, 16))
             .widget(new ButtonWidget().setOnClick((clickData, widget) -> {

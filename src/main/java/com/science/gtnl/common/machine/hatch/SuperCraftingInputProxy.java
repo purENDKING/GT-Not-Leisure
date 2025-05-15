@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_ME_CRAFTING_INPUT_SLAVE;
 
+import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,8 +19,6 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.interfaces.IDataCopyable;
@@ -55,10 +54,10 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
             aNameRegional,
             6,
             0,
-            new String[] { TextLocalization.Tooltip_SuperCraftingInputProxy_00,
-                TextLocalization.Tooltip_SuperCraftingInputProxy_01,
-                TextLocalization.Tooltip_SuperCraftingInputProxy_02,
-                TextLocalization.Tooltip_SuperCraftingInputProxy_03 });
+            new String[] { StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_00"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_01"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_02"),
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_03") });
         disableSort = true;
     }
 
@@ -167,7 +166,7 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
         var ret = new ArrayList<String>();
         if (getMasterSuper() != null) {
             ret.add(
-                TextLocalization.Chat_SuperCraftingInputProxy_00_00 + masterSuperX
+                StatCollector.translateToLocal("Chat_SuperCraftingInputProxy_00_00") + masterSuperX
                     + ", "
                     + masterSuperY
                     + ", "
@@ -176,7 +175,7 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
             ret.addAll(Arrays.asList(getMasterSuper().getInfoData()));
         } else if (getCraftingMaster() != null) {
             ret.add(
-                TextLocalization.Chat_SuperCraftingInputProxy_00_01 + craftingMasterX
+                StatCollector.translateToLocal("Chat_SuperCraftingInputProxy_00_01") + craftingMasterX
                     + ", "
                     + craftingMasterY
                     + ", "
@@ -184,7 +183,7 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
                     + ".");
             ret.addAll(Arrays.asList(getCraftingMaster().getInfoData()));
         } else {
-            ret.add(TextLocalization.Chat_SuperCraftingInputProxy_01);
+            ret.add(StatCollector.translateToLocal("Chat_SuperCraftingInputProxy_01"));
         }
         return ret.toArray(new String[0]);
     }
@@ -408,17 +407,17 @@ public class SuperCraftingInputProxy extends MTEHatchInputBus implements IDualIn
         boolean superLinked = tag.getBoolean("superLinked");
         boolean craftingLinked = tag.getBoolean("craftingLinked");
         currenttip.add(
-            (superLinked || craftingLinked) ? TextLocalization.Tooltip_SuperCraftingInputProxy_05_00
-                : TextLocalization.Tooltip_SuperCraftingInputProxy_05_01);
+            (superLinked || craftingLinked) ? StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_05_00")
+                : StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_05_01"));
 
         if (superLinked) {
             currenttip.add(
-                TextLocalization.Tooltip_SuperCraftingInputProxy_04 + tag.getInteger(
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_04") + tag.getInteger(
                     "superMasterX") + ", " + tag.getInteger("superMasterY") + ", " + tag.getInteger("superMasterZ"));
         }
         if (craftingLinked) {
             currenttip.add(
-                TextLocalization.Tooltip_SuperCraftingInputProxy_04 + tag.getInteger("craftingMasterX")
+                StatCollector.translateToLocal("Tooltip_SuperCraftingInputProxy_04") + tag.getInteger("craftingMasterX")
                     + ", "
                     + tag.getInteger("craftingMasterY")
                     + ", "

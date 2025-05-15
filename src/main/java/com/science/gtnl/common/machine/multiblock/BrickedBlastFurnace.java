@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings1;
 import static gregtech.api.enums.HatchElement.*;
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
 import gregtech.api.enums.Materials;
@@ -97,21 +97,21 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.BrickBlastFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_BrickBlastFurnace_00)
-            .addInfo(TextLocalization.Tooltip_BrickBlastFurnace_01)
-            .addInfo(TextLocalization.Tooltip_BrickBlastFurnace_02)
-            .addInfo(TextLocalization.Tooltip_BrickBlastFurnace_03)
-            .addInfo(TextLocalization.Tooltip_BrickBlastFurnace_04)
+        tt.addMachineType(StatCollector.translateToLocal("BrickBlastFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(15, 14, 15, true)
-            .addStructureInfo(TextLocalization.Tooltip_BrickBlastFurnace_Casing_00)
-            .addStructureInfo(TextLocalization.Tooltip_BrickBlastFurnace_Casing_01)
-            .addStructureInfo(TextLocalization.Tooltip_BrickBlastFurnace_Casing_02)
-            .addStructureInfo(TextLocalization.Tooltip_BrickBlastFurnace_Casing_03)
-            .addStructureInfo(TextLocalization.Tooltip_BrickBlastFurnace_Casing_04)
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_Casing_00"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_Casing_01"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_Casing_02"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_Casing_03"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_BrickBlastFurnace_Casing_04"))
             .toolTipFinisher();
         return tt;
     }

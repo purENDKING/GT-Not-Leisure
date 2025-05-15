@@ -33,7 +33,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -152,24 +151,24 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.ComponentAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_00)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_01)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_02)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_03)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_04)
-            .addInfo(TextLocalization.Tooltip_ComponentAssembler_05)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("ComponentAssemblerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ComponentAssembler_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addPollutionAmount(getPollutionPerSecond(null))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 5, 5, true)
-            .addInputBus(TextLocalization.Tooltip_ComponentAssembler_Casing)
-            .addOutputBus(TextLocalization.Tooltip_ComponentAssembler_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_ComponentAssembler_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_ComponentAssembler_Casing)
-            .addInputHatch(TextLocalization.Tooltip_ComponentAssembler_Casing)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_ComponentAssembler_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_ComponentAssembler_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_ComponentAssembler_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_ComponentAssembler_Casing"))
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_ComponentAssembler_Casing"))
             .toolTipFinisher();
         return tt;
     }

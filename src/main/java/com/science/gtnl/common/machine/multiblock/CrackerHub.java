@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
@@ -74,30 +74,30 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.CrackerHubRecipeType)
-            .addInfo(TextLocalization.Tooltip_CrackerHub_00)
-            .addInfo(TextLocalization.Tooltip_CrackerHub_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("CrackerHubRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_CrackerHub_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_CrackerHub_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(15, 23, 25, true)
-            .addInputBus(TextLocalization.Tooltip_CrackerHub_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_CrackerHub_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_CrackerHub_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_CrackerHub_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_CrackerHub_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_CrackerHub_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_CrackerHub_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

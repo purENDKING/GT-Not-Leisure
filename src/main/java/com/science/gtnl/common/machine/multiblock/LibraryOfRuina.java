@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
@@ -27,7 +28,6 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -111,36 +111,36 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LibraryOfRuinaRecipeType)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_00)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_01)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_02)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_03)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_04)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_05)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_06)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_LibraryOfRuina_07)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("LibraryOfRuinaRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(69, 51, 73, true)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_09)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_10)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_11)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_12)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_13)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_14)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_15)
-            .addStructureInfo(TextLocalization.Tooltip_LibraryOfRuina_16)
-            .addInputHatch(TextLocalization.Tooltip_LibraryOfRuina_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_LibraryOfRuina_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LibraryOfRuina_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LibraryOfRuina_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LibraryOfRuina_Casing)
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_09"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_10"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_11"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_12"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_13"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_14"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_15"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_16"))
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LibraryOfRuina_Casing"))
             .toolTipFinisher();
         return tt;
     }

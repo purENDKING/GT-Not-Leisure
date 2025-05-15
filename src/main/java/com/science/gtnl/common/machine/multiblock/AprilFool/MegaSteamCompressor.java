@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -76,7 +76,7 @@ public class MegaSteamCompressor extends SteamMultiMachineBase<MegaSteamCompress
 
     @Override
     public String getMachineType() {
-        return TextLocalization.MegaSteamCompressorRecipeType;
+        return StatCollector.translateToLocal("MegaSteamCompressorRecipeType");
     }
 
     @Override
@@ -150,13 +150,13 @@ public class MegaSteamCompressor extends SteamMultiMachineBase<MegaSteamCompress
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_00)
-            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_01)
-            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_02)
-            .addInfo(TextLocalization.Tooltip_MegaSteamCompressor_03)
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSteamCompressor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSteamCompressor_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSteamCompressor_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSteamCompressor_03"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(35, 33, 35, true)
             .toolTipFinisher();
         return tt;

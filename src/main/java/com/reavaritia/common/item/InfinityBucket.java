@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -37,7 +38,6 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -538,7 +538,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem, Subtitl
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer player, List toolTip, boolean advanced) {
-        toolTip.add(TextLocalization.Tooltip_InfinityBucket_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinityBucket_00"));
 
         NBTTagCompound nbt = stack.getTagCompound();
         if (nbt != null) {
@@ -583,7 +583,7 @@ public class InfinityBucket extends Item implements IFluidContainerItem, Subtitl
         String amountText = (remainingAmount == INFINITE_FLUID_AMOUNT) ? "∞" : remainingAmount + "L";
 
         IChatComponent component = new ChatComponentTranslation(
-            TextLocalization.Tooltip_InfinityBucket_01,
+            StatCollector.translateToLocal("Tooltip_InfinityBucket_01"),
             displayName,
             amountText);
         component.setChatStyle(new ChatStyle().setColor(EnumChatFormatting.WHITE));

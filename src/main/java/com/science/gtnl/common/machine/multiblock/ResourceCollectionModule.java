@@ -31,7 +31,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DynamicTextWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.Utils.recipes.ResourceCollectionModuleTierKey;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -366,19 +365,19 @@ public class ResourceCollectionModule extends TileEntityModuleBase {
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.ResourceCollectionModuleRecipeType)
-            .addInfo(TextLocalization.Tooltip_ResourceCollectionModule_00)
-            .addInfo(TextLocalization.Tooltip_ResourceCollectionModule_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
+        tt.addMachineType(StatCollector.translateToLocal("ResourceCollectionModuleRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(1, 5, 2, false)
-            .addInputBus(TextLocalization.Tooltip_ResourceCollectionModule_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_ResourceCollectionModule_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_ResourceCollectionModule_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_ResourceCollectionModule_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_ResourceCollectionModule_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.basicMachine;
 
 import static gregtech.api.enums.Textures.BlockIcons.*;
 
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -13,7 +14,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.gtnewhorizons.modularui.common.widget.ProgressBar;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.SoundResource;
 import gregtech.api.enums.TierEU;
@@ -31,7 +31,7 @@ import gregtech.api.util.GTUtility;
 public class SteamAssemblerSteel extends MTEBasicMachineSteel {
 
     public SteamAssemblerSteel(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional, TextLocalization.Tooltip_SteamAssembler_00, 6, 1, true);
+        super(aID, aName, aNameRegional, StatCollector.translateToLocal("Tooltip_SteamAssembler_00"), 6, 1, true);
     }
 
     public SteamAssemblerSteel(String aName, String[] aDescription, ITexture[][][] aTextures) {

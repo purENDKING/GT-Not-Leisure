@@ -24,7 +24,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
@@ -67,16 +66,16 @@ public class VibrantPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<V
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.PhotovoltaicPowerStationRecipeType)
-            .addInfo(TextLocalization.Tooltip_PhotovoltaicPowerStation_00)
-            .addInfo(TextLocalization.Tooltip_PhotovoltaicPowerStation_01)
+        tt.addMachineType(StatCollector.translateToLocal("PhotovoltaicPowerStationRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PhotovoltaicPowerStation_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PhotovoltaicPowerStation_01"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 5, 7, true)
-            .addInputHatch(TextLocalization.Tooltip_VibrantPhotovoltaicPowerStation_Casing)
-            .addDynamoHatch(TextLocalization.Tooltip_VibrantPhotovoltaicPowerStation_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_VibrantPhotovoltaicPowerStation_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_VibrantPhotovoltaicPowerStation_Casing"))
+            .addDynamoHatch(StatCollector.translateToLocal("Tooltip_VibrantPhotovoltaicPowerStation_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_VibrantPhotovoltaicPowerStation_Casing"))
             .toolTipFinisher();
         return tt;
     }

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -18,7 +19,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
@@ -124,20 +124,20 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.FlotationCellRegulatorRecipeType)
-            .addInfo(TextLocalization.Tooltip_FlotationCellRegulator_00)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("FlotationCellRegulatorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_FlotationCellRegulator_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 5, 7, true)
-            .addInputBus(TextLocalization.Tooltip_FlotationCellRegulator_Casing)
-            .addOutputBus(TextLocalization.Tooltip_FlotationCellRegulator_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_FlotationCellRegulator_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_FlotationCellRegulator_Casing)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_FlotationCellRegulator_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_FlotationCellRegulator_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_FlotationCellRegulator_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_FlotationCellRegulator_Casing"))
             .toolTipFinisher();
         return tt;
     }

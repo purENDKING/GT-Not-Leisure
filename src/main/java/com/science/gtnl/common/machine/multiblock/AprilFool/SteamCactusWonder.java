@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -33,7 +34,6 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -90,7 +90,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamCactusWonderRecipeType;
+        return StatCollector.translateToLocal("SteamCactusWonderRecipeType");
     }
 
     private int currentSteam;
@@ -275,7 +275,7 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
             .widget(
                 new TextWidget()
                     .setStringSupplier(
-                        () -> EnumChatFormatting.WHITE + TextLocalization.Tooltip_SteamCactusWonder_06
+                        () -> EnumChatFormatting.WHITE + StatCollector.translateToLocal("Tooltip_SteamCactusWonder_06")
                             + EnumChatFormatting.YELLOW
                             + numberFormat.format(fueledAmount))
                     .setTextAlignment((Alignment.CenterLeft)))
@@ -301,15 +301,15 @@ public class SteamCactusWonder extends SteamMultiMachineBase<SteamCactusWonder> 
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_00)
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_01)
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_02)
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_03)
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_04)
-            .addInfo(TextLocalization.Tooltip_SteamCactusWonder_05)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCactusWonder_05"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 11, 9, true)
             .toolTipFinisher();
         return tt;

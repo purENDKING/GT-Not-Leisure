@@ -32,7 +32,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import goodgenerator.items.GGMaterial;
@@ -81,19 +80,19 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeNaquadahReactorRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeNaquadahReactor_00)
-            .addInfo(TextLocalization.Tooltip_LargeNaquadahReactor_01)
-            .addInfo(TextLocalization.Tooltip_LargeNaquadahReactor_02)
-            .addInfo(TextLocalization.Tooltip_LargeNaquadahReactor_03)
-            .addInfo(TextLocalization.Tooltip_LargeNaquadahReactor_04)
+        tt.addMachineType(StatCollector.translateToLocal("LargeNaquadahReactorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(25, 25, 9, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeNaquadahReactor_Casing)
-            .addDynamoHatch(TextLocalization.Tooltip_LargeNaquadahReactor_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeNaquadahReactor_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_Casing"))
+            .addDynamoHatch(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeNaquadahReactor_Casing"))
             .toolTipFinisher();
         return tt;
     }

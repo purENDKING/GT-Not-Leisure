@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -21,7 +22,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -50,7 +50,7 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamCrackingRecipeType;
+        return StatCollector.translateToLocal("SteamCrackingRecipeType");
     }
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -250,16 +250,16 @@ public class SteamCracking extends SteamMultiMachineBase<SteamCracking> implemen
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.SteamCrackingRecipeType)
-            .addInfo(TextLocalization.Tooltip_SteamCracking_00)
-            .addInfo(TextLocalization.Tooltip_SteamCracking_01)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("SteamCrackingRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCracking_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamCracking_01"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 4, 4, false)
-            .addInputBus(TextLocalization.Tooltip_SteamCracking_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_SteamCracking_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_SteamCracking_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_SteamCracking_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

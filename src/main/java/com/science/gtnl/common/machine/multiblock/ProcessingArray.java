@@ -32,7 +32,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayManager;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
@@ -116,23 +115,23 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.ProcessingArrayRecipeType)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_00)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_01)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_02)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_03)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_04)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_05)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_06)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_07)
-            .addInfo(TextLocalization.Tooltip_ProcessingArray_08)
+        tt.addMachineType(StatCollector.translateToLocal("ProcessingArrayRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ProcessingArray_08"))
             .beginStructureBlock(5, 5, 5, true)
-            .addEnergyHatch(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
-            .addInputBus(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_ProcessingArray_Casing, 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_ProcessingArray_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

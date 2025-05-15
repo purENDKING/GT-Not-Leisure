@@ -34,7 +34,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -324,21 +323,21 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.BloodSoulSacrificialArrayRecipeType)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_00)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_01)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_02)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_03)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_04)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_BloodSoulSacrificialArray_05)
+        tt.addMachineType(StatCollector.translateToLocal("BloodSoulSacrificialArrayRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_05"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(33, 14, 30, false)
-            .addInputBus(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_BloodSoulSacrificialArray_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_BloodSoulSacrificialArray_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

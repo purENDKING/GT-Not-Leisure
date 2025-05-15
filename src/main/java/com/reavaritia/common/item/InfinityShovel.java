@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -30,7 +31,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
 import cpw.mods.fml.relauncher.Side;
@@ -65,7 +65,7 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
         boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_InfinityShovel_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinityShovel_00"));
     }
 
     @Override
@@ -112,8 +112,8 @@ public class InfinityShovel extends ItemSpade implements SubtitleDisplay {
             player.swingItem();
 
             if (world.isRemote) {
-                String key = isDestroyerMode ? TextLocalization.Tooltip_Infinity_Mode_2
-                    : TextLocalization.Tooltip_Infinity_Mode_1;
+                String key = isDestroyerMode ? StatCollector.translateToLocal("Tooltip_Infinity_Mode_2")
+                    : StatCollector.translateToLocal("Tooltip_Infinity_Mode_1");
                 showSubtitle(key);
             }
             return stack;

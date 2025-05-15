@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -48,7 +48,7 @@ public class CrystalShovel extends ItemSpade {
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_CrystalShovel_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_CrystalShovel_00"));
     }
 
     @SubscribeEvent

@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -75,7 +75,7 @@ public class CrystalAxe extends ItemAxe {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> list, boolean advanced) {
-        list.add(TextLocalization.Tooltip_CrystalAxe_00);
+        list.add(StatCollector.translateToLocal("Tooltip_CrystalAxe_00"));
     }
 
     @Override

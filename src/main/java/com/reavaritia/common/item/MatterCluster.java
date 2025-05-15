@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,6 @@ import net.minecraft.world.World;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.ItemLoader;
 
 import codechicken.lib.math.MathHelper;
@@ -66,7 +66,7 @@ public class MatterCluster extends Item implements ICosmicRenderItem {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean debug) {
-        tooltip.add(TextLocalization.Tooltip_MatterCluster_00);
+        tooltip.add(StatCollector.translateToLocal("Tooltip_MatterCluster_00"));
         if (!stack.hasTagCompound() || !stack.getTagCompound()
             .hasKey(MAINTAG)) {
             return;
@@ -78,7 +78,7 @@ public class MatterCluster extends Item implements ICosmicRenderItem {
             clustertag.getInteger(MAINCOUNTTAG) + "/"
                 + capacity
                 + " "
-                + TextLocalization.Tooltip_MatterCluster_Counter);
+                + StatCollector.translateToLocal("Tooltip_MatterCluster_Counter"));
         tooltip.add("");
 
         if (GuiScreen.isShiftKeyDown()) {
@@ -99,7 +99,7 @@ public class MatterCluster extends Item implements ICosmicRenderItem {
                 }
             }
         } else {
-            tooltip.add(TextLocalization.Tooltip_MatterCluster_01);
+            tooltip.add(StatCollector.translateToLocal("Tooltip_MatterCluster_01"));
         }
     }
 

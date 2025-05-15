@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.entity.EntityBlazeFireball;
 import com.science.gtnl.Mods;
 
@@ -106,7 +106,7 @@ public class BlazeSword extends ItemSword {
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_BlazeSword_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_BlazeSword_00"));
     }
 
     @Override

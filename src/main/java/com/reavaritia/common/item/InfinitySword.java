@@ -47,7 +47,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 import com.science.gtnl.config.MainConfig;
 
@@ -265,8 +264,8 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             if (world.isRemote) {
                 long remainingTime = (COOLDOWN - (System.currentTimeMillis() - lastUsed)) / 1000;
                 showSubtitle(
-                    TextLocalization.Tooltip_InfinitySword_Aura_00 + remainingTime
-                        + TextLocalization.Tooltip_InfinitySword_Aura_01);
+                    StatCollector.translateToLocal("Tooltip_InfinitySword_Aura_00") + remainingTime
+                        + StatCollector.translateToLocal("Tooltip_InfinitySword_Aura_01"));
             }
             return;
         }
@@ -495,9 +494,9 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> toolTip,
         boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_00);
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_01);
-        toolTip.add(TextLocalization.Tooltip_InfinitySword_02);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinitySword_00"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinitySword_01"));
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinitySword_02"));
     }
 
     @Override
@@ -679,7 +678,7 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
                     event.toolTip.set(
                         x,
                         EnumChatFormatting.BLUE + "+"
-                            + LudicrousText.makeFabulous(TextLocalization.Damage_InfinitySword)
+                            + LudicrousText.makeFabulous(StatCollector.translateToLocal("Damage_InfinitySword"))
                             + " "
                             + EnumChatFormatting.BLUE
                             + StatCollector.translateToLocal("attribute.name.generic.attackDamage"));

@@ -12,7 +12,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.interfaces.ITexture;
@@ -38,15 +37,15 @@ public class ManaEnergyHatch extends MTEHatchEnergy implements IAddUIWidgets {
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_ManaEnergyHatch_00, TextLocalization.Tooltip_ManaEnergyHatch_01,
-                TextLocalization.Tooltip_ManaEnergyHatch_02, "" });
-        mDescriptionArray[3] = TextLocalization.Tooltip_ManaEnergyHatch_03 + getCapacity() + "L";
+            new String[] { StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_00"), StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_01"),
+                StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_02"), "" });
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_03") + getCapacity() + "L";
         mAmp = aAmp;
     }
 
     public ManaEnergyHatch(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures, int aAmp) {
         super(aName, aTier, aDescription, aTextures);
-        mDescriptionArray[3] = TextLocalization.Tooltip_ManaEnergyHatch_03 + getCapacity() + "L";
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaEnergyHatch_03") + getCapacity() + "L";
         mAmp = aAmp;
     }
 

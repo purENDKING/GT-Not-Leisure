@@ -31,7 +31,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.Special.PortalToAlfheimExplosion;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
@@ -267,24 +266,24 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.TeleportationArrayToAlfheimRecipeType)
-            .addInfo(TextLocalization.Tooltip_TeleportationArrayToAlfheim_00)
-            .addInfo(TextLocalization.Tooltip_TeleportationArrayToAlfheim_01)
-            .addInfo(TextLocalization.Tooltip_TeleportationArrayToAlfheim_02)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("TeleportationArrayToAlfheimRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(23, 18, 23, false)
-            .addInputBus(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"), 1)
             .addOtherStructurePart(
-                TextLocalization.FluidManaInputHatch,
-                TextLocalization.Tooltip_TeleportationArrayToAlfheim_Casing,
+                StatCollector.translateToLocal("FluidManaInputHatch"),
+                StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_Casing"),
                 1)
             .toolTipFinisher();
         return tt;

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
@@ -24,7 +25,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
@@ -93,26 +93,26 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.BlazeBlastFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_00)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_01)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_02)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_03)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_04)
-            .addInfo(TextLocalization.Tooltip_BlazeBlastFurnace_05)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("BlazeBlastFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .beginStructureBlock(7, 6, 7, true)
-            .addInputBus(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
-            .addOutputBus(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
-            .addInputHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
-            .addOutputHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
-            .addOutputHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_01, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
-            .addMufflerHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_02, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_01"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
+            .addMufflerHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_02"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"), 1)
             .addOtherStructurePart(
-                TextLocalization.FluidBlazeInputHatch,
-                TextLocalization.Tooltip_BlazeBlastFurnace_Casing_00,
+                StatCollector.translateToLocal("FluidBlazeInputHatch"),
+                StatCollector.translateToLocal("Tooltip_BlazeBlastFurnace_Casing_00"),
                 1)
             .toolTipFinisher();
         return tt;

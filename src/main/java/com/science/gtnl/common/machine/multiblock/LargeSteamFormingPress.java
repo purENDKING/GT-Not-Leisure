@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -23,7 +24,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -53,7 +53,7 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamFormingPressRecipeType;
+        return StatCollector.translateToLocal("LargeSteamFormingPressRecipeType");
     }
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -254,17 +254,17 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamFormingPressRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFormingPress_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamFormingPressRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFormingPress_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFormingPress_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFormingPress_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 3, 5, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamFormingPress_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamFormingPress_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamFormingPress_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamFormingPress_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

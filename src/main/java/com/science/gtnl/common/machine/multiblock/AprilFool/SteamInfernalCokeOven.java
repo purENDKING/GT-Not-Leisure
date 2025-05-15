@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
@@ -24,7 +25,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -89,7 +89,7 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamInfernalCokeOvenRecipeType;
+        return StatCollector.translateToLocal("SteamInfernalCokeOvenRecipeType");
     }
 
     @Override
@@ -233,12 +233,12 @@ public class SteamInfernalCokeOven extends SteamMultiMachineBase<SteamInfernalCo
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_00)
-            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_01)
-            .addInfo(TextLocalization.Tooltip_SteamInfernalCokeOven_02)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamInfernalCokeOven_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamInfernalCokeOven_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamInfernalCokeOven_02"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 5, 5, true)
             .toolTipFinisher();
         return tt;

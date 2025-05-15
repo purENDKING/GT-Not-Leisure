@@ -27,7 +27,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -111,22 +110,22 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeExtractorRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeExtractor_00)
-            .addInfo(TextLocalization.Tooltip_LargeExtractor_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("LargeExtractorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeExtractor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeExtractor_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 3, 3, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeExtractor_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_LargeExtractor_Casing)
-            .addInputBus(TextLocalization.Tooltip_LargeExtractor_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LargeExtractor_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeExtractor_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeExtractor_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeExtractor_Casing"))
             .toolTipFinisher();
         return tt;
     }

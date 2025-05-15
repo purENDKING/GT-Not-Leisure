@@ -2,14 +2,13 @@ package com.science.gtnl.Utils;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 
+import net.minecraft.util.StatCollector;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
 import net.minecraft.util.EnumChatFormatting;
 
 import org.apache.commons.lang3.ArrayUtils;
-
-import com.science.gtnl.Utils.item.TextLocalization;
 
 public class AnimatedText {
 
@@ -78,12 +77,12 @@ public class AnimatedText {
         + RESET;
 
     public static final Supplier<String> SCIENCE_NOT_LEISURE = chain(
-        text(TextLocalization.Adder),
+        text(StatCollector.translateToLocal("Adder")),
         animatedText("Science Not Leisure", 1, 80, RED, GOLD, YELLOW, GREEN, AQUA, BLUE, LIGHT_PURPLE));
 
     public static final Supplier<String> STRUCTURAL_RECONSTRUCTION_PLAN = chain(
         animatedText(
-            TextLocalization.StructuralReconstructionPlan,
+            StatCollector.translateToLocal("StructuralReconstructionPlan"),
             1,
             50,
             BLUE,

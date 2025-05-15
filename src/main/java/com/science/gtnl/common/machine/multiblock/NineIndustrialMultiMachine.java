@@ -46,7 +46,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.NineIndustrialMultiMachineManager;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
@@ -131,15 +130,15 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         }
 
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.NineIndustrialMultiMachineRecipeType)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_NineIndustrialMultiMachine_07);
+        tt.addMachineType(StatCollector.translateToLocal("NineIndustrialMultiMachineRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_07"));
         for (int i = 0; i < 36; i++) {
             tt.addInfo(
                 I18n.format("Tooltip_NineIndustrialMultiMachine_Mode_" + i) + " - "
@@ -148,11 +147,11 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
                     + EnumChatFormatting.RESET);
         }
         tt.beginStructureBlock(29, 29, 29, true)
-            .addInputBus(TextLocalization.Tooltip_NineIndustrialMultiMachine_Casing)
-            .addOutputBus(TextLocalization.Tooltip_NineIndustrialMultiMachine_Casing)
-            .addInputHatch(TextLocalization.Tooltip_NineIndustrialMultiMachine_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_NineIndustrialMultiMachine_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_NineIndustrialMultiMachine_Casing)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_Casing"))
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_NineIndustrialMultiMachine_Casing"))
             .toolTipFinisher();
         return tt;
     }

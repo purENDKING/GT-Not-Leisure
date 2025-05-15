@@ -37,7 +37,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -130,24 +129,24 @@ public class Incubator extends MultiMachineBase<Incubator> implements ISurvivalC
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.IncubatorRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_Incubator_00)
-            .addInfo(TextLocalization.Tooltip_Incubator_01)
-            .addInfo(TextLocalization.Tooltip_Incubator_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("IncubatorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Incubator_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Incubator_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Incubator_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .beginStructureBlock(5, 5, 5, false)
-            .addMaintenanceHatch(TextLocalization.Tooltip_Incubator_Casing, 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
             .addOtherStructurePart(
-                TextLocalization.Tooltip_Incubator_Radio_Hatch,
-                TextLocalization.Tooltip_Incubator_Casing,
+                StatCollector.translateToLocal("Tooltip_Incubator_Radio_Hatch"),
+                StatCollector.translateToLocal("Tooltip_Incubator_Casing"),
                 1)
-            .addInputBus(TextLocalization.Tooltip_Incubator_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_Incubator_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_Incubator_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_Incubator_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_Incubator_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_Incubator_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import static com.reavaritia.common.block.ReAvaBasicBlocks.BlockSoulFarmland;
+import net.minecraft.util.StatCollector;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,6 @@ import net.minecraftforge.event.world.BlockEvent;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -59,7 +59,7 @@ public class BlazeHoe extends ItemHoe implements SubtitleDisplay {
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_BlazeHoe_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_BlazeHoe_00"));
     }
 
     @Override
@@ -78,8 +78,8 @@ public class BlazeHoe extends ItemHoe implements SubtitleDisplay {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         if (player.isSneaking()) {
             toggleSmeltingMode(stack);
-            String messageKey = isSmeltingModeActive(stack) ? TextLocalization.Tooltip_Blaze_Smelt_On
-                : TextLocalization.Tooltip_Blaze_Smelt_Off;
+            String messageKey = isSmeltingModeActive(stack) ? StatCollector.translateToLocal("Tooltip_Blaze_Smelt_On")
+                : StatCollector.translateToLocal("Tooltip_Blaze_Smelt_Off");
             if (world.isRemote) {
                 showSubtitle(messageKey);
             }

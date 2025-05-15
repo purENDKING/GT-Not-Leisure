@@ -51,7 +51,6 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
@@ -267,8 +266,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public String[] getInfoData() {
         ArrayList<String> info = new ArrayList<>(Arrays.asList(super.getInfoData()));
-        info.add(TextLocalization.MachineTierTooltip + EnumChatFormatting.YELLOW + tierMachine);
-        info.add(TextLocalization.ParallelTooltip + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
+        info.add(StatCollector.translateToLocal("MachineTierTooltip") + EnumChatFormatting.YELLOW + tierMachine);
+        info.add(StatCollector.translateToLocal("ParallelTooltip") + EnumChatFormatting.YELLOW + getMaxParallelRecipes());
         return info.toArray(new String[0]);
     }
 

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
@@ -23,7 +24,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.config.MainConfig;
@@ -80,23 +80,23 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.ColdIceFreezerRecipeType)
-            .addInfo(TextLocalization.Tooltip_ColdIceFreezer_00)
-            .addInfo(TextLocalization.Tooltip_ColdIceFreezer_01)
-            .addInfo(TextLocalization.Tooltip_ColdIceFreezer_02)
-            .addInfo(TextLocalization.Tooltip_ColdIceFreezer_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("ColdIceFreezerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .beginStructureBlock(5, 5, 9, true)
-            .addInputBus(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
-            .addOutputBus(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
-            .addInputHatch(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
-            .addOutputHatch(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
-            .addMufflerHatch(TextLocalization.Tooltip_ColdIceFreezer_Casing_01, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_ColdIceFreezer_Casing_00, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
+            .addMufflerHatch(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_01"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"), 1)
             .addOtherStructurePart(
-                TextLocalization.FluidIceInputHatch,
-                TextLocalization.Tooltip_ColdIceFreezer_Casing_00,
+                StatCollector.translateToLocal("FluidIceInputHatch"),
+                StatCollector.translateToLocal("Tooltip_ColdIceFreezer_Casing_00"),
                 1)
             .toolTipFinisher();
         return tt;

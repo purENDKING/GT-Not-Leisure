@@ -24,7 +24,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import bartworks.util.BWUtil;
@@ -123,26 +122,26 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.VacuumDryingFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_00)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_02)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_03)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_04)
-            .addInfo(TextLocalization.Tooltip_VacuumDryingFurnace_05)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("VacuumDryingFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(3, 5, 3, true)
-            .addInputHatch(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
-            .addInputBus(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
-            .addOutputBus(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_VacuumDryingFurnace_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_VacuumDryingFurnace_Casing"))
             .toolTipFinisher();
         return tt;
     }

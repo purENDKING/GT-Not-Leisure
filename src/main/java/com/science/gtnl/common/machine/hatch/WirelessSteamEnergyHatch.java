@@ -12,7 +12,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableSet;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -61,7 +60,7 @@ public class WirelessSteamEnergyHatch extends CustomFluidHatch {
 
         desc.add(StatCollector.translateToLocal("Tooltip_WirelessSteamEnergyHatch_00"));
         desc.add(StatCollector.translateToLocal("Tooltip_WirelessSteamEnergyHatch_01"));
-        desc.add(TextLocalization.HatchCustomFluid_01 + getCapacity() + "L");
+        desc.add(StatCollector.translateToLocal("HatchCustomFluid_01") + getCapacity() + "L");
         if (mTier == 0) {
             desc.add(StatCollector.translateToLocal("Tooltip_PipelessSteamHatch_00"));
             desc.add(StatCollector.translateToLocal("Tooltip_PipelessSteamHatch_01"));

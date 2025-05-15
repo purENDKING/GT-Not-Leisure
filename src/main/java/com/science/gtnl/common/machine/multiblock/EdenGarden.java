@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.Utils.item.ItemUtils.readItemStackFromNBT;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static gregtech.api.GregTechAPI.*;
@@ -62,7 +63,6 @@ import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucket;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGDropTable;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGDynamicInventory;
@@ -222,23 +222,23 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.EdenGardenRecipeType)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_00)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_01)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_02)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_03)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_04)
-            .addInfo(TextLocalization.Tooltip_EdenGarden_05)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("EdenGardenRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EdenGarden_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(6, 43, 10, false)
-            .addInputBus(TextLocalization.Tooltip_EdenGarden_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_EdenGarden_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_EdenGarden_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_EdenGarden_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_EdenGarden_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_EdenGarden_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_EdenGarden_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_EdenGarden_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_EdenGarden_Casing"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_EdenGarden_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

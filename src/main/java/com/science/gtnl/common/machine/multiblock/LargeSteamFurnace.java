@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
@@ -29,7 +30,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -167,17 +167,17 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamFurnaceRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFurnace_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFurnace_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamFurnace_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamFurnaceRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFurnace_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFurnace_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamFurnace_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 8, 10, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamFurnace_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamFurnace_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamFurnace_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamFurnace_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -292,7 +292,7 @@ public class LargeSteamFurnace extends SteamMultiMachineBase<LargeSteamFurnace> 
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamFurnaceRecipeType;
+        return StatCollector.translateToLocal("LargeSteamFurnaceRecipeType");
     }
 
     @Override

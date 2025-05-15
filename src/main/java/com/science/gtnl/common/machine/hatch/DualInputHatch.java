@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
@@ -22,7 +23,6 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.fluid.FluidStackTank;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -101,14 +101,14 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
             aNameRegional,
             aTier,
             aTier * aTier + 1,
-            new String[] { TextLocalization.Tooltip_DualInputHatch_00, "", "" });
+            new String[] { StatCollector.translateToLocal("Tooltip_DualInputHatch_00"), "", "" });
         this.mStoredFluid = new FluidStack[aTier];
         this.fluidTanks = new FluidStackTank[aTier];
         this.mCapacityPer = getCapacityPerTank(aTier);
         this.itemSlotAmount = aTier * aTier + 1;
-        mDescriptionArray[1] = TextLocalization.Tooltip_DualInputHatch_01 + GTUtility.formatNumbers(itemSlotAmount - 1);
-        mDescriptionArray[2] = TextLocalization.Tooltip_DualInputHatch_02_00 + GTUtility.formatNumbers(aTier)
-            + TextLocalization.Tooltip_DualInputHatch_02_01
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01") + GTUtility.formatNumbers(itemSlotAmount - 1);
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00") + GTUtility.formatNumbers(aTier)
+            + StatCollector.translateToLocal("Tooltip_DualInputHatch_02_01")
             + GTUtility.formatNumbers(mCapacityPer)
             + "L";
 
@@ -128,9 +128,9 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
         this.fluidTanks = new FluidStackTank[aTier];
         this.mCapacityPer = getCapacityPerTank(aTier);
         this.itemSlotAmount = aTier * aTier + 1;
-        mDescriptionArray[1] = TextLocalization.Tooltip_DualInputHatch_01 + GTUtility.formatNumbers(itemSlotAmount - 1);
-        mDescriptionArray[2] = TextLocalization.Tooltip_DualInputHatch_02_00 + GTUtility.formatNumbers(aTier)
-            + TextLocalization.Tooltip_DualInputHatch_02_01
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_DualInputHatch_01") + GTUtility.formatNumbers(itemSlotAmount - 1);
+        mDescriptionArray[2] = StatCollector.translateToLocal("Tooltip_DualInputHatch_02_00") + GTUtility.formatNumbers(aTier)
+            + StatCollector.translateToLocal("Tooltip_DualInputHatch_02_01")
             + GTUtility.formatNumbers(mCapacityPer)
             + "L";
 

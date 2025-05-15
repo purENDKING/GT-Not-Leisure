@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -23,7 +24,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import gregtech.api.enums.Textures;
@@ -100,21 +100,21 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.DraconicFusionCraftingRecipeType)
-            .addInfo(TextLocalization.Tooltip_DraconicFusionCrafting_00)
-            .addInfo(TextLocalization.Tooltip_DraconicFusionCrafting_01)
-            .addInfo(TextLocalization.Tooltip_DraconicFusionCrafting_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("DraconicFusionCraftingRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(29, 36, 29, true)
-            .addInputBus(TextLocalization.Tooltip_DraconicFusionCrafting_Casing)
-            .addOutputBus(TextLocalization.Tooltip_DraconicFusionCrafting_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_DraconicFusionCrafting_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_DraconicFusionCrafting_Casing)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_DraconicFusionCrafting_Casing"))
             .toolTipFinisher();
         return tt;
     }

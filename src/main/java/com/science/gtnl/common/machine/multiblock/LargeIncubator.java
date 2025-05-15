@@ -28,7 +28,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
@@ -100,25 +99,25 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeIncubatorRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_00)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_01)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_02)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_03)
-            .addInfo(TextLocalization.Tooltip_LargeIncubator_04)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("LargeIncubatorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeIncubator_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeIncubator_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeIncubator_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeIncubator_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeIncubator_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .beginStructureBlock(13, 9, 13, false)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
             .addOtherStructurePart(
-                TextLocalization.Tooltip_LargeIncubator_Radio_Hatch,
-                TextLocalization.Tooltip_LargeIncubator_Casing,
+                StatCollector.translateToLocal("Tooltip_LargeIncubator_Radio_Hatch"),
+                StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"),
                 1)
-            .addInputBus(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeIncubator_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeIncubator_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

@@ -44,7 +44,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
 import com.science.gtnl.config.MainConfig;
@@ -276,38 +275,38 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.MeteorMinerRecipeType)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_00)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_01)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_02)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_03)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_04)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_05)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_06)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_07)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_08)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_09)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_10)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_11)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_12)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_13)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_14)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_15)
-            .addInfo(TextLocalization.Tooltip_MeteorMiner_16)
+        tt.addMachineType(StatCollector.translateToLocal("MeteorMinerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_10"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_11"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_12"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_13"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_14"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_15"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_16"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
-            .addStructureInfo(TextLocalization.Tooltip_MeteorMiner_07)
-            .addController(TextLocalization.Tooltip_MeteorMiner_Casing_01_01)
-            .addOutputBus(TextLocalization.Tooltip_MeteorMiner_Casing_01_02, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_MeteorMiner_Casing_01_02, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_MeteorMiner_Casing_01_02, 1)
-            .addInputBus(TextLocalization.Tooltip_MeteorMiner_Casing_01_03, 2)
-            .addStructureInfo(TextLocalization.Tooltip_MeteorMiner_13)
-            .addController(TextLocalization.Tooltip_MeteorMiner_Casing_02_01)
-            .addOutputBus(TextLocalization.Tooltip_MeteorMiner_Casing_02_02, 3)
-            .addEnergyHatch(TextLocalization.Tooltip_MeteorMiner_Casing_02_02, 3)
-            .addMaintenanceHatch(TextLocalization.Tooltip_MeteorMiner_Casing_02_02, 3)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_07"))
+            .addController(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_01_01"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_01_02"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_01_02"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_01_02"), 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_01_03"), 2)
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_MeteorMiner_13"))
+            .addController(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_02_01"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_02_02"), 3)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_02_02"), 3)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_MeteorMiner_Casing_02_02"), 3)
             .toolTipFinisher();
         return tt;
     }

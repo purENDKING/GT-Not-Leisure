@@ -10,6 +10,7 @@ import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructable;
@@ -18,7 +19,6 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
 import crazypants.enderio.EnderIO;
@@ -64,7 +64,7 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     @Override
     public String getMachineType() {
-        return TextLocalization.GenerationEarthEngineRecipeType;
+        return StatCollector.translateToLocal("GenerationEarthEngineRecipeType");
     }
 
     @Override
@@ -81,18 +81,18 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_GenerationEarthEngine_00)
-            .addInfo(TextLocalization.Tooltip_GenerationEarthEngine_01)
+            .addInfo(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_01"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(643, 218, 643, true)
-            .addInputBus(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
-            .addMaintenanceHatch(TextLocalization.Tooltip_GenerationEarthEngine_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_GenerationEarthEngine_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

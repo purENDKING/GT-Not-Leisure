@@ -27,7 +27,6 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
@@ -86,28 +85,28 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.IntegratedAssemblyFacilityRecipeType)
-            .addInfo(TextLocalization.Tooltip_IntegratedAssemblyFacility_00)
-            .addInfo(TextLocalization.Tooltip_IntegratedAssemblyFacility_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("IntegratedAssemblyFacilityRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(47, 13, 19, true)
-            .addInputBus(TextLocalization.Tooltip_IntegratedAssemblyFacility_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_IntegratedAssemblyFacility_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_IntegratedAssemblyFacility_Casing, 1)
-            .addEnergyHatch(TextLocalization.Tooltip_IntegratedAssemblyFacility_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_IntegratedAssemblyFacility_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

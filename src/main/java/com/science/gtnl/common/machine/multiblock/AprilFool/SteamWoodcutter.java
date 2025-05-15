@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -21,7 +22,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -60,7 +60,7 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamWoodcutterRecipeType;
+        return StatCollector.translateToLocal("SteamWoodcutterRecipeType");
     }
 
     @Override
@@ -164,11 +164,11 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamWoodcutter_00)
-            .addInfo(TextLocalization.Tooltip_SteamWoodcutter_01)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamWoodcutter_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamWoodcutter_01"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 8, 7, true)
             .toolTipFinisher();
         return tt;

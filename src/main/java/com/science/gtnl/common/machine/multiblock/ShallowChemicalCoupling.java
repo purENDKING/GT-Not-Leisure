@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -19,7 +20,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -109,25 +109,25 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.ShallowChemicalCouplingRecipes)
-            .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_00)
-            .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_01)
-            .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_02)
-            .addInfo(TextLocalization.Tooltip_ShallowChemicalCoupling_03)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("ShallowChemicalCouplingRecipes"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 11, 7, true)
-            .addInputHatch(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
-            .addOutputHatch(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
-            .addInputBus(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
-            .addOutputBus(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
-            .addEnergyHatch(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
-            .addMaintenanceHatch(TextLocalization.Tooltip_ShallowChemicalCoupling_Casing_00)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_ShallowChemicalCoupling_Casing_00"))
             .toolTipFinisher();
         return tt;
     }

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import static gregtech.api.enums.Textures.BlockIcons.FLUID_STEAM_IN_SIGN;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_PIPE_IN;
+import net.minecraft.util.StatCollector;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.GTMod;
 import gregtech.api.enums.Textures;
@@ -38,8 +38,8 @@ public class CustomFluidHatch extends MTEHatch {
             aNameRegional,
             aTier,
             3,
-            new String[] { TextLocalization.HatchCustomFluid_00,
-                TextLocalization.HatchCustomFluid_01 + GTUtility.formatNumbers(aAmount) + "L" });
+            new String[] { StatCollector.translateToLocal("HatchCustomFluid_00"),
+                StatCollector.translateToLocal("HatchCustomFluid_01") + GTUtility.formatNumbers(aAmount) + "L" });
         this.mLockedFluids = aFluid;
         this.mFluidCapacity = aAmount;
     }
@@ -225,9 +225,9 @@ public class CustomFluidHatch extends MTEHatch {
 
         ArrayList<String> desc = new ArrayList<>();
 
-        desc.add(TextLocalization.HatchCustomFluid_00);
-        desc.add(TextLocalization.HatchCustomFluid_01 + getCapacity() + "L");
-        desc.add(TextLocalization.HatchCustomFluid_02);
+        desc.add(StatCollector.translateToLocal("HatchCustomFluid_00"));
+        desc.add(StatCollector.translateToLocal("HatchCustomFluid_01") + getCapacity() + "L");
+        desc.add(StatCollector.translateToLocal("HatchCustomFluid_02"));
 
         for (Fluid allowed : mLockedFluids) {
             desc.add("-" + (allowed.getLocalizedName(new FluidStack(allowed, 1))));

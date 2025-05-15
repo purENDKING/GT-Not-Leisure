@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -26,7 +27,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.machine.multiblock.LargeSteamFurnace;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -77,7 +77,7 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamRockBreakerRecipeType;
+        return StatCollector.translateToLocal("SteamRockBreakerRecipeType");
     }
 
     @Override
@@ -255,15 +255,15 @@ public class SteamRockBreaker extends SteamMultiMachineBase<SteamRockBreaker> im
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_00)
-            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_01)
-            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_02)
-            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_03)
-            .addInfo(TextLocalization.Tooltip_SteamRockBreaker_04)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamRockBreaker_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamRockBreaker_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamRockBreaker_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamRockBreaker_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamRockBreaker_04"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(11, 6, 11, true)
             .toolTipFinisher();
         return tt;

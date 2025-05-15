@@ -2,6 +2,7 @@ package com.science.gtnl.common.effect.effects;
 
 import java.util.HashSet;
 import java.util.Random;
+import net.minecraft.util.StatCollector;
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import com.science.gtnl.Utils.GTNLEffectUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -109,7 +109,7 @@ public class AweEffect extends GTNLEffectUtils {
 
         if (entityLiving instanceof EntityPlayerMP player) {
             if (!player.capabilities.isCreativeMode) {
-                player.playerNetServerHandler.kickPlayerFromServer(TextLocalization.Awe_Kick);
+                player.playerNetServerHandler.kickPlayerFromServer(StatCollector.translateToLocal("Awe_Kick"));
             } else {
                 if (!player.capabilities.allowFlying) {
                     player.capabilities.allowFlying = true;

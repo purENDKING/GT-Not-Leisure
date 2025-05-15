@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static gregtech.api.enums.HatchElement.*;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofHatchAdder;
 
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.ISurvivalConstructa
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -89,17 +89,17 @@ public class PrimitiveDistillationTower extends SteamMultiMachineBase<PrimitiveD
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.PrimitiveDistillationTowerRecipeType)
-            .addInfo(TextLocalization.Tooltip_PrimitiveDistillationTower_00)
-            .addInfo(TextLocalization.Tooltip_PrimitiveDistillationTower_01)
+        tt.addMachineType(StatCollector.translateToLocal("PrimitiveDistillationTowerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_01"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(3, 7, 3, false)
-            .addInputBus(TextLocalization.Tooltip_PrimitiveDistillationTower_Casing_01, 1)
-            .addOutputBus(TextLocalization.Tooltip_PrimitiveDistillationTower_Casing_01, 1)
-            .addInputHatch(TextLocalization.Tooltip_PrimitiveDistillationTower_Casing_01, 1)
-            .addOutputHatch(TextLocalization.Tooltip_PrimitiveDistillationTower_Casing_02, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_Casing_01"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_Casing_01"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_Casing_01"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_PrimitiveDistillationTower_Casing_02"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -129,7 +129,7 @@ public class PrimitiveDistillationTower extends SteamMultiMachineBase<PrimitiveD
 
     @Override
     public String getMachineType() {
-        return TextLocalization.PrimitiveDistillationTowerRecipeType;
+        return StatCollector.translateToLocal("PrimitiveDistillationTowerRecipeType");
     }
 
     @Override

@@ -30,7 +30,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -134,26 +133,26 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.IndustrialArcaneAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_00)
-            .addInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_01)
-            .addInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_02)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("IndustrialArcaneAssemblerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(91, 150, 91, true)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_03)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_04)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_05)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_06)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_07)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_08)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_09)
-            .addStructureInfo(TextLocalization.Tooltip_IndustrialArcaneAssembler_10)
-            .addInputBus(TextLocalization.Tooltip_EnergeticIndustrialArcaneAssembler_Casing)
-            .addOutputBus(TextLocalization.Tooltip_EnergeticIndustrialArcaneAssembler_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_EnergeticIndustrialArcaneAssembler_Casing)
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_03"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_04"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_05"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_06"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_07"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_08"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_09"))
+            .addStructureInfo(StatCollector.translateToLocal("Tooltip_IndustrialArcaneAssembler_10"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_EnergeticIndustrialArcaneAssembler_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_EnergeticIndustrialArcaneAssembler_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_EnergeticIndustrialArcaneAssembler_Casing"))
             .toolTipFinisher();
         return tt;
     }

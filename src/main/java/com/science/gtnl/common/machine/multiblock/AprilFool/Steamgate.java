@@ -18,7 +18,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.GTNLItemList;
 
 import gregtech.api.enums.Textures;
@@ -119,13 +118,13 @@ public class Steamgate extends MTEEnhancedMultiBlockBase<Steamgate> implements I
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addInfo(TextLocalization.Tooltip_Steamgate_00)
-            .addInfo(TextLocalization.Tooltip_Steamgate_01)
-            .addInfo(TextLocalization.Tooltip_Steamgate_02)
-            .addInfo(TextLocalization.Tooltip_Steamgate_03)
+        tt.addInfo(StatCollector.translateToLocal("Tooltip_Steamgate_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Steamgate_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Steamgate_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Steamgate_03"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 9, 1, true)
             .toolTipFinisher();
         return tt;

@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -14,7 +15,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.fluid.FluidStackTank;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,13 +43,13 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_NinefoldInputHatch_00, "",
-                TextLocalization.Tooltip_NinefoldInputHatch_02_00 + GTUtility.formatNumbers(aSlot)
-                    + TextLocalization.Tooltip_NinefoldInputHatch_02_01 });
+            new String[] { StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_00"), "",
+                StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_02_00") + GTUtility.formatNumbers(aSlot)
+                    + StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_02_01") });
         this.mStoredFluid = new FluidStack[aSlot];
         fluidTanks = new FluidStackTank[aSlot];
         mCapacityPer = getCapacityPerTank(aTier, aSlot);
-        mDescriptionArray[1] = TextLocalization.Tooltip_NinefoldInputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 
@@ -65,7 +65,7 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
                 fluid -> mStoredFluid[index] = fluid,
                 mCapacityPer);
         }
-        mDescriptionArray[1] = TextLocalization.Tooltip_NinefoldInputHatch_01 + GTUtility.formatNumbers(mCapacityPer)
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_NinefoldInputHatch_01") + GTUtility.formatNumbers(mCapacityPer)
             + "L";
     }
 

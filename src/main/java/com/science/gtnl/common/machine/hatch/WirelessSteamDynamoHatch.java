@@ -10,7 +10,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableSet;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -59,7 +58,7 @@ public class WirelessSteamDynamoHatch extends CustomFluidHatch {
 
         desc.add(StatCollector.translateToLocal("Tooltip_WirelessSteamDynamoHatch_00"));
         desc.add(StatCollector.translateToLocal("Tooltip_WirelessSteamDynamoHatch_01"));
-        desc.add(TextLocalization.HatchCustomFluid_01 + getCapacity() + "L");
+        desc.add(StatCollector.translateToLocal("HatchCustomFluid_01") + getCapacity() + "L");
         if (mTier == 0) {
             desc.add(StatCollector.translateToLocal("Tooltip_PipelessSteamVent_00"));
             desc.add(StatCollector.translateToLocal("Tooltip_PipelessSteamVent_01"));

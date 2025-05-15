@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -48,7 +48,7 @@ public class CrystalHoe extends ItemHoe {
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_CrystalHoe_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_CrystalHoe_00"));
     }
 
     @Override

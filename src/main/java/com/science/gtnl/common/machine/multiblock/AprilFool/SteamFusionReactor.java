@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputHatch;
@@ -22,7 +23,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -61,7 +61,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamFusionReactorRecipeType;
+        return StatCollector.translateToLocal("SteamFusionReactorRecipeType");
     }
 
     @Override
@@ -160,15 +160,15 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_00)
-            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_01)
-            .addInfo(TextLocalization.Tooltip_SteamFusionReactor_02)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamFusionReactor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamFusionReactor_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamFusionReactor_02"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(15, 3, 15, true)
-            .addInputHatch(TextLocalization.Tooltip_SteamFusionReactor_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_SteamFusionReactor_Casing, 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_SteamFusionReactor_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_SteamFusionReactor_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

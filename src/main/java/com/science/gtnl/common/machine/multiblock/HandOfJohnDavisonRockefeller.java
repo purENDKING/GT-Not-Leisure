@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
@@ -21,7 +22,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
@@ -105,33 +105,33 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.HandOfJohnDavisonRockefellerRecipeType)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_00)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_01)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_02)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_03)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_04)
-            .addInfo(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_00)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_04)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("HandOfJohnDavisonRockefellerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_06"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_07"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_08"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_09"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(41, 9, 9, true)
-            .addInputHatch(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_Casing)
-            .addInputBus(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_Casing)
-            .addOutputBus(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_HandOfJohnDavisonRockefeller_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_HandOfJohnDavisonRockefeller_Casing"))
             .toolTipFinisher();
         return tt;
     }

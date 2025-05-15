@@ -28,7 +28,6 @@ import com.gtnewhorizon.structurelib.alignment.constructable.IConstructable;
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import cofh.api.energy.IEnergyContainerItem;
 import gregtech.api.enums.Materials;
@@ -352,21 +351,21 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.EnergyInfuserRecipeType)
-            .addInfo(TextLocalization.Tooltip_EnergyInfuser_00)
-            .addInfo(TextLocalization.Tooltip_EnergyInfuser_01)
-            .addInfo(TextLocalization.Tooltip_EnergyInfuser_02)
-            .addInfo(TextLocalization.Tooltip_EnergyInfuser_03)
-            .addInfo(TextLocalization.Tooltip_EnergyInfuser_04)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("EnergyInfuserRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EnergyInfuser_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EnergyInfuser_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EnergyInfuser_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EnergyInfuser_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_EnergyInfuser_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 8, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_EnergyInfuser_Casing)
-            .addOutputBus(TextLocalization.Tooltip_EnergyInfuser_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_EnergyInfuser_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_EnergyInfuser_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_EnergyInfuser_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_EnergyInfuser_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_EnergyInfuser_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_EnergyInfuser_Casing"))
             .toolTipFinisher();
         return tt;
     }

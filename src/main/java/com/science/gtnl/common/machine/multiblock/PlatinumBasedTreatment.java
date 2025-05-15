@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -19,7 +20,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -121,26 +121,26 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.PlatinumBasedTreatmentRecipes)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_00)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_01)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_02)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_03)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_04)
-            .addInfo(TextLocalization.Tooltip_PlatinumBasedTreatment_05)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("PlatinumBasedTreatmentRecipes"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_04"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_05"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(15, 17, 18, true)
-            .addInputHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addOutputHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addInputBus(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addOutputBus(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addEnergyHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addMaintenanceHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_00)
-            .addMufflerHatch(TextLocalization.Tooltip_PlatinumBasedTreatment_Casing_01)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_00"))
+            .addMufflerHatch(StatCollector.translateToLocal("Tooltip_PlatinumBasedTreatment_Casing_01"))
             .toolTipFinisher();
         return tt;
     }

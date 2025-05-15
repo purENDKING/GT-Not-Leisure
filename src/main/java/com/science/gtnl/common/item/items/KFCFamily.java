@@ -2,6 +2,7 @@ package com.science.gtnl.common.item.items;
 
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
+import net.minecraft.util.StatCollector;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.client.GTNLCreativeTabs;
 import com.science.gtnl.common.GTNLItemList;
 
@@ -40,6 +40,6 @@ public class KFCFamily extends ItemFood {
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_KFCFamily_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_KFCFamily_00"));
     }
 }

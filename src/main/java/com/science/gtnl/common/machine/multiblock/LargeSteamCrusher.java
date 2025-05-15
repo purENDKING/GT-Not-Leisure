@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -22,7 +23,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import gregtech.api.GregTechAPI;
@@ -51,7 +51,7 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
 
     @Override
     public String getMachineType() {
-        return TextLocalization.LargeSteamCrusherRecipeType;
+        return StatCollector.translateToLocal("LargeSteamCrusherRecipeType");
     }
 
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -275,17 +275,17 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSteamCrusherRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_00)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_01)
-            .addInfo(TextLocalization.Tooltip_LargeSteamCrusher_02)
-            .addInfo(TextLocalization.HighPressureTooltipNotice)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSteamCrusherRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCrusher_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCrusher_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSteamCrusher_02"))
+            .addInfo(StatCollector.translateToLocal("HighPressureTooltipNotice"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(7, 8, 11, false)
-            .addInputBus(TextLocalization.Tooltip_LargeSteamCrusher_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_LargeSteamCrusher_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSteamCrusher_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSteamCrusher_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

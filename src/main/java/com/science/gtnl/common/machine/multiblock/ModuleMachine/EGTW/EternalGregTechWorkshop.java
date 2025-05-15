@@ -66,7 +66,6 @@ import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.TileEntityEternalGregTechWorkshop;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EGTWUpgradeStorage;
@@ -346,15 +345,15 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.EternalGregTechWorkshopRecipeType)
+        tt.addMachineType(StatCollector.translateToLocal("EternalGregTechWorkshopRecipeType"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(75, 96, 75, true)
-            .addInputBus(TextLocalization.Tooltip_EternalGregTechWorkshop_Casing, 1)
-            .addOutputBus(TextLocalization.Tooltip_EternalGregTechWorkshop_Casing, 1)
-            .addInputHatch(TextLocalization.Tooltip_EternalGregTechWorkshop_Casing, 1)
-            .addOutputHatch(TextLocalization.Tooltip_EternalGregTechWorkshop_Casing, 1)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_EternalGregTechWorkshop_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_EternalGregTechWorkshop_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_EternalGregTechWorkshop_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_EternalGregTechWorkshop_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }

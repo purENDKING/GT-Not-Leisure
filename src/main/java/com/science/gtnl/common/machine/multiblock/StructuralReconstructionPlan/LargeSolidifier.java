@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_MULTI_CANNER;
@@ -25,7 +26,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
 
@@ -229,22 +229,22 @@ public class LargeSolidifier extends GTMMultiMachineBase<LargeSolidifier> implem
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.LargeSolidifierRecipeType)
-            .addInfo(TextLocalization.Tooltip_LargeSolidifier_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("LargeSolidifierRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_LargeSolidifier_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 4, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_LargeSolidifier_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_LargeSolidifier_Casing)
-            .addInputBus(TextLocalization.Tooltip_LargeSolidifier_Casing)
-            .addOutputBus(TextLocalization.Tooltip_LargeSolidifier_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_LargeSolidifier_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_LargeSolidifier_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeSolidifier_Casing"))
             .toolTipFinisher();
         return tt;
     }

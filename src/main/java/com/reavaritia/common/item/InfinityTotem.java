@@ -2,6 +2,7 @@ package com.reavaritia.common.item;
 
 import static com.reavaritia.ReAvaritia.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Mods.Baubles;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.Utils.item.ItemUtils.removeItemFromPlayer;
 
 import java.util.List;
@@ -34,7 +35,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
-import com.reavaritia.TextLocalization;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.playSound;
 
@@ -71,7 +71,7 @@ public class InfinityTotem extends Item implements IBauble, SubtitleDisplay, pla
     @SideOnly(Side.CLIENT)
     public void addInformation(final ItemStack itemStack, final EntityPlayer player, final List<String> toolTip,
         final boolean advancedToolTips) {
-        toolTip.add(TextLocalization.Tooltip_InfinityTotem_00);
+        toolTip.add(StatCollector.translateToLocal("Tooltip_InfinityTotem_00"));
     }
 
     @Override

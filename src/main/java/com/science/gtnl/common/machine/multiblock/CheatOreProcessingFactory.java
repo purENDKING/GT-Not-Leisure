@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasingsAdvanced;
+import net.minecraft.util.StatCollector;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.metaItemEqual;
@@ -32,7 +33,6 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -288,10 +288,10 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.CheatOreProcessingFactoryRecipeType)
+        tt.addMachineType(StatCollector.translateToLocal("CheatOreProcessingFactoryRecipeType"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(41, 26, 18, false)
             .toolTipFinisher();
         return tt;

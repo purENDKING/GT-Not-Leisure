@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.basicMachine;
 
 import static gregtech.api.enums.Textures.BlockIcons.*;
 
+import net.minecraft.util.StatCollector;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
@@ -10,7 +11,6 @@ import com.gtnewhorizons.modularui.api.math.Size;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.ProgressBar;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
@@ -26,7 +26,7 @@ import gregtech.api.util.GTUtility;
 public class SteamAssemblerBronze extends MTEBasicMachineBronze {
 
     public SteamAssemblerBronze(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional, TextLocalization.Tooltip_SteamAssembler_00, 6, 1, false);
+        super(aID, aName, aNameRegional, StatCollector.translateToLocal("Tooltip_SteamAssembler_00"), 6, 1, false);
     }
 
     public SteamAssemblerBronze(String aName, String[] aDescription, ITexture[][][] aTextures) {

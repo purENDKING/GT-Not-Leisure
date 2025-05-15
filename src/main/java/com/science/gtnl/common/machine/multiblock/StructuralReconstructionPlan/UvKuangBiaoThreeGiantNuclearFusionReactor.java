@@ -26,7 +26,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 
 import cpw.mods.fml.relauncher.Side;
@@ -148,25 +147,25 @@ public class UvKuangBiaoThreeGiantNuclearFusionReactor
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.KuangBiaoOneGiantNuclearFusionReactorRecipeType)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03)
-            .addInfo(TextLocalization.Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04 + "640M EU")
-            .addInfo(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00)
-            .addInfo(TextLocalization.Tooltip_PerfectOverclock)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_02)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("KuangBiaoOneGiantNuclearFusionReactorRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_KuangBiaoOneGiantNuclearFusionReactor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_KuangBiaoOneGiantNuclearFusionReactor_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_KuangBiaoOneGiantNuclearFusionReactor_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_KuangBiaoOneGiantNuclearFusionReactor_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_KuangBiaoOneGiantNuclearFusionReactor_04") + "640M EU")
+            .addInfo(StatCollector.translateToLocal("Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(39, 17, 39, true)
-            .addInputBus(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing)
-            .addOutputBus(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_UvKuangBiaoThreeGiantNuclearFusionReactor_Casing"))
             .toolTipFinisher();
         return tt;
     }

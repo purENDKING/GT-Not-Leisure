@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.Utils.Utils.mergeArray;
+import net.minecraft.util.StatCollector;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.common.misc.WirelessNetworkManager.addEUToGlobalEnergyMap;
 
@@ -20,7 +21,6 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
@@ -100,9 +100,9 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
         super.getWailaBody(itemStack, currentTip, accessor, config);
         final NBTTagCompound tag = accessor.getNBTData();
         if (tag.getBoolean("wirelessMode")) {
-            currentTip.add(EnumChatFormatting.LIGHT_PURPLE + TextLocalization.Waila_WirelessMode);
+            currentTip.add(EnumChatFormatting.LIGHT_PURPLE + StatCollector.translateToLocal("Waila_WirelessMode"));
             currentTip.add(
-                EnumChatFormatting.AQUA + TextLocalization.Waila_CurrentEuCost
+                EnumChatFormatting.AQUA + StatCollector.translateToLocal("Waila_CurrentEuCost")
                     + EnumChatFormatting.RESET
                     + ": "
                     + EnumChatFormatting.GOLD

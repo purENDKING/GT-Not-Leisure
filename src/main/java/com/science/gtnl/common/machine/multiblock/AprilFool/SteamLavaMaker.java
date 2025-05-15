@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockAnyMeta;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputBus;
@@ -22,7 +23,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -69,12 +69,12 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamLavaMaker_00)
-            .addInfo(TextLocalization.Tooltip_SteamLavaMaker_01)
-            .addInfo(TextLocalization.Tooltip_SteamLavaMaker_02)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamLavaMaker_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamLavaMaker_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamLavaMaker_02"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(3, 5, 3, true)
             .toolTipFinisher();
         return tt;
@@ -82,7 +82,7 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamLavaMakerRecipeType;
+        return StatCollector.translateToLocal("SteamLavaMakerRecipeType");
     }
 
     @Override

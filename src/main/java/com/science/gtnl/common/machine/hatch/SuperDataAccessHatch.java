@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.hatch;
 
 import java.lang.reflect.Field;
 
+import net.minecraft.util.StatCollector;
 import net.minecraft.item.ItemStack;
 
 import com.gtnewhorizons.modularui.api.ModularUITextures;
@@ -9,7 +10,6 @@ import com.gtnewhorizons.modularui.api.forge.ItemStackHandler;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
-import com.science.gtnl.Utils.item.TextLocalization;
 
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
@@ -24,7 +24,7 @@ public class SuperDataAccessHatch extends MTEHatchDataAccess implements IAddGreg
 
     public SuperDataAccessHatch(int aID, String aName, String aNameRegional, int aTier) {
         super(aID, aName, aNameRegional, aTier);
-        mDescriptionArray[1] = TextLocalization.Tooltip_SuperDataAccessHatch_00;
+        mDescriptionArray[1] = StatCollector.translateToLocal("Tooltip_SuperDataAccessHatch_00");
         initializeInventory(81);
     }
 

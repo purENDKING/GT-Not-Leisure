@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
@@ -106,18 +106,18 @@ public class RareEarthCentrifugal extends MultiMachineBase<RareEarthCentrifugal>
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.RareEarthCentrifugalRecipeType)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_04)
+        tt.addMachineType(StatCollector.translateToLocal("RareEarthCentrifugalRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_04"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(5, 5, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
-            .addOutputHatch(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
-            .addInputBus(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
-            .addOutputBus(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_RareEarthCentrifugal_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_RareEarthCentrifugal_Casing"))
             .toolTipFinisher();
         return tt;
     }

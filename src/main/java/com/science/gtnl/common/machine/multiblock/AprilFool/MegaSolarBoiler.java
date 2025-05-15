@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -29,7 +30,6 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 
 import cpw.mods.fml.relauncher.Side;
@@ -78,7 +78,7 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
 
     @Override
     public String getMachineType() {
-        return TextLocalization.MegaSolarBoilerRecipeType;
+        return StatCollector.translateToLocal("MegaSolarBoilerRecipeType");
     }
 
     @Override
@@ -239,12 +239,12 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_00)
-            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_01)
-            .addInfo(TextLocalization.Tooltip_MegaSolarBoiler_02)
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSolarBoiler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSolarBoiler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_MegaSolarBoiler_02"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(21, 5, 7, true)
             .toolTipFinisher();
         return tt;

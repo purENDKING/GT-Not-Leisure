@@ -35,7 +35,6 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 
 import bartworks.API.BorosilicateGlass;
@@ -146,22 +145,22 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(TextLocalization.PreciseAssemblerRecipeType)
-            .addInfo(TextLocalization.Tooltip_PreciseAssembler_00)
-            .addInfo(TextLocalization.Tooltip_GTMMultiMachine_01)
-            .addInfo(TextLocalization.Tooltip_PreciseAssembler_01)
-            .addInfo(TextLocalization.Tooltip_PreciseAssembler_02)
-            .addInfo(TextLocalization.Tooltip_PreciseAssembler_03)
-            .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
+        tt.addMachineType(StatCollector.translateToLocal("PreciseAssemblerRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PreciseAssembler_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_GTMMultiMachine_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PreciseAssembler_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PreciseAssembler_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PreciseAssembler_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(9, 5, 5, true)
-            .addInputHatch(TextLocalization.Tooltip_PreciseAssembler_Casing)
-            .addInputBus(TextLocalization.Tooltip_PreciseAssembler_Casing)
-            .addOutputBus(TextLocalization.Tooltip_PreciseAssembler_Casing)
-            .addEnergyHatch(TextLocalization.Tooltip_PreciseAssembler_Casing)
-            .addMaintenanceHatch(TextLocalization.Tooltip_PreciseAssembler_Casing)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_PreciseAssembler_Casing"))
+            .addInputBus(StatCollector.translateToLocal("Tooltip_PreciseAssembler_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_PreciseAssembler_Casing"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_PreciseAssembler_Casing"))
+            .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_PreciseAssembler_Casing"))
             .toolTipFinisher();
         return tt;
     }

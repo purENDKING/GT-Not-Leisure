@@ -2,6 +2,7 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
+import net.minecraft.util.StatCollector;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -20,7 +21,6 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -76,7 +76,7 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
 
     @Override
     public String getMachineType() {
-        return TextLocalization.SteamExtractinatorRecipeType;
+        return StatCollector.translateToLocal("SteamExtractinatorRecipeType");
     }
 
     @Override
@@ -226,16 +226,16 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
     protected MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
         tt.addMachineType(getMachineType())
-            .addInfo(TextLocalization.Tooltip_SteamExtractinator_00)
-            .addInfo(TextLocalization.Tooltip_SteamExtractinator_01)
-            .addInfo(TextLocalization.Tooltip_SteamExtractinator_02)
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamExtractinator_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamExtractinator_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamExtractinator_02"))
             .addSeparator()
-            .addInfo(TextLocalization.StructureTooComplex)
-            .addInfo(TextLocalization.BLUE_PRINT_INFO)
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(15, 10, 17, true)
-            .addInputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_00)
-            .addOutputHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_01)
-            .addEnergyHatch(TextLocalization.Tooltip_SteamExtractinator_Casing_02)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_SteamExtractinator_Casing_00"))
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_SteamExtractinator_Casing_01"))
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_SteamExtractinator_Casing_02"))
             .toolTipFinisher();
         return tt;
     }

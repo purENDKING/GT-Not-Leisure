@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.interfaces.ITexture;
@@ -48,15 +47,15 @@ public class ManaDynamoHatch extends MTEHatchDynamo implements IAddUIWidgets {
             aName,
             aNameRegional,
             aTier,
-            new String[] { TextLocalization.Tooltip_ManaDynamoHatch_00, TextLocalization.Tooltip_ManaDynamoHatch_01,
-                TextLocalization.Tooltip_ManaDynamoHatch_02, "", TextLocalization.Tooltip_ManaDynamoHatch_04 });
-        mDescriptionArray[3] = TextLocalization.Tooltip_ManaDynamoHatch_03 + getCapacity() + "L";
+            new String[] { StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_00"), StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_01"),
+                StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_02"), "", StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_04") });
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_03") + getCapacity() + "L";
         mAmp = aAmp;
     }
 
     public ManaDynamoHatch(String aName, int aTier, String[] aDescription, ITexture[][][] aTextures, int aAmp) {
         super(aName, aTier, aDescription, aTextures);
-        mDescriptionArray[3] = TextLocalization.Tooltip_ManaDynamoHatch_03 + getCapacity() + "L";
+        mDescriptionArray[3] = StatCollector.translateToLocal("Tooltip_ManaDynamoHatch_03") + getCapacity() + "L";
         mAmp = aAmp;
     }
 
