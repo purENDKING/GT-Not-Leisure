@@ -200,7 +200,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -216,7 +216,7 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 45 && this.mMufflerHatches.size() == 1;
     }
 
@@ -260,8 +260,8 @@ public class LargeBrewer extends GTMMultiMachineBase<LargeBrewer> implements ISu
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 2.25 - (ParallelTier / 200.0));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 2.25 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

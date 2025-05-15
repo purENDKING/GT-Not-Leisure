@@ -48,6 +48,8 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=岁月静滞怀表
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=掌握时间的秘密
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=在古老的时间学派手稿中，有关「岁月静滞怀表」的记载寥寥无几。据说，它最早是由一位厌倦战争与喧嚣的炼金术士打造，他渴望在流逝中捕捉永恒。怀表的构造并不复杂，真正的难点在于为其注入“停滞”的本质。传闻整个仪式必须在月相最黯淡之夜进行，四周环绕以安静的时空晶体与沉默的金属，施术者的每一缕意念都必须精确控制，否则整个注魔仪式会使时间本身反噬施法者。若仪式成功，便可暂时将世界之流冻结于此刻，但切记：时间从不会真正被掌控，它只是在等待反扑的时机。
 
+ExplosionDynamoHatch=爆炸动力仓
+
 PipelessSteamHatch=无管蒸汽仓
 Tooltip_PipelessSteamHatch_00=§b§o它从哪儿来的? 能从看似虚无的地方提取蒸汽,
 Tooltip_PipelessSteamHatch_01=§b§o甚至无需任何管道, 你开始怀疑自己对烧水的理解.
@@ -1335,9 +1337,8 @@ Tooltip_WirelessEnergyMultiMachine_04=并行控制核心将额外提供16倍的�
 Tooltip_WirelessEnergyMultiMachine_05=加速由加算改为乘算，每级提供75%%的加速
 Tooltip_WirelessEnergyMultiMachine_06=无线模式下支持跨配方并行
 Tooltip_WirelessEnergyMultiMachine_07=机器可进行§c无损超频§7
-Tooltip_WirelessEnergyMultiMachine_08=无线模式固定运行时间为%%stick
-Tooltip_WirelessEnergyMultiMachine_09=不安装能源仓将自动进入无线模式
-Tooltip_WirelessEnergyMultiMachine_10=每级并行控制核心将减少无线模式所需时间的10tick
+Tooltip_WirelessEnergyMultiMachine_08=不安装能源仓将自动进入无线模式
+Tooltip_WirelessEnergyMultiMachine_09=无线模式下电压等级为并行控制核心等级 + 1, 电流为 4 ^ 等级 - 2
 Waila.General.WirelessMode=无线模式
 Waila.General.CurrentEuCost=当前EU消耗
 
@@ -1975,7 +1976,7 @@ Tooltip_MagneticEnergyReactionFurnace_Casing=任意电弧炉机械方块
 NameIntegratedAssemblyFacility=综合组装车间
 IntegratedAssemblyFacilityRecipeType=组装机
 Tooltip_IntegratedAssemblyFacility_00=每级玻璃和部件装配线外壳等级额外提供5%%的加速和耗电减免(乘算叠加)
-Tooltip_IntegratedAssemblyFacility_01=部件装配线外壳等级决定了能源仓最大等级 + 3, UIV机械方块解锁所有等级
+Tooltip_IntegratedAssemblyFacility_01=部件装配线外壳等级决定了能源仓最大等级 + 3, UIV装配线外壳解锁所有等级
 Tooltip_IntegratedAssemblyFacility_Casing=任意强化镀铱机械方块
 
 NameNanitesIntegratedProcessingCenter=纳米集成加工中心

@@ -6,6 +6,7 @@ import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocy
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
@@ -32,9 +33,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
-import com.science.gtnl.misc.OverclockType;
 
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
@@ -48,6 +47,7 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
+import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.MultiblockTooltipBuilder;
@@ -131,9 +131,8 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "300"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -520,25 +519,32 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return super.validateRecipe(recipe);
+            }
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
-
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(OverclockType.PerfectOverclock);
+                enablePerfectOverclock();
                 return super.process();
             }
 
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
-                    : super.createOverclockCalculator(recipe)
-                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, getMaxInputVoltage()))
-                        .setSpeedBoost(0.1 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, getMaxInputVoltage()));
+                return super.createOverclockCalculator(recipe)
+                    .setEUtDiscount(0.4 - (mParallelTier / 50.0) * Math.pow(0.95, getMaxInputVoltage()))
+                    .setSpeedBoost(0.1 * Math.pow(0.75, mParallelTier) * Math.pow(0.95, getMaxInputVoltage()));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
@@ -546,11 +552,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     @Override
     public RecipeMap<?> getRecipeMap() {
         return RecipeMaps.maceratorRecipes;
-    }
-
-    @Override
-    public int getWirelessModeProcessingTime() {
-        return 300 - ParallelTier * 10;
     }
 
     @Override

@@ -190,10 +190,10 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
                         .setAmperageOC(true)
                         .setDurationDecreasePerOC(4)
                         .setEUtIncreasePerOC(4)
-                        .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                        .setSpeedBoost(1.0 / 2.0 - (ParallelTier / 200.0));
-                } else return super.createOverclockCalculator(recipe).setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 2.0 - (ParallelTier / 200.0));
+                        .setEUtDiscount(0.5 - (mParallelTier / 50.0))
+                        .setSpeedBoost(1.0 / 2.0 - (mParallelTier / 200.0));
+                } else return super.createOverclockCalculator(recipe).setEUtDiscount(0.5 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 2.0 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
@@ -201,7 +201,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         tierCasing = -1;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -211,7 +211,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
         energyHatchTier = checkEnergyHatchTier();
         if (tierCasing < 0) return false;
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 25;
     }
 

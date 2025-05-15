@@ -144,13 +144,13 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 35 && this.mMufflerHatches.size() == 1;
     }
 
@@ -183,8 +183,8 @@ public class ElectricImplosionCompressor extends GTMMultiMachineBase<ElectricImp
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setEUt(ElectricImplosionCompressor.this.getMaxInputEu())
                     .setAmperage(1)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 / 1.67 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

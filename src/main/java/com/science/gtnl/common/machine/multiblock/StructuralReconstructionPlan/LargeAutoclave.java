@@ -128,7 +128,7 @@ public class LargeAutoclave extends GTMMultiMachineBase<LargeAutoclave> implemen
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -144,7 +144,7 @@ public class LargeAutoclave extends GTMMultiMachineBase<LargeAutoclave> implemen
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 25;
     }
 

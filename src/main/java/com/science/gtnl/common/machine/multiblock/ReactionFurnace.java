@@ -147,14 +147,14 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 115;
     }
 
@@ -167,7 +167,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     @NotNull
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         ArrayList<ItemStack> tInputList = getAllStoredInputs();
         if (tInputList.isEmpty()) return CheckRecipeResultRegistry.NO_RECIPE;
 
@@ -254,10 +254,10 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
 
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 2) {
+        if (mParallelTier <= 2) {
             return 8;
         } else {
-            return (int) Math.pow(4, ParallelTier - 3) * 512 - 1;
+            return (int) Math.pow(4, mParallelTier - 3) * 512 - 1;
         }
     }
 

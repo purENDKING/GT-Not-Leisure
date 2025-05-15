@@ -93,13 +93,13 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
 
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 1) {
+        if (mParallelTier <= 1) {
             return 8;
         } else {
             if (this.getRecipeMap() == RecipeRegister.FallingTowerRecipes) {
-                return (int) Math.pow(4, ParallelTier - 2) / 16;
+                return (int) Math.pow(4, mParallelTier - 2) / 16;
             } else {
-                return (int) Math.pow(4, ParallelTier - 2) * 4;
+                return (int) Math.pow(4, mParallelTier - 2) * 4;
             }
         }
     }
@@ -182,7 +182,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         repairMachine();
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
             return false;
@@ -192,7 +192,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
             return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return true;
     }
@@ -347,7 +347,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
     @Override
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         isCreativeOrb = false;
 
         ItemStack requiredItem = GTModHandler.getModItem(Avaritia.ID, "Orb_Armok", 1);
@@ -406,7 +406,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
                             return foundResult.checkRecipeResult;
                         } else {
                             currentEssence = SoulNetworkHandler.getCurrentEssence(getOwner());
-                            int needEssence = (int) (this.lastRecipe.mSpecialValue * (1 - ParallelTier / 50.0));
+                            int needEssence = (int) (this.lastRecipe.mSpecialValue * (1 - mParallelTier / 50.0));
 
                             if (currentEssence >= calculatedParallels * needEssence) {
                                 SoulNetworkHandler
@@ -446,7 +446,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
             protected ParallelHelper createParallelHelper(@Nonnull GTRecipe recipe) {
 
                 currentEssence = SoulNetworkHandler.getCurrentEssence(getOwner());
-                int needEssence = (int) (recipe.mSpecialValue * (1 - ParallelTier / 50.0));
+                int needEssence = (int) (recipe.mSpecialValue * (1 - mParallelTier / 50.0));
 
                 return new ParallelHelper().setRecipe(recipe)
                     .setItemInputs(inputItems)
@@ -486,7 +486,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
                     .setEUtDiscount(1)
-                    .setSpeedBoost(1 - (ParallelTier / 50.0));
+                    .setSpeedBoost(1 - (mParallelTier / 50.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -4,6 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
@@ -119,9 +120,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -220,6 +220,24 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
 
             @NotNull
             @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return super.validateRecipe(recipe);
+            }
+
+            @NotNull
+            @Override
+            public CheckRecipeResult process() {
+                setEuModifier(getEuModifier());
+                setSpeedBonus(getSpeedBonus());
+                enablePerfectOverclock();
+                return super.process();
+            }
+
+            @NotNull
+            @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
 
                 if (GTUtility.getTier(getMaxInputVoltage()) > 11) {
@@ -230,8 +248,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                         .setAmperageOC(true)
                         .setDurationDecreasePerOC(4)
                         .setEUtIncreasePerOC(4)
-                        .setEUtDiscount(calculateEUtDiscount(SpeedCount)) // 计算 EUt 折扣
-                        .setSpeedBoost(calculateSpeedBoost(SpeedCount)); // 计算速度提升
+                        .setEUtDiscount(calculateEUtDiscount(SpeedCount))
+                        .setSpeedBoost(calculateSpeedBoost(SpeedCount));
                 } else {
                     return super.createOverclockCalculator(recipe).setEUtDiscount(calculateEUtDiscount(SpeedCount))
                         .setSpeedBoost(calculateSpeedBoost(SpeedCount));
@@ -243,7 +261,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                 for (int i = 0; i < levels; i++) {
                     discount *= 0.95;
                 }
-                return (0.4 - (ParallelTier / 50.0)) * discount;
+                return (0.4 - (mParallelTier / 50.0)) * discount;
             }
 
             private double calculateSpeedBoost(double levels) {
@@ -255,20 +273,10 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                         break;
                     }
                 }
-                return (0.1 * Math.pow(0.75, ParallelTier)) * speedBoost;
-            }
-
-            @NotNull
-            @Override
-            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                return CheckRecipeResultRegistry.SUCCESSFUL;
+                return (0.1 * Math.pow(0.75, mParallelTier)) * speedBoost;
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
 
-    @Override
-    public int getWirelessModeProcessingTime() {
-        return 1200 - ParallelTier * 10;
-    }
 }

@@ -136,7 +136,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -165,7 +165,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             "D",
             Blocks.water);
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return true;
     }
 
@@ -193,8 +193,8 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setEUtDiscount(1 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -228,7 +228,7 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mCasing >= 55) {
@@ -261,8 +261,8 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 1.0 / 5.0 - (ParallelTier / 200.0)));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.05, 1.0 / 5.0 - (mParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

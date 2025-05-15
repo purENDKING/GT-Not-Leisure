@@ -197,7 +197,7 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 36.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 36.0));
                 // .setSpeedBoost(Math.max(0.05, 1.0 / 3.75 - (ParallelTier / 200.0)));
             }
 
@@ -259,7 +259,7 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
 
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
-        ParallelTier = 0;
+        mParallelTier = 0;
         mCasing = 0;
         energyHatchTier = 0;
 
@@ -267,7 +267,7 @@ public class AdvancedCircuitAssemblyLine extends GTMMultiMachineBase<AdvancedCir
             return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return mCasing >= 30;
     }

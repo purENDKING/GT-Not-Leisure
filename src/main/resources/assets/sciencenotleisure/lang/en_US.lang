@@ -48,6 +48,8 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=Time Stop Pocket Watch
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=Mastering the Secret of Time
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=In the ancient manuscripts of the Chronomantic school, records of the “Time Stop Pocket Watch” are scarce. It is said to have been first crafted by an alchemist weary of war and noise, longing to capture eternity within the flow of time. The construction of the watch itself is not complex—the true challenge lies in imbuing it with the essence of stillness. Rumors tell that the infusion must take place on the darkest night of the lunar cycle, surrounded by silent temporal crystals and hushed metals. Every thought of the practitioner must be held in perfect focus, lest the ritual turn awry and time itself lash back. If the ritual succeeds, one may briefly freeze the world’s flow at this very moment—but beware: time is never truly mastered. It merely waits for the moment to retaliate.
 
+ExplosionDynamoHatch=Explosion Dynamo Hatch
+
 PipelessSteamHatch=Pipeless Steam Hatch
 Tooltip_PipelessSteamHatch_00=§b§oWhere does it come from? Capable of extracting Steam from seemingly nowhere, and even
 Tooltip_PipelessSteamHatch_01=§b§owithout any type of Pipes, you begin to question what you thought you knew about this
@@ -1335,9 +1337,8 @@ Tooltip_WirelessEnergyMultiMachine_04=Parallel control cores provide an addition
 Tooltip_WirelessEnergyMultiMachine_05=Speed boost changed from additive to multiplicative, each level provides 75%% speed boost
 Tooltip_WirelessEnergyMultiMachine_06=Supports cross-recipe parallelism in wireless mode
 Tooltip_WirelessEnergyMultiMachine_07=Machine can perform §clossless overclocking§7
-Tooltip_WirelessEnergyMultiMachine_08=Wireless mode fixes runtime to %%stick
-Tooltip_WirelessEnergyMultiMachine_09=Automatically enters wireless mode if no energy hatch is installed
-Tooltip_WirelessEnergyMultiMachine_10=Wireless mode activation time is reduced by 10 tick per Parallel Control Core level
+Tooltip_WirelessEnergyMultiMachine_08=Automatically enters wireless mode if no energy hatch is installed
+Tooltip_WirelessEnergyMultiMachine_09=In wireless mode, the voltage is the parallel control core level + 1, ampere is 4 ^ level - 2
 Waila.General.WirelessMode=Wireless Mode
 Waila.General.CurrentEuCost=Current EU Consumption
 

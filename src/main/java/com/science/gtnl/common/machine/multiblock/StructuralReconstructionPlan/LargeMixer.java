@@ -138,7 +138,7 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -154,7 +154,7 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 50;
     }
 
@@ -171,8 +171,8 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 1.0 / 3.75 - (ParallelTier / 200.0)));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.05, 1.0 / 3.75 - (mParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -153,14 +153,14 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 115 && this.mEnergyHatches.size() == 1;
     }
 
@@ -173,7 +173,7 @@ public class MatterFabricator extends GTMMultiMachineBase<MatterFabricator> impl
     @Override
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         boolean foundValidInput = false;
         long outputAmount = 0;
         final Item MatterBall = GameRegistry.findItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial");

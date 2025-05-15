@@ -236,7 +236,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         mCasing = 0;
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
@@ -263,7 +263,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
 
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return mCasing >= 30;
     }

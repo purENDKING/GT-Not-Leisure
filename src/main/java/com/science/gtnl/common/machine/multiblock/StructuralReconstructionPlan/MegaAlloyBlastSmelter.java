@@ -170,7 +170,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         heatLevel = HeatingCoilLevel.None;
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
@@ -178,7 +178,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
             && mMufflerHatches.size() == 1
             && mCasing >= 290) {
             energyHatchTier = checkEnergyHatchTier();
-            ParallelTier = getParallelTier(aStack);
+            mParallelTier = getParallelTier(aStack);
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
             return true;
@@ -237,8 +237,8 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(Math.max(0.005, 0.8 - (ParallelTier / 50.0)))
-                    .setSpeedBoost(Math.max(0.005, 1.0 / 2.0 - (ParallelTier / 200.0)));
+                    .setEUtDiscount(Math.max(0.005, 0.8 - (mParallelTier / 50.0)))
+                    .setSpeedBoost(Math.max(0.005, 1.0 / 2.0 - (mParallelTier / 200.0)));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
@@ -248,7 +248,7 @@ public class MegaAlloyBlastSmelter extends GTMMultiMachineBase<MegaAlloyBlastSme
     @Override
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         if (processingLogic == null) {
             return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;

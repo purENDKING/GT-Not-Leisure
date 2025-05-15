@@ -144,14 +144,14 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.energyHatchTier = 0;
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mEnergyHatches.size() <= 1
             && mMufflerHatches.size() == 1
             && mCasing >= 25) {
-            ParallelTier = getParallelTier(aStack);
+            mParallelTier = getParallelTier(aStack);
             energyHatchTier = checkEnergyHatchTier();
             if (MainConfig.enableMachineAmpLimit) {
                 for (MTEHatch hatch : getExoticEnergyHatches()) {
@@ -216,8 +216,8 @@ public class AlloyBlastSmelter extends GTMMultiMachineBase<AlloyBlastSmelter> im
                 return super.createOverclockCalculator(recipe).setMachineHeat(AlloyBlastSmelter.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setEUtDiscount(1 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 - (mParallelTier / 200.0));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);

@@ -193,8 +193,8 @@ public class WoodDistillation extends GTMMultiMachineBase<WoodDistillation> impl
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(1 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
@@ -203,7 +203,7 @@ public class WoodDistillation extends GTMMultiMachineBase<WoodDistillation> impl
     @Override
     public CheckRecipeResult checkProcessing() {
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         if (processingLogic == null) {
             return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
                 : CheckRecipeResultRegistry.NO_RECIPE;

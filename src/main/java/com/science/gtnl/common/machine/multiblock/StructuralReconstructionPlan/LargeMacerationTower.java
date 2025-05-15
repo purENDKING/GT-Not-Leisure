@@ -130,7 +130,7 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -146,7 +146,7 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 55;
     }
 
@@ -177,8 +177,8 @@ public class LargeMacerationTower extends GTMMultiMachineBase<LargeMacerationTow
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.001, 1.0 / 2.0 - (ParallelTier / 200.0)));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.001, 1.0 / 2.0 - (mParallelTier / 200.0)));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

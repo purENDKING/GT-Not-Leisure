@@ -175,7 +175,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         mGlassTier = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -197,7 +197,7 @@ public class LargeCircuitAssembler extends GTMMultiMachineBase<LargeCircuitAssem
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         if (this.mEnergyHatches.size() >= 2) return false;
         return mCasing >= 30;
     }

@@ -174,7 +174,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -193,7 +193,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 50;
     }
 
@@ -220,10 +220,10 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
     @Override
     public int getMaxParallelRecipes() {
         int maxRecipes;
-        if (ParallelTier <= 2) {
+        if (mParallelTier <= 2) {
             maxRecipes = 8;
         } else {
-            maxRecipes = (int) Math.pow(4, ParallelTier - 3);
+            maxRecipes = (int) Math.pow(4, mParallelTier - 3);
         }
         return Math.min(maxRecipes, 1024);
     }

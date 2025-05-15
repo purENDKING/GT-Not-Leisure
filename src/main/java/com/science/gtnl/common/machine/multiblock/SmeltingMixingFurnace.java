@@ -14,7 +14,6 @@ import static gtPlusPlus.core.block.ModBlocks.*;
 import static kubatech.loaders.BlockLoader.defcCasingBlock;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -101,9 +100,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -258,37 +256,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
                 return CheckRecipeResultRegistry.NO_RECIPE;
             }
         }
-
-        costingEU = BigInteger.ZERO;
-        costingEUText = ZERO_STRING;
-        prepareProcessing();
-        if (!wirelessMode) return super.checkProcessing();
-
-        boolean succeeded = false;
-        CheckRecipeResult finalResult = CheckRecipeResultRegistry.SUCCESSFUL;
-        for (int i = 0; i < cycleNum; i++) {
-            CheckRecipeResult r = wirelessModeProcessOnce();
-            if (!r.wasSuccessful()) {
-                finalResult = r;
-                break;
-            }
-            succeeded = true;
-        }
-
-        updateSlots();
-        if (!succeeded) return finalResult;
-        costingEUText = GTUtility.formatNumbers(costingEU);
-
-        mEfficiency = 10000;
-        mEfficiencyIncrease = 10000;
-        mMaxProgresstime = getWirelessModeProcessingTime();
-
-        return CheckRecipeResultRegistry.SUCCESSFUL;
-    }
-
-    @Override
-    public int getWirelessModeProcessingTime() {
-        return 1200 - ParallelTier * 10;
+        return super.checkProcessing();
     }
 
     @Override

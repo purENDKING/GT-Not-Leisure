@@ -88,7 +88,7 @@ public class UhvKuangBiaoFourGiantNuclearFusionReactor
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
             return false;
@@ -99,7 +99,7 @@ public class UhvKuangBiaoFourGiantNuclearFusionReactor
             return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 1500;
     }
 
@@ -311,8 +311,8 @@ public class UhvKuangBiaoFourGiantNuclearFusionReactor
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(4 - (ParallelTier / 12.5))
-                    .setSpeedBoost(1.0 / 2.0 - (ParallelTier / 200.0));
+                    .setEUtDiscount(4 - (mParallelTier / 12.5))
+                    .setSpeedBoost(1.0 / 2.0 - (mParallelTier / 200.0));
             }
 
             @NotNull

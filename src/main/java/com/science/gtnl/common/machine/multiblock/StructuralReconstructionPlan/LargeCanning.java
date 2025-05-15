@@ -168,8 +168,8 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 3.33 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.5 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 / 3.33 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }
@@ -225,7 +225,7 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -241,7 +241,7 @@ public class LargeCanning extends GTMMultiMachineBase<LargeCanning> implements I
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 80;
     }
 

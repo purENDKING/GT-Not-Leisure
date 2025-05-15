@@ -5,6 +5,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
 import static gtPlusPlus.core.block.ModBlocks.blockCasings4Misc;
@@ -28,9 +29,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
-import com.science.gtnl.misc.OverclockType;
 
 import bartworks.API.BorosilicateGlass;
 import bartworks.util.BWUtil;
@@ -104,9 +103,8 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -145,11 +143,6 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
     }
 
     @Override
-    public int getWirelessModeProcessingTime() {
-        return 1200 - ParallelTier * 10;
-    }
-
-    @Override
     public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
         if (aBaseMetaTileEntity.isServerSide()) {
             if (!moduleHatches.isEmpty() && moduleHatches.size() <= 3) {
@@ -160,14 +153,12 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
                         module.setSpeedBoost(getSpeedBoost());
                         module.setMaxParallel(getMaxParallelRecipes());
                         module.setHeatingCapacity(mHeatingCapacity);
-                        module.setWirelessModeProcessingTime(getWirelessModeProcessingTime());
                     } else {
                         module.disconnect();
                         module.setEUtDiscount(1);
                         module.setSpeedBoost(1);
                         module.setMaxParallel(0);
                         module.setHeatingCapacity(0);
-                        module.setWirelessModeProcessingTime(0);
                     }
                 }
             } else if (moduleHatches.size() > 3) {
@@ -286,33 +277,33 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(OverclockType.PerfectOverclock);
+                enablePerfectOverclock();
                 return super.process();
             }
 
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                setEUtDiscount = 1 - (ParallelTier / 50.0) * Math.pow(0.80, coilTier);
-                setSpeedBoost = Math.pow(0.75, ParallelTier) * Math.pow(0.80, coilTier);
-                return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
-                    .setRecipeHeat(recipe.mSpecialValue)
+                setEUtDiscount = 1 - (mParallelTier / 50.0) * Math.pow(0.80, coilTier);
+                setSpeedBoost = Math.pow(0.75, mParallelTier) * Math.pow(0.80, coilTier);
+                return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(mHeatingCapacity)
-                    : super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
-                        .setMachineHeat(mHeatingCapacity)
-                        .setEUtDiscount(setEUtDiscount)
-                        .setSpeedBoost(setSpeedBoost);
+                    .setEUtDiscount(setEUtDiscount)
+                    .setSpeedBoost(setSpeedBoost);
             }
 
             @Override
             protected @Nonnull CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
                 return recipe.mSpecialValue <= mHeatingCapacity ? CheckRecipeResultRegistry.SUCCESSFUL
                     : CheckRecipeResultRegistry.insufficientHeat(recipe.mSpecialValue);
             }

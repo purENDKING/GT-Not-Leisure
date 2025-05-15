@@ -1,13 +1,13 @@
 package com.science.gtnl.common.machine.multiblock;
 
+import static gregtech.api.enums.GTValues.V;
+
 import javax.annotation.Nonnull;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
-import com.science.gtnl.misc.OverclockType;
 
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
@@ -31,7 +31,6 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
     protected final int VERTICAL_OFF_SET = 17;
     protected final int DEPTH_OFF_SET = 0;
     protected int mHeatingCapacity = 0;
-    protected int WirelessModeProcessingTime = 0;
 
     public NanitesBaseModule(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -53,9 +52,8 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -80,14 +78,14 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(OverclockType.PerfectOverclock);
+                enablePerfectOverclock();
                 return super.process();
             }
 
@@ -105,6 +103,9 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
 
             @Override
             protected @Nonnull CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
                 return recipe.mSpecialValue <= mHeatingCapacity ? CheckRecipeResultRegistry.SUCCESSFUL
                     : CheckRecipeResultRegistry.insufficientHeat(recipe.mSpecialValue);
             }
@@ -161,15 +162,6 @@ public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends 
 
     public void setHeatingCapacity(int HeatingCapacity) {
         mHeatingCapacity = HeatingCapacity;
-    }
-
-    @Override
-    public int getWirelessModeProcessingTime() {
-        return WirelessModeProcessingTime;
-    }
-
-    public void setWirelessModeProcessingTime(int time) {
-        WirelessModeProcessingTime = time;
     }
 
 }

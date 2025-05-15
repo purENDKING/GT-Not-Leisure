@@ -175,8 +175,8 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setEUtDiscount(1 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -216,7 +216,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        ParallelTier = 0;
+        mParallelTier = 0;
         mCasing = 0;
         this.multiTier = getMultiTier(aStack);
 
@@ -225,7 +225,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             && multiTier == 1) {
             replaceWaterWithPortal();
             energyHatchTier = checkEnergyHatchTier();
-            ParallelTier = getParallelTier(aStack);
+            mParallelTier = getParallelTier(aStack);
             return true;
         } else {
             replacePortalWithWater();

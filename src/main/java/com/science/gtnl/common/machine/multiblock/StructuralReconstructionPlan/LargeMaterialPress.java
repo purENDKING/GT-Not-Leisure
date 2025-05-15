@@ -144,7 +144,7 @@ public class LargeMaterialPress extends GTMMultiMachineBase<LargeMaterialPress> 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -160,7 +160,7 @@ public class LargeMaterialPress extends GTMMultiMachineBase<LargeMaterialPress> 
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 40;
     }
 
@@ -191,8 +191,8 @@ public class LargeMaterialPress extends GTMMultiMachineBase<LargeMaterialPress> 
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 2.5 - (ParallelTier / 200.0));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 2.5 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

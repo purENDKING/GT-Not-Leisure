@@ -158,7 +158,7 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.mHeatingCapacity = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
@@ -169,7 +169,7 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
         this.mHeatingCapacity = (int) getCoilLevel().getHeat();
 
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return mCasing >= 245;
     }
@@ -203,8 +203,8 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(FuelRefiningComplex.this.mHeatingCapacity)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(0.6 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(0.6 - (mParallelTier / 200.0));
             }
 
             @Override

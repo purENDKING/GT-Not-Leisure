@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.*;
 
@@ -20,9 +21,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
-import com.science.gtnl.misc.OverclockType;
 
 import bartworks.API.BorosilicateGlass;
 import galaxyspace.core.register.GSBlocks;
@@ -86,9 +85,8 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_05)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_06)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_07)
-            .addInfo(String.format(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08, "1200"))
+            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_08)
             .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_09)
-            .addInfo(TextLocalization.Tooltip_WirelessEnergyMultiMachine_10)
             .addInfo(TextLocalization.Tooltip_Tectech_Hatch)
             .addSeparator()
             .addInfo(TextLocalization.StructureTooComplex)
@@ -198,11 +196,6 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
         return RecipeMaps.crackingRecipes;
     }
 
-    @Override
-    public int getWirelessModeProcessingTime() {
-        return 1200 - ParallelTier * 10;
-    }
-
     public HeatingCoilLevel getCoilLevel() {
         return this.heatLevel;
     }
@@ -225,25 +218,32 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return super.validateRecipe(recipe);
+            }
 
             @NotNull
             @Override
             public CheckRecipeResult process() {
-
                 setEuModifier(getEuModifier());
                 setSpeedBonus(getSpeedBonus());
-                setOverclockType(OverclockType.PerfectOverclock);
+                enablePerfectOverclock();
                 return super.process();
             }
 
             @Nonnull
             @Override
             protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return wirelessMode ? OverclockCalculator.ofNoOverclock(recipe)
-                    : super.createOverclockCalculator(recipe)
-                        .setEUtDiscount(0.4 - (ParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
-                        .setSpeedBoost(1.0 / 10.0 * Math.pow(0.75, ParallelTier) * Math.pow(0.95, mGlassTier));
+                return super.createOverclockCalculator(recipe)
+                    .setEUtDiscount(0.4 - (mParallelTier / 50.0) * Math.pow(0.95, mGlassTier))
+                    .setSpeedBoost(1.0 / 10.0 * Math.pow(0.75, mParallelTier) * Math.pow(0.95, mGlassTier));
             }
         }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
@@ -251,24 +251,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
-        ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
-        if (processingLogic == null) {
-            return checkRecipe(mInventory[1]) ? CheckRecipeResultRegistry.SUCCESSFUL
-                : CheckRecipeResultRegistry.NO_RECIPE;
-        }
-
-        setupProcessingLogic(processingLogic);
-
-        CheckRecipeResult result = doCheckRecipe();
-        result = postCheckRecipe(result, processingLogic);
-        updateSlots();
-        if (!result.wasSuccessful()) return result;
-
-        mEfficiency = 10000;
-        mEfficiencyIncrease = 10000;
-        mMaxProgresstime = processingLogic.getDuration();
-        setEnergyUsage(processingLogic);
+        super.checkProcessing();
 
         int tier = getCoilLevel().getTier();
         double factor = (Math.floor(tier / 2.0) * 0.1);
@@ -293,7 +276,7 @@ public class CrackerHub extends WirelessEnergyMultiMachineBase<CrackerHub> imple
         }
         mOutputFluids = outputFluids;
 
-        return result;
+        return CheckRecipeResultRegistry.SUCCESSFUL;
     }
 
 }

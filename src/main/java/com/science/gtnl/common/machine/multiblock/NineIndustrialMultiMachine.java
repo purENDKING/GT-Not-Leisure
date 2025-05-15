@@ -9,6 +9,7 @@ import static com.science.gtnl.Utils.Utils.mergeArray;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static goodgenerator.loader.Loaders.FRF_Coil_4;
 import static gregtech.api.GregTechAPI.*;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
@@ -46,7 +47,6 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.TextLocalization;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingLogic;
 import com.science.gtnl.common.machine.multiMachineClasses.NineIndustrialMultiMachineManager;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
@@ -277,15 +277,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         return null;
     }
 
-    @Override
-    public int getWirelessModeProcessingTime() {
-        if (batchMode) {
-            return 1;
-        } else {
-            return 128;
-        }
-    }
-
     @Nonnull
     @Override
     public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
@@ -298,7 +289,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
     @Override
     protected ProcessingLogic createProcessingLogic() {
-        return new GTNLProcessingLogic() {
+        return new ProcessingLogic() {
 
             private ItemStack lastCircuit = null;
             private int lastMode = -1;
@@ -306,7 +297,9 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
             @NotNull
             @Override
             public CheckRecipeResult process() {
-                setEuModifier(0);
+                setEuModifier(getEuModifier());
+                setSpeedBonus(getSpeedBonus());
+                enablePerfectOverclock();
                 return super.process();
             }
 
@@ -360,7 +353,10 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                return CheckRecipeResultRegistry.SUCCESSFUL;
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return super.validateRecipe(recipe);
             }
         };
     }
@@ -446,7 +442,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
     public CheckRecipeResult checkProcessing() {
         costingEU = BigInteger.ZERO;
         costingEUText = ZERO_STRING;
-        prepareProcessing();
 
         if (!wirelessMode) return handleNonWirelessModeProcessing();
 
@@ -467,7 +462,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
         mEfficiency = 10000;
         mEfficiencyIncrease = 10000;
-        mMaxProgresstime = getWirelessModeProcessingTime();
+        mMaxProgresstime = 1;
 
         return CheckRecipeResultRegistry.SUCCESSFUL;
     }
@@ -476,7 +471,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
     public CheckRecipeResult wirelessModeProcessOnce() {
         if (!isRecipeProcessing) startRecipeProcessing();
         setupProcessingLogic(processingLogic);
-        setupWirelessProcessingPowerLogic(processingLogic);
 
         CheckRecipeResult result = doCheckRecipe();
         if (!result.wasSuccessful()) {
@@ -485,11 +479,6 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
         BigInteger costEU = BigInteger.valueOf(processingLogic.getCalculatedEut())
             .multiply(BigInteger.valueOf(processingLogic.getDuration()));
-
-        int m = getExtraEUCostMultiplier();
-        if (m > 1) {
-            costEU = costEU.multiply(BigInteger.valueOf(m));
-        }
 
         if (!addEUToGlobalEnergyMap(ownerUUID, costEU.multiply(NEGATIVE_ONE))) {
             return CheckRecipeResultRegistry.insufficientPower(costEU.longValue());

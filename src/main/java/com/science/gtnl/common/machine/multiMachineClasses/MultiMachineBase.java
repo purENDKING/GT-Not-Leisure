@@ -88,7 +88,7 @@ public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MT
     implements IConstructable, ISurvivalConstructable {
 
     protected int mCasing;
-    protected int ParallelTier;
+    protected int mParallelTier;
     protected int energyHatchTier;
     protected int mMaxParallel = 0;
     protected int cleanroomTier = 0;

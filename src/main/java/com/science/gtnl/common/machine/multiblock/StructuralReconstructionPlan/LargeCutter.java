@@ -195,7 +195,7 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -211,7 +211,7 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 60;
     }
 
@@ -228,8 +228,8 @@ public class LargeCutter extends GTMMultiMachineBase<LargeCutter> implements ISu
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.5 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 3.25 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.5 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 3.25 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

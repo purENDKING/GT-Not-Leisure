@@ -218,8 +218,8 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                 return super.createOverclockCalculator(recipe).setMachineHeat(VacuumDryingFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(0.6 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 2.5 - (ParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
+                    .setEUtDiscount(0.6 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 / 2.5 - (mParallelTier / 200.0) * ((machineMode >= 2) ? 1 : 0.1));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
@@ -237,7 +237,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -258,7 +258,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
             }
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 10;
     }
 

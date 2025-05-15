@@ -131,7 +131,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
             return false;
@@ -151,7 +151,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return mCasing >= 25;
     }
@@ -169,8 +169,8 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.6 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1.0 / 3.25 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.6 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1.0 / 3.25 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

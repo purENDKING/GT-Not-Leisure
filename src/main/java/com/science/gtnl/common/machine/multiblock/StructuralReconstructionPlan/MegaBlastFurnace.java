@@ -172,7 +172,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     @Override
     public boolean isEnablePerfectOverclock() {
-        return ParallelTier >= 9;
+        return mParallelTier >= 9;
     }
 
     @Override
@@ -243,8 +243,8 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                     .setMachineHeat(MegaBlastFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
                     .setHeatDiscount(false)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.005, 1.0 / 5.0 - (ParallelTier / 200.0)));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.005, 1.0 / 5.0 - (mParallelTier / 200.0)));
             }
 
             @Override
@@ -258,10 +258,10 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     @Override
     public int getMaxParallelRecipes() {
-        if (ParallelTier <= 1) {
+        if (mParallelTier <= 1) {
             return 8;
         } else {
-            return (int) Math.pow(4, ParallelTier - 2) * 4;
+            return (int) Math.pow(4, mParallelTier - 2) * 4;
         }
     }
 
@@ -290,7 +290,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -305,7 +305,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
             .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
 
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 3500;
     }
 

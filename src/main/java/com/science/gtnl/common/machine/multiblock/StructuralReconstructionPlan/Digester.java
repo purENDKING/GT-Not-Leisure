@@ -159,13 +159,13 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
             && mCasing >= 45) {
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
-            ParallelTier = getParallelTier(aStack);
+            mParallelTier = getParallelTier(aStack);
             energyHatchTier = checkEnergyHatchTier();
             if (MainConfig.enableMachineAmpLimit) {
                 for (MTEHatch hatch : getExoticEnergyHatches()) {
@@ -230,8 +230,8 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
                     .setHeatOC(true)
                     .setHeatDiscount(true)
                     .enablePerfectOC()
-                    .setEUtDiscount(0.8 - ((ParallelTier + mHeatingCapacity / 1800.0) / 50.0))
-                    .setSpeedBoost(1 / 1.67 - ((ParallelTier + mHeatingCapacity / 1800.0) / 200.0));
+                    .setEUtDiscount(0.8 - ((mParallelTier + mHeatingCapacity / 1800.0) / 50.0))
+                    .setSpeedBoost(1 / 1.67 - ((mParallelTier + mHeatingCapacity / 1800.0) / 200.0));
             }
 
             @Override

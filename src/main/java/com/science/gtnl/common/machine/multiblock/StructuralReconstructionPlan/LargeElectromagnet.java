@@ -157,7 +157,7 @@ public class LargeElectromagnet extends GTMMultiMachineBase<LargeElectromagnet> 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -173,7 +173,7 @@ public class LargeElectromagnet extends GTMMultiMachineBase<LargeElectromagnet> 
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 30;
     }
 

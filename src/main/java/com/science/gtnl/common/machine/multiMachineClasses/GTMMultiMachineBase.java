@@ -49,13 +49,13 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setInteger("parallelTier", ParallelTier);
+        aNBT.setInteger("parallelTier", mParallelTier);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        ParallelTier = aNBT.getInteger("parallelTier");
+        mParallelTier = aNBT.getInteger("parallelTier");
     }
 
     @Override
@@ -64,7 +64,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
             if (mParallelControllerHatches.size() == 1 && aTick % 20 == 0) {
                 for (ParallelControllerHatch module : mParallelControllerHatches) {
                     setMaxParallel(module.getParallel());
-                    ParallelTier = module.mTier;
+                    mParallelTier = module.mTier;
                 }
             } else {
                 setMaxParallel(8);
@@ -87,8 +87,8 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 / 1.67 - (mParallelTier / 200.0));
 
                 ((IOverclockCalculatorExtension) calc).setMoreSpeedBoost(configSpeedBoost);
 
@@ -111,13 +111,13 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     public int getMaxParallelRecipes() {
         if (mParallelControllerHatches.size() == 1) {
             for (ParallelControllerHatch module : mParallelControllerHatches) {
-                ParallelTier = module.mTier;
+                mParallelTier = module.mTier;
                 return module.getParallel();
             }
-        } else if (ParallelTier <= 1) {
+        } else if (mParallelTier <= 1) {
             return 8;
         } else {
-            return (int) Math.pow(4, ParallelTier - 2);
+            return (int) Math.pow(4, mParallelTier - 2);
         }
         return 8;
     }
@@ -159,9 +159,10 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
+        mParallelTier = 0;
         ItemStack controllerItem = getControllerSlot();
         int ParallelTierItem = getParallelTier(controllerItem);
-        ParallelTier = Math.max(ParallelTier, ParallelTierItem);
+        mParallelTier = Math.max(mParallelTier, ParallelTierItem);
         return super.checkProcessing();
     }
 

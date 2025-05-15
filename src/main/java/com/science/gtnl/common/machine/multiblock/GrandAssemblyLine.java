@@ -218,7 +218,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
         // 第一步：初始化参数
         ItemStack controllerItem = getControllerSlot();
-        this.ParallelTier = getParallelTier(controllerItem);
+        this.mParallelTier = getParallelTier(controllerItem);
         long energyEU = wirelessMode ? Integer.MAX_VALUE
             : GTValues.VP[energyHatchTier] * (useSingleAmp ? 1 : getMaxInputAmps() / 4); // 能源仓最大输入功率
         int maxParallel = getMaxParallelRecipes(); // 最大并行数
@@ -445,7 +445,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                         .multiply(
                             BigInteger.valueOf(4)
                                 .pow(overclockCount));
-                    adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount);
+                    adjustedTime = recipe.mDuration / (int) Math.pow((mParallelTier >= 11) ? 4 : 2, overclockCount);
 
                     // 检查功耗是否超过 int 的最大值或时间是否小于 1
                     while ((adjustedPowerBigInt.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0
@@ -455,7 +455,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                             .multiply(
                                 BigInteger.valueOf(4)
                                     .pow(overclockCount)); // 重新计算功耗
-                        adjustedTime = recipe.mDuration / (int) Math.pow((ParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
+                        adjustedTime = recipe.mDuration / (int) Math.pow((mParallelTier >= 11) ? 4 : 2, overclockCount); // 重新计算时间
                         adjustedPower = adjustedPowerBigInt.min(BigInteger.valueOf(Integer.MAX_VALUE))
                             .intValue();
                     }
@@ -635,86 +635,72 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
             }
 
             if (!wirelessMode) {
-                // 调整功率和时间以适配能源仓输入功率
                 long needEUt = needEU / needTime;
 
                 while (needEU / needTime > energyEU) {
+                    if ((long) needTime * 2 > Integer.MAX_VALUE) {
+                        break;
+                    }
                     needEU /= 2;
                     needTime *= 2;
                 }
 
                 while ((needEU / needTime) * 8 < energyEU) {
-                    // 检查 needEUt 是否超过 Long.MAX_VALUE
                     if (needEUt > Long.MAX_VALUE / 4) {
                         needEUt = Long.MAX_VALUE;
-                        break; // 如果超过上限，则设置为最大值并退出循环
+                        break;
                     }
 
-                    // 检查 needTime 是否会低于 1
                     if (needTime / 2 < 1) {
-                        break; // 如果时间会低于 1，则退出循环
+                        break;
                     }
 
-                    // 更新 needEUt 和 needTime
                     needEUt *= 4;
-                    needTime /= (ParallelTier >= 11) ? 4 : 2;
+                    needTime /= (mParallelTier >= 11) ? 4 : 2;
                 }
 
-                // 累加总功率和最大时间
                 totalNeedEUt = needEUt;
                 totalMaxProgressTime = needTime;
             }
 
-            // 第六步：生成输出物品并累加到总输出列表
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
                 GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
                 int parallel = entry.getValue();
 
-                // 生成输出物品
                 ItemStack output = recipe.mOutput.copy();
                 output.stackSize *= parallel;
 
-                // 将输出物品添加到总输出列表
                 if (output.stackSize > 0) {
                     totalOutputs.add(output);
                 }
             }
 
-            // 检查总输出是否溢出
             if (!totalOutputs.isEmpty() && !canOutputAll(totalOutputs.toArray(new ItemStack[0]))) {
-                // 如果溢出，返回
                 return CheckRecipeResultRegistry.ITEM_OUTPUT_FULL;
             }
 
-            // 第七步：消耗输入的物品和流体
             for (Map.Entry<GTRecipe.RecipeAssemblyLine, Integer> entry : recipeParallelMap.entrySet()) {
                 GTRecipe.RecipeAssemblyLine recipe = entry.getKey();
                 int parallel = entry.getValue();
 
-                // 消耗物品
                 for (ItemStack input : recipe.mInputs) {
-                    consumeItems(input, (long) input.stackSize * parallel, allInputs); // 使用自定义方法
+                    consumeItems(input, (long) input.stackSize * parallel, allInputs);
                 }
 
-                // 消耗流体
                 for (FluidStack fluid : recipe.mFluidInputs) {
-                    consumeFluids(fluid, (long) fluid.amount * parallel, allFluids); // 使用自定义方法
+                    consumeFluids(fluid, (long) fluid.amount * parallel, allFluids);
                 }
             }
         }
 
-        // 如果没有有效的配方，返回 NO_RECIPE
         if (totalOutputs.isEmpty()) {
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
-        // 第八步：设置总输出物品
         mOutputItems = totalOutputs.toArray(new ItemStack[0]);
 
-        // 第九步：更新槽位
         updateSlots();
 
-        // 设置总功率和最大时间
         if (wirelessMode) {
             costingEUText = GTUtility.formatNumbers(costingEU);
             if (!addEUToGlobalEnergyMap(ownerUUID, costingEU.multiply(NEGATIVE_ONE))) {
@@ -727,7 +713,6 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
             this.mMaxProgresstime = totalMaxProgressTime;
         }
 
-        // 更新效率
         this.mEfficiency = 10000;
         this.mEfficiencyIncrease = 10000;
 
@@ -916,7 +901,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setBoolean("wirelessMode", wirelessMode);
-        aNBT.setInteger("parallelTier", ParallelTier);
+        aNBT.setInteger("parallelTier", mParallelTier);
         aNBT.setInteger("minRecipeTime", minRecipeTime);
     }
 
@@ -924,7 +909,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         wirelessMode = aNBT.getBoolean("wirelessMode");
-        ParallelTier = aNBT.getInteger("parallelTier");
+        mParallelTier = aNBT.getInteger("parallelTier");
         minRecipeTime = aNBT.getInteger("minRecipeTime");
     }
 
@@ -989,7 +974,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         mDataAccessHatches.clear();
         isDualInputHatch = false;
         useSingleAmp = true;
@@ -998,9 +983,9 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
         if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
         useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
-        if (ParallelTier < 10 && MainConfig.enableMachineAmpLimit) {
+        if (mParallelTier < 10 && MainConfig.enableMachineAmpLimit) {
             for (MTEHatch hatch : getExoticEnergyHatches()) {
                 if (hatch instanceof MTEHatchEnergyTunnel) {
                     return false;
@@ -1009,7 +994,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
             if (mEnergyHatches.size() + mExoticEnergyHatches.size() > 1 || getMaxInputAmps() > 64) return false;
         }
 
-        if (ParallelTier >= 12 && mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) {
+        if (mParallelTier >= 12 && mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty()) {
             wirelessMode = true;
             useSingleAmp = false;
             energyHatchTier = 14;
@@ -1122,8 +1107,8 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return OverclockCalculator.ofNoOverclock(recipe)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) * ((ParallelTier >= 12) ? 0.2 : 1))
-                    .setSpeedBoost((1 / 1.67 - (ParallelTier / 200.0)) * ((ParallelTier >= 12) ? 1.0 / 20.0 : 1));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0) * ((mParallelTier >= 12) ? 0.2 : 1))
+                    .setSpeedBoost((1 / 1.67 - (mParallelTier / 200.0)) * ((mParallelTier >= 12) ? 1.0 / 20.0 : 1));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

@@ -134,7 +134,7 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
             return false;
@@ -155,7 +155,7 @@ public class DecayHastener extends GTMMultiMachineBase<DecayHastener> implements
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
 
         return mCasing >= 80;
     }

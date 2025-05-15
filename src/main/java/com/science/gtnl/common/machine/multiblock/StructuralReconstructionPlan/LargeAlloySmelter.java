@@ -139,7 +139,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -157,7 +157,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
         }
 
         if (mMaintenanceHatches.size() != 1 && mMufflerHatches.size() != 1) return false;
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 25;
     }
 
@@ -169,8 +169,8 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
                 return super.createOverclockCalculator(recipe)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) - (getCoilLevel().getTier() / 50.0))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0) - (getCoilLevel().getTier() / 50.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0) - (getCoilLevel().getTier() / 50.0))
+                    .setSpeedBoost(1 / 1.67 - (mParallelTier / 200.0) - (getCoilLevel().getTier() / 50.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

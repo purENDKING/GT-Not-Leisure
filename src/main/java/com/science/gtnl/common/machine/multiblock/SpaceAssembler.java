@@ -191,14 +191,14 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         mGlassTier = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 10;
     }
 
@@ -215,8 +215,8 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
                     .setAmperage(availableAmperage)
                     .setRecipeEUt(recipe.mEUt)
                     .setEUt(availableVoltage)
-                    .setEUtDiscount(0.8 - (ParallelTier / 50.0) * Math.pow(0.90, mGlassTier))
-                    .setSpeedBoost(1 / 1.67 - (ParallelTier / 200.0));
+                    .setEUtDiscount(0.8 - (mParallelTier / 50.0) * Math.pow(0.90, mGlassTier))
+                    .setSpeedBoost(1 / 1.67 - (mParallelTier / 200.0));
             }
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
     }

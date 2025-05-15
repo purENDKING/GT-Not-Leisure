@@ -158,7 +158,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
         mGlassTier = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
         mMillingBallBuses.clear();
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
@@ -181,7 +181,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 48 && mMillingBallBuses.size() == 1;
     }
 
@@ -388,8 +388,8 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
                     .setAmperageOC(true)
                     .setDurationDecreasePerOC(4)
                     .setEUtIncreasePerOC(4)
-                    .setEUtDiscount(1 - (ParallelTier / 50.0))
-                    .setSpeedBoost(1 - (ParallelTier / 200.0));
+                    .setEUtDiscount(1 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 - (mParallelTier / 200.0));
             }
 
         }.enablePerfectOverclock()

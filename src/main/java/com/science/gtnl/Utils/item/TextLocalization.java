@@ -2107,14 +2107,11 @@ public class TextLocalization {
         "It gains §cperfect overclock§7",
         "Tooltip_WirelessEnergyMultiMachine_07");
     public static final String Tooltip_WirelessEnergyMultiMachine_08 = texter(
-        "The fixed running time of wireless mode is %%s tick",
+        "If the energy storage unit is not installed, it will automatically enter wireless mode",
         "Tooltip_WirelessEnergyMultiMachine_08");
     public static final String Tooltip_WirelessEnergyMultiMachine_09 = texter(
-        "If the energy storage unit is not installed, it will automatically enter wireless mode",
+        "In wireless mode, the voltage is the parallel control core level + 1, ampere is 4 ^ level - 2",
         "Tooltip_WirelessEnergyMultiMachine_09");
-    public static final String Tooltip_WirelessEnergyMultiMachine_10 = texter(
-        "Wireless mode activation time is reduced by 10 tick per Parallel Control Core level",
-        "Tooltip_WirelessEnergyMultiMachine_10");
     public static final String Waila_WirelessMode = texter("Wireless Mode", "Waila.General.WirelessMode");
     public static final String Waila_CurrentEuCost = texter("Current EU Cost", "Waila.General.CurrentEuCost");
 

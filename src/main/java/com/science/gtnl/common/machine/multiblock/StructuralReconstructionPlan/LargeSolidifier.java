@@ -140,8 +140,8 @@ public class LargeSolidifier extends GTMMultiMachineBase<LargeSolidifier> implem
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (ParallelTier / 50.0))
-                    .setSpeedBoost(Math.max(0.05, 1 / 4.0 - (ParallelTier / 200.0)));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(0.8 - (mParallelTier / 50.0))
+                    .setSpeedBoost(Math.max(0.05, 1 / 4.0 - (mParallelTier / 200.0)));
             }
 
         }.setMaxParallelSupplier(this::getMaxParallelRecipes);
@@ -269,7 +269,7 @@ public class LargeSolidifier extends GTMMultiMachineBase<LargeSolidifier> implem
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mCasing = 0;
-        ParallelTier = 0;
+        mParallelTier = 0;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
             return false;
@@ -285,7 +285,7 @@ public class LargeSolidifier extends GTMMultiMachineBase<LargeSolidifier> implem
             if (getMaxInputAmps() > 64) return false;
         }
 
-        ParallelTier = getParallelTier(aStack);
+        mParallelTier = getParallelTier(aStack);
         return mCasing >= 45;
     }
 
