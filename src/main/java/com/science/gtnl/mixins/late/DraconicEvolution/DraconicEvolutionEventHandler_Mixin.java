@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.late.DraconicEvolution;
 
 import static com.reavaritia.common.item.InfinitySword.cancelDragonArmor;
 

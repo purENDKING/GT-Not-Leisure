@@ -420,6 +420,7 @@ public enum GTNLItemList implements IItemContainer {
     LargeSteamCircuitAssembler,
     GenerationEarthEngine,
 
+    ExplosionDynamoHatch,
     AutoConfigurationMaintenanceHatch,
     PipelessSteamHatch,
     PipelessSteamVent,

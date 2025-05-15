@@ -32,10 +32,12 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Bartwork.MultipleMetalLoader_Mixin");
         mixins.add("Bartwork.SimpleMetalLoader_Mixin");
         mixins.add("Bartwork.CircuitImprintLoader_Mixin");
-        mixins.add("ItemBloodSword_Mixin");
-        mixins.add("DraconicEvolutionEventHandler_Mixin");
-        mixins.add("BacteriaRegistry_Mixin");
-        mixins.add("MeteorParadigm_Mixin");
+        mixins.add("DraconicEvolution.DraconicEvolutionEventHandler_Mixin");
+        mixins.add("DraconicEvolution.ReactorExplosion_Mixin");
+        mixins.add("ThaumicTinkerer.ItemBloodSword_Mixin");
+        mixins.add("NHCoreMod.BacteriaRegistry_Mixin");
+        mixins.add("BloodMagic.MeteorParadigm_Mixin");
+        mixins.add("AppliedEnergistics.EntityTinyTNTPrimed_Mixin");
 
         if (!Mods.Overpowered.isModLoaded() && MainConfig.enableRecipeOutputChance) {
             mixins.add("Gregtech.VoltageChanceBonus_GT_ParallelHelper_Mixin");

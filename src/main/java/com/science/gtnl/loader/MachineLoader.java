@@ -30,6 +30,7 @@ import com.science.gtnl.common.machine.hatch.CustomMaintenanceHatch;
 import com.science.gtnl.common.machine.hatch.DebugEnergyHatch;
 import com.science.gtnl.common.machine.hatch.DualInputHatch;
 import com.science.gtnl.common.machine.hatch.DualOutputHatch;
+import com.science.gtnl.common.machine.hatch.ExplosionDynamoHatch;
 import com.science.gtnl.common.machine.hatch.HumongousInputBus;
 import com.science.gtnl.common.machine.hatch.HumongousNinefoldInputHatch;
 import com.science.gtnl.common.machine.hatch.HumongousSolidifierHatch;
@@ -1406,6 +1407,14 @@ public class MachineLoader {
                 120,
                 5));
         addItemTooltip(GTNLItemList.AutoConfigurationMaintenanceHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.ExplosionDynamoHatch.set(
+            new ExplosionDynamoHatch(
+                EXPLOSION_DYNAMO_HATCH.ID,
+                "ExplosionDynamoHatch",
+                StatCollector.translateToLocal("ExplosionDynamoHatch"),
+                1));
+        addItemTooltip(GTNLItemList.ExplosionDynamoHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

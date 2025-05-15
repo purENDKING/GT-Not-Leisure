@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.late.ThaumicTinkerer;
 
 import static com.reavaritia.common.item.InfinitySword.cancelBloodSword;
 

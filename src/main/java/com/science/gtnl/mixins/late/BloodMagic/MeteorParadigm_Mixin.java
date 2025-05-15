@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.late;
+package com.science.gtnl.mixins.late.BloodMagic;
 
 import static com.science.gtnl.Utils.bloodMagic.MeteorParadigmHelper.*;
 
