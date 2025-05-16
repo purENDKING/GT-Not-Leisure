@@ -20,6 +20,7 @@ import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.MoreMaterialToolUtils;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
+import com.science.gtnl.common.machine.basicMachine.DebugResearchStation;
 import com.science.gtnl.common.machine.basicMachine.ManaTank;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerSteel;
@@ -1608,6 +1609,14 @@ public class MachineLoader {
                 StatCollector.translateToLocal("ExplosionDynamoHatch"),
                 1));
         addItemTooltip(GTNLItemList.ExplosionDynamoHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.DebugResearchStation.set(
+            new DebugResearchStation(
+                DEBUG_RESEARCH_STATION.ID,
+                "DebugResearchStation",
+                StatCollector.translateToLocal("DebugResearchStation"),
+                14));
+        addItemTooltip(GTNLItemList.DebugResearchStation.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

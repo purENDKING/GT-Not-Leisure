@@ -249,6 +249,9 @@ Tooltip_SteamTurbine_01=Base efficiency: 2L steam/EU
 Tooltip_SteamTurbine_02=Fuel efficiency: 
 Tooltip_SteamTurbine_03=Fluid capacity: 
 
+DebugResearchStation=Debug Research Station
+Tooltip_DebugResearchStation_00=Immediately scans Research Station recipes, requires no energy
+
 GasCollectorLV=Basic Gas Collector
 GasCollectorMV=Advanced Gas Collector
 GasCollectorHV=Advanced Gas Collector II

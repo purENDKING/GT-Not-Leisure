@@ -249,6 +249,9 @@ Tooltip_SteamTurbine_01=基础效率: 2L蒸汽/EU
 Tooltip_SteamTurbine_02=燃料效率: 
 Tooltip_SteamTurbine_03=流体容量: 
 
+DebugResearchStation=Debug研究站
+Tooltip_DebugResearchStation_00=立即扫描研究站配方, 无需能量
+
 GasCollectorLV=基础集气室
 GasCollectorMV=进阶集气室
 GasCollectorHV=进阶集气室 II
