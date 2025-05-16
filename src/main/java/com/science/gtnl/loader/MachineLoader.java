@@ -72,6 +72,7 @@ import com.science.gtnl.common.machine.multiblock.DraconicFusionCrafting;
 import com.science.gtnl.common.machine.multiblock.EdenGarden;
 import com.science.gtnl.common.machine.multiblock.ElementCopying;
 import com.science.gtnl.common.machine.multiblock.EnergeticPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.EngravingLaserPlant;
 import com.science.gtnl.common.machine.multiblock.FuelRefiningComplex;
 import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
 import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
@@ -1084,6 +1085,13 @@ public class MachineLoader {
                 "SpaceAssembler",
                 StatCollector.translateToLocal("NameSpaceAssembler")));
         addItemTooltip(GTNLItemList.SpaceAssembler.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.EngravingLaserPlant.set(
+            new EngravingLaserPlant(
+                ENGRAVING_LASER_PLANT.ID,
+                "EngravingLaserPlant",
+                StatCollector.translateToLocal("NameEngravingLaserPlant")));
+        addItemTooltip(GTNLItemList.EngravingLaserPlant.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

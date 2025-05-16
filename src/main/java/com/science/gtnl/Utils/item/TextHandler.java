@@ -1,22 +1,16 @@
 package com.science.gtnl.Utils.item;
 
-import static net.minecraft.util.StatCollector.translateToLocalFormatted;
-
-import java.util.HashMap;
-import java.util.Map;
+import net.minecraft.util.StatCollector;
 
 public class TextHandler {
-
-    public static Map<String, String> LangMap;
-    public static Map<String, String> LangMapNeedToWrite = new HashMap<>();
 
     public static String texter(String aTextLine, String aKey) {
 
         /**
          * If not in Dev mode , return vanilla forge method directly.
          */
-        if (null != translateToLocalFormatted(aKey)) {
-            return translateToLocalFormatted(aKey);
+        if (null != StatCollector.translateToLocal(aKey)) {
+            return StatCollector.translateToLocal(aKey);
         }
         return "texterError: " + aTextLine;
     }
