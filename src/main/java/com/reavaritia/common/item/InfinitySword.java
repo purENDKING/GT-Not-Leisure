@@ -216,7 +216,6 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             target.onDeath(INFINITY_DAMAGE);
             target.setDead();
             target.worldObj.removeEntity(target);
-            target.worldObj.updateEntity(target);
         }
     }
 
@@ -383,7 +382,6 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
             target.onDeath(INFINITY_DAMAGE);
             target.setDead();
             target.worldObj.removeEntity(target);
-            target.worldObj.updateEntity(target);
         }
     }
 

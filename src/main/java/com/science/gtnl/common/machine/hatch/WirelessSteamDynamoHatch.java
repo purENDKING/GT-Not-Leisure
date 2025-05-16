@@ -3,53 +3,119 @@ package com.science.gtnl.common.machine.hatch;
 import static com.science.gtnl.Utils.SteamWirelessNetworkManager.addSteamToGlobalSteamMap;
 import static gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation.number_of_energy_additions;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
+
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableSet;
+import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
+import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.fluid.IFluidStore;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
+import gregtech.api.metatileentity.implementations.MTEHatch;
+import gregtech.api.metatileentity.implementations.MTEHatchOutput;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTUtility;
 import gregtech.common.misc.spaceprojects.SpaceProjectManager;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
-public class WirelessSteamDynamoHatch extends CustomFluidHatch {
+public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidStore {
 
     private UUID owner_uuid;
+    public Set<Fluid> mLockedFluids;
 
     public WirelessSteamDynamoHatch(final int aID, final String aName, final String aNameRegional, int aTier) {
-        super(
-            ImmutableSet.of(
-                FluidUtils.getSteam(1)
-                    .getFluid()),
-            aTier == 0 ? 128000000 : Integer.MAX_VALUE,
-            aID,
-            aName,
-            aNameRegional,
-            aTier);
+        super(aID, aName, aNameRegional, aTier);
+        this.mLockedFluids = ImmutableSet.of(
+            FluidUtils.getSteam(1)
+                .getFluid(),
+            FluidUtils.getSuperHeatedSteam(1)
+                .getFluid(),
+            FluidRegistry.getFluidStack("supercriticalsteam", 1)
+                .getFluid(),
+            MaterialPool.CompressedSteam.getMolten(1)
+                .getFluid());
     }
 
-    public WirelessSteamDynamoHatch(final String aName, final ITexture[][][] aTextures, int aTier) {
-        super(
-            ImmutableSet.of(
-                FluidUtils.getSteam(1)
-                    .getFluid()),
-            aTier == 0 ? 128000000 : Integer.MAX_VALUE,
-            aName,
-            aTier,
-            new String[] { "" },
-            aTextures);
+    public WirelessSteamDynamoHatch(final String aName, int aTier, final ITexture[][][] aTextures, Set<Fluid> aFluid) {
+        super(aName, aTier, 3, new String[] { "" }, aTextures);
+        this.mLockedFluids = ImmutableSet.of(
+            FluidUtils.getSteam(1)
+                .getFluid(),
+            FluidUtils.getSuperHeatedSteam(1)
+                .getFluid(),
+            FluidRegistry.getFluidStack("supercriticalsteam", 1)
+                .getFluid(),
+            MaterialPool.CompressedSteam.getMolten(1)
+                .getFluid());
     }
 
     @Override
     public MetaTileEntity newMetaEntity(final IGregTechTileEntity aTileEntity) {
-        return new WirelessSteamDynamoHatch(this.mName, this.mTextures, mTier);
+        return new WirelessSteamDynamoHatch(this.mName, this.mTier, this.mTextures, this.mLockedFluids);
+    }
+
+    @Override
+    public int getCapacity() {
+        return mTier == 0 ? 128000000 : Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean isFluidLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean acceptsFluidLock(String name) {
+        return false;
+    }
+
+    @Override
+    public void setLockedFluidName(String lockedFluidName) {}
+
+    @Override
+    public void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {}
+
+    @Override
+    public boolean isLiquidInput(ForgeDirection side) {
+        return true;
+    }
+
+    @Override
+    public boolean doesEmptyContainers() {
+        return true;
+    }
+
+    @Override
+    public boolean isFluidInputAllowed(final FluidStack aFluid) {
+        for (Fluid allowed : mLockedFluids) {
+            if (allowed.getName()
+                .equals(
+                    aFluid.getFluid()
+                        .getName()))
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    protected FluidSlotWidget createFluidSlot() {
+        return super.createFluidSlot().setFilter(mLockedFluids::contains);
     }
 
     @Override
@@ -83,11 +149,66 @@ public class WirelessSteamDynamoHatch extends CustomFluidHatch {
     }
 
     @Override
+    public ITexture[] getTexture(IGregTechTileEntity aBaseMetaTileEntity, ForgeDirection side, ForgeDirection aFacing,
+        int colorIndex, boolean aActive, boolean redstoneLevel) {
+
+        int texturePointer = getUpdateData();
+        int mTexturePage;
+
+        try {
+            Class<?> hatchClass = MTEHatch.class;
+            Field texturePageField = hatchClass.getDeclaredField("mTexturePage");
+            texturePageField.setAccessible(true);
+            mTexturePage = (byte) texturePageField.get(this);
+            if (mTexturePage < 0 || mTexturePage >= Textures.BlockIcons.casingTexturePages.length) {
+                return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[0][0] };
+            }
+
+            int textureIndex = texturePointer | (mTexturePage << 7);
+
+            if (side != aFacing) {
+                if (textureIndex > 0 && texturePointer < Textures.BlockIcons.casingTexturePages[mTexturePage].length) {
+                    return new ITexture[] { Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer] };
+                } else {
+                    return new ITexture[] { getBaseTexture(colorIndex) };
+                }
+            } else {
+                if (textureIndex > 0 && texturePointer < Textures.BlockIcons.casingTexturePages[mTexturePage].length) {
+                    if (aActive) {
+                        return getTexturesActive(Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer]);
+                    } else {
+                        return getTexturesInactive(
+                            Textures.BlockIcons.casingTexturePages[mTexturePage][texturePointer]);
+                    }
+                } else {
+                    if (aActive) {
+                        return getTexturesActive(getBaseTexture(colorIndex));
+                    } else {
+                        return getTexturesInactive(getBaseTexture(colorIndex));
+                    }
+                }
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+            return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[0][0] };
+        }
+    }
+
     public ITexture getBaseTexture(int colorIndex) {
         if (mTier == 0) {
             return TextureFactory.of(Textures.BlockIcons.MACHINE_BRONZE_SIDE);
         }
         return TextureFactory.of(Textures.BlockIcons.MACHINE_STEEL_SIDE);
+    }
+
+    @Override
+    public boolean isEmptyAndAcceptsAnyFluid() {
+        return getFluidAmount() == 0;
+    }
+
+    @Override
+    public boolean canStoreFluid(@Nonnull FluidStack fluidStack) {
+        return mFluid == null || GTUtility.areFluidsEqual(mFluid, fluidStack);
     }
 
     @Override
@@ -117,12 +238,29 @@ public class WirelessSteamDynamoHatch extends CustomFluidHatch {
 
     private void tryFetchingSteam() {
         FluidStack currentSteamStack = getFillableStack();
+
         if (currentSteamStack != null && currentSteamStack.amount > 0) {
 
-            int currentSteam = currentSteamStack.amount;
+            int rawAmount = currentSteamStack.amount;
+            Fluid fluidType = currentSteamStack.getFluid();
 
-            if (!addSteamToGlobalSteamMap(owner_uuid, currentSteam)) return;
-            drain(currentSteam, true);
+            SteamMultiMachineBase.SteamTypes matchedSteamType = null;
+            for (SteamMultiMachineBase.SteamTypes steamType : SteamMultiMachineBase.SteamTypes.VALUES) {
+                if (steamType.fluid != null && steamType.fluid.equals(fluidType)) {
+                    matchedSteamType = steamType;
+                    break;
+                }
+            }
+
+            if (matchedSteamType != null) {
+                int convertedAmount = rawAmount * matchedSteamType.efficiencyFactor;
+
+                if (!addSteamToGlobalSteamMap(owner_uuid, convertedAmount)) {
+                    return;
+                }
+
+                drain(rawAmount, true);
+            }
         }
     }
 }

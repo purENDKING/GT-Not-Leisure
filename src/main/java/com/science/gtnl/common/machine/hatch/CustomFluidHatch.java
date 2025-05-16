@@ -126,6 +126,7 @@ public class CustomFluidHatch extends MTEHatch {
         return Textures.BlockIcons.MACHINE_CASINGS[mTier][colorIndex + 1];
     }
 
+    @Override
     public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, final ForgeDirection side,
         final ItemStack aStack) {
         if (side == aBaseMetaTileEntity.getFrontFacing() && aIndex == 0) {
