@@ -16,6 +16,7 @@ import com.gtnewhorizons.modularui.api.math.Size;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
+import com.science.gtnl.Utils.item.ItemUtils;
 
 import gregtech.api.enums.SteamVariant;
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
@@ -31,9 +32,16 @@ public class ExtremeExtremeEntityCrusherFrontend extends RecipeMapFrontend {
     public ExtremeExtremeEntityCrusherFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {
         super(
-            uiPropertiesBuilder.progressBarPos(new Pos2d(26, 7))
-                .logoPos(new Pos2d(150, 110)),
+            uiPropertiesBuilder.progressBarPos(new Pos2d(26, 7)),
             neiPropertiesBuilder.recipeBackgroundSize(new Size(170, 100)));
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder, Pos2d windowOffset) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(new Pos2d(150, 102).add(windowOffset)));
     }
 
     @Override

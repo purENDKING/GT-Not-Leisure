@@ -1429,8 +1429,7 @@ public class MachineLoader {
                         .getFluid(),
                     FluidUtils.getSuperHeatedSteam(1)
                         .getFluid(),
-                    FluidRegistry.getFluidStack("supercriticalsteam", 1)
-                        .getFluid(),
+                    FluidRegistry.getFluid("supercriticalsteam"),
                     MaterialPool.CompressedSteam.getMolten(1)
                         .getFluid()),
                 4096000,
@@ -1893,6 +1892,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorLV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorMV.set(
             new MTEBasicMachineWithRecipe(
@@ -1913,6 +1913,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorHV.set(
             new MTEBasicMachineWithRecipe(
@@ -1933,6 +1934,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorEV.set(
             new MTEBasicMachineWithRecipe(
@@ -1953,6 +1955,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorIV.set(
             new MTEBasicMachineWithRecipe(
@@ -1973,6 +1976,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorLuV.set(
             new MTEBasicMachineWithRecipe(
@@ -1993,6 +1997,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorLuV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorZPM.set(
             new MTEBasicMachineWithRecipe(
@@ -2013,6 +2018,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorZPM.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUV.set(
             new MTEBasicMachineWithRecipe(
@@ -2033,6 +2039,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUHV.set(
             new MTEBasicMachineWithRecipe(
@@ -2053,6 +2060,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUHV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUEV.set(
             new MTEBasicMachineWithRecipe(
@@ -2073,6 +2081,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUEV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUIV.set(
             new MTEBasicMachineWithRecipe(
@@ -2093,6 +2102,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUIV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUMV.set(
             new MTEBasicMachineWithRecipe(
@@ -2113,6 +2123,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUMV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.GasCollectorUXV.set(
             new MTEBasicMachineWithRecipe(
@@ -2133,6 +2144,7 @@ public class MachineLoader {
                 MTEBasicMachineWithRecipe.SpecialEffects.NONE,
                 "GAS_COLLECTOR",
                 null).getStackForm(1L));
+        addItemTooltip(GTNLItemList.GasCollectorUXV.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     public static void registerMTEWireAndPipe() {

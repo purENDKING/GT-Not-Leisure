@@ -1,10 +1,11 @@
 package com.science.gtnl.common.machine.hatch;
 
 import gregtech.api.interfaces.ITexture;
+import gregtech.api.interfaces.modularui.IAddGregtechLogo;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 
-public class HumongousNinefoldInputHatch extends NinefoldInputHatch {
+public class HumongousNinefoldInputHatch extends NinefoldInputHatch implements IAddGregtechLogo {
 
     public HumongousNinefoldInputHatch(int aID, int aSlot, String aName, String aNameRegional) {
         super(aID, aSlot, aName, aNameRegional, 14);

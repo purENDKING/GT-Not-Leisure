@@ -12,6 +12,7 @@ import com.gtnewhorizons.modularui.api.math.Size;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.ProgressBar;
+import com.science.gtnl.Utils.item.ItemUtils;
 
 import gregtech.api.enums.SoundResource;
 import gregtech.api.interfaces.ITexture;
@@ -37,6 +38,14 @@ public class SteamAssemblerBronze extends MTEBasicMachineBronze {
     @Override
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new SteamAssemblerBronze(this.mName, this.mDescriptionArray, this.mTextures);
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(151, 62));
     }
 
     @Override

@@ -12,19 +12,22 @@ import com.gtnewhorizons.modularui.api.math.Alignment;
 import com.gtnewhorizons.modularui.api.math.Color;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.TextFieldWidget;
+import com.science.gtnl.Utils.item.ItemUtils;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUIInfos;
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
+import gregtech.api.interfaces.modularui.IAddGregtechLogo;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.render.TextureFactory;
 
-public class ParallelControllerHatch extends MTEHatch {
+public class ParallelControllerHatch extends MTEHatch implements IAddGregtechLogo {
 
     public static final String TEXTURE_OVERLAY_PARALLEL_CONTROLLER = RESOURCE_ROOT_ID + ":"
         + "iconsets/OVERLAY_PARALLEL_CONTROLLER";
@@ -72,6 +75,14 @@ public class ParallelControllerHatch extends MTEHatch {
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new ParallelControllerHatch(this.mName, this.mTier, 0, this.mDescriptionArray, this.mTextures);
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(151, 80));
     }
 
     @Override

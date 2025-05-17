@@ -9,7 +9,6 @@ import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
-import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.common.misc.spaceprojects.SpaceProjectManager;
 import gregtech.nei.RecipeDisplayInfo;
@@ -18,7 +17,7 @@ import micdoodle8.mods.galacticraft.core.util.GCCoreUtil;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class SpaceMinerFrontend extends RecipeMapFrontend {
+public class SpaceMinerFrontend extends GTNLLogoFrontend {
 
     public SpaceMinerFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {

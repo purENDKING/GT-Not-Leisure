@@ -51,6 +51,7 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
+import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
@@ -775,6 +776,14 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     }
 
     @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(172, 67));
+    }
+
+    @Override
     public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
         buildContext.addSyncedWindow(OC_WINDOW_ID, this::createRecipeOcCountWindow);
         builder.widget(new FakeSyncWidget.LongSyncer(this::getTotalSteamCapacity, val -> uiSteamCapacity = val));
@@ -888,8 +897,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             .getFluid(), 1),
         SH_STEAM("Superheated Steam", FluidUtils.getSuperHeatedSteam(1)
             .getFluid(), 10),
-        SC_STEAM("Supercritical Steam", FluidRegistry.getFluidStack("supercriticalsteam", 1)
-            .getFluid(), 50),
+        SC_STEAM("Supercritical Steam", FluidRegistry.getFluid("supercriticalsteam"), 50),
         CM_STEAM("Compressed Steam", MaterialPool.CompressedSteam.getMolten(1)
             .getFluid(), 100000);
 

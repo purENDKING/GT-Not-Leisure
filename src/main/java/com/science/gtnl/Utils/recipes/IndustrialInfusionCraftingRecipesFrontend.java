@@ -11,10 +11,9 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
-import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.common.gui.modularui.UIHelper;
 
-public class IndustrialInfusionCraftingRecipesFrontend extends RecipeMapFrontend {
+public class IndustrialInfusionCraftingRecipesFrontend extends GTNLLogoFrontend {
 
     private static final int xDirMaxCount = 5;
     private static final int yOrigin = 8;

@@ -26,6 +26,7 @@ import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.gui.modularui.GTUITextures;
@@ -60,6 +61,14 @@ public class ManaTank extends MTEDigitalTankBase {
     @Override
     public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new ManaTank(mName, mDescriptionArray, mTextures);
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(151, 62));
     }
 
     @Override

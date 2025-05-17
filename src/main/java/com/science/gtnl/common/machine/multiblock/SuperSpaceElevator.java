@@ -49,7 +49,6 @@ import com.gtnewhorizons.gtnhintergalactic.gui.IG_UITextures;
 import com.gtnewhorizons.gtnhintergalactic.tile.TileEntitySpaceElevatorCable;
 import com.gtnewhorizons.gtnhintergalactic.tile.multi.elevator.ElevatorUtil;
 import com.gtnewhorizons.gtnhintergalactic.tile.multi.elevatormodules.TileEntityModuleBase;
-import com.gtnewhorizons.modularui.api.ModularUITextures;
 import com.gtnewhorizons.modularui.api.drawable.IDrawable;
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
@@ -61,6 +60,7 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.item.ItemUtils;
 
 import galaxyspace.core.register.GSBlocks;
 import gregtech.api.enums.Materials;
@@ -105,8 +105,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
     private static final int MODULE_CHARGE_INTERVAL = 20;
     /** Multiplier for the internal EU buffer */
     private static final int INTERNAL_BUFFER_MULTIPLIER = 256;
-    /** Window ID of the contributors child window */
-    private static final int CONTRIBUTORS_WINDOW_ID = 10;
 
     public static final int CASING_INDEX_BASE = 32 * 128;
     private static final String STRUCTURE_PIECE_MAIN = "main_base";
@@ -560,7 +558,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
     @Override
     public void addGregTechLogo(ModularWindow.Builder builder) {
         builder.widget(
-            new DrawableWidget().setDrawable(IG_UITextures.PICTURE_ELEVATOR_LOGO_DARK)
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
                 .setSize(18, 18)
                 .setPos(150, 154));
     }
@@ -631,19 +629,6 @@ public class SuperSpaceElevator extends TTMultiblockBase
             .setSize(16, 16)
             .addTooltip(GCCoreUtil.translate("ig.button.travel"))
             .setTooltipShowUpDelay(TOOLTIP_DELAY));
-
-        // Open contributor window button
-        builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
-            if (!widget.getContext()
-                .isClient()) {
-                widget.getContext()
-                    .openSyncedWindow(CONTRIBUTORS_WINDOW_ID);
-            }
-        })
-            .addTooltip(StatCollector.translateToLocal("ig.structure.contributors"))
-            .setBackground(ModularUITextures.ICON_INFO)
-            .setPos(133, 155)
-            .setSize(16, 16));
     }
 
     @Override

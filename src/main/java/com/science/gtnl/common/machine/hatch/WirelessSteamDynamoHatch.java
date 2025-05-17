@@ -18,13 +18,17 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.google.common.collect.ImmutableSet;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
+import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
 import com.science.gtnl.common.materials.MaterialPool;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.fluid.IFluidStore;
+import gregtech.api.interfaces.modularui.IAddGregtechLogo;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.MTEHatch;
@@ -34,7 +38,7 @@ import gregtech.api.util.GTUtility;
 import gregtech.common.misc.spaceprojects.SpaceProjectManager;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
 
-public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidStore {
+public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidStore, IAddGregtechLogo {
 
     private UUID owner_uuid;
     public Set<Fluid> mLockedFluids;
@@ -46,8 +50,7 @@ public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidSt
                 .getFluid(),
             FluidUtils.getSuperHeatedSteam(1)
                 .getFluid(),
-            FluidRegistry.getFluidStack("supercriticalsteam", 1)
-                .getFluid(),
+            FluidRegistry.getFluid("supercriticalsteam"),
             MaterialPool.CompressedSteam.getMolten(1)
                 .getFluid());
     }
@@ -59,8 +62,7 @@ public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidSt
                 .getFluid(),
             FluidUtils.getSuperHeatedSteam(1)
                 .getFluid(),
-            FluidRegistry.getFluidStack("supercriticalsteam", 1)
-                .getFluid(),
+            FluidRegistry.getFluid("supercriticalsteam"),
             MaterialPool.CompressedSteam.getMolten(1)
                 .getFluid());
     }
@@ -68,6 +70,14 @@ public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidSt
     @Override
     public MetaTileEntity newMetaEntity(final IGregTechTileEntity aTileEntity) {
         return new WirelessSteamDynamoHatch(this.mName, this.mTier, this.mTextures, this.mLockedFluids);
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(151, 62));
     }
 
     @Override
@@ -189,7 +199,6 @@ public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidSt
                 }
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
             return new ITexture[] { Textures.BlockIcons.MACHINE_CASINGS[0][0] };
         }
     }

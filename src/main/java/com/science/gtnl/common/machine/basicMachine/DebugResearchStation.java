@@ -11,6 +11,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
+import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
+import com.science.gtnl.Utils.item.ItemUtils;
 
 import gregtech.GTMod;
 import gregtech.api.enums.ItemList;
@@ -99,6 +101,14 @@ public class DebugResearchStation extends MTEBasicMachine {
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
         return new DebugResearchStation(this.mName, this.mTier, this.mDescriptionArray, this.mTextures);
+    }
+
+    @Override
+    public void addGregTechLogo(ModularWindow.Builder builder) {
+        builder.widget(
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+                .setSize(18, 18)
+                .setPos(151, 62));
     }
 
     @Override

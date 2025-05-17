@@ -9,11 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.reavaritia.common.item.InfinityTotem;
+import com.science.gtnl.Mods;
 
 import baubles.api.BaublesApi;
 
 public class ItemUtils {
+
+    public static final UITexture PICTURE_GTNL_LOGO = UITexture
+        .fullImage(Mods.ScienceNotLeisure.ID, "gui/picture/logo");
 
     public static NBTTagCompound writeItemStackToNBT(ItemStack stack) {
         NBTTagCompound compound = new NBTTagCompound();

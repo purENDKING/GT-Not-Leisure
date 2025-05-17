@@ -94,6 +94,20 @@ public class RecipeLoader {
 
     public static void loadRecipesCompleteInit() {
 
+        MeteorsRecipes.registerMeteors();
+
+        TCRecipePool.loadRecipes();
+        TCResearches.register();
+
+        new OP_NormalProcessing().enumOreProcessingRecipes();
+        new ShapedArcaneCraftingRecipes().loadRecipes();
+        new InfusionCraftingRecipes().loadRecipes();
+        GTNLProcessingArrayRecipeLoader.registerDefaultGregtechMaps();
+
+        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.MolybdenumDisilicide, 800, 1920, 2300, true);
+        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.HSLASteel, 1000, 480, 1711, true);
+        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.Germaniumtungstennitride, 800, 30720, 8200, true);
+
         IRecipePool[] recipePools = new IRecipePool[] { new ChemicalRecipes(), new ElectrolyzerRecipes(),
             new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AutoclaveRecipes(),
             new AlloyBlastSmelterRecipes(), new CompressorRecipes(), new ReFusionReactorRecipes(),
@@ -123,18 +137,6 @@ public class RecipeLoader {
 
         };
 
-        TCRecipePool.loadRecipes();
-        TCResearches.register();
-
-        new OP_NormalProcessing().enumOreProcessingRecipes();
-        new ShapedArcaneCraftingRecipes().loadRecipes();
-        new InfusionCraftingRecipes().loadRecipes();
-        GTNLProcessingArrayRecipeLoader.registerDefaultGregtechMaps();
-
-        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.MolybdenumDisilicide, 800, 1920, 2300, true);
-        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.HSLASteel, 1000, 480, 1711, true);
-        CrackRecipeAdder.reAddBlastRecipe(MaterialPool.Germaniumtungstennitride, 800, 30720, 8200, true);
-
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();
         }
@@ -146,7 +148,5 @@ public class RecipeLoader {
         for (ItemStack stone : OreDictionary.getOres("stone")) {
             PortalToAlfheimOreRecipes.addManaInfusionOreRecipes(stone);
         }
-
-        MeteorsRecipes.registerMeteors();
     }
 }

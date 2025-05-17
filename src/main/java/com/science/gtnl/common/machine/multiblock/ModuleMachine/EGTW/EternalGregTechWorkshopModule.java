@@ -475,14 +475,6 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
         if (supportsSingleRecipeLocking()) builder.widget(createLockToSingleRecipeButton(builder));
     }
 
-    @Override
-    public void addGregTechLogo(ModularWindow.Builder builder) {
-        builder.widget(
-            new DrawableWidget().setDrawable(TecTechUITextures.PICTURE_GODFORGE_LOGO)
-                .setSize(18, 18)
-                .setPos(172, 67));
-    }
-
     private Text connectionStatus() {
         String status = EnumChatFormatting.RED
             + StatCollector.translateToLocal("gt.blockmachines.multimachine.FOG.modulestatus.false");
