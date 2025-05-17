@@ -1092,7 +1092,7 @@ public class MachineLoader {
                 ENGRAVING_LASER_PLANT.ID,
                 "EngravingLaserPlant",
                 StatCollector.translateToLocal("NameEngravingLaserPlant")));
-        addItemTooltip(GTNLItemList.EngravingLaserPlant.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+        addItemTooltip(GTNLItemList.EngravingLaserPlant.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

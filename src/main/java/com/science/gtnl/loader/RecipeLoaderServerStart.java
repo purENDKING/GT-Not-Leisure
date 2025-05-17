@@ -1,5 +1,6 @@
 package com.science.gtnl.loader;
 
+import com.Nxer.TwistSpaceTechnology.recipe.machineRecipe.expanded.CircuitAssemblyLineWithoutImprintRecipePool;
 import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeUtil;
 import com.science.gtnl.common.recipe.GTNL.ExtremeExtremeEntityCrusherRecipes;
@@ -19,32 +20,36 @@ public class RecipeLoaderServerStart {
     private static boolean recipesAdded;
 
     public static void loadRecipesServerStart() {
-
         if (!recipesAdded) {
+            loadRecipes();
+        }
+        loadCircuitRelatedRecipes();
+        recipesAdded = true;
+    }
 
-            if (Mods.MobsInfo.isModLoaded()) {
-                ExtremeExtremeEntityCrusherRecipes.init();
-            }
-
-            IRecipePool[] recipePools = new IRecipePool[] { new FormingPressRecipes(),
-                new CircuitAssemblerConvertRecipes(), new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
-
-            for (IRecipePool recipePool : recipePools) {
-                recipePool.loadRecipes();
-            }
-
-            RecipeUtil.generateRecipesNotUsingCells(
-                BartWorksRecipeMaps.bioLabRecipes,
-                RecipeRegister.LargeBioLabRecipes,
-                true);
-
+    private static void loadRecipes() {
+        if (Mods.MobsInfo.isModLoaded()) {
+            ExtremeExtremeEntityCrusherRecipes.init();
         }
 
+        IRecipePool[] recipePools = new IRecipePool[] { new FormingPressRecipes(), new CircuitAssemblerConvertRecipes(),
+            new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
+
+        for (IRecipePool recipePool : recipePools) {
+            recipePool.loadRecipes();
+        }
+
+        RecipeUtil
+            .generateRecipesNotUsingCells(BartWorksRecipeMaps.bioLabRecipes, RecipeRegister.LargeBioLabRecipes, true);
+    }
+
+    private static void loadCircuitRelatedRecipes() {
         RecipeUtil.copyAllRecipes(RecipeRegister.ConvertToCircuitAssembler, RecipeMaps.circuitAssemblerRecipes);
 
         new CircuitAssemblyLineRecipes().loadRecipes();
 
-        recipesAdded = true;
+        if (!recipesAdded && com.science.gtnl.Mods.TwistSpaceTechnology.isModLoaded()) {
+            CircuitAssemblyLineWithoutImprintRecipePool.loadRecipes();
+        }
     }
-
 }

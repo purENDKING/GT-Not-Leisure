@@ -53,6 +53,10 @@ public class LateMixinPlugin implements ILateMixinLoader {
             mixins.add("EnderIO.Modify_CapBankMaxIO_Mixin");
         }
 
+        if (Mods.TwistSpaceTechnology.isModLoaded()) {
+            mixins.add("TwistSpaceTechnology.RecipeLoader_Mixin");
+        }
+
         return mixins;
     }
 
