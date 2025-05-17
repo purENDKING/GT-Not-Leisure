@@ -17,6 +17,7 @@ public class EarlyMixinPlugin {
         mixins.add("WorldServer_Mixin");
         mixins.add("FMLProxyPacket_Mixin");
         mixins.add("Explosion_Mixin");
+        mixins.add("ForgeHooks_Mixin");
         return mixins;
     }
 }

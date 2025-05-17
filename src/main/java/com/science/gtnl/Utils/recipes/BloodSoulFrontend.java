@@ -9,14 +9,13 @@ import net.minecraft.util.StatCollector;
 
 import gregtech.api.recipe.BasicUIPropertiesBuilder;
 import gregtech.api.recipe.NEIRecipePropertiesBuilder;
-import gregtech.api.recipe.RecipeMapFrontend;
 import gregtech.api.util.MethodsReturnNonnullByDefault;
 import gregtech.nei.RecipeDisplayInfo;
 import gregtech.nei.formatter.INEISpecialInfoFormatter;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BloodSoulFrontend extends RecipeMapFrontend {
+public class BloodSoulFrontend extends GTNLLogoFrontend {
 
     public BloodSoulFrontend(BasicUIPropertiesBuilder uiPropertiesBuilder,
         NEIRecipePropertiesBuilder neiPropertiesBuilder) {

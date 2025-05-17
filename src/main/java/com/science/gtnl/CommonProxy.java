@@ -7,6 +7,8 @@ import net.minecraftforge.common.MinecraftForge;
 import com.science.gtnl.Utils.GlobalSteamWorldSavedData;
 import com.science.gtnl.Utils.PlayerUtils;
 import com.science.gtnl.Utils.WorldUtils;
+import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
+import com.science.gtnl.Utils.message.PacketTileEntityNBT;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
 import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
@@ -38,6 +40,12 @@ public class CommonProxy {
         network.registerMessage(TitlePacket.Handler.class, TitlePacket.class, 0, Side.CLIENT);
         network.registerMessage(TickrateMessage.Handler.class, TickrateMessage.class, 1, Side.CLIENT);
         network.registerMessage(ConfigSyncMessage.Handler.class, ConfigSyncMessage.class, 2, Side.CLIENT);
+        network.registerMessage(
+            PacketGetTileEntityNBTRequest.Handler.class,
+            PacketGetTileEntityNBTRequest.class,
+            3,
+            Side.SERVER);
+        network.registerMessage(PacketTileEntityNBT.Handler.class, PacketTileEntityNBT.class, 4, Side.CLIENT);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
@@ -46,6 +54,9 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerUtils());
         MinecraftForge.EVENT_BUS.register(new WorldUtils());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new WorldUtils());
         FMLCommonHandler.instance()
             .bus()
             .register(new PlayerUtils());
