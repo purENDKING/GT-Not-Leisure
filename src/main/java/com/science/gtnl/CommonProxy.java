@@ -11,7 +11,6 @@ import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
 import com.science.gtnl.Utils.message.PacketTileEntityNBT;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
-import com.science.gtnl.common.block.Casings.Special.CrushingWheelsEventHandler;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.config.ClientEventHandler;
@@ -51,7 +50,6 @@ public class CommonProxy {
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new GlobalSteamWorldSavedData(""));
-        MinecraftForge.EVENT_BUS.register(new CrushingWheelsEventHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerUtils());
         MinecraftForge.EVENT_BUS.register(new WorldUtils());
         FMLCommonHandler.instance()

@@ -1,11 +1,16 @@
 package com.science.gtnl.Utils;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
+import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.ExplosionDynamoHatch;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -86,6 +91,25 @@ public class WorldUtils {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+        if (event.entity instanceof EntityPlayer player) {
+            World world = player.worldObj;
+
+            int x = (int) Math.floor(player.posX);
+            int y = (int) player.posY - 1;
+            int z = (int) Math.floor(player.posZ);
+
+            Block block = world.getBlock(x, y, z);
+            int meta = world.getBlockMetadata(x, y, z);
+
+            if (block == GTNLItemList.CrushingWheels.getBlock() && meta == 2) {
+                player.attackEntityFrom(DamageSource.generic, 4.0F);
+                player.hurtResistantTime = 0;
             }
         }
     }
