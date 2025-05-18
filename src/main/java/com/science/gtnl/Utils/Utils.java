@@ -12,15 +12,23 @@ import java.util.Objects;
 import java.util.function.IntFunction;
 
 import net.minecraft.block.Block;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.command.server.CommandBlockLogic;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.rcon.RConConsoleSource;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.management.UserListOps;
+import net.minecraft.server.management.UserListOpsEntry;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import com.mojang.authlib.GameProfile;
 import com.science.gtnl.ScienceNotLeisure;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -392,5 +400,29 @@ public final class Utils {
             sb.append("!");
         }
         return sb.toString();
+    }
+
+    public static boolean checkSenderPermission(ICommandSender sender, int requiredLevel) {
+        if (requiredLevel == 0) return true;
+        if (sender instanceof RConConsoleSource || sender instanceof MinecraftServer) {
+            return true;
+        }
+
+        if (sender instanceof CommandBlockLogic) {
+            return requiredLevel < 4;
+        }
+
+        if (sender instanceof EntityPlayerMP player) {
+            UserListOps userList = MinecraftServer.getServer()
+                .getConfigurationManager()
+                .func_152603_m();
+            GameProfile profile = player.getGameProfile();
+            UserListOpsEntry entry = (UserListOpsEntry) userList.func_152683_b(profile);
+            if (entry != null) {
+                return requiredLevel <= entry.func_152644_a();
+            }
+        }
+
+        return false;
     }
 }
