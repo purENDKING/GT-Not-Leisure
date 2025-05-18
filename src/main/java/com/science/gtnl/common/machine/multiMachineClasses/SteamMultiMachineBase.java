@@ -778,7 +778,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Override
     public void addGregTechLogo(ModularWindow.Builder builder) {
         builder.widget(
-            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_STEAM_LOGO)
                 .setSize(18, 18)
                 .setPos(172, 67));
     }

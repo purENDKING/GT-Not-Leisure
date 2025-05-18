@@ -18,6 +18,7 @@ import com.google.common.collect.ImmutableSet;
 import com.science.gtnl.Mods;
 import com.science.gtnl.Utils.AnimatedText;
 import com.science.gtnl.Utils.MoreMaterialToolUtils;
+import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.basicMachine.DebugResearchStation;
@@ -1436,7 +1437,8 @@ public class MachineLoader {
                 BIG_STEAM_INPUT_HATCH.ID,
                 "BigSteamInputHatch",
                 StatCollector.translateToLocal("BigSteamInputHatch"),
-                1));
+                1,
+                ItemUtils.PICTURE_GTNL_STEAM_LOGO));
         addItemTooltip(GTNLItemList.BigSteamInputHatch.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         GTNLItemList.ParallelControllerHatchLV.set(

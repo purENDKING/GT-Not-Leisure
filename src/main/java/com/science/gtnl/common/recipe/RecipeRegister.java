@@ -22,6 +22,7 @@ import com.science.gtnl.Utils.recipes.ResourceCollectionModuleTierKey;
 import com.science.gtnl.Utils.recipes.SpaceMinerFrontend;
 import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
 import com.science.gtnl.Utils.recipes.SteamGateAssemblerFrontend;
+import com.science.gtnl.Utils.recipes.SteamLogoFrontend;
 import com.science.gtnl.common.GTNLItemList;
 
 import goodgenerator.api.recipe.ComponentAssemblyLineFrontend;
@@ -146,7 +147,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamCrackerRecipes")
         .maxIO(1, 0, 1, 1)
         .progressBar(GTUITextures.PROGRESSBAR_ARROW_MULTIPLE)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo(builder -> builder.setDisplayStack(GTNLItemList.SteamCracking.get(1)))
         .disableOptimize()
         .build();
@@ -444,7 +445,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.CactusWonder")
         .maxIO(1, 0, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_2_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamCactusWonder.get(1))))
         .disableOptimize()
         .build();
@@ -453,7 +454,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamManufacturer")
         .maxIO(9, 1, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamManufacturer.get(1))))
         .disableOptimize()
         .build();
@@ -462,7 +463,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamCarpenter")
         .maxIO(2, 2, 0, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamCarpenter.get(1))))
         .disableOptimize()
         .build();
@@ -470,7 +471,7 @@ public class RecipeRegister {
     public static final RecipeMap<RecipeMapBackend> LavaMakerRecipes = RecipeMapBuilder.of("gtnl.recipe.LavaMaker")
         .maxIO(1, 0, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_COMPRESS_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamLavaMaker.get(1))))
         .disableOptimize()
         .build();
@@ -479,7 +480,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamWoodcutter")
         .maxIO(1, 3, 0, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_ARROW_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamWoodcutter.get(1))))
         .disableOptimize()
         .build();
@@ -488,7 +489,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamExtractinator")
         .maxIO(1, 6, 1, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamExtractinator.get(1))))
         .disableOptimize()
         .build();
@@ -497,7 +498,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.SteamFusion")
         .maxIO(0, 0, 2, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamFusionReactor.get(1))))
         .neiRecipeComparator(
             Comparator
@@ -510,7 +511,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.InfernalCock")
         .maxIO(1, 1, 0, 1)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamInfernalCokeOven.get(1))))
         .disableOptimize()
         .build();
@@ -519,7 +520,7 @@ public class RecipeRegister {
         .of("gtnl.recipe.RockBreakerRecipes")
         .maxIO(2, 1, 0, 0)
         .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
-        .frontend(GTNLLogoFrontend::new)
+        .frontend(SteamLogoFrontend::new)
         .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamRockBreaker.get(1))))
         .disableOptimize()
         .build();

@@ -20,6 +20,9 @@ public class ItemUtils {
     public static final UITexture PICTURE_GTNL_LOGO = UITexture
         .fullImage(Mods.ScienceNotLeisure.ID, "gui/picture/logo");
 
+    public static final UITexture PICTURE_GTNL_STEAM_LOGO = UITexture
+        .fullImage(Mods.ScienceNotLeisure.ID, "gui/picture/steam_logo");
+
     public static NBTTagCompound writeItemStackToNBT(ItemStack stack) {
         NBTTagCompound compound = new NBTTagCompound();
 

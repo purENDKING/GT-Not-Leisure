@@ -75,7 +75,7 @@ public class WirelessSteamDynamoHatch extends MTEHatchOutput implements IFluidSt
     @Override
     public void addGregTechLogo(ModularWindow.Builder builder) {
         builder.widget(
-            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_STEAM_LOGO)
                 .setSize(18, 18)
                 .setPos(151, 62));
     }

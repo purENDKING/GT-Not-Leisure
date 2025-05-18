@@ -14,6 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
+import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FluidSlotWidget;
@@ -34,6 +35,7 @@ public class CustomFluidHatch extends MTEHatch implements IAddGregtechLogo {
 
     public Set<Fluid> mLockedFluids;
     public int mFluidCapacity;
+    public UITexture uiTexture = ItemUtils.PICTURE_GTNL_LOGO;
 
     public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier) {
         super(
@@ -46,6 +48,21 @@ public class CustomFluidHatch extends MTEHatch implements IAddGregtechLogo {
                 StatCollector.translateToLocal("HatchCustomFluid_01") + GTUtility.formatNumbers(aAmount) + "L" });
         this.mLockedFluids = aFluid;
         this.mFluidCapacity = aAmount;
+    }
+
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier,
+        UITexture aUITexture) {
+        super(
+            aID,
+            aName,
+            aNameRegional,
+            aTier,
+            3,
+            new String[] { StatCollector.translateToLocal("HatchCustomFluid_00"),
+                StatCollector.translateToLocal("HatchCustomFluid_01") + GTUtility.formatNumbers(aAmount) + "L" });
+        this.mLockedFluids = aFluid;
+        this.mFluidCapacity = aAmount;
+        this.uiTexture = aUITexture;
     }
 
     public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, int aID, String aName, String aNameRegional, int aTier,
@@ -69,6 +86,14 @@ public class CustomFluidHatch extends MTEHatch implements IAddGregtechLogo {
         this.mFluidCapacity = aAmount;
     }
 
+    public CustomFluidHatch(Set<Fluid> aFluid, int aAmount, String aName, int aTier, String[] aDescription,
+        ITexture[][][] aTextures, UITexture aUITexture) {
+        super(aName, aTier, 3, aDescription, aTextures);
+        this.mLockedFluids = aFluid;
+        this.mFluidCapacity = aAmount;
+        this.uiTexture = aUITexture;
+    }
+
     @Override
     public MetaTileEntity newMetaEntity(final IGregTechTileEntity aTileEntity) {
         return new CustomFluidHatch(
@@ -77,13 +102,14 @@ public class CustomFluidHatch extends MTEHatch implements IAddGregtechLogo {
             this.mName,
             this.mTier,
             this.mDescriptionArray,
-            this.mTextures);
+            this.mTextures,
+            this.uiTexture);
     }
 
     @Override
     public void addGregTechLogo(ModularWindow.Builder builder) {
         builder.widget(
-            new DrawableWidget().setDrawable(ItemUtils.PICTURE_GTNL_LOGO)
+            new DrawableWidget().setDrawable(uiTexture)
                 .setSize(18, 18)
                 .setPos(151, 62));
     }
