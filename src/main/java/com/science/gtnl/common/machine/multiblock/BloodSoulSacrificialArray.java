@@ -105,14 +105,11 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        switch (machineMode) {
-            case MACHINEMODE_FALLING_TOWER:
-                return RecipeRegister.FallingTowerRecipes;
-            case MACHINEMODE_ALCHEMIC:
-                return RecipeRegister.AlchemicChemistrySetRecipes;
-            default:
-                return RecipeRegister.BloodDemonInjectionRecipes;
-        }
+        return switch (machineMode) {
+            case MACHINEMODE_FALLING_TOWER -> RecipeRegister.FallingTowerRecipes;
+            case MACHINEMODE_ALCHEMIC -> RecipeRegister.AlchemicChemistrySetRecipes;
+            default -> RecipeRegister.BloodDemonInjectionRecipes;
+        };
     }
 
     @NotNull

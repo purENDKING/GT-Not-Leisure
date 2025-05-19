@@ -1962,6 +1962,14 @@ NeutroniumWireCuttingRecipeType=Cutter
 Tooltip_NeutroniumWireCutting_00=Each glass tier provides an additional 5% speed and power reduction (multiplicative).
 Tooltip_NeutroniumWireCutting_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
 
+NameSuperconductingElectromagnetism=Superconducting Electromagnetism
+SuperconductingElectromagnetismRecipeType=Electrolyzer / Electromagnetic Separator / Two-stage Magnetizer
+SuperconductingElectromagnetism_Mode_0=Electrolyzer
+SuperconductingElectromagnetism_Mode_1=Electromagnetic Separator
+SuperconductingElectromagnetism_Mode_2=Two-stage Magnetizer
+Tooltip_SuperconductingElectromagnetism_00=Each glass tier provides an additional 5% speed and power reduction (multiplicative).
+Tooltip_SuperconductingElectromagnetism_Casing=Any Molecular Casing
+
 NameVortexMatterCentrifuge=Vortex Matter Centrifuge
 VortexMatterCentrifugeRecipeType=Centrifuge
 Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing

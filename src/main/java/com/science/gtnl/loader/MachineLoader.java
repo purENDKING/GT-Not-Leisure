@@ -178,6 +178,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.V
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.VacuumFreezer;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ZpmKuangBiaoTwoGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.SuperSpaceElevator;
+import com.science.gtnl.common.machine.multiblock.SuperconductingElectromagnetism;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.VortexMatterCentrifuge;
@@ -1102,6 +1103,13 @@ public class MachineLoader {
                 "VortexMatterCentrifuge",
                 StatCollector.translateToLocal("NameVortexMatterCentrifuge")));
         addItemTooltip(GTNLItemList.VortexMatterCentrifuge.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.SuperconductingElectromagnetism.set(
+            new SuperconductingElectromagnetism(
+                SUPERCONDUCTING_ELECTROMAGNETISM.ID,
+                "SuperconductingElectromagnetism",
+                StatCollector.translateToLocal("NameSuperconductingElectromagnetism")));
+        addItemTooltip(GTNLItemList.SuperconductingElectromagnetism.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

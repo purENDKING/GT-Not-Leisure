@@ -2,77 +2,82 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static gregtech.api.GregTechAPI.*;
-import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import org.jetbrains.annotations.NotNull;
 
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
+import com.gtnewhorizons.modularui.api.screen.ModularWindow;
+import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
-import galaxyspace.core.register.GSBlocks;
-import gregtech.api.enums.Materials;
+import bartworks.API.BorosilicateGlass;
+import goodgenerator.loader.Loaders;
 import gregtech.api.enums.Textures;
+import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
-import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.recipe.check.CheckRecipeResult;
-import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
-import gregtech.api.util.GTRecipe;
+import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gregtech.api.util.OverclockCalculator;
-import gtnhlanth.common.register.LanthItemList;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
 import tectech.thing.casing.BlockGTCasingsTT;
 
-public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<VortexMatterCentrifuge>
+public class SuperconductingElectromagnetism extends WirelessEnergyMultiMachineBase<SuperconductingElectromagnetism>
     implements IWirelessEnergyHatchInformation {
 
-    private static final int HORIZONTAL_OFF_SET = 15;
-    private static final int VERTICAL_OFF_SET = 7;
+    private byte mGlassTier = 0;
+    private static final int MACHINEMODE_ELECTROLYZER = 0;
+    private static final int MACHINEMODE_ELECTROMAGNETIC = 1;
+    private static final int MACHINEMODE_POLARIZER = 2;
+    private static final int HORIZONTAL_OFF_SET = 7;
+    private static final int VERTICAL_OFF_SET = 20;
     private static final int DEPTH_OFF_SET = 0;
     private int tCountCasing = 0;
-    private static IStructureDefinition<VortexMatterCentrifuge> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<SuperconductingElectromagnetism> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String VMC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
-        + "multiblock/vortex_matter_centrifuge";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(VMC_STRUCTURE_FILE_PATH);
+    private static final String SE_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+        + "multiblock/superconducting_electromagnetism";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(SE_STRUCTURE_FILE_PATH);
 
-    public VortexMatterCentrifuge(String aName) {
+    public SuperconductingElectromagnetism(String aName) {
         super(aName);
     }
 
-    public VortexMatterCentrifuge(int aID, String aName, String aNameRegional) {
+    public SuperconductingElectromagnetism(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new VortexMatterCentrifuge(this.mName);
+        return new SuperconductingElectromagnetism(this.mName);
     }
 
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(StatCollector.translateToLocal("VortexMatterCentrifugeRecipeType"))
+        tt.addMachineType(StatCollector.translateToLocal("SuperconductingElectromagnetismRecipeType"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
@@ -87,12 +92,12 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
             .addSeparator()
             .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
             .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
-            .beginStructureBlock(31, 10, 31, true)
-            .addInputBus(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addOutputBus(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addInputHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addOutputHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
+            .beginStructureBlock(15, 21, 15, true)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_SuperconductingElectromagnetism_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -121,31 +126,22 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
     }
 
     @Override
-    public IStructureDefinition<VortexMatterCentrifuge> getStructureDefinition() {
+    public IStructureDefinition<SuperconductingElectromagnetism> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<VortexMatterCentrifuge>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<SuperconductingElectromagnetism>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(BasicBlocks.MetaCasing, 5))
-                .addElement('B', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
-                .addElement('C', ofBlock(sBlockCasingsTT, 6))
-                .addElement('D', ofBlock(sBlockCasingsTT, 0))
-                .addElement('E', ofBlock(sBlockCasings10, 3))
-                .addElement('F', ofBlock(sBlockCasings1, 9))
-                .addElement('G', ofBlock(sBlockCasingsTT, 8))
-                .addElement('H', ofBlock(sBlockCasings10, 8))
-                .addElement('I', ofBlock(BasicBlocks.MetaCasing, 7))
-                .addElement('J', ofBlock(sBlockCasings10, 7))
+                .addElement('A', ofBlock(Loaders.speedingPipe, 0))
+                .addElement('B', ofBlock(Loaders.compactFusionCoil, 0))
+                .addElement('C', ofBlockAnyMeta(ELECTRODE_CASING))
+                .addElement('D', ofBlock(BasicBlocks.MetaCasing, 8))
                 .addElement(
-                    'K',
-                    buildHatchAdder(VortexMatterCentrifuge.class)
+                    'E',
+                    buildHatchAdder(SuperconductingElectromagnetism.class)
                         .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 4))))
-                .addElement('L', ofBlock(sBlockCasings8, 10))
-                .addElement('M', ofBlock(sBlockCasings1, 13))
-                .addElement('N', ofFrame(Materials.EnrichedHolmium))
-                .addElement('O', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
+                .addElement('F', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -183,43 +179,79 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        return tCountCasing > 250;
+        return tCountCasing > 700;
     }
 
     @Override
-    protected ProcessingLogic createProcessingLogic() {
-        return new ProcessingLogic() {
+    public void saveNBTData(NBTTagCompound aNBT) {
+        super.saveNBTData(aNBT);
+        aNBT.setInteger("mode", machineMode);
+        aNBT.setByte("mGlassTier", mGlassTier);
+    }
 
-            @NotNull
-            @Override
-            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
-                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
-                }
-                return super.validateRecipe(recipe);
-            }
-
-            @NotNull
-            @Override
-            public CheckRecipeResult process() {
-                setEuModifier(getEuModifier());
-                setSpeedBonus(getSpeedBonus());
-                enablePerfectOverclock();
-                return super.process();
-            }
-
-            @Nonnull
-            @Override
-            protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(0.4 - (mParallelTier / 50.0))
-                    .setSpeedBoost(0.1 * Math.pow(0.75, mParallelTier));
-            }
-        }.setMaxParallelSupplier(this::getLimitedMaxParallel);
+    @Override
+    public void loadNBTData(NBTTagCompound aNBT) {
+        super.loadNBTData(aNBT);
+        mGlassTier = aNBT.getByte("mGlassTier");
+        machineMode = aNBT.getInteger("mode");
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.centrifugeRecipes;
+        return switch (machineMode) {
+            case MACHINEMODE_ELECTROMAGNETIC -> RecipeMaps.electroMagneticSeparatorRecipes;
+            case MACHINEMODE_POLARIZER -> RecipeMaps.polarizerRecipes;
+            default -> GTPPRecipeMaps.electrolyzerNonCellRecipes;
+        };
+    }
+
+    @Nonnull
+    @Override
+    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
+        return Arrays.asList(
+            GTPPRecipeMaps.electrolyzerNonCellRecipes,
+            RecipeMaps.electroMagneticSeparatorRecipes,
+            RecipeMaps.polarizerRecipes);
+    }
+
+    @Override
+    public int nextMachineMode() {
+        if (machineMode == MACHINEMODE_ELECTROLYZER) return MACHINEMODE_ELECTROMAGNETIC;
+        else if (machineMode == MACHINEMODE_ELECTROMAGNETIC) return MACHINEMODE_POLARIZER;
+        else return MACHINEMODE_ELECTROLYZER;
+    }
+
+    @Override
+    public boolean supportsMachineModeSwitch() {
+        return true;
+    }
+
+    @Override
+    public void setMachineModeIcons() {
+        machineModeIcons.clear();
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_UNPACKAGER);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_LPF_METAL);
+        machineModeIcons.add(GTUITextures.OVERLAY_BUTTON_MACHINEMODE_PACKAGER);
+    }
+
+    @Override
+    public void addUIWidgets(ModularWindow.Builder builder, UIBuildContext buildContext) {
+        super.addUIWidgets(builder, buildContext);
+        setMachineModeIcons();
+        builder.widget(createModeSwitchButton(builder));
+    }
+
+    @Override
+    public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
+        this.machineMode = (byte) ((this.machineMode + 1) % 3);
+        GTUtility.sendChatToPlayer(
+            aPlayer,
+            StatCollector.translateToLocal("SuperconductingElectromagnetism_Mode_" + this.machineMode));
+    }
+
+    @Override
+    public String getMachineModeName() {
+        return StatCollector.translateToLocal("SuperconductingElectromagnetism_Mode_" + machineMode);
     }
 
 }
