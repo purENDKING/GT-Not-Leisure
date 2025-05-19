@@ -340,6 +340,7 @@ public enum GTNLItemList implements IItemContainer {
     EternalGregTechWorkshop,
     EGTWFusionModule,
 
+    VortexMatterCentrifuge,
     EngravingLaserPlant,
     SpaceAssembler,
     LargeGasCollector,

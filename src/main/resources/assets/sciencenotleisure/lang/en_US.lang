@@ -1962,6 +1962,10 @@ NeutroniumWireCuttingRecipeType=Cutter
 Tooltip_NeutroniumWireCutting_00=Each glass tier provides an additional 5% speed and power reduction (multiplicative).
 Tooltip_NeutroniumWireCutting_Casing=Any Superconductor Reinforced Sterile Water Purifier Machine Block
 
+NameVortexMatterCentrifuge=Vortex Matter Centrifuge
+VortexMatterCentrifugeRecipeType=Centrifuge
+Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing
+
 NameNanoPhagocytosisPlant=Nano Phagocytosis Plant
 NanoPhagocytosisPlantRecipeType=Macerator
 Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nanites

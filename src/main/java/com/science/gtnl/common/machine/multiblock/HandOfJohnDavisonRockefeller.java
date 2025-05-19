@@ -239,21 +239,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-
-                if (GTUtility.getTier(getMaxInputVoltage()) > 11) {
-                    return super.createOverclockCalculator(recipe).setRecipeEUt(recipe.mEUt)
-                        .setAmperage(availableAmperage)
-                        .setEUt(availableVoltage)
-                        .setDuration(recipe.mDuration)
-                        .setAmperageOC(true)
-                        .setDurationDecreasePerOC(4)
-                        .setEUtIncreasePerOC(4)
-                        .setEUtDiscount(calculateEUtDiscount(SpeedCount))
-                        .setSpeedBoost(calculateSpeedBoost(SpeedCount));
-                } else {
-                    return super.createOverclockCalculator(recipe).setEUtDiscount(calculateEUtDiscount(SpeedCount))
-                        .setSpeedBoost(calculateSpeedBoost(SpeedCount));
-                }
+                return super.createOverclockCalculator(recipe).setEUtDiscount(calculateEUtDiscount(SpeedCount))
+                    .setSpeedBoost(calculateSpeedBoost(SpeedCount));
             }
 
             private double calculateEUtDiscount(double levels) {

@@ -180,6 +180,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.Z
 import com.science.gtnl.common.machine.multiblock.SuperSpaceElevator;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.VortexMatterCentrifuge;
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
 import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
@@ -1094,6 +1095,13 @@ public class MachineLoader {
                 "EngravingLaserPlant",
                 StatCollector.translateToLocal("NameEngravingLaserPlant")));
         addItemTooltip(GTNLItemList.EngravingLaserPlant.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.VortexMatterCentrifuge.set(
+            new VortexMatterCentrifuge(
+                VORTEX_MATTER_CENTRIFUGE.ID,
+                "VortexMatterCentrifuge",
+                StatCollector.translateToLocal("NameVortexMatterCentrifuge")));
+        addItemTooltip(GTNLItemList.VortexMatterCentrifuge.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
