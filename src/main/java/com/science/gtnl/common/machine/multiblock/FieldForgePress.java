@@ -5,9 +5,11 @@ import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
-import static gregtech.api.util.GTStructureUtility.ofFrame;
+import static gtPlusPlus.core.block.ModBlocks.blockCasings3Misc;
+import static gtPlusPlus.core.block.ModBlocks.blockCustomMachineCasings;
 import static tectech.thing.casing.TTCasingsContainer.sBlockCasingsTT;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -19,8 +21,6 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 
-import galaxyspace.core.register.GSBlocks;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -30,39 +30,38 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.MultiblockTooltipBuilder;
-import gtnhlanth.common.register.LanthItemList;
+import gtPlusPlus.core.material.MaterialsAlloy;
 import tectech.thing.casing.BlockGTCasingsTT;
 
-public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<VortexMatterCentrifuge>
+public class FieldForgePress extends WirelessEnergyMultiMachineBase<FieldForgePress>
     implements IWirelessEnergyHatchInformation {
 
-    private static final int HORIZONTAL_OFF_SET = 15;
-    private static final int VERTICAL_OFF_SET = 7;
-    private static final int DEPTH_OFF_SET = 0;
+    private static final int HORIZONTAL_OFF_SET = 8;
+    private static final int VERTICAL_OFF_SET = 23;
+    private static final int DEPTH_OFF_SET = 1;
     private int tCountCasing = 0;
-    private static IStructureDefinition<VortexMatterCentrifuge> STRUCTURE_DEFINITION = null;
+    private static IStructureDefinition<FieldForgePress> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String VMC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
-        + "multiblock/vortex_matter_centrifuge";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(VMC_STRUCTURE_FILE_PATH);
+    private static final String FFP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/field_forge_press";
+    private static final String[][] shape = StructureUtils.readStructureFromFile(FFP_STRUCTURE_FILE_PATH);
 
-    public VortexMatterCentrifuge(String aName) {
+    public FieldForgePress(String aName) {
         super(aName);
     }
 
-    public VortexMatterCentrifuge(int aID, String aName, String aNameRegional) {
+    public FieldForgePress(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new VortexMatterCentrifuge(this.mName);
+        return new FieldForgePress(this.mName);
     }
 
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(StatCollector.translateToLocal("VortexMatterCentrifugeRecipeType"))
+        tt.addMachineType(StatCollector.translateToLocal("FieldForgePressRecipeType"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
@@ -77,12 +76,12 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
             .addSeparator()
             .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
             .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
-            .beginStructureBlock(31, 10, 31, true)
-            .addInputBus(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addOutputBus(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addInputHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addOutputHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
-            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_VortexMatterCentrifuge_Casing"), 1)
+            .beginStructureBlock(15, 25, 27, true)
+            .addInputBus(StatCollector.translateToLocal("Tooltip_FieldForgePress_Casing"), 1)
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_FieldForgePress_Casing"), 1)
+            .addInputHatch(StatCollector.translateToLocal("Tooltip_FieldForgePress_Casing"), 1)
+            .addOutputHatch(StatCollector.translateToLocal("Tooltip_FieldForgePress_Casing"), 1)
+            .addEnergyHatch(StatCollector.translateToLocal("Tooltip_FieldForgePress_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -111,31 +110,33 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
     }
 
     @Override
-    public IStructureDefinition<VortexMatterCentrifuge> getStructureDefinition() {
+    public IStructureDefinition<FieldForgePress> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
-            STRUCTURE_DEFINITION = StructureDefinition.<VortexMatterCentrifuge>builder()
+            STRUCTURE_DEFINITION = StructureDefinition.<FieldForgePress>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(BasicBlocks.MetaCasing, 5))
-                .addElement('B', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
-                .addElement('C', ofBlock(sBlockCasingsTT, 6))
-                .addElement('D', ofBlock(sBlockCasingsTT, 0))
-                .addElement('E', ofBlock(sBlockCasings10, 3))
-                .addElement('F', ofBlock(sBlockCasings1, 9))
-                .addElement('G', ofBlock(sBlockCasingsTT, 8))
-                .addElement('H', ofBlock(sBlockCasings10, 8))
-                .addElement('I', ofBlock(BasicBlocks.MetaCasing, 7))
-                .addElement('J', ofBlock(sBlockCasings10, 7))
+                .addElement('A', ofBlock(sBlockCasings4, 12))
+                .addElement('B', ofBlock(sBlockCasings1, 14))
+                .addElement('C', ofBlock(sBlockCasings10, 3))
+                .addElement('D', ofBlock(sBlockCasings1, 13))
+                .addElement('E', ofBlock(sBlockCasings8, 7))
+                .addElement('F', ofBlock(sBlockCasings9, 9))
+                .addElement('G', ofBlock(blockCasings3Misc, 1))
                 .addElement(
-                    'K',
-                    buildHatchAdder(VortexMatterCentrifuge.class)
+                    'H',
+                    buildHatchAdder(FieldForgePress.class)
                         .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 4))))
-                .addElement('L', ofBlock(sBlockCasings8, 10))
-                .addElement('M', ofBlock(sBlockCasings1, 13))
-                .addElement('N', ofFrame(Materials.EnrichedHolmium))
-                .addElement('O', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
+                .addElement('I', ofBlock(blockCustomMachineCasings, 3))
+                .addElement('J', ofBlock(sBlockCasings8, 10))
+                .addElement('K', ofBlock(BasicBlocks.MetaCasing, 12))
+                .addElement(
+                    'L',
+                    ofBlockAnyMeta(
+                        Block.getBlockFromItem(
+                            MaterialsAlloy.INCONEL_792.getFrameBox(1)
+                                .getItem())))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -173,12 +174,12 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
-        return tCountCasing > 250;
+        return tCountCasing > 1800;
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        return RecipeMaps.centrifugeRecipes;
+        return RecipeMaps.hammerRecipes;
     }
 
 }

@@ -1970,6 +1970,19 @@ SuperconductingElectromagnetism_Mode_2=两级磁化机
 Tooltip_SuperconductingElectromagnetism_00=每级玻璃等级额外提供5%的加速和耗电减免(乘算叠加)
 Tooltip_SuperconductingElectromagnetism_Casing=任意分子机械方块
 
+NameFieldForgePress=力场锻压机
+FieldForgePressRecipeType=锻造锤
+Tooltip_FieldForgePress_Casing=任意分子机械方块
+
+NameHeavyRolling=重型辊轧机
+HeavyRollingRecipeType=卷板机
+Tooltip_HeavyRolling_00=每级线圈等级额外提供15%的加速(乘算叠加)
+Tooltip_HeavyRolling_Casing=任意冶炼炉机械方块
+
+NameSuperconductingMagneticPresser=超导磁驱冲击装置
+SuperconductingMagneticPresserRecipeType=冲压机床
+Tooltip_SuperconductingMagneticPresser_Casing=任意镀铱机械方块
+
 NameVortexMatterCentrifuge=旋涡物质离心器
 VortexMatterCentrifugeRecipeType=离心机
 Tooltip_VortexMatterCentrifuge_Casing=任意分子机械方块

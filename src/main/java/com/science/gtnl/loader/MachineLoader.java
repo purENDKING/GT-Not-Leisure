@@ -75,10 +75,12 @@ import com.science.gtnl.common.machine.multiblock.EdenGarden;
 import com.science.gtnl.common.machine.multiblock.ElementCopying;
 import com.science.gtnl.common.machine.multiblock.EnergeticPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.EngravingLaserPlant;
+import com.science.gtnl.common.machine.multiblock.FieldForgePress;
 import com.science.gtnl.common.machine.multiblock.FuelRefiningComplex;
 import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
 import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
+import com.science.gtnl.common.machine.multiblock.HeavyRolling;
 import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
 import com.science.gtnl.common.machine.multiblock.IntegratedAssemblyFacility;
 import com.science.gtnl.common.machine.multiblock.LapotronChip;
@@ -179,6 +181,7 @@ import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.V
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ZpmKuangBiaoTwoGiantNuclearFusionReactor;
 import com.science.gtnl.common.machine.multiblock.SuperSpaceElevator;
 import com.science.gtnl.common.machine.multiblock.SuperconductingElectromagnetism;
+import com.science.gtnl.common.machine.multiblock.SuperconductingMagneticPresser;
 import com.science.gtnl.common.machine.multiblock.TeleportationArrayToAlfheim;
 import com.science.gtnl.common.machine.multiblock.VibrantPhotovoltaicPowerStation;
 import com.science.gtnl.common.machine.multiblock.VortexMatterCentrifuge;
@@ -1110,6 +1113,24 @@ public class MachineLoader {
                 "SuperconductingElectromagnetism",
                 StatCollector.translateToLocal("NameSuperconductingElectromagnetism")));
         addItemTooltip(GTNLItemList.SuperconductingElectromagnetism.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.FieldForgePress.set(
+            new FieldForgePress(
+                FIELD_FORGE_PRESS.ID,
+                "FieldForgePress",
+                StatCollector.translateToLocal("NameFieldForgePress")));
+        addItemTooltip(GTNLItemList.FieldForgePress.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.SuperconductingMagneticPresser.set(
+            new SuperconductingMagneticPresser(
+                SUPERCONDUCTING_MAGNETIC_PRESSER.ID,
+                "SuperconductingMagneticPresser",
+                StatCollector.translateToLocal("NameSuperconductingMagneticPresser")));
+        addItemTooltip(GTNLItemList.SuperconductingMagneticPresser.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.HeavyRolling.set(
+            new HeavyRolling(HEAVY_ROLLING.ID, "HeavyRolling", StatCollector.translateToLocal("NameHeavyRolling")));
+        addItemTooltip(GTNLItemList.HeavyRolling.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

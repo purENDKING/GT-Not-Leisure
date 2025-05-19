@@ -1970,6 +1970,19 @@ SuperconductingElectromagnetism_Mode_2=Two-stage Magnetizer
 Tooltip_SuperconductingElectromagnetism_00=Each glass tier provides an additional 5% speed and power reduction (multiplicative).
 Tooltip_SuperconductingElectromagnetism_Casing=Any Molecular Casing
 
+NameFieldForgePress=Field Forge Press
+FieldForgePressRecipeType=Forging Hammer
+Tooltip_FieldForgePress_Casing=Any Molecular Casing
+
+NameHeavyRolling=Heavy Rolling
+HeavyRollingRecipeType=Bender
+Tooltip_HeavyRolling_00=Each coil tier provides an additional 15% speed (multiplicative).
+Tooltip_HeavyRolling_Casing=Any Blast Furnace Machine Block
+
+NameSuperconductingMagneticPresser=Superconducting Magnetic Presser
+SuperconductingMagneticPresserRecipeType=Forming Press
+Tooltip_SuperconductingMagneticPresser_Casing=Ang Advanced Iridium Plated Machine Casing
+
 NameVortexMatterCentrifuge=Vortex Matter Centrifuge
 VortexMatterCentrifugeRecipeType=Centrifuge
 Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing
