@@ -81,6 +81,7 @@ import com.science.gtnl.common.machine.multiblock.GenerationEarthEngine;
 import com.science.gtnl.common.machine.multiblock.GrandAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.HandOfJohnDavisonRockefeller;
 import com.science.gtnl.common.machine.multiblock.HeavyRolling;
+import com.science.gtnl.common.machine.multiblock.HighEnergyLaserLathe;
 import com.science.gtnl.common.machine.multiblock.IndustrialArcaneAssembler;
 import com.science.gtnl.common.machine.multiblock.IntegratedAssemblyFacility;
 import com.science.gtnl.common.machine.multiblock.LapotronChip;
@@ -1131,6 +1132,13 @@ public class MachineLoader {
         GTNLItemList.HeavyRolling.set(
             new HeavyRolling(HEAVY_ROLLING.ID, "HeavyRolling", StatCollector.translateToLocal("NameHeavyRolling")));
         addItemTooltip(GTNLItemList.HeavyRolling.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.HighEnergyLaserLathe.set(
+            new HighEnergyLaserLathe(
+                HIGH_ENERGY_LASER_LATHE.ID,
+                "HighEnergyLaserLathe",
+                StatCollector.translateToLocal("NameHighEnergyLaserLathe")));
+        addItemTooltip(GTNLItemList.HighEnergyLaserLathe.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
