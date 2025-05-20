@@ -47,10 +47,9 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
     private static IStructureDefinition<FlotationCellRegulator> STRUCTURE_DEFINITION = null;
     public static final String FCR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/flotation_cell_regulator";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(18);
-    public byte mGlassTier = 0;
-    public final int horizontalOffSet = 6;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 1;
+    public final int HORIZONTAL_OFF_SET = 6;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 1;
     public static String[][] shape = StructureUtils.readStructureFromFile(FCR_STRUCTURE_FILE_PATH);
 
     public FlotationCellRegulator(int aID, String aName, String aNameRegional) {
@@ -164,7 +163,7 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
                     buildHatchAdder(FlotationCellRegulator.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputBus, OutputHatch, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 2))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings2Misc, 2))))
                 .addElement('E', ofBlock(blockCasings3Misc, 1))
                 .addElement('F', ofBlock(blockSpecialMultiCasings, 9))
                 .build();
@@ -174,11 +173,11 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mGlassTier = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -199,12 +198,12 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -213,9 +212,9 @@ public class FlotationCellRegulator extends GTMMultiMachineBase<FlotationCellReg
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

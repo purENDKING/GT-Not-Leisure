@@ -66,9 +66,9 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
     public static final String KBFR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/kuang_biao_giant_nuclear_fusion_reactor";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(52);
-    public final int horizontalOffSet = 19;
-    public final int verticalOffSet = 14;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 19;
+    public final int VERTICAL_OFF_SET = 14;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(KBFR_STRUCTURE_FILE_PATH);
 
     public UevKuangBiaoFiveGiantNuclearFusionReactor(int aID, String aName, String aNameRegional) {
@@ -86,10 +86,10 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) {
             return false;
         }
 
@@ -99,12 +99,12 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 1500;
+        return tCountCasing >= 1500;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -113,9 +113,9 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -347,7 +347,7 @@ public class UevKuangBiaoFiveGiantNuclearFusionReactor
                     buildHatchAdder(UevKuangBiaoFiveGiantNuclearFusionReactor.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings6Misc, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings6Misc, 0))))
                 .addElement('D', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
                 .addElement('E', ofFrame(Materials.Tungsten))
                 .addElement('F', ofFrame(Materials.Infinity))

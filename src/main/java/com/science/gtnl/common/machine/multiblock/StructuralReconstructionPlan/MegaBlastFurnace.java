@@ -60,10 +60,9 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String MBF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/mega_blast_furnace";
     public static String[][] shape = StructureUtils.readStructureFromFile(MBF_STRUCTURE_FILE_PATH);
-    private int mCasing;
-    public final int horizontalOffSet = 11;
-    public final int verticalOffSet = 41;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 11;
+    public final int VERTICAL_OFF_SET = 41;
+    public final int DEPTH_OFF_SET = 0;
 
     public MegaBlastFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -96,7 +95,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                             ParallelCon)
                         .casingIndex(TAE.GTPP_INDEX(15))
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(ModBlocks.blockCasingsMisc, 15))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(ModBlocks.blockCasingsMisc, 15))))
                 .addElement('B', ofBlock(sBlockCasings2, 0))
                 .addElement('S', Muffler.newAny(((BlockCasings8) sBlockCasings8).getTextureIndex(10), 2))
                 .addElement('C', ofBlock(sBlockCasings2, 12))
@@ -266,7 +265,13 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -276,9 +281,9 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -288,11 +293,11 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -305,7 +310,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
 
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 3500;
+        return tCountCasing >= 3500;
     }
 
     @Override

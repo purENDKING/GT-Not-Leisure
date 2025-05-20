@@ -48,17 +48,15 @@ import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase<HandOfJohnDavisonRockefeller>
     implements ISurvivalConstructable {
 
-    public int mCasing;
-    public byte mGlassTier = 0;
-    public int SpeedCount = 0;
+    public int mSpeedCount = 0;
     public static IStructureDefinition<HandOfJohnDavisonRockefeller> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String HODR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/hand_of_john_davison_rockefeller";
     public static String[][] shape = StructureUtils.readStructureFromFile(HODR_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 20;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 20;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 0;
     public static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(3);
 
     public HandOfJohnDavisonRockefeller(int aID, String aName, String aNameRegional) {
@@ -158,7 +156,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                     buildHatchAdder(HandOfJohnDavisonRockefeller.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings10, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings10, 3))))
                 .addElement('E', ofBlock(sBlockCasings10, 8))
                 .addElement('F', ofBlock(sBlockCasings3, 10))
                 .addElement('G', ofBlock(sBlockCasings8, 2))
@@ -171,7 +169,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -180,9 +178,9 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -191,22 +189,22 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mGlassTier = 0;
-        SpeedCount = 0;
+        mSpeedCount = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         for (MTEHatchEnergy mEnergyHatch : this.mEnergyHatches) {
-            SpeedCount = mGlassTier + GTUtility.getTier(this.getMaxInputVoltage());
+            mSpeedCount = mGlassTier + GTUtility.getTier(this.getMaxInputVoltage());
 
             if (mGlassTier < VoltageIndex.UEV & mEnergyHatch.mTier > mGlassTier - 1) {
                 return false;
             }
         }
-        return mCasing >= 80;
+        return tCountCasing >= 80;
     }
 
     @Override
@@ -239,8 +237,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
             @NotNull
             @Override
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).setEUtDiscount(calculateEUtDiscount(SpeedCount))
-                    .setSpeedBoost(calculateSpeedBoost(SpeedCount));
+                return super.createOverclockCalculator(recipe).setEUtDiscount(calculateEUtDiscount(mSpeedCount))
+                    .setSpeedBoost(calculateSpeedBoost(mSpeedCount));
             }
 
             private double calculateEUtDiscount(double levels) {

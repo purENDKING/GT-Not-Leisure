@@ -88,9 +88,9 @@ public class StructureUtils {
      * blocks in the world, with the machine facing the XZ direction.
      *
      * @param aBaseMetaTileEntity the machine
-     * @param OffSetX             horizontalOffSet of the machine structure definition
-     * @param OffSetY             verticalOffSet of the machine structure definition
-     * @param OffSetZ             depthOffSet of the machine structure definition
+     * @param OffSetX             HORIZONTAL_OFF_SET of the machine structure definition
+     * @param OffSetY             VERTICAL_OFF_SET of the machine structure definition
+     * @param OffSetZ             DEPTH_OFF_SET of the machine structure definition
      * @param StructureString     the machine structure definition string array
      * @param isStructureFlipped  if the machine is flipped, use getFlip().isHorizontallyFlipped() to get it
      * @param TargetString        target character

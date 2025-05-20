@@ -71,13 +71,12 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     private static final int MACHINEMODE_ASSEMBLER = 0;
     private static final int MACHINEMODE_PRECISION = 1;
     private static final int CASING_INDEX = 1540;
-    public final int horizontalOffSet = 4;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 4;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LPA_STRUCTURE_FILE_PATH);
     protected int casingTier = 0;
     protected int machineTier = -1;
-    public byte mGlassTier = 0;
 
     public PrecisionAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -209,7 +208,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
                             .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                             .buildAndChain(
                                 onElementPass(
-                                    x -> ++x.mCasing,
+                                    x -> ++x.tCountCasing,
                                     withChannel(
                                         "precisecasing",
                                         ofBlocksTiered(
@@ -302,12 +301,12 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         casingTier = -1;
         machineTier = -1;
         mGlassTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -330,7 +329,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
             mteHatch.updateTexture(getCasingTextureID());
             return true;
         }
-        return mCasing >= 30 && casingTier >= 0;
+        return tCountCasing >= 30 && casingTier >= 0;
     }
 
     @Override
@@ -399,7 +398,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -408,9 +407,9 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

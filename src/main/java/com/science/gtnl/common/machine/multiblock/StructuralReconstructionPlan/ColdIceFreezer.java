@@ -59,9 +59,9 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String CIF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/cold_ice_freeze";
     public static String[][] shape = StructureUtils.readStructureFromFile(CIF_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 2;
+    public final int DEPTH_OFF_SET = 0;
     private static IStructureDefinition<ColdIceFreezer> STRUCTURE_DEFINITION = null;
 
     public ColdIceFreezer(final int aID, final String aName, final String aNameRegional) {
@@ -116,7 +116,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
                             .dot(1)
                             .casingIndex(CASING_INDEX)
                             .build(),
-                        onElementPass(x -> ++x.mCasing, ofBlock(GregTechAPI.sBlockCasings2, 1)),
+                        onElementPass(x -> ++x.tCountCasing, ofBlock(GregTechAPI.sBlockCasings2, 1)),
                         buildHatchAdder(ColdIceFreezer.class).adder(ColdIceFreezer::addFluidIceInputHatch)
                             .hatchId(21502)
                             .shouldReject(x -> !x.FluidIceInputHatch.isEmpty())
@@ -134,7 +134,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -143,9 +143,9 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -154,10 +154,10 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         FluidIceInputHatch.clear();
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
@@ -169,7 +169,7 @@ public class ColdIceFreezer extends MultiMachineBase<ColdIceFreezer> implements 
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return mCasing >= 50 && checkHatch() && this.mMufflerHatches.size() == 1;
+        return tCountCasing >= 50 && checkHatch() && this.mMufflerHatches.size() == 1;
     }
 
     @Override

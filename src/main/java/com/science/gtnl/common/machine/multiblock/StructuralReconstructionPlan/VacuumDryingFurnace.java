@@ -58,9 +58,9 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     private static final int MACHINEMODE_NUCLEAR_SALT = 3;
     private HeatingCoilLevel mCoilLevel;
     private int mHeatingCapacity = 0;
-    public final int horizontalOffSet = 1;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 1;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(VDF_STRUCTURE_FILE_PATH);
 
     public VacuumDryingFurnace(int aID, String aName, String aNameRegional) {
@@ -160,7 +160,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .casingIndex(getCasingTextureID())
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(ModBlocks.blockCasings4Misc, 10))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(ModBlocks.blockCasings4Misc, 10))))
                 .addElement('C', Muffler.newAny(getCasingTextureID(), 1))
                 .build();
         }
@@ -235,11 +235,11 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -258,7 +258,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 10;
+        return tCountCasing >= 10;
     }
 
     @Override
@@ -268,7 +268,7 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -277,9 +277,9 @@ public class VacuumDryingFurnace extends GTMMultiMachineBase<VacuumDryingFurnace
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

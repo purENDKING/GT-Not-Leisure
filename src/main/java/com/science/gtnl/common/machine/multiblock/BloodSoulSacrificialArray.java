@@ -70,9 +70,9 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String BSSA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/blood_soul_sacrificial_array"; // 文件路径
-    public final int horizontalOffSet = 16;
-    public final int verticalOffSet = 10;
-    public final int depthOffSet = 9;
+    public final int HORIZONTAL_OFF_SET = 16;
+    public final int VERTICAL_OFF_SET = 10;
+    public final int DEPTH_OFF_SET = 9;
     public static boolean isCreativeOrb = false;
     public static boolean enableRender = true;
     public static int currentEssence = 0;
@@ -180,7 +180,7 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
         repairMachine();
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) {
             return false;
         }
 
@@ -195,7 +195,13 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -204,9 +210,9 @@ public class BloodSoulSacrificialArray extends GTMMultiMachineBase<BloodSoulSacr
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

@@ -58,11 +58,9 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     implements IWirelessEnergyHatchInformation {
 
     private int casingTier;
-    private byte mGlassTier = 0;
     private static final int HORIZONTAL_OFF_SET = 8;
     private static final int VERTICAL_OFF_SET = 10;
     private static final int DEPTH_OFF_SET = 0;
-    private int tCountCasing = 0;
     private static IStructureDefinition<IntegratedAssemblyFacility> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String IAF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"

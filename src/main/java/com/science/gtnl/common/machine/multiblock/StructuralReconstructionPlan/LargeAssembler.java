@@ -49,10 +49,9 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
     private static IStructureDefinition<LargeAssembler> STRUCTURE_DEFINITION = null;
     public static final String LA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_assembler";
     public static final int CASING_INDEX = TAE.getIndexFromPage(0, 10);
-    public byte mGlassTier = 0;
-    public final int horizontalOffSet = 6;
-    public final int verticalOffSet = 1;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 6;
+    public final int VERTICAL_OFF_SET = 1;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LA_STRUCTURE_FILE_PATH);
 
     public LargeAssembler(int aID, String aName, String aNameRegional) {
@@ -150,7 +149,7 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
                     buildHatchAdder(LargeAssembler.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 12))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings2Misc, 12))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -158,11 +157,11 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.energyHatchTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -183,12 +182,12 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 30;
+        return tCountCasing >= 30;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -197,9 +196,9 @@ public class LargeAssembler extends GTMMultiMachineBase<LargeAssembler> implemen
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

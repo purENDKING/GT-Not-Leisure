@@ -20,7 +20,6 @@ import gregtech.api.util.OverclockCalculator;
 
 public abstract class NanitesBaseModule<T extends NanitesBaseModule<T>> extends WirelessEnergyMultiMachineBase<T> {
 
-    protected int tCountCasing = 0;
     protected boolean isConnected = false;
     protected boolean isOreModule = false;
     protected boolean isBioModule = false;

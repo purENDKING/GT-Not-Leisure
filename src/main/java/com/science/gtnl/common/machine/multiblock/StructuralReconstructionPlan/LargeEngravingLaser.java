@@ -48,11 +48,10 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
     private static IStructureDefinition<LargeEngravingLaser> STRUCTURE_DEFINITION = null;
     public static final String LEL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_engraving_laser";
     public static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(1);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LEL_STRUCTURE_FILE_PATH);
-    public byte mGlassTier = 0;
 
     public LargeEngravingLaser(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -158,7 +157,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
                     buildHatchAdder(LargeEngravingLaser.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, InputHatch, OutputHatch, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings10, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings10, 1))))
                 .addElement('C', ofBlock(sBlockCasings2, 15))
                 .addElement('D', ofBlock(sBlockCasings3, 10))
                 .build();
@@ -168,11 +167,11 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         mGlassTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -193,7 +192,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
@@ -217,7 +216,7 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -226,9 +225,9 @@ public class LargeEngravingLaser extends GTMMultiMachineBase<LargeEngravingLaser
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

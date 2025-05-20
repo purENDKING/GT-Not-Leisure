@@ -62,9 +62,9 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<Digester> STRUCTURE_DEFINITION = null;
     public static final String D_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/digester";
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(D_STRUCTURE_FILE_PATH);
 
     public Digester(int aID, String aName, String aNameRegional) {
@@ -148,7 +148,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
                     buildHatchAdder(Digester.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings4, 0))))
                 .addElement('C', ofBlock(sBlockCasings4, 1))
                 .addElement('D', withChannel("coil", ofCoil(Digester::setCoilLevel, Digester::getCoilLevel)))
                 .build();
@@ -158,11 +158,11 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
-            && mCasing >= 45) {
+        if (checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()
+            && tCountCasing >= 45) {
             this.mHeatingCapacity = (int) this.getCoilLevel()
                 .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
             mParallelTier = getParallelTier(aStack);
@@ -183,7 +183,7 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -192,9 +192,9 @@ public class Digester extends GTMMultiMachineBase<Digester> implements ISurvival
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

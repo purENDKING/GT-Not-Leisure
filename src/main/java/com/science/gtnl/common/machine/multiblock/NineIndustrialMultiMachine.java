@@ -75,19 +75,17 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<NineIndustrialMultiMachine>
     implements IWirelessEnergyHatchInformation {
 
-    private int machineMode;
     private final NineIndustrialMultiMachineManager modeManager = new NineIndustrialMultiMachineManager();
     public static final String[] aToolTipNames = new String[108];
-    private int mCasing;
     protected static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(12);
     private static IStructureDefinition<NineIndustrialMultiMachine> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String NIMM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/nine_industrial_multi_machine";
     public static String[][] shape = StructureUtils.readStructureFromFile(NIMM_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 14;
-    public final int verticalOffSet = 27;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 14;
+    public final int VERTICAL_OFF_SET = 27;
+    public final int DEPTH_OFF_SET = 0;
 
     static {
         for (int id = 0; id < 108; id++) {
@@ -170,7 +168,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
                     buildHatchAdder(NineIndustrialMultiMachine.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings1, 12))))
+                        .buildAndChain(onElementPass(x -> ++this.tCountCasing, ofBlock(sBlockCasings1, 12))))
                 .addElement('F', ofBlock(sBlockCasings1, 13))
                 .addElement('G', ofBlock(sBlockCasings1, 14))
                 .addElement('H', ofBlock(sBlockCasings10, 6))
@@ -189,7 +187,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -198,9 +196,9 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -209,12 +207,12 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        this.tCountCasing = 0;
         wirelessMode = false;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
-        if (mCasing <= 256 && !checkHatch()) {
+        if (this.tCountCasing <= 256 && !checkHatch()) {
             return false;
         }
 

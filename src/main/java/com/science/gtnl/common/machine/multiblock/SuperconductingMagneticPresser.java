@@ -50,11 +50,9 @@ import tectech.thing.casing.BlockGTCasingsTT;
 public class SuperconductingMagneticPresser extends WirelessEnergyMultiMachineBase<SuperconductingMagneticPresser>
     implements IWirelessEnergyHatchInformation {
 
-    private byte mGlassTier = 0;
     private static final int HORIZONTAL_OFF_SET = 6;
     private static final int VERTICAL_OFF_SET = 5;
     private static final int DEPTH_OFF_SET = 0;
-    private int tCountCasing = 0;
     private static IStructureDefinition<SuperconductingMagneticPresser> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String SMP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"

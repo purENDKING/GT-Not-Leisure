@@ -114,9 +114,9 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String GAL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/grand_assembly_line";
     private static final String[][] shape = StructureUtils.readStructureFromFile(GAL_STRUCTURE_FILE_PATH);
-    private final int horizontalOffSet = 46;
-    private final int verticalOffSet = 2;
-    private final int depthOffSet = 0;
+    private final int HORIZONTAL_OFF_SET = 46;
+    private final int VERTICAL_OFF_SET = 2;
+    private final int DEPTH_OFF_SET = 0;
     private final ArrayList<MTEHatchDataAccess> mDataAccessHatches = new ArrayList<>();
     private static final int CASING_INDEX = BlockGTCasingsTT.textureOffset + 3;
     private static Textures.BlockIcons.CustomIcon ScreenOFF;
@@ -930,14 +930,14 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     buildHatchAdder(GrandAssemblyLine.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 3))))
                 .addElement('C', ofBlock(sBlockCasingsTT, 2))
                 .addElement(
                     'D',
                     buildHatchAdder(GrandAssemblyLine.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(OutputBus)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 3))))
                 .addElement(
                     'E',
                     buildHatchAdder(GrandAssemblyLine.class).casingIndex(CASING_INDEX)
@@ -951,7 +951,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                             DataHatchElement.DataAccess)
                         .buildAndChain(
                             onElementPass(
-                                x -> ++x.mCasing,
+                                x -> ++x.tCountCasing,
                                 ofBlockAnyMeta(GameRegistry.findBlock(IndustrialCraft2.ID, "blockAlloyGlass")))))
                 .addElement(
                     'F',
@@ -964,7 +964,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                             Maintenance,
                             Energy.or(ExoticEnergy),
                             DataHatchElement.DataAccess)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 3))))
                 .addElement('G', ofBlock(sBlockCasings2, 9))
                 .build();
         }
@@ -973,14 +973,14 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         mDataAccessHatches.clear();
         isDualInputHatch = false;
         useSingleAmp = true;
         wirelessMode = false;
 
-        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
@@ -1005,7 +1005,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
             if (!mInputBusses.isEmpty() || !mInputHatches.isEmpty()) return false;
         }
 
-        return mDataAccessHatches.size() <= 1 && mMaintenanceHatches.size() <= 1 && mCasing >= 590;
+        return mDataAccessHatches.size() <= 1 && mMaintenanceHatches.size() <= 1 && tCountCasing >= 590;
     }
 
     @Override
@@ -1051,7 +1051,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -1060,9 +1060,9 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

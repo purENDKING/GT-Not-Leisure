@@ -58,7 +58,6 @@ import gtnhlanth.common.register.LanthItemList;
 public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachineBase<NanitesIntegratedProcessingCenter>
     implements IWirelessEnergyHatchInformation {
 
-    private byte mGlassTier = 0;
     private HeatingCoilLevel heatLevel;
     private int coilTier = 0;
     private int mHeatingCapacity = 0;
@@ -66,7 +65,6 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
     private final int HORIZONTAL_OFF_SET = 15;
     private final int VERTICAL_OFF_SET = 20;
     private final int DEPTH_OFF_SET = 0;
-    private int tCountCasing = 0;
     private double setEUtDiscount = 1;
     private double setSpeedBoost = 1;
     public ArrayList<NanitesBaseModule<?>> moduleHatches = new ArrayList<>();

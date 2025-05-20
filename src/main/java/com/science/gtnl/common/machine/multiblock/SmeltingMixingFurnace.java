@@ -58,7 +58,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     implements IWirelessEnergyHatchInformation {
 
     protected GTRecipe lastRecipeToBuffer;
-    public byte mGlassTier = 0;
     public boolean hasRequiredItem = false;
     public static final int HORIZONTAL_OFF_SET = 8;
     public static final int VERTICAL_OFF_SET = 14;
@@ -173,7 +172,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
                             ParallelCon)
                         .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 0))))
+                        .buildAndChain(onElementPass(x -> ++this.tCountCasing, ofBlock(sBlockCasingsTT, 0))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -206,11 +205,11 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     }
 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        this.tCountCasing = 0;
         wirelessMode = false;
         hasRequiredItem = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (mCasing <= 15 && mGlassTier < VoltageIndex.UEV) {
+        if (this.tCountCasing <= 15 && mGlassTier < VoltageIndex.UEV) {
             return false;
         }
 

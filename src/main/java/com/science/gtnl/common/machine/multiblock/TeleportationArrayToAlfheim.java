@@ -60,12 +60,11 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String TATA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/teleportation_array_to_alfheim";
-    public final int horizontalOffSet = 11;
-    public final int verticalOffSet = 15;
-    public final int depthOffSet = 2;
+    public final int HORIZONTAL_OFF_SET = 11;
+    public final int VERTICAL_OFF_SET = 15;
+    public final int DEPTH_OFF_SET = 2;
     public static IStructureDefinition<TeleportationArrayToAlfheim> STRUCTURE_DEFINITION = null;
     public static String[][] shape = StructureUtils.readStructureFromFile(TATA_STRUCTURE_FILE_PATH);
-    private int mCasing;
     private static final int PORTAL_MODE = 0;
     private static final int NATURE_MODE = 1;
     private static final int MANA_MODE = 2;
@@ -212,7 +211,13 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -221,9 +226,9 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -247,7 +252,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
                             .dot(1)
                             .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10))
                             .build(),
-                        onElementPass(x -> ++x.mCasing, ofBlock(GregTechAPI.sBlockCasings8, 10)),
+                        onElementPass(x -> ++x.tCountCasing, ofBlock(GregTechAPI.sBlockCasings8, 10)),
                         buildHatchAdder(TeleportationArrayToAlfheim.class)
                             .adder(TeleportationArrayToAlfheim::addFluidManaInputHatch)
                             .hatchId(21501)
@@ -319,9 +324,10 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         FluidManaInputHatch.clear();
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && mCasing >= 350
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
+            && tCountCasing >= 350
             && checkHatch();
     }
 

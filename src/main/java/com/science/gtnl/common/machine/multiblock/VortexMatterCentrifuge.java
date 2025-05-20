@@ -39,7 +39,6 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
     private static final int HORIZONTAL_OFF_SET = 15;
     private static final int VERTICAL_OFF_SET = 7;
     private static final int DEPTH_OFF_SET = 0;
-    private int tCountCasing = 0;
     private static IStructureDefinition<VortexMatterCentrifuge> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String VMC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"

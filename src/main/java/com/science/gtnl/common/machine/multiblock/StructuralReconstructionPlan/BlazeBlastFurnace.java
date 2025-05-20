@@ -65,9 +65,9 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String BBF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/blaze_blast_furnace";
     public static String[][] shape = StructureUtils.readStructureFromFile(BBF_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 1;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 1;
     public static IStructureDefinition<BlazeBlastFurnace> STRUCTURE_DEFINITION = null;
     private int mHeatingCapacity = 0;
     private HeatingCoilLevel mCoilLevel;
@@ -145,7 +145,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
                             .dot(1)
                             .casingIndex(CASING_INDEX)
                             .build(),
-                        onElementPass(x -> ++x.mCasing, ofBlock(ModBlocks.blockCasingsMisc, 15)),
+                        onElementPass(x -> ++x.tCountCasing, ofBlock(ModBlocks.blockCasingsMisc, 15)),
                         buildHatchAdder(BlazeBlastFurnace.class).adder(BlazeBlastFurnace::addFluidBlazeInputHatch)
                             .hatchId(21503)
                             .shouldReject(x -> !x.FluidBlazeInputHatch.isEmpty())
@@ -168,7 +168,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -178,9 +178,9 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -196,13 +196,13 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         multiTier = 1;
         this.setCoilLevel(HeatingCoilLevel.None);
         this.mPollutionOutputHatches.clear();
         FluidBlazeInputHatch.clear();
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
         this.multiTier = getMultiTier(getControllerSlot());
 
@@ -222,7 +222,7 @@ public class BlazeBlastFurnace extends MultiMachineBase<BlazeBlastFurnace> imple
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return mCasing >= 50 && checkHatch();
+        return tCountCasing >= 50 && checkHatch();
     }
 
     public boolean addOutputHatchToTopList(IGregTechTileEntity aTileEntity, int aBaseCasingIndex) {

@@ -66,7 +66,6 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 
 public class ProcessingArray extends MultiMachineBase<ProcessingArray> implements ISurvivalConstructable {
 
-    public int mCasing = 0;
     public RecipeMap<?> mLastRecipeMap;
     public ItemStack lastControllerStack;
     public int tTier = 0;
@@ -325,7 +324,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy)
                         .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 2))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings4, 2))))
                 .addElement('B', ofBlock(sBlockCasings2, 14))
                 .addElement(
                     'C',
@@ -389,7 +388,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         setCoilLevel(HeatingCoilLevel.None);
         tTier = 0;
 
@@ -402,7 +401,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
         if (GTUtility.getTier(this.getMaxInputVoltage()) > tTier + 4) {
             return false;
         }
-        return mCasing >= 40 && mMaintenanceHatches.size() == 1
+        return tCountCasing >= 40 && mMaintenanceHatches.size() == 1
             && getCoilLevel() != HeatingCoilLevel.None
             && this.mMufflerHatches.size() == 1;
     }

@@ -48,16 +48,15 @@ import gregtech.common.blocks.BlockCasings1;
 public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatment> implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    private byte mGlassTier = 0;
     private static IStructureDefinition<PlatinumBasedTreatment> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String PBT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/platinum_based_treatment";
     private static final int CASING_INDEX = TAE.getIndexFromPage(2, 2);
     private static final String[][] shape = StructureUtils.readStructureFromFile(PBT_STRUCTURE_FILE_PATH);
-    private final int horizontalOffSet = 7;
-    private final int verticalOffSet = 15;
-    private final int depthOffSet = 0;
+    private final int HORIZONTAL_OFF_SET = 7;
+    private final int VERTICAL_OFF_SET = 15;
+    private final int DEPTH_OFF_SET = 0;
 
     public PlatinumBasedTreatment(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -109,7 +108,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
                     buildHatchAdder(PlatinumBasedTreatment.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, InputBus, OutputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 2))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings3Misc, 2))))
                 .addElement('P', ofBlock(blockCasingsMisc, 0))
                 .addElement('Q', ofBlock(blockCasingsMisc, 5))
                 .addElement('R', Muffler.newAny(((BlockCasings1) sBlockCasings1).getTextureIndex(11), 6))
@@ -227,7 +226,13 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -237,9 +242,9 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -248,11 +253,11 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
 
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
         energyHatchTier = checkEnergyHatchTier();
@@ -266,7 +271,7 @@ public class PlatinumBasedTreatment extends MultiMachineBase<PlatinumBasedTreatm
 
         if (mMaintenanceHatches.size() != 1 && mMufflerHatches.size() != 6) return false;
 
-        return mCasing >= 30;
+        return tCountCasing >= 30;
     }
 
     @Override

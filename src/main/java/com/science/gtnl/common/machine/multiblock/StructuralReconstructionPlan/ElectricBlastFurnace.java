@@ -52,10 +52,9 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
     public static final String EBF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/electric_blast_furnace";
     public static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(11);
     public static String[][] shape = StructureUtils.readStructureFromFile(EBF_STRUCTURE_FILE_PATH);
-    private int mCasing;
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 0;
 
     public ElectricBlastFurnace(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -81,7 +80,7 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy)
                         .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings1, 11))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings1, 11))))
                 .addElement('B', ofBlock(sBlockCasings2, 0))
                 .addElement('C', ofBlock(sBlockCasings3, 10))
                 .addElement('D', ofBlock(sBlockCasings4, 1))
@@ -212,7 +211,13 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -222,9 +227,9 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -234,11 +239,11 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
     @Override
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
         energyHatchTier = checkEnergyHatchTier();
@@ -249,7 +254,7 @@ public class ElectricBlastFurnace extends MultiMachineBase<ElectricBlastFurnace>
 
         this.mHeatingCapacity = (int) this.getCoilLevel()
             .getHeat() + 100 * (BWUtil.getTier(this.getMaxInputEu()) - 2);
-        return mCasing >= 30;
+        return tCountCasing >= 30;
     }
 
     @Override

@@ -100,7 +100,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     public boolean stopAllRendering = false;
     private final Collection<ItemStack> itemDrop = new ArrayList<>();
     public int multiTier = 0;
-    public int mCasing;
+    public int tCountCasing;
 
     private final Deque<BlockPos> scanQueue = new ArrayDeque<>();
     private final Deque<List<BlockPos>> rowQueue = new ArrayDeque<>();
@@ -182,7 +182,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     @Override
     public void clearHatches() {
         super.clearHatches();
-        mCasing = 0;
+        tCountCasing = 0;
     }
 
     @Override
@@ -198,7 +198,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     }
 
     public void onCasingAdded() {
-        mCasing++;
+        tCountCasing++;
     }
 
     public boolean addInjector(IGregTechTileEntity aBaseMetaTileEntity, int aBaseCasingIndex) {
@@ -350,7 +350,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         this.multiTier = 0;
         if (aStack != null) {
             if (checkPiece(STRUCTURE_PIECE_MAIN, 9, 13, 7)) this.multiTier = getMultiTier(aStack);

@@ -51,9 +51,9 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
     private static IStructureDefinition<FuelRefiningComplex> STRUCTURE_DEFINITION = null;
     public static final String FRC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/fuel_refining_complex";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(33);
-    public final int horizontalOffSet = 8;
-    public final int verticalOffSet = 12;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 8;
+    public final int VERTICAL_OFF_SET = 12;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(FRC_STRUCTURE_FILE_PATH);
 
     public FuelRefiningComplex(int aID, String aName, String aNameRegional) {
@@ -149,7 +149,7 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
                     buildHatchAdder(FuelRefiningComplex.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputHatch, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings3Misc, 1))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -157,12 +157,12 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.mHeatingCapacity = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && !checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && !checkHatch()) {
             return false;
         }
         if (getCoilLevel() == HeatingCoilLevel.None) return false;
@@ -171,12 +171,12 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
 
-        return mCasing >= 245;
+        return tCountCasing >= 245;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -185,9 +185,9 @@ public class FuelRefiningComplex extends GTMMultiMachineBase<FuelRefiningComplex
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

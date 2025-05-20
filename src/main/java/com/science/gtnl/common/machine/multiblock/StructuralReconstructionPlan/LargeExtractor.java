@@ -55,9 +55,9 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
     public static final String LC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_extractor";
     private static final int MACHINEMODE_EXTRA = 0;
     private static final int MACHINEMODE_FLUID = 1;
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 1;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 1;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LC_STRUCTURE_FILE_PATH);
 
     public LargeExtractor(int aID, String aName, String aNameRegional) {
@@ -141,7 +141,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
                     buildHatchAdder(LargeExtractor.class).casingIndex(getCasingTextureID())
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 4))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings2Misc, 4))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -205,10 +205,10 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -223,7 +223,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 10;
+        return tCountCasing >= 10;
     }
 
     @Override
@@ -233,7 +233,7 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -242,9 +242,9 @@ public class LargeExtractor extends GTMMultiMachineBase<LargeExtractor> implemen
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

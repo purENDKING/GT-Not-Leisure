@@ -44,9 +44,9 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String VF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/vacuum_freezer";
     public static String[][] shape = StructureUtils.readStructureFromFile(VF_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 5;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 5;
+    public final int DEPTH_OFF_SET = 0;
 
     public VacuumFreezer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -143,7 +143,7 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
                     buildHatchAdder(VacuumFreezer.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings2, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings2, 1))))
                 .addElement('D', ofBlock(sBlockCasings2, 14))
                 .addElement('E', ofBlock(sBlockCasings4, 1))
                 .build();
@@ -153,7 +153,7 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -162,9 +162,9 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -173,14 +173,14 @@ public class VacuumFreezer extends MultiMachineBase<VacuumFreezer> implements IS
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
-        return mCasing >= 135 && checkHatch();
+        return tCountCasing >= 135 && checkHatch();
     }
 
     @Override

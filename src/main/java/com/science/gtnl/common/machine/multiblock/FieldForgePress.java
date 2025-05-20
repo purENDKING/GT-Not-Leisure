@@ -39,7 +39,6 @@ public class FieldForgePress extends WirelessEnergyMultiMachineBase<FieldForgePr
     private static final int HORIZONTAL_OFF_SET = 8;
     private static final int VERTICAL_OFF_SET = 23;
     private static final int DEPTH_OFF_SET = 1;
-    private int tCountCasing = 0;
     private static IStructureDefinition<FieldForgePress> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String FFP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/field_forge_press";

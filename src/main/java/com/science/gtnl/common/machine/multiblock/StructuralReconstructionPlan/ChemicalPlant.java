@@ -42,13 +42,12 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
 
     public static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(0);
     private HeatingCoilLevel mCoilLevel;
-    private int mCasing;
     private static IStructureDefinition<ChemicalPlant> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String CP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/chemical_plant";
-    public final int horizontalOffSet = 0;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 0;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(CP_STRUCTURE_FILE_PATH);
 
     public ChemicalPlant(int aID, String aName, String aNameRegional) {
@@ -144,7 +143,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
                     buildHatchAdder(ChemicalPlant.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 0))))
                 .addElement('C', ofBlock(sBlockCasings8, 1))
                 .build();
         }
@@ -153,7 +152,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -162,9 +161,9 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -173,11 +172,11 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -194,7 +193,7 @@ public class ChemicalPlant extends GTMMultiMachineBase<ChemicalPlant> implements
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 50;
+        return tCountCasing >= 50;
     }
 
     @Override

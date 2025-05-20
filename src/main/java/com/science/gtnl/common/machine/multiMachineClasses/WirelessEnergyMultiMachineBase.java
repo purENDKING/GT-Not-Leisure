@@ -38,7 +38,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMultiMachineBase<T>>
     extends MultiMachineBase<T> {
 
-    private int totalOverclockedDuration = 0;
+    protected int totalOverclockedDuration = 0;
 
     public WirelessEnergyMultiMachineBase(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);

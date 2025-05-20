@@ -49,9 +49,9 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
     private static IStructureDefinition<ReactionFurnace> STRUCTURE_DEFINITION = null;
     public static final String RF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/reaction_furnace";
     public static final int CASING_INDEX = ((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(7);
-    public final int horizontalOffSet = 15;
-    public final int verticalOffSet = 18;
-    public final int depthOffSet = 3;
+    public final int HORIZONTAL_OFF_SET = 15;
+    public final int VERTICAL_OFF_SET = 18;
+    public final int DEPTH_OFF_SET = 3;
     public static String[][] shape = StructureUtils.readStructureFromFile(RF_STRUCTURE_FILE_PATH);
 
     public ReactionFurnace(int aID, String aName, String aNameRegional) {
@@ -138,7 +138,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
                     buildHatchAdder(ReactionFurnace.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 7))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 7))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -146,21 +146,21 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 115;
+        return tCountCasing >= 115;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -267,9 +267,9 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

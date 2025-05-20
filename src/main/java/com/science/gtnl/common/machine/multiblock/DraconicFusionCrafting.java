@@ -50,9 +50,9 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
     private static IStructureDefinition<DraconicFusionCrafting> STRUCTURE_DEFINITION = null;
     public static final String DFC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/draconic_fusion_crafting";
     public static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(12);
-    public final int horizontalOffSet = 14;
-    public final int verticalOffSet = 33;
-    public final int depthOffSet = 5;
+    public final int HORIZONTAL_OFF_SET = 14;
+    public final int VERTICAL_OFF_SET = 33;
+    public final int DEPTH_OFF_SET = 5;
     public static String[][] shape = StructureUtils.readStructureFromFile(DFC_STRUCTURE_FILE_PATH);
     public int tierCasing = -1;
 
@@ -131,7 +131,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
                     buildHatchAdder(DraconicFusionCrafting.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings10, 12))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings10, 12))))
                 .addElement(
                     'D',
                     withChannel(
@@ -200,11 +200,11 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         tierCasing = -1;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -212,12 +212,12 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
         if (tierCasing < 0) return false;
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -226,9 +226,9 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

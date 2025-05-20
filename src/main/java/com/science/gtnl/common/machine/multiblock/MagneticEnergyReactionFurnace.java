@@ -64,7 +64,6 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
     private static final int HORIZONTAL_OFF_SET = 16;
     private static final int VERTICAL_OFF_SET = 12;
     private static final int DEPTH_OFF_SET = 1;
-    private int tCountCasing = 0;
     public static final int CASING_INDEX = TAE.getIndexFromPage(3, 3);
     private static IStructureDefinition<MagneticEnergyReactionFurnace> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";

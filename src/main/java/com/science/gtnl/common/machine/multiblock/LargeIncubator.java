@@ -61,7 +61,6 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     private Fluid mFluid = FluidRegistry.LAVA;
     private BioCulture mCulture;
     private static final int CASING_INDEX = 210;
-    private byte mGlassTier;
     private int mSievert;
     private int mNeededSievert;
     private boolean isVisibleFluid = false;
@@ -69,9 +68,9 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String L_INCUBATOR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_incubator";
     public static String[][] shape = StructureUtils.readStructureFromFile(L_INCUBATOR_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 6;
-    public final int verticalOffSet = 7;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 6;
+    public final int VERTICAL_OFF_SET = 7;
+    public final int DEPTH_OFF_SET = 0;
 
     public LargeIncubator(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -149,7 +148,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
                             .casingIndex(CASING_INDEX)
                             .dot(1)
                             .build(),
-                        onElementPass(e -> e.mCasing++, ofBlock(sBlockReinforced, 2))))
+                        onElementPass(e -> e.tCountCasing++, ofBlock(sBlockReinforced, 2))))
                 .addElement('F', ofBlockAnyMeta(Blocks.sponge))
                 .addElement('G', ofChain(isAir(), ofBlockAnyMeta(Blocks.flowing_water), ofBlockAnyMeta(Blocks.water)))
                 .build();
@@ -306,11 +305,11 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack itemStack) {
         this.mRadHatches.clear();
         this.mGlassTier = 0;
-        this.mCasing = 0;
+        this.tCountCasing = 0;
 
-        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
-        if (mCasing < 19 && this.mRadHatches.size() > 1
+        if (tCountCasing < 19 && this.mRadHatches.size() > 1
             && this.mOutputHatches.size() != 1
             && this.mInputHatches.isEmpty()
             && this.mEnergyHatches.isEmpty()) return false;
@@ -319,9 +318,9 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
             .isHorizontallyFlipped();
         StructureUtils.setStringBlockXZ(
             aBaseMetaTileEntity,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             shape,
             isFlipped,
             "G",
@@ -423,7 +422,7 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
 
     @Override
     public void construct(ItemStack itemStack, boolean b) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, itemStack, b, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(STRUCTURE_PIECE_MAIN, itemStack, b, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -432,9 +431,9 @@ public class LargeIncubator extends MultiMachineBase<LargeIncubator> implements 
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

@@ -47,9 +47,9 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
     private static IStructureDefinition<FishingGround> STRUCTURE_DEFINITION = null;
     public static final String FG_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/fishing_ground";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(18);
-    public final int horizontalOffSet = 6;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 6;
+    public final int VERTICAL_OFF_SET = 2;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(FG_STRUCTURE_FILE_PATH);
 
     public FishingGround(int aID, String aName, String aNameRegional) {
@@ -126,7 +126,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
                     buildHatchAdder(FishingGround.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 2))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings2Misc, 2))))
                 .addElement('D', ofChain(ofBlockAnyMeta(Blocks.water), ofBlockAnyMeta(Blocks.flowing_water), isAir()))
                 .build();
         }
@@ -135,14 +135,14 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
-        if (mCasing < 25) return false;
+        if (tCountCasing < 25) return false;
 
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
@@ -157,9 +157,9 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
             .isHorizontallyFlipped();
         StructureUtils.setStringBlockXZ(
             aBaseMetaTileEntity,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             shape,
             isFlipped,
             "D",
@@ -201,7 +201,7 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -210,9 +210,9 @@ public class FishingGround extends GTMMultiMachineBase<FishingGround> implements
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

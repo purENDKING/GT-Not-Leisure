@@ -175,7 +175,7 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
         currentOutputEU = 0;
 
         if (aStack != null) {
-            if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet))
+            if (checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET))
                 this.multiTier = getMultiTier(aStack);
         }
 
@@ -186,7 +186,13 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -195,18 +201,18 @@ public class WhiteNightGenerator extends MultiMachineBase<WhiteNightGenerator>
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
             true);
     }
 
-    public final int horizontalOffSet = 49;
-    public final int verticalOffSet = 55;
-    public final int depthOffSet = 26;
+    public final int HORIZONTAL_OFF_SET = 49;
+    public final int VERTICAL_OFF_SET = 55;
+    public final int DEPTH_OFF_SET = 26;
 
     @Override
     public IStructureDefinition<WhiteNightGenerator> getStructureDefinition() {
