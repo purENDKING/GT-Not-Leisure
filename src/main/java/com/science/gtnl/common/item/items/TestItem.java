@@ -94,7 +94,7 @@ public class TestItem extends Item implements IHaloRenderItem {
 
     @Override
     public int getHaloColour(ItemStack stack) {
-        return 0xFFFFFFFF;
+        return 0xE6FFFFFF;
     }
 
 }

@@ -20,13 +20,14 @@ import com.science.gtnl.Utils.item.MetaItemStackUtils;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fox.spiteful.avaritia.render.IHaloRenderItem;
 
 /**
  * An ItemStack Generator used Meta Item System.
  * <li>Use {@link ItemAdder#initItem(String, int)} to create your Item at ItemList01.
  *
  */
-public class ItemAdder extends ItemAdder_Basic {
+public class ItemAdder extends ItemAdder_Basic implements IHaloRenderItem {
 
     /**
      * An Item Map for managing basic items
@@ -40,6 +41,7 @@ public class ItemAdder extends ItemAdder_Basic {
     public static final Map<Integer, String[]> MetaItemTooltipsMap = new HashMap<>();
 
     public final String unlocalizedName;
+    public IIcon[] halo;
 
     /**
      * Create the basic item MetaItem.
@@ -103,6 +105,11 @@ public class ItemAdder extends ItemAdder_Basic {
             ItemStaticDataClientOnly.iconsMap01
                 .put(meta, iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaItem/" + meta));
         }
+        halo = new IIcon[4];
+        halo[0] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHalo");
+        halo[1] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyan");
+        halo[2] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyanFaded");
+        halo[3] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloSol");
     }
 
     @Override
@@ -145,5 +152,36 @@ public class ItemAdder extends ItemAdder_Basic {
             aList.add(new ItemStack(BasicItems.MetaItem, 1, Meta));
         }
     }
-    // endregion
+
+    @Override
+    public boolean drawHalo(ItemStack stack) {
+        return switch (stack.getItemDamage()) {
+            case 26, 27 -> true;
+            default -> false;
+        };
+    }
+
+    @Override
+    public IIcon getHaloTexture(ItemStack stack) {
+        return switch (stack.getItemDamage()) {
+            case 26 -> halo[0];
+            case 27 -> halo[3];
+            default -> halo[0];
+        };
+    }
+
+    @Override
+    public int getHaloSize(ItemStack stack) {
+        return 10;
+    }
+
+    @Override
+    public boolean drawPulseEffect(ItemStack stack) {
+        return false;
+    }
+
+    @Override
+    public int getHaloColour(ItemStack stack) {
+        return 0xE6FFFFFF;
+    }
 }
