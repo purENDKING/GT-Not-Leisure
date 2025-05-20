@@ -88,7 +88,8 @@ import gtPlusPlus.xmod.gregtech.api.metatileentity.implementations.MteHatchSteam
 public abstract class MultiMachineBase<T extends MultiMachineBase<T>> extends MTEExtendedPowerMultiBlockBase<T>
     implements IConstructable, ISurvivalConstructable {
 
-    protected int mCasing;
+    protected int tCountCasing;
+    protected byte mGlassTier = 0;
     protected int mParallelTier;
     protected int energyHatchTier;
     protected int mMaxParallel = 0;

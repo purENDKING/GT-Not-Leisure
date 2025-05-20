@@ -43,16 +43,15 @@ import tectech.thing.casing.BlockGTCasingsTT;
 
 public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implements ISurvivalConstructable {
 
-    public byte mGlassTier = 0;
     private static Textures.BlockIcons.CustomIcon ScreenOFF;
     private static Textures.BlockIcons.CustomIcon ScreenON;
     public static IStructureDefinition<SpaceAssembler> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String SA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/space_assembler";
     public static String[][] shape = StructureUtils.readStructureFromFile(SA_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 5;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 5;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 0;
 
     public SpaceAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -161,7 +160,7 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
                     buildHatchAdder(SpaceAssembler.class).casingIndex(BlockGTCasingsTT.textureOffset + 3)
                         .dot(1)
                         .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy), ParallelCon)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasingsTT, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 3))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -169,7 +168,7 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -178,9 +177,9 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -189,17 +188,17 @@ public class SpaceAssembler extends GTMMultiMachineBase<SpaceAssembler> implemen
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mGlassTier = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 10;
+        return tCountCasing >= 10;
     }
 
     @Override

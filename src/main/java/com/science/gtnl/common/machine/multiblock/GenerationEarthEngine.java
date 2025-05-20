@@ -45,9 +45,9 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     protected GTRecipe lastRecipeToBuffer;
 
-    public static final int horizontalOffSet = 321;
-    public static final int verticalOffSet = 321;
-    public static final int depthOffSet = 17;
+    public static final int HORIZONTAL_OFF_SET = 321;
+    public static final int VERTICAL_OFF_SET = 321;
+    public static final int DEPTH_OFF_SET = 17;
     public int tCountCasing = 0;
     private static IStructureDefinition<GenerationEarthEngine> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
@@ -163,7 +163,13 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -175,9 +181,9 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
             return this.survivialBuildPiece(
                 STRUCTURE_PIECE_MAIN,
                 stackSize,
-                horizontalOffSet,
-                verticalOffSet,
-                depthOffSet,
+                HORIZONTAL_OFF_SET,
+                VERTICAL_OFF_SET,
+                DEPTH_OFF_SET,
                 realBudget,
                 env,
                 false,
@@ -189,7 +195,7 @@ public class GenerationEarthEngine extends GTPPMultiBlockBase<GenerationEarthEng
 
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tCountCasing = 0;
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         return tCountCasing >= 5;
     }
 

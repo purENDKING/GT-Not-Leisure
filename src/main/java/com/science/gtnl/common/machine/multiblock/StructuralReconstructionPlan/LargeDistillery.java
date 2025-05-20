@@ -62,9 +62,9 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     private static final int MACHINEMODE_TOWER = 0;
     private static final int MACHINEMODE_DISTILLERY = 1;
     protected static final int CASING_INDEX = TAE.GTPP_INDEX(11);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 0;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 0;
+    public final int DEPTH_OFF_SET = 0;
     protected static final String STRUCTURE_PIECE_BASE = "base";
     protected static final String STRUCTURE_PIECE_LAYER = "layer";
     protected static final String STRUCTURE_PIECE_LAYER_HINT = "layerHint";
@@ -85,7 +85,6 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
 
     protected final List<List<MTEHatchOutput>> mOutputHatchesByLayer = new ArrayList<>();
     protected int mHeight;
-    protected int mCasing;
 
     public LargeDistillery(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -208,7 +207,7 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     }
 
     protected void onCasingFound() {
-        mCasing++;
+        tCountCasing++;
     }
 
     protected int getCurrentLayerOutputHatchCount() {
@@ -297,23 +296,23 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mOutputHatchesByLayer.forEach(List::clear);
         mHeight = 1;
-        mCasing = 0;
+        tCountCasing = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_BASE, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_BASE, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
         while (mHeight <= 12) {
-            if (!checkPiece(STRUCTURE_PIECE_LAYER, horizontalOffSet, mHeight, depthOffSet)) {
+            if (!checkPiece(STRUCTURE_PIECE_LAYER, HORIZONTAL_OFF_SET, mHeight, DEPTH_OFF_SET)) {
                 return false;
             }
             if (mOutputHatchesByLayer.size() < mHeight || mOutputHatchesByLayer.get(mHeight - 1)
                 .isEmpty()) return false;
-            if (checkPiece(STRUCTURE_PIECE_TOP, horizontalOffSet, mHeight + 1, depthOffSet)) {
+            if (checkPiece(STRUCTURE_PIECE_TOP, HORIZONTAL_OFF_SET, mHeight + 1, DEPTH_OFF_SET)) {
                 break;
             }
             mHeight++;
         }
 
-        if (!checkPiece(STRUCTURE_PIECE_TOP_HINT, horizontalOffSet, mHeight, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_TOP_HINT, HORIZONTAL_OFF_SET, mHeight, DEPTH_OFF_SET)) return false;
 
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
@@ -325,7 +324,7 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return mCasing >= 5 * (mHeight + 1) - 5 && mHeight + 1 >= 3
+        return tCountCasing >= 5 * (mHeight + 1) - 5 && mHeight + 1 >= 3
             && mMaintenanceHatches.size() == 1
             && mMufflerHatches.size() == 1;
     }
@@ -351,13 +350,13 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_BASE, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_BASE, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
         int tTotalHeight = Math.min(13, stackSize.stackSize + 2);
         for (int i = 1; i < tTotalHeight - 1; i++) {
-            buildPiece(STRUCTURE_PIECE_LAYER_HINT, stackSize, hintsOnly, horizontalOffSet, i, depthOffSet);
+            buildPiece(STRUCTURE_PIECE_LAYER_HINT, stackSize, hintsOnly, HORIZONTAL_OFF_SET, i, DEPTH_OFF_SET);
         }
-        buildPiece(STRUCTURE_PIECE_TOP_HINT, stackSize, hintsOnly, horizontalOffSet, tTotalHeight - 1, depthOffSet);
-        buildPiece(STRUCTURE_PIECE_TOP, stackSize, hintsOnly, horizontalOffSet, tTotalHeight, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_TOP_HINT, stackSize, hintsOnly, HORIZONTAL_OFF_SET, tTotalHeight - 1, DEPTH_OFF_SET);
+        buildPiece(STRUCTURE_PIECE_TOP, stackSize, hintsOnly, HORIZONTAL_OFF_SET, tTotalHeight, DEPTH_OFF_SET);
     }
 
     @Override
@@ -367,9 +366,9 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
         int built = survivialBuildPiece(
             STRUCTURE_PIECE_BASE,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -381,9 +380,9 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
             built = survivialBuildPiece(
                 STRUCTURE_PIECE_LAYER_HINT,
                 stackSize,
-                horizontalOffSet,
+                HORIZONTAL_OFF_SET,
                 i,
-                depthOffSet,
+                DEPTH_OFF_SET,
                 elementBudget,
                 env,
                 false,
@@ -394,9 +393,9 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
         built = survivialBuildPiece(
             STRUCTURE_PIECE_TOP_HINT,
             stackSize,
-            horizontalOffSet,
+            HORIZONTAL_OFF_SET,
             tTotalHeight - 1,
-            depthOffSet,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -406,9 +405,9 @@ public class LargeDistillery extends GTMMultiMachineBase<LargeDistillery> implem
         return survivialBuildPiece(
             STRUCTURE_PIECE_TOP,
             stackSize,
-            horizontalOffSet,
+            HORIZONTAL_OFF_SET,
             tTotalHeight,
-            depthOffSet,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

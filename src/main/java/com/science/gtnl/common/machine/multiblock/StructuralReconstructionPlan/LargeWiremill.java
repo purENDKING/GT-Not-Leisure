@@ -44,9 +44,9 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
     private static IStructureDefinition<LargeWiremill> STRUCTURE_DEFINITION = null;
     public static final String LIL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_wiremill";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(33);
-    public final int horizontalOffSet = 1;
-    public final int verticalOffSet = 1;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 1;
+    public final int VERTICAL_OFF_SET = 1;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LIL_STRUCTURE_FILE_PATH);
 
     public LargeWiremill(int aID, String aName, String aNameRegional) {
@@ -122,7 +122,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
                     buildHatchAdder(LargeWiremill.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings3Misc, 1))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -130,10 +130,10 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) {
             return false;
         }
 
@@ -153,7 +153,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
 
         mParallelTier = getParallelTier(aStack);
 
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -186,9 +186,9 @@ public class LargeWiremill extends GTMMultiMachineBase<LargeWiremill> implements
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

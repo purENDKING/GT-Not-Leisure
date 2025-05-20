@@ -65,13 +65,12 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> implements ISurvivalConstructable {
 
     public int casingTier;
-    public byte mGlassTier = 0;
     private static final String CA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/component_assembler";
     private static final String[][] shape = StructureUtils.readStructureFromFile(CA_STRUCTURE_FILE_PATH);
     private static final String STRUCTURE_PIECE_MAIN = "main";
-    private final int horizontalOffSet = 3;
-    private final int verticalOffSet = 4;
-    private final int depthOffSet = 0;
+    private final int HORIZONTAL_OFF_SET = 3;
+    private final int VERTICAL_OFF_SET = 4;
+    private final int DEPTH_OFF_SET = 0;
     private static IStructureDefinition<ComponentAssembler> STRUCTURE_DEFINITION = null;
 
     @Override
@@ -105,7 +104,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
                         .atLeast(InputBus, OutputBus, InputHatch, Maintenance, Energy.or(ExoticEnergy))
                         .dot(1)
                         .casingIndex(getCasingTextureID())
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings2, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings2, 0))))
                 .addElement('D', ofBlock(sBlockCasings2, 5))
                 .addElement('E', ofBlock(sBlockCasings2, 6))
                 .addElement('F', ofBlock(sBlockCasings3, 10))
@@ -145,7 +144,13 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -254,9 +259,9 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -266,9 +271,9 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         casingTier = -2;
-        mCasing = 0;
+        tCountCasing = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -288,7 +293,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return mCasing >= 50 && mEnergyHatches.size() <= 2 && mMaintenanceHatches.size() == 1;
+        return tCountCasing >= 50 && mEnergyHatches.size() <= 2 && mMaintenanceHatches.size() == 1;
     }
 
     @Override

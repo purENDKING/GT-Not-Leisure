@@ -45,9 +45,9 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
     private static IStructureDefinition<LargeAlloySmelter> STRUCTURE_DEFINITION = null;
     public static final String LAS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_alloy_smelter";
     public static final int CASING_INDEX = ((BlockCasings1) sBlockCasings1).getTextureIndex(11);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 2;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LAS_STRUCTURE_FILE_PATH);
     private HeatingCoilLevel mCoilLevel;
 
@@ -124,7 +124,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
                     buildHatchAdder(LargeAlloySmelter.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings1, 11))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings1, 11))))
                 .addElement('B', ofBlock(sBlockCasings2, 0))
                 .addElement('C', ofBlock(sBlockCasings2, 13))
                 .addElement(
@@ -138,11 +138,11 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -158,7 +158,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
 
         if (mMaintenanceHatches.size() != 1 && mMufflerHatches.size() != 1) return false;
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
@@ -177,7 +177,7 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -186,9 +186,9 @@ public class LargeAlloySmelter extends GTMMultiMachineBase<LargeAlloySmelter> im
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

@@ -80,7 +80,6 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
     private static final int HORIZONTAL_OFF_SET_RING_THREE = 1;
     private static final int VERTICAL_OFF_SET_RING_THREE = 19;
     private static final int DEPTH_OFF_SET_RING_THREE = -3;
-    private int tCountCasing = 0;
     private static IStructureDefinition<NanoPhagocytosisPlant> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String STRUCTURE_PIECE_MAIN_RING_ONE = "main_ring_one";
@@ -96,7 +95,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
         + "multiblock/nano_phagocytosis_plant_ring_two";
     private static final String NPPRTh_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/nano_phagocytosis_plant_ring_three";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(NPP_STRUCTURE_FILE_PATH);
+    public static final String[][] shape = StructureUtils.readStructureFromFile(NPP_STRUCTURE_FILE_PATH);
     public static final String[][] shapeRingOne = StructureUtils.readStructureFromFile(NPPRO_STRUCTURE_FILE_PATH);
     public static final String[][] shapeRingTwo = StructureUtils.readStructureFromFile(NPPRT_STRUCTURE_FILE_PATH);
     public static final String[][] shapeRingThree = StructureUtils.readStructureFromFile(NPPRTh_STRUCTURE_FILE_PATH);

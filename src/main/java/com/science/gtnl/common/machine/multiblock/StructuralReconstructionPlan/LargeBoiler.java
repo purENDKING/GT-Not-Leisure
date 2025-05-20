@@ -49,48 +49,14 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 
 public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler> implements ISurvivalConstructable {
 
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final ClassValue<IStructureDefinition<LargeBoiler>> STRUCTURE_DEFINITION = new ClassValue<>() {
-
-        @Override
-        protected IStructureDefinition<LargeBoiler> computeValue(Class<?> type) {
-            return StructureDefinition.<LargeBoiler>builder()
-                .addShape(
-                    STRUCTURE_PIECE_MAIN,
-                    transpose(
-                        new String[][] { { "ccc", "ccc", "ccc" }, { "ccc", "cPc", "ccc" }, { "ccc", "cPc", "ccc" },
-                            { "ccc", "cPc", "ccc" }, { "f~f", "fff", "fff" }, }))
-                .addElement('P', lazy(t -> ofBlock(t.getPipeBlock(), t.getPipeMeta())))
-                .addElement(
-                    'c',
-                    lazy(
-                        t -> buildHatchAdder(LargeBoiler.class).atLeast(OutputHatch)
-                            .casingIndex(t.getCasingTextureIndex())
-                            .dot(2)
-                            .buildAndChain(
-                                onElementPass(
-                                    LargeBoiler::onCasingAdded,
-                                    ofBlock(t.getCasingBlock(), t.getCasingMeta())))))
-                .addElement(
-                    'f',
-                    lazy(
-                        t -> buildHatchAdder(LargeBoiler.class).atLeast(InputHatch, InputBus)
-                            .casingIndex(t.getFireboxTextureIndex())
-                            .dot(1)
-                            .buildAndChain(
-                                onElementPass(
-                                    LargeBoiler::onFireboxAdded,
-                                    ofBlock(t.getFireboxBlock(), t.getFireboxMeta())))))
-                .build();
-        }
-    };
     private boolean firstRun = true;
     private int integratedCircuitConfig = 0;
     private long excessWater = 0;
     private int excessFuel = 0;
     private int excessProjectedEU = 0;
-    private int mCasing;
+    private int tCountCasing;
     private int mFireboxCasing;
+    private static final String STRUCTURE_PIECE_MAIN = "main";
 
     public LargeBoiler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -136,7 +102,7 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
     }
 
     private void onCasingAdded() {
-        mCasing++;
+        tCountCasing++;
     }
 
     private void onFireboxAdded() {
@@ -316,14 +282,39 @@ public abstract class LargeBoiler extends MTEEnhancedMultiBlockBase<LargeBoiler>
 
     @Override
     public IStructureDefinition<LargeBoiler> getStructureDefinition() {
-        return STRUCTURE_DEFINITION.get(getClass());
+        return StructureDefinition.<LargeBoiler>builder()
+            .addShape(
+                STRUCTURE_PIECE_MAIN,
+                transpose(
+                    new String[][] { { "ccc", "ccc", "ccc" }, { "ccc", "cPc", "ccc" }, { "ccc", "cPc", "ccc" },
+                        { "ccc", "cPc", "ccc" }, { "f~f", "fff", "fff" }, }))
+            .addElement('P', lazy(t -> ofBlock(t.getPipeBlock(), t.getPipeMeta())))
+            .addElement(
+                'c',
+                lazy(
+                    t -> buildHatchAdder(LargeBoiler.class).atLeast(OutputHatch)
+                        .casingIndex(t.getCasingTextureIndex())
+                        .dot(2)
+                        .buildAndChain(
+                            onElementPass(LargeBoiler::onCasingAdded, ofBlock(t.getCasingBlock(), t.getCasingMeta())))))
+            .addElement(
+                'f',
+                lazy(
+                    t -> buildHatchAdder(LargeBoiler.class).atLeast(InputHatch, InputBus)
+                        .casingIndex(t.getFireboxTextureIndex())
+                        .dot(1)
+                        .buildAndChain(
+                            onElementPass(
+                                LargeBoiler::onFireboxAdded,
+                                ofBlock(t.getFireboxBlock(), t.getFireboxMeta())))))
+            .build();
     }
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mFireboxCasing = 0;
-        return checkPiece(STRUCTURE_PIECE_MAIN, 1, 4, 0) && mCasing >= 20 && mFireboxCasing >= 3;
+        return checkPiece(STRUCTURE_PIECE_MAIN, 1, 4, 0) && tCountCasing >= 20 && mFireboxCasing >= 3;
     }
 
     @Override

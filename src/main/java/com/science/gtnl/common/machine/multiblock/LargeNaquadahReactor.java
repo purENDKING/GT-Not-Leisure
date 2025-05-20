@@ -59,17 +59,17 @@ import tectech.thing.metaTileEntity.multi.base.TTMultiblockBase;
 
 public class LargeNaquadahReactor extends TTMultiblockBase implements IConstructable, ISurvivalConstructable {
 
-    private int mCasing;
+    private int tCountCasing;
     private boolean Oxygen = false;
     private int multiplier = 1;
-    private long SetEUt = 0;
+    private long setEUt = 0;
     private static IStructureDefinition<LargeNaquadahReactor> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String LNR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_naquadah_reactor";
     public static String[][] shape = StructureUtils.readStructureFromFile(LNR_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 12;
-    public final int verticalOffSet = 12;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 12;
+    public final int VERTICAL_OFF_SET = 12;
+    public final int DEPTH_OFF_SET = 0;
     protected static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(10);
 
     public LargeNaquadahReactor(int aID, String aName, String aNameRegional) {
@@ -112,7 +112,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                     buildHatchAdder(LargeNaquadahReactor.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, Dynamo.or(DynamoMulti), Maintenance)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 10))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 10))))
                 .addElement('D', ofBlock(sBlockCasingsTT, 0))
                 .addElement('E', ofFrame(Materials.Naquadria))
                 .addElement('F', ofFrame(Materials.Trinium))
@@ -166,7 +166,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
         boolean oxygenPlasma = false;
         boolean nitrogenPlasma = false;
         Oxygen = false;
-        SetEUt = 524288;
+        setEUt = 524288;
         multiplier = 1;
 
         List<FluidStack> tFluids = getStoredFluids();
@@ -297,10 +297,10 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
         }
         this.mMaxProgresstime = baseTime;
 
-        SetEUt *= multiplier;
+        setEUt *= multiplier;
         if (Oxygen) {
             this.mMaxProgresstime /= 16;
-            SetEUt *= 16;
+            setEUt *= 16;
         }
 
         this.mEfficiency = 10000;
@@ -352,7 +352,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
                 return false;
             }
 
-            BigInteger euPerSecond = BigInteger.valueOf(SetEUt)
+            BigInteger euPerSecond = BigInteger.valueOf(setEUt)
                 .multiply(BigInteger.valueOf(20));
 
             for (MTEHatchDynamo eDynamo : super.mDynamoHatches) {
@@ -430,7 +430,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     public String[] getInfoData() {
         String[] info = super.getInfoData();
         info[4] = StatCollector.translateToLocal("LargeNaquadahReactor.Generates") + EnumChatFormatting.RED
-            + GTUtility.formatNumbers(Math.abs(this.SetEUt))
+            + GTUtility.formatNumbers(Math.abs(this.setEUt))
             + EnumChatFormatting.RESET
             + " EU/t";
         return info;
@@ -438,9 +438,9 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
 
     @Override
     public boolean checkMachine_EM(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
             && mMaintenanceHatches.size() == 1
-            && mCasing >= 110;
+            && tCountCasing >= 110;
     }
 
     @Override
@@ -451,7 +451,7 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
-        aNBT.setLong("SetEUt", SetEUt);
+        aNBT.setLong("SetEUt", setEUt);
         aNBT.setBoolean("Oxygen", Oxygen);
         aNBT.setInteger("Multiplier", multiplier);
     }
@@ -459,14 +459,14 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
-        SetEUt = aNBT.getLong("SetEUt");
+        setEUt = aNBT.getLong("SetEUt");
         Oxygen = aNBT.getBoolean("Oxygen");
         multiplier = aNBT.getInteger("Multiplier");
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -475,9 +475,9 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

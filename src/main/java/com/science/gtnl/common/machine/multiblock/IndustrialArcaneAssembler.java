@@ -56,9 +56,9 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
     public static final String LAA_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/industrial_arcane_assembler";
     public static String[][] shape = StructureUtils.readStructureFromFile(LAA_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 45;
-    public final int verticalOffSet = 84;
-    public final int depthOffSet = 45;
+    public final int HORIZONTAL_OFF_SET = 45;
+    public final int VERTICAL_OFF_SET = 84;
+    public final int DEPTH_OFF_SET = 45;
 
     public IndustrialArcaneAssembler(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -167,7 +167,7 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
                     buildHatchAdder(IndustrialArcaneAssembler.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings1, 12))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings1, 12))))
                 .addElement('B', ofBlock(sBlockCasings1, 13))
                 .addElement('C', ofBlock(sBlockCasings10, 11))
                 .addElement('D', ofBlock(sBlockCasings9, 11))
@@ -182,7 +182,7 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -194,9 +194,9 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
             return this.survivialBuildPiece(
                 STRUCTURE_PIECE_MAIN,
                 stackSize,
-                horizontalOffSet,
-                verticalOffSet,
-                depthOffSet,
+                HORIZONTAL_OFF_SET,
+                VERTICAL_OFF_SET,
+                DEPTH_OFF_SET,
                 realBudget,
                 env,
                 false,
@@ -208,14 +208,14 @@ public class IndustrialArcaneAssembler extends MultiMachineBase<IndustrialArcane
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         ItemStack item = getControllerSlot();
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
-        return mCasing >= 3 && item != null
+        return tCountCasing >= 3 && item != null
             && item.isItemEqual(GTModHandler.getModItem(Thaumcraft.ID, "WandCasting", 1, 9000));
     }
 

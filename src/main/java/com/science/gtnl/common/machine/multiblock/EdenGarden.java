@@ -120,14 +120,13 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         return this.useNoHumidity;
     }
 
-    public int mCasing = 0;
     public static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(5);
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String EG_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/eden_garden";
     public static String[][] shape = StructureUtils.readStructureFromFile(EG_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 6;
-    public final int verticalOffSet = 43;
-    public final int depthOffSet = 10;
+    public final int HORIZONTAL_OFF_SET = 6;
+    public final int VERTICAL_OFF_SET = 43;
+    public final int DEPTH_OFF_SET = 10;
     public static IStructureDefinition<EdenGarden> STRUCTURE_DEFINITION = null;
 
     @Override
@@ -164,7 +163,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
                             .dot(1)
                             .casingIndex(((BlockCasings10) sBlockCasings10).getTextureIndex(4))
                             .build(),
-                        onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings10, 4))))
+                        onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings10, 4))))
                 .addElement('C', ofBlock(sBlockCasings10, 5))
                 .addElement('D', ofBlock(sBlockCasings8, 10))
                 .addElement('E', ofBlock(sBlockCasings9, 11))
@@ -184,11 +183,11 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack itemStack) {
-        mCasing = 0;
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        tCountCasing = 0;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         boolean valid = this.mMaintenanceHatches.size() == 1
             && !(this.mEnergyHatches.isEmpty() && this.mExoticEnergyHatches.isEmpty())
-            && this.mCasing >= 1000;
+            && this.tCountCasing >= 1000;
 
         if (valid) this.updateSeedLimits();
         return valid;
@@ -196,7 +195,13 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -205,9 +210,9 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

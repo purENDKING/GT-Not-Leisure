@@ -62,9 +62,9 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
     public static final String COPF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/cheat_ore_processing_factory"; // 文件路径
     public static String[][] shape = StructureUtils.readStructureFromFile(COPF_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 20;
-    public final int verticalOffSet = 24;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 20;
+    public final int VERTICAL_OFF_SET = 24;
+    public final int DEPTH_OFF_SET = 0;
 
     public CheatOreProcessingFactory(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -237,13 +237,13 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         return checkHatch();
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     public int survivalConstruct(ItemStack stackSize, int elementBudget, ISurvivalBuildEnvironment env) {
@@ -251,9 +251,9 @@ public class CheatOreProcessingFactory extends MultiMachineBase<CheatOreProcessi
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

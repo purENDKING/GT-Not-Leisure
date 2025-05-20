@@ -85,9 +85,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
     private static final String AID_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/advanced_infinite_driller";
     public static String[][] shape = StructureUtils.readStructureFromFile(AID_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 12;
-    public final int verticalOffSet = 39;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 12;
+    public final int VERTICAL_OFF_SET = 39;
+    public final int DEPTH_OFF_SET = 0;
     private static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(10);
 
     public AdvancedInfiniteDriller(int aID, String aName, String aNameRegional) {
@@ -162,7 +162,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
                     buildHatchAdder(AdvancedInfiniteDriller.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, InputHatch, OutputHatch, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 10))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 10))))
                 .addElement('K', ofFrame(Materials.Neutronium))
                 .addElement('L', ofBlock(sBlockMetal8, 0))
                 .build();
@@ -502,10 +502,10 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         drillTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()
             && !mOutputHatches.isEmpty()) {
             return false;
         }
@@ -513,7 +513,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
         energyHatchTier = checkEnergyHatchTier();
         drillTier = checkDrillTier();
 
-        return mCasing >= 570;
+        return tCountCasing >= 570;
     }
 
     public int checkDrillTier() {
@@ -661,7 +661,7 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -670,9 +670,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

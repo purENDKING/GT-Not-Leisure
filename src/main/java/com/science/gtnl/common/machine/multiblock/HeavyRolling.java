@@ -48,7 +48,6 @@ public class HeavyRolling extends WirelessEnergyMultiMachineBase<HeavyRolling>
     private static final int HORIZONTAL_OFF_SET = 32;
     private static final int VERTICAL_OFF_SET = 6;
     private static final int DEPTH_OFF_SET = 0;
-    private int tCountCasing = 0;
     private static IStructureDefinition<HeavyRolling> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String HR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/heavy_rolling";

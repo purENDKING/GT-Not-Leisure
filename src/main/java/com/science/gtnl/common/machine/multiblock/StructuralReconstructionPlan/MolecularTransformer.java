@@ -39,9 +39,9 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
     private static IStructureDefinition<MolecularTransformer> STRUCTURE_DEFINITION = null;
     public static final String MT_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/molecular_transformer";
     public static final int CASING_INDEX = ((BlockCasings8) sBlockCasings8).getTextureIndex(0);
-    public final int horizontalOffSet = 4;
-    public final int verticalOffSet = 9;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 4;
+    public final int VERTICAL_OFF_SET = 9;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(MT_STRUCTURE_FILE_PATH);
 
     public MolecularTransformer(int aID, String aName, String aNameRegional) {
@@ -119,7 +119,7 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
                     buildHatchAdder(MolecularTransformer.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings8, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 0))))
                 .addElement('G', ofFrame(Materials.StainlessSteel))
                 .build();
         }
@@ -128,21 +128,21 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         energyHatchTier = checkEnergyHatchTier();
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 25;
+        return tCountCasing >= 25;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -151,9 +151,9 @@ public class MolecularTransformer extends GTMMultiMachineBase<MolecularTransform
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

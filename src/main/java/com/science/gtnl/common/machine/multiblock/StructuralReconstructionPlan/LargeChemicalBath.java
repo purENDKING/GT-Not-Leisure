@@ -64,9 +64,9 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
     private static final int MACHINEMODE_OREWASH = 0;
     private static final int MACHINEMODE_SIMPLEWASH = 1;
     private static final int MACHINEMODE_CHEMBATH = 2;
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 1;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 1;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LCB_STRUCTURE_FILE_PATH);
 
     public LargeChemicalBath(int aID, String aName, String aNameRegional) {
@@ -166,7 +166,7 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
                     buildHatchAdder(LargeChemicalBath.class).casingIndex(getCasingTextureID())
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings2Misc, 4))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings2Misc, 4))))
                 .build();
         }
         return STRUCTURE_DEFINITION;
@@ -226,11 +226,11 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
-            && mCasing >= 55) {
+        if (checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()
+            && tCountCasing >= 55) {
             energyHatchTier = checkEnergyHatchTier();
             if (MainConfig.enableMachineAmpLimit) {
                 for (MTEHatch hatch : getExoticEnergyHatches()) {
@@ -273,7 +273,7 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -282,9 +282,9 @@ public class LargeChemicalBath extends GTMMultiMachineBase<LargeChemicalBath> im
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

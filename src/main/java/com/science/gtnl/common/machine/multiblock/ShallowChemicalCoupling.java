@@ -48,7 +48,6 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     implements ISurvivalConstructable {
 
     private HeatingCoilLevel mCoilLevel;
-    private byte mGlassTier = 0;
     private int mHeatingCapacity = 0;
     private static IStructureDefinition<ShallowChemicalCoupling> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -56,9 +55,9 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
         + "multiblock/shallow_chemical_coupling";
     private static final int CASING_INDEX = GTUtility.getTextureId((byte) 116, (byte) 19);
     private static final String[][] shape = StructureUtils.readStructureFromFile(SCC_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 9;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 9;
+    public final int DEPTH_OFF_SET = 0;
 
     public ShallowChemicalCoupling(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -83,7 +82,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
                     buildHatchAdder(ShallowChemicalCoupling.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(MetaCasing, 19))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(MetaCasing, 19))))
                 .addElement(
                     'B',
                     withChannel(
@@ -214,7 +213,13 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        this.buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        this.buildPiece(
+            STRUCTURE_PIECE_MAIN,
+            stackSize,
+            hintsOnly,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET);
     }
 
     @Override
@@ -224,9 +229,9 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -237,11 +242,11 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
     public boolean checkMachine(IGregTechTileEntity iGregTechTileEntity, ItemStack aStack) {
         this.mHeatingCapacity = 0;
         mParallelTier = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         energyHatchTier = 0;
         this.setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -265,7 +270,7 @@ public class ShallowChemicalCoupling extends GTMMultiMachineBase<ShallowChemical
 
         mParallelTier = getParallelTier(aStack);
 
-        return mCasing >= 30;
+        return tCountCasing >= 30;
     }
 
     @Override

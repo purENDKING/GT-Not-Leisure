@@ -47,16 +47,16 @@ import gtPlusPlus.xmod.gregtech.common.blocks.textures.TexturesGtBlock;
 public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<EnergeticPhotovoltaicPowerStation>
     implements ISurvivalConstructable {
 
-    private int mCasing;
+    private int tCountCasing;
     protected int fuelConsumption;
     public static IStructureDefinition<EnergeticPhotovoltaicPowerStation> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String PPS_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/photovoltaic_power_station";
     private static final String[][] shape = StructureUtils.readStructureFromFile(PPS_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 4;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 2;
+    public final int HORIZONTAL_OFF_SET = 4;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 2;
     protected static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(0);
 
     public EnergeticPhotovoltaicPowerStation(int aID, String aName, String aNameRegional) {
@@ -94,7 +94,7 @@ public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase
                     buildHatchAdder(EnergeticPhotovoltaicPowerStation.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputHatch, Dynamo, Maintenance)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings2, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings2, 0))))
                 .addElement('B', ofFrame(Materials.StainlessSteel))
                 .addElement('D', ofBlock(MetaCasing, 9))
                 .build();
@@ -277,9 +277,9 @@ public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        return checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)
+        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
             && mMaintenanceHatches.size() == 1
-            && mCasing >= 8;
+            && tCountCasing >= 8;
     }
 
     @Override
@@ -319,7 +319,7 @@ public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -328,9 +328,9 @@ public class EnergeticPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

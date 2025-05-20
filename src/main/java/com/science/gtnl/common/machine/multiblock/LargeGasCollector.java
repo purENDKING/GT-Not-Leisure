@@ -43,9 +43,9 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
     private static IStructureDefinition<LargeGasCollector> STRUCTURE_DEFINITION = null;
     public static final String LGC_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_gas_collector";
     public static final int CASING_INDEX = ((BlockCasings2) sBlockCasings2).getTextureIndex(0);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 2;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LGC_STRUCTURE_FILE_PATH);
 
     public LargeGasCollector(int aID, String aName, String aNameRegional) {
@@ -133,7 +133,7 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
                     buildHatchAdder(LargeGasCollector.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(OutputHatch, InputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings2, 0))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings2, 0))))
                 .addElement('B', ofBlock(sBlockCasings2, 15))
                 .addElement('C', ofBlock(sBlockCasings3, 10))
                 .addElement('D', ofBlock(sBlockCasings6, 5))
@@ -144,18 +144,18 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
-        return mCasing >= 20;
+        return tCountCasing >= 20;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -164,9 +164,9 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

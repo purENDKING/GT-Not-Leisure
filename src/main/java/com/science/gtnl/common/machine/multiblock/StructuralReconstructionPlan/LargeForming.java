@@ -49,9 +49,9 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
     private static IStructureDefinition<LargeForming> STRUCTURE_DEFINITION = null;
     public static final String LF_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/large_forming";
     public static final int CASING_INDEX = TAE.GTPP_INDEX(33);
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 2;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 2;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(LF_STRUCTURE_FILE_PATH);
 
     public LargeForming(int aID, String aName, String aNameRegional) {
@@ -147,7 +147,7 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
                     buildHatchAdder(LargeForming.class).casingIndex(CASING_INDEX)
                         .dot(1)
                         .atLeast(InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(blockCasings3Misc, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings3Misc, 1))))
                 .addElement('D', ofBlock(sBlockCasings3, 10))
                 .addElement('E', ofFrame(Materials.StainlessSteel))
                 .build();
@@ -157,10 +157,10 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mParallelTier = 0;
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -175,12 +175,12 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 10;
+        return tCountCasing >= 10;
     }
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -189,9 +189,9 @@ public class LargeForming extends GTMMultiMachineBase<LargeForming> implements I
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

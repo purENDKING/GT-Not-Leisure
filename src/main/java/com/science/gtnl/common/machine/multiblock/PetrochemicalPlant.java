@@ -46,15 +46,14 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     private HeatingCoilLevel mHeatingCapacity;
     private int mLevel = 0;
-    private int mCasing;
 
     private static IStructureDefinition<PetrochemicalPlant> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String PP_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/petrochemical_plant";
     public static String[][] shape = StructureUtils.readStructureFromFile(PP_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 22;
-    public final int verticalOffSet = 56;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 22;
+    public final int VERTICAL_OFF_SET = 56;
+    public final int DEPTH_OFF_SET = 0;
     protected static final int CASING_INDEX = ((BlockCasings10) sBlockCasings10).getTextureIndex(3);
 
     public PetrochemicalPlant(int aID, String aName, String aNameRegional) {
@@ -169,7 +168,7 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
                         .atLeast(InputHatch, OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .casingIndex(CASING_INDEX)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings10, 3))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings10, 3))))
                 .addElement('P', ofBlock(sBlockCasings10, 4))
                 .addElement('Q', ofBlock(blockCasingsMisc, 14))
                 .addElement('R', ofBlock(sBlockCasings9, 0))
@@ -189,7 +188,7 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -198,9 +197,9 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -209,17 +208,17 @@ public class PetrochemicalPlant extends MultiMachineBase<PetrochemicalPlant> imp
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mLevel = 0;
         setCoilLevel(HeatingCoilLevel.None);
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
         IMetaTileEntity aMetaTileEntity = aBaseMetaTileEntity.getMetaTileEntity();
         if (aMetaTileEntity == null) return false;
-        return mCasing >= 5 && getCoilLevel() != HeatingCoilLevel.None
+        return tCountCasing >= 5 && getCoilLevel() != HeatingCoilLevel.None
             && this.mMufflerHatches.size() == 8
             && (mLevel = getCoilLevel().getTier() + 1) > 0;
     }

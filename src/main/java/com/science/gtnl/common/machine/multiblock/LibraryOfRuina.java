@@ -45,14 +45,13 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implements ISurvivalConstructable {
 
     public int multiTier = 0;
-    private int mCasing;
     private static IStructureDefinition<LibraryOfRuina> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String LOR_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/library_of_ruina";
     public static String[][] shape = StructureUtils.readStructureFromFile(LOR_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 34;
-    public final int verticalOffSet = 34;
-    public final int depthOffSet = 20;
+    public final int HORIZONTAL_OFF_SET = 34;
+    public final int VERTICAL_OFF_SET = 34;
+    public final int DEPTH_OFF_SET = 20;
 
     public LibraryOfRuina(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -166,7 +165,8 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
                             ParallelCon)
                         .casingIndex(getCasingTextureID())
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlockAnyMeta(SHIELDED_ACCELERATOR_CASING))))
+                        .buildAndChain(
+                            onElementPass(x -> ++x.tCountCasing, ofBlockAnyMeta(SHIELDED_ACCELERATOR_CASING))))
                 .addElement('E', ofBlock(sBlockCasings10, 4))
                 .addElement('F', ofBlock(sBlockCasings10, 11))
                 .addElement('G', ofBlock(sBlockCasings9, 11))
@@ -185,7 +185,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -197,9 +197,9 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             return this.survivialBuildPiece(
                 STRUCTURE_PIECE_MAIN,
                 stackSize,
-                horizontalOffSet,
-                verticalOffSet,
-                depthOffSet,
+                HORIZONTAL_OFF_SET,
+                VERTICAL_OFF_SET,
+                DEPTH_OFF_SET,
                 realBudget,
                 env,
                 false,
@@ -217,11 +217,11 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         mParallelTier = 0;
-        mCasing = 0;
+        tCountCasing = 0;
         this.multiTier = getMultiTier(aStack);
 
-        if (checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()
-            && mCasing >= 920
+        if (checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()
+            && tCountCasing >= 920
             && multiTier == 1) {
             replaceWaterWithPortal();
             energyHatchTier = checkEnergyHatchTier();

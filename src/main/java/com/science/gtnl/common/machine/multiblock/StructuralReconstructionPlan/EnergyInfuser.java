@@ -57,14 +57,14 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
     private static final int maxRepairedDamagePerOperation = 10000;
     private static final long usedEuPerDurability = 1000;
     private static final int usedUumPerDurability = 1;
-    private int mCasing;
+    private int tCountCasing;
     private static IStructureDefinition<EnergyInfuser> STRUCTURE_DEFINITION = null;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String EI_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/energy_infuser";
     public static String[][] shape = StructureUtils.readStructureFromFile(EI_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 7;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 7;
+    public final int DEPTH_OFF_SET = 0;
 
     @Override
     public IStructureDefinition<EnergyInfuser> getStructure_EM() {
@@ -79,7 +79,8 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
                         .atLeast(InputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .casingIndex(1028)
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(TTCasingsContainer.sBlockCasingsTT, 4))))
+                        .buildAndChain(
+                            onElementPass(x -> ++x.tCountCasing, ofBlock(TTCasingsContainer.sBlockCasingsTT, 4))))
                 .addElement('D', ofBlock(TTCasingsContainer.sBlockCasingsTT, 7))
                 .addElement('E', ofFrame(Materials.Osmiridium))
                 .addElement('F', ofBlock(lscLapotronicEnergyUnit, 6))
@@ -115,7 +116,7 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
 
     @Override
     public boolean checkMachine_EM(IGregTechTileEntity iGregTechTileEntity, ItemStack itemStack) {
-        return structureCheck_EM(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet);
+        return structureCheck_EM(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -388,7 +389,13 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        structureBuild_EM(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet, stackSize, hintsOnly);
+        structureBuild_EM(
+            STRUCTURE_PIECE_MAIN,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
+            stackSize,
+            hintsOnly);
     }
 
     @Override

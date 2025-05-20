@@ -95,9 +95,9 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public final DecimalFormat decimalFormat = new DecimalFormat("#.0");
     public boolean isRendering = false;
     public byte enableRender = EnableRenderDefaultArtificialStar;
-    public final int horizontalOffSet = 62;
-    public final int verticalOffSet = 88;
-    public final int depthOffSet = 15;
+    public final int HORIZONTAL_OFF_SET = 62;
+    public final int VERTICAL_OFF_SET = 88;
+    public final int DEPTH_OFF_SET = 15;
 
     public RealArtificialStar(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -386,7 +386,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         tierDimensionField = -1;
         tierTimeField = -1;
         tierStabilisationField = -1;
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
         if (tierDimensionField < 0 || tierTimeField < 0 || tierStabilisationField < 0) return false;
         if (this.mInputBusses.size() != 1) return false;
         calculateOutputMultiplier();
@@ -396,7 +396,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -405,9 +405,9 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         return this.survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,

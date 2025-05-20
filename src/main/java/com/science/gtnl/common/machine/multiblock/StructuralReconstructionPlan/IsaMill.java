@@ -54,14 +54,12 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalConstructable {
 
     protected static final int CASING_INDEX = TAE.GTPP_INDEX(2);
-    private int mCasing;
-    public byte mGlassTier = 0;
     public static final String STRUCTURE_PIECE_MAIN = "main";
     private static IStructureDefinition<IsaMill> STRUCTURE_DEFINITION = null;
     public static final String IM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/isa_mill";
-    public final int horizontalOffSet = 2;
-    public final int verticalOffSet = 3;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 2;
+    public final int VERTICAL_OFF_SET = 3;
+    public final int DEPTH_OFF_SET = 0;
     public static String[][] shape = StructureUtils.readStructureFromFile(IM_STRUCTURE_FILE_PATH);
 
     private final ArrayList<MTEHatchMillingBalls> mMillingBallBuses = new ArrayList<>();
@@ -126,7 +124,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
                             .casingIndex(CASING_INDEX)
                             .dot(1)
                             .build(),
-                        onElementPass(x -> ++x.mCasing, ofBlock(blockCasings5Misc, 0))))
+                        onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasings5Misc, 0))))
                 .addElement('C', ofBlock(blockCasings5Misc, 1))
                 .addElement('D', ofBlock(blockCasings5Misc, 2))
                 .build();
@@ -136,7 +134,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -145,9 +143,9 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -156,12 +154,12 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mGlassTier = 0;
         mParallelTier = 0;
         mMillingBallBuses.clear();
 
-        if (!checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet) && checkHatch()) {
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch()) {
             return false;
         }
 
@@ -182,7 +180,7 @@ public class IsaMill extends GTMMultiMachineBase<IsaMill> implements ISurvivalCo
         }
 
         mParallelTier = getParallelTier(aStack);
-        return mCasing >= 48 && mMillingBallBuses.size() == 1;
+        return tCountCasing >= 48 && mMillingBallBuses.size() == 1;
     }
 
     @Override

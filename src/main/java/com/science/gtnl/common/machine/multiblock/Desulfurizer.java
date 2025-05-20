@@ -53,9 +53,9 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
     public static final String STRUCTURE_PIECE_MAIN = "main";
     public static final String Desu_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/desulfurizer";
     public static String[][] shape = StructureUtils.readStructureFromFile(Desu_STRUCTURE_FILE_PATH);
-    public final int horizontalOffSet = 3;
-    public final int verticalOffSet = 4;
-    public final int depthOffSet = 0;
+    public final int HORIZONTAL_OFF_SET = 3;
+    public final int VERTICAL_OFF_SET = 4;
+    public final int DEPTH_OFF_SET = 0;
 
     public Desulfurizer(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -154,7 +154,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
                         .atLeast(InputHatch, OutputHatch, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .casingIndex(((BlockCasings4) sBlockCasings4).getTextureIndex(1))
                         .dot(1)
-                        .buildAndChain(onElementPass(x -> ++x.mCasing, ofBlock(sBlockCasings4, 1))))
+                        .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings4, 1))))
                 .addElement('F', withChannel("coil", ofCoil(Desulfurizer::setCoilLevel, Desulfurizer::getCoilLevel)))
                 .addElement('G', ofBlock(sBlockCasings6, 2))
                 .build();
@@ -164,7 +164,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
 
     @Override
     public void construct(ItemStack stackSize, boolean hintsOnly) {
-        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, horizontalOffSet, verticalOffSet, depthOffSet);
+        buildPiece(STRUCTURE_PIECE_MAIN, stackSize, hintsOnly, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET);
     }
 
     @Override
@@ -173,9 +173,9 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
         return survivialBuildPiece(
             STRUCTURE_PIECE_MAIN,
             stackSize,
-            horizontalOffSet,
-            verticalOffSet,
-            depthOffSet,
+            HORIZONTAL_OFF_SET,
+            VERTICAL_OFF_SET,
+            DEPTH_OFF_SET,
             elementBudget,
             env,
             false,
@@ -184,11 +184,11 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
 
     @Override
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
-        mCasing = 0;
+        tCountCasing = 0;
         mLevel = 0;
         setCoilLevel(HeatingCoilLevel.None);
 
-        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, horizontalOffSet, verticalOffSet, depthOffSet)) return false;
+        if (!this.checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
         energyHatchTier = checkEnergyHatchTier();
         if (MainConfig.enableMachineAmpLimit) {
@@ -200,7 +200,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
             if (getMaxInputAmps() > 64) return false;
         }
 
-        return mCasing >= 20 && getCoilLevel() != HeatingCoilLevel.None
+        return tCountCasing >= 20 && getCoilLevel() != HeatingCoilLevel.None
             && (mLevel = getCoilLevel().getTier() + 1) > 0
             && checkHatch();
     }
