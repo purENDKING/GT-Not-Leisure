@@ -46,7 +46,7 @@ public class OP_GTPP_OreHandler {
         for (Material ore : addSpecials(getGTPPOreMaterials())) {
             GTValues.RA.stdBuilder()
                 .itemInputs(ore.getOre(1))
-                .itemOutputs(ore.getDust(12))
+                .itemOutputs(ore.getDust(Integer.MAX_VALUE))
                 .eut(OreProcessRecipeEUt)
                 .duration(OreProcessRecipeDuration)
                 .addTo(RecipeRegister.CheatOreProcessingRecipes);
@@ -57,7 +57,7 @@ public class OP_GTPP_OreHandler {
         for (Material ore : addSpecials(getGTPPOreMaterials())) {
             GTValues.RA.stdBuilder()
                 .itemInputs(ore.getRawOre(1))
-                .itemOutputs(ore.getDust(6))
+                .itemOutputs(ore.getDust(Integer.MAX_VALUE))
                 .eut(OreProcessRecipeEUt)
                 .duration(OreProcessRecipeDuration)
                 .addTo(RecipeRegister.CheatOreProcessingRecipes);

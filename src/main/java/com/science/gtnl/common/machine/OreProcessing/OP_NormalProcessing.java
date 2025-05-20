@@ -73,7 +73,7 @@ public class OP_NormalProcessing {
         if (SpecialProcessingLineMaterialInstead) {
             ItemStack t = processingLineMaterials.get(material);
             if (t != null) {
-                return copyAmount(amount * 3, t);
+                return copyAmount(Integer.MAX_VALUE, t);
             }
         }
         return setStackSize(GTOreDictUnificator.get(OrePrefixes.dust, material, 1), amount);
@@ -122,9 +122,9 @@ public class OP_NormalProcessing {
         // Cerium ore
         {
             ItemStack[] outputs = new ItemStack[] {
-                WerkstoffMaterialPool.CeriumOreConcentrate.get(OrePrefixes.dust, 11) };
+                WerkstoffMaterialPool.CeriumOreConcentrate.get(OrePrefixes.dust, Integer.MAX_VALUE) };
             ItemStack[] outputsRich = new ItemStack[] {
-                WerkstoffMaterialPool.CeriumOreConcentrate.get(OrePrefixes.dust, 22) };
+                WerkstoffMaterialPool.CeriumOreConcentrate.get(OrePrefixes.dust, Integer.MAX_VALUE) };
             for (OrePrefixes prefixes : basicStoneTypes) {
                 if (GTOreDictUnificator.get(prefixes, Materials.Cerium, 1) == null) continue;
                 registryOreProcessRecipe(
@@ -137,9 +137,9 @@ public class OP_NormalProcessing {
         // Samarium Ore
         {
             ItemStack[] outputs = new ItemStack[] {
-                WerkstoffMaterialPool.SamariumOreConcentrate.get(OrePrefixes.dust, 11) };
+                WerkstoffMaterialPool.SamariumOreConcentrate.get(OrePrefixes.dust, Integer.MAX_VALUE) };
             ItemStack[] outputsRich = new ItemStack[] {
-                WerkstoffMaterialPool.SamariumOreConcentrate.get(OrePrefixes.dust, 22) };
+                WerkstoffMaterialPool.SamariumOreConcentrate.get(OrePrefixes.dust, Integer.MAX_VALUE) };
             for (OrePrefixes prefixes : basicStoneTypes) {
                 if (GTOreDictUnificator.get(prefixes, Materials.Samarium, 1) == null) continue;
                 registryOreProcessRecipe(
@@ -151,10 +151,10 @@ public class OP_NormalProcessing {
 
         // Naquadah Ore
         {
-            ItemStack[] outputs = new ItemStack[] { GGMaterial.naquadahEarth.get(OrePrefixes.dust, 8),
-                GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, 3), };
-            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.naquadahEarth.get(OrePrefixes.dust, 16),
-                GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, 8), };
+            ItemStack[] outputs = new ItemStack[] { GGMaterial.naquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE), };
+            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.naquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE), };
             for (OrePrefixes prefixes : basicStoneTypes) {
                 if (GTOreDictUnificator.get(prefixes, Materials.Naquadah, 1) == null) continue;
                 registryOreProcessRecipe(
@@ -166,10 +166,10 @@ public class OP_NormalProcessing {
 
         // Enriched Naquadah Ore
         {
-            ItemStack[] outputs = new ItemStack[] { GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, 8),
-                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 3) };
-            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, 16),
-                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 6) };
+            ItemStack[] outputs = new ItemStack[] { GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE) };
+            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.enrichedNaquadahEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE) };
             for (OrePrefixes prefixes : basicStoneTypes) {
                 if (GTOreDictUnificator.get(prefixes, Materials.NaquadahEnriched, 1) == null) continue;
                 registryOreProcessRecipe(
@@ -181,10 +181,10 @@ public class OP_NormalProcessing {
 
         // Naquadria Ore
         {
-            ItemStack[] outputs = new ItemStack[] { GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 8),
-                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 3), };
-            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 16),
-                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, 6), };
+            ItemStack[] outputs = new ItemStack[] { GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE), };
+            ItemStack[] outputsRich = new ItemStack[] { GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE),
+                GGMaterial.naquadriaEarth.get(OrePrefixes.dust, Integer.MAX_VALUE), };
             for (OrePrefixes prefixes : basicStoneTypes) {
                 if (GTOreDictUnificator.get(prefixes, Materials.Naquadria, 1) == null) continue;
                 registryOreProcessRecipe(
@@ -274,11 +274,11 @@ public class OP_NormalProcessing {
         // check byproduct
         if (!material.mOreByProducts.isEmpty()) {
             // the basic output the material
-            outputs.add(getDustStack(material, 4));
+            outputs.add(getDustStack(material, Integer.MAX_VALUE));
             if (material.mOreByProducts.size() == 1) {
                 for (Materials byproduct : material.mOreByProducts) {
                     if (byproduct == null) continue;
-                    outputs.add(getDustStack(byproduct, 3));
+                    outputs.add(getDustStack(byproduct, Integer.MAX_VALUE));
                 }
             } else {
                 for (Materials byproduct : material.mOreByProducts) {
@@ -286,31 +286,31 @@ public class OP_NormalProcessing {
                         || byproduct == Materials.Endstone
                         || byproduct == Materials.Stone) continue;
 
-                    outputs.add(getDustStack(byproduct, 2));
+                    outputs.add(getDustStack(byproduct, Integer.MAX_VALUE));
                 }
             }
 
         } else {
-            outputs.add(getDustStack(material, 8));
+            outputs.add(getDustStack(material, Integer.MAX_VALUE));
         }
 
         // check gem style
         if (GTOreDictUnificator.get(OrePrefixes.gem, material, 1) != null) {
             if (GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, 1) != null) {
                 // has gem style
-                outputs.add(GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, 1));
-                outputs.add(GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, 2));
-                outputs.add(GTOreDictUnificator.get(OrePrefixes.gem, material, 2));
+                outputs.add(GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, Integer.MAX_VALUE));
+                outputs.add(GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, Integer.MAX_VALUE));
+                outputs.add(GTOreDictUnificator.get(OrePrefixes.gem, material, Integer.MAX_VALUE));
 
             } else {
                 // just normal gem
-                outputs.add(GTOreDictUnificator.get(OrePrefixes.gem, material, 4));
+                outputs.add(GTOreDictUnificator.get(OrePrefixes.gem, material, Integer.MAX_VALUE));
             }
         }
 
         if (isRich) {
             for (ItemStack out : outputs) {
-                out.stackSize *= 2;
+                out.stackSize = Integer.MAX_VALUE;
             }
         }
 
