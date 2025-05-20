@@ -4,10 +4,14 @@ import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
 import java.util.List;
 
+import com.science.gtnl.Mods;
+import fox.spiteful.avaritia.render.IHaloRenderItem;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -17,7 +21,9 @@ import com.science.gtnl.common.GTNLItemList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TestItem extends Item {
+public class TestItem extends Item implements IHaloRenderItem {
+
+    public IIcon[] halo;
 
     public TestItem() {
         super();
@@ -25,6 +31,14 @@ public class TestItem extends Item {
         this.setCreativeTab(GTNLCreativeTabs.GTNotLeisureItem);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "TestItem");
         GTNLItemList.TestItem.set(new ItemStack(this, 1));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister ir) {
+        super.registerIcons(ir);
+        halo = new IIcon[1];
+        halo[0] = ir.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyan");
     }
 
     @Override
@@ -49,6 +63,7 @@ public class TestItem extends Item {
 
     }
 
+    @Override
     public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {
         if (!worldIn.isRemote) {
             playerIn.addPotionEffect(new PotionEffect(186, 6000, 1));
@@ -56,6 +71,31 @@ public class TestItem extends Item {
 
         stack.splitStack(1);
         return stack;
+    }
+
+    @Override
+    public boolean drawHalo(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public IIcon getHaloTexture(ItemStack stack) {
+        return halo[0];
+    }
+
+    @Override
+    public int getHaloSize(ItemStack stack) {
+        return 10;
+    }
+
+    @Override
+    public boolean drawPulseEffect(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getHaloColour(ItemStack stack) {
+        return 0xFFFFFFFF;
     }
 
 }

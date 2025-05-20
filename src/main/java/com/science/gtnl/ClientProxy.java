@@ -2,6 +2,7 @@ package com.science.gtnl;
 
 import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 
+import fox.spiteful.avaritia.render.FancyHaloRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,6 +63,8 @@ public class ClientProxy extends CommonProxy {
             new RenderEternalGregTechWorkshop());
 
         MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
+
+        MinecraftForgeClient.registerItemRenderer(ItemLoader.TestItem, new FancyHaloRenderer());
     }
 
     @Override
