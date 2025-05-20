@@ -50,6 +50,32 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=岁月静滞怀表
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=掌握时间的秘密
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=在古老的时间学派手稿中，有关「岁月静滞怀表」的记载寥寥无几。据说，它最早是由一位厌倦战争与喧嚣的炼金术士打造，他渴望在流逝中捕捉永恒。怀表的构造并不复杂，真正的难点在于为其注入“停滞”的本质。传闻整个仪式必须在月相最黯淡之夜进行，四周环绕以安静的时空晶体与沉默的金属，施术者的每一缕意念都必须精确控制，否则整个注魔仪式会使时间本身反噬施法者。若仪式成功，便可暂时将世界之流冻结于此刻，但切记：时间从不会真正被掌控，它只是在等待反扑的时机。
 
+SuperInputBusME=超级存储输入总线(ME)
+AdvancedSuperInputBusME=进阶超级存储输入总线(ME)
+Tooltip_SuperInputBusME_00=为多方块机器输入物品(进阶)
+Tooltip_SuperInputBusME_01=仓室等级: 
+Tooltip_SuperInputBusME_02=直接从ME网络抽取物品
+Tooltip_SuperInputBusME_03=可标记100种物品
+Tooltip_SuperInputBusME_04=手持剪线钳右键以改变仓室与ME网络的连接模式
+Tooltip_SuperInputBusME_05=配置可使用闪存复制/粘贴
+Tooltip_AdvancedSuperInputBusME_00=ME自动拉取模式将会自动标记ME网络中的前100种物品, 每5秒更新一次.
+Tooltip_AdvancedSuperInputBusME_01=使用螺丝刀切换, 或在GUI配置.
+Tooltip_AdvancedSuperInputBusME_02=在GUI配置 "自动拉取" 的最小堆叠数与快速配方检查.
+Tooltip_AdvancedSuperInputBusME_03=警告: 快速配方检查可能会很卡. 请谨慎使用.
+
+SuperInputHatchME=超级存储输入仓(ME)
+AdvancedSuperInputHatchME=进阶超级存储输入仓(ME)
+Tooltip_SuperInputHatchME_00=为多方块机器输入流体(进阶)
+Tooltip_SuperInputHatchME_01=仓室等级: 
+Tooltip_SuperInputHatchME_02=直接从ME网络抽取流体
+Tooltip_SuperInputHatchME_03=可标记100种流体
+Tooltip_SuperInputHatchME_04=手持剪线钳右键以改变仓室与ME网络的连接模式
+Tooltip_SuperInputHatchME_05=配置可使用闪存复制/粘贴
+Tooltip_AdvancedSuperInputHatchME_00=ME自动拉取模式将会自动标记ME网络中的前100种流体, 每5秒更新一次.
+Tooltip_AdvancedSuperInputHatchME_01=使用螺丝刀切换, 或在GUI配置.
+Tooltip_AdvancedSuperInputHatchME_02=在GUI配置 "自动拉取" 的最小堆叠数与快速配方检查, 调整流体槽位刷新时间并启用快速配方检查.
+Tooltip_AdvancedSuperInputHatchME_03=警告: 快速配方检查可能会很卡. 请谨慎使用.
+
 ExplosionDynamoHatch=爆炸动力仓
 
 PipelessSteamHatch=无管蒸汽仓
@@ -177,7 +203,7 @@ SterileMaintenanceHatch=无菌维护仓
 SterileConfigurationMaintenanceHatch=可配置无菌维护仓
 AbsoluteMaintenanceHatch=绝对洁净维护仓
 AbsoluteConfigurationMaintenanceHatch=可配置绝对洁净维护仓
-Info_ConfigurationMaintenanceHatch_00=配置机器处理耗时，单位: %
+Info_ConfigurationMaintenanceHatch_00=配置机器处理耗时，单位: %%
 
 NinefoldInputHatchEV=九重输入仓 (EV)
 NinefoldInputHatchIV=九重输入仓 (IV)
