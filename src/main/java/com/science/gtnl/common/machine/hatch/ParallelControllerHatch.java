@@ -191,6 +191,7 @@ public class ParallelControllerHatch extends MTEHatch implements IAddGregtechLog
                     .setSize(70, 18)
                     .setPos(54, 36)
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD));
+        addGregTechLogo(builder);
     }
 
 }
