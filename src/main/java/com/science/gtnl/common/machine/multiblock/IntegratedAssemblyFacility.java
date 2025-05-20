@@ -261,6 +261,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     }
 
     public long getMachineVoltageLimit() {
+        if (wirelessMode) return mParallelTier;
         if (casingTier < 0) return 0;
         if (casingTier >= 11) return GTValues.V[energyHatchTier];
         else return GTValues.V[Math.min(casingTier + 3, energyHatchTier)];
