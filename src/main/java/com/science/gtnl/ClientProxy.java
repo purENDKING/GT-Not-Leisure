@@ -2,7 +2,6 @@ package com.science.gtnl;
 
 import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 
-import fox.spiteful.avaritia.render.FancyHaloRenderer;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
@@ -30,6 +29,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import fox.spiteful.avaritia.render.FancyHaloRenderer;
 
 public class ClientProxy extends CommonProxy {
 

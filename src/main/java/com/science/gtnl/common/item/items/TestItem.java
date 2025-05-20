@@ -4,8 +4,6 @@ import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 
 import java.util.List;
 
-import com.science.gtnl.Mods;
-import fox.spiteful.avaritia.render.IHaloRenderItem;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -20,6 +18,7 @@ import com.science.gtnl.common.GTNLItemList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import fox.spiteful.avaritia.render.IHaloRenderItem;
 
 public class TestItem extends Item implements IHaloRenderItem {
 
