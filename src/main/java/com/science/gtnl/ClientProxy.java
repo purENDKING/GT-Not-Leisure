@@ -29,6 +29,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import fox.spiteful.avaritia.render.FancyHaloRenderer;
 
 public class ClientProxy extends CommonProxy {
 
@@ -62,6 +63,8 @@ public class ClientProxy extends CommonProxy {
             new RenderEternalGregTechWorkshop());
 
         MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
+
+        MinecraftForgeClient.registerItemRenderer(ItemLoader.TestItem, new FancyHaloRenderer());
     }
 
     @Override
