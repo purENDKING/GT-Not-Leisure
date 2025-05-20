@@ -50,6 +50,32 @@ tc.research_name.GTNL_TIME_STOP_POCKET_WATCH=Time Stop Pocket Watch
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH=Mastering the Secret of Time
 tc.research_text.GTNL_TIME_STOP_POCKET_WATCH.1=In the ancient manuscripts of the Chronomantic school, records of the “Time Stop Pocket Watch” are scarce. It is said to have been first crafted by an alchemist weary of war and noise, longing to capture eternity within the flow of time. The construction of the watch itself is not complex—the true challenge lies in imbuing it with the essence of stillness. Rumors tell that the infusion must take place on the darkest night of the lunar cycle, surrounded by silent temporal crystals and hushed metals. Every thought of the practitioner must be held in perfect focus, lest the ritual turn awry and time itself lash back. If the ritual succeeds, one may briefly freeze the world’s flow at this very moment—but beware: time is never truly mastered. It merely waits for the moment to retaliate.
 
+SuperInputBusME=Super Stocking Input Bus (ME)
+AdvancedSuperInputBusME=Advanced Super Stocking Input Bus (ME)
+Tooltip_SuperInputBusME_00=Advanced item input for Multiblocks
+Tooltip_SuperInputBusME_01=Hatch Tier: 
+Tooltip_SuperInputBusME_02=Retrieves directly from ME
+Tooltip_SuperInputBusME_03=Keeps 100 item types in stock
+Tooltip_SuperInputBusME_04=Change ME connection behavior by right-clicking with wire cutter
+Tooltip_SuperInputBusME_05=Configuration data can be copy+pasted using a data stick
+Tooltip_AdvancedSuperInputBusME_00=Auto-Pull from ME mode will automatically stock the first 100 items in the ME system, updated every 5 seconds.
+Tooltip_AdvancedSuperInputBusME_01=Toggle by right-clicking with screwdriver, or use the GUI.
+Tooltip_AdvancedSuperInputBusME_02=Use the GUI to limit the minimum stack size for Auto-Pulling and enable fast recipe checks.
+Tooltip_AdvancedSuperInputBusME_03=WARNING: Fast recipe checks can be laggy. Use with caution.
+
+SuperInputHatchME=Super Stocking Input Hatch (ME)
+AdvancedSuperInputHatchME=Advanced Super Stocking Input Hatch (ME)
+Tooltip_SuperInputHatchME_00=Advanced fluid input for Multiblocks
+Tooltip_SuperInputHatchME_01=Hatch Tier: 
+Tooltip_SuperInputHatchME_02=Retrieves directly from ME
+Tooltip_SuperInputHatchME_03=Keeps 100 fluid types in stock
+Tooltip_SuperInputHatchME_04=Change ME connection behavior by right-clicking with wire cutter
+Tooltip_SuperInputHatchME_05=Configuration data can be copy+pasted using a data stick
+Tooltip_AdvancedSuperInputHatchME_00=Auto-Pull from ME mode will automatically stock the first 100 fluids in the ME system, updated every 5 seconds.
+Tooltip_AdvancedSuperInputHatchME_01=Toggle by right-clicking with screwdriver, or use the GUI.
+Tooltip_AdvancedSuperInputHatchME_02=Use the GUI to limit the minimum stack size for Auto-Pulling, adjust the slot refresh timer and enable fast recipe checks.
+Tooltip_AdvancedSuperInputHatchME_03=WARNING: Fast recipe checks can be laggy. Use with caution.
+
 ExplosionDynamoHatch=Explosion Dynamo Hatch
 
 PipelessSteamHatch=Pipeless Steam Hatch
@@ -177,7 +203,7 @@ SterileMaintenanceHatch=Sterile Maintenance Hatch
 SterileConfigurationMaintenanceHatch=Sterile Configuration Maintenance Hatch
 AbsoluteMaintenanceHatch=Absolute Maintenance Hatch
 AbsoluteConfigurationMaintenanceHatch=Absolute Configuration Maintenance Hatch
-Info_ConfigurationMaintenanceHatch_00=Configuration machine processing time, unit: %
+Info_ConfigurationMaintenanceHatch_00=Configuration machine processing time, unit: %%
 
 NinefoldInputHatchEV=Ninefold Input Hatch (EV)
 NinefoldInputHatchIV=Ninefold Input Hatch (IV)

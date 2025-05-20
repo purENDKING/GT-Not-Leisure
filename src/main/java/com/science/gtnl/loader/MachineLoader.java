@@ -42,6 +42,8 @@ import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputProxy;
 import com.science.gtnl.common.machine.hatch.SuperDataAccessHatch;
+import com.science.gtnl.common.machine.hatch.SuperInputBusME;
+import com.science.gtnl.common.machine.hatch.SuperInputHatchME;
 import com.science.gtnl.common.machine.hatch.TapDynamoHatch;
 import com.science.gtnl.common.machine.hatch.WirelessSteamDynamoHatch;
 import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
@@ -1663,6 +1665,38 @@ public class MachineLoader {
                 StatCollector.translateToLocal("DebugResearchStation"),
                 14));
         addItemTooltip(GTNLItemList.DebugResearchStation.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SuperInputBusME.set(
+            new SuperInputBusME(
+                SUPER_INPUT_BUS_ME.ID,
+                false,
+                "SuperInputBusME",
+                StatCollector.translateToLocal("SuperInputBusME")));
+        addItemTooltip(GTNLItemList.SuperInputBusME.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.AdvancedSuperInputBusME.set(
+            new SuperInputBusME(
+                ADVANCED_SUPER_INPUT_BUS_ME.ID,
+                true,
+                "AdvancedSuperInputBusME",
+                StatCollector.translateToLocal("AdvancedSuperInputBusME")));
+        addItemTooltip(GTNLItemList.AdvancedSuperInputBusME.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SuperInputHatchME.set(
+            new SuperInputHatchME(
+                SUPER_INPUT_HATCH_ME.ID,
+                false,
+                "SuperInputHatchME",
+                StatCollector.translateToLocal("SuperInputHatchME")));
+        addItemTooltip(GTNLItemList.SuperInputHatchME.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.AdvancedSuperInputHatchME.set(
+            new SuperInputHatchME(
+                ADVANCED_SUPER_INPUT_HATCH_ME.ID,
+                true,
+                "AdvancedSuperInputHatchME",
+                StatCollector.translateToLocal("AdvancedSuperInputHatchME")));
+        addItemTooltip(GTNLItemList.AdvancedSuperInputHatchME.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
     }
 
     @Deprecated

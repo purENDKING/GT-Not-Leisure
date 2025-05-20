@@ -1005,27 +1005,30 @@ public class SuperCraftingInputHatchME extends MTEHatchInputBus
 
     protected ModularWindow createSlotManualWindow(final EntityPlayer player) {
         final int WIDTH = 176;
-        final int HEIGHT = 176;
+        final int HEIGHT = 86;
         final int PARENT_WIDTH = getGUIWidth();
         final int PARENT_HEIGHT = getGUIHeight();
         ModularWindow.Builder builder = ModularWindow.builder(WIDTH, HEIGHT);
         builder.setBackground(GTUITextures.BACKGROUND_SINGLEBLOCK_DEFAULT);
         builder.setGuiTint(getGUIColorization());
         builder.setDraggable(true);
-        // make sure the manual window is within the parent window
-        // otherwise picking up manual items would toss them
-        // See GuiContainer.java flag1
         builder.setPos(
             (size, window) -> Alignment.Center.getAlignedPos(size, new Size(PARENT_WIDTH, PARENT_HEIGHT))
                 .add(Alignment.TopRight.getAlignedPos(new Size(PARENT_WIDTH, PARENT_HEIGHT), new Size(WIDTH, HEIGHT))));
+
+        final Scrollable scrollable = new Scrollable().setVerticalScroll();
+        SlotGroup slotGroup = SlotGroup.ofItemHandler(inventoryHandler, 9)
+            .startFromSlot(SLOT_MANUAL_START)
+            .endAtSlot(SLOT_MANUAL_START + SLOT_MANUAL_SIZE - 1)
+            .phantom(false)
+            .background(getGUITextureSet().getItemSlot())
+            .build();
+        scrollable.widget(slotGroup);
+
         builder.widget(
-            SlotGroup.ofItemHandler(inventoryHandler, 9)
-                .startFromSlot(SLOT_MANUAL_START)
-                .endAtSlot(SLOT_MANUAL_START + SLOT_MANUAL_SIZE - 1)
-                .phantom(false)
-                .background(getGUITextureSet().getItemSlot())
-                .build()
+            scrollable.setSize(18 * 9 + 4, 18 * 4)
                 .setPos(7, 7));
+
         return builder.build();
     }
 
