@@ -221,8 +221,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             }
         }
 
-        wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         energyHatchTier = checkEnergyHatchTier();
+        wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return true;
     }
 

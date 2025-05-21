@@ -204,6 +204,8 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                 return false;
             }
         }
+        energyHatchTier = checkEnergyHatchTier();
+        wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return tCountCasing >= 80;
     }
 

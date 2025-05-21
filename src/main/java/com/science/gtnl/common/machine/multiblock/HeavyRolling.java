@@ -180,6 +180,7 @@ public class HeavyRolling extends WirelessEnergyMultiMachineBase<HeavyRolling>
         heatLevel = HeatingCoilLevel.None;
 
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
+        energyHatchTier = checkEnergyHatchTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return tCountCasing > 1800;
     }

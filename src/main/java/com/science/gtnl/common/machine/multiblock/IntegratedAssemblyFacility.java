@@ -4,6 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
+import static gregtech.api.enums.GTValues.VN;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
@@ -33,7 +34,6 @@ import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMa
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
-import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -207,6 +207,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
         tCountCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
+        energyHatchTier = checkEnergyHatchTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return tCountCasing > 1200;
     }
@@ -248,9 +249,10 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
         if (wirelessMode) {
-            logic.setAvailableVoltage(getAverageInputVoltage());
-            logic.setAvailableAmperage(getMaxInputAmps());
+            logic.setAvailableVoltage(getMachineVoltageLimit());
+            logic.setAvailableAmperage((long) Math.pow(4, mParallelTier) * 8L - 2L);
             logic.setAmperageOC(false);
+            logic.enablePerfectOverclock();
         } else {
             boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty()
                 && getMaxInputAmps() <= 2;
@@ -261,10 +263,18 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
     }
 
     public long getMachineVoltageLimit() {
-        if (wirelessMode) return mParallelTier;
         if (casingTier < 0) return 0;
-        if (casingTier >= 11) return GTValues.V[energyHatchTier];
-        else return GTValues.V[Math.min(casingTier + 3, energyHatchTier)];
+        if (wirelessMode) {
+            if (casingTier >= 11) {
+                return V[Math.min(mParallelTier + 1, 14)];
+            } else {
+                return V[Math.min(Math.min(mParallelTier + 1, casingTier + 3), 14)];
+            }
+        } else if (casingTier >= 11) {
+            return V[energyHatchTier];
+        } else {
+            return V[Math.min(casingTier + 3, energyHatchTier)];
+        }
     }
 
     public int checkEnergyHatchTier() {
@@ -303,7 +313,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
         String[] ret = new String[origin.length + 1];
         System.arraycopy(origin, 0, ret, 0, origin.length);
         ret[origin.length] = StatCollector.translateToLocal("scanner.info.CASS.tier")
-            + (casingTier >= 0 ? GTValues.VN[casingTier + 1] : "None!");
+            + (casingTier >= 0 ? VN[casingTier + 1] : "None!");
         return ret;
     }
 

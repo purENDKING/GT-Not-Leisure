@@ -131,6 +131,7 @@ public class PolymerTwistingModule extends NanitesBaseModule<PolymerTwistingModu
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
 
         isPolModule = true;
+        energyHatchTier = checkEnergyHatchTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
 
         return true;
