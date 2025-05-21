@@ -16,7 +16,6 @@ import com.science.gtnl.common.command.CommandReloadConfig;
 import com.science.gtnl.common.command.CommandSteamNetwork;
 import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.command.CommandTitle;
-import com.science.gtnl.common.effect.GTNLEffect;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGBucketLoader;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.MachineLoader;
@@ -88,7 +87,6 @@ public class ScienceNotLeisure {
     public void preInit(FMLPreInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         proxy.preInit(event);
-        GTNLEffect.init();
         MaterialLoader.loadPreInit();
         LanguageManager.init();
 

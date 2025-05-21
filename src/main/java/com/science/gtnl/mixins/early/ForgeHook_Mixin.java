@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(value = ForgeHooks.class, remap = false)
-public class ForgeHookServer_Mixin {
+public class ForgeHook_Mixin {
 
     @Inject(method = "onPlaceItemIntoWorld", at = @At("HEAD"), cancellable = true, remap = false)
     private static void preOnPlaceItemIntoWorldRewrite(ItemStack itemstack, EntityPlayer player, World world, int x,
