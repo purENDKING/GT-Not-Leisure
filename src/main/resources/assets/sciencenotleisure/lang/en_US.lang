@@ -2203,7 +2203,7 @@ CheatOreProcessingFactoryRecipeType=Fast Ore Processing for Cheaters
 
 NameMeteorMiner=Meteor Miner
 MeteorMinerRecipeType=Meteor Mining
-Tooltip_MeteorMiner_00=To function properly, the height of the meteor center must be at least 32 blocks above the highest point of the multiblock structure.
+Tooltip_MeteorMiner_00=To function properly, the height of the meteor core must be at least one block higher than the highest point of the multiblock structure.
 Tooltip_MeteorMiner_01=The laser will mine in a radius of up to 50 blocks in the XZ axis from the center of the meteor
 Tooltip_MeteorMiner_02=All involved chunks must be force-loaded.
 Tooltip_MeteorMiner_03=The laser will automatically set its radius based on the meteor.
