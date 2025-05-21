@@ -202,6 +202,7 @@ public class EngravingLaserPlant extends WirelessEnergyMultiMachineBase<Engravin
         tCountCasing = 0;
         wirelessMode = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
+        energyHatchTier = checkEnergyHatchTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return tCountCasing > 1200;
     }
@@ -243,9 +244,10 @@ public class EngravingLaserPlant extends WirelessEnergyMultiMachineBase<Engravin
     @Override
     protected void setProcessingLogicPower(ProcessingLogic logic) {
         if (wirelessMode) {
-            logic.setAvailableVoltage(getAverageInputVoltage());
-            logic.setAvailableAmperage(getMaxInputAmps());
+            logic.setAvailableVoltage(getMachineVoltageLimit());
+            logic.setAvailableAmperage((long) Math.pow(4, mParallelTier) * 8L - 2L);
             logic.setAmperageOC(false);
+            logic.enablePerfectOverclock();
         } else {
             boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty()
                 && getMaxInputAmps() <= 2;
@@ -256,10 +258,18 @@ public class EngravingLaserPlant extends WirelessEnergyMultiMachineBase<Engravin
     }
 
     public long getMachineVoltageLimit() {
-        if (wirelessMode) return mParallelTier;
         if (casingTier < 0) return 0;
-        if (casingTier >= 11) return GTValues.V[energyHatchTier];
-        else return GTValues.V[Math.min(casingTier + 3, energyHatchTier)];
+        if (wirelessMode) {
+            if (casingTier >= 11) {
+                return V[Math.min(mParallelTier + 1, 14)];
+            } else {
+                return V[Math.min(Math.min(mParallelTier + 1, casingTier + 3), 14)];
+            }
+        } else if (casingTier >= 11) {
+            return V[energyHatchTier];
+        } else {
+            return V[Math.min(casingTier + 3, energyHatchTier)];
+        }
     }
 
     public int checkEnergyHatchTier() {

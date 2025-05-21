@@ -216,6 +216,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
             return false;
         }
 
+        energyHatchTier = checkEnergyHatchTier();
         wirelessMode = mEnergyHatches.isEmpty() && mExoticEnergyHatches.isEmpty();
         return true;
     }
