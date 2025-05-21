@@ -207,11 +207,11 @@ public abstract class WirelessEnergyMultiMachineBase<T extends WirelessEnergyMul
             succeeded = true;
         }
 
-        updateSlots();
         if (!succeeded) return finalResult;
+        updateSlots();
         if (totalOverclockedDuration > 0) {
-            totalOverclockedDuration = (int) (totalOverclockedDuration * Math.pow(0.75, mParallelTier - 4)
-                / (cycleNow + 1));
+            totalOverclockedDuration = (int) Math
+                .max(1, totalOverclockedDuration * Math.pow(0.75, mParallelTier - 4) / (cycleNow + 1));
         } else {
             totalOverclockedDuration = 1;
         }

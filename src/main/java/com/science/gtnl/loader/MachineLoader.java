@@ -106,6 +106,7 @@ import com.science.gtnl.common.machine.multiblock.LargeSteamThermalCentrifuge;
 import com.science.gtnl.common.machine.multiblock.LibraryOfRuina;
 import com.science.gtnl.common.machine.multiblock.MagneticEnergyReactionFurnace;
 import com.science.gtnl.common.machine.multiblock.MatterFabricator;
+import com.science.gtnl.common.machine.multiblock.MegaMixer;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EGTWFusionModule;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop;
@@ -1141,6 +1142,10 @@ public class MachineLoader {
                 "HighEnergyLaserLathe",
                 StatCollector.translateToLocal("NameHighEnergyLaserLathe")));
         addItemTooltip(GTNLItemList.HighEnergyLaserLathe.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.MegaMixer
+            .set(new MegaMixer(MEGA_MIXER.ID, "MegaMixer", StatCollector.translateToLocal("NameMegaMixer")));
+        addItemTooltip(GTNLItemList.MegaMixer.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
