@@ -54,6 +54,10 @@ public class MainConfig {
     public static int meteorParadigmChunkSize = 1024;
     public static int meteorParadigmBatchUpdateInterval = 2048;
 
+    // NotEnoughItems
+    public static boolean enableSpecialCheatIcon = false;
+    public static int specialIconType = 0;
+
     // Debug
     public static boolean enableDebugMode = false;
 
@@ -269,6 +273,19 @@ public class MainConfig {
                 meteorParadigmBatchUpdateInterval,
                 "Set the batch update interval for meteor paradigm operations (default: 2048)")
             .getInt(meteorParadigmBatchUpdateInterval);
+
+        // Not Enough Items
+        enableSpecialCheatIcon = config
+            .get(
+                "NotEnoughItems",
+                "EnableSpecialCheatIcon",
+                enableSpecialCheatIcon,
+                "Enable a special icon for cheat mode")
+            .getBoolean(enableSpecialCheatIcon);
+
+        specialIconType = config
+            .get("NotEnoughItems", "SpecialIconType", specialIconType, "Specify the type of the special cheat icon")
+            .getInt(specialIconType);
 
         // Debug
         enableDebugMode = config.get("Debug", "enable", enableDebugMode, "Enable Debug Print Log")
