@@ -117,6 +117,7 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
             .beginStructureBlock(5, 5, 5, true)
             .addOutputHatch(StatCollector.translateToLocal("Tooltip_LargeGasCollector_Casing"))
             .addInputBus(StatCollector.translateToLocal("Tooltip_LargeGasCollector_Casing"))
+            .addOutputBus(StatCollector.translateToLocal("Tooltip_LargeGasCollector_Casing"))
             .addEnergyHatch(StatCollector.translateToLocal("Tooltip_LargeGasCollector_Casing"))
             .addMaintenanceHatch(StatCollector.translateToLocal("Tooltip_LargeGasCollector_Casing"))
             .toolTipFinisher();
@@ -132,7 +133,7 @@ public class LargeGasCollector extends MultiMachineBase<LargeGasCollector> imple
                     'A',
                     buildHatchAdder(LargeGasCollector.class).casingIndex(CASING_INDEX)
                         .dot(1)
-                        .atLeast(OutputHatch, InputBus, Maintenance, Energy.or(ExoticEnergy))
+                        .atLeast(OutputHatch, InputBus, OutputBus, Maintenance, Energy.or(ExoticEnergy))
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings2, 0))))
                 .addElement('B', ofBlock(sBlockCasings2, 15))
                 .addElement('C', ofBlock(sBlockCasings3, 10))

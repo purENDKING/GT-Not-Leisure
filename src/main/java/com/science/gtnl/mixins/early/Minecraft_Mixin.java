@@ -1,8 +1,11 @@
 package com.science.gtnl.mixins.early;
 
+import static com.science.gtnl.ScienceNotLeisure.network;
+
 import java.util.Queue;
 import java.util.concurrent.Callable;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
@@ -27,14 +30,18 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.client.C16PacketClientStatus;
 import net.minecraft.profiler.Profiler;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.Timer;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -42,12 +49,14 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.reavaritia.common.render.CustomEntityRenderer;
+import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
 import com.science.gtnl.common.item.TimeStopManager;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -84,6 +93,8 @@ public abstract class Minecraft_Mixin {
     public long systemTime;
     @Shadow
     public GameSettings gameSettings;
+    @Shadow
+    public MovingObjectPosition objectMouseOver;
     @Shadow
     public boolean inGameHasFocus;
     @Shadow
@@ -657,5 +668,48 @@ public abstract class Minecraft_Mixin {
         if (((Minecraft) ((Object) this)).isFramerateLimitBelowMax()) {
             Display.sync(((Minecraft) ((Object) this)).getLimitFramerate());
         }
+    }
+
+    @Inject(
+        method = "func_147112_ai",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraftforge/common/ForgeHooks;onPickBlock(Lnet/minecraft/util/MovingObjectPosition;Lnet/minecraft/entity/player/EntityPlayer;Lnet/minecraft/world/World;)Z"),
+        cancellable = true,
+        remap = false)
+    private void onBeforePickBlock(CallbackInfo ci) {
+        boolean shouldCancel = mixin$preOnPickBlockSendRequest(this.objectMouseOver, this.thePlayer, this.theWorld);
+        if (shouldCancel) {
+            ci.cancel();
+        }
+    }
+
+    @Unique
+    private static boolean mixin$preOnPickBlockSendRequest(MovingObjectPosition target, EntityPlayer player,
+        World world) {
+        boolean isCtrlKeyDown = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL);
+        if (isCtrlKeyDown && player.capabilities.isCreativeMode) {
+            ItemStack result;
+
+            if (target != null && target.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                int x = target.blockX;
+                int y = target.blockY;
+                int z = target.blockZ;
+                Block block = world.getBlock(x, y, z);
+
+                if (!block.isAir(world, x, y, z)) {
+                    result = block.getPickBlock(target, world, x, y, z, player);
+                    Item item = result.getItem();
+                    int blockID = Item.getIdFromItem(item);
+                    int blockMeta = result.getItemDamage();
+                    TileEntity tileentity = world.getTileEntity(x, y, z);
+                    if (tileentity != null) {
+                        network.sendToServer(new PacketGetTileEntityNBTRequest(x, y, z, blockID, blockMeta));
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
