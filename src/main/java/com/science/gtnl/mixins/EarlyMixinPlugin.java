@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.science.gtnl.config.MainConfig;
+
 public class EarlyMixinPlugin {
 
     public static List<String> getEarlyMixins(Set<String> loadedMods) {
@@ -17,8 +19,15 @@ public class EarlyMixinPlugin {
         mixins.add("WorldServer_Mixin");
         mixins.add("FMLProxyPacket_Mixin");
         mixins.add("Explosion_Mixin");
-        mixins.add("ForgeHooksClient_Mixin");
-        mixins.add("ForgeHookServer_Mixin");
+        mixins.add("ForgeHook_Mixin");
+
+        if (MainConfig.enableSpecialCheatIcon) {
+            mixins.add("NotEnoughItems.DrawableBuilderAccessor");
+            mixins.add("NotEnoughItems.DrawableResourceAccessor");
+            mixins.add("NotEnoughItems.DrawableResource_Mixin");
+            mixins.add("NotEnoughItems.LayoutStyleMinecraft_Mixin");
+            mixins.add("NotEnoughItems.LayoutManager_Mixin");
+        }
         return mixins;
     }
 }
