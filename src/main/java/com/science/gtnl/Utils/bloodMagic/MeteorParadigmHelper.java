@@ -141,11 +141,11 @@ public class MeteorParadigmHelper {
     private static void handleGTOres(World world, int x, int y, int z) {
         try {
             TileEntity te = world.getTileEntity(x, y, z);
-            if (te instanceof TileEntityOres) {
-                ((TileEntityOres) te).mNatural = true;
+            if (te instanceof TileEntityOres gtOre) {
+                gtOre.mNatural = true;
             }
         } catch (Exception e) {
-            AlchemicalWizardry.logger.error("GT Ore处理失败 [{},{},{}]", x, y, z, e);
+            AlchemicalWizardry.logger.error("GTNL: Meteor Mixin: GT Ore Error [{},{},{}]", x, y, z, e);
         }
     }
 

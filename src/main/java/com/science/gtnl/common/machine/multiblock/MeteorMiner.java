@@ -3,6 +3,7 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElementPass;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
+import static com.science.gtnl.ScienceNotLeisure.LOG;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.block.Casings.BasicBlocks.LaserBeacon;
 import static gregtech.api.enums.HatchElement.*;
@@ -75,6 +76,7 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.OverclockCalculator;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings8;
+import gregtech.common.blocks.TileEntityOres;
 import gtPlusPlus.core.block.ModBlocks;
 import gtPlusPlus.core.util.minecraft.PlayerUtils;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -387,7 +389,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         this.fortuneTier = 0;
 
         if (this.multiTier == 2) {
-            this.fortuneTier = 3;
+            this.fortuneTier = 5;
             return;
         }
 
@@ -405,11 +407,11 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
 
     public int getFortuneTierForItem(ItemStack stack) {
         if (isSpecificItem(stack, Botania.ID, "terraPick")) {
-            return 3;
+            return 4;
         } else if (isSpecificItem(stack, BloodMagic.ID, "boundPickaxe")) {
-            return 2;
+            return 3;
         } else if (isSpecificItem(stack, Thaumcraft.ID, "ItemPickaxeElemental")) {
-            return 1;
+            return 2;
         } else {
             return 0;
         }
@@ -493,7 +495,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
                 if (renderer != null) renderer.setShouldRender(false);
             }
             setElectricityStats();
-            boolean centerReady = checkCenter();
+            boolean centerReady = checkIsBlock();
             if (centerReady) {
                 isWaiting = false;
                 isStartInitialized = false;
@@ -603,13 +605,21 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         if (target.getBlockHardness(w, x, y, z) < 0) return;
 
         Collection<ItemStack> drops = target.getDrops(w, x, y, z, meta, 0);
-        w.setBlockToAir(x, y, z);
 
         if (GTUtility.isOre(target, meta)) {
-            itemDrop.addAll(getOutputByDrops(drops));
+            try {
+                TileEntity te = w.getTileEntity(x, y, z);
+                if (te instanceof TileEntityOres gtOre && gtOre.mNatural) {
+                    itemDrop.addAll(getOutputByDrops(drops));
+                }
+            } catch (Exception e) {
+                LOG.error("GTNL Meteor Miner: GT Ore Error [{},{},{}]", x, y, z, e);
+            }
         } else {
             itemDrop.addAll(drops);
         }
+        w.setBlockToAir(x, y, z);
+        w.removeTileEntity(x, y, z);
     }
 
     public Collection<ItemStack> getOutputByDrops(Collection<ItemStack> oreBlockDrops) {
@@ -685,9 +695,14 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         this.hasFinished = false;
     }
 
-    public boolean checkCenter() {
-        return !getBaseMetaTileEntity().getWorld()
-            .isAirBlock(xStart, yStart + 32, zStart);
+    public boolean checkIsBlock() {
+        World world = getBaseMetaTileEntity().getWorld();
+        for (int y = yStart + 1; y <= 255; y++) {
+            if (!world.isAirBlock(xStart, y, zStart)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setElectricityStats() {
@@ -723,9 +738,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
             new ButtonWidget().setOnClick((clickData, widget) -> this.startReset())
                 .setPlayClickSound(true)
                 .setBackground(
-                    () -> {
-                        return new IDrawable[] { GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_CYCLIC };
-                    })
+                    () -> new IDrawable[] { GTUITextures.BUTTON_STANDARD, GTUITextures.OVERLAY_BUTTON_CYCLIC })
                 .setPos(new Pos2d(174, 112))
                 .setSize(16, 16));
     }
