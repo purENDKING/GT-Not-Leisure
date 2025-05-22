@@ -23,7 +23,7 @@ Tooltip_PerfectOverclock=机器可进行§c无损超频§7
 OverclockType.Description.01=每次超频时, 耗时除以
 OverclockType.Description.02=耗电乘以
 
-Info_VoltageChanceBonus_00=电压概率加成: §3%.2f% §r(电压等级: §3%s§r, 基础电压等级: §3%s§r) 
+Info_VoltageChanceBonus_00=电压概率加成: §3%s %% §r(电压等级: §3%s§r, 基础电压等级: §3%s§r) 
 
 HatchCustomFluid_00=为多方块机器输入流体
 HatchCustomFluid_01=容量: 
@@ -1462,6 +1462,25 @@ Tooltip_SuperSpaceElevator_05=MK-III及以上加速轨道可开启无线模式
 Tooltip_SuperSpaceElevator_06=当主结构未安装能源仓时自动进入无线模式
 Tooltip_SuperSpaceElevator_07=关闭控制器即可暂停所有模块
 Tooltip_SuperSpaceElevator_Casing=任意太空电梯基座机械方块
+
+NameSteamBeaconModule=蒸汽电梯信标模块
+SteamBeaconModuleRecipeType=信标
+Info_SteamBeaconModule_00=配置信标效果
+Info_SteamBeaconModule_01=确定
+Info_SteamBeaconModule_02=当前启用效果:
+Info_SteamBeaconModule_Effect_00=速度
+Info_SteamBeaconModule_Effect_01=力量
+Info_SteamBeaconModule_Effect_02=跳跃提升
+Info_SteamBeaconModule_Effect_03=抗性提升
+Info_SteamBeaconModule_Effect_04=生命恢复
+Info_SteamBeaconModule_Effect_05=夜视
+Info_SteamBeaconModule_Effect_06=急迫
+Info_SteamBeaconModule_Effect_07=防火
+Info_SteamBeaconModule_Effect_08=扭曲守护
+Info_SteamBeaconModule_Effect_09=水下呼吸
+
+Tooltip_SteamElevatorModule_00=蒸汽电梯的模块
+Tooltip_SteamElevatorModule_Casing=任意脱氧钢机械方块
 
 NameLargeMixer=大型搅拌罐
 LargeMixerRecipeType=搅拌机
