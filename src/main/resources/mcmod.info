@@ -1,8 +1,7 @@
-{
-	"modListVersion": 2,
-	"modList": [{
-		"modid": "sciencenotleisure",
-		"name": "GTNotLeisure",
+[
+  {
+    "modid": "${modId}",
+    "name": "${modName}",
 		"description": "GT Not Leisure For GTNH, maybe nerf everything",
 		"version": "${modVersion}",
 		"mcversion": "1.7.10",
@@ -16,5 +15,5 @@
 		"dependencies": [],
 		"dependants": [],
 		"useDependencyInformation": false
-	}]
-}
+  }
+]

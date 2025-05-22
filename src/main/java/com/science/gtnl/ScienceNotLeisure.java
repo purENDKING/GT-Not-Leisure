@@ -3,8 +3,6 @@ package com.science.gtnl;
 import static com.science.gtnl.ScienceNotLeisure.MODID;
 import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 
-import java.io.File;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -54,6 +52,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
         + "required-after:gregtech;"
         + "before:TwistSpaceTechnology;"
         + "after:GalacticraftPlanets",
+    guiFactory = "com.science.gtnl.config.ConfigGuiFactory",
     acceptedMinecraftVersions = "1.7.10")
 public class ScienceNotLeisure {
 
@@ -70,16 +69,6 @@ public class ScienceNotLeisure {
 
     @SidedProxy(clientSide = "com.science.gtnl.ClientProxy", serverSide = "com.science.gtnl.CommonProxy")
     public static CommonProxy proxy;
-
-    static {
-        File configDir = new File("config/GTNotLeisure");
-        if (!configDir.exists()) {
-            configDir.mkdirs();
-        }
-
-        File mainConfigFile = new File(configDir, "main.cfg");
-        MainConfig.init(mainConfigFile);
-    }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)

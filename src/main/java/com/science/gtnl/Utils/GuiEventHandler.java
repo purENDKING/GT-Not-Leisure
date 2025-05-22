@@ -5,12 +5,13 @@ import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.common.effect.effects.AweEffect;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -35,9 +36,12 @@ public class GuiEventHandler {
                 event.setCanceled(true);
                 String[] messages = { "Awe_Cancel_02_01", "Awe_Cancel_02_02" };
                 String message = messages[random.nextInt(messages.length)];
-                IChatComponent chatComponent = new ChatComponentTranslation(message);
-                player.addChatMessage(chatComponent);
-
+                TitlePacket.sendTitleToPlayer(
+                    (EntityPlayerMP) player,
+                    StatCollector.translateToLocal(message),
+                    200,
+                    0xFFFFFF,
+                    2);
             }
         }
     }

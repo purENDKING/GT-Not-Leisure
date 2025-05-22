@@ -128,6 +128,7 @@ import com.science.gtnl.common.machine.multiblock.ShallowChemicalCoupling;
 import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SpaceAssembler;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
+import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamBeaconModule;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
@@ -1146,6 +1147,13 @@ public class MachineLoader {
         GTNLItemList.MegaMixer
             .set(new MegaMixer(MEGA_MIXER.ID, "MegaMixer", StatCollector.translateToLocal("NameMegaMixer")));
         addItemTooltip(GTNLItemList.MegaMixer.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.SteamBeaconModule.set(
+            new SteamBeaconModule(
+                STEAM_BEACON_MODULE.ID,
+                "SteamBeaconModule",
+                StatCollector.translateToLocal("NameSteamBeaconModule")));
+        addItemTooltip(GTNLItemList.SteamBeaconModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

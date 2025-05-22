@@ -8,6 +8,40 @@ import net.minecraftforge.common.config.Configuration;
 // spotless:off
 public class MainConfig {
 
+    // --- Main Configuration Categories ---
+    public static final String CATEGORY_GTNL_CONFIG = "gtnl_config";
+
+    // --- Sub-Categories (direct children of gtnl_config, or deeper nested) ---
+    public static final String CATEGORY_MACHINE = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "machine";
+    public static final String CATEGORY_RE_AVARITIA = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
+        + "re_avaritia";
+    public static final String CATEGORY_BLOOD_MAGIC = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
+        + "blood_magic";
+    public static final String CATEGORY_RECIPE = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "recipe";
+    public static final String CATEGORY_TICK_RATE = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "tickrate";
+    public static final String CATEGORY_PLAYER_DOLL = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
+        + "player_doll";
+    public static final String CATEGORY_NOT_ENOUGH_ITEMS = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
+        + "not_enough_items";
+    public static final String CATEGORY_DEBUG = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "debug";
+
+    // --- Deeper Nested Categories (paths constructed using CATEGORY_SPLITTER) ---
+    public static final String SUB_CATEGORY_METEOR_MINER = CATEGORY_MACHINE + Configuration.CATEGORY_SPLITTER
+        + "meteor_miner";
+    public static final String SUB_CATEGORY_ARTIFICIAL_STAR = CATEGORY_MACHINE + Configuration.CATEGORY_SPLITTER
+        + "artificial_star";
+    public static final String SUB_CATEGORY_ETERNAL_GREGTECH_WORKSHOP = CATEGORY_MACHINE
+        + Configuration.CATEGORY_SPLITTER
+        + "eternal_gregtech_workshop";
+    public static final String SUB_CATEGORY_PORTAL_TO_ALFHEIM = CATEGORY_MACHINE + Configuration.CATEGORY_SPLITTER
+        + "portal_to_alfheim";
+    public static final String SUB_CATEGORY_INFINITY_SWORD = CATEGORY_RE_AVARITIA + Configuration.CATEGORY_SPLITTER
+        + "infinity_sword";
+    public static final String SUB_CATEGORY_CHRONARCHS_CLOCK = CATEGORY_RE_AVARITIA + Configuration.CATEGORY_SPLITTER
+        + "chronarch_clock";
+    public static final String SUB_CATEGORY_METEOR_PARADIGM = CATEGORY_BLOOD_MAGIC + Configuration.CATEGORY_SPLITTER
+        + "meteor_paradigm";
+
     // Machine
     public static boolean enableRecipeOutputChance = true;
     public static boolean enableMachineAmpLimit = true;
@@ -61,11 +95,18 @@ public class MainConfig {
     // Debug
     public static boolean enableDebugMode = false;
 
-    private static Configuration config;
+    public static Configuration config;
 
-    public static void init(File configFile) {
+    static {
+        File configDir = new File("config/GTNotLeisure");
+        if (!configDir.exists()) {
+            configDir.mkdirs();
+        }
+
+        File mainConfigFile = new File(configDir, "main.cfg");
+
         if (config == null) {
-            config = new Configuration(configFile);
+            config = new Configuration(mainConfigFile);
             loadConfig();
         }
 
@@ -78,6 +119,9 @@ public class MainConfig {
 
     public static void reloadConfig() {
         if (config != null) {
+            if (config.hasChanged()) {
+                config.save();
+            }
             config.load();
             loadConfig();
         }
@@ -86,20 +130,24 @@ public class MainConfig {
     public static void loadConfig() {
         // Machine
         enableRecipeOutputChance = config
-            .get("Machine", "enable", enableRecipeOutputChance, "Enable Output Change Function")
+            .get(
+                CATEGORY_MACHINE,
+                "enableRecipeOutputChance",
+                enableRecipeOutputChance,
+                "Enable Output Change Function")
             .getBoolean(enableRecipeOutputChance);
 
         enableMachineAmpLimit = config
-            .get("Machine", "enableLaserHatch", enableMachineAmpLimit, "Enable Machine Can't Use Laser Hatch")
+            .get(CATEGORY_MACHINE, "enableLaserHatch", enableMachineAmpLimit, "Enable Machine Can't Use Laser Hatch")
             .getBoolean(enableMachineAmpLimit);
 
         recipeOutputChance = config
-            .get("Machine", "RecipeChanceOutput", recipeOutputChance, "Change Recipe Item Output, like QFT")
+            .get(CATEGORY_MACHINE, "RecipeChanceOutput", recipeOutputChance, "Change Recipe Item Output, like QFT")
             .getDouble(recipeOutputChance);
 
         meteorMinerMaxBlockPerCycle = config
             .get(
-                "Meteor Miner",
+                SUB_CATEGORY_METEOR_MINER,
                 "MaxBlockCount",
                 meteorMinerMaxBlockPerCycle,
                 "Set the Meteor Miner how many every cycle break a block")
@@ -107,7 +155,7 @@ public class MainConfig {
 
         meteorMinerMaxRowPerCycle = config
             .get(
-                "Meteor Miner",
+                SUB_CATEGORY_METEOR_MINER,
                 "MaxRawCount",
                 meteorMinerMaxRowPerCycle,
                 "Set the Meteor Miner how many every cycle break row blocks")
@@ -115,7 +163,7 @@ public class MainConfig {
 
         euEveryEnhancementCore = config
             .get(
-                "Artificial Star",
+                SUB_CATEGORY_ARTIFICIAL_STAR,
                 "EUEveryEnhancementCore",
                 euEveryEnhancementCore,
                 "Set the power generation of EU Every Enhancement Core")
@@ -123,7 +171,7 @@ public class MainConfig {
 
         euEveryDepletedExcitedNaquadahFuelRod = config
             .get(
-                "Artificial Star",
+                SUB_CATEGORY_ARTIFICIAL_STAR,
                 "EUEveryDepletedExcitedNaquadahFuelRod",
                 euEveryDepletedExcitedNaquadahFuelRod,
                 "Set the power generation of EU Every Depleted Excited Naquadah FuelRod")
@@ -131,7 +179,7 @@ public class MainConfig {
 
         secondsOfArtificialStarProgressCycleTime = config
             .get(
-                "Artificial Star",
+                SUB_CATEGORY_ARTIFICIAL_STAR,
                 "secondsOfArtificialStarProgressCycleTime",
                 secondsOfArtificialStarProgressCycleTime,
                 "Set secondsOfArtificialStarProgressCycleTime running time")
@@ -139,7 +187,7 @@ public class MainConfig {
 
         enableRenderDefaultArtificialStar = config
             .get(
-                "Artificial Star",
+                SUB_CATEGORY_ARTIFICIAL_STAR,
                 "EnableDefaultRender",
                 enableRenderDefaultArtificialStar,
                 "Open RenderDefaultArtificialStar rendering")
@@ -147,7 +195,7 @@ public class MainConfig {
 
         enableEternalGregTechWorkshopSpiralRender = config
             .get(
-                "Eternal GregTech Workshop",
+                SUB_CATEGORY_ETERNAL_GREGTECH_WORKSHOP,
                 "spiralRender",
                 enableEternalGregTechWorkshopSpiralRender,
                 "Enable Eternal GregTech Workshop Spiral Render, like DNA")
@@ -155,28 +203,33 @@ public class MainConfig {
 
         enablePortalToAlfheimBigBoom = config
             .get(
-                "Portal To Alfheim",
+                SUB_CATEGORY_PORTAL_TO_ALFHEIM,
                 "bigBoom",
                 enablePortalToAlfheimBigBoom,
                 "Setting this to false will reduce the Portal To Alfheim explosion to little more then a tnt blast")
             .getBoolean(enablePortalToAlfheimBigBoom);
 
         // Recipe
-        enableDeleteRecipe = config.get("Recipe", "enable", enableDeleteRecipe, "Enable Delete Recipe")
+        enableDeleteRecipe = config
+            .get(CATEGORY_RECIPE, "enableDeleteRecipe", enableDeleteRecipe, "Enable Delete Recipe")
             .getBoolean(enableDeleteRecipe);
 
         enableAprilFoolRecipe = config
-            .get("Recipe", "enable", enableAprilFoolRecipe, "Force enable April Fool's recipe")
+            .get(CATEGORY_RECIPE, "enableAprilFoolRecipe", enableAprilFoolRecipe, "Force enable April Fool's recipe")
             .getBoolean(enableAprilFoolRecipe);
 
         enableCheatRecipeWithOwner = config
-            .get("Recipe", "enable", enableCheatRecipeWithOwner, "Enable Only Player Owner Cheat Recipe (Need 7 Mods)")
+            .get(
+                CATEGORY_RECIPE,
+                "enableCheatRecipeWithOwner",
+                enableCheatRecipeWithOwner,
+                "Enable Only Player Owner Cheat Recipe (Need 7 Mods)")
             .getBoolean(enableCheatRecipeWithOwner);
 
         // Tick Rate
         defaultTickrate = (float) config
             .get(
-                "Tickrate",
+                CATEGORY_TICK_RATE,
                 "Default",
                 defaultTickrate,
                 "Default tickrate. The game will always initialize with this value.")
@@ -184,7 +237,7 @@ public class MainConfig {
 
         minTickrate = (float) config
             .get(
-                "Tickrate",
+                CATEGORY_TICK_RATE,
                 "Minimum",
                 minTickrate,
                 "Minimum tickrate from servers. Prevents really low tickrate values.")
@@ -192,7 +245,7 @@ public class MainConfig {
 
         maxTickrate = (float) config
             .get(
-                "Tickrate",
+                CATEGORY_TICK_RATE,
                 "Maximum",
                 maxTickrate,
                 "Maximum tickrate from servers. Prevents really high tickrate values.")
@@ -200,7 +253,7 @@ public class MainConfig {
 
         showTickrateMessages = config
             .get(
-                "Tickrate",
+                CATEGORY_TICK_RATE,
                 "show-messages",
                 showTickrateMessages,
                 "If it will show log messages in the console and the game")
@@ -208,13 +261,13 @@ public class MainConfig {
 
         // Player Doll
         enableCustomPlayerDoll = config
-            .get("Player Doll", "enable", enableCustomPlayerDoll, "Enable Custom Player Skin for Player Doll")
+            .get(CATEGORY_PLAYER_DOLL, "enable", enableCustomPlayerDoll, "Enable Custom Player Skin for Player Doll")
             .getBoolean(enableCustomPlayerDoll);
 
         // Infinity Sword
         enableInfinitySwordBypassMechanism = config
             .get(
-                "Infinity Sword",
+                SUB_CATEGORY_INFINITY_SWORD,
                 "enableBypass",
                 enableInfinitySwordBypassMechanism,
                 "Enable Infinity Sword bypass against Blood Sword and Draconic Armor")
@@ -222,24 +275,28 @@ public class MainConfig {
 
         enableInfinitySwordExplosion = config
             .get(
-                "Infinity Sword",
+                SUB_CATEGORY_INFINITY_SWORD,
                 "enableExplosion",
                 enableInfinitySwordExplosion,
                 "Enable when Infinity Sword hit Infinity Suit create Explosion")
             .getBoolean(enableInfinitySwordExplosion);
 
         enableRenderInfinitySwordSpecial = config
-            .get("Infinity Sword", "enable", enableRenderInfinitySwordSpecial, "Enable Player Special Render")
+            .get(
+                SUB_CATEGORY_INFINITY_SWORD,
+                "enableSpecialRender",
+                enableRenderInfinitySwordSpecial,
+                "Enable Player Special Render")
             .getBoolean(enableRenderInfinitySwordSpecial);
 
         // Chronarch's Clock
         chronarchsClockRadius = config
-            .get("Chronarch's Clock", "radius", chronarchsClockRadius, "Effective radius in blocks")
+            .get(SUB_CATEGORY_CHRONARCHS_CLOCK, "radius", chronarchsClockRadius, "Effective radius in blocks")
             .getInt(chronarchsClockRadius);
 
         chronarchsClockSpeedMultiplier = config
             .get(
-                "Chronarch's Clock",
+                SUB_CATEGORY_CHRONARCHS_CLOCK,
                 "speedMultiplier",
                 chronarchsClockSpeedMultiplier,
                 "Speed multiplier for the clock")
@@ -247,20 +304,20 @@ public class MainConfig {
 
         chronarchsClockDurationTicks = config
             .get(
-                "Chronarch's Clock",
+                SUB_CATEGORY_CHRONARCHS_CLOCK,
                 "durationTicks",
                 chronarchsClockDurationTicks,
                 "Duration of the clock's effect in ticks")
             .getInt(chronarchsClockDurationTicks);
 
         chronarchsClockCooldown = config
-            .get("Chronarch's Clock", "Cooldown", chronarchsClockCooldown, "Change Chronarchs Clock Cooldown")
+            .get(SUB_CATEGORY_CHRONARCHS_CLOCK, "Cooldown", chronarchsClockCooldown, "Change Chronarchs Clock Cooldown")
             .getInt(chronarchsClockCooldown);
 
         // Blood Magic
         meteorParadigmChunkSize = config
             .get(
-                "Meteor Paradigm",
+                SUB_CATEGORY_METEOR_PARADIGM,
                 "ChunkSize",
                 meteorParadigmChunkSize,
                 "Set the chunk size for meteor paradigm operations (default: 1024)")
@@ -268,7 +325,7 @@ public class MainConfig {
 
         meteorParadigmBatchUpdateInterval = config
             .get(
-                "Meteor Paradigm",
+                SUB_CATEGORY_METEOR_PARADIGM,
                 "BatchUpdateInterval",
                 meteorParadigmBatchUpdateInterval,
                 "Set the batch update interval for meteor paradigm operations (default: 2048)")
@@ -277,18 +334,22 @@ public class MainConfig {
         // Not Enough Items
         enableSpecialCheatIcon = config
             .get(
-                "NotEnoughItems",
+                CATEGORY_NOT_ENOUGH_ITEMS,
                 "EnableSpecialCheatIcon",
                 enableSpecialCheatIcon,
                 "Enable a special icon for cheat mode")
             .getBoolean(enableSpecialCheatIcon);
 
         specialIconType = config
-            .get("NotEnoughItems", "SpecialIconType", specialIconType, "Specify the type of the special cheat icon")
+            .get(
+                CATEGORY_NOT_ENOUGH_ITEMS,
+                "SpecialIconType",
+                specialIconType,
+                "Specify the type of the special cheat icon")
             .getInt(specialIconType);
 
         // Debug
-        enableDebugMode = config.get("Debug", "enable", enableDebugMode, "Enable Debug Print Log")
+        enableDebugMode = config.get(CATEGORY_DEBUG, "enableDebugMode", enableDebugMode, "Enable Debug Print Log")
             .getBoolean(enableDebugMode);
 
         if (config.hasChanged()) {
