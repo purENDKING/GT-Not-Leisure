@@ -246,12 +246,26 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
     @Override
     public void setItemNBT(NBTTagCompound aNBT) {
         saveGeneralNBT(aNBT, false);
+
         super.saveNBTData(aNBT);
     }
 
     @Override
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
+        // Upgrade window stored items
+        NBTTagCompound upgradeWindowStorageNBTTag = new NBTTagCompound();
+        int storageIndex = 0;
+        for (ItemStack itemStack : inputSlotHandler.getStacks()) {
+            if (itemStack != null) {
+                upgradeWindowStorageNBTTag
+                    .setInteger(storageIndex + "stacksizeOfStoredUpgradeItems", itemStack.stackSize);
+                aNBT.setTag(storageIndex + "storedUpgradeItem", itemStack.writeToNBT(new NBTTagCompound()));
+            }
+            storageIndex++;
+        }
+        aNBT.setTag("upgradeWindowStorage", upgradeWindowStorageNBTTag);
+
         saveGeneralNBT(aNBT, true);
         aNBT.setInteger("mMachineTier", mMachineTier);
         aNBT.setBoolean("enableExtraModule", enableExtraModule);

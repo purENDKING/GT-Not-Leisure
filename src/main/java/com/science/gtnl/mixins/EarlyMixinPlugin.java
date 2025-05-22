@@ -13,7 +13,6 @@ public class EarlyMixinPlugin {
         mixins.add("AccessorEntityRenderer");
         mixins.add("Entity_Mixin");
         mixins.add("Minecraft_Mixin");
-        mixins.add("MixinWorldUpdateEntities_Wrap");
         mixins.add("World_Mixin");
         mixins.add("WorldClient_Mixin");
         mixins.add("WorldServer_Mixin");

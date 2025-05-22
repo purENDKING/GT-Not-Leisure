@@ -158,7 +158,7 @@ public class PrimitiveDistillationTower extends SteamMultiMachineBase<PrimitiveD
             @Override
             @Nonnull
             public OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(0.75)
                     .setSpeedBoost(0.8);
             }

@@ -80,13 +80,6 @@ public class DecayHastenerRecipes implements IRecipePool {
             .addTo(DHR);
 
         GTValues.RA.stdBuilder()
-            .itemInputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Bismuth, 1))
-            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Lead, 1))
-            .duration(200)
-            .eut(TierEU.RECIPE_MV)
-            .addTo(DHR);
-
-        GTValues.RA.stdBuilder()
             .itemInputs(MaterialsElements.getInstance().THALLIUM.getDust(1))
             .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.Lead, 1))
             .duration(200)

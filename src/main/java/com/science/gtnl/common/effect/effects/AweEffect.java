@@ -11,15 +11,14 @@ import net.minecraft.entity.ai.attributes.BaseAttributeMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import com.science.gtnl.Utils.GTNLEffectUtils;
+import com.science.gtnl.Utils.message.TitlePacket;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -95,9 +94,12 @@ public class AweEffect extends GTNLEffectUtils {
             if (effect != null && event.gui instanceof GuiIngameMenu) {
                 event.setCanceled(true);
 
-                IChatComponent chatComponent = new ChatComponentTranslation("Awe_Cancel_01");
-                player.addChatMessage(chatComponent);
-
+                TitlePacket.sendTitleToPlayer(
+                    (EntityPlayerMP) player,
+                    StatCollector.translateToLocal("Awe_Cancel_01"),
+                    200,
+                    0xFFFFFF,
+                    2);
             }
         }
     }

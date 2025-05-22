@@ -237,7 +237,7 @@ public class LargeSteamFormingPress extends SteamMultiMachineBase<LargeSteamForm
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(0.9 * tierMachine)
                     .setSpeedBoost(1 / 1.25 / tierMachine);
             }

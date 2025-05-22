@@ -90,7 +90,7 @@ import mcp.mobius.waila.api.IWailaDataAccessor;
 public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> extends MTESteamMultiBase<T> {
 
     private static final int OC_WINDOW_ID = 11;
-    protected int RecipeOcCount = 0;
+    protected int recipeOcCount = 0;
     protected int tierAdvancedCasing = -1;
     protected int tierBrickCasing = -1;
     protected int tierPlatedCasing = -1;
@@ -303,14 +303,14 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
         super.saveNBTData(aNBT);
         aNBT.setInteger("tierMachine", tierMachine);
         aNBT.setInteger("mMode", machineMode);
-        aNBT.setInteger("recipeOcCount", RecipeOcCount);
+        aNBT.setInteger("recipeOcCount", recipeOcCount);
     }
 
     @Override
     public void loadNBTData(final NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         tierMachine = aNBT.getInteger("tierMachine");
-        RecipeOcCount = aNBT.getInteger("recipeOcCount");
+        recipeOcCount = aNBT.getInteger("recipeOcCount");
     }
 
     @Override
@@ -860,8 +860,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
                 .setPos(3, 4)
                 .setSize(150, 20))
             .widget(
-                new NumericWidget().setSetter(val -> RecipeOcCount = (int) Math.min(4, val))
-                    .setGetter(() -> Math.min(4, RecipeOcCount))
+                new NumericWidget().setSetter(val -> recipeOcCount = (int) Math.min(4, val))
+                    .setGetter(() -> Math.min(4, recipeOcCount))
                     .setBounds(1, Integer.MAX_VALUE)
                     .setDefaultValue(1)
                     .setScrollValues(1, 4, 64)
@@ -872,8 +872,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
                     .setBackground(GTUITextures.BACKGROUND_TEXT_FIELD)
                     .attachSyncer(
                         new FakeSyncWidget.IntegerSyncer(
-                            () -> Math.min(4, RecipeOcCount),
-                            (val) -> RecipeOcCount = Math.min(4, val)),
+                            () -> Math.min(4, recipeOcCount),
+                            (val) -> recipeOcCount = Math.min(4, val)),
                         builder));
         return builder.build();
     }
