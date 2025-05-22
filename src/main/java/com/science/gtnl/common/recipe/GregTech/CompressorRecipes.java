@@ -4,7 +4,6 @@ import static com.science.gtnl.Mods.ScienceNotLeisure;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
-import gtPlusPlus.core.util.minecraft.FluidUtils;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.science.gtnl.Utils.recipes.IRecipePool;
@@ -19,6 +18,7 @@ import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.metadata.CompressionTierKey;
 import gregtech.api.util.GTUtility;
+import gtPlusPlus.core.util.minecraft.FluidUtils;
 
 public class CompressorRecipes implements IRecipePool {
 

@@ -23,7 +23,7 @@ Tooltip_PerfectOverclock=Machine can perform §clossless overclocking§7
 OverclockType.Description.01=Each overclock, time divided by
 OverclockType.Description.02=Power multiplied by
 
-Info_VoltageChanceBonus_00=Voltage Chance Bonus: §3%.2f% §r(Voltage Tier: §3%s§r, Base Voltage Tier: §3%s§r)
+Info_VoltageChanceBonus_00=Voltage Chance Bonus: §3%s %% §r(Voltage Tier: §3%s§r, Base Voltage Tier: §3%s§r)
 
 HatchCustomFluid_00=Input fluids for multiblock machines
 HatchCustomFluid_01=Capacity: 
@@ -1462,6 +1462,24 @@ Tooltip_SuperSpaceElevator_05=MK-III and above speed tracks can enable wireless 
 Tooltip_SuperSpaceElevator_06=The system automatically activates wireless mode when no energy hatch is installed in the main structure
 Tooltip_SuperSpaceElevator_07=Disabling this controller also pauses all modules
 Tooltip_SuperSpaceElevator_Casing=Any Space Elevator Base Casing
+
+NameSteamBeaconModule=Steam Elevator Beacon Module
+SteamBeaconModuleRecipeType=Beacon
+Info_SteamBeaconModule_00=Configure beacon effects
+Info_SteamBeaconModule_01=Confirm
+Info_SteamBeaconModule_02=Currently Enabled Effects:
+Info_SteamBeaconModule_Effect_00=Speed
+Info_SteamBeaconModule_Effect_01=Strength
+Info_SteamBeaconModule_Effect_02=Jump Boost
+Info_SteamBeaconModule_Effect_03=Resistance
+Info_SteamBeaconModule_Effect_04=Regeneration
+Info_SteamBeaconModule_Effect_05=Night Vision
+Info_SteamBeaconModule_Effect_06=Haste
+Info_SteamBeaconModule_Effect_07=Fire Resistance
+Info_SteamBeaconModule_Effect_08=Warp Ward
+
+Tooltip_SteamElevatorModule_00=Steam Elevator Module
+Tooltip_SteamElevatorModule_Casing=Any Solid Steel Machine Casing
 
 NameLargeMixer=Large Mixing Tank
 LargeMixerRecipeType=Mixer
