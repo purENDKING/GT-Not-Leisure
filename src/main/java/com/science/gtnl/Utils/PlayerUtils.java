@@ -21,6 +21,7 @@ import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.item.TimeStopManager;
 import com.science.gtnl.config.MainConfig;
 
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -143,8 +144,7 @@ public class PlayerUtils {
 
     @SubscribeEvent
     public void chat(ClientChatReceivedEvent event) {
-        if (event.message instanceof ChatComponentTranslation) {
-            ChatComponentTranslation t = (ChatComponentTranslation) event.message;
+        if (event.message instanceof ChatComponentTranslation t) {
             if (t.getKey()
                 .equals("GTNLEarlyCoreMod.show.clientside")) {
                 event.message = new ChatComponentText("");
@@ -152,6 +152,13 @@ public class PlayerUtils {
                 event.message
                     .appendSibling(CommandTickrate.c(TickrateAPI.getClientTickrate() + " ticks per second", 'a'));
             }
+        }
+    }
+
+    @SubscribeEvent
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.modID.equals(Mods.ScienceNotLeisure.ID)) {
+            MainConfig.reloadConfig();
         }
     }
 }

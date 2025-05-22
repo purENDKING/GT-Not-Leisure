@@ -11,7 +11,6 @@ import net.minecraft.util.EnumChatFormatting;
 
 import com.science.gtnl.Mods;
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.config.Config;
 import com.science.gtnl.config.ConfigSyncMessage;
 import com.science.gtnl.config.MainConfig;
 
@@ -30,7 +29,7 @@ public class CommandReloadConfig extends CommandBase {
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
         try {
-            Config.reloadConfig();
+            MainConfig.reloadConfig();
 
             ConfigSyncMessage msg = new ConfigSyncMessage(new MainConfig());
             for (Object obj : MinecraftServer.getServer()
