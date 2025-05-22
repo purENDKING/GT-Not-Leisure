@@ -260,7 +260,7 @@ public class LargeSteamCrusher extends SteamMultiMachineBase<LargeSteamCrusher> 
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(0.8 * tierMachine)
                     .setSpeedBoost(1.0 / 10.0 / tierMachine);
             }

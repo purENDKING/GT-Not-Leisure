@@ -50,7 +50,7 @@ public class PortalToAlfheimRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 1L))
-            .itemOutputs(GTModHandler.getModItem(Botania.ID, "manaResource", 1, 8, missing))
+            .itemOutputs(GTModHandler.getModItem(Botania.ID, "manaResource", 1, 9, missing))
             .noOptimize()
             .duration(20)
             .eut(2048)

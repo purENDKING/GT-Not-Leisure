@@ -270,7 +270,7 @@ public class LargeSteamMixer extends SteamMultiMachineBase<LargeSteamMixer> impl
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(tierMachine + (enableHVRecipe ? 1 : 0))
                     .setSpeedBoost(1 / 0.67 / tierMachine - (enableHVRecipe ? 0.25 : 0));
             }

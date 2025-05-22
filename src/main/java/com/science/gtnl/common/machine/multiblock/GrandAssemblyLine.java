@@ -63,6 +63,7 @@ import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
+import com.science.gtnl.Utils.Pair;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
@@ -84,7 +85,6 @@ import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.metatileentity.implementations.MTEHatch;
 import gregtech.api.metatileentity.implementations.MTEHatchDataAccess;
 import gregtech.api.recipe.RecipeMap;
-import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
@@ -105,6 +105,7 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 
 public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> implements ISurvivalConstructable {
 
+    private static Map<String, Pair<GTRecipe.RecipeAssemblyLine, AssemblyLineUtils.LookupResult>> recipeCache = new HashMap<>();
     private static final String ZERO_STRING = "0";
     private String costingEUText = ZERO_STRING;
     private UUID ownerUUID;
@@ -209,13 +210,6 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
-        // 预初始化配方池并删除所有配方
-        if (!MainConfig.enableDebugMode) {
-            RecipeMapBackend grandAssemblyLineRecipes = RecipeRegister.GrandAssemblyLineRecipes.getBackend();
-            List<GTRecipe> recipesToRemove = new ArrayList<>(grandAssemblyLineRecipes.getAllRecipes());
-            grandAssemblyLineRecipes.removeRecipes(recipesToRemove);
-        }
-
         // 第一步：初始化参数
         ItemStack controllerItem = getControllerSlot();
         this.mParallelTier = getParallelTier(controllerItem);
@@ -245,6 +239,13 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
         // 执行配方处理逻辑
         return processRecipeLogic(inputInventories, energyEU, maxParallel, minRecipeTime);
+    }
+
+    private String generateCacheKeyFromRecipeHash(ItemStack tDataStick) {
+        // 获取物品的 tagCompound 和固定的 Recipe Hash
+        String recipeHash = tDataStick.getTagCompound()
+            .getString("Data.Recipe.Hash");
+        return "RecipeHash_" + recipeHash;
     }
 
     private CheckRecipeResult processRecipeLogic(ArrayList<IDualInputInventory> inputInventories, long energyEU,
@@ -284,6 +285,15 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                 AssemblyLineUtils.LookupResult tLookupResult = AssemblyLineUtils
                     .findAssemblyLineRecipeFromDataStick(tDataStick, false);
 
+                String cacheKey = generateCacheKeyFromRecipeHash(tDataStick);
+                if (recipeCache.containsKey(cacheKey)) {
+                    // 使用缓存的结果
+                    Pair<GTRecipe.RecipeAssemblyLine, AssemblyLineUtils.LookupResult> cachedResult = recipeCache
+                        .get(cacheKey);
+                    validRecipes.add(cachedResult.getKey());
+                    continue;
+                }
+
                 if (tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_HASH
                     || tLookupResult.getType() == AssemblyLineUtils.LookupResultType.VALID_STACK_AND_VALID_RECIPE) {
 
@@ -293,6 +303,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                         ItemStack[][] tOreDictAlt = tRecipe.mOreDictAlt;
 
                         validRecipes.add(tRecipe); // 原始配方
+                        recipeCache.put(cacheKey, new Pair<>(tRecipe, tLookupResult));
 
                         boolean hasValidAlt = false;
                         if (tOreDictAlt != null) {
@@ -359,6 +370,8 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                                     tRecipe.mEUt,
                                     tOreDictAlt);
                                 validRecipes.add(tAltRecipe);
+                                String altCacheKey = cacheKey + "_alt_" + Arrays.hashCode(inputs);
+                                recipeCache.put(altCacheKey, new Pair<>(tAltRecipe, tLookupResult));
                             }
                         }
                     }

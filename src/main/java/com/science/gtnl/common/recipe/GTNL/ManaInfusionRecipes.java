@@ -1601,15 +1601,6 @@ public class ManaInfusionRecipes implements IRecipePool {
             .addTo(MIR);
 
         RecipeBuilder.builder()
-            .itemInputs(GTModHandler.getModItem("gregtech", "gt.metaitem.01", 1, 2330))
-            .itemOutputs(GTModHandler.getModItem("Botania", "manaResource", 1, 23))
-            .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(250))
-            .noOptimize()
-            .duration(20)
-            .eut(2048)
-            .addTo(MIR);
-
-        RecipeBuilder.builder()
             .itemInputs(GTModHandler.getModItem("gregtech", "gt.metaitem.01", 1, 2529))
             .itemOutputs(GTModHandler.getModItem("Botania", "manaResource", 1, 23))
             .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(150))
@@ -1800,7 +1791,7 @@ public class ManaInfusionRecipes implements IRecipePool {
 
         RecipeBuilder.builder()
             .itemInputs(GTModHandler.getModItem("minecraft", "diamond_block", 1, 0))
-            .itemOutputs(GTModHandler.getModItem("Botania", "manaResource", 1, 2))
+            .itemOutputs(GTModHandler.getModItem("Botania", "storage", 1, 3))
             .fluidInputs(MaterialPool.FluidMana.getFluidOrGas(360000))
             .noOptimize()
             .duration(20)

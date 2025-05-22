@@ -4,6 +4,7 @@ import static com.science.gtnl.Mods.ScienceNotLeisure;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
+import gtPlusPlus.core.util.minecraft.FluidUtils;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.science.gtnl.Utils.recipes.IRecipePool;
@@ -38,7 +39,17 @@ public class CompressorRecipes implements IRecipePool {
         GTValues.RA.stdBuilder()
             .itemInputs(GTUtility.copyAmount(0, ItemList.Shape_Mold_Ingot.get(1)))
             .itemOutputs(MaterialPool.CompressedSteam.get(OrePrefixes.ingot, 1))
-            .fluidInputs(FluidRegistry.getFluidStack("steam", 100000))
+            .fluidInputs(FluidUtils.getSteam(100000))
+            .noOptimize()
+            .duration(80)
+            .metadata(COMPRESSION_TIER, 2)
+            .eut(512)
+            .addTo(CR);
+
+        GTValues.RA.stdBuilder()
+            .itemInputs(GTUtility.copyAmount(0, ItemList.Shape_Mold_Ingot.get(1)))
+            .itemOutputs(MaterialPool.CompressedSteam.get(OrePrefixes.ingot, 1))
+            .fluidInputs(FluidRegistry.getFluidStack("supercriticalsteam", 2000))
             .noOptimize()
             .duration(80)
             .metadata(COMPRESSION_TIER, 2)

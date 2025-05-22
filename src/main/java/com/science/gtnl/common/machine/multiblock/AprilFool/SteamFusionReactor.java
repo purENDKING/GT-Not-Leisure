@@ -133,7 +133,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(1)
                     .setSpeedBoost(1);
             }

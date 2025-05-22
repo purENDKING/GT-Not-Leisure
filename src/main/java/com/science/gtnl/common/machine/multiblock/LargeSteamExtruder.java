@@ -275,7 +275,7 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(0.95 * tierMachine)
                     .setSpeedBoost(1 / 1.11 / tierMachine);
             }

@@ -227,7 +227,7 @@ public class LargeSteamChemicalBath extends SteamMultiMachineBase<LargeSteamChem
             @Override
             @Nonnull
             protected OverclockCalculator createOverclockCalculator(@NotNull GTRecipe recipe) {
-                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, RecipeOcCount))
+                return super.createOverclockCalculator(recipe).limitOverclockCount(Math.min(4, recipeOcCount))
                     .setEUtDiscount(0.8 * tierMachine)
                     .setSpeedBoost(1 / 1.25 / tierMachine);
             }
