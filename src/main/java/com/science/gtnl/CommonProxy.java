@@ -5,7 +5,6 @@ import static com.science.gtnl.ScienceNotLeisure.network;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GlobalSteamWorldSavedData;
-import com.science.gtnl.Utils.IIconRegister;
 import com.science.gtnl.Utils.PlayerUtils;
 import com.science.gtnl.Utils.WorldUtils;
 import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
@@ -30,7 +29,6 @@ public class CommonProxy {
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new IIconRegister());
         FMLCommonHandler.instance()
             .bus()
             .register(new ServerEventHandler());

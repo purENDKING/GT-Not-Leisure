@@ -37,7 +37,7 @@ public class TestItem extends Item implements IHaloRenderItem {
     public void registerIcons(IIconRegister ir) {
         super.registerIcons(ir);
         halo = new IIcon[1];
-        halo[0] = ir.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyan");
+        halo[0] = ir.registerIcon(RESOURCE_ROOT_ID + ":" + "halonoise");
     }
 
     @Override

@@ -19,7 +19,7 @@ public class IIconRegister {
         }
     }
 
-    public static String haloNoiseIconTexture = Mods.ScienceNotLeisure.resourceDomain + ":CompressionHalo";
+    public static String haloNoiseIconTexture = Mods.ScienceNotLeisure.resourceDomain + ":halonoise";
     public static IIcon haloNoiseIcon;
 
     public static void registerAllIcons(net.minecraft.client.renderer.texture.IIconRegister ir) {

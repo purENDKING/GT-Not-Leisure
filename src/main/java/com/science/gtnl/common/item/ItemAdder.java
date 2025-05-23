@@ -105,11 +105,8 @@ public class ItemAdder extends ItemAdder_Basic implements IHaloRenderItem {
             ItemStaticDataClientOnly.iconsMap01
                 .put(meta, iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "MetaItem/" + meta));
         }
-        halo = new IIcon[4];
-        halo[0] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHalo");
-        halo[1] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyan");
-        halo[2] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloCyanFaded");
-        halo[3] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "CompressionHaloSol");
+        halo = new IIcon[1];
+        halo[0] = iconRegister.registerIcon(RESOURCE_ROOT_ID + ":" + "halonoise");
     }
 
     @Override
@@ -164,8 +161,6 @@ public class ItemAdder extends ItemAdder_Basic implements IHaloRenderItem {
     @Override
     public IIcon getHaloTexture(ItemStack stack) {
         return switch (stack.getItemDamage()) {
-            case 26 -> halo[0];
-            case 27 -> halo[3];
             default -> halo[0];
         };
     }
