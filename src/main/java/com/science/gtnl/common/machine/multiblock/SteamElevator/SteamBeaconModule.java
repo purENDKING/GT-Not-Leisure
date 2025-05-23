@@ -1,8 +1,7 @@
 package com.science.gtnl.common.machine.multiblock.SteamElevator;
 
 import static gregtech.api.enums.GTValues.V;
-import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Thaumcraft;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
 import static net.minecraft.util.StatCollector.translateToLocal;
 
@@ -21,7 +20,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +38,7 @@ import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
+import com.kentington.thaumichorizons.common.lib.potion.PotionVisRegen;
 import com.science.gtnl.Mods;
 
 import gregtech.api.enums.SoundResource;
@@ -55,6 +54,7 @@ import gregtech.api.util.OverclockCalculator;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import thaumcraft.common.config.Config;
+import vazkii.botania.common.brew.ModPotions;
 
 public class SteamBeaconModule extends SteamElevatorModule {
 
@@ -66,7 +66,11 @@ public class SteamBeaconModule extends SteamElevatorModule {
     private boolean hasNightVisionEffect; // 夜视
     private boolean hasHasteEffect; // 急迫
     private boolean hasFireResistanceEffect; // 防火
+    private boolean hasWaterBreathingEffect; // 水下呼吸
     private boolean hasWarpWardEffect; // 扭曲守护
+    private boolean hasFeatherFeetEffect; // 羽翼
+    private boolean hasVisRegenEffect; // 灵气创生
+
     private boolean enableSpeedEffect; // 速度效果
     private boolean enableStrengthEffect; // 力量效果
     private boolean enableJumpBoostEffect; // 跳跃提升效果
@@ -75,24 +79,30 @@ public class SteamBeaconModule extends SteamElevatorModule {
     private boolean enableNightVisionEffect; // 夜视
     private boolean enableHasteEffect; // 急迫
     private boolean enableFireResistanceEffect; // 防火
+    private boolean enableWaterBreathingEffect; // 水下呼吸
+    private boolean enableFeatherFeetEffect; // 羽翼
+    private boolean enableVisRegenEffect; // 灵气创生
     private boolean enableWarpWardEffect; // 扭曲守护
     private int activeEffectsCount = 0;
     private boolean canWork;
     private int runningTickCounter = 0;
     private final ItemStackHandler inputSlotHandler = new ItemStackHandler(1);
     private ItemStack storedWindowItems;
+    private final int mTier;
 
-    public SteamBeaconModule(String aName) {
-        super(aName);
+    public SteamBeaconModule(int aID, String aName, String aNameRegional, int aTier) {
+        super(aID, aName, aNameRegional);
+        mTier = aTier;
     }
 
-    public SteamBeaconModule(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional);
+    public SteamBeaconModule(String aName, int aTier) {
+        super(aName);
+        mTier = aTier;
     }
 
     @Override
     public IMetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-        return new SteamBeaconModule(this.mName);
+        return new SteamBeaconModule(this.mName, this.mTier);
     }
 
     @Override
@@ -110,11 +120,14 @@ public class SteamBeaconModule extends SteamElevatorModule {
         aNBT.setBoolean("enableStrengthEffect", enableStrengthEffect);
         aNBT.setBoolean("enableJumpBoostEffect", enableJumpBoostEffect);
         aNBT.setBoolean("enableResistanceEffect", enableResistanceEffect);
-        aNBT.setBoolean("enableHealthRegeneration", enableHealthRegenerationEffect);
-        aNBT.setBoolean("enableNightVision", enableNightVisionEffect);
-        aNBT.setBoolean("enableHaste", enableHasteEffect);
-        aNBT.setBoolean("enableFireResistance", enableFireResistanceEffect);
+        aNBT.setBoolean("enableHealthRegenerationEffect", enableHealthRegenerationEffect);
+        aNBT.setBoolean("enableNightVisionEffect", enableNightVisionEffect);
+        aNBT.setBoolean("enableHasteEffect", enableHasteEffect);
+        aNBT.setBoolean("enableFireResistanceEffect", enableFireResistanceEffect);
+        aNBT.setBoolean("enableWaterBreathingEffect", enableWaterBreathingEffect);
         aNBT.setBoolean("enableWarpWardEffect", enableWarpWardEffect);
+        aNBT.setBoolean("enableFeatherFeetEffect", enableFeatherFeetEffect);
+        aNBT.setBoolean("enableVisRegenEffect", enableVisRegenEffect);
 
         aNBT.setBoolean("canWork", canWork);
     }
@@ -135,11 +148,14 @@ public class SteamBeaconModule extends SteamElevatorModule {
         enableStrengthEffect = aNBT.getBoolean("enableStrengthEffect");
         enableJumpBoostEffect = aNBT.getBoolean("enableJumpBoostEffect");
         enableResistanceEffect = aNBT.getBoolean("enableResistanceEffect");
-        enableHealthRegenerationEffect = aNBT.getBoolean("enableHealthRegeneration");
-        enableNightVisionEffect = aNBT.getBoolean("enableNightVision");
-        enableHasteEffect = aNBT.getBoolean("enableHaste");
-        enableFireResistanceEffect = aNBT.getBoolean("enableFireResistance");
+        enableHealthRegenerationEffect = aNBT.getBoolean("enableHealthRegenerationEffect");
+        enableNightVisionEffect = aNBT.getBoolean("enableNightVisionEffect");
+        enableHasteEffect = aNBT.getBoolean("enableHasteEffect");
+        enableFireResistanceEffect = aNBT.getBoolean("enableFireResistanceEffect");
+        enableWaterBreathingEffect = aNBT.getBoolean("enableWaterBreathingEffect");
         enableWarpWardEffect = aNBT.getBoolean("enableWarpWardEffect");
+        enableFeatherFeetEffect = aNBT.getBoolean("enableFeatherFeetEffect");
+        enableVisRegenEffect = aNBT.getBoolean("enableVisRegenEffect");
 
         canWork = aNBT.getBoolean("canWork");
     }
@@ -158,7 +174,10 @@ public class SteamBeaconModule extends SteamElevatorModule {
             tag.setBoolean("enableNightVisionEffect", enableNightVisionEffect);
             tag.setBoolean("enableHasteEffect", enableHasteEffect);
             tag.setBoolean("enableFireResistanceEffect", enableFireResistanceEffect);
+            tag.setBoolean("enableWaterBreathingEffect", enableWaterBreathingEffect);
             tag.setBoolean("enableWarpWardEffect", enableWarpWardEffect);
+            tag.setBoolean("enableFeatherFeetEffect", enableFeatherFeetEffect);
+            tag.setBoolean("enableVisRegenEffect", enableVisRegenEffect);
         }
     }
 
@@ -167,63 +186,63 @@ public class SteamBeaconModule extends SteamElevatorModule {
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);
         final NBTTagCompound tag = accessor.getNBTData();
-        currentTip.add(EnumChatFormatting.BLUE + StatCollector.translateToLocal("Info_SteamBeaconModule_02"));
+        currentTip.add(EnumChatFormatting.BLUE + translateToLocal("Info_SteamBeaconModule_02"));
         if (tag.getBoolean("enableSpeedEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_00"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_00"));
         }
         if (tag.getBoolean("enableStrengthEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_01"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_01"));
         }
         if (tag.getBoolean("enableJumpBoostEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_02"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_02"));
         }
         if (tag.getBoolean("enableResistanceEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_03"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_03"));
         }
         if (tag.getBoolean("enableHealthRegenerationEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_04"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_04"));
         }
         if (tag.getBoolean("enableNightVisionEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_05"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_05"));
         }
         if (tag.getBoolean("enableHasteEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_06"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_06"));
         }
         if (tag.getBoolean("enableFireResistanceEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_07"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_07"));
+        }
+        if (tag.getBoolean("enableWaterBreathingEffect")) {
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_08"));
         }
         if (tag.getBoolean("enableWarpWardEffect")) {
-            currentTip
-                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_08"));
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_09"));
+        }
+        if (tag.getBoolean("enableFeatherFeetEffect")) {
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_10"));
+        }
+        if (tag.getBoolean("enableVisRegenEffect")) {
+            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_11"));
         }
     }
 
     @Override
     public String getMachineType() {
-        return StatCollector.translateToLocal("SteamBeaconModuleRecipeType");
+        return translateToLocal("SteamBeaconModuleRecipeType");
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(StatCollector.translateToLocal("SteamBeaconModuleRecipeType"))
-            .addInfo(StatCollector.translateToLocal("Tooltip_SteamElevatorModule_00"))
+        tt.addMachineType(translateToLocal("SteamBeaconModuleRecipeType"))
+            .addInfo(translateToLocal("Tooltip_SteamElevatorModule_00"))
             .addSeparator()
-            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
-            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
+            .addInfo(translateToLocal("StructureTooComplex"))
+            .addInfo(translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(1, 5, 2, false)
-            .addInputBus(StatCollector.translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addOutputBus(StatCollector.translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addInputHatch(StatCollector.translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addOutputHatch(StatCollector.translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
+            .addInputBus(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
+            .addOutputBus(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
+            .addInputHatch(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
+            .addOutputHatch(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -241,15 +260,16 @@ public class SteamBeaconModule extends SteamElevatorModule {
     }
 
     private boolean canActivateNewEffect() {
-        return activeEffectsCount < 2;
+        return activeEffectsCount < mTier + 1;
     }
 
     private boolean canActivateNewEffectWork() {
-        return activeEffectsCount < 3;
+        return activeEffectsCount < mTier + 2;
     }
 
     private void updateActiveEffectsCount() {
         activeEffectsCount = 0;
+
         if (hasSpeedEffect) activeEffectsCount++;
         if (hasStrengthEffect) activeEffectsCount++;
         if (hasJumpBoostEffect) activeEffectsCount++;
@@ -258,7 +278,10 @@ public class SteamBeaconModule extends SteamElevatorModule {
         if (hasNightVisionEffect) activeEffectsCount++;
         if (hasHasteEffect) activeEffectsCount++;
         if (hasFireResistanceEffect) activeEffectsCount++;
+        if (hasWaterBreathingEffect) activeEffectsCount++;
         if (hasWarpWardEffect) activeEffectsCount++;
+        if (hasFeatherFeetEffect) activeEffectsCount++;
+        if (hasVisRegenEffect) activeEffectsCount++;
     }
 
     public void toggleSpeedEffect() {
@@ -310,6 +333,13 @@ public class SteamBeaconModule extends SteamElevatorModule {
         }
     }
 
+    public void toggleWaterBreathingEffect() {
+        if (canActivateNewEffect() || hasWaterBreathingEffect) {
+            hasWaterBreathingEffect = !hasWaterBreathingEffect;
+            updateActiveEffectsCount();
+        }
+    }
+
     public void toggleFireResistanceEffect() {
         if (canActivateNewEffect() || hasFireResistanceEffect) {
             hasFireResistanceEffect = !hasFireResistanceEffect;
@@ -320,6 +350,20 @@ public class SteamBeaconModule extends SteamElevatorModule {
     public void toggleWarpWardEffect() {
         if (canActivateNewEffect() || hasWarpWardEffect) {
             hasWarpWardEffect = !hasWarpWardEffect;
+            updateActiveEffectsCount();
+        }
+    }
+
+    public void toggleFeatherFeetEffect() {
+        if (canActivateNewEffect() || hasFeatherFeetEffect) {
+            hasFeatherFeetEffect = !hasFeatherFeetEffect;
+            updateActiveEffectsCount();
+        }
+    }
+
+    public void toggleVisRegenEffect() {
+        if (canActivateNewEffect() || hasVisRegenEffect) {
+            hasVisRegenEffect = !hasVisRegenEffect;
             updateActiveEffectsCount();
         }
     }
@@ -404,12 +448,39 @@ public class SteamBeaconModule extends SteamElevatorModule {
         updateActiveEffectsCount();
     }
 
+    public boolean hasWaterBreathingEffect() {
+        return hasWaterBreathingEffect;
+    }
+
+    public void setWaterBreathingEffect(boolean hasWaterBreathingEffect) {
+        this.hasWaterBreathingEffect = hasWaterBreathingEffect;
+        updateActiveEffectsCount();
+    }
+
     public boolean hasWarpWardEffect() {
         return hasWarpWardEffect;
     }
 
     public void setWarpWardEffect(boolean hasWarpWardEffect) {
         this.hasWarpWardEffect = hasWarpWardEffect;
+        updateActiveEffectsCount();
+    }
+
+    public boolean hasFeatherFeetEffect() {
+        return hasFeatherFeetEffect;
+    }
+
+    public void setFeatherFeetEffect(boolean hasFeatherFeetEffect) {
+        this.hasFeatherFeetEffect = hasFeatherFeetEffect;
+        updateActiveEffectsCount();
+    }
+
+    public boolean hasVisRegenEffect() {
+        return hasVisRegenEffect;
+    }
+
+    public void setVisRegenEffect(boolean hasVisRegenEffect) {
+        this.hasVisRegenEffect = hasVisRegenEffect;
         updateActiveEffectsCount();
     }
 
@@ -485,6 +556,15 @@ public class SteamBeaconModule extends SteamElevatorModule {
         updateActiveEffectsCount();
     }
 
+    public boolean enableWaterBreathingEffect() {
+        return enableWaterBreathingEffect;
+    }
+
+    public void setEnableWaterBreathingEffect(boolean enableWaterBreathing) {
+        this.enableWaterBreathingEffect = enableWaterBreathing;
+        updateActiveEffectsCount();
+    }
+
     public boolean enableWarpWardEffect() {
         return enableWarpWardEffect;
     }
@@ -494,10 +574,41 @@ public class SteamBeaconModule extends SteamElevatorModule {
         updateActiveEffectsCount();
     }
 
+    public boolean enableFeatherFeetEffect() {
+        return enableFeatherFeetEffect;
+    }
+
+    public void setEnableFeatherFeetEffect(boolean enableFeatherFeetEffect) {
+        this.enableFeatherFeetEffect = enableFeatherFeetEffect;
+        updateActiveEffectsCount();
+    }
+
+    public boolean enableVisRegenEffect() {
+        return enableVisRegenEffect;
+    }
+
+    public void setEnableVisRegenEffect(boolean enableVisRegenEffect) {
+        this.enableVisRegenEffect = enableVisRegenEffect;
+        updateActiveEffectsCount();
+    }
+
     private boolean isValidItem(ItemStack itemStack) {
         return itemStack.getItem() == Items.iron_ingot || itemStack.getItem() == Items.gold_ingot
             || itemStack.getItem() == Items.diamond
             || itemStack.getItem() == Items.emerald;
+    }
+
+    private int setMaxEffectLevel() {
+        return Math.min(mTier, recipeOcCount);
+    }
+
+    private int getMachineEffectRange() {
+        return switch (mTier) {
+            case 1 -> 64;
+            case 2 -> 128;
+            case 3 -> 256;
+            default -> 0;
+        };
     }
 
     @Override
@@ -510,7 +621,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
-        this.lEUt = -activeEffectsCount * V[3] * Math.max(1, recipeOcCount * 2);
+        this.lEUt = activeEffectsCount * V[3] * Math.max(1, setMaxEffectLevel() * 2);
         this.mEfficiency = 10000;
         this.mMaxProgresstime = 1000;
         return CheckRecipeResultRegistry.SUCCESSFUL;
@@ -531,46 +642,64 @@ public class SteamBeaconModule extends SteamElevatorModule {
 
             List<EntityPlayer> playersInRange = world.getEntitiesWithinAABB(
                 EntityPlayer.class,
-                AxisAlignedBB.getBoundingBox(x - 128, y - 128, z - 128, x + 128, y + 128, z + 128));
+                AxisAlignedBB.getBoundingBox(
+                    x - getMachineEffectRange(),
+                    y - getMachineEffectRange(),
+                    z - getMachineEffectRange(),
+                    x + getMachineEffectRange(),
+                    y + getMachineEffectRange(),
+                    z + getMachineEffectRange()));
 
             for (EntityPlayer player : playersInRange) {
                 double distance = player.getDistance(x, y, z);
-                if (distance <= 128) {
+                if (distance <= getMachineEffectRange()) {
                     if (enableSpeedEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 300, setMaxEffectLevel()));
                         setEnableSpeedEffect(enableSpeedEffect); // 更新启用状态
                     }
                     if (enableStrengthEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.damageBoost.id, 300, setMaxEffectLevel()));
                         setEnableStrengthEffect(enableStrengthEffect); // 更新启用状态
                     }
                     if (enableJumpBoostEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.jump.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.jump.id, 300, setMaxEffectLevel()));
                         setEnableJumpBoostEffect(enableJumpBoostEffect); // 更新启用状态
                     }
                     if (enableResistanceEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.resistance.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.resistance.id, 300, setMaxEffectLevel()));
                         setEnableResistanceEffect(enableResistanceEffect); // 更新启用状态
                     }
                     if (enableHealthRegenerationEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 300, setMaxEffectLevel()));
                         setEnableHealthRegenerationEffect(enableHealthRegenerationEffect); // 更新启用状态
                     }
                     if (enableNightVisionEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 300, setMaxEffectLevel()));
                         setEnableNightVisionEffect(enableNightVisionEffect); // 更新启用状态
                     }
                     if (enableHasteEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 300, setMaxEffectLevel()));
                         setEnableHasteEffect(enableHasteEffect); // 更新启用状态
                     }
                     if (enableFireResistanceEffect) {
-                        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 300, setMaxEffectLevel()));
                         setEnableFireResistanceEffect(enableFireResistanceEffect); // 更新启用状态
                     }
+                    if (enableWaterBreathingEffect) {
+                        player.addPotionEffect(new PotionEffect(Potion.waterBreathing.id, 300, setMaxEffectLevel()));
+                        setEnableWaterBreathingEffect(enableWaterBreathingEffect); // 更新启用状态
+                    }
                     if (enableWarpWardEffect) {
-                        player.addPotionEffect(new PotionEffect(Config.potionWarpWardID, 300, recipeOcCount));
+                        player.addPotionEffect(new PotionEffect(Config.potionWarpWardID, 300, setMaxEffectLevel()));
                         setEnableWarpWardEffect(enableWarpWardEffect); // 更新启用状态
+                    }
+                    if (enableFeatherFeetEffect) {
+                        player.addPotionEffect(new PotionEffect(ModPotions.featherfeet.id, 300, setMaxEffectLevel()));
+                        setEnableFeatherFeetEffect(enableFeatherFeetEffect); // 更新启用状态
+                    }
+                    if (enableVisRegenEffect) {
+                        player.addPotionEffect(new PotionEffect(PotionVisRegen.instance.id, 300, setMaxEffectLevel()));
+                        setEnableVisRegenEffect(enableVisRegenEffect); // 更新启用状态
                     }
                 }
             }
@@ -592,10 +721,17 @@ public class SteamBeaconModule extends SteamElevatorModule {
         .partly(Minecraft.resourceDomain, "gui/container/inventory", 256, 256, 72, 216, 90, 234);
     public static final UITexture HASTE_EFFECT = UITexture
         .partly(Minecraft.resourceDomain, "gui/container/inventory", 256, 256, 36, 198, 54, 216);
+    public static final UITexture WATER_BREATHING_EFFECT = UITexture
+        .partly(Minecraft.resourceDomain, "gui/container/inventory", 256, 256, 0, 234, 18, 252);
     public static final UITexture FIRE_RESISTANCE_EFFECT = UITexture
         .partly(Minecraft.resourceDomain, "gui/container/inventory", 256, 256, 126, 216, 144, 234);
     public static final UITexture WARP_WARD_EFFECT = UITexture
         .partly(Thaumcraft.resourceDomain, "misc/potions", 256, 256, 54, 234, 72, 252);
+    public static final UITexture FEATHER_FEET_EFFECT = UITexture
+        .partly(Botania.resourceDomain, "gui/potions", 256, 256, 18, 198, 36, 216);
+    public static final UITexture VIS_REGEN_EFFECT = UITexture
+        .partly(ThaumicHorizons.resourceDomain, "misc/potions", 256, 256, 54, 198, 72, 216);
+
     public static final UITexture BEACON_MATERIAL = UITexture
         .fullImage(Mods.ScienceNotLeisure.resourceDomain, "gui/picture/steam_beacon");
 
@@ -632,7 +768,14 @@ public class SteamBeaconModule extends SteamElevatorModule {
             new FakeSyncWidget.BooleanSyncer(
                 this::enableFireResistanceEffect,
                 val -> enableFireResistanceEffect = val));
+        builder.widget(
+            new FakeSyncWidget.BooleanSyncer(
+                this::enableWaterBreathingEffect,
+                val -> enableWaterBreathingEffect = val));
         builder.widget(new FakeSyncWidget.BooleanSyncer(this::enableWarpWardEffect, val -> enableWarpWardEffect = val));
+        builder.widget(
+            new FakeSyncWidget.BooleanSyncer(this::enableFeatherFeetEffect, val -> enableFeatherFeetEffect = val));
+        builder.widget(new FakeSyncWidget.BooleanSyncer(this::enableVisRegenEffect, val -> enableVisRegenEffect = val));
 
         super.addUIWidgets(builder, buildContext);
 
@@ -656,12 +799,13 @@ public class SteamBeaconModule extends SteamElevatorModule {
     }
 
     public ModularWindow createBeaconConfigWindow(final EntityPlayer player) {
-        final int WIDTH = 158;
-        final int HEIGHT = 52;
+        final int WIDTH = 100;
+        final int HEIGHT = 116;
         final int PARENT_WIDTH = getGUIWidth();
         final int PARENT_HEIGHT = getGUIHeight();
         inputSlotHandler.insertItem(0, storedWindowItems, false);
         storedWindowItems = null;
+        updateGuiMachineEffect();
 
         ModularWindow.Builder builder = ModularWindow.builder(WIDTH, HEIGHT);
         builder.setBackground(GTUITextures.BACKGROUND_SINGLEBLOCK_DEFAULT);
@@ -675,12 +819,12 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         .subtract(0, 10)));
         builder.widget(
             TextWidget.localised("Info_SteamBeaconModule_00")
-                .setPos(3, 4)
-                .setSize(150, 20))
+                .setPos(0, 0)
+                .setSize(100, 18))
             .widget(
                 new DrawableWidget().setDrawable(BEACON_MATERIAL)
                     .setSize(83, 18)
-                    .setPos(36, 18))
+                    .setPos(8, 90))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleSpeedEffect())
                     .setPlayClickSoundResource(
@@ -697,9 +841,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         return ret.toArray(new IDrawable[0]);
                     })
                     .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasSpeedEffect, this::setSpeedEffect), builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_00"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_00"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(0, 0)
+                    .setPos(6, 18)
                     .setSize(16, 16))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleStrengthEffect())
@@ -719,9 +863,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasStrengthEffect, this::setStrengthEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_01"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_01"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(18, 0)
+                    .setPos(24, 18)
                     .setSize(16, 16))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleJumpBoostEffect())
@@ -741,9 +885,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasJumpBoostEffect, this::setJumpBoostEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_02"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_02"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(36, 0)
+                    .setPos(42, 18)
                     .setSize(16, 16))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleResistanceEffect())
@@ -763,9 +907,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasResistanceEffect, this::setResistanceEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_03"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_03"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(54, 0)
+                    .setPos(6, 36)
                     .setSize(16, 16))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleHealthRegenerationEffect())
@@ -787,9 +931,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                             this::hasHealthRegenerationEffect,
                             this::setHealthRegenerationEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_04"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_04"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(72, 0)
+                    .setPos(24, 36)
                     .setSize(16, 16))
             .widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleNightVisionEffect())
@@ -809,11 +953,12 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasNightVisionEffect, this::setNightVisionEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_05"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_05"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(90, 0)
-                    .setSize(16, 16))
-            .widget(
+                    .setPos(42, 36)
+                    .setSize(16, 16));
+        if (mTier > 1) {
+            builder.widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleHasteEffect())
                     .setPlayClickSoundResource(
                         () -> hasHasteEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
@@ -829,33 +974,59 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         return ret.toArray(new IDrawable[0]);
                     })
                     .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasHasteEffect, this::setHasteEffect), builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_06"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_06"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(108, 0)
+                    .setPos(6, 54)
                     .setSize(16, 16))
-            .widget(
-                new ButtonWidget().setOnClick((clickData, widget) -> toggleFireResistanceEffect())
-                    .setPlayClickSoundResource(
-                        () -> hasFireResistanceEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
-                            : SoundResource.GUI_BUTTON_DOWN.resourceLocation)
-                    .setBackground(() -> {
-                        List<UITexture> ret = new ArrayList<>();
-                        if (hasFireResistanceEffect()) {
-                            ret.add(GTUITextures.BUTTON_STANDARD_PRESSED);
-                        } else {
-                            ret.add(GTUITextures.BUTTON_STANDARD);
-                        }
-                        ret.add(FIRE_RESISTANCE_EFFECT);
-                        return ret.toArray(new IDrawable[0]);
-                    })
-                    .attachSyncer(
-                        new FakeSyncWidget.BooleanSyncer(this::hasFireResistanceEffect, this::setFireResistanceEffect),
-                        builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_07"))
-                    .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(126, 0)
-                    .setSize(16, 16))
-            .widget(
+                .widget(
+                    new ButtonWidget().setOnClick((clickData, widget) -> toggleFireResistanceEffect())
+                        .setPlayClickSoundResource(
+                            () -> hasFireResistanceEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
+                                : SoundResource.GUI_BUTTON_DOWN.resourceLocation)
+                        .setBackground(() -> {
+                            List<UITexture> ret = new ArrayList<>();
+                            if (hasFireResistanceEffect()) {
+                                ret.add(GTUITextures.BUTTON_STANDARD_PRESSED);
+                            } else {
+                                ret.add(GTUITextures.BUTTON_STANDARD);
+                            }
+                            ret.add(FIRE_RESISTANCE_EFFECT);
+                            return ret.toArray(new IDrawable[0]);
+                        })
+                        .attachSyncer(
+                            new FakeSyncWidget.BooleanSyncer(
+                                this::hasFireResistanceEffect,
+                                this::setFireResistanceEffect),
+                            builder)
+                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_07"))
+                        .setTooltipShowUpDelay(TOOLTIP_DELAY)
+                        .setPos(24, 54)
+                        .setSize(16, 16))
+                .widget(
+                    new ButtonWidget().setOnClick((clickData, widget) -> toggleWaterBreathingEffect())
+                        .setPlayClickSoundResource(
+                            () -> hasWaterBreathingEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
+                                : SoundResource.GUI_BUTTON_DOWN.resourceLocation)
+                        .setBackground(() -> {
+                            List<UITexture> ret = new ArrayList<>();
+                            if (hasWaterBreathingEffect()) {
+                                ret.add(GTUITextures.BUTTON_STANDARD_PRESSED);
+                            } else {
+                                ret.add(GTUITextures.BUTTON_STANDARD);
+                            }
+                            ret.add(WATER_BREATHING_EFFECT);
+                            return ret.toArray(new IDrawable[0]);
+                        })
+                        .attachSyncer(
+                            new FakeSyncWidget.BooleanSyncer(this::hasWarpWardEffect, this::setWaterBreathingEffect),
+                            builder)
+                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_08"))
+                        .setTooltipShowUpDelay(TOOLTIP_DELAY)
+                        .setPos(42, 54)
+                        .setSize(16, 16));
+        }
+        if (mTier > 2) {
+            builder.widget(
                 new ButtonWidget().setOnClick((clickData, widget) -> toggleWarpWardEffect())
                     .setPlayClickSoundResource(
                         () -> hasWarpWardEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
@@ -873,10 +1044,55 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasWarpWardEffect, this::setWarpWardEffect),
                         builder)
-                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_08"))
+                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_09"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
-                    .setPos(144, 0)
-                    .setSize(16, 16));
+                    .setPos(6, 72)
+                    .setSize(16, 16))
+                .widget(
+                    new ButtonWidget().setOnClick((clickData, widget) -> toggleFeatherFeetEffect())
+                        .setPlayClickSoundResource(
+                            () -> hasFeatherFeetEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
+                                : SoundResource.GUI_BUTTON_DOWN.resourceLocation)
+                        .setBackground(() -> {
+                            List<UITexture> ret = new ArrayList<>();
+                            if (hasFeatherFeetEffect()) {
+                                ret.add(GTUITextures.BUTTON_STANDARD_PRESSED);
+                            } else {
+                                ret.add(GTUITextures.BUTTON_STANDARD);
+                            }
+                            ret.add(FEATHER_FEET_EFFECT);
+                            return ret.toArray(new IDrawable[0]);
+                        })
+                        .attachSyncer(
+                            new FakeSyncWidget.BooleanSyncer(this::hasFeatherFeetEffect, this::setFeatherFeetEffect),
+                            builder)
+                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_10"))
+                        .setTooltipShowUpDelay(TOOLTIP_DELAY)
+                        .setPos(24, 72)
+                        .setSize(16, 16))
+                .widget(
+                    new ButtonWidget().setOnClick((clickData, widget) -> toggleVisRegenEffect())
+                        .setPlayClickSoundResource(
+                            () -> hasVisRegenEffect() ? SoundResource.GUI_BUTTON_UP.resourceLocation
+                                : SoundResource.GUI_BUTTON_DOWN.resourceLocation)
+                        .setBackground(() -> {
+                            List<UITexture> ret = new ArrayList<>();
+                            if (hasVisRegenEffect()) {
+                                ret.add(GTUITextures.BUTTON_STANDARD_PRESSED);
+                            } else {
+                                ret.add(GTUITextures.BUTTON_STANDARD);
+                            }
+                            ret.add(VIS_REGEN_EFFECT);
+                            return ret.toArray(new IDrawable[0]);
+                        })
+                        .attachSyncer(
+                            new FakeSyncWidget.BooleanSyncer(this::hasVisRegenEffect, this::setVisRegenEffect),
+                            builder)
+                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_11"))
+                        .setTooltipShowUpDelay(TOOLTIP_DELAY)
+                        .setPos(42, 72)
+                        .setSize(16, 16));
+        }
 
         builder.widget(new ButtonWidget().setOnClick((clickData, widget) -> {
             if (canActivateNewEffectWork() && !widget.isClient()) {
@@ -897,9 +1113,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                 return ret.toArray(new IDrawable[0]);
             })
             .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasMachineCanWork, this::setMachineCanWork), builder)
-            .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_01"))
+            .addTooltip(translateToLocal("Info_SteamBeaconModule_01"))
             .setTooltipShowUpDelay(TOOLTIP_DELAY)
-            .setPos(0, 18)
+            .setPos(66, 37)
             .setSize(16, 16))
             .widget(
                 SlotGroup.ofItemHandler(inputSlotHandler, 1)
@@ -907,7 +1123,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .endAtSlot(0)
                     .background(getGUITextureSet().getItemSlot())
                     .build()
-                    .setPos(18, 18));
+                    .setPos(65, 18));
         return builder.build();
     }
 
@@ -930,7 +1146,25 @@ public class SteamBeaconModule extends SteamElevatorModule {
         setEnableNightVisionEffect(hasNightVisionEffect);
         setEnableHasteEffect(hasHasteEffect);
         setEnableFireResistanceEffect(hasFireResistanceEffect);
+        setEnableWaterBreathingEffect(hasWaterBreathingEffect);
         setEnableWarpWardEffect(hasWarpWardEffect);
+        setEnableFeatherFeetEffect(hasFeatherFeetEffect);
+        setEnableVisRegenEffect(hasVisRegenEffect);
+    }
+
+    public void updateGuiMachineEffect() {
+        setStrengthEffect(enableStrengthEffect);
+        setSpeedEffect(enableSpeedEffect);
+        setJumpBoostEffect(enableJumpBoostEffect);
+        setResistanceEffect(enableResistanceEffect);
+        setHealthRegenerationEffect(enableHealthRegenerationEffect);
+        setNightVisionEffect(enableNightVisionEffect);
+        setHasteEffect(enableHasteEffect);
+        setFireResistanceEffect(enableFireResistanceEffect);
+        setWaterBreathingEffect(enableWaterBreathingEffect);
+        setWarpWardEffect(enableWarpWardEffect);
+        setFeatherFeetEffect(enableFeatherFeetEffect);
+        setVisRegenEffect(enableVisRegenEffect);
     }
 
     public boolean payCost(ItemStackHandler handler) {

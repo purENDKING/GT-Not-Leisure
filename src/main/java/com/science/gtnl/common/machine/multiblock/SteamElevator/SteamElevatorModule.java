@@ -29,6 +29,7 @@ import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.OverclockCalculator;
+import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 
 public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamElevatorModule>
     implements ISurvivalConstructable {
@@ -143,6 +144,22 @@ public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamEle
     @Override
     public int getMaxParallelRecipes() {
         return 1;
+    }
+
+    @Override
+    public boolean onRunningTick(ItemStack aStack) {
+        if (lEUt > 0) {
+            lEUt = -lEUt;
+        }
+        if (lEUt < 0) {
+            long aSteamVal = ((-lEUt * 10000) / Math.max(1000, mEfficiency));
+            // Logger.INFO("Trying to drain "+aSteamVal+" steam per tick.");
+            if (!tryConsumeSteam((int) aSteamVal)) {
+                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

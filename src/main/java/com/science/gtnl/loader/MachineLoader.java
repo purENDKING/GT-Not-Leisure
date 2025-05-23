@@ -1148,12 +1148,29 @@ public class MachineLoader {
             .set(new MegaMixer(MEGA_MIXER.ID, "MegaMixer", StatCollector.translateToLocal("NameMegaMixer")));
         addItemTooltip(GTNLItemList.MegaMixer.get(1), AnimatedText.SNL_QYZG);
 
-        GTNLItemList.SteamBeaconModule.set(
+        GTNLItemList.SteamBeaconModuleI.set(
             new SteamBeaconModule(
-                STEAM_BEACON_MODULE.ID,
-                "SteamBeaconModule",
-                StatCollector.translateToLocal("NameSteamBeaconModule")));
-        addItemTooltip(GTNLItemList.SteamBeaconModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+                STEAM_BEACON_MODULE_I.ID,
+                "SteamBeaconModuleI",
+                StatCollector.translateToLocal("NameSteamBeaconModuleI"),
+                1));
+        addItemTooltip(GTNLItemList.SteamBeaconModuleI.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamBeaconModuleII.set(
+            new SteamBeaconModule(
+                STEAM_BEACON_MODULE_II.ID,
+                "SteamBeaconModuleII",
+                StatCollector.translateToLocal("NameSteamBeaconModuleII"),
+                2));
+        addItemTooltip(GTNLItemList.SteamBeaconModuleII.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamBeaconModuleIII.set(
+            new SteamBeaconModule(
+                STEAM_BEACON_MODULE_III.ID,
+                "SteamBeaconModuleIII",
+                StatCollector.translateToLocal("NameSteamBeaconModuleIII"),
+                3));
+        addItemTooltip(GTNLItemList.SteamBeaconModuleIII.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
