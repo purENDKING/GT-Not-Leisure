@@ -340,7 +340,9 @@ public enum GTNLItemList implements IItemContainer {
     EternalGregTechWorkshop,
     EGTWFusionModule,
 
-    SteamBeaconModule,
+    SteamBeaconModuleI,
+    SteamBeaconModuleII,
+    SteamBeaconModuleIII,
 
     MegaMixer,
     HighEnergyLaserLathe,
