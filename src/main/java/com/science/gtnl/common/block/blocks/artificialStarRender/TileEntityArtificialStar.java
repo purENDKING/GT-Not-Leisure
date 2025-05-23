@@ -35,8 +35,8 @@ public class TileEntityArtificialStar extends TileEntity {
     public final List<ResourceLocation> textures = new ArrayList<>();
 
     public TileEntityArtificialStar() {
-        models.add(RealArtificialStarRender.MODEL1);
-        textures.add(RealArtificialStarRender.STARTEXTURE1);
+        models.add(RealArtificialStarRender.STAR_MODEL);
+        textures.add(RealArtificialStarRender.STAR_TEXTURE);
     }
 
     @Override
@@ -68,8 +68,8 @@ public class TileEntityArtificialStar extends TileEntity {
         models.clear();
         textures.clear();
         for (int i = 0; i < modelsCount; i++) {
-            models.add(RealArtificialStarRender.MODEL1);
-            textures.add(RealArtificialStarRender.STARTEXTURE1);
+            models.add(RealArtificialStarRender.STAR_MODEL);
+            textures.add(RealArtificialStarRender.STAR_TEXTURE);
         }
     }
 

@@ -75,17 +75,6 @@ public class ItemAdder extends ItemAdder_Basic implements IHaloRenderItem {
 
     }
 
-    /**
-     * Init the basic items at the game pre init.
-     */
-    // public static void init() {
-    // for (String MetaName : Item01Map.keySet()) {
-    // GameRegistry.registerItem(Item01Map.get(MetaName), MetaName);
-    // }
-    // }
-
-    // region Overrides
-
     @Override
     public String getUnlocalizedName(ItemStack aItemStack) {
         return this.unlocalizedName + "." + aItemStack.getItemDamage();
