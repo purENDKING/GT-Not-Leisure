@@ -7,6 +7,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.GuiEventHandler;
+import com.science.gtnl.Utils.IIconRegister;
 import com.science.gtnl.Utils.message.TitleDisplayHandler;
 import com.science.gtnl.common.block.blocks.artificialStarRender.ArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
@@ -64,6 +65,7 @@ public class ClientProxy extends CommonProxy {
             new RenderEternalGregTechWorkshop());
 
         MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
+        MinecraftForge.EVENT_BUS.register(new IIconRegister());
 
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TestItem, new FancyHaloRenderer());
         MinecraftForgeClient.registerItemRenderer(BasicItems.MetaItem, new FancyHaloRenderer());
