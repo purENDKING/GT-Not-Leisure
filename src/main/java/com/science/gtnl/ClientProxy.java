@@ -9,7 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import com.science.gtnl.Utils.GuiEventHandler;
 import com.science.gtnl.Utils.IIconRegister;
 import com.science.gtnl.Utils.message.TitleDisplayHandler;
-import com.science.gtnl.common.block.blocks.artificialStarRender.ArtificialStarRender;
+import com.science.gtnl.common.block.blocks.artificialStarRender.ItemBlockArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.ItemBlockEternalGregTechWorkshopRender;
 import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.RenderEternalGregTechWorkshop;
@@ -27,7 +27,6 @@ import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.render.TwilightSwordModelRender;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -40,12 +39,14 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
 
         new RealArtificialStarRender();
-        RenderingRegistry.registerBlockHandler(new ArtificialStarRender());
 
         new MeteorMinerRenderer();
 
         new BlockPlayerDollRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new BlockPlayerDollRenderer());
+        MinecraftForgeClient.registerItemRenderer(
+            Item.getItemFromBlock(BlockArtificialStarRender),
+            new ItemBlockArtificialStarRender());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
