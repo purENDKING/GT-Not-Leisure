@@ -26,20 +26,20 @@
       }
     ]
   },
-  "record.sus": {
+  "sus": {
     "category": "record",
     "sounds": [
       {
-        "name": "record.sus",
+        "name": "sus",
         "stream": "true"
       }
     ]
   },
-  "record.newhorizons": {
+  "newhorizons": {
     "category": "record",
     "sounds": [
       {
-        "name": "record.newhorizons",
+        "name": "newhorizons",
         "stream": "true"
       }
     ]

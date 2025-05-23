@@ -1,6 +1,6 @@
 package com.science.gtnl.common.render;
 
-import static com.science.gtnl.Utils.IIconRegister.haloNoiseIcon;
+import static com.science.gtnl.Utils.ClientUtils.haloNoiseIcon;
 
 import java.awt.Color;
 import java.util.Random;

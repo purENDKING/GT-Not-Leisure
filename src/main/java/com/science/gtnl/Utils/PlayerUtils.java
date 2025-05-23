@@ -1,5 +1,7 @@
 package com.science.gtnl.Utils;
 
+import static com.science.gtnl.ScienceNotLeisure.network;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,6 +16,7 @@ import net.minecraftforge.event.world.WorldEvent;
 
 import com.reavaritia.common.render.CustomEntityRenderer;
 import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.message.SoundPacket;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
@@ -22,7 +25,6 @@ import com.science.gtnl.common.item.TimeStopManager;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.network.FMLNetworkEvent;
@@ -68,22 +70,20 @@ public class PlayerUtils {
         }
 
         TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 200, 0xFFFF55, 2);
+        network.sendTo(new SoundPacket(true), player);
 
-        if (FMLCommonHandler.instance()
-            .getEffectiveSide() == Side.SERVER) {
-            float tickrate = MainConfig.defaultTickrate;
-            try {
-                GameRules rules = MinecraftServer.getServer()
-                    .getEntityWorld()
-                    .getGameRules();
-                if (rules.hasRule(GTNLEarlyCoreMod.GAME_RULE)) {
-                    tickrate = Float.parseFloat(rules.getGameRuleStringValue(GTNLEarlyCoreMod.GAME_RULE));
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+        float tickrate = MainConfig.defaultTickrate;
+        try {
+            GameRules rules = MinecraftServer.getServer()
+                .getEntityWorld()
+                .getGameRules();
+            if (rules.hasRule(GTNLEarlyCoreMod.GAME_RULE)) {
+                tickrate = Float.parseFloat(rules.getGameRuleStringValue(GTNLEarlyCoreMod.GAME_RULE));
             }
-            TickrateAPI.changeClientTickrate(event.player, tickrate);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
+        TickrateAPI.changeClientTickrate(event.player, tickrate);
     }
 
     @SubscribeEvent
