@@ -9,6 +9,7 @@ import com.science.gtnl.Utils.PlayerUtils;
 import com.science.gtnl.Utils.WorldUtils;
 import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
 import com.science.gtnl.Utils.message.PacketTileEntityNBT;
+import com.science.gtnl.Utils.message.SoundPacket;
 import com.science.gtnl.Utils.message.TitlePacket;
 import com.science.gtnl.asm.TickrateMessage;
 import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
@@ -45,6 +46,7 @@ public class CommonProxy {
             3,
             Side.SERVER);
         network.registerMessage(PacketTileEntityNBT.Handler.class, PacketTileEntityNBT.class, 4, Side.CLIENT);
+        network.registerMessage(SoundPacket.Handler.class, SoundPacket.class, 5, Side.CLIENT);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)

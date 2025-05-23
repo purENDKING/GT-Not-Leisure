@@ -6,8 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
+import com.science.gtnl.Utils.ClientUtils;
 import com.science.gtnl.Utils.GuiEventHandler;
-import com.science.gtnl.Utils.IIconRegister;
 import com.science.gtnl.Utils.message.TitleDisplayHandler;
 import com.science.gtnl.common.block.blocks.artificialStarRender.ItemBlockArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
@@ -27,6 +27,7 @@ import com.science.gtnl.common.item.ItemLoader;
 import com.science.gtnl.common.render.TwilightSwordModelRender;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -50,8 +51,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(PlayerDoll), new ItemPlayerDollRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TwilightSword, new TwilightSwordModelRender());
 
-        MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
-
         MinecraftForgeClient.registerItemRenderer(
             Item.getItemFromBlock(BlockNanoPhagocytosisPlantRender),
             new ItemBlockNanoPhagocytosisPlantRender(BlockNanoPhagocytosisPlantRender));
@@ -66,7 +65,11 @@ public class ClientProxy extends CommonProxy {
             new RenderEternalGregTechWorkshop());
 
         MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
-        MinecraftForge.EVENT_BUS.register(new IIconRegister());
+        MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
+        MinecraftForge.EVENT_BUS.register(new ClientUtils());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new ClientUtils());
 
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TestItem, new FancyHaloRenderer());
         MinecraftForgeClient.registerItemRenderer(BasicItems.MetaItem, new FancyHaloRenderer());
