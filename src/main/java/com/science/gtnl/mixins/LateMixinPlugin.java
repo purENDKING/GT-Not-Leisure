@@ -31,6 +31,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
 
         if (MainConfig.enableDebugMode) {
             mixins.add("Gregtech.HatchElementBuilder_Mixin");
+            mixins.add("Gregtech.GTPPMultiBlockBase_Mixin");
         }
 
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");
