@@ -344,6 +344,7 @@ public enum GTNLItemList implements IItemContainer {
     SteamBeaconModuleII,
     SteamBeaconModuleIII,
 
+    NanitesCircuitAssemblyFactory,
     MegaMixer,
     HighEnergyLaserLathe,
     HeavyRolling,
