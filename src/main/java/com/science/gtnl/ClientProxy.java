@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.ClientUtils;
 import com.science.gtnl.Utils.GuiEventHandler;
-import com.science.gtnl.Utils.message.TitleDisplayHandler;
+import com.science.gtnl.Utils.message.ClientTitleDisplayHandler;
 import com.science.gtnl.common.block.blocks.artificialStarRender.ItemBlockArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.ItemBlockEternalGregTechWorkshopRender;
@@ -64,7 +64,7 @@ public class ClientProxy extends CommonProxy {
             TileEntityEternalGregTechWorkshop.class,
             new RenderEternalGregTechWorkshop());
 
-        MinecraftForge.EVENT_BUS.register(new TitleDisplayHandler());
+        MinecraftForge.EVENT_BUS.register(new ClientTitleDisplayHandler());
         MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
         MinecraftForge.EVENT_BUS.register(new ClientUtils());
         FMLCommonHandler.instance()

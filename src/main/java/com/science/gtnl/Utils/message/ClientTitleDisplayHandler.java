@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TitleDisplayHandler {
+public class ClientTitleDisplayHandler {
 
     public static String currentTitle = "";
     public static int ticksRemaining = 0;

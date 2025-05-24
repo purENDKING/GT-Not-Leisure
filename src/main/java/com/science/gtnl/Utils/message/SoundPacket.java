@@ -1,29 +1,25 @@
 package com.science.gtnl.Utils.message;
 
-import static com.science.gtnl.Utils.ClientUtils.PLAYING_SOUNDS;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import gregtech.client.ElectricJukeboxSound;
 import io.netty.buffer.ByteBuf;
 
 public class SoundPacket implements IMessage {
 
-    private ResourceLocation soundResource;
-    private float volume;
-    private float pitch;
-    private long seekMs;
+    public ResourceLocation soundResource;
+    public float volume;
+    public float pitch;
+    public long seekMs;
     public static Map<String, SoundInfo> soundsToSync;
-    private boolean syncPacket;
-    private boolean stopAll;
+    public boolean syncPacket;
+    public boolean stopAll;
 
     public SoundPacket() {
         this.stopAll = true;
@@ -136,50 +132,8 @@ public class SoundPacket implements IMessage {
 
         @Override
         public IMessage onMessage(SoundPacket message, MessageContext ctx) {
-            if (message.stopAll) {
-                for (ElectricJukeboxSound sound : PLAYING_SOUNDS.values()) {
-                    Minecraft.getMinecraft()
-                        .getSoundHandler()
-                        .stopSound(sound);
-                }
-                PLAYING_SOUNDS.clear();
-                if (soundsToSync != null) soundsToSync.clear();
-                return null;
-            }
-            if (soundsToSync != null) {
-                for (ElectricJukeboxSound sound : PLAYING_SOUNDS.values()) {
-                    Minecraft.getMinecraft()
-                        .getSoundHandler()
-                        .stopSound(sound);
-                }
-                PLAYING_SOUNDS.clear();
-
-                for (Map.Entry<String, SoundInfo> entry : soundsToSync.entrySet()) {
-                    SoundInfo info = entry.getValue();
-                    ElectricJukeboxSound sound = new ElectricJukeboxSound(
-                        info.resourceLocation,
-                        info.volume,
-                        info.seekMs,
-                        0,
-                        0,
-                        0);
-                    PLAYING_SOUNDS.put(entry.getKey(), sound);
-                    Minecraft.getMinecraft()
-                        .getSoundHandler()
-                        .playSound(sound);
-                }
-            } else {
-                ElectricJukeboxSound sound = new ElectricJukeboxSound(
-                    message.soundResource,
-                    message.volume,
-                    message.seekMs,
-                    0,
-                    0,
-                    0);
-                PLAYING_SOUNDS.put(message.soundResource.toString(), sound);
-                Minecraft.getMinecraft()
-                    .getSoundHandler()
-                    .playSound(sound);
+            if (ctx.side.isClient()) {
+                ClientSoundHandler.handleSoundPacket(message);
             }
             return null;
         }
