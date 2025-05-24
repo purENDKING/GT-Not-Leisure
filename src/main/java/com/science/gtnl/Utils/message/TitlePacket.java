@@ -81,7 +81,7 @@ public class TitlePacket implements IMessage {
 
         @Override
         public IMessage onMessage(final TitlePacket msg, final MessageContext ctx) {
-            TitleDisplayHandler
+            ClientTitleDisplayHandler
                 .displayTitle(msg.message, msg.durationTicks, msg.colorText, msg.scaleText, msg.fadeIn, msg.fadeOut);
             return null;
         }

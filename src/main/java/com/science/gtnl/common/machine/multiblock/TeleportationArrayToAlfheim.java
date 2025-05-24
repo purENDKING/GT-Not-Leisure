@@ -78,30 +78,29 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
         super(aName);
     }
 
+    @Override
     protected float getSpeedBonus() {
         return 1F;
     }
 
+    @Override
     protected int getMaxParallelRecipes() {
-        return 2147483647;
+        return Integer.MAX_VALUE;
     }
 
+    @Override
     protected boolean isEnablePerfectOverclock() {
         return true;
     }
 
     @Override
     public RecipeMap<?> getRecipeMap() {
-        switch (machineMode) {
-            case NATURE_MODE:
-                return RecipeRegister.NatureSpiritArrayRecipes;
-            case MANA_MODE:
-                return RecipeRegister.ManaInfusionRecipes;
-            case RUNE_MODE:
-                return RecipeRegister.RuneAltarRecipes;
-            default:
-                return RecipeRegister.PortalToAlfheimRecipes;
-        }
+        return switch (machineMode) {
+            case NATURE_MODE -> RecipeRegister.NatureSpiritArrayRecipes;
+            case MANA_MODE -> RecipeRegister.ManaInfusionRecipes;
+            case RUNE_MODE -> RecipeRegister.RuneAltarRecipes;
+            default -> RecipeRegister.PortalToAlfheimRecipes;
+        };
     }
 
     @NotNull
@@ -186,14 +185,13 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
     public void triggerExplosion(IGregTechTileEntity aBaseMetaTileEntity, float strength) {
         if (MainConfig.enablePortalToAlfheimBigBoom) {
-            float power = strength;
             ProcessHandler.addProcess(
                 new PortalToAlfheimExplosion(
                     aBaseMetaTileEntity.getWorld(),
                     aBaseMetaTileEntity.getXCoord(),
                     aBaseMetaTileEntity.getYCoord(),
                     aBaseMetaTileEntity.getZCoord(),
-                    power));
+                    strength));
         } else {
             triggerExplosion(aBaseMetaTileEntity, 5);
         }
@@ -275,6 +273,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
             .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
             .addInfo(StatCollector.translateToLocal("StructureTooComplex"))

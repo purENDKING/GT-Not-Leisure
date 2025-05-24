@@ -1,7 +1,8 @@
 package com.science.gtnl.Utils;
 
+import static com.science.gtnl.Utils.message.ClientSoundHandler.PLAYING_SOUNDS;
+
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,8 +27,6 @@ public class ClientUtils {
     public static void registerAllIcons(net.minecraft.client.renderer.texture.IIconRegister ir) {
         haloNoiseIcon = ir.registerIcon(haloNoiseIconTexture);
     }
-
-    public static final Map<String, ElectricJukeboxSound> PLAYING_SOUNDS = new ConcurrentHashMap<>();
 
     @SubscribeEvent
     public void onClientTickEvent(TickEvent.ClientTickEvent aEvent) {

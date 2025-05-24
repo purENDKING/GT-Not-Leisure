@@ -1018,7 +1018,9 @@ public class SteamBeaconModule extends SteamElevatorModule {
                             return ret.toArray(new IDrawable[0]);
                         })
                         .attachSyncer(
-                            new FakeSyncWidget.BooleanSyncer(this::hasWarpWardEffect, this::setWaterBreathingEffect),
+                            new FakeSyncWidget.BooleanSyncer(
+                                this::hasWaterBreathingEffect,
+                                this::setWaterBreathingEffect),
                             builder)
                         .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_08"))
                         .setTooltipShowUpDelay(TOOLTIP_DELAY)
