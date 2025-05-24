@@ -2051,6 +2051,10 @@ NameSuperconductingMagneticPresser=Superconducting Magnetic Presser
 SuperconductingMagneticPresserRecipeType=Forming Press
 Tooltip_SuperconductingMagneticPresser_Casing=Ang Advanced Iridium Plated Machine Casing
 
+NameNanitesCircuitAssemblyFactory=Nanites Circuit Assembly Factory
+NanitesCircuitAssemblyFactoryRecipeType=Circuit Assembler
+Tooltip_NanitesCircuitAssemblyFactory_Casing=Any Radiant Naquadah Alloy Machine Casing
+
 NameVortexMatterCentrifuge=Vortex Matter Centrifuge
 VortexMatterCentrifugeRecipeType=Centrifuge
 Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing

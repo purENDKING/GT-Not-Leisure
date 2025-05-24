@@ -110,6 +110,7 @@ import com.science.gtnl.common.machine.multiblock.MegaMixer;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EGTWFusionModule;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop;
+import com.science.gtnl.common.machine.multiblock.NanitesCircuitAssemblyFactory;
 import com.science.gtnl.common.machine.multiblock.NanitesIntegratedProcessingCenter;
 import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
@@ -1171,6 +1172,13 @@ public class MachineLoader {
                 StatCollector.translateToLocal("NameSteamBeaconModuleIII"),
                 3));
         addItemTooltip(GTNLItemList.SteamBeaconModuleIII.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.NanitesCircuitAssemblyFactory.set(
+            new NanitesCircuitAssemblyFactory(
+                NANITES_CIRCUIT_ASSEMBLY_FACTORY.ID,
+                "NanitesCircuitAssemblyFactory",
+                StatCollector.translateToLocal("NameNanitesCircuitAssemblyFactory")));
+        addItemTooltip(GTNLItemList.NanitesCircuitAssemblyFactory.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
