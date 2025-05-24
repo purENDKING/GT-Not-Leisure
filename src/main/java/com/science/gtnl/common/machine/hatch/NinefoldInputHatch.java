@@ -36,7 +36,7 @@ public class NinefoldInputHatch extends MTEHatchMultiInput implements IAddUIWidg
     private final FluidStackTank[] fluidTanks;
     public final int mCapacityPer;
 
-    private static final String TEXTURE_OVERLAY_NINE_HATCH = RESOURCE_ROOT_ID + ":" + "OVERLAY_NINE_HATCH";
+    private static final String TEXTURE_OVERLAY_NINE_HATCH = RESOURCE_ROOT_ID + ":" + "iconsets/OVERLAY_NINE_HATCH";
     private static Textures.BlockIcons.CustomIcon face;
 
     public NinefoldInputHatch(int aID, int aSlot, String aName, String aNameRegional, int aTier) {

@@ -47,7 +47,7 @@ public class DualInputHatch extends MTEHatchInputBus implements IAddUIWidgets, I
     public final int mCapacityPer;
     public final int itemSlotAmount;
 
-    private static final String TEXTURE_OVERLAY_DUAL_HATCH = RESOURCE_ROOT_ID + ":" + "OVERLAY_DUAL_HATCH";
+    private static final String TEXTURE_OVERLAY_DUAL_HATCH = RESOURCE_ROOT_ID + ":" + "iconsets/OVERLAY_DUAL_HATCH";
     private static Textures.BlockIcons.CustomIcon face;
 
     public static class Inventory implements IDualInputInventory {
