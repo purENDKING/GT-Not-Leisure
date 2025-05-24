@@ -7,6 +7,7 @@ import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings9;
+import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTStructureUtility.ofFrame;
@@ -25,12 +26,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
 import com.science.gtnl.common.recipe.RecipeRegister;
 
@@ -44,6 +48,7 @@ import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.recipe.check.CheckRecipeResult;
@@ -52,6 +57,7 @@ import gregtech.api.render.TextureFactory;
 import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.OverclockCalculator;
 import tectech.thing.casing.BlockGTCasingsTT;
 
 public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<SmeltingMixingFurnace>
@@ -90,7 +96,6 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             .addInfo(StatCollector.translateToLocal("Tooltip_SmeltingMixingFurnace_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_SmeltingMixingFurnace_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_SmeltingMixingFurnace_02"))
-            .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_02"))
             .addInfo(StatCollector.translateToLocal("Tooltip_WirelessEnergyMultiMachine_03"))
@@ -239,6 +244,28 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         return Arrays.asList(RecipeRegister.SmeltingMixingFurnaceRecipes, RecipeMaps.plasmaForgeRecipes);
     }
 
+    @Override
+    protected void setProcessingLogicPower(ProcessingLogic logic) {
+        if (wirelessMode) {
+            if (machineMode == MACHINEMODE_DTPF) {
+                logic.setAvailableVoltage(Integer.MAX_VALUE);
+                logic.setAvailableAmperage((long) Math.pow(4, mParallelTier) * 8L - 2L);
+                logic.setAmperageOC(false);
+                logic.enablePerfectOverclock();
+                return;
+            }
+            logic.setAvailableVoltage(V[Math.min(mParallelTier + 1, 14)]);
+            logic.setAvailableAmperage((long) Math.pow(4, mParallelTier) * 8L - 2L);
+            logic.setAmperageOC(false);
+            logic.enablePerfectOverclock();
+        } else {
+            boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
+            logic.setAvailableVoltage(getMachineVoltageLimit());
+            logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
+            logic.setAmperageOC(useSingleAmp);
+        }
+    }
+
     @Nonnull
     @Override
     public CheckRecipeResult checkProcessing() {
@@ -256,6 +283,43 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             }
         }
         return super.checkProcessing();
+    }
+
+    @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4 && machineMode != MACHINEMODE_DTPF) {
+                    return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
+                }
+                return super.validateRecipe(recipe);
+            }
+
+            @NotNull
+            @Override
+            public CheckRecipeResult process() {
+                setEuModifier(getEuModifier());
+                setSpeedBonus(getSpeedBonus());
+                enablePerfectOverclock();
+                return super.process();
+            }
+
+            @Nonnull
+            @Override
+            protected OverclockCalculator createOverclockCalculator(@Nonnull GTRecipe recipe) {
+
+                OverclockCalculator calc = super.createOverclockCalculator(recipe)
+                    .setEUtDiscount(0.4 - (mParallelTier / 50.0))
+                    .setSpeedBoost(1 * Math.pow(0.75, mParallelTier));
+
+                ((IOverclockCalculatorExtension) calc).setMoreSpeedBoost(configSpeedBoost);
+
+                return calc;
+            }
+        }.setMaxParallelSupplier(this::getLimitedMaxParallel);
     }
 
     @Override

@@ -77,6 +77,7 @@ Tooltip_AdvancedSuperInputHatchME_02=在GUI配置 "自动拉取" 的最小堆叠
 Tooltip_AdvancedSuperInputHatchME_03=警告: 快速配方检查可能会很卡. 请谨慎使用.
 
 ExplosionDynamoHatch=爆炸动力仓
+Tooltip_ExplosionDynamoHatch_00=概念神!
 
 PipelessSteamHatch=无管蒸汽仓
 Tooltip_PipelessSteamHatch_00=§b§o它从哪儿来的? 能从看似虚无的地方提取蒸汽,

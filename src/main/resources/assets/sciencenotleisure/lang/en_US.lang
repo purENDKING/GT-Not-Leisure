@@ -77,6 +77,7 @@ Tooltip_AdvancedSuperInputHatchME_02=Use the GUI to limit the minimum stack size
 Tooltip_AdvancedSuperInputHatchME_03=WARNING: Fast recipe checks can be laggy. Use with caution.
 
 ExplosionDynamoHatch=Explosion Dynamo Hatch
+Tooltip_ExplosionDynamoHatch_00=Concept God!
 
 PipelessSteamHatch=Pipeless Steam Hatch
 Tooltip_PipelessSteamHatch_00=§b§oWhere does it come from? Capable of extracting Steam from seemingly nowhere, and even
