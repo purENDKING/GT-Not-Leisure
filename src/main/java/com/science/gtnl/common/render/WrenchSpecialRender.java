@@ -1,21 +1,19 @@
 package com.science.gtnl.common.render;
 
-import static com.science.gtnl.Utils.ClientUtils.haloNoiseIcon;
-
 import java.awt.Color;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
+
+import com.science.gtnl.Utils.SubscribeEventClientUtils;
 
 import cpw.mods.fml.common.Loader;
 import fox.spiteful.avaritia.render.CosmicRenderShenanigans;
@@ -136,47 +134,49 @@ public class WrenchSpecialRender {
                 break;
 
             case 3:
-                CosmicRenderShenanigans.setLightLevel(1.2f);
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                RenderHelper.enableGUIStandardItemLighting();
+                if (Loader.isModLoaded("Avaritia")) {
+                    Minecraft.getMinecraft()
+                        .getTextureManager()
+                        .bindTexture(resourceLocation);
+                    Gui.func_146110_a(drawX, drawY, x, y, width, height, textureWidth, textureHeight);
+                    GL11.glColor4f(1, 1, 1, 1);
 
-                GL11.glDisable(GL11.GL_ALPHA_TEST);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                    GL11.glDisable(GL11.GL_ALPHA_TEST);
+                    GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-                Gui.func_146110_a(drawX, drawY, x, y, width, height, textureWidth, textureHeight);
+                    CosmicRenderShenanigans.cosmicOpacity = 0.95f;
+                    CosmicRenderShenanigans.inventoryRender = true;
+                    CosmicRenderShenanigans.useShader();
 
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                RenderHelper.enableGUIStandardItemLighting();
+                    IIcon cheatWrenchIcon = SubscribeEventClientUtils.cheatWrenchIcon;
 
-                GL11.glDisable(GL11.GL_ALPHA_TEST);
-                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                    if (cheatWrenchIcon != null) {
+                        Minecraft.getMinecraft()
+                            .getTextureManager()
+                            .bindTexture(TextureMap.locationItemsTexture);
 
-                CosmicRenderShenanigans.cosmicOpacity = 0.8f;
-                CosmicRenderShenanigans.inventoryRender = true;
-                CosmicRenderShenanigans.useShader();
+                        float minU = cheatWrenchIcon.getMinU();
+                        float maxU = cheatWrenchIcon.getMaxU();
+                        float minV = cheatWrenchIcon.getMinV();
+                        float maxV = cheatWrenchIcon.getMaxV();
 
-                GL11.glColor4d(1, 1, 1, 1);
-                Tessellator t3 = Tessellator.instance;
-                float u = (float) x / textureWidth;
-                float v = (float) y / textureHeight;
-                float uWidth = (float) width / textureWidth;
-                float vHeight = (float) height / textureHeight;
+                        Tessellator t = Tessellator.instance;
+                        t.startDrawingQuads();
+                        t.addVertexWithUV((float) drawX, (float) drawY + (float) height, 0, minU, maxV);
+                        t.addVertexWithUV((float) drawX + (float) width, (float) drawY + (float) height, 0, maxU, maxV);
+                        t.addVertexWithUV((float) drawX + (float) width, (float) drawY, 0, maxU, minV);
+                        t.addVertexWithUV((float) drawX, (float) drawY, 0, minU, minV);
+                        t.draw();
 
-                t3.startDrawingQuads();
-                t3.addVertexWithUV(drawX, drawY, 0, u, v);
-                t3.addVertexWithUV(drawX, drawY + height, 0, u, v + vHeight);
-                t3.addVertexWithUV(drawX + width, drawY + height, 0, u + uWidth, v + vHeight);
-                t3.addVertexWithUV(drawX + width, drawY, 0, u + uWidth, v);
-                t3.draw();
+                        CosmicRenderShenanigans.releaseShader();
+                        CosmicRenderShenanigans.inventoryRender = false;
+                    }
 
-                CosmicRenderShenanigans.releaseShader();
-                CosmicRenderShenanigans.inventoryRender = false;
-                GL11.glEnable(GL11.GL_ALPHA_TEST);
-                GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-                GL11.glEnable(GL11.GL_DEPTH_TEST);
-                GL11.glDisable(GL11.GL_BLEND);
+                    GL11.glEnable(GL11.GL_DEPTH_TEST);
+                    GL11.glEnable(GL11.GL_ALPHA_TEST);
+                }
                 break;
 
             case 4:
@@ -222,7 +222,7 @@ public class WrenchSpecialRender {
                 GL11.glDisable(GL11.GL_ALPHA_TEST);
                 GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-                IIcon halonoiseIcon = haloNoiseIcon;
+                IIcon halonoiseIcon = SubscribeEventClientUtils.haloNoiseIcon;
 
                 if (halonoiseIcon != null) {
                     Minecraft.getMinecraft()
