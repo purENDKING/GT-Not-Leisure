@@ -6,9 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.science.gtnl.Utils.ClientUtils;
-import com.science.gtnl.Utils.GuiEventHandler;
-import com.science.gtnl.Utils.message.ClientTitleDisplayHandler;
+import com.science.gtnl.Utils.SubscribeEventClientUtils;
 import com.science.gtnl.common.block.blocks.artificialStarRender.ItemBlockArtificialStarRender;
 import com.science.gtnl.common.block.blocks.artificialStarRender.RealArtificialStarRender;
 import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.ItemBlockEternalGregTechWorkshopRender;
@@ -20,7 +18,6 @@ import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.RenderNa
 import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.block.blocks.playerDoll.BlockPlayerDollRenderer;
 import com.science.gtnl.common.block.blocks.playerDoll.ItemPlayerDollRenderer;
-import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager;
 import com.science.gtnl.common.block.blocks.playerDoll.TileEntityPlayerDoll;
 import com.science.gtnl.common.item.BasicItems;
 import com.science.gtnl.common.item.ItemLoader;
@@ -64,13 +61,6 @@ public class ClientProxy extends CommonProxy {
             TileEntityEternalGregTechWorkshop.class,
             new RenderEternalGregTechWorkshop());
 
-        MinecraftForge.EVENT_BUS.register(new ClientTitleDisplayHandler());
-        MinecraftForge.EVENT_BUS.register(new PlayerDollRenderManager());
-        MinecraftForge.EVENT_BUS.register(new ClientUtils());
-        FMLCommonHandler.instance()
-            .bus()
-            .register(new ClientUtils());
-
         MinecraftForgeClient.registerItemRenderer(ItemLoader.TestItem, new FancyHaloRenderer());
         MinecraftForgeClient.registerItemRenderer(BasicItems.MetaItem, new FancyHaloRenderer());
     }
@@ -78,11 +68,14 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void postInit(FMLPostInitializationEvent event) {
         super.postInit(event);
-        new GuiEventHandler();
     }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new SubscribeEventClientUtils());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new SubscribeEventClientUtils());
         super.preInit(event);
     }
 

@@ -30,15 +30,12 @@ import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.AdvancedModelLoader;
 import net.minecraftforge.client.model.IModelCustom;
-import net.minecraftforge.event.world.WorldEvent;
 
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerDollRenderManager {
 
@@ -507,15 +504,6 @@ public class PlayerDollRenderManager {
             return false;
         }
         return username.matches("^[a-zA-Z0-9_\\-]+$");
-    }
-
-    @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event) {
-        offlineMode = false;
-        BLACKLISTED_UUIDS.clear();
-        BLACKLISTED_SKIN_URLS.clear();
-        BLACKLISTED_CAPE_URLS.clear();
-        textureCache.clear();
     }
 
 }

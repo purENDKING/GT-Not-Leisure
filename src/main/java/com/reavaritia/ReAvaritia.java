@@ -8,15 +8,16 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.reavaritia.common.ItemLoader;
+import com.reavaritia.common.SubscribeEventUtils;
 import com.reavaritia.common.block.BlockRegister;
 import com.reavaritia.common.block.ExtremeAnvil.EntityExtremeAnvil;
 import com.reavaritia.common.block.ExtremeAnvil.ExtremeAnvilPacket;
 import com.reavaritia.common.block.GooeyHandler;
 import com.reavaritia.common.item.BlazeSword;
 import com.reavaritia.common.item.ChronarchsClock;
-import com.reavaritia.common.item.ToolEvents;
 import com.science.gtnl.Mods;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -54,7 +55,6 @@ public class ReAvaritia {
         proxy.init(event);
         proxy.makeThingsPretty();
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GooeyHandler());
-        MinecraftForge.EVENT_BUS.register(new ToolEvents());
     }
 
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
@@ -63,6 +63,12 @@ public class ReAvaritia {
     public void preInit(FMLPreInitializationEvent event) {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         proxy.preInit(event);
+
+        MinecraftForge.EVENT_BUS.register(new SubscribeEventUtils());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new SubscribeEventUtils());
+
         BlockRegister.registryBlocks();
         ItemLoader.registerItems();
         BlockRegister.registryAnotherData();

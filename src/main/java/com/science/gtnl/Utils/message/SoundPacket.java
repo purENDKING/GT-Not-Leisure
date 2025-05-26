@@ -56,6 +56,9 @@ public class SoundPacket implements IMessage {
             volume = 0;
             pitch = 0;
             seekMs = 0;
+            if (soundsToSync != null) {
+                soundsToSync.clear();
+            }
             return;
         }
         if (isSyncPacket) {
@@ -79,7 +82,6 @@ public class SoundPacket implements IMessage {
             volume = buf.readFloat();
             pitch = buf.readFloat();
             seekMs = buf.readLong();
-            soundsToSync = null;
         }
     }
 
@@ -92,7 +94,7 @@ public class SoundPacket implements IMessage {
             return;
         }
         buf.writeBoolean(syncPacket);
-        if (syncPacket) {
+        if (syncPacket && soundsToSync != null) {
             buf.writeInt(soundsToSync.size());
             for (Map.Entry<String, SoundInfo> entry : soundsToSync.entrySet()) {
                 ByteBufUtils.writeUTF8String(buf, entry.getKey());
