@@ -13,7 +13,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
@@ -21,15 +20,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.event.world.BlockEvent;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.common.SubtitleDisplay;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,7 +40,6 @@ public class BlazePickaxe extends ItemPickaxe implements SubtitleDisplay {
         this.setCreativeTab(ReAvaCreativeTabs.ReAvaritia);
         this.setTextureName(RESOURCE_ROOT_ID + ":" + "BlazePickaxe");
         this.setMaxDamage(7777);
-        MinecraftForge.EVENT_BUS.register(this);
         ReAvaItemList.BlazePickaxe.set(new ItemStack(this, 1));
     }
 
@@ -105,34 +100,6 @@ public class BlazePickaxe extends ItemPickaxe implements SubtitleDisplay {
     private boolean isSmeltingModeActive(ItemStack stack) {
         NBTTagCompound nbt = stack.getTagCompound();
         return nbt != null && nbt.getBoolean("SmeltingMode");
-    }
-
-    @SubscribeEvent
-    public void onBlockHarvest(BlockEvent.HarvestDropsEvent event) {
-        if (event.harvester == null || event.harvester.getCurrentEquippedItem() == null) return;
-
-        ItemStack heldItem = event.harvester.getCurrentEquippedItem();
-        if (!(heldItem.getItem() instanceof BlazePickaxe)) return;
-
-        boolean smeltingActive = isSmeltingModeActive(heldItem);
-        if (!smeltingActive) return;
-
-        Block block = event.block;
-        int meta = event.blockMetadata;
-        ItemStack blockStack = new ItemStack(block, 1, meta);
-        ItemStack smeltResult = FurnaceRecipes.smelting()
-            .getSmeltingResult(blockStack);
-        if (smeltResult == null) return;
-
-        int totalCount = 0;
-        for (ItemStack drop : event.drops) {
-            totalCount += drop.stackSize;
-        }
-
-        event.drops.clear();
-        ItemStack result = smeltResult.copy();
-        result.stackSize = totalCount;
-        event.drops.add(result);
     }
 
     @SideOnly(Side.CLIENT)

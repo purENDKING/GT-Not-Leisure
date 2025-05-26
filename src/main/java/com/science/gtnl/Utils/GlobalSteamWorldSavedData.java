@@ -17,21 +17,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSavedData;
 import net.minecraft.world.storage.MapStorage;
-import net.minecraftforge.event.world.WorldEvent;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import gregtech.common.misc.spaceprojects.SpaceProjectManager;
 
 public class GlobalSteamWorldSavedData extends WorldSavedData {
 
     public static GlobalSteamWorldSavedData INSTANCE;
 
-    private static final String DATA_NAME = "GregTech_WirelessSteamWorldSavedData";
+    public static final String DATA_NAME = "GregTech_WirelessSteamWorldSavedData";
 
-    private static final String GlobalSteamNBTTag = "GregTech_GlobalSteam_MapNBTTag";
-    private static final String GlobalSteamTeamNBTTag = "GregTech_GlobalSteamTeam_MapNBTTag";
+    public static final String GlobalSteamNBTTag = "GregTech_GlobalSteam_MapNBTTag";
+    public static final String GlobalSteamTeamNBTTag = "GregTech_GlobalSteamTeam_MapNBTTag";
 
-    private static void loadInstance(World world) {
+    public static void loadInstance(World world) {
         GlobalSteam.clear();
 
         MapStorage storage = world.mapStorage;
@@ -41,13 +39,6 @@ public class GlobalSteamWorldSavedData extends WorldSavedData {
             storage.setData(DATA_NAME, INSTANCE);
         }
         INSTANCE.markDirty();
-    }
-
-    @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event) {
-        if (!event.world.isRemote && event.world.provider.dimensionId == 0) {
-            loadInstance(event.world);
-        }
     }
 
     public GlobalSteamWorldSavedData() {

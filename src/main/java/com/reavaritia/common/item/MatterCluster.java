@@ -216,7 +216,7 @@ public class MatterCluster extends Item implements ICosmicRenderItem {
         int donorcount = getClusterSize(donor);
         int recipientcount = getClusterSize(recipient);
 
-        ReAvaritiaLog.info(donorcount + ", " + recipientcount);
+        // ReAvaritiaLog.info(donorcount + ", " + recipientcount);
         if (donorcount == 0 || donorcount == capacity || recipientcount == capacity) {
             return;
         }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -35,15 +34,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-
-import org.lwjgl.opengl.GL11;
 
 import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
@@ -56,7 +51,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.avaritia.DamageSourceInfinitySword;
-import fox.spiteful.avaritia.LudicrousText;
 import fox.spiteful.avaritia.entity.EntityImmortalItem;
 import fox.spiteful.avaritia.items.LudicrousItems;
 import fox.spiteful.avaritia.render.ICosmicRenderItem;
@@ -663,72 +657,6 @@ public class InfinitySword extends ItemSword implements ICosmicRenderItem, Subti
     @Override
     public boolean hasEffect(ItemStack par1ItemStack, int pass) {
         return false;
-    }
-
-    @SubscribeEvent
-    public void onTooltip(ItemTooltipEvent event) {
-        if (event.itemStack.getItem() instanceof InfinitySword) {
-            for (int x = 0; x < event.toolTip.size(); x++) {
-                if (event.toolTip.get(x)
-                    .contains(StatCollector.translateToLocal("attribute.name.generic.attackDamage"))
-                    || event.toolTip.get(x)
-                        .contains(StatCollector.translateToLocal("Attack Damage"))) {
-                    event.toolTip.set(
-                        x,
-                        EnumChatFormatting.BLUE + "+"
-                            + LudicrousText.makeFabulous(StatCollector.translateToLocal("Damage_InfinitySword"))
-                            + " "
-                            + EnumChatFormatting.BLUE
-                            + StatCollector.translateToLocal("attribute.name.generic.attackDamage"));
-                    return;
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void interceptLudicrousEvents(LivingDeathEvent event) {
-        if (event.entity instanceof EntityPlayer player) {
-            if (LudicrousItems.isInfinite(player)) {
-                event.setCanceled(true);
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public void onRenderPlayer(RenderPlayerEvent.Pre event) {
-        if (MainConfig.enableRenderInfinitySwordSpecial) {
-            EntityPlayer player = event.entityPlayer;
-            ItemStack heldItem = player.getHeldItem();
-
-            if (heldItem != null && heldItem.getItem() == this) {
-                float currentTime = (player.worldObj.getTotalWorldTime() + event.partialRenderTick) / 20.0F;
-
-                float rotationSpeed = 1800.0F;
-
-                float rotationAngle = (currentTime * rotationSpeed) % 360;
-
-                GL11.glPushMatrix();
-                GL11.glRotatef(rotationAngle, 0.0F, 1.0F, 0.0F);
-            }
-        }
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onRenderPlayerPost(RenderPlayerEvent.Post event) {
-        if (MainConfig.enableRenderInfinitySwordSpecial) {
-            EntityPlayer player = event.entityPlayer;
-            ItemStack heldItem = player.getHeldItem();
-
-            if (heldItem != null && heldItem.getItem() == this) {
-                GL11.glPopMatrix();
-
-                ModelBiped playerModel = event.renderer.modelBipedMain;
-                playerModel.bipedHead.rotateAngleX = 0;
-            }
-        }
     }
 
     public static DamageSource getAdminKill() {

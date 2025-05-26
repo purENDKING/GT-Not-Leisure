@@ -1,35 +1,52 @@
-package com.reavaritia.common.item;
-
-import static net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import static net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+package com.reavaritia.common;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockCocoa;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.reavaritia.common.ItemLoader;
+import com.reavaritia.common.item.BlazeAxe;
+import com.reavaritia.common.item.BlazePickaxe;
+import com.reavaritia.common.item.BlazeShovel;
+import com.reavaritia.common.item.BlazeSword;
+import com.reavaritia.common.item.InfinitySword;
+import com.reavaritia.common.item.MatterCluster;
+import com.reavaritia.common.item.ToolHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import fox.spiteful.avaritia.Config;
+import fox.spiteful.avaritia.LudicrousText;
 import fox.spiteful.avaritia.items.LudicrousItems;
 
-public class ToolEvents {
+public class SubscribeEventUtils {
 
-    static final String[] trash = new String[] { "dirt", "sand", "gravel", "cobblestone", "netherrack" };
+    public static final String[] trash = new String[] { "dirt", "sand", "gravel", "cobblestone", "netherrack" };
 
     @SubscribeEvent
     public void onPlayerMine(PlayerInteractEvent event) {
@@ -71,7 +88,7 @@ public class ToolEvents {
     }
 
     @SubscribeEvent
-    public void handleExtraLuck(HarvestDropsEvent event) {
+    public void handleExtraLuck(BlockEvent.HarvestDropsEvent event) {
         if (event.harvester == null) return;
         if (event.harvester.getHeldItem() == null) return;
         ItemStack held = event.harvester.getHeldItem();
@@ -95,7 +112,7 @@ public class ToolEvents {
                 && ToolHelper.hammerdrops.containsKey(event.harvester)
                 && ToolHelper.hammerdrops.get(event.harvester) != null) {
 
-                ArrayList<ItemStack> garbage = new ArrayList<ItemStack>();
+                ArrayList<ItemStack> garbage = new ArrayList<>();
                 for (ItemStack drop : event.drops) {
                     if (isGarbage(drop)) garbage.add(drop);
                 }
@@ -119,7 +136,7 @@ public class ToolEvents {
     }
 
     @SubscribeEvent
-    public void onHarvestDrops(HarvestDropsEvent event) {
+    public void onHarvestDrops(BlockEvent.HarvestDropsEvent event) {
         if (event.harvester != null && event.harvester.getHeldItem() != null
             && event.harvester.getHeldItem()
                 .getItem() == ItemLoader.InfinityHoe) {
@@ -155,8 +172,7 @@ public class ToolEvents {
 
     @SubscribeEvent
     public void onGetHurt(LivingHurtEvent event) {
-        if (!(event.entityLiving instanceof EntityPlayer)) return;
-        EntityPlayer player = (EntityPlayer) event.entityLiving;
+        if (!(event.entityLiving instanceof EntityPlayer player)) return;
         if (player.getHeldItem() != null && player.getHeldItem()
             .getItem() == ItemLoader.InfinitySword && player.isUsingItem()) event.setCanceled(true);
         if (LudicrousItems.isInfinite(player) && !event.source.damageType.equals("infinity")) event.setCanceled(true);
@@ -164,16 +180,15 @@ public class ToolEvents {
 
     @SubscribeEvent
     public void onAttacked(LivingAttackEvent event) {
-        if (!(event.entityLiving instanceof EntityPlayer)) return;
+        if (!(event.entityLiving instanceof EntityPlayer player)) return;
         if (event.source.getEntity() != null && event.source.getEntity() instanceof EntityPlayer) return;
-        EntityPlayer player = (EntityPlayer) event.entityLiving;
         if (player.getHeldItem() != null && player.getHeldItem()
             .getItem() == ItemLoader.InfinitySword && player.isUsingItem()) event.setCanceled(true);
         if (LudicrousItems.isInfinite(player) && !event.source.damageType.equals("infinity")) event.setCanceled(true);
     }
 
     @SubscribeEvent
-    public void diggity(BreakSpeed event) {
+    public void diggity(PlayerEvent.BreakSpeed event) {
         if (event.entityPlayer.getHeldItem() != null) {
             ItemStack held = event.entityPlayer.getHeldItem();
             if (held.getItem() == ItemLoader.InfinityPickaxe || held.getItem() == ItemLoader.InfinityShovel) {
@@ -226,6 +241,197 @@ public class ToolEvents {
                 ItemStack slot = player.inventory.mainInventory[i];
                 if (slot != null && slot.getItem() != null && slot.getItem() == ItemLoader.MatterCluster) {
                     MatterCluster.mergeClusters(stack, slot);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onBlockHarvestBlazeAxe(BlockEvent.HarvestDropsEvent event) {
+        if (event.harvester == null || event.harvester.getCurrentEquippedItem() == null) return;
+
+        ItemStack heldItem = event.harvester.getCurrentEquippedItem();
+        if (!(heldItem.getItem() instanceof BlazeAxe)) return;
+
+        boolean smeltingActive = isSmeltingModeActive(heldItem);
+        if (!smeltingActive) return;
+
+        Block block = event.block;
+        int meta = event.blockMetadata;
+        ItemStack blockStack = new ItemStack(block, 1, meta);
+        ItemStack smeltResult = FurnaceRecipes.smelting()
+            .getSmeltingResult(blockStack);
+        if (smeltResult == null) return;
+
+        int totalCount = 0;
+        for (ItemStack drop : event.drops) {
+            totalCount += drop.stackSize;
+        }
+
+        event.drops.clear();
+        ItemStack result = smeltResult.copy();
+        result.stackSize = totalCount;
+        event.drops.add(result);
+    }
+
+    public boolean isSmeltingModeActive(ItemStack stack) {
+        NBTTagCompound nbt = stack.getTagCompound();
+        return nbt != null && nbt.getBoolean("SmeltingMode");
+    }
+
+    @SubscribeEvent
+    public void onBlockHarvestHoe(BlockEvent.HarvestDropsEvent event) {
+        if (event.harvester == null || event.harvester.getCurrentEquippedItem() == null) return;
+
+        ItemStack heldItem = event.harvester.getCurrentEquippedItem();
+        if (!(heldItem.getItem() instanceof BlazePickaxe)) return;
+
+        boolean smeltingActive = isSmeltingModeActive(heldItem);
+        if (!smeltingActive) return;
+
+        Block block = event.block;
+        int meta = event.blockMetadata;
+        ItemStack blockStack = new ItemStack(block, 1, meta);
+        ItemStack smeltResult = FurnaceRecipes.smelting()
+            .getSmeltingResult(blockStack);
+        if (smeltResult == null) return;
+
+        int totalCount = 0;
+        for (ItemStack drop : event.drops) {
+            totalCount += drop.stackSize;
+        }
+
+        event.drops.clear();
+        ItemStack result = smeltResult.copy();
+        result.stackSize = totalCount;
+        event.drops.add(result);
+    }
+
+    @SubscribeEvent
+    public void onBlockHarvestBlazePickaxe(BlockEvent.HarvestDropsEvent event) {
+        if (event.harvester == null || event.harvester.getCurrentEquippedItem() == null) return;
+
+        ItemStack heldItem = event.harvester.getCurrentEquippedItem();
+        if (!(heldItem.getItem() instanceof BlazePickaxe)) return;
+
+        boolean smeltingActive = isSmeltingModeActive(heldItem);
+        if (!smeltingActive) return;
+
+        Block block = event.block;
+        int meta = event.blockMetadata;
+        ItemStack blockStack = new ItemStack(block, 1, meta);
+        ItemStack smeltResult = FurnaceRecipes.smelting()
+            .getSmeltingResult(blockStack);
+        if (smeltResult == null) return;
+
+        int totalCount = 0;
+        for (ItemStack drop : event.drops) {
+            totalCount += drop.stackSize;
+        }
+
+        event.drops.clear();
+        ItemStack result = smeltResult.copy();
+        result.stackSize = totalCount;
+        event.drops.add(result);
+    }
+
+    @SubscribeEvent
+    public void onBlockHarvestBlazeShovel(BlockEvent.HarvestDropsEvent event) {
+        if (event.harvester == null || event.harvester.getCurrentEquippedItem() == null) return;
+
+        ItemStack heldItem = event.harvester.getCurrentEquippedItem();
+        if (!(heldItem.getItem() instanceof BlazeShovel)) return;
+
+        Block block = event.block;
+        List<ItemStack> drops = event.drops;
+
+        boolean transformed = false;
+        for (int i = 0; i < drops.size(); i++) {
+            ItemStack drop = drops.get(i);
+            if (drop.getItem() == Item.getItemFromBlock(Blocks.dirt)) {
+                drops.set(i, new ItemStack(Blocks.netherrack, drop.stackSize));
+                transformed = true;
+            } else if (drop.getItem() == Item.getItemFromBlock(Blocks.sand)) {
+                drops.set(i, new ItemStack(Blocks.soul_sand, drop.stackSize));
+                transformed = true;
+            } else if (drop.getItem() == Item.getItemFromBlock(Blocks.gravel)) {
+                drops.set(i, new ItemStack(Blocks.netherrack, drop.stackSize));
+                transformed = true;
+            }
+        }
+
+        if (!transformed) {
+            boolean smeltingActive = isSmeltingModeActive(heldItem);
+            if (smeltingActive) {
+                int meta = event.blockMetadata;
+                ItemStack blockStack = new ItemStack(block, 1, meta);
+                ItemStack smeltResult = FurnaceRecipes.smelting()
+                    .getSmeltingResult(blockStack);
+                if (smeltResult != null) {
+                    int totalCount = 0;
+                    for (ItemStack drop : drops) {
+                        totalCount += drop.stackSize;
+                    }
+
+                    event.drops.clear();
+                    ItemStack result = smeltResult.copy();
+                    result.stackSize = totalCount;
+                    event.drops.add(result);
+                }
+            }
+        }
+
+        heldItem.damageItem(1, event.harvester);
+    }
+
+    @SubscribeEvent
+    public void onEntityDrop(LivingDropsEvent event) {
+        if (event.entity instanceof EntitySkeleton) {
+            Entity attacker = event.source.getEntity();
+
+            if (attacker instanceof EntityPlayer player) {
+                ItemStack heldItem = player.getHeldItem();
+
+                if (heldItem != null && heldItem.getItem() instanceof BlazeSword) {
+
+                    Iterator<EntityItem> iterator = event.drops.iterator();
+                    while (iterator.hasNext()) {
+                        EntityItem item = iterator.next();
+                        ItemStack stack = item.getEntityItem();
+                        if (stack.getItem() == Items.skull) {
+                            iterator.remove();
+                        }
+                    }
+
+                    event.drops.add(
+                        new EntityItem(
+                            event.entity.worldObj,
+                            event.entity.posX,
+                            event.entity.posY,
+                            event.entity.posZ,
+                            new ItemStack(Items.skull, 1, 1)));
+                }
+            }
+        }
+    }
+
+    // Item
+    @SubscribeEvent
+    public void onTooltip(ItemTooltipEvent event) {
+        if (event.itemStack.getItem() instanceof InfinitySword) {
+            for (int x = 0; x < event.toolTip.size(); x++) {
+                if (event.toolTip.get(x)
+                    .contains(StatCollector.translateToLocal("attribute.name.generic.attackDamage"))
+                    || event.toolTip.get(x)
+                        .contains(StatCollector.translateToLocal("Attack Damage"))) {
+                    event.toolTip.set(
+                        x,
+                        EnumChatFormatting.BLUE + "+"
+                            + LudicrousText.makeFabulous(StatCollector.translateToLocal("Damage_InfinitySword"))
+                            + " "
+                            + EnumChatFormatting.BLUE
+                            + StatCollector.translateToLocal("attribute.name.generic.attackDamage"));
+                    return;
                 }
             }
         }
