@@ -363,6 +363,15 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
     public ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
+            @NotNull
+            @Override
+            public CheckRecipeResult process() {
+                setEuModifier(getEuModifier());
+                setSpeedBonus(getSpeedBonus());
+                setOverclock(isEnablePerfectOverclock() ? 4 : 2, 4);
+                return super.process();
+            }
+
             @Nonnull
             @Override
             protected CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {

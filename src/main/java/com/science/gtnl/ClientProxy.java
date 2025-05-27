@@ -23,6 +23,7 @@ import com.science.gtnl.common.render.tile.PlayerDollRenderer;
 import com.science.gtnl.common.render.tile.RealArtificialStarRender;
 import com.science.gtnl.common.render.tile.RenderEternalGregTechWorkshop;
 import com.science.gtnl.common.render.tile.RenderNanoPhagocytosisPlant;
+import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.BlockLoader;
 import com.science.gtnl.loader.ItemLoader;
 
@@ -41,11 +42,13 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserBeacon.class, new MeteorMinerRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(BaseMetaTileEntity.class, new MeteorMinerMachineRender());
-        MinecraftForgeClient.registerItemRenderer(
-            Item.getItemFromBlock(GregTechAPI.sBlockMachines),
-            new ItemMeteorMinerMachineRender());
+        if (MainConfig.enableDebugMode) {
+            ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserBeacon.class, new MeteorMinerRenderer());
+            ClientRegistry.bindTileEntitySpecialRenderer(BaseMetaTileEntity.class, new MeteorMinerMachineRender());
+            MinecraftForgeClient.registerItemRenderer(
+                Item.getItemFromBlock(GregTechAPI.sBlockMachines),
+                new ItemMeteorMinerMachineRender());
+        }
 
         new PlayerDollRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new PlayerDollRenderer());
