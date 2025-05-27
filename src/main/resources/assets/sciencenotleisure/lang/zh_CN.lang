@@ -1373,6 +1373,7 @@ Tooltip_WirelessEnergyMultiMachine_08=不安装能源仓将自动进入无线模
 Tooltip_WirelessEnergyMultiMachine_09=无线模式下电压为并行控制核心等级 + 1, 电流为 4 ^ 等级 - 2
 Waila_WirelessMode=无线模式
 Waila_CurrentEuCost=当前EU消耗
+Waila_CurrentSteamCost=当前蒸汽消耗
 
 NameFuelRefiningComplex=燃料精炼复合体
 FuelRefiningComplexRecipeType=燃料精炼复合体
@@ -1464,16 +1465,52 @@ Tooltip_SuperSpaceElevator_06=当主结构未安装能源仓时自动进入无�
 Tooltip_SuperSpaceElevator_07=关闭控制器即可暂停所有模块
 Tooltip_SuperSpaceElevator_Casing=任意太空电梯基座机械方块
 
-NameSteamBeaconModuleI=蒸汽电梯信标模块 I
-NameSteamBeaconModuleII=蒸汽电梯信标模块 II
-NameSteamBeaconModuleIII=蒸汽电梯信标模块 III
+NameSteamElevator=蒸汽楼梯
+SteamElevatorRecipeType=蒸汽楼梯
+Tooltip_SteamElevator_00=§a§l通向天空的楼梯?
+Tooltip_SteamElevator_01=每个模块有各自独立的输入输出空间, 除了蒸汽
+Tooltip_SteamElevator_02=本控制器接收蒸汽供应并将蒸汽分发
+Tooltip_SteamElevator_03=当主结构未安装蒸汽输入仓时自动进入无线模式
+Tooltip_SteamElevator_04=关闭控制器即可暂停所有模块
+Tooltip_SteamElevator_Casing=任意砖砌钢外壳
+
+NameSteamMonsterRepellentModuleI=蒸汽敌对生物驱逐器模块 I
+NameSteamMonsterRepellentModuleII=蒸汽敌对生物驱逐器模块 II
+NameSteamMonsterRepellentModuleIII=蒸汽敌对生物驱逐器模块 III
+SteamMonsterRepellentModuleRecipeType=敌对生物驱逐器
+Tooltip_SteamMonsterRepellentModuleI_00=§a§l它通过发出巨大的噪音来赶走怪物...和你一天的好心情.
+Tooltip_SteamMonsterRepellentModuleII_00=§a§l你听不到它, 但怪物听得一清二楚.
+Tooltip_SteamMonsterRepellentModuleIII_00=§a§l这机器让怪物自己报警跑路.
+Tooltip_SteamMonsterRepellentModule_00=将敌对生物驱逐功能添加到蒸汽楼梯
+Tooltip_SteamMonsterRepellentModule_01=创建一个力场阻止怪物的生成
+Tooltip_SteamMonsterRepellentModule_02=只在机器运行的时候阻止
+Tooltip_SteamMonsterRepellentModule_03=生效范围: 
+
+NameSteamFlightModule=蒸汽飞行模块
+SteamFlightModuleRecipeType=飞行
+Tooltip_SteamFlightModule_00=§a§l蒸汽是人类进步的阶梯 - 高尔哈基米
+Tooltip_SteamFlightModule_01=将飞行功能添加到蒸汽楼梯
+Tooltip_SteamFlightModule_02=消耗蒸汽赋予你自由飞行的能力
+Tooltip_SteamFlightModule_03=调整超频次数来消耗更多蒸汽扩大范围
+Tooltip_SteamFlightModule_04=生效范围: 64 * 超频次数
+
+NameSteamWeatherModule=蒸汽天气更替模块
+gtnl.recipe.SteamWeatherModuleFakeRecipes=天气更替
+SteamWeatherModuleRecipeType=天气更替
+Tooltip_SteamWeatherModule_01=将天气更替功能添加到蒸汽楼梯
+
+NameSteamBeaconModuleI=蒸汽信标模块 I
+NameSteamBeaconModuleII=蒸汽信标模块 II
+NameSteamBeaconModuleIII=蒸汽信标模块 III
 SteamBeaconModuleRecipeType=信标
-Tooltip_SteamBeaconModule_00=
-Tooltip_SteamBeaconModule_01=
-Tooltip_SteamBeaconModule_02=
-Tooltip_SteamBeaconModule_03=
-Tooltip_SteamBeaconModule_04=
-Tooltip_SteamBeaconModule_05=
+Tooltip_SteamBeaconModuleI_00=§a§l村民向您分享了原始药水信标技术!
+Tooltip_SteamBeaconModuleII_00=§a§l将蒸汽嬗变成药水分子...
+Tooltip_SteamBeaconModuleIII_00=§a§l宇宙没有义务让你理解...喵!
+Tooltip_SteamBeaconModule_00=将信标功能添加到蒸汽楼梯
+Tooltip_SteamBeaconModule_01=通入蒸汽来启用大范围的药水效果
+Tooltip_SteamBeaconModule_02=生效范围: 
+Tooltip_SteamBeaconModule_03=在GUI中配置要释放的药水效果
+Tooltip_SteamBeaconModule_04=调整超频次数来提高药水效果等级
 Info_SteamBeaconModule_00=配置信标效果
 Info_SteamBeaconModule_01=确定
 Info_SteamBeaconModule_02=当前启用效果:
@@ -1489,8 +1526,6 @@ Info_SteamBeaconModule_Effect_08=水下呼吸
 Info_SteamBeaconModule_Effect_09=扭曲守护
 Info_SteamBeaconModule_Effect_10=羽翼
 Info_SteamBeaconModule_Effect_11=灵气创生
-
-Tooltip_SteamElevatorModule_00=蒸汽电梯的模块
 Tooltip_SteamElevatorModule_Casing=任意脱氧钢机械方块
 
 NameLargeMixer=大型搅拌罐
@@ -2056,6 +2091,10 @@ NameNanitesCircuitAssemblyFactory=纳米蜂群电路组装厂
 NanitesCircuitAssemblyFactoryRecipeType=电路组装机
 Tooltip_NanitesCircuitAssemblyFactory_Casing=任意放射硅岩合金机械方块
 
+NameAetronPressor=以太压铸机
+AetronPressorRecipeType=压模机
+Tooltip_AetronPressor_Casing=任意分子机械方块
+
 NameVortexMatterCentrifuge=旋涡物质离心器
 VortexMatterCentrifugeRecipeType=离心机
 Tooltip_VortexMatterCentrifuge_Casing=任意分子机械方块
@@ -2120,6 +2159,21 @@ EGTW_MachineIncomplete=§c结构不成型
 NameEGTWFusionModule=永恒格雷工坊 - 聚变模块
 EGTWFusionModuleRecipeType=聚变反应堆
 Tooltip_EGTWFusionModule_Casing=提示方块: 1号
+
+NameETGWEyeOfHarmonyModule=永恒格雷工坊 - 鸿蒙之眼模块
+ETGWEyeOfHarmonyModuleRecipeType=鸿蒙之眼
+Tooltip_ETGWEyeOfHarmonyModule_00=比鸿蒙之眼快900%
+Tooltip_ETGWEyeOfHarmonyModule_01=固定基础成功率为60%
+Tooltip_ETGWEyeOfHarmonyModule_02=每次失败成功率额外提高10%
+Tooltip_ETGWEyeOfHarmonyModule_03=成功后重置额外成功率
+Tooltip_ETGWEyeOfHarmonyModule_04=使用电路板进行激光超频
+Tooltip_ETGWEyeOfHarmonyModule_05=产出EU固定为配方显示的100倍
+Tooltip_ETGWEyeOfHarmonyModule_06=保留溢出比成功率惩罚
+Tooltip_ETGWEyeOfHarmonyModule_07=固定并行为10000
+Tooltip_ETGWEyeOfHarmonyModule_08=默认使用浓缩原始恒星等离子体混合物, 使用螺丝刀右键切换回氢氦
+Tooltip_ETGWEyeOfHarmonyModule_09=仓室检查和鸿蒙之眼一致
+Tooltip_ETGWEyeOfHarmonyModule_10=允许执行所有配方
+Tooltip_ETGWEyeOfHarmonyModule_Casing=提示方块: 1号
 
 NameCrackerHub=裂解反应枢纽
 CrackerHubRecipeType=石油裂化机

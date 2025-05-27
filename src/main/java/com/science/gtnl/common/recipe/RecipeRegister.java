@@ -576,4 +576,13 @@ public class RecipeRegister {
             builder -> builder.setDisplayStack(GTNLItemList.EternalGregTechWorkshop.get(1))
                 .setHeight(314))
         .build();
+
+    public static final RecipeMap<RecipeMapBackend> SteamWeatherModuleFakeRecipes = RecipeMapBuilder
+        .of("gtnl.recipe.SteamWeatherModuleFakeRecipes")
+        .maxIO(9, 1, 0, 0)
+        .progressBarSteam(GTUITextures.PROGRESSBAR_EXTRACT_STEAM)
+        .frontend(SteamLogoFrontend::new)
+        .neiHandlerInfo((builder -> builder.setDisplayStack(GTNLItemList.SteamWeatherModule.get(1))))
+        .disableOptimize()
+        .build();
 }
