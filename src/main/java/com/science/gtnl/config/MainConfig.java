@@ -67,7 +67,6 @@ public class MainConfig {
     // Recipe
     public static boolean enableDeleteRecipe = true;
     public static boolean enableAprilFoolRecipe = false;
-    public static boolean enableCheatRecipeWithOwner = false;
     public static boolean enableShowDelRecipeTitle = true;
 
     // Tickrate
@@ -251,14 +250,6 @@ public class MainConfig {
                 enableShowDelRecipeTitle,
                 "Enable when player join world, Show Big Title")
             .getBoolean(enableShowDelRecipeTitle);
-
-        enableCheatRecipeWithOwner = config
-            .get(
-                CATEGORY_RECIPE,
-                "enableCheatRecipeWithOwner",
-                enableCheatRecipeWithOwner,
-                "Enable Only Player Owner Cheat Recipe (Need 7 Mods)")
-            .getBoolean(enableCheatRecipeWithOwner);
 
         // Tick Rate
         defaultTickrate = (float) config
