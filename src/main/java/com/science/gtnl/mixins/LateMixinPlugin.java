@@ -28,11 +28,9 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Gregtech.MTEIntegratedOreFactory_Mixin");
         mixins.add("Gregtech.OverclockCalculator_Mixin");
         mixins.add("Gregtech.MTEBetterJukebox_Mixin");
-        mixins.add("Gregtech.MachineBlockRenderer_Mixin");
 
         if (MainConfig.enableDebugMode) {
-            mixins.add("Gregtech.HatchElementBuilder_Mixin");
-            mixins.add("Gregtech.GTPPMultiBlockBase_Mixin");
+            mixins.add("Gregtech.MachineBlockRenderer_Mixin");
         }
 
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");
