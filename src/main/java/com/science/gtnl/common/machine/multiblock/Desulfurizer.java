@@ -239,7 +239,7 @@ public class Desulfurizer extends MultiMachineBase<Desulfurizer> implements ISur
         logic.setAvailableAmperage(
             useSingleAmp ? 1
                 : ExoticEnergyInputHelper.getMaxWorkingInputAmpsMulti(getExoticAndNormalEnergyHatchList()));
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
     }
 
     public HeatingCoilLevel getCoilLevel() {

@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.early;
+package com.science.gtnl.mixins.early.Minecraft;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;

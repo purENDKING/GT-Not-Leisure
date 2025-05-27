@@ -219,7 +219,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4 && wirelessMode) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return super.validateRecipe(recipe);
@@ -258,7 +258,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
                 && getMaxInputAmps() <= 2;
             logic.setAvailableVoltage(getMachineVoltageLimit());
             logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
-            logic.setAmperageOC(useSingleAmp);
+            logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
         }
     }
 

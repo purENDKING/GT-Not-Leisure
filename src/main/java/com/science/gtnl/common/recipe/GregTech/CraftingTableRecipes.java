@@ -45,12 +45,12 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GTNLItemList.BronzeBrickCasing.get(1),
             new Object[] { "AAA", "ABA", "ACA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
-                'B', "craftingToolWrench", 'C', GTModHandler.getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
+                'B', "craftingToolWrench", 'C', new ItemStack(Blocks.brick_block, 1) });
 
         addCraftingRecipe(
             GTNLItemList.SteelBrickCasing.get(1),
             new Object[] { "AAA", "ABA", "ACA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 1),
-                'B', "craftingToolWrench", 'C', GTModHandler.getModItem(Minecraft.ID, "brick_block", 1, 0, missing) });
+                'B', "craftingToolWrench", 'C', new ItemStack(Blocks.brick_block, 1) });
 
         addCraftingRecipe(
             GTNLItemList.CheatOreProcessingFactory.get(1),
@@ -61,15 +61,13 @@ public class CraftingTableRecipes implements IRecipePool {
             GTNLItemList.LargeSteamFurnace.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
                 'B', ItemList.Casing_Pipe_Bronze.get(1), 'C', ItemList.Casing_Firebox_Bronze.get(1), 'D',
-                GTModHandler.getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
-                GTModHandler.getModItem("gregtech", "gt.blockmachines", 1, 103, missing) });
+                new ItemStack(Items.cauldron, 1), 'E', ItemList.Machine_Bronze_Furnace.get(1) });
 
         addCraftingRecipe(
             GTNLItemList.LargeSteamAlloySmelter.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
                 'B', new ItemStack(ModItems.itemBasicTurbine, 1, 1), 'C', ItemList.Casing_Firebox_Bronze.get(1), 'D',
-                GTModHandler.getModItem(Minecraft.ID, "cauldron", 1, 0, missing), 'E',
-                ItemList.Machine_Bronze_AlloySmelter.get(1) });
+                new ItemStack(Items.cauldron, 1), 'E', ItemList.Machine_Bronze_AlloySmelter.get(1) });
 
         addCraftingRecipe(
             GTNLItemList.LargeSteamChemicalBath.get(1),
@@ -174,9 +172,8 @@ public class CraftingTableRecipes implements IRecipePool {
 
         addCraftingRecipe(
             GTNLItemList.TestItem.get(1),
-            new Object[] { "ABA", "BCB", "ABA", 'A', GTModHandler.getModItem(Minecraft.ID, "golden_apple", 1, 1), 'B',
-                GTModHandler.getModItem(Botania.ID, "manaResource", 1, 9), 'C',
-                GTModHandler.getModItem(Minecraft.ID, "dragon_egg", 1) });
+            new Object[] { "ABA", "BCB", "ABA", 'A', new ItemStack(Items.golden_apple, 1, 1), 'B',
+                GTModHandler.getModItem(Botania.ID, "manaResource", 1, 9), 'C', new ItemStack(Blocks.dragon_egg, 1) });
 
         addCraftingRecipe(
             GTNLItemList.CrushingWheels.get(2),
@@ -277,7 +274,7 @@ public class CraftingTableRecipes implements IRecipePool {
             new Object[] { "ABA", "CDE", "ABA", 'A', ItemList.Casing_Pipe_Bronze.get(1), 'B',
                 GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Bronze, 1L), 'C',
                 ItemList.Casing_Gearbox_Bronze.get(1), 'D', ItemList.Machine_Bronze_Extractor.get(1), 'E',
-                GTModHandler.getModItem(Minecraft.ID, "glass", 1, 0, missing) });
+                new ItemStack(Blocks.glass, 1) });
 
         addCraftingRecipe(
             GTNLItemList.LargeSteamOreWasher.get(1),

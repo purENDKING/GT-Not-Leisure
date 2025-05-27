@@ -1,5 +1,6 @@
 package com.science.gtnl.Utils;
 
+import static com.science.gtnl.config.MainConfig.targetBlockSpecs;
 import static net.minecraft.util.StatCollector.translateToLocalFormatted;
 
 import java.lang.reflect.Array;
@@ -14,6 +15,7 @@ import java.util.function.IntFunction;
 import net.minecraft.block.Block;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.server.CommandBlockLogic;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -424,5 +426,65 @@ public final class Utils {
         }
 
         return false;
+    }
+
+    public static boolean isTargetBlock(Block block, int meta) {
+        if (block == null) {
+            return false;
+        }
+        String blockId = Block.blockRegistry.getNameForObject(block);
+        if (blockId == null) {
+            return false;
+        }
+
+        for (String spec : targetBlockSpecs) {
+            String[] parts = spec.split(":");
+            if (parts.length == 2) {
+                if (spec.equals(blockId)) {
+                    return true;
+                }
+            } else if (parts.length == 3) {
+                String idPart = parts[0] + ":" + parts[1];
+                int desiredMeta;
+                try {
+                    desiredMeta = Integer.parseInt(parts[2]);
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid meta value in config: " + spec);
+                    continue;
+                }
+
+                if (idPart.equals(blockId) && meta == desiredMeta) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static class TargetInfo {
+
+        public double x, y, z;
+        public double distance;
+        public EntityLivingBase entityTarget;
+
+        public TargetInfo(double x, double y, double z, double distance) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.distance = distance;
+            this.entityTarget = null;
+        }
+
+        public TargetInfo(EntityLivingBase entity, double distance) {
+            this.entityTarget = entity;
+            this.x = entity.posX;
+            this.y = entity.posY;
+            this.z = entity.posZ;
+            this.distance = distance;
+        }
+
+        public boolean isEntityTarget() {
+            return entityTarget != null;
+        }
     }
 }

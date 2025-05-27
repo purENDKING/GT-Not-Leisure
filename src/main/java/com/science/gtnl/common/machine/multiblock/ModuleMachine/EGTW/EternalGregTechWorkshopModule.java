@@ -82,17 +82,17 @@ public abstract class EternalGregTechWorkshopModule extends MultiMachineBase<Ete
     protected long maxUseEUt = 0;
     protected BigInteger powerTally = BigInteger.ZERO;
     protected long recipeTally = 0;
-    private long EUt = 0;
-    private int currentParallel = 0;
+    protected long EUt = 0;
+    protected int currentParallel = 0;
 
-    private static final String STRUCTURE_PIECE_MAIN = "main";
-    private static final String EGTWM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
+    protected static final String STRUCTURE_PIECE_MAIN = "main";
+    protected static final String EGTWM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":"
         + "multiblock/eternal_gregTech_workshop/module";
-    private static final String[][] shape = StructureUtils.readStructureFromFile(EGTWM_STRUCTURE_FILE_PATH);
+    protected static final String[][] shape = StructureUtils.readStructureFromFile(EGTWM_STRUCTURE_FILE_PATH);
     protected final int HORIZONTAL_OFF_SET = 4;
     protected final int VERTICAL_OFF_SET = 3;
     protected final int DEPTH_OFF_SET = 0;
-    public final int CASING_INDEX = 960;
+    protected final int CASING_INDEX = 960;
 
     public static final String TEXTURE_OVERLAY_FRONT_SCREEN_ON = Mods.GregTech.ID + ":"
         + "iconsets/GODFORGE_MODULE_ACTIVE";

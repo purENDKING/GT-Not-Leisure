@@ -243,9 +243,12 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
     private String generateCacheKeyFromRecipeHash(ItemStack tDataStick) {
         // 获取物品的 tagCompound 和固定的 Recipe Hash
-        String recipeHash = tDataStick.getTagCompound()
-            .getString("Data.Recipe.Hash");
-        return "RecipeHash_" + recipeHash;
+        if (tDataStick.hasTagCompound()) {
+            String recipeHash = tDataStick.getTagCompound()
+                .getString("Data.Recipe.Hash");
+            return "RecipeHash_" + recipeHash;
+        }
+        return "RecipeHash_NoHash";
     }
 
     private CheckRecipeResult processRecipeLogic(ArrayList<IDualInputInventory> inputInventories, long energyEU,
@@ -282,6 +285,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
 
             List<GTRecipe.RecipeAssemblyLine> validRecipes = new ArrayList<>();
             for (ItemStack tDataStick : getDataItems(2)) {
+                if (tDataStick == null) continue;
                 AssemblyLineUtils.LookupResult tLookupResult = AssemblyLineUtils
                     .findAssemblyLineRecipeFromDataStick(tDataStick, false);
 

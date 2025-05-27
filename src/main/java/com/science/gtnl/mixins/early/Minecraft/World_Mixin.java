@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.early;
+package com.science.gtnl.mixins.early.Minecraft;
 
 import java.util.Iterator;
 import java.util.List;

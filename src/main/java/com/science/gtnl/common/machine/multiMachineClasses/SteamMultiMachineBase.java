@@ -899,7 +899,7 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
             .getFluid(), 10),
         SC_STEAM("Supercritical Steam", FluidRegistry.getFluid("supercriticalsteam"), 50),
         CM_STEAM("Compressed Steam", MaterialPool.CompressedSteam.getMolten(1)
-            .getFluid(), 100000);
+            .getFluid(), 1000);
 
         public static final SteamTypes[] VALUES = values();
 

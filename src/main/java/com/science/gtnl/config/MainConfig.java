@@ -2,6 +2,9 @@ package com.science.gtnl.config;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -23,6 +26,8 @@ public class MainConfig {
         + "player_doll";
     public static final String CATEGORY_NOT_ENOUGH_ITEMS = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
         + "not_enough_items";
+    public static final String CATEGORY_SUPER_CREEPER = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
+        + "super_creeper";
     public static final String CATEGORY_DEBUG = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "debug";
 
     // --- Deeper Nested Categories (paths constructed using CATEGORY_SPLITTER) ---
@@ -92,6 +97,12 @@ public class MainConfig {
     public static boolean enableSpecialCheatIcon = false;
     public static int specialIconType = 0;
 
+    // SuperCreeper
+    public static List<String> targetBlockSpecs = new ArrayList<>();
+    public static String[] defaultTargetBlocks = { "minecraft:chest", "appliedenergistics2:tile.BlockDrive",
+        "gregtech:gt.blockmachines" };
+    public static boolean enableSuperCreeper = false;
+
     // Debug
     public static boolean enableDebugMode = false;
 
@@ -122,12 +133,15 @@ public class MainConfig {
             if (config.hasChanged()) {
                 config.save();
             }
+            if (targetBlockSpecs != null) targetBlockSpecs.clear();
             config.load();
             loadConfig();
+            targetBlockSpecs.addAll(Arrays.asList(defaultTargetBlocks));
         }
     }
 
     public static void loadConfig() {
+
         // Machine
         enableRecipeOutputChance = config
             .get(
@@ -347,6 +361,23 @@ public class MainConfig {
                 specialIconType,
                 "Specify the type of the special cheat icon")
             .getInt(specialIconType);
+
+        // Super Creeper
+        defaultTargetBlocks = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "DefaultTargetBlocks",
+                defaultTargetBlocks,
+                "List of target block IDs. Format: 'modid:blockname' or 'modid:blockname:meta'.")
+            .getStringList();
+
+        enableSuperCreeper = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "EnableSuperCreeper",
+                enableSuperCreeper,
+                "Enable super creeper, can find you chest and more")
+            .getBoolean(enableSuperCreeper);
 
         // Debug
         enableDebugMode = config.get(CATEGORY_DEBUG, "enableDebugMode", enableDebugMode, "Enable Debug Print Log")
