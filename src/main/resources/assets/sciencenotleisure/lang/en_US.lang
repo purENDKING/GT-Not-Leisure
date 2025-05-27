@@ -1373,6 +1373,7 @@ Tooltip_WirelessEnergyMultiMachine_08=Automatically enters wireless mode if no e
 Tooltip_WirelessEnergyMultiMachine_09=In wireless mode, the voltage is the parallel control core level + 1, ampere is 4 ^ level - 2
 Waila_WirelessMode=Wireless Mode
 Waila_CurrentEuCost=Current EU Consumption
+Waila_CurrentSteamCost=Current Steam Consumption
 
 NameFuelRefiningComplex=Fuel Refining Complex
 FuelRefiningComplexRecipeType=Fuel Refining Complex
@@ -1464,16 +1465,47 @@ Tooltip_SuperSpaceElevator_06=The system automatically activates wireless mode w
 Tooltip_SuperSpaceElevator_07=Disabling this controller also pauses all modules
 Tooltip_SuperSpaceElevator_Casing=Any Space Elevator Base Casing
 
+NameSteamElevator=Steam Elevator
+SteamElevatorRecipeType=Steam Elevator
+Tooltip_SteamElevator_00=§a§lStairway to the Sky?
+Tooltip_SteamElevator_01=Each module has their own space for IO, except energy
+Tooltip_SteamElevator_02=Steam is supplied to this controller and gets distributed
+Tooltip_SteamElevator_03=The system automatically activates wireless mode when no steam input hatch is installed in the main structure
+Tooltip_SteamElevator_04=Disabling this controller also pauses all modules
+Tooltip_SteamElevator_Casing=Any Brick Steel Shell
+
+NameSteamMonsterRepellentModuleI=Steam Monster Repellator Module I
+NameSteamMonsterRepellentModuleII=Steam Monster Repellator Module II
+NameSteamMonsterRepellentModuleIII=Steam Monster Repellator Module III
+SteamMonsterRepellentModuleRecipeType=Monster Repellator
+Tooltip_SteamMonsterRepellentModuleI_00=§a§lIt drives away monsters with loud noise... and ruins your whole day.
+Tooltip_SteamMonsterRepellentModuleII_00=§a§lYou can’t hear it, but the monsters hear it loud and clear.
+Tooltip_SteamMonsterRepellentModuleIII_00=§a§lThis machine makes monsters alert and run away on their own.
+Tooltip_SteamMonsterRepellentModule_00=Adds mob repellent module to the Steam Stairway
+Tooltip_SteamMonsterRepellentModule_01=Creates a force field to prevent monster spawns
+Tooltip_SteamMonsterRepellentModule_02=Only prevents spawns while the machine is running
+Tooltip_SteamMonsterRepellentModule_03=Effective range: 
+
+NameSteamFlightModule=Steam Flight Module
+SteamFlightModuleRecipeType=Flight
+Tooltip_SteamFlightModule_00=§a§lSTEAM are the REAL ladder of human progress - MaxiMeow Gorkitty
+Tooltip_SteamFlightModule_01=Adds flight module to the Steam Stairway
+Tooltip_SteamFlightModule_02=Consumes steam to grant you the power of free flight
+Tooltip_SteamFlightModule_03=Adjust overclock count to consume more steam and expand the range
+Tooltip_SteamFlightModule_04=Effective range: 64 * overclock count
+
 NameSteamBeaconModuleI=Steam Elevator Beacon Module I
 NameSteamBeaconModuleII=Steam Elevator Beacon Module II
 NameSteamBeaconModuleIII=Steam Elevator Beacon Module III
 SteamBeaconModuleRecipeType=Beacon
-Tooltip_SteamBeaconModule_00=
-Tooltip_SteamBeaconModule_01=
-Tooltip_SteamBeaconModule_02=
-Tooltip_SteamBeaconModule_03=
-Tooltip_SteamBeaconModule_04=
-Tooltip_SteamBeaconModule_05=
+Tooltip_SteamBeaconModuleI_00=§a§lPrimitive Beacon!
+Tooltip_SteamBeaconModuleII_00=§a§lTransmuting STEAM into potions...
+Tooltip_SteamBeaconModuleIII_00=§a§lThe universe owes you NO answer...NYA!
+Tooltip_SteamBeaconModule_00=Add beacon module effects into the Steam Stairway
+Tooltip_SteamBeaconModule_01=Input steam to enable large-area potion effects
+Tooltip_SteamBeaconModule_02=Effective range: 
+Tooltip_SteamBeaconModule_03=Configure the potion effects to emit in the GUI
+Tooltip_SteamBeaconModule_04=Adjust overclock count to increase potion effect levels
 Info_SteamBeaconModule_00=Configure beacon effects
 Info_SteamBeaconModule_01=Confirm
 Info_SteamBeaconModule_02=Currently Enabled Effects:
@@ -1489,8 +1521,6 @@ Info_SteamBeaconModule_Effect_08=Water Breathing
 Info_SteamBeaconModule_Effect_09=Warp Ward
 Info_SteamBeaconModule_Effect_10=Feather Feet
 Info_SteamBeaconModule_Effect_11=Vis Regen
-
-Tooltip_SteamElevatorModule_00=Steam Elevator Module
 Tooltip_SteamElevatorModule_Casing=Any Solid Steel Machine Casing
 
 NameLargeMixer=Large Mixing Tank
@@ -2056,6 +2086,10 @@ NameNanitesCircuitAssemblyFactory=Nanites Circuit Assembly Factory
 NanitesCircuitAssemblyFactoryRecipeType=Circuit Assembler
 Tooltip_NanitesCircuitAssemblyFactory_Casing=Any Radiant Naquadah Alloy Machine Casing
 
+NameAetronPressor=Aetron Pressor
+AetronPressorRecipeType=Extruder
+Tooltip_AetronPressor_Casing=Any Molecular Casing
+
 NameVortexMatterCentrifuge=Vortex Matter Centrifuge
 VortexMatterCentrifugeRecipeType=Centrifuge
 Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing
@@ -2117,9 +2151,13 @@ EGTW_MachineRunning=§aMachine Running
 EGTW_MachineStandby=Machine Standby
 EGTW_MachineIncomplete=§cMachine Incomplete
 
-NameEGTWFusionModule=EGTW - Fusion Reactor
+NameEGTWFusionModule=EGTW - Fusion Reactor Module
 EGTWFusionModuleRecipeType=Fusion Reactor
 Tooltip_EGTWFusionModule_Casing=Hint 1 dots
+
+NameETGWEyeOfHarmonyModule=EGTW - EOH Module
+Tooltip_ETGWEyeOfHarmonyModule_Casing=Hint 1 dots
+ETGWEyeOfHarmonyModuleRecipeType=Eye Of Harmony
 
 NameCrackerHub=Cracker Hub
 CrackerHubRecipeType=Oil Cracker

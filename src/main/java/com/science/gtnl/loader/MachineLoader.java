@@ -50,6 +50,7 @@ import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
 import com.science.gtnl.common.machine.multiblock.AdvancedCircuitAssemblyLine;
 import com.science.gtnl.common.machine.multiblock.AdvancedInfiniteDriller;
 import com.science.gtnl.common.machine.multiblock.AdvancedPhotovoltaicPowerStation;
+import com.science.gtnl.common.machine.multiblock.AetronPressor;
 import com.science.gtnl.common.machine.multiblock.AprilFool.HighPressureSteamFusionReactor;
 import com.science.gtnl.common.machine.multiblock.AprilFool.MegaSolarBoiler;
 import com.science.gtnl.common.machine.multiblock.AprilFool.MegaSteamCompressor;
@@ -109,6 +110,7 @@ import com.science.gtnl.common.machine.multiblock.MatterFabricator;
 import com.science.gtnl.common.machine.multiblock.MegaMixer;
 import com.science.gtnl.common.machine.multiblock.MeteorMiner;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EGTWFusionModule;
+import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.ETGWEyeOfHarmonyModule;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop;
 import com.science.gtnl.common.machine.multiblock.NanitesCircuitAssemblyFactory;
 import com.science.gtnl.common.machine.multiblock.NanitesIntegratedProcessingCenter;
@@ -130,6 +132,10 @@ import com.science.gtnl.common.machine.multiblock.SmeltingMixingFurnace;
 import com.science.gtnl.common.machine.multiblock.SpaceAssembler;
 import com.science.gtnl.common.machine.multiblock.SteamCracking;
 import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamBeaconModule;
+import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamElevator;
+import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamFlightModule;
+import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamMonsterRepellentModule;
+import com.science.gtnl.common.machine.multiblock.SteamElevator.SteamWeatherModule;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.AlloyBlastSmelter;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.BlazeBlastFurnace;
 import com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan.ChemicalPlant;
@@ -1179,6 +1185,59 @@ public class MachineLoader {
                 "NanitesCircuitAssemblyFactory",
                 StatCollector.translateToLocal("NameNanitesCircuitAssemblyFactory")));
         addItemTooltip(GTNLItemList.NanitesCircuitAssemblyFactory.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.ETGWEyeOfHarmonyModule.set(
+            new ETGWEyeOfHarmonyModule(
+                ETGW_EYE_OF_HARMONY_MODULE.ID,
+                "ETGWEyeOfHarmonyModule",
+                StatCollector.translateToLocal("NameETGWEyeOfHarmonyModule")));
+        addItemTooltip(GTNLItemList.ETGWEyeOfHarmonyModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.AetronPressor.set(
+            new AetronPressor(AETRON_PRESSOR.ID, "AetronPressor", StatCollector.translateToLocal("NameAetronPressor")));
+        addItemTooltip(GTNLItemList.AetronPressor.get(1), AnimatedText.SNL_QYZG);
+
+        GTNLItemList.SteamElevator.set(
+            new SteamElevator(STEAM_ELEVATOR.ID, "SteamElevator", StatCollector.translateToLocal("NameSteamElevator")));
+        addItemTooltip(GTNLItemList.SteamElevator.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamMonsterRepellentModuleI.set(
+            new SteamMonsterRepellentModule(
+                STEAM_MONSTER_REPELLENT_MODULE_I.ID,
+                "SteamMonsterRepellentModuleI",
+                StatCollector.translateToLocal("NameSteamMonsterRepellentModuleI"),
+                1));
+        addItemTooltip(GTNLItemList.SteamMonsterRepellentModuleI.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamMonsterRepellentModuleII.set(
+            new SteamMonsterRepellentModule(
+                STEAM_MONSTER_REPELLENT_MODULE_II.ID,
+                "SteamMonsterRepellentModuleII",
+                StatCollector.translateToLocal("NameSteamMonsterRepellentModuleII"),
+                2));
+        addItemTooltip(GTNLItemList.SteamMonsterRepellentModuleII.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamMonsterRepellentModuleIII.set(
+            new SteamMonsterRepellentModule(
+                STEAM_MONSTER_REPELLENT_MODULE_III.ID,
+                "SteamMonsterRepellentModuleIII",
+                StatCollector.translateToLocal("NameSteamMonsterRepellentModuleIII"),
+                3));
+        addItemTooltip(GTNLItemList.SteamMonsterRepellentModuleIII.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamFlightModule.set(
+            new SteamFlightModule(
+                STEAM_FLIGHT_MODULE.ID,
+                "SteamFlightModule",
+                StatCollector.translateToLocal("NameSteamFlightModule")));
+        addItemTooltip(GTNLItemList.SteamFlightModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.SteamWeatherModule.set(
+            new SteamWeatherModule(
+                STEAM_WEATHER_MODULE.ID,
+                "SteamWeatherModule",
+                StatCollector.translateToLocal("NameSteamWeatherModule")));
+        addItemTooltip(GTNLItemList.SteamWeatherModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(
