@@ -2,14 +2,11 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -23,6 +20,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -95,12 +93,6 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
         return RecipeMaps.furnaceRecipes;
     }
 
-    @NotNull
-    @Override
-    public Collection<RecipeMap<?>> getAvailableRecipeMaps() {
-        return Arrays.asList(RecipeMaps.furnaceRecipes);
-    }
-
     @Override
     public MultiblockTooltipBuilder createTooltip() {
         MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
@@ -129,7 +121,7 @@ public class ReactionFurnace extends GTMMultiMachineBase<ReactionFurnace> implem
             STRUCTURE_DEFINITION = StructureDefinition.<ReactionFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(sBlockCasings9, 11))
-                .addElement('B', ofBlock(MetaCasing, 14))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 14))
                 .addElement('C', ofBlock(sBlockCasings9, 7))
                 .addElement('D', ofBlock(sBlockCasings10, 3))
                 .addElement('E', ofBlock(sBlockCasings8, 10))

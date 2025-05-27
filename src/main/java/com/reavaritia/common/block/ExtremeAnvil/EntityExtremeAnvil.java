@@ -21,7 +21,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.relauncher.Side;

@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockEternalGregTechWorkshopRender;
 import static com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUpgrade.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
@@ -66,14 +65,15 @@ import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.blocks.eternalGregTechWorkshopRender.TileEntityEternalGregTechWorkshop;
+import com.science.gtnl.common.block.blocks.tile.TileEntityEternalGregTechWorkshop;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EGTWUpgradeStorage;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUI;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.EternalGregTechWorkshopUpgrade;
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.Util.UpgradeColor;
-import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.common.loaders.ItemRegistry;
 import goodgenerator.loader.Loaders;
@@ -469,7 +469,9 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
                     .buildAndChain(TTCasingsContainer.GodforgeCasings, 0))
             .addElement(
                 'Z',
-                ofChain(ofBlock(GregTechAPI.sBlockCasings1, 14), ofBlock(BlockEternalGregTechWorkshopRender, 0)))
+                ofChain(
+                    ofBlock(GregTechAPI.sBlockCasings1, 14),
+                    ofBlock(BlockLoader.BlockEternalGregTechWorkshopRender, 0)))
             .addElement('a', isAir())
             .build();
     }
@@ -2124,7 +2126,7 @@ public class EternalGregTechWorkshop extends MultiMachineBase<EternalGregTechWor
             .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
         this.getBaseMetaTileEntity()
             .getWorld()
-            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockEternalGregTechWorkshopRender);
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockLoader.BlockEternalGregTechWorkshopRender);
         TileEntityEternalGregTechWorkshop rendererTileEntity = (TileEntityEternalGregTechWorkshop) this
             .getBaseMetaTileEntity()
             .getWorld()

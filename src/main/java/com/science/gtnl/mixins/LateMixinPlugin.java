@@ -6,7 +6,7 @@ import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.config.MainConfig;
 
 @LateMixin
@@ -30,8 +30,7 @@ public class LateMixinPlugin implements ILateMixinLoader {
         mixins.add("Gregtech.MTEBetterJukebox_Mixin");
 
         if (MainConfig.enableDebugMode) {
-            mixins.add("Gregtech.HatchElementBuilder_Mixin");
-            mixins.add("Gregtech.GTPPMultiBlockBase_Mixin");
+            mixins.add("Gregtech.MachineBlockRenderer_Mixin");
         }
 
         mixins.add("Bartwork.BartworkLoad_Head_Mixin");

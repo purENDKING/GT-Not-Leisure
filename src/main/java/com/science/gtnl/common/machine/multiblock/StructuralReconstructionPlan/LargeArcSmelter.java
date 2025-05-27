@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gtPlusPlus.core.block.ModBlocks.blockCasingsMisc;
@@ -31,6 +30,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.TAE;
 import gregtech.api.enums.Textures;
@@ -143,7 +143,7 @@ public class LargeArcSmelter extends GTMMultiMachineBase<LargeArcSmelter> implem
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<LargeArcSmelter>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 8))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 8))
                 .addElement(
                     'B',
                     buildHatchAdder(LargeArcSmelter.class).casingIndex(CASING_INDEX)

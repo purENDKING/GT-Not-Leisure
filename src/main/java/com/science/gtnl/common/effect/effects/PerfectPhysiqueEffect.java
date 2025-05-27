@@ -5,16 +5,17 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
-import com.science.gtnl.Utils.GTNLEffectUtils;
+import com.science.gtnl.common.effect.EffectBase;
+import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class PerfectPhysiqueEffect extends GTNLEffectUtils {
+public class PerfectPhysiqueEffect extends EffectBase {
 
     public static final PerfectPhysiqueEffect instance = new PerfectPhysiqueEffect();
 
     public PerfectPhysiqueEffect() {
-        super(187, "perfect_physique", false, 0xFFD700, 2);
+        super(MainConfig.perfectPhysiqueEffect, "perfect_physique", false, 0xFFD700, 2);
         MinecraftForge.EVENT_BUS.register(this);
     }
 

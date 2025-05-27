@@ -20,8 +20,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.HeatingCoilLevel;
 import gregtech.api.enums.Materials;
@@ -123,7 +123,7 @@ public class HeavyRolling extends WirelessEnergyMultiMachineBase<HeavyRolling>
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(sBlockCasings8, 10))
                 .addElement('B', ofBlock(sBlockCasings2, 15))
-                .addElement('C', ofBlock(BasicBlocks.MetaCasing, 5))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('D', ofBlock(sBlockCasings10, 3))
                 .addElement('E', ofBlock(sBlockCasings8, 7))
                 .addElement('F', withChannel("coil", ofCoil(HeavyRolling::setCoilLevel, HeavyRolling::getCoilLevel)))
@@ -134,14 +134,14 @@ public class HeavyRolling extends WirelessEnergyMultiMachineBase<HeavyRolling>
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(blockCasingsMisc, 15))))
-                .addElement('I', ofBlock(BasicBlocks.MetaCasing, 7))
+                .addElement('I', ofBlock(BlockLoader.MetaCasing, 7))
                 .addElement('J', ofBlock(blockCasings3Misc, 1))
-                .addElement('K', ofBlock(BasicBlocks.MetaCasing, 2))
-                .addElement('L', ofBlock(BasicBlocks.MetaBlockGlass, 2))
+                .addElement('K', ofBlock(BlockLoader.MetaCasing, 2))
+                .addElement('L', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement('M', ofBlock(sBlockCasings3, 11))
                 .addElement('N', ofFrame(Materials.NaquadahAlloy))
                 .addElement('O', ofBlock(sBlockCasings1, 9))
-                .addElement('P', ofBlock(BasicBlocks.MetaCasing, 4))
+                .addElement('P', ofBlock(BlockLoader.MetaCasing, 4))
                 .build();
         }
         return STRUCTURE_DEFINITION;

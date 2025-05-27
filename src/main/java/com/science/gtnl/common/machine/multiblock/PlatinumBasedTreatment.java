@@ -21,7 +21,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.API.BorosilicateGlass;
 import cpw.mods.fml.relauncher.Side;

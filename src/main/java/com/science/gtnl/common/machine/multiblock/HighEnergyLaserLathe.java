@@ -22,8 +22,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.Textures;
@@ -125,7 +125,7 @@ public class HighEnergyLaserLathe extends WirelessEnergyMultiMachineBase<HighEne
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlockAnyMeta(ELECTRODE_CASING))
                 .addElement('B', ofBlock(sBlockCasingsTT, 0))
-                .addElement('C', ofBlock(BasicBlocks.MetaCasing, 5))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('D', ofBlock(sBlockCasings10, 6))
                 .addElement('E', ofBlock(sBlockGem2, 11))
                 .addElement(
@@ -136,7 +136,7 @@ public class HighEnergyLaserLathe extends WirelessEnergyMultiMachineBase<HighEne
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 7))))
                 .addElement('G', ofBlock(sBlockCasings8, 12))
-                .addElement('H', ofBlock(BasicBlocks.MetaCasing, 6))
+                .addElement('H', ofBlock(BlockLoader.MetaCasing, 6))
                 .addElement('I', ofBlock(sBlockCasingsTT, 6))
                 .addElement('J', ofBlock(sBlockCasingsTT, 4))
                 .addElement('K', ofBlock(sBlockCasings10, 1))

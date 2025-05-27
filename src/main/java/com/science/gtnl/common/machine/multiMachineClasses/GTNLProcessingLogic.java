@@ -2,7 +2,7 @@ package com.science.gtnl.common.machine.multiMachineClasses;
 
 import javax.annotation.Nonnull;
 
-import com.science.gtnl.misc.OverclockType;
+import com.science.gtnl.Utils.enums.OverclockType;
 
 import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.util.GTRecipe;

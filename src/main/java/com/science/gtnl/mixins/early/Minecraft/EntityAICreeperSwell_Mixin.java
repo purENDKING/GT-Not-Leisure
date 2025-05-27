@@ -11,12 +11,14 @@ import net.minecraft.util.MathHelper;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.science.gtnl.Utils.Utils;
+import com.science.gtnl.config.MainConfig;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(EntityAICreeperSwell.class)
@@ -25,14 +27,30 @@ public abstract class EntityAICreeperSwell_Mixin {
     @Shadow
     EntityCreeper swellingCreeper;
 
+    @Unique
     private Utils.TargetInfo cachedBlockTarget = null;
+    @Unique
     private Utils.TargetInfo cachedPlayerTarget = null;
 
+    @Unique
     private long lastBlockTargetUpdateTick = 0;
+    @Unique
     private long lastPlayerTargetUpdateTick = 0;
 
-    private final long blockTargetInterval = 30;
-    private final long playerTargetInterval = 10;
+    @Unique
+    private final int blockTargetInterval = MainConfig.blockTargetInterval;
+    @Unique
+    private final int playerTargetInterval = MainConfig.playerTargetInterval;
+    @Unique
+    private final int blockFindRadius = MainConfig.blockFindRadius;
+    @Unique
+    private final int playerFindRadius = MainConfig.playerFindRadius;
+    @Unique
+    private final int explosionPower = MainConfig.explosionPower;
+    @Unique
+    private final double moveSpeed = MainConfig.moveSpeed;
+    @Unique
+    private final double explosionTriggerRange = MainConfig.explosionTriggerRange;
 
     public Utils.TargetInfo findNearestTarget() {
         long currentTick = this.swellingCreeper.worldObj.getTotalWorldTime();
@@ -57,7 +75,7 @@ public abstract class EntityAICreeperSwell_Mixin {
         double minDistance = Double.MAX_VALUE;
         Utils.TargetInfo closestTarget = null;
 
-        int radius = 16;
+        int radius = blockFindRadius;
 
         for (int x = MathHelper.floor_double(this.swellingCreeper.posX) - radius; x
             <= MathHelper.floor_double(this.swellingCreeper.posX) + radius; ++x) {
@@ -85,7 +103,7 @@ public abstract class EntityAICreeperSwell_Mixin {
         double minDistance = Double.MAX_VALUE;
         Utils.TargetInfo closestTarget = null;
 
-        int radius = 16;
+        int radius = playerFindRadius;
 
         List<EntityPlayer> players = this.swellingCreeper.worldObj
             .getEntitiesWithinAABB(EntityPlayer.class, this.swellingCreeper.boundingBox.expand(radius, radius, radius));
@@ -131,16 +149,16 @@ public abstract class EntityAICreeperSwell_Mixin {
             double targetY = customTarget.y + 0.5;
             double targetZ = customTarget.z + 0.5;
 
-            if (customTarget.distance <= 3) {
+            if (customTarget.distance <= explosionTriggerRange) {
                 if (this.swellingCreeper.getCreeperState() < 1) {
                     this.swellingCreeper.setCreeperState(1);
-                    ((EntityCreeperAccessor) this.swellingCreeper).setExplosionRadius(100);
+                    ((EntityCreeperAccessor) this.swellingCreeper).setExplosionRadius(explosionPower);
                 }
                 this.swellingCreeper.getNavigator()
                     .clearPathEntity();
             } else {
                 this.swellingCreeper.getNavigator()
-                    .tryMoveToXYZ(targetX, targetY, targetZ, 1.0D);
+                    .tryMoveToXYZ(targetX, targetY, targetZ, moveSpeed);
 
                 boolean canSeeTarget = true;
                 if (customTarget.isEntityTarget() && customTarget.entityTarget != null) {

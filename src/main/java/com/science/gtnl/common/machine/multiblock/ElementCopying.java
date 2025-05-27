@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gtnhlanth.common.register.LanthItemList.ELECTRODE_CASING;
@@ -20,7 +19,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -111,7 +111,7 @@ public class ElementCopying extends GTMMultiMachineBase<ElementCopying> implemen
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<ElementCopying>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 18))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 18))
                 .addElement('B', ofBlockAnyMeta(ELECTRODE_CASING))
                 .addElement(
                     'C',

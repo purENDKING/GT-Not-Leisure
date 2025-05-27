@@ -7,8 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.client.GTNLCreativeTabs;
-import com.science.gtnl.common.GTNLItemList;
 
 import baubles.api.BaubleType;
 import cpw.mods.fml.relauncher.Side;

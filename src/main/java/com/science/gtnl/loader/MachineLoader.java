@@ -1,7 +1,7 @@
 package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
-import static com.science.gtnl.common.GTNLMachineID.*;
+import static com.science.gtnl.Utils.enums.GTNLMachineID.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
@@ -15,12 +15,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 import com.google.common.collect.ImmutableSet;
-import com.science.gtnl.Mods;
-import com.science.gtnl.Utils.AnimatedText;
-import com.science.gtnl.Utils.MoreMaterialToolUtils;
+import com.science.gtnl.Utils.enums.GTNLItemList;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.Utils.item.ItemUtils;
-import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
+import com.science.gtnl.Utils.text.AnimatedText;
 import com.science.gtnl.common.machine.basicMachine.DebugResearchStation;
 import com.science.gtnl.common.machine.basicMachine.ManaTank;
 import com.science.gtnl.common.machine.basicMachine.SteamAssemblerBronze;
@@ -200,7 +198,7 @@ import com.science.gtnl.common.machine.multiblock.VortexMatterCentrifuge;
 import com.science.gtnl.common.machine.multiblock.WhiteNightGenerator;
 import com.science.gtnl.common.machine.multiblock.WoodDistillation;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.common.materials.MaterialUtils;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.util.CrackRecipeAdder;
@@ -2327,13 +2325,13 @@ public class MachineLoader {
 
     public static void registerMTEWireAndPipe() {
         CrackRecipeAdder.registerWire(STAR_GATE_WIRE.ID, MaterialPool.Stargate, 2147483647, 2147483647, 0, true);
-        MoreMaterialToolUtils.generateGTFluidPipes(Materials.BlueAlloy, BLUE_ALLOY_PIPE.ID, 4000, 3000, true);
+        MaterialUtils.generateGTFluidPipes(Materials.BlueAlloy, BLUE_ALLOY_PIPE.ID, 4000, 3000, true);
         CrackRecipeAdder.registerPipe(COMPRESSED_STEAM_PIPE.ID, MaterialPool.CompressedSteam, 250000, 10000, true);
         CrackRecipeAdder.registerPipe(STRONZE_PIPE.ID, MaterialPool.Stronze, 15000, 10000, true);
         CrackRecipeAdder.registerPipe(BREEL_PIPE.ID, MaterialPool.Breel, 10000, 10000, true);
-        // 这个可用 MoreMaterialToolUtils.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
+        // 这个可用 MaterialUtils.generateNonGTFluidPipes(GregtechOrePrefixes.GT_Materials.Void, 22013, 500, 2000,
         // true);
-        // 这个渲染炸了 MoreMaterialToolUtils.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
+        // 这个渲染炸了 MaterialUtils.registerPipeGTPP(22020, MaterialsAlloy.BLOODSTEEL, 123, 123, true);
     }
 
     private static void registerCovers() {
@@ -2365,17 +2363,17 @@ public class MachineLoader {
     }
 
     public static void registerGlasses() {
-        BorosilicateGlass.registerGlass(BasicBlocks.PlayerDoll, 0, (byte) 12);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 0, (byte) 10);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 1, (byte) 8);
-        BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlass, 2, (byte) 7);
+        BorosilicateGlass.registerGlass(BlockLoader.PlayerDoll, 0, (byte) 12);
+        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 0, (byte) 10);
+        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 1, (byte) 8);
+        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 2, (byte) 7);
 
         for (int LampMeta = 1; LampMeta <= 32; LampMeta++) {
-            BorosilicateGlass.registerGlass(BasicBlocks.MetaBlockGlow, LampMeta, (byte) 3);
+            BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlow, LampMeta, (byte) 3);
         }
 
         for (int LampOffMeta = 3; LampOffMeta <= 34; LampOffMeta++) {
-            BorosilicateGlass.registerGlass(BasicBlocks.MetaBlock, LampOffMeta, (byte) 3);
+            BorosilicateGlass.registerGlass(BlockLoader.MetaBlock, LampOffMeta, (byte) 3);
         }
     }
 

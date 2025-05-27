@@ -35,7 +35,7 @@ import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

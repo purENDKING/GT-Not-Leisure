@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.HatchElement.ExoticEnergy;
@@ -18,6 +17,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -84,7 +84,7 @@ public class PolymerTwistingModule extends NanitesBaseModule<PolymerTwistingModu
                         .casingIndex(CASING_INDEX)
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 0))))
-                .addElement('B', ofBlock(MetaCasing, 4))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement('C', ofFrame(Materials.CosmicNeutronium))
                 .addElement('D', ofBlock(sBlockCasings6, 10))
                 .addElement('E', ofBlock(sBlockCasings2, 5))

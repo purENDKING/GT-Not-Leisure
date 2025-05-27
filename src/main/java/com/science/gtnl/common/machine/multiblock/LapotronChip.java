@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.ExtraUtilities;
@@ -23,7 +22,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -163,7 +163,7 @@ public class LapotronChip extends MultiMachineBase<LapotronChip> implements ISur
                         .casingIndex(((BlockCasings8) GregTechAPI.sBlockCasings8).getTextureIndex(10))
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 10))))
-                .addElement('F', ofBlock(MetaBlockGlow, 0))
+                .addElement('F', ofBlock(BlockLoader.MetaBlockGlow, 0))
                 .addElement(
                     'G',
                     withChannel(

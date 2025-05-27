@@ -27,8 +27,8 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
@@ -139,7 +139,7 @@ public class SuperconductingElectromagnetism extends WirelessEnergyMultiMachineB
                 .addElement('A', ofBlock(Loaders.speedingPipe, 0))
                 .addElement('B', ofBlock(Loaders.compactFusionCoil, 0))
                 .addElement('C', ofBlockAnyMeta(ELECTRODE_CASING))
-                .addElement('D', ofBlock(BasicBlocks.MetaCasing, 8))
+                .addElement('D', ofBlock(BlockLoader.MetaCasing, 8))
                 .addElement(
                     'E',
                     buildHatchAdder(SuperconductingElectromagnetism.class)

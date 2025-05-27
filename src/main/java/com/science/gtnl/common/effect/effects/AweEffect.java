@@ -17,14 +17,15 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
-import com.science.gtnl.Utils.GTNLEffectUtils;
-import com.science.gtnl.Utils.message.TitlePacket;
+import com.science.gtnl.common.effect.EffectBase;
+import com.science.gtnl.common.packet.TitlePacket;
+import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class AweEffect extends GTNLEffectUtils {
+public class AweEffect extends EffectBase {
 
     public static final AweEffect instance = new AweEffect();
 
@@ -38,7 +39,7 @@ public class AweEffect extends GTNLEffectUtils {
     private static final Random random = new Random();
 
     public AweEffect() {
-        super(186, "awe", false, 0xFF00FF, 1);
+        super(MainConfig.aweEffectID, "awe", false, 0xFF00FF, 1);
         MinecraftForge.EVENT_BUS.register(this);
     }
 

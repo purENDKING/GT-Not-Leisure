@@ -28,8 +28,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
@@ -137,7 +137,7 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<IntegratedAssemblyFacility>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(BasicBlocks.MetaCasing, 4))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement(
                     'B',
                     ofBlocksTiered(
@@ -166,9 +166,9 @@ public class IntegratedAssemblyFacility extends WirelessEnergyMultiMachineBase<I
                 .addElement('L', ofBlock(LanthItemList.COOLANT_DELIVERY_CASING, 0))
                 .addElement('M', ofBlock(IGBlocks.SpaceElevatorCasing, 1))
                 .addElement('N', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
-                .addElement('O', ofBlock(BasicBlocks.MetaBlockGlow, 31))
+                .addElement('O', ofBlock(BlockLoader.MetaBlockGlow, 31))
                 .addElement('P', ofBlock(sBlockCasings6, 9))
-                .addElement('Q', ofBlock(BasicBlocks.MetaCasing, 5))
+                .addElement('Q', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('R', ofFrame(Materials.CosmicNeutronium))
                 .build();
         }

@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_FRONT_ORE_DRILL;
@@ -43,8 +42,8 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.Scrollable;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.Utils.enums.TierEU;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import goodgenerator.loader.Loaders;
 import gregtech.api.enums.GTValues;
@@ -52,6 +51,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.MaterialsUEVplus;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.Textures;
+import gregtech.api.enums.TierEU;
 import gregtech.api.enums.VoidingMode;
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
@@ -149,9 +149,9 @@ public class AdvancedInfiniteDriller extends MultiMachineBase<AdvancedInfiniteDr
             STRUCTURE_DEFINITION = StructureDefinition.<AdvancedInfiniteDriller>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(Loaders.MAR_Casing, 0))
-                .addElement('B', ofBlock(MetaCasing, 5))
-                .addElement('C', ofBlock(MetaCasing, 16))
-                .addElement('D', ofBlock(MetaCasing, 18))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 5))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 16))
+                .addElement('D', ofBlock(BlockLoader.MetaCasing, 18))
                 .addElement('E', ofBlock(sBlockCasings1, 14))
                 .addElement('F', ofBlock(sSolenoidCoilCasings, 5))
                 .addElement('G', ofBlock(sBlockCasings3, 11))

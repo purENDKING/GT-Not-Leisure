@@ -28,7 +28,7 @@ import com.reavaritia.ReAvaCreativeTabs;
 import com.reavaritia.ReAvaItemList;
 import com.reavaritia.common.SubtitleDisplay;
 import com.reavaritia.common.entity.EntityChronarchPoint;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.config.MainConfig;
 

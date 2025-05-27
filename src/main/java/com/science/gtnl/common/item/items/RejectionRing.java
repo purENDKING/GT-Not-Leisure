@@ -10,8 +10,8 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.client.GTNLCreativeTabs;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.BaubleItem;
 
 import baubles.api.BaubleType;

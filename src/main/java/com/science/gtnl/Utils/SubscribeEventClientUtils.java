@@ -1,8 +1,8 @@
 package com.science.gtnl.Utils;
 
-import static com.science.gtnl.Utils.message.ClientSoundHandler.PLAYING_SOUNDS;
-import static com.science.gtnl.Utils.message.ClientTitleDisplayHandler.*;
-import static com.science.gtnl.common.block.blocks.playerDoll.PlayerDollRenderManager.*;
+import static com.science.gtnl.common.packet.ClientSoundHandler.PLAYING_SOUNDS;
+import static com.science.gtnl.common.packet.ClientTitleDisplayHandler.*;
+import static com.science.gtnl.common.render.PlayerDollRenderManager.*;
 
 import java.util.Map;
 import java.util.Random;
@@ -25,10 +25,10 @@ import net.minecraftforge.event.world.WorldEvent;
 import org.lwjgl.opengl.GL11;
 
 import com.reavaritia.common.render.CustomEntityRenderer;
-import com.science.gtnl.Mods;
-import com.science.gtnl.Utils.message.TitlePacket;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.common.effect.effects.AweEffect;
 import com.science.gtnl.common.item.TimeStopManager;
+import com.science.gtnl.common.packet.TitlePacket;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;

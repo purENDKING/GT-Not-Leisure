@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 
-import com.science.gtnl.Utils.message.TitlePacket;
+import com.science.gtnl.common.packet.TitlePacket;
 
 public class CommandTitle extends CommandBase {
 

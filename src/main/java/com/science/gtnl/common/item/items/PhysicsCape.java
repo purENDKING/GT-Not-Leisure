@@ -20,8 +20,8 @@ import net.minecraftforge.client.event.RenderPlayerEvent;
 
 import org.lwjgl.opengl.GL11;
 
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.client.GTNLCreativeTabs;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.item.BaubleItem;
 
 import baubles.api.BaubleType;

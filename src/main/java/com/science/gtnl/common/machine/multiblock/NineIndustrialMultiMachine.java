@@ -6,7 +6,6 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.NEGATIVE_ONE;
 import static com.science.gtnl.Utils.Utils.mergeArray;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static goodgenerator.loader.Loaders.FRF_Coil_4;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
@@ -48,6 +47,7 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.NineIndustrialMultiMachineManager;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
@@ -161,7 +161,7 @@ public class NineIndustrialMultiMachine extends WirelessEnergyMultiMachineBase<N
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(bw_realglas2, 0))
                 .addElement('B', ofBlock(FRF_Coil_4, 0))
-                .addElement('C', ofBlock(MetaCasing, 5))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('D', ofBlock(defcCasingBlock, 12))
                 .addElement(
                     'E',

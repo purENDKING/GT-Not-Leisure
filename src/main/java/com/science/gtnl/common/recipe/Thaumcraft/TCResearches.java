@@ -5,7 +5,7 @@ import static com.science.gtnl.common.recipe.Thaumcraft.TCRecipePool.infusionRec
 
 import net.minecraft.util.ResourceLocation;
 
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 
 import gregtech.api.enums.Mods;
 import thaumcraft.api.aspects.Aspect;

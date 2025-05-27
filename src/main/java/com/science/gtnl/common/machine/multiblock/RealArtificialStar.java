@@ -1,13 +1,11 @@
 package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
-import static com.science.gtnl.Mods.TwistSpaceTechnology;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.Utils.copyAmount;
+import static com.science.gtnl.Utils.enums.GTNLItemList.StellarConstructionFrameMaterial;
+import static com.science.gtnl.Utils.enums.Mods.TwistSpaceTechnology;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
-import static com.science.gtnl.common.GTNLItemList.StellarConstructionFrameMaterial;
-import static com.science.gtnl.common.machine.DSP.DSP_Values.EnableRenderDefaultArtificialStar;
-import static com.science.gtnl.common.machine.DSP.DSP_Values.secondsOfArtificialStarProgressCycleTime;
 import static goodgenerator.loader.Loaders.compactFusionCoil;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
@@ -44,11 +42,11 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.Utils;
-import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import galaxyspace.core.register.GSBlocks;
 import gregtech.api.GregTechAPI;
@@ -94,7 +92,8 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     public long currentOutputEU = 0;
     public final DecimalFormat decimalFormat = new DecimalFormat("#.0");
     public boolean isRendering = false;
-    public byte enableRender = EnableRenderDefaultArtificialStar;
+    public static boolean configEnableDefaultRender = MainConfig.enableRenderDefaultArtificialStar;
+    public boolean enableRender = configEnableDefaultRender;
     public final int HORIZONTAL_OFF_SET = 62;
     public final int VERTICAL_OFF_SET = 88;
     public final int DEPTH_OFF_SET = 15;
@@ -134,7 +133,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
                     + " * 2147483647"
                     + EnumChatFormatting.RESET
                     + " EU / "
-                    + secondsOfArtificialStarProgressCycleTime
+                    + MainConfig.secondsOfArtificialStarProgressCycleTime
                     + " s");
         }
     }
@@ -171,14 +170,14 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
     @Override
     public final void onScrewdriverRightClick(ForgeDirection side, EntityPlayer aPlayer, float aX, float aY, float aZ) {
         if (getBaseMetaTileEntity().isServerSide()) {
-            this.enableRender = (byte) ((this.enableRender + 1) % 2);
-            GTUtility.sendChatToPlayer(
-                aPlayer,
-                StatCollector.translateToLocal("ArtificialStar.enableRender." + this.enableRender));
-            if (enableRender == 0 && isRendering) {
+            if (enableRender && isRendering) {
                 destroyRenderBlock();
                 isRendering = false;
             }
+            this.enableRender = !enableRender;
+            GTUtility.sendChatToPlayer(
+                aPlayer,
+                StatCollector.translateToLocal("ArtificialStar.enableRender." + this.enableRender));
         }
     }
 
@@ -246,7 +245,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         }
 
         // set progress time with cfg
-        mMaxProgresstime = (int) (20 * secondsOfArtificialStarProgressCycleTime);
+        mMaxProgresstime = (int) (20 * MainConfig.secondsOfArtificialStarProgressCycleTime);
         // chance to recover FrameMaterial
         if (recoveryChance == 1000) {
             if (recoveryAmount > 0) {
@@ -268,7 +267,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         if (rewardContinuous < 50) rewardContinuous++;
 
         // start render
-        if (enableRender != 0 && !isRendering) {
+        if (enableRender && !isRendering) {
             createRenderBlock();
             isRendering = true;
         }
@@ -357,7 +356,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         aNBT.setByte("rewardContinuous", rewardContinuous);
         aNBT.setLong("currentOutputEU", currentOutputEU);
         aNBT.setBoolean("isRendering", isRendering);
-        aNBT.setByte("enableRender", enableRender);
+        aNBT.setBoolean("enableRender", enableRender);
     }
 
     @Override
@@ -371,7 +370,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
         rewardContinuous = aNBT.getByte("rewardContinuous");
         currentOutputEU = aNBT.getLong("currentOutputEU");
         isRendering = aNBT.getBoolean("isRendering");
-        enableRender = aNBT.getByte("enableRender");
+        enableRender = aNBT.getBoolean("enableRender");
     }
 
     @Override
@@ -640,7 +639,7 @@ public class RealArtificialStar extends MultiMachineBase<RealArtificialStar>
                 (int) (x + xOffset),
                 (int) (y + yOffset),
                 (int) (z + zOffset),
-                BasicBlocks.BlockArtificialStarRender);
+                BlockLoader.BlockArtificialStarRender);
     }
 
     public void destroyRenderBlock() {

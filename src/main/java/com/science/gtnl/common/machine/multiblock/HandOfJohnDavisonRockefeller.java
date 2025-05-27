@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
@@ -23,6 +22,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.Materials;
@@ -149,7 +149,7 @@ public class HandOfJohnDavisonRockefeller extends WirelessEnergyMultiMachineBase
                             Byte.MAX_VALUE,
                             (te, t) -> te.mGlassTier = t,
                             te -> te.mGlassTier)))
-                .addElement('B', ofBlock(MetaCasing, 4))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement('C', ofBlockAnyMeta(FOCUS_MANIPULATION_CASING))
                 .addElement(
                     'D',

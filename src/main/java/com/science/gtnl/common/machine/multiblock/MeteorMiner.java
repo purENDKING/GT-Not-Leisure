@@ -5,7 +5,6 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.onElement
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.transpose;
 import static com.science.gtnl.ScienceNotLeisure.LOG;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.LaserBeacon;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -46,10 +45,11 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.ButtonWidget;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.Utils.item.ItemUtils;
-import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.block.blocks.laserBeacon.TileEntityLaserBeacon;
+import com.science.gtnl.common.block.blocks.tile.TileEntityLaserBeacon;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -125,7 +125,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
                 .addElement('D', ofFrame(Materials.StainlessSteel))
                 .addElement('E', ofBlock(ModBlocks.blockSpecialMultiCasings, 6))
                 .addElement('F', ofBlock(ModBlocks.blockSpecialMultiCasings, 8))
-                .addElement('G', ofBlock(LaserBeacon, 0))
+                .addElement('G', ofBlock(BlockLoader.LaserBeacon, 0))
                 .addElement(
                     'H',
                     buildHatchAdder(MeteorMiner.class).atLeast(OutputBus, Energy, Maintenance)

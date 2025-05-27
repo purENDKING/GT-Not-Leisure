@@ -2,8 +2,8 @@ package com.science.gtnl.common.recipe.GTNL;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import WayofTime.alchemicalWizardry.ModItems;
 import WayofTime.alchemicalWizardry.api.altarRecipeRegistry.AltarRecipe;

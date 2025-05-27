@@ -2,8 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing02;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_STEAM_MACERATOR;
@@ -25,7 +23,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
@@ -72,8 +71,8 @@ public class HighPressureSteamFusionReactor extends SteamMultiMachineBase<HighPr
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<HighPressureSteamFusionReactor>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 31))
-                .addElement('B', ofBlock(MetaCasing02, 0))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 31))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing02, 0))
                 .addElement('C', chainAllGlasses())
                 .addElement('D', ofFrame(Materials.Steel))
                 .addElement(

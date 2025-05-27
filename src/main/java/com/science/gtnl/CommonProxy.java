@@ -5,14 +5,14 @@ import static com.science.gtnl.ScienceNotLeisure.network;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.science.gtnl.Utils.SubscribeEventUtils;
-import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
-import com.science.gtnl.Utils.message.PacketTileEntityNBT;
-import com.science.gtnl.Utils.message.SoundPacket;
-import com.science.gtnl.Utils.message.TitlePacket;
-import com.science.gtnl.asm.TickrateMessage;
-import com.science.gtnl.common.block.blocks.playerDoll.PlayerDollWaila;
+import com.science.gtnl.Utils.text.PlayerDollWaila;
 import com.science.gtnl.common.machine.hatch.SuperCraftingInputHatchME;
-import com.science.gtnl.config.ConfigSyncMessage;
+import com.science.gtnl.common.packet.ConfigSyncPacket;
+import com.science.gtnl.common.packet.GetTileEntityNBTRequestPacket;
+import com.science.gtnl.common.packet.SoundPacket;
+import com.science.gtnl.common.packet.TickratePacket;
+import com.science.gtnl.common.packet.TileEntityNBTPacket;
+import com.science.gtnl.common.packet.TitlePacket;
 
 import appeng.api.AEApi;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -32,14 +32,14 @@ public class CommonProxy {
             .register(new SubscribeEventUtils());
 
         network.registerMessage(TitlePacket.Handler.class, TitlePacket.class, 0, Side.CLIENT);
-        network.registerMessage(TickrateMessage.Handler.class, TickrateMessage.class, 1, Side.CLIENT);
-        network.registerMessage(ConfigSyncMessage.Handler.class, ConfigSyncMessage.class, 2, Side.CLIENT);
+        network.registerMessage(TickratePacket.Handler.class, TickratePacket.class, 1, Side.CLIENT);
+        network.registerMessage(ConfigSyncPacket.Handler.class, ConfigSyncPacket.class, 2, Side.CLIENT);
         network.registerMessage(
-            PacketGetTileEntityNBTRequest.Handler.class,
-            PacketGetTileEntityNBTRequest.class,
+            GetTileEntityNBTRequestPacket.Handler.class,
+            GetTileEntityNBTRequestPacket.class,
             3,
             Side.SERVER);
-        network.registerMessage(PacketTileEntityNBT.Handler.class, PacketTileEntityNBT.class, 4, Side.CLIENT);
+        network.registerMessage(TileEntityNBTPacket.Handler.class, TileEntityNBTPacket.class, 4, Side.CLIENT);
         network.registerMessage(SoundPacket.Handler.class, SoundPacket.class, 5, Side.CLIENT);
     }
 

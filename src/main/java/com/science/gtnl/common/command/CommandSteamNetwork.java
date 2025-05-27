@@ -1,6 +1,6 @@
 package com.science.gtnl.common.command;
 
-import static com.science.gtnl.Utils.SteamWirelessNetworkManager.*;
+import static com.science.gtnl.Utils.steam.SteamWirelessNetworkManager.*;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

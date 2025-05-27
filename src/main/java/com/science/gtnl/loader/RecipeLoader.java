@@ -3,9 +3,8 @@ package com.science.gtnl.loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayRecipeLoader;
+import com.science.gtnl.common.machine.multiMachineClasses.ProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.recipe.AprilFool.CactusWonderFakeRecipes;
 import com.science.gtnl.common.recipe.AprilFool.CraftingTableAprilFoolRecipes;
@@ -102,7 +101,7 @@ public class RecipeLoader {
         new OP_NormalProcessing().enumOreProcessingRecipes();
         new ShapedArcaneCraftingRecipes().loadRecipes();
         new InfusionCraftingRecipes().loadRecipes();
-        GTNLProcessingArrayRecipeLoader.registerDefaultGregtechMaps();
+        ProcessingArrayRecipeLoader.registerDefaultGregtechMaps();
 
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.MolybdenumDisilicide, 800, 1920, 2300, true);
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.HSLASteel, 1000, 480, 1711, true);

@@ -4,10 +4,10 @@ import static gregtech.api.util.GTRecipeBuilder.TICKS;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.recipe.RecipeMap;

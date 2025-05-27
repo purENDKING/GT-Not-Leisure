@@ -1,14 +1,14 @@
 package com.science.gtnl.common.recipe.GTNL;
 
+import static com.science.gtnl.Utils.enums.GTNLItemList.TrollFace;
 import static com.science.gtnl.Utils.item.TextHandler.texter;
-import static com.science.gtnl.common.GTNLItemList.TrollFace;
 import static gregtech.api.util.GTModHandler.getModItem;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTUtility;

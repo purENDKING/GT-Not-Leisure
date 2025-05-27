@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -23,7 +22,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -68,7 +68,7 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SteamWoodcutter>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 23))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 23))
                 .addElement(
                     'B',
                     ofChain(
@@ -93,8 +93,8 @@ public class SteamWoodcutter extends SteamMultiMachineBase<SteamWoodcutter> impl
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 24))
                             .dot(1)
                             .buildAndChain(),
-                        ofBlock(MetaCasing, 24)))
-                .addElement('C', ofBlock(MetaCasing, 25))
+                        ofBlock(BlockLoader.MetaCasing, 24)))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 25))
                 .addElement('D', chainAllGlasses())
                 .addElement('E', ofBlock(Blocks.dirt, 0))
                 .build();

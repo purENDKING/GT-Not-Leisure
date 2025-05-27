@@ -2,8 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.*;
@@ -25,6 +23,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -127,7 +126,7 @@ public class NanitesCircuitAssemblyFactory extends WirelessEnergyMultiMachineBas
             STRUCTURE_DEFINITION = StructureDefinition.<NanitesCircuitAssemblyFactory>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(sBlockCasings1, 13))
-                .addElement('B', ofBlock(MetaCasing, 18))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 18))
                 .addElement('C', ofBlock(IGBlocks.SpaceElevatorCasing, 0))
                 .addElement('D', ofBlock(ModBlocks.blockCasings5Misc, 12))
                 .addElement(
@@ -137,7 +136,7 @@ public class NanitesCircuitAssemblyFactory extends WirelessEnergyMultiMachineBas
                         .casingIndex(getCasingTextureID())
                         .dot(1)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 10))))
-                .addElement('F', ofBlock(MetaBlockGlass, 2))
+                .addElement('F', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement(
                     'G',
                     ofBlockAnyMeta(
@@ -151,7 +150,7 @@ public class NanitesCircuitAssemblyFactory extends WirelessEnergyMultiMachineBas
                             MaterialsAlloy.PIKYONIUM.getFrameBox(1)
                                 .getItem())))
                 .addElement('I', ofFrame(Materials.Quantium))
-                .addElement('J', ofBlock(MetaCasing, 4))
+                .addElement('J', ofBlock(BlockLoader.MetaCasing, 4))
                 .build();
         }
         return STRUCTURE_DEFINITION;

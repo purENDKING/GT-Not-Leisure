@@ -34,7 +34,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.ScienceNotLeisure;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;

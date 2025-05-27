@@ -14,7 +14,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.Utils.recipes.ChanceBonusManager;
 import com.science.gtnl.config.MainConfig;
 

@@ -1,6 +1,6 @@
 package com.reavaritia;
 
-import static com.science.gtnl.common.GTNLItemList.TestMetaBlock01_0;
+import static com.science.gtnl.Utils.enums.GTNLItemList.TestMetaBlock01_0;
 import static gregtech.api.enums.GTValues.NI;
 import static gregtech.api.enums.GTValues.W;
 

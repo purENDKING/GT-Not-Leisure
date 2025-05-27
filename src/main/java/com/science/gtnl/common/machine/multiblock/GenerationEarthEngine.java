@@ -19,7 +19,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import crazypants.enderio.EnderIO;
 import gregtech.api.GregTechAPI;

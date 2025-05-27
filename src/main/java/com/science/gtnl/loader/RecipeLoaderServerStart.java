@@ -1,7 +1,6 @@
 package com.science.gtnl.loader;
 
 import com.Nxer.TwistSpaceTechnology.recipe.machineRecipe.expanded.CircuitAssemblyLineWithoutImprintRecipePool;
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeUtil;
 import com.science.gtnl.common.recipe.GTNL.ExtremeExtremeEntityCrusherRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.AlloyBlastSmelterRecipes;
@@ -9,7 +8,6 @@ import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblerConve
 import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblyLineRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.VacuumFurnaceRecipes;
-import com.science.gtnl.common.recipe.RecipeRegister;
 
 import bartworks.API.recipe.BartWorksRecipeMaps;
 import gregtech.api.enums.Mods;
@@ -48,7 +46,7 @@ public class RecipeLoaderServerStart {
 
         new CircuitAssemblyLineRecipes().loadRecipes();
 
-        if (!recipesAdded && com.science.gtnl.Mods.TwistSpaceTechnology.isModLoaded()) {
+        if (!recipesAdded && com.science.gtnl.Utils.enums.Mods.TwistSpaceTechnology.isModLoaded()) {
             CircuitAssemblyLineWithoutImprintRecipePool.loadRecipes();
         }
     }

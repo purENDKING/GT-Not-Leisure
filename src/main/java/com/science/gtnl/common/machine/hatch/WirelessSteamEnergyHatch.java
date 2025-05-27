@@ -1,7 +1,7 @@
 package com.science.gtnl.common.machine.hatch;
 
-import static com.science.gtnl.Utils.SteamWirelessNetworkManager.addSteamToGlobalSteamMap;
-import static com.science.gtnl.Utils.SteamWirelessNetworkManager.getUserSteam;
+import static com.science.gtnl.Utils.steam.SteamWirelessNetworkManager.addSteamToGlobalSteamMap;
+import static com.science.gtnl.Utils.steam.SteamWirelessNetworkManager.getUserSteam;
 import static gregtech.api.interfaces.tileentity.IWirelessEnergyHatchInformation.number_of_energy_additions;
 
 import java.math.BigInteger;

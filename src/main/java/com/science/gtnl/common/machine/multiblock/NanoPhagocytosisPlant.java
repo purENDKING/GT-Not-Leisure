@@ -2,8 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.BlockNanoPhagocytosisPlantRender;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
@@ -32,8 +30,9 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.blocks.nanoPhagocytosisPlantRender.TileEntityNanoPhagocytosisPlant;
+import com.science.gtnl.common.block.blocks.tile.TileEntityNanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import goodgenerator.loader.Loaders;
 import gregtech.api.GregTechAPI;
@@ -179,9 +178,9 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
                 .addShape(STRUCTURE_PIECE_MAIN_RING_TWO_AIR, transpose(shapeRingTwoAir))
                 .addShape(STRUCTURE_PIECE_MAIN_RING_THREE_AIR, transpose(shapeRingThreeAir))
                 .addElement('A', ofBlock(BlockQuantumGlass.INSTANCE, 0))
-                .addElement('B', ofBlock(MetaCasing, 2))
-                .addElement('C', ofBlock(MetaCasing, 4))
-                .addElement('D', ofBlock(MetaCasing, 18))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 2))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 4))
+                .addElement('D', ofBlock(BlockLoader.MetaCasing, 18))
                 .addElement('E', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_CASING, 0))
                 .addElement('F', ofBlock(sBlockCasings1, 15))
                 .addElement('G', ofBlock(sBlockCasings10, 3))
@@ -350,7 +349,7 @@ public class NanoPhagocytosisPlant extends WirelessEnergyMultiMachineBase<NanoPh
             .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, Blocks.air);
         this.getBaseMetaTileEntity()
             .getWorld()
-            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockNanoPhagocytosisPlantRender);
+            .setBlock(renderPos.posX, renderPos.posY, renderPos.posZ, BlockLoader.BlockNanoPhagocytosisPlantRender);
         TileEntityNanoPhagocytosisPlant rendererTileEntity = (TileEntityNanoPhagocytosisPlant) this
             .getBaseMetaTileEntity()
             .getWorld()

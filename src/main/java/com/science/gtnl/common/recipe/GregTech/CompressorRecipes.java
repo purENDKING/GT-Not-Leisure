@@ -1,14 +1,14 @@
 package com.science.gtnl.common.recipe.GregTech;
 
-import static com.science.gtnl.Mods.ScienceNotLeisure;
+import static com.science.gtnl.Utils.enums.Mods.ScienceNotLeisure;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.loader.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

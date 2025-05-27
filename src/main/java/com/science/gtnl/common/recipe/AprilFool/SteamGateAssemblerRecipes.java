@@ -5,11 +5,11 @@ import static gregtech.api.util.GTRecipeBuilder.SECONDS;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;

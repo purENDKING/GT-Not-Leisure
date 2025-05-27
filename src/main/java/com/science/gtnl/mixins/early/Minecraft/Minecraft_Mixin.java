@@ -56,8 +56,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.reavaritia.common.render.CustomEntityRenderer;
-import com.science.gtnl.Utils.message.PacketGetTileEntityNBTRequest;
 import com.science.gtnl.common.item.TimeStopManager;
+import com.science.gtnl.common.packet.GetTileEntityNBTRequestPacket;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 
@@ -704,7 +704,7 @@ public abstract class Minecraft_Mixin {
                     int blockMeta = result.getItemDamage();
                     TileEntity tileentity = world.getTileEntity(x, y, z);
                     if (tileentity != null) {
-                        network.sendToServer(new PacketGetTileEntityNBTRequest(x, y, z, blockID, blockMeta));
+                        network.sendToServer(new GetTileEntityNBTRequestPacket(x, y, z, blockID, blockMeta));
                         return true;
                     }
                 }

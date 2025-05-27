@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -27,6 +26,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -155,7 +155,8 @@ public class LargeSteamExtruder extends SteamMultiMachineBase<LargeSteamExtruder
                     'E',
                     ofBlocksTiered(
                         LargeSteamExtruder::getTierBrickCasing,
-                        ImmutableList.of(Pair.of(MetaBlockColumn, 0), Pair.of(MetaBlockColumn, 1)),
+                        ImmutableList
+                            .of(Pair.of(BlockLoader.MetaBlockColumn, 0), Pair.of(BlockLoader.MetaBlockColumn, 1)),
                         -1,
                         (t, m) -> t.tierBrickCasing = m,
                         t -> t.tierBrickCasing))

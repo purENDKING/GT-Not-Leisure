@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TELEPORTER;
@@ -125,7 +124,7 @@ public class DraconicFusionCrafting extends GTMMultiMachineBase<DraconicFusionCr
             STRUCTURE_DEFINITION = StructureDefinition.<DraconicFusionCrafting>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(sBlockCasings9, 11))
-                .addElement('B', ofBlock(MetaCasing, 14))
+                .addElement('B', ofBlock(com.science.gtnl.loader.BlockLoader.MetaCasing, 14))
                 .addElement(
                     'C',
                     buildHatchAdder(DraconicFusionCrafting.class).casingIndex(CASING_INDEX)

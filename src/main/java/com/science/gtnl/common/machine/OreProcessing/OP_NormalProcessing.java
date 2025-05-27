@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 
 import com.google.common.collect.Sets;
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;

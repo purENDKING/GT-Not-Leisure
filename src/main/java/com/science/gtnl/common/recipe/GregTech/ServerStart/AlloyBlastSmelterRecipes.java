@@ -1,11 +1,11 @@
 package com.science.gtnl.common.recipe.GregTech.ServerStart;
 
-import com.science.gtnl.Utils.enums.TierEU;
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
+import com.science.gtnl.loader.IRecipePool;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;

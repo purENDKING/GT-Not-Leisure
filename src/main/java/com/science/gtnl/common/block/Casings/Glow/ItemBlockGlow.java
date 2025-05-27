@@ -2,7 +2,6 @@ package com.science.gtnl.common.block.Casings.Glow;
 
 import static com.science.gtnl.Utils.item.MetaItemStackUtils.initMetaItemStack;
 import static com.science.gtnl.Utils.item.MetaItemStackUtils.metaItemStackTooltipsAdd;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 import com.science.gtnl.client.GTNLCreativeTabs;
+import com.science.gtnl.loader.BlockLoader;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -45,7 +45,7 @@ public class ItemBlockGlow extends ItemBlock {
     // region MetaBlock Generators
 
     public static ItemStack initMetaBlockGlow(String i18nName, int Meta) {
-        return initMetaItemStack(i18nName, Meta, MetaBlockGlow, MetaBlockSet);
+        return initMetaItemStack(i18nName, Meta, BlockLoader.MetaBlockGlow, MetaBlockSet);
     }
 
     public static ItemStack initMetaBlockGlow(String i18nName, int Meta, String[] tooltips) {

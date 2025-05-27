@@ -6,9 +6,9 @@ import static gregtech.api.enums.Mods.IndustrialCraft2;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.loader.IRecipePool;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;

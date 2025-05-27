@@ -9,9 +9,9 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 
-import com.science.gtnl.Mods;
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.config.ConfigSyncMessage;
+import com.science.gtnl.Utils.enums.Mods;
+import com.science.gtnl.common.packet.ConfigSyncPacket;
 import com.science.gtnl.config.MainConfig;
 
 public class CommandReloadConfig extends CommandBase {
@@ -31,7 +31,7 @@ public class CommandReloadConfig extends CommandBase {
         try {
             MainConfig.reloadConfig();
 
-            ConfigSyncMessage msg = new ConfigSyncMessage(new MainConfig());
+            ConfigSyncPacket msg = new ConfigSyncPacket(new MainConfig());
             for (Object obj : MinecraftServer.getServer()
                 .getConfigurationManager().playerEntityList) {
                 if (obj instanceof EntityPlayerMP) {

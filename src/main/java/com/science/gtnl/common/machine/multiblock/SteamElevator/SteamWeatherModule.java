@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;

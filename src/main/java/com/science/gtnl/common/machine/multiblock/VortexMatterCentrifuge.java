@@ -16,8 +16,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import galaxyspace.core.register.GSBlocks;
 import gregtech.api.enums.Materials;
@@ -114,7 +114,7 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<VortexMatterCentrifuge>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(BasicBlocks.MetaCasing, 5))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('B', ofBlock(GSBlocks.DysonSwarmBlocks, 9))
                 .addElement('C', ofBlock(sBlockCasingsTT, 6))
                 .addElement('D', ofBlock(sBlockCasingsTT, 0))
@@ -122,7 +122,7 @@ public class VortexMatterCentrifuge extends WirelessEnergyMultiMachineBase<Vorte
                 .addElement('F', ofBlock(sBlockCasings1, 9))
                 .addElement('G', ofBlock(sBlockCasingsTT, 8))
                 .addElement('H', ofBlock(sBlockCasings10, 8))
-                .addElement('I', ofBlock(BasicBlocks.MetaCasing, 7))
+                .addElement('I', ofBlock(BlockLoader.MetaCasing, 7))
                 .addElement('J', ofBlock(sBlockCasings10, 7))
                 .addElement(
                     'K',

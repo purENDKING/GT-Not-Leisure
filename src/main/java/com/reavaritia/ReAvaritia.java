@@ -15,7 +15,7 @@ import com.reavaritia.common.block.ExtremeAnvil.ExtremeAnvilPacket;
 import com.reavaritia.common.block.GooeyHandler;
 import com.reavaritia.common.item.BlazeSword;
 import com.reavaritia.common.item.ChronarchsClock;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;

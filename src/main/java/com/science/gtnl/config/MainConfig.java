@@ -67,7 +67,7 @@ public class MainConfig {
     // Recipe
     public static boolean enableDeleteRecipe = true;
     public static boolean enableAprilFoolRecipe = false;
-    public static boolean enableCheatRecipeWithOwner = false;
+    public static boolean enableShowDelRecipeTitle = true;
 
     // Tickrate
     public static float defaultTickrate = 20.0f;
@@ -102,6 +102,17 @@ public class MainConfig {
     public static String[] defaultTargetBlocks = { "minecraft:chest", "appliedenergistics2:tile.BlockDrive",
         "gregtech:gt.blockmachines" };
     public static boolean enableSuperCreeper = false;
+    public static int blockTargetInterval = 30;
+    public static int playerTargetInterval = 10;
+    public static int blockFindRadius = 16;
+    public static int playerFindRadius = 16;
+    public static int explosionPower = 3;
+    public static double moveSpeed = 1.0;
+    public static double explosionTriggerRange = 2.5;
+
+    // Effect
+    public static int aweEffectID = 186;
+    public static int perfectPhysiqueEffect = 187;
 
     // Debug
     public static boolean enableDebugMode = false;
@@ -232,13 +243,13 @@ public class MainConfig {
             .get(CATEGORY_RECIPE, "enableAprilFoolRecipe", enableAprilFoolRecipe, "Force enable April Fool's recipe")
             .getBoolean(enableAprilFoolRecipe);
 
-        enableCheatRecipeWithOwner = config
+        enableShowDelRecipeTitle = config
             .get(
                 CATEGORY_RECIPE,
-                "enableCheatRecipeWithOwner",
-                enableCheatRecipeWithOwner,
-                "Enable Only Player Owner Cheat Recipe (Need 7 Mods)")
-            .getBoolean(enableCheatRecipeWithOwner);
+                "enableShowDelRecipeTitle",
+                enableShowDelRecipeTitle,
+                "Enable when player join world, Show Big Title")
+            .getBoolean(enableShowDelRecipeTitle);
 
         // Tick Rate
         defaultTickrate = (float) config
@@ -332,7 +343,7 @@ public class MainConfig {
         meteorParadigmChunkSize = config
             .get(
                 SUB_CATEGORY_METEOR_PARADIGM,
-                "ChunkSize",
+                "chunkSize",
                 meteorParadigmChunkSize,
                 "Set the chunk size for meteor paradigm operations (default: 1024)")
             .getInt(meteorParadigmChunkSize);
@@ -340,7 +351,7 @@ public class MainConfig {
         meteorParadigmBatchUpdateInterval = config
             .get(
                 SUB_CATEGORY_METEOR_PARADIGM,
-                "BatchUpdateInterval",
+                "batchUpdateInterval",
                 meteorParadigmBatchUpdateInterval,
                 "Set the batch update interval for meteor paradigm operations (default: 2048)")
             .getInt(meteorParadigmBatchUpdateInterval);
@@ -349,7 +360,7 @@ public class MainConfig {
         enableSpecialCheatIcon = config
             .get(
                 CATEGORY_NOT_ENOUGH_ITEMS,
-                "EnableSpecialCheatIcon",
+                "enableSpecialCheatIcon",
                 enableSpecialCheatIcon,
                 "Enable a special icon for cheat mode")
             .getBoolean(enableSpecialCheatIcon);
@@ -357,7 +368,7 @@ public class MainConfig {
         specialIconType = config
             .get(
                 CATEGORY_NOT_ENOUGH_ITEMS,
-                "SpecialIconType",
+                "specialIconType",
                 specialIconType,
                 "Specify the type of the special cheat icon")
             .getInt(specialIconType);
@@ -366,7 +377,7 @@ public class MainConfig {
         defaultTargetBlocks = config
             .get(
                 CATEGORY_SUPER_CREEPER,
-                "DefaultTargetBlocks",
+                "defaultTargetBlocks",
                 defaultTargetBlocks,
                 "List of target block IDs. Format: 'modid:blockname' or 'modid:blockname:meta'.")
             .getStringList();
@@ -374,10 +385,54 @@ public class MainConfig {
         enableSuperCreeper = config
             .get(
                 CATEGORY_SUPER_CREEPER,
-                "EnableSuperCreeper",
+                "enableSuperCreeper",
                 enableSuperCreeper,
                 "Enable super creeper, can find you chest and more")
             .getBoolean(enableSuperCreeper);
+
+        blockTargetInterval = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "blockTargetInterval",
+                blockTargetInterval,
+                "Interval in ticks between block targeting scans")
+            .getInt(blockTargetInterval);
+
+        playerTargetInterval = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "playerTargetInterval",
+                playerTargetInterval,
+                "Interval in ticks between player targeting scans")
+            .getInt(playerTargetInterval);
+
+        blockFindRadius = config
+            .get(CATEGORY_SUPER_CREEPER, "blockFindRadius", blockFindRadius, "Search radius for blocks")
+            .getInt(blockFindRadius);
+
+        playerFindRadius = config
+            .get(CATEGORY_SUPER_CREEPER, "playerFindRadius", playerFindRadius, "Search radius for players")
+            .getInt(playerFindRadius);
+
+        explosionPower = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "explosionPower",
+                explosionPower,
+                "Power of the explosion caused by Super Creeper")
+            .getInt(explosionPower);
+
+        moveSpeed = config
+            .get(CATEGORY_SUPER_CREEPER, "MoveSpeed", moveSpeed, "Movement speed multiplier for Super Creeper")
+            .getDouble(moveSpeed);
+
+        explosionTriggerRange = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "explosionTriggerRange",
+                explosionTriggerRange,
+                "Distance at which the Super Creeper will trigger its explosion.")
+            .getDouble(explosionTriggerRange);
 
         // Debug
         enableDebugMode = config.get(CATEGORY_DEBUG, "enableDebugMode", enableDebugMode, "Enable Debug Print Log")

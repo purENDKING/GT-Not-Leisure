@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static goodgenerator.loader.Loaders.compactFusionCoil;
 import static gregtech.api.GregTechAPI.*;
@@ -31,6 +30,7 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import goodgenerator.loader.Loaders;
@@ -149,8 +149,8 @@ public class EngravingLaserPlant extends WirelessEnergyMultiMachineBase<Engravin
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings8, 7))))
                 .addElement('E', ofBlock(sBlockCasings8, 12))
                 .addElement('F', ofBlock(sBlockCasings9, 1))
-                .addElement('G', ofBlock(MetaCasing, 5))
-                .addElement('H', ofBlock(MetaCasing, 4))
+                .addElement('G', ofBlock(BlockLoader.MetaCasing, 5))
+                .addElement('H', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement('I', ofBlock(compactFusionCoil, 2))
                 .addElement(
                     'J',

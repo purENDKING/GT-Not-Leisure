@@ -1,6 +1,6 @@
 package com.science.gtnl.Utils.item;
 
-import static com.science.gtnl.Mods.Baubles;
+import static com.science.gtnl.Utils.enums.Mods.Baubles;
 import static gregtech.api.util.GTModHandler.getModItem;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import com.gtnewhorizons.modularui.api.drawable.UITexture;
 import com.reavaritia.common.item.InfinityTotem;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 
 import baubles.api.BaublesApi;
 

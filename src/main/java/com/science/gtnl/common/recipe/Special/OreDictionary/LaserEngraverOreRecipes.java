@@ -2,7 +2,7 @@ package com.science.gtnl.common.recipe.Special.OreDictionary;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
