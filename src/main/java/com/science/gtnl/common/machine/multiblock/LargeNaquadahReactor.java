@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings8;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.NAQUADAH_REACTOR_SOLID_FRONT;
@@ -35,7 +34,8 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.ItemUtils;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.Materials;
@@ -105,8 +105,8 @@ public class LargeNaquadahReactor extends TTMultiblockBase implements IConstruct
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<LargeNaquadahReactor>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 4))
-                .addElement('B', ofBlock(MetaCasing, 5))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 4))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement(
                     'C',
                     buildHatchAdder(LargeNaquadahReactor.class).casingIndex(CASING_INDEX)

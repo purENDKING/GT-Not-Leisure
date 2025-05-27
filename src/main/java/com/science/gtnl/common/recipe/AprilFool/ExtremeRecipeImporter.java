@@ -15,8 +15,8 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.jetbrains.annotations.Nullable;
 
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import fox.spiteful.avaritia.crafting.ExtremeCraftingManager;
 import fox.spiteful.avaritia.crafting.ExtremeShapedOreRecipe;

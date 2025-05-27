@@ -1,6 +1,5 @@
 package com.science.gtnl.common.recipe.GTNL;
 
-import static com.science.gtnl.Utils.enums.TierEU.RECIPE_LV;
 import static thaumcraft.common.config.ConfigItems.itemJarNode;
 
 import java.util.ArrayList;
@@ -13,13 +12,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.common.recipe.Thaumcraft.TCRecipeTools;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Mods;
+import gregtech.api.enums.TierEU;
 import gregtech.api.interfaces.IRecipeMap;
 
 public class ShapedArcaneCraftingRecipes implements IRecipePool {
@@ -91,7 +91,7 @@ public class ShapedArcaneCraftingRecipes implements IRecipePool {
                 .itemOutputs(recipe.getOutput())
                 .noOptimize()
                 .duration(20)
-                .eut(RECIPE_LV)
+                .eut(TierEU.RECIPE_LV)
                 .addTo(IAA);
         }
 
@@ -121,7 +121,7 @@ public class ShapedArcaneCraftingRecipes implements IRecipePool {
                 .itemOutputs(recipe.getOutput())
                 .noOptimize()
                 .duration(20)
-                .eut(RECIPE_LV)
+                .eut(TierEU.RECIPE_LV)
                 .addTo(IAA);
         }
     }

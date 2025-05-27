@@ -4,9 +4,9 @@ import static gregtech.api.enums.Mods.IndustrialCraft2;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.MeteorRecipeData;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import WayofTime.alchemicalWizardry.common.summoning.meteor.MeteorParadigm;
 import WayofTime.alchemicalWizardry.common.summoning.meteor.MeteorRegistry;

@@ -5,10 +5,10 @@ import static com.science.gtnl.Utils.Utils.setStackSize;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.Utils.recipes.IsaMillTierKey;
 import com.science.gtnl.common.item.items.MilledOre;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

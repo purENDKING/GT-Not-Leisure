@@ -1,7 +1,7 @@
 package com.science.gtnl.Utils.item;
 
-import static com.science.gtnl.Mods.ReAvaritia;
-import static com.science.gtnl.Mods.ScienceNotLeisure;
+import static com.science.gtnl.Utils.enums.Mods.ReAvaritia;
+import static com.science.gtnl.Utils.enums.Mods.ScienceNotLeisure;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.gtnewhorizons.gtnhintergalactic.item.IGItems;
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 
 import fox.spiteful.avaritia.items.LudicrousItems;
 import gregtech.api.enums.ItemList;

@@ -13,7 +13,7 @@ import com.lootgames.sudoku.config.LGConfigs;
 import com.lootgames.sudoku.packet.GamePackets;
 import com.lootgames.sudoku.sudoku.GameSudoku;
 import com.lootgames.sudoku.sudoku.SudokuOverlayHandler;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;

@@ -17,7 +17,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 import com.science.gtnl.Utils.Utils;
-import com.science.gtnl.Utils.item.GTNL_ItemID;
+import com.science.gtnl.Utils.item.ItemID;
 
 import gregtech.api.enums.ItemList;
 import gregtech.api.interfaces.tileentity.IRecipeLockable;
@@ -731,22 +731,22 @@ public class ParallelHelper extends gregtech.api.util.ParallelHelper {
         double remainingCost;
         long providedAmount;
         if (recipe.mInputs.length > 0) {
-            Map<GTNL_ItemID, Long> itemCost = new HashMap<>();
+            Map<ItemID, Long> itemCost = new HashMap<>();
             if (isNBTSensitive) {
                 for (ItemStack recipeItemCost : recipe.mInputs) {
                     // for non-consumed input
                     if (recipeItemCost.stackSize == 0) continue;
-                    itemCost.merge(GTNL_ItemID.create(recipeItemCost), (long) recipeItemCost.stackSize, Long::sum);
+                    itemCost.merge(ItemID.create(recipeItemCost), (long) recipeItemCost.stackSize, Long::sum);
                 }
             } else {
                 for (ItemStack recipeItemCost : recipe.mInputs) {
                     // for non-consumed input
                     if (recipeItemCost.stackSize == 0) continue;
-                    itemCost.merge(GTNL_ItemID.createNoNBT(recipeItemCost), (long) recipeItemCost.stackSize, Long::sum);
+                    itemCost.merge(ItemID.createNoNBT(recipeItemCost), (long) recipeItemCost.stackSize, Long::sum);
                 }
             }
 
-            nextRecipeItemCost: for (Map.Entry<GTNL_ItemID, Long> itemID : itemCost.entrySet()) {
+            nextRecipeItemCost: for (Map.Entry<ItemID, Long> itemID : itemCost.entrySet()) {
                 ItemStack unifiedItemCost;
                 if (isNBTSensitive) {
                     unifiedItemCost = GTOreDictUnificator.get_nocopy(itemID.getKey().getItemStackWithNBT());

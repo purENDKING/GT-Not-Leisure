@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings2;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -23,6 +22,7 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.TAE;
@@ -120,7 +120,7 @@ public class LargeMixer extends GTMMultiMachineBase<LargeMixer> implements ISurv
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<LargeMixer>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 12))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 12))
                 .addElement('B', ofFrame(Materials.TungstenSteel))
                 .addElement('C', ofBlock(sBlockCasings2, 14))
                 .addElement('D', ofBlock(sBlockCasings2, 15))

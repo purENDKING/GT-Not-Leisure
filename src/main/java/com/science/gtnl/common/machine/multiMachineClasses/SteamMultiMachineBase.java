@@ -1,9 +1,8 @@
 package com.science.gtnl.common.machine.multiMachineClasses;
 
 import static bartworks.system.material.WerkstoffLoader.BWBlockCasings;
-import static com.science.gtnl.common.GTNLMachineID.BIG_STEAM_INPUT_HATCH;
-import static com.science.gtnl.common.GTNLMachineID.PIPELESS_STEAM_HATCH;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
+import static com.science.gtnl.Utils.enums.GTNLMachineID.BIG_STEAM_INPUT_HATCH;
+import static com.science.gtnl.Utils.enums.GTNLMachineID.PIPELESS_STEAM_HATCH;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockFrames;
 import static gregtech.api.enums.Mods.GregTech;
@@ -50,12 +49,13 @@ import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.gtnewhorizons.modularui.common.widget.textfield.NumericWidget;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.Utils.gui.CircularGaugeDrawable;
 import com.science.gtnl.Utils.item.ItemUtils;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.hatch.WirelessSteamEnergyHatch;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.gui.modularui.GTUITextures;
@@ -173,8 +173,8 @@ public abstract class SteamMultiMachineBase<T extends SteamMultiMachineBase<T>> 
     @Nullable
     protected static Integer getTierBrickCasing(Block block, int meta) {
         if (block == null) return null;
-        if (block == MetaBlockColumn && 0 == meta) return 1;
-        if (block == MetaBlockColumn && 1 == meta) return 2;
+        if (block == BlockLoader.MetaBlockColumn && 0 == meta) return 1;
+        if (block == BlockLoader.MetaBlockColumn && 1 == meta) return 2;
         return null;
     }
 

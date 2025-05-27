@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.Utils.recipes.ChanceBonusManager;
 import com.science.gtnl.config.MainConfig;
 

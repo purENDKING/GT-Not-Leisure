@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.Utils.item.ItemUtils.readItemStackFromNBT;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.Textures.BlockIcons.*;
@@ -70,6 +69,7 @@ import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIG
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIGModes;
 import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.buckets.EIGIC2Bucket;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Textures;
@@ -169,7 +169,7 @@ public class EdenGarden extends MultiMachineBase<EdenGarden> {
                 .addElement('E', ofBlock(sBlockCasings9, 11))
                 .addElement('F', ofBlock(ModBlocks.blockCasings2Misc, 3))
                 .addElement('G', ofBlock(LanthItemList.SHIELDED_ACCELERATOR_GLASS, 0))
-                .addElement('H', ofBlock(MetaBlockGlow, 0))
+                .addElement('H', ofBlock(BlockLoader.MetaBlockGlow, 0))
                 .addElement('I', ofBlock(Blocks.farmland, 0))
                 .addElement(
                     'J',

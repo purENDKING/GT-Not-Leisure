@@ -1,7 +1,7 @@
 package com.science.gtnl.Utils;
 
 import static com.science.gtnl.ScienceNotLeisure.network;
-import static com.science.gtnl.Utils.GlobalSteamWorldSavedData.loadInstance;
+import static com.science.gtnl.Utils.steam.GlobalSteamWorldSavedData.loadInstance;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,16 +26,16 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
-import com.science.gtnl.Mods;
-import com.science.gtnl.Utils.message.SoundPacket;
-import com.science.gtnl.Utils.message.TitlePacket;
+import com.science.gtnl.Utils.enums.GTNLItemList;
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.command.CommandTickrate;
 import com.science.gtnl.common.item.TimeStopManager;
 import com.science.gtnl.common.machine.hatch.ExplosionDynamoHatch;
-import com.science.gtnl.config.ConfigSyncMessage;
+import com.science.gtnl.common.packet.ConfigSyncPacket;
+import com.science.gtnl.common.packet.SoundPacket;
+import com.science.gtnl.common.packet.TitlePacket;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
@@ -57,7 +57,7 @@ public class SubscribeEventUtils {
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.player instanceof EntityPlayerMP player) {
             // construct message from current server config
-            ConfigSyncMessage msg = new ConfigSyncMessage(new MainConfig());// or pass static values
+            ConfigSyncPacket msg = new ConfigSyncPacket(new MainConfig());// or pass static values
             network.sendTo(msg, player);
 
             TimeStopManager.setTimeStopped(false);
@@ -95,7 +95,9 @@ public class SubscribeEventUtils {
                             .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.GOLD)));
             }
 
-            TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 200, 0xFFFF55, 2);
+            if (MainConfig.enableShowDelRecipeTitle) {
+                TitlePacket.sendTitleToPlayer(player, "Welcome_GTNL_DeleteRecipe", 200, 0xFFFF55, 2);
+            }
             network.sendTo(new SoundPacket(true), player);
 
             float tickrate = MainConfig.defaultTickrate;

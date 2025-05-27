@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -34,8 +33,9 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.Special.PortalToAlfheimExplosion;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -259,8 +259,8 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
                             .dot(1)
                             .build()))
                 .addElement('F', ofBlock(TTCasingsContainer.sBlockCasingsTT, 0))
-                .addElement('G', ofBlock(MetaBlockGlass, 0))
-                .addElement('H', ofBlock(MetaBlockGlass, 1))
+                .addElement('G', ofBlock(BlockLoader.MetaBlockGlass, 0))
+                .addElement('H', ofBlock(BlockLoader.MetaBlockGlass, 1))
                 .build();
         }
         return STRUCTURE_DEFINITION;

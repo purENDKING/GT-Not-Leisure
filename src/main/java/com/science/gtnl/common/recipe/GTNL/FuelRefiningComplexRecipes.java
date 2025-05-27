@@ -6,8 +6,8 @@ import static gtPlusPlus.core.item.chemistry.RocketFuels.Unsymmetrical_Dimethylh
 
 import net.minecraftforge.fluids.FluidStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.GTValues;

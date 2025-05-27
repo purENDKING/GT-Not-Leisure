@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings9;
@@ -36,7 +35,8 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.enums.ItemList;
@@ -148,8 +148,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             STRUCTURE_DEFINITION = StructureDefinition.<SmeltingMixingFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
-                .addElement('B', ofBlock(MetaCasing, 5))
-                .addElement('C', ofBlock(MetaCasing, 7))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 5))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 7))
                 .addElement('D', ofBlock(defcCasingBlock, 7))
                 .addElement('E', ofBlock(defcCasingBlock, 10))
                 .addElement('F', ofBlock(sBlockCasings1, 12))

@@ -14,10 +14,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 import com.dreammaster.gthandler.CustomItemList;
 import com.reavaritia.common.block.ReAvaBasicBlocks;
-import com.science.gtnl.Utils.recipes.IRecipePool;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.Utils.recipes.RecipeBuilder;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.loader.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;

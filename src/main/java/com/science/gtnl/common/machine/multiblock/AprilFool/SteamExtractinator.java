@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.*;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputBus;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -22,7 +21,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -113,15 +113,15 @@ public class SteamExtractinator extends SteamMultiMachineBase<SteamExtractinator
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SteamExtractinator>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaBlockGlass, 3))
-                .addElement('B', ofBlock(MetaCasing02, 0))
+                .addElement('A', ofBlock(BlockLoader.MetaBlockGlass, 3))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing02, 0))
                 .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
                 .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 3))
                 .addElement('E', ofBlock(GregTechAPI.sBlockCasings2, 12))
                 .addElement('F', ofBlock(GregTechAPI.sBlockCasings2, 13))
                 .addElement('G', ofBlock(GregTechAPI.sBlockCasings3, 13))
                 .addElement('H', ofFrame(Materials.Steel))
-                .addElement('I', ofBlock(MetaBlockColumn, 1))
+                .addElement('I', ofBlock(BlockLoader.MetaBlockColumn, 1))
                 .addElement(
                     'J',
                     ofChain(

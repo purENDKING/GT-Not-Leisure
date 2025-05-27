@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.sBlockCasings4;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -27,6 +26,7 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.ItemUtils;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
@@ -95,7 +95,7 @@ public class VibrantPhotovoltaicPowerStation extends MTEEnhancedMultiBlockBase<V
                         .atLeast(InputHatch, Dynamo, Maintenance)
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasings4, 0))))
                 .addElement('B', ofFrame(Materials.StainlessSteel))
-                .addElement('D', ofBlock(MetaCasing, 11))
+                .addElement('D', ofBlock(BlockLoader.MetaCasing, 11))
                 .build();
         }
         return STRUCTURE_DEFINITION;

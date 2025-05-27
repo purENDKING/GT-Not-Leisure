@@ -4,7 +4,6 @@ import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.GregTechAPI.sBlockCasings4;
 import static gregtech.api.enums.HatchElement.*;
@@ -20,6 +19,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -81,9 +81,9 @@ public class OreExtractionModule extends NanitesBaseModule<OreExtractionModule> 
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(sBlockCasings8, 0))
                 .addElement('B', ofBlock(sBlockCasings1, 15))
-                .addElement('C', ofBlock(MetaCasing, 4))
+                .addElement('C', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement('D', ofBlock(sBlockCasings8, 7))
-                .addElement('E', ofBlock(MetaCasing, 8))
+                .addElement('E', ofBlock(BlockLoader.MetaCasing, 8))
                 .addElement('F', ofFrame(Materials.CosmicNeutronium))
                 .addElement(
                     'G',
@@ -98,7 +98,7 @@ public class OreExtractionModule extends NanitesBaseModule<OreExtractionModule> 
                 .addElement('K', ofBlock(sBlockCasings8, 1))
                 .addElement('L', ofBlock(sBlockCasings4, 12))
                 .addElement('M', ofFrame(Materials.Invar))
-                .addElement('N', ofBlock(MetaCasing, 12))
+                .addElement('N', ofBlock(BlockLoader.MetaCasing, 12))
                 .addElement('O', ofBlock(bw_realglas, 14))
                 .build();
         }

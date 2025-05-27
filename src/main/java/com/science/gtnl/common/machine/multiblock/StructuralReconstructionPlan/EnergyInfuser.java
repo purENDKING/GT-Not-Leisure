@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.StructuralReconstructionPlan;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -31,6 +30,7 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.ItemUtils;
+import com.science.gtnl.loader.BlockLoader;
 
 import cofh.api.energy.IEnergyContainerItem;
 import gregtech.api.enums.Materials;
@@ -71,7 +71,7 @@ public class EnergyInfuser extends TTMultiblockBase implements IConstructable {
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<EnergyInfuser>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaBlockGlass, 2))
+                .addElement('A', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement('B', ofBlock(TTCasingsContainer.sBlockCasingsTT, 0))
                 .addElement(
                     'C',

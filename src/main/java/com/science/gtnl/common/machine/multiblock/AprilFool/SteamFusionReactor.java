@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputHatch;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_TOP_STEAM_MACERATOR;
@@ -25,7 +24,8 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.recipes.SteamFusionTierKey;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -69,8 +69,8 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SteamFusionReactor>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 26))
-                .addElement('B', ofBlock(MetaCasing, 29))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 26))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 29))
                 .addElement('C', chainAllGlasses())
                 .addElement(
                     'D',
@@ -91,7 +91,7 @@ public class SteamFusionReactor extends SteamMultiMachineBase<SteamFusionReactor
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 29))
                             .dot(1)
                             .buildAndChain(),
-                        ofBlock(MetaCasing, 29)))
+                        ofBlock(BlockLoader.MetaCasing, 29)))
                 .build();
         }
         return STRUCTURE_DEFINITION;

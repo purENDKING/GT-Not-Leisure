@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputBus;
@@ -23,7 +22,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -76,8 +76,8 @@ public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> 
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SteamManufacturer>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 26))
-                .addElement('B', ofBlock(MetaCasing, 28))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 26))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 28))
                 .addElement(
                     'C',
                     ofChain(
@@ -102,7 +102,7 @@ public class SteamManufacturer extends SteamMultiMachineBase<SteamManufacturer> 
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 30))
                             .dot(1)
                             .buildAndChain(),
-                        ofBlock(MetaCasing, 30)))
+                        ofBlock(BlockLoader.MetaCasing, 30)))
                 .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 3))
                 .addElement('E', ofFrame(Materials.Steel))
                 .build();

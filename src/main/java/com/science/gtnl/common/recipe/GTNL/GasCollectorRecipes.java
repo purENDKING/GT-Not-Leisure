@@ -5,8 +5,8 @@ import static gregtech.api.enums.Mods.Botania;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

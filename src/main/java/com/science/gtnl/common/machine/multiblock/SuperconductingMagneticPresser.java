@@ -23,8 +23,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import bartworks.API.BorosilicateGlass;
 import gregtech.api.GregTechAPI;
@@ -154,7 +154,7 @@ public class SuperconductingMagneticPresser extends WirelessEnergyMultiMachineBa
                             MaterialsElements.STANDALONE.DRAGON_METAL.getFrameBox(1)
                                 .getItem())))
                 .addElement('O', ofFrame(Materials.Naquadria))
-                .addElement('P', ofBlock(BasicBlocks.MetaCasing, 2))
+                .addElement('P', ofBlock(BlockLoader.MetaCasing, 2))
                 .addElement('Q', ofBlock(sBlockMetal5, 2))
                 .build();
         }

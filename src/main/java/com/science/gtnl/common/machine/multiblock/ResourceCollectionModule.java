@@ -32,10 +32,10 @@ import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.gtnewhorizons.modularui.common.widget.DrawableWidget;
 import com.gtnewhorizons.modularui.common.widget.DynamicTextWidget;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.Utils.recipes.ResourceCollectionModuleTierKey;
-import com.science.gtnl.common.GTNLItemList;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.gui.modularui.GTUITextures;

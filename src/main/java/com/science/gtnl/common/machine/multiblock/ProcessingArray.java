@@ -32,8 +32,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.machine.multiMachineClasses.GTNLProcessingArrayManager;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.machine.multiMachineClasses.ProcessingArrayManager;
 
 import gregtech.GTMod;
 import gregtech.api.enums.GTValues;
@@ -176,12 +176,12 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
 
     public RecipeMap<?> fetchRecipeMap() {
         if (isCorrectMachinePart(getControllerSlot())) {
-            RecipeMap<?> recipeMap = GTNLProcessingArrayManager
-                .giveRecipeMap(GTNLProcessingArrayManager.getMachineName(getControllerSlot()));
+            RecipeMap<?> recipeMap = ProcessingArrayManager
+                .giveRecipeMap(ProcessingArrayManager.getMachineName(getControllerSlot()));
 
             if (recipeMap == null) {
-                recipeMap = GTNLProcessingArrayManager
-                    .giveRecipeMap(GTNLProcessingArrayManager.getFullMachineName(getControllerSlot()));
+                recipeMap = ProcessingArrayManager
+                    .giveRecipeMap(ProcessingArrayManager.getFullMachineName(getControllerSlot()));
             }
 
             return recipeMap;
@@ -202,12 +202,12 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
 
     @Override
     public void sendStartMultiBlockSoundLoop() {
-        SoundResource sound = GTNLProcessingArrayManager
-            .getSoundResource(GTNLProcessingArrayManager.getMachineName(getControllerSlot()));
+        SoundResource sound = ProcessingArrayManager
+            .getSoundResource(ProcessingArrayManager.getMachineName(getControllerSlot()));
 
         if (sound == null) {
-            sound = GTNLProcessingArrayManager
-                .getSoundResource(GTNLProcessingArrayManager.getFullMachineName(getControllerSlot()));
+            sound = ProcessingArrayManager
+                .getSoundResource(ProcessingArrayManager.getFullMachineName(getControllerSlot()));
         }
 
         if (sound != null) {

@@ -4,9 +4,9 @@ import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 
 import net.minecraftforge.fluids.FluidStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;

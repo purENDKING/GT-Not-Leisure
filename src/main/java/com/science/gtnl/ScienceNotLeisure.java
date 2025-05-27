@@ -6,8 +6,9 @@ import static com.science.gtnl.ScienceNotLeisure.MODNAME;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.science.gtnl.Utils.enums.Mods;
 import com.science.gtnl.Utils.item.MissingMappingsHandler;
-import com.science.gtnl.Utils.message.LanguageManager;
+import com.science.gtnl.Utils.text.LanguageManager;
 import com.science.gtnl.api.TickrateAPI;
 import com.science.gtnl.common.command.CommandEnergyNetwork;
 import com.science.gtnl.common.command.CommandPlaySound;

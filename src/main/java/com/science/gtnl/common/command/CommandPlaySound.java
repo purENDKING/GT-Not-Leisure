@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 
-import com.science.gtnl.Utils.message.SoundPacket;
+import com.science.gtnl.common.packet.SoundPacket;
 
 public class CommandPlaySound extends CommandBase {
 

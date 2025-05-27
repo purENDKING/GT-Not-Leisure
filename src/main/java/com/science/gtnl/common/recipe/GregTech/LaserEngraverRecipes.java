@@ -2,8 +2,8 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.Utils.enums.GTNLItemList;
+import com.science.gtnl.loader.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;

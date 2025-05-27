@@ -2,8 +2,8 @@ package com.science.gtnl.common.recipe.GregTech;
 
 import static gregtech.api.util.GTRecipeConstants.DISSOLUTION_TANK_RATIO;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.materials.MaterialPool;
+import com.science.gtnl.loader.IRecipePool;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

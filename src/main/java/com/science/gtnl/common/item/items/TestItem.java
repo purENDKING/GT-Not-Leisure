@@ -13,8 +13,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.client.GTNLCreativeTabs;
-import com.science.gtnl.common.GTNLItemList;
+import com.science.gtnl.common.effect.GTNLEffect;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -65,7 +66,7 @@ public class TestItem extends Item implements IHaloRenderItem {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {
         if (!worldIn.isRemote) {
-            playerIn.addPotionEffect(new PotionEffect(186, 6000, 1));
+            playerIn.addPotionEffect(new PotionEffect(GTNLEffect.awe.id, 6000, 1));
         }
 
         stack.splitStack(1);

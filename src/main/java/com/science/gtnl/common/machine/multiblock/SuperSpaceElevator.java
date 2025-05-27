@@ -4,8 +4,6 @@ import static bartworks.common.loaders.ItemRegistry.bw_realglas;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlow;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -230,7 +228,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
         return StructureDefinition.<SuperSpaceElevator>builder()
             .addShape(STRUCTURE_PIECE_MAIN, transpose(shapeBase))
             .addShape(STRUCTURE_PIECE_EXTENDED, transpose(shapeExtended))
-            .addElement('A', ofBlock(MetaCasing, 18))
+            .addElement('A', ofBlock(com.science.gtnl.loader.BlockLoader.MetaCasing, 18))
             .addElement('B', ofBlock(IGBlocks.SpaceElevatorCasing, 2))
             .addElement('C', ofBlock(sBlockCasingsTT, 0))
             .addElement(
@@ -278,7 +276,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
                     .dot(1)
                     .buildAndChain(IGBlocks.SpaceElevatorCasing, 0))
             .addElement('N', ElevatorUtil.ofBlockAdder(SuperSpaceElevator::addCable, IGBlocks.SpaceElevatorCable, 0))
-            .addElement('O', ofBlock(MetaBlockGlow, 31))
+            .addElement('O', ofBlock(com.science.gtnl.loader.BlockLoader.MetaBlockGlow, 31))
             .build();
     }
 

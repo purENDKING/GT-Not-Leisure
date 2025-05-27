@@ -39,7 +39,7 @@ import com.gtnewhorizons.modularui.common.widget.FakeSyncWidget;
 import com.gtnewhorizons.modularui.common.widget.SlotGroup;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.kentington.thaumichorizons.common.lib.potion.PotionVisRegen;
-import com.science.gtnl.Mods;
+import com.science.gtnl.Utils.enums.Mods;
 
 import gregtech.api.enums.SoundResource;
 import gregtech.api.gui.modularui.GTUITextures;

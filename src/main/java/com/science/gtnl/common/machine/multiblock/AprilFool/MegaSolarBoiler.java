@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockColumn;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
@@ -31,6 +30,7 @@ import com.gtnewhorizons.modularui.common.widget.SlotWidget;
 import com.gtnewhorizons.modularui.common.widget.TextWidget;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -91,7 +91,7 @@ public class MegaSolarBoiler extends SteamMultiMachineBase<MegaSolarBoiler> impl
                 .addElement('C', ofBlock(GregTechAPI.sBlockCasings2, 0))
                 .addElement('D', ofBlock(GregTechAPI.sBlockCasings2, 12))
                 .addElement('E', ofBlock(GregTechAPI.sBlockCasings2, 13))
-                .addElement('F', ofBlock(MetaBlockColumn, 3))
+                .addElement('F', ofBlock(BlockLoader.MetaBlockColumn, 3))
                 .addElement(
                     'G',
                     ofChain(

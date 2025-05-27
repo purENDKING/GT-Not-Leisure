@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import net.minecraft.item.ItemStack;
 
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import bartworks.system.material.Werkstoff;
 import gregtech.api.enums.GTValues;

@@ -2,9 +2,8 @@ package com.science.gtnl.common.machine.multiblock.SteamElevator;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.Utils.SteamWirelessNetworkManager.addSteamToGlobalSteamMap;
-import static com.science.gtnl.Utils.SteamWirelessNetworkManager.getUserSteam;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
+import static com.science.gtnl.Utils.steam.SteamWirelessNetworkManager.addSteamToGlobalSteamMap;
+import static com.science.gtnl.Utils.steam.SteamWirelessNetworkManager.getUserSteam;
 import static com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase.ZERO_STRING;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
@@ -60,6 +59,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.Utils.item.ItemUtils;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -170,8 +170,8 @@ public class SteamElevator extends SteamMultiMachineBase<SteamElevator> implemen
                         .build(),
                     buildSteamInput(SteamElevator.class).casingIndex(GTUtility.getTextureId((byte) 116, (byte) 25))
                         .dot(1)
-                        .buildAndChain(MetaCasing, 25)))
-            .addElement('B', ofBlock(MetaCasing, 31))
+                        .buildAndChain(BlockLoader.MetaCasing, 25)))
+            .addElement('B', ofBlock(BlockLoader.MetaCasing, 31))
             .addElement('C', ofBlock(sBlockCasings1, 10))
             .addElement('D', ofBlock(sBlockCasings2, 0))
             .addElement('E', ofBlock(sBlockCasings3, 14))

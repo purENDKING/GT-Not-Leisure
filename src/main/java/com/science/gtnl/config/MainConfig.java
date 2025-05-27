@@ -68,6 +68,7 @@ public class MainConfig {
     public static boolean enableDeleteRecipe = true;
     public static boolean enableAprilFoolRecipe = false;
     public static boolean enableCheatRecipeWithOwner = false;
+    public static boolean enableShowDelRecipeTitle = true;
 
     // Tickrate
     public static float defaultTickrate = 20.0f;
@@ -102,6 +103,10 @@ public class MainConfig {
     public static String[] defaultTargetBlocks = { "minecraft:chest", "appliedenergistics2:tile.BlockDrive",
         "gregtech:gt.blockmachines" };
     public static boolean enableSuperCreeper = false;
+
+    // Effect
+    public static int aweEffectID = 186;
+    public static int perfectPhysiqueEffect = 187;
 
     // Debug
     public static boolean enableDebugMode = false;
@@ -231,6 +236,14 @@ public class MainConfig {
         enableAprilFoolRecipe = config
             .get(CATEGORY_RECIPE, "enableAprilFoolRecipe", enableAprilFoolRecipe, "Force enable April Fool's recipe")
             .getBoolean(enableAprilFoolRecipe);
+
+        enableShowDelRecipeTitle = config
+            .get(
+                CATEGORY_RECIPE,
+                "enableShowDelRecipeTitle",
+                enableShowDelRecipeTitle,
+                "Enable when player join world, Show Big Title")
+            .getBoolean(enableShowDelRecipeTitle);
 
         enableCheatRecipeWithOwner = config
             .get(

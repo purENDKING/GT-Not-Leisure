@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
@@ -22,8 +21,9 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
 import com.science.gtnl.config.MainConfig;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Textures;
@@ -126,8 +126,8 @@ public class RareEarthCentrifugal extends MultiMachineBase<RareEarthCentrifugal>
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<RareEarthCentrifugal>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 4))
-                .addElement('B', ofBlock(MetaCasing, 12))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 4))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 12))
                 .addElement(
                     'C',
                     buildHatchAdder(RareEarthCentrifugal.class).casingIndex(CASING_INDEX)

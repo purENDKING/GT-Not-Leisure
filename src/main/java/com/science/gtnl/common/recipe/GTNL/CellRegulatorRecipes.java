@@ -2,9 +2,9 @@ package com.science.gtnl.common.recipe.GTNL;
 
 import static gregtech.api.util.GTRecipeBuilder.MINUTES;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
 import com.science.gtnl.common.item.items.MilledOre;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.IRecipePool;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;

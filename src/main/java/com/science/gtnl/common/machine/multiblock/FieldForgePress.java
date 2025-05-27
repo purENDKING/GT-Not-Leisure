@@ -18,8 +18,8 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
-import com.science.gtnl.common.block.Casings.BasicBlocks;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -129,7 +129,7 @@ public class FieldForgePress extends WirelessEnergyMultiMachineBase<FieldForgePr
                         .buildAndChain(onElementPass(x -> ++x.tCountCasing, ofBlock(sBlockCasingsTT, 4))))
                 .addElement('I', ofBlock(blockCustomMachineCasings, 3))
                 .addElement('J', ofBlock(sBlockCasings8, 10))
-                .addElement('K', ofBlock(BasicBlocks.MetaCasing, 12))
+                .addElement('K', ofBlock(BlockLoader.MetaCasing, 12))
                 .addElement(
                     'L',
                     ofBlockAnyMeta(

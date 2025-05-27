@@ -82,7 +82,7 @@ public class ETGWEyeOfHarmonyModule extends EternalGregTechWorkshopModule {
 
     // Check for recipe every recipeCheckInterval ticks.
     private boolean recipeRunning = false;
-    private long astralArrayAmount = 10000;
+    private long astralArrayAmount = 50000;
     private long parallelAmount = 65536;
     private long successfulParallelAmount = 0;
     private double hydrogenOverflowProbabilityAdjustment;

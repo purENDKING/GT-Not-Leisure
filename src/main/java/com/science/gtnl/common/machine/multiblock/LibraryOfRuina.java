@@ -2,8 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase.ParallelControllerElement.ParallelCon;
 import static goodgenerator.loader.Loaders.gravityStabilizationCasing;
 import static gregtech.api.GregTechAPI.*;
@@ -29,7 +27,8 @@ import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.gtnewhorizons.gtnhintergalactic.block.IGBlocks;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.GTMMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.GregTechAPI;
@@ -150,7 +149,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
             STRUCTURE_DEFINITION = StructureDefinition.<LibraryOfRuina>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlockAnyMeta(gravityStabilizationCasing))
-                .addElement('B', ofBlock(MetaCasing, 13))
+                .addElement('B', ofBlock(BlockLoader.MetaCasing, 13))
                 .addElement('C', ofBlock(IGBlocks.SpaceElevatorCasing, 1))
                 .addElement(
                     'D',
@@ -170,7 +169,7 @@ public class LibraryOfRuina extends GTMMultiMachineBase<LibraryOfRuina> implemen
                 .addElement('E', ofBlock(sBlockCasings10, 4))
                 .addElement('F', ofBlock(sBlockCasings10, 11))
                 .addElement('G', ofBlock(sBlockCasings9, 11))
-                .addElement('H', ofBlock(MetaBlockGlass, 2))
+                .addElement('H', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement(
                     'I',
                     ofChain(

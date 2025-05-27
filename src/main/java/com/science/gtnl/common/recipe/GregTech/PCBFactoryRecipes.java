@@ -1,6 +1,6 @@
 package com.science.gtnl.common.recipe.GregTech;
 
-import com.science.gtnl.Utils.recipes.IRecipePool;
+import com.science.gtnl.loader.IRecipePool;
 
 import bartworks.system.material.WerkstoffLoader;
 import gregtech.api.enums.GTValues;

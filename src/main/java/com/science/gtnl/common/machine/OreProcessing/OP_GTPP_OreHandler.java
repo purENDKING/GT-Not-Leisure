@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.science.gtnl.ScienceNotLeisure;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.GTValues;
 import gtPlusPlus.core.material.Material;

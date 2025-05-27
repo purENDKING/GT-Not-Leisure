@@ -2,7 +2,6 @@ package com.science.gtnl.common.machine.multiblock;
 
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
 import static goodgenerator.loader.Loaders.FRF_Coil_1;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.GTValues.V;
@@ -32,6 +31,7 @@ import com.gtnewhorizons.modularui.api.screen.ModularWindow;
 import com.gtnewhorizons.modularui.api.screen.UIBuildContext;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMachineBase;
+import com.science.gtnl.loader.BlockLoader;
 
 import galaxyspace.core.register.GSBlocks;
 import gregtech.api.enums.HeatingCoilLevel;
@@ -141,7 +141,7 @@ public class MagneticEnergyReactionFurnace extends WirelessEnergyMultiMachineBas
             STRUCTURE_DEFINITION = StructureDefinition.<MagneticEnergyReactionFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
                 .addElement('A', ofBlock(FRF_Coil_1, 0))
-                .addElement('B', ofBlock(MetaBlockGlass, 2))
+                .addElement('B', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement('C', ofBlockAnyMeta(ELECTRODE_CASING))
                 .addElement('D', ofBlock(sBlockCasings10, 0))
                 .addElement('E', ofBlock(sBlockCasings10, 6))

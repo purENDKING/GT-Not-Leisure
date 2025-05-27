@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 
 import com.science.gtnl.asm.GTNLEarlyCoreMod;
-import com.science.gtnl.asm.TickrateMessage;
+import com.science.gtnl.common.packet.TickratePacket;
 import com.science.gtnl.config.MainConfig;
 
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -118,7 +118,7 @@ public class TickrateAPI {
             if ((player != null) && (player != Minecraft.getMinecraft().thePlayer)) return;
             GTNLEarlyCoreMod.INSTANCE.updateClientTickrate(ticksPerSecond, log);
         } else { // Server
-            network.sendTo(new TickrateMessage(ticksPerSecond), (EntityPlayerMP) player);
+            network.sendTo(new TickratePacket(ticksPerSecond), (EntityPlayerMP) player);
         }
     }
 

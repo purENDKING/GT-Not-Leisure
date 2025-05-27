@@ -21,8 +21,8 @@ import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
 
+import com.science.gtnl.Utils.enums.GTNLItemList;
 import com.science.gtnl.api.mixinHelper.IOverclockCalculatorExtension;
-import com.science.gtnl.common.GTNLItemList;
 import com.science.gtnl.common.machine.hatch.ParallelControllerHatch;
 
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;

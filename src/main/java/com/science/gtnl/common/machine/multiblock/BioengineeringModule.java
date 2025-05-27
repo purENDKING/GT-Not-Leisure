@@ -3,8 +3,6 @@ package com.science.gtnl.common.machine.multiblock;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlock;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaBlockGlass;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
 import static gregtech.api.enums.HatchElement.ExoticEnergy;
@@ -17,6 +15,7 @@ import com.gtnewhorizon.structurelib.structure.IStructureDefinition;
 import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
+import com.science.gtnl.loader.BlockLoader;
 
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -76,7 +75,7 @@ public class BioengineeringModule extends NanitesBaseModule<BioengineeringModule
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<BioengineeringModule>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', ofBlock(MetaCasing, 4))
+                .addElement('A', ofBlock(BlockLoader.MetaCasing, 4))
                 .addElement(
                     'B',
                     buildHatchAdder(BioengineeringModule.class)
@@ -90,7 +89,7 @@ public class BioengineeringModule extends NanitesBaseModule<BioengineeringModule
                 .addElement('F', ofFrame(Materials.CosmicNeutronium))
                 .addElement('G', ofBlock(sBlockCasings2, 5))
                 .addElement('H', ofBlock(sBlockCasings4, 12))
-                .addElement('I', ofBlock(MetaBlockGlass, 2))
+                .addElement('I', ofBlock(BlockLoader.MetaBlockGlass, 2))
                 .addElement('J', ofBlock(sBlockCasings8, 1))
                 .addElement('K', ofFrame(Materials.PulsatingIron))
                 .addElement('L', ofBlock(sBlockCasings9, 1))

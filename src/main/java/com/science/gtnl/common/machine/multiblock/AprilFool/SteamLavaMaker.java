@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock.AprilFool;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.gtnewhorizon.structurelib.structure.StructureUtility.ofBlockAnyMeta;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
-import static com.science.gtnl.common.block.Casings.BasicBlocks.MetaCasing;
 import static gregtech.api.enums.HatchElement.InputBus;
 import static gregtech.api.enums.HatchElement.OutputHatch;
 import static gregtech.api.multitileentity.multiblock.casing.Glasses.chainAllGlasses;
@@ -24,7 +23,8 @@ import com.gtnewhorizon.structurelib.structure.ISurvivalBuildEnvironment;
 import com.gtnewhorizon.structurelib.structure.StructureDefinition;
 import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.multiMachineClasses.SteamMultiMachineBase;
-import com.science.gtnl.common.recipe.RecipeRegister;
+import com.science.gtnl.loader.BlockLoader;
+import com.science.gtnl.loader.RecipeRegister;
 
 import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
@@ -136,8 +136,8 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
                         .build() };
             }
         } else {
-            rTexture = new ITexture[] {
-                Textures.BlockIcons.getCasingTextureForId(GTUtility.getCasingTextureIndex(MetaCasing, 27)) };
+            rTexture = new ITexture[] { Textures.BlockIcons
+                .getCasingTextureForId(GTUtility.getCasingTextureIndex(BlockLoader.MetaCasing, 27)) };
         }
         return rTexture;
     }
@@ -171,7 +171,7 @@ public class SteamLavaMaker extends SteamMultiMachineBase<SteamLavaMaker> implem
                             .casingIndex(GTUtility.getTextureId((byte) 116, (byte) 27))
                             .dot(1)
                             .buildAndChain(),
-                        ofBlock(MetaCasing, 27)))
+                        ofBlock(BlockLoader.MetaCasing, 27)))
                 .addElement('B', chainAllGlasses())
                 .addElement('C', ofChain(ofBlockAnyMeta(Blocks.lava), ofBlockAnyMeta(Blocks.flowing_lava)))
                 .build();
