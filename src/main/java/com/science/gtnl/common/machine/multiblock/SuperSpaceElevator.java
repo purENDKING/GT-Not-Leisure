@@ -625,7 +625,7 @@ public class SuperSpaceElevator extends TTMultiblockBase
                 ret.add(IG_UITextures.OVERLAY_BUTTON_PLANET_TELEPORT);
                 return ret.toArray(new IDrawable[0]);
             })
-            .setPos(174, doesBindPlayerInventory() ? 132 : 156)
+            .setPos(174, 156)
             .setSize(16, 16)
             .addTooltip(GCCoreUtil.translate("ig.button.travel"))
             .setTooltipShowUpDelay(TOOLTIP_DELAY));

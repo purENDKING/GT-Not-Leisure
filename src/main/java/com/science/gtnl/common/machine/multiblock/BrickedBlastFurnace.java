@@ -203,4 +203,17 @@ public class BrickedBlastFurnace extends MultiMachineBase<BrickedBlastFurnace> i
 
         return result;
     }
+
+    @Override
+    public void checkMaintenance() {}
+
+    @Override
+    public boolean getDefaultHasMaintenanceChecks() {
+        return false;
+    }
+
+    @Override
+    public boolean shouldCheckMaintenance() {
+        return false;
+    }
 }

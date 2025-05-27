@@ -300,7 +300,7 @@ public class NanitesIntegratedProcessingCenter extends WirelessEnergyMultiMachin
 
             @Override
             protected @Nonnull CheckRecipeResult validateRecipe(@Nonnull GTRecipe recipe) {
-                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4 && wirelessMode) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return recipe.mSpecialValue <= mHeatingCapacity ? CheckRecipeResultRegistry.SUCCESSFUL

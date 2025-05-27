@@ -3,7 +3,6 @@ package com.science.gtnl.common.machine.multiblock.SteamElevator;
 import static gregtech.api.enums.GTValues.V;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.metatileentity.BaseTileEntity.TOOLTIP_DELAY;
-import static net.minecraft.util.StatCollector.translateToLocal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.jetbrains.annotations.NotNull;
@@ -84,20 +84,18 @@ public class SteamBeaconModule extends SteamElevatorModule {
     private boolean enableVisRegenEffect; // 灵气创生
     private boolean enableWarpWardEffect; // 扭曲守护
     private int activeEffectsCount = 0;
+    private int machineEffectsCount = 0;
     private boolean canWork;
     private int runningTickCounter = 0;
     private final ItemStackHandler inputSlotHandler = new ItemStackHandler(1);
     private ItemStack storedWindowItems;
-    private final int mTier;
 
     public SteamBeaconModule(int aID, String aName, String aNameRegional, int aTier) {
-        super(aID, aName, aNameRegional);
-        mTier = aTier;
+        super(aID, aName, aNameRegional, aTier);
     }
 
     public SteamBeaconModule(String aName, int aTier) {
-        super(aName);
-        mTier = aTier;
+        super(aName, aTier);
     }
 
     @Override
@@ -186,63 +184,86 @@ public class SteamBeaconModule extends SteamElevatorModule {
         IWailaConfigHandler config) {
         super.getWailaBody(itemStack, currentTip, accessor, config);
         final NBTTagCompound tag = accessor.getNBTData();
-        currentTip.add(EnumChatFormatting.BLUE + translateToLocal("Info_SteamBeaconModule_02"));
+        currentTip.add(EnumChatFormatting.BLUE + StatCollector.translateToLocal("Info_SteamBeaconModule_02"));
         if (tag.getBoolean("enableSpeedEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_00"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_00"));
         }
         if (tag.getBoolean("enableStrengthEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_01"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_01"));
         }
         if (tag.getBoolean("enableJumpBoostEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_02"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_02"));
         }
         if (tag.getBoolean("enableResistanceEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_03"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_03"));
         }
         if (tag.getBoolean("enableHealthRegenerationEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_04"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_04"));
         }
         if (tag.getBoolean("enableNightVisionEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_05"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_05"));
         }
         if (tag.getBoolean("enableHasteEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_06"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_06"));
         }
         if (tag.getBoolean("enableFireResistanceEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_07"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_07"));
         }
         if (tag.getBoolean("enableWaterBreathingEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_08"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_08"));
         }
         if (tag.getBoolean("enableWarpWardEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_09"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_09"));
         }
         if (tag.getBoolean("enableFeatherFeetEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_10"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_10"));
         }
         if (tag.getBoolean("enableVisRegenEffect")) {
-            currentTip.add(EnumChatFormatting.GREEN + translateToLocal("Info_SteamBeaconModule_Effect_11"));
+            currentTip
+                .add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_11"));
         }
     }
 
     @Override
     public String getMachineType() {
-        return translateToLocal("SteamBeaconModuleRecipeType");
+        return StatCollector.translateToLocal("SteamBeaconModuleRecipeType");
     }
 
     @Override
     protected MultiblockTooltipBuilder createTooltip() {
         final MultiblockTooltipBuilder tt = new MultiblockTooltipBuilder();
-        tt.addMachineType(translateToLocal("SteamBeaconModuleRecipeType"))
-            .addInfo(translateToLocal("Tooltip_SteamElevatorModule_00"))
+        tt.addMachineType(StatCollector.translateToLocal("SteamBeaconModuleRecipeType"));
+        switch (mTier) {
+            case 1:
+                tt.addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModuleI_00"));
+                break;
+            case 2:
+                tt.addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModuleII_00"));
+                break;
+            case 3:
+                tt.addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModuleIII_00"));
+                break;
+        }
+        tt.addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModule_00"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModule_01"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModule_02") + (int) Math.pow(2, 5 + mTier))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModule_03"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_SteamBeaconModule_04"))
             .addSeparator()
-            .addInfo(translateToLocal("StructureTooComplex"))
-            .addInfo(translateToLocal("BLUE_PRINT_INFO"))
+            .addInfo(StatCollector.translateToLocal("StructureTooComplex"))
+            .addInfo(StatCollector.translateToLocal("BLUE_PRINT_INFO"))
             .beginStructureBlock(1, 5, 2, false)
-            .addInputBus(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addOutputBus(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addInputHatch(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
-            .addOutputHatch(translateToLocal("Tooltip_SteamElevatorModule_Casing"), 1)
             .toolTipFinisher();
         return tt;
     }
@@ -282,6 +303,23 @@ public class SteamBeaconModule extends SteamElevatorModule {
         if (hasWarpWardEffect) activeEffectsCount++;
         if (hasFeatherFeetEffect) activeEffectsCount++;
         if (hasVisRegenEffect) activeEffectsCount++;
+    }
+
+    private void updateMachineEffectsCount() {
+        machineEffectsCount = 0;
+
+        if (enableSpeedEffect) machineEffectsCount++;
+        if (enableStrengthEffect) machineEffectsCount++;
+        if (enableJumpBoostEffect) machineEffectsCount++;
+        if (enableResistanceEffect) machineEffectsCount++;
+        if (enableHealthRegenerationEffect) machineEffectsCount++;
+        if (enableNightVisionEffect) machineEffectsCount++;
+        if (enableHasteEffect) machineEffectsCount++;
+        if (enableFireResistanceEffect) machineEffectsCount++;
+        if (enableWaterBreathingEffect) machineEffectsCount++;
+        if (enableWarpWardEffect) machineEffectsCount++;
+        if (enableFeatherFeetEffect) machineEffectsCount++;
+        if (enableVisRegenEffect) machineEffectsCount++;
     }
 
     public void toggleSpeedEffect() {
@@ -614,6 +652,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
     @Override
     @NotNull
     public CheckRecipeResult checkProcessing() {
+        updateMachineEffectsCount();
         if (!canWork) {
             this.lEUt = 0;
             this.mEfficiency = 0;
@@ -621,7 +660,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
             return CheckRecipeResultRegistry.NO_RECIPE;
         }
 
-        this.lEUt = activeEffectsCount * V[3] * Math.max(1, setMaxEffectLevel() * 2);
+        this.lEUt = machineEffectsCount * V[3] * Math.max(1, setMaxEffectLevel() * 2);
         this.mEfficiency = 10000;
         this.mMaxProgresstime = 1000;
         return CheckRecipeResultRegistry.SUCCESSFUL;
@@ -792,7 +831,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                 ret.add(GTUITextures.OVERLAY_BUTTON_BATCH_MODE_ON);
                 return ret.toArray(new IDrawable[0]);
             })
-            .addTooltip(translateToLocal("Info_SteamBeaconModule_00"))
+            .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_00"))
             .setTooltipShowUpDelay(TOOLTIP_DELAY)
             .setPos(174, 94)
             .setSize(16, 16));
@@ -841,7 +880,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         return ret.toArray(new IDrawable[0]);
                     })
                     .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasSpeedEffect, this::setSpeedEffect), builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_00"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_00"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(6, 18)
                     .setSize(16, 16))
@@ -863,7 +902,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasStrengthEffect, this::setStrengthEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_01"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_01"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(24, 18)
                     .setSize(16, 16))
@@ -885,7 +924,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasJumpBoostEffect, this::setJumpBoostEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_02"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_02"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(42, 18)
                     .setSize(16, 16))
@@ -907,7 +946,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasResistanceEffect, this::setResistanceEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_03"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_03"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(6, 36)
                     .setSize(16, 16))
@@ -931,7 +970,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                             this::hasHealthRegenerationEffect,
                             this::setHealthRegenerationEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_04"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_04"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(24, 36)
                     .setSize(16, 16))
@@ -953,7 +992,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasNightVisionEffect, this::setNightVisionEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_05"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_05"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(42, 36)
                     .setSize(16, 16));
@@ -974,7 +1013,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         return ret.toArray(new IDrawable[0]);
                     })
                     .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasHasteEffect, this::setHasteEffect), builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_06"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_06"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(6, 54)
                     .setSize(16, 16))
@@ -998,7 +1037,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                                 this::hasFireResistanceEffect,
                                 this::setFireResistanceEffect),
                             builder)
-                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_07"))
+                        .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_07"))
                         .setTooltipShowUpDelay(TOOLTIP_DELAY)
                         .setPos(24, 54)
                         .setSize(16, 16))
@@ -1022,7 +1061,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                                 this::hasWaterBreathingEffect,
                                 this::setWaterBreathingEffect),
                             builder)
-                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_08"))
+                        .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_08"))
                         .setTooltipShowUpDelay(TOOLTIP_DELAY)
                         .setPos(42, 54)
                         .setSize(16, 16));
@@ -1046,7 +1085,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                     .attachSyncer(
                         new FakeSyncWidget.BooleanSyncer(this::hasWarpWardEffect, this::setWarpWardEffect),
                         builder)
-                    .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_09"))
+                    .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_09"))
                     .setTooltipShowUpDelay(TOOLTIP_DELAY)
                     .setPos(6, 72)
                     .setSize(16, 16))
@@ -1068,7 +1107,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         .attachSyncer(
                             new FakeSyncWidget.BooleanSyncer(this::hasFeatherFeetEffect, this::setFeatherFeetEffect),
                             builder)
-                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_10"))
+                        .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_10"))
                         .setTooltipShowUpDelay(TOOLTIP_DELAY)
                         .setPos(24, 72)
                         .setSize(16, 16))
@@ -1090,7 +1129,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                         .attachSyncer(
                             new FakeSyncWidget.BooleanSyncer(this::hasVisRegenEffect, this::setVisRegenEffect),
                             builder)
-                        .addTooltip(translateToLocal("Info_SteamBeaconModule_Effect_11"))
+                        .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_Effect_11"))
                         .setTooltipShowUpDelay(TOOLTIP_DELAY)
                         .setPos(42, 72)
                         .setSize(16, 16));
@@ -1115,7 +1154,7 @@ public class SteamBeaconModule extends SteamElevatorModule {
                 return ret.toArray(new IDrawable[0]);
             })
             .attachSyncer(new FakeSyncWidget.BooleanSyncer(this::hasMachineCanWork, this::setMachineCanWork), builder)
-            .addTooltip(translateToLocal("Info_SteamBeaconModule_01"))
+            .addTooltip(StatCollector.translateToLocal("Info_SteamBeaconModule_01"))
             .setTooltipShowUpDelay(TOOLTIP_DELAY)
             .setPos(66, 37)
             .setSize(16, 16))

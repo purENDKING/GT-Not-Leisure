@@ -266,7 +266,7 @@ public class SubscribeEventUtils {
     public static volatile List<int[]> mobReps = new CopyOnWriteArrayList<>();
 
     public static int getPoweredRepellentRange(int aTier) {
-        return 64 * aTier;
+        return (int) Math.pow(2, 5 + aTier);
     }
 
     @SubscribeEvent

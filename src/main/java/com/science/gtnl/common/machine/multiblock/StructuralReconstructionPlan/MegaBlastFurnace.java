@@ -240,7 +240,7 @@ public class MegaBlastFurnace extends GTMMultiMachineBase<MegaBlastFurnace> impl
                 return super.createOverclockCalculator(recipe).setRecipeHeat(recipe.mSpecialValue)
                     .setMachineHeat(MegaBlastFurnace.this.mHeatingCapacity)
                     .setHeatOC(true)
-                    .setHeatDiscount(false)
+                    .setHeatDiscount(true)
                     .setEUtDiscount(0.8 - (mParallelTier / 50.0))
                     .setSpeedBoost(Math.max(0.005, 1.0 / 5.0 - (mParallelTier / 200.0)));
             }

@@ -34,6 +34,9 @@ import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamElevatorModule>
     implements ISurvivalConstructable {
 
+    protected int mTier;
+    protected final long steamBufferSize;
+    protected boolean isConnected = false;
     protected static final int CONFIG_WINDOW_ID = 10;
     public static final int CASING_INDEX = StructureUtils.getTextureIndex(sBlockCasings2, 0);
     private static final String STRUCTURE_PIECE_MAIN = "main";
@@ -41,12 +44,16 @@ public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamEle
     private static final String SEM_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/steam_elevator_module";
     private static final String[][] shape = StructureUtils.readStructureFromFile(SEM_STRUCTURE_FILE_PATH);
 
-    public SteamElevatorModule(String aName) {
-        super(aName);
+    public SteamElevatorModule(int aID, String aName, String aNameRegional, int aTier) {
+        super(aID, aName, aNameRegional);
+        mTier = aTier;
+        steamBufferSize = 640000 * (1L << (aTier));
     }
 
-    public SteamElevatorModule(int aID, String aName, String aNameRegional) {
-        super(aID, aName, aNameRegional);
+    public SteamElevatorModule(String aName, int aTier) {
+        super(aName);
+        mTier = aTier;
+        steamBufferSize = 640000 * (1L << (aTier));
     }
 
     private static final int HORIZONTAL_OFF_SET = 0;
@@ -147,22 +154,6 @@ public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamEle
     }
 
     @Override
-    public boolean onRunningTick(ItemStack aStack) {
-        if (lEUt > 0) {
-            lEUt = -lEUt;
-        }
-        if (lEUt < 0) {
-            long aSteamVal = ((-lEUt * 10000) / Math.max(1000, mEfficiency));
-            // Logger.INFO("Trying to drain "+aSteamVal+" steam per tick.");
-            if (!tryConsumeSteam((int) aSteamVal)) {
-                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
     protected ProcessingLogic createProcessingLogic() {
 
         return new ProcessingLogic() {
@@ -184,8 +175,66 @@ public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamEle
     }
 
     @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        if (aBaseMetaTileEntity.isServerSide() && isConnected) {
+            super.onPostTick(aBaseMetaTileEntity, aTick);
+            if (mEfficiency < 0) mEfficiency = 0;
+            if (aBaseMetaTileEntity.getStoredEU() <= 0 && mMaxProgresstime > 0) {
+                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+            }
+        }
+    }
+
+    @Override
+    public boolean onRunningTick(ItemStack aStack) {
+        if (lEUt > 0) {
+            lEUt = -lEUt;
+        }
+        if (lEUt < 0) {
+            long aSteamVal = ((-lEUt * 10000) / Math.max(1000, mEfficiency));
+            if (!tryConsumeSteam((int) aSteamVal)) {
+                stopMachine(ShutDownReasonRegistry.POWER_LOSS);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean tryConsumeSteam(int aAmount) {
+        if (getEUVar() > aAmount) {
+            setEUVar(getEUVar() - aAmount);
+            return true;
+        }
+        return false;
+    }
+
+    public long increaseStoredEU(long maximumIncrease) {
+        if (getBaseMetaTileEntity() == null) {
+            return 0;
+        }
+        connect();
+        long increasedEU = Math
+            .min(getBaseMetaTileEntity().getEUCapacity() - getBaseMetaTileEntity().getStoredEU(), maximumIncrease);
+        return getBaseMetaTileEntity().increaseStoredEnergyUnits(increasedEU, false) ? increasedEU : 0;
+    }
+
+    @Override
+    public long maxEUStore() {
+        return steamBufferSize;
+    }
+
+    @Override
     public int getTierRecipes() {
         return 14;
+    }
+
+    public void connect() {
+        isConnected = true;
+    }
+
+    public void disconnect() {
+        isConnected = false;
     }
 
 }

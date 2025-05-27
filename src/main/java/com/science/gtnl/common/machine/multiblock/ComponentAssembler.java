@@ -250,7 +250,7 @@ public class ComponentAssembler extends MultiMachineBase<ComponentAssembler> imp
         logic.setAvailableAmperage(
             useSingleAmp ? 1
                 : ExoticEnergyInputHelper.getMaxWorkingInputAmpsMulti(getExoticAndNormalEnergyHatchList()));
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
     }
 
     @Override

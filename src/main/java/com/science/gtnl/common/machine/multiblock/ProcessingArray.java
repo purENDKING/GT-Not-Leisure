@@ -280,7 +280,7 @@ public class ProcessingArray extends MultiMachineBase<ProcessingArray> implement
         boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
         logic.setAvailableVoltage(GTValues.V[tTier] * (mLastRecipeMap != null ? mLastRecipeMap.getAmperage() : 1));
         logic.setAvailableAmperage(getControllerSlot().stackSize);
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
     }
 
     public void setTierAndMult() {

@@ -172,26 +172,6 @@ public class EIGIC2Bucket extends EIGBucket {
             if (calcAvgGrowthRate(crop, cc, 6) <= 0) return;
 
             ItemStack blockInputStackToConsume = null;
-            if (!crop.canMature()) {
-                if (this.supportItems != null) return;
-                crop.updateNutrientsForBlockUnder();
-                boolean canGrow = false;
-                ArrayList<ItemStack> inputs = greenhouse.getStoredInputs();
-                for (ItemStack potentialBlock : inputs) {
-                    if (potentialBlock == null || potentialBlock.stackSize <= 0) continue;
-                    if (!setBlock(potentialBlock, xyz[0], xyz[1] + 2, xyz[2], world)) continue;
-                    if (!crop.canMature()) continue;
-                    if (this.seedCount > potentialBlock.stackSize) return;
-                    canGrow = true;
-                    blockInputStackToConsume = potentialBlock;
-                    ItemStack newSupport = potentialBlock.copy();
-                    newSupport.stackSize = 1;
-                    this.supportItems = new ItemStack[] { newSupport };
-                    break;
-                }
-
-                if (!canGrow) return;
-            }
 
             if (this.supportItems == null) {
                 cc.getGain(crop);
@@ -469,7 +449,6 @@ public class EIGIC2Bucket extends EIGBucket {
         public boolean isValid;
         public Set<Block> reqBlockSet = new HashSet<>();
         public Set<String> reqBlockOreDict = new HashSet<>();
-        public int lightLevel = 15;
 
         public FakeTileEntityCrop(EIGIC2Bucket bucket, EdenGarden greenhouse, int[] xyz) {
             super();
@@ -499,15 +478,6 @@ public class EIGIC2Bucket extends EIGBucket {
             this.airQuality = EIGIC2Bucket.getAirQuality(greenhouse);
 
             this.isValid = true;
-        }
-
-        public boolean canMature() {
-            CropCard cc = this.getCrop();
-            this.size = cc.maxSize() - 1;
-            this.lightLevel = 15;
-            if (cc.canGrow(this)) return true;
-            this.lightLevel = 9;
-            return cc.canGrow(this);
         }
 
         @Override

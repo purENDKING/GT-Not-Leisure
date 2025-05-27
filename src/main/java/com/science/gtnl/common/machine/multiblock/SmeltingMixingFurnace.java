@@ -262,7 +262,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             boolean useSingleAmp = mEnergyHatches.size() == 1 && mExoticEnergyHatches.isEmpty();
             logic.setAvailableVoltage(getMachineVoltageLimit());
             logic.setAvailableAmperage(useSingleAmp ? 1 : getMaxInputAmps());
-            logic.setAmperageOC(useSingleAmp);
+            logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
         }
     }
 
@@ -292,7 +292,8 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
             @NotNull
             @Override
             protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
-                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4 && machineMode != MACHINEMODE_DTPF) {
+                if (recipe.mEUt > V[Math.min(mParallelTier + 1, 14)] * 4 && machineMode != MACHINEMODE_DTPF
+                    && wirelessMode) {
                     return CheckRecipeResultRegistry.insufficientPower(recipe.mEUt);
                 }
                 return super.validateRecipe(recipe);

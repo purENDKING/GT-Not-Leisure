@@ -339,7 +339,7 @@ public class PrecisionAssembler extends MultiMachineBase<PrecisionAssembler> imp
         logic.setAvailableAmperage(
             useSingleAmp ? 1
                 : ExoticEnergyInputHelper.getMaxWorkingInputAmpsMulti(getExoticAndNormalEnergyHatchList()));
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAmperageOC(true);
     }
 
     public long getMachineVoltageLimit() {

@@ -104,7 +104,7 @@ public abstract class GTMMultiMachineBase<T extends GTMMultiMachineBase<T>> exte
         logic.setAvailableAmperage(
             useSingleAmp ? 1
                 : ExoticEnergyInputHelper.getMaxWorkingInputAmpsMulti(getExoticAndNormalEnergyHatchList()));
-        logic.setAmperageOC(useSingleAmp);
+        logic.setAmperageOC(!mExoticEnergyHatches.isEmpty() || mEnergyHatches.size() != 1);
     }
 
     @Override

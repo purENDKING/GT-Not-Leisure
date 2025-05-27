@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.early;
+package com.science.gtnl.mixins.early.Minecraft;
 
 import static com.science.gtnl.ScienceNotLeisure.network;
 

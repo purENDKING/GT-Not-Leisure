@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ReAvaritiaLog {
 
-    public static final Logger logger = LogManager.getLogger("GTNotLeisure");
+    public static final Logger logger = LogManager.getLogger("ReAvaritia");
 
     public static void log(Level level, Throwable e, Object message) {
         log(level, message);
