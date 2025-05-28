@@ -4,6 +4,7 @@ import static com.gtnewhorizon.structurelib.structure.StructureUtility.*;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static gregtech.api.GregTechAPI.*;
 import static gregtech.api.enums.HatchElement.*;
+import static gregtech.api.enums.Mods.Botania;
 import static gregtech.api.util.GTStructureUtility.buildHatchAdder;
 import static gregtech.api.util.GTUtility.validMTEList;
 
@@ -20,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,12 +45,16 @@ import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
+import gregtech.api.logic.ProcessingLogic;
 import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTRecipe;
 import gregtech.api.util.GTUtility;
 import gregtech.api.util.MultiblockTooltipBuilder;
+import gregtech.api.util.ParallelHelper;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings8;
 import gtPlusPlus.core.util.minecraft.FluidUtils;
@@ -69,6 +75,19 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     private static final int NATURE_MODE = 1;
     private static final int MANA_MODE = 2;
     private static final int RUNE_MODE = 3;
+    private boolean enableInfinityMana = false;
+    private static final ItemStack asgardandelion = GTModHandler.getModItem("Botania", "specialFlower", 1);
+
+    static {
+        NBTTagCompound asgardandelionType = asgardandelion.getTagCompound();
+        if (asgardandelionType != null) {
+            asgardandelionType.setString("type", "asgardandelion");
+        } else {
+            asgardandelionType = new NBTTagCompound();
+            asgardandelionType.setString("type", "asgardandelion");
+            asgardandelion.setTagCompound(asgardandelionType);
+        }
+    }
 
     public TeleportationArrayToAlfheim(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -273,6 +292,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_00"))
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_01"))
             .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_02"))
+            .addInfo(StatCollector.translateToLocal("Tooltip_TeleportationArrayToAlfheim_03"))
             .addInfo(StatCollector.translateToLocal("Tooltip_PerfectOverclock"))
             .addInfo(StatCollector.translateToLocal("Tooltip_Tectech_Hatch"))
             .addSeparator()
@@ -325,9 +345,22 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     public boolean checkMachine(IGregTechTileEntity aBaseMetaTileEntity, ItemStack aStack) {
         tCountCasing = 0;
         FluidManaInputHatch.clear();
-        return checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)
-            && tCountCasing >= 350
-            && checkHatch();
+        enableInfinityMana = false;
+        if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET) && checkHatch())
+            return false;
+        ItemStack item = getControllerSlot();
+        if (areStacksEqualExtended(item, GTModHandler.getModItem(Botania.ID, "pool", 1, 1))
+            || areStacksEqualExtended(item, asgardandelion)) {
+            enableInfinityMana = true;
+        }
+
+        return tCountCasing >= 350;
+    }
+
+    private static boolean areStacksEqualExtended(ItemStack lhs, ItemStack rhs) {
+        if (lhs == null) return rhs == null;
+        if (rhs == null) return false;
+        return lhs.getItem() == rhs.getItem() && (Objects.equals(lhs.stackTagCompound, rhs.stackTagCompound));
     }
 
     @Override
@@ -348,7 +381,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             if (this.mMaxProgresstime > 0 && this.mProgresstime != 0 || this.getBaseMetaTileEntity()
                 .hasWorkJustBeenEnabled()) {
                 if (aTick % 20 == 0 || this.getBaseMetaTileEntity()
-                    .hasWorkJustBeenEnabled()) {
+                    .hasWorkJustBeenEnabled() && !enableInfinityMana) {
                     if (!this.depleteInputFromRestrictedHatches(this.FluidManaInputHatch, 100)) {
                         this.causeMaintenanceIssue();
                         this.stopMachine(
@@ -358,6 +391,47 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
                 }
             }
         }
+    }
+
+    @Override
+    protected ProcessingLogic createProcessingLogic() {
+        return new ProcessingLogic() {
+
+            @NotNull
+            @Override
+            protected ParallelHelper createParallelHelper(@NotNull GTRecipe recipe) {
+                return super.createParallelHelper(recipeWithMultiplier(recipe, inputFluids));
+            }
+        };
+    }
+
+    protected GTRecipe recipeWithMultiplier(GTRecipe recipe, FluidStack[] fluidInputs) {
+        if (recipe == null || fluidInputs == null) {
+            return recipe;
+        }
+
+        if (recipe.mFluidInputs == null || recipe.mFluidInputs.length == 0
+            || recipe.mFluidOutputs == null
+            || recipe.mFluidOutputs.length == 0) {
+            return recipe;
+        }
+
+        if (recipe.mFluidInputs[0] == null || recipe.mFluidOutputs[0] == null) {
+            return recipe;
+        }
+
+        for (FluidStack fluid : fluidInputs) {
+            if (fluid == null) {
+                return recipe;
+            }
+        }
+
+        GTRecipe tRecipe = recipe.copy();
+        if (enableInfinityMana) {
+            tRecipe.mFluidInputs[0].amount = 0;
+        }
+
+        return tRecipe;
     }
 
     @Override
