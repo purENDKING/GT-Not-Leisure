@@ -43,12 +43,13 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
 
         if (MainConfig.enableDebugMode) {
-            ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserBeacon.class, new MeteorMinerRenderer());
             ClientRegistry.bindTileEntitySpecialRenderer(BaseMetaTileEntity.class, new MeteorMinerMachineRender());
             MinecraftForgeClient.registerItemRenderer(
                 Item.getItemFromBlock(GregTechAPI.sBlockMachines),
                 new ItemMeteorMinerMachineRender());
         }
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLaserBeacon.class, new MeteorMinerRenderer());
 
         new PlayerDollRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPlayerDoll.class, new PlayerDollRenderer());

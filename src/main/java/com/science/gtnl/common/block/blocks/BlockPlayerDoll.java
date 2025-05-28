@@ -3,8 +3,6 @@ package com.science.gtnl.common.block.blocks;
 import static com.science.gtnl.ScienceNotLeisure.RESOURCE_ROOT_ID;
 import static com.science.gtnl.common.render.PlayerDollRenderManager.fetchUUID;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -115,7 +113,7 @@ public class BlockPlayerDoll extends BlockContainer {
                         tileEntityPlayerDoll.setOwnerUUID(uuid);
                     }
                 }
-            } else {
+            } else if (player != null) {
                 String playerName = player.getCommandSenderName();
                 tileEntityPlayerDoll.setOwner(playerName);
                 String uuid = fetchUUID(playerName);
@@ -125,23 +123,17 @@ public class BlockPlayerDoll extends BlockContainer {
             }
         }
 
-        int direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-        int metadata = 0;
-
-        switch (direction) {
-            case 0:
-                metadata = 2;
-                break; // 南
-            case 1:
-                metadata = 5;
-                break; // 西
-            case 2:
-                metadata = 3;
-                break; // 北
-            case 3:
-                metadata = 4;
-                break; // 东
+        int direction = 0;
+        if (player != null) {
+            direction = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         }
+        int metadata = switch (direction) {
+            case 0 -> 2; // 南
+            case 1 -> 5; // 西
+            case 2 -> 3; // 北
+            case 3 -> 4;
+            default -> 0; // 东
+        };
 
         world.setBlockMetadataWithNotify(x, y, z, metadata, 2);
     }
@@ -189,9 +181,10 @@ public class BlockPlayerDoll extends BlockContainer {
     }
 
     @Override
-    public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        return new ArrayList<>();
-    }
+    public void dropBlockAsItemWithChance(World worldIn, int x, int y, int z, int meta, float chance, int fortune) {}
+
+    @Override
+    public void dropBlockAsItem(World world, int x, int y, int z, ItemStack itemStack) {}
 
     @Override
     public int getRenderType() {

@@ -38,11 +38,10 @@ import com.science.gtnl.common.machine.multiMachineClasses.WirelessEnergyMultiMa
 import com.science.gtnl.loader.BlockLoader;
 import com.science.gtnl.loader.RecipeRegister;
 
-import bartworks.API.BorosilicateGlass;
+import bartworks.common.loaders.ItemRegistry;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.Textures;
-import gregtech.api.enums.VoltageIndex;
 import gregtech.api.gui.modularui.GTUITextures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
@@ -147,7 +146,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         if (STRUCTURE_DEFINITION == null) {
             STRUCTURE_DEFINITION = StructureDefinition.<SmeltingMixingFurnace>builder()
                 .addShape(STRUCTURE_PIECE_MAIN, transpose(shape))
-                .addElement('A', BorosilicateGlass.ofBoroGlass((byte) 0, (t, v) -> t.mGlassTier = v, t -> t.mGlassTier))
+                .addElement('A', ofBlock(ItemRegistry.bw_realglas2, 0))
                 .addElement('B', ofBlock(BlockLoader.MetaCasing, 5))
                 .addElement('C', ofBlock(BlockLoader.MetaCasing, 7))
                 .addElement('D', ofBlock(defcCasingBlock, 7))
@@ -215,7 +214,7 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
         wirelessMode = false;
         hasRequiredItem = false;
         if (!checkPiece(STRUCTURE_PIECE_MAIN, HORIZONTAL_OFF_SET, VERTICAL_OFF_SET, DEPTH_OFF_SET)) return false;
-        if (this.tCountCasing <= 15 && mGlassTier < VoltageIndex.UEV) {
+        if (this.tCountCasing <= 15) {
             return false;
         }
 
@@ -359,14 +358,12 @@ public class SmeltingMixingFurnace extends WirelessEnergyMultiMachineBase<Smelti
     public void saveNBTData(NBTTagCompound aNBT) {
         super.saveNBTData(aNBT);
         aNBT.setInteger("mode", machineMode);
-        aNBT.setByte("mGlassTier", mGlassTier);
     }
 
     @Override
     public void loadNBTData(NBTTagCompound aNBT) {
         super.loadNBTData(aNBT);
         machineMode = aNBT.getInteger("mode");
-        mGlassTier = aNBT.getByte("mGlassTier");
     }
 
     @Override

@@ -41,6 +41,7 @@ import com.reavaritia.common.item.ToolHelper;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import fox.spiteful.avaritia.Config;
+import fox.spiteful.avaritia.LudicrousEvents;
 import fox.spiteful.avaritia.LudicrousText;
 import fox.spiteful.avaritia.items.LudicrousItems;
 
@@ -93,6 +94,7 @@ public class SubscribeEventUtils {
         if (event.harvester.getHeldItem() == null) return;
         ItemStack held = event.harvester.getHeldItem();
         if (held.getItem() == ItemLoader.InfinityPickaxe) {
+            LudicrousEvents.extraLuck(event, 5);
 
             if (held.getTagCompound() != null && held.getTagCompound()
                 .getBoolean("HammerMode")
