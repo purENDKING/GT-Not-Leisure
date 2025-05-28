@@ -31,6 +31,8 @@ public class EarlyMixinPlugin {
         if (MainConfig.enableSuperCreeper) {
             mixins.add("Minecraft.EntityCreeperAccessor");
             mixins.add("Minecraft.EntityAICreeperSwell_Mixin");
+            mixins.add("Minecraft.EntityCreeper_Mixin");
+            mixins.add("Minecraft.EntitySpider_Mixin");
         }
         return mixins;
     }
