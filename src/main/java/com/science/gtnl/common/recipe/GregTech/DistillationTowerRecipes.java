@@ -4,6 +4,7 @@ import com.science.gtnl.Utils.recipes.RecipeBuilder;
 import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.loader.IRecipePool;
 
+import bartworks.system.material.WerkstoffLoader;
 import goodgenerator.items.GGMaterial;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -72,5 +73,23 @@ public class DistillationTowerRecipes implements IRecipePool {
             .eut(TierEU.RECIPE_EV)
             .addTo(DTR);
 
+        RecipeBuilder.builder()
+            .itemOutputs(GTOreDictUnificator.get(OrePrefixes.dust, Materials.EnderPearl, 1))
+            .fluidInputs(MaterialPool.FluidEnderAir.getFluidOrGas(200000))
+            .fluidOutputs(
+                Materials.NitrogenDioxide.getGas(120000),
+                Materials.Deuterium.getGas(40000),
+                Materials.Helium.getGas(15000),
+                Materials.Helium_3.getGas(12000),
+                Materials.Tritium.getGas(10000),
+                WerkstoffLoader.Krypton.getFluidOrGas(1000),
+                WerkstoffLoader.Xenon.getFluidOrGas(1000),
+                Materials.Radon.getGas(1000))
+            .outputChances(1000)
+            .specialValue(0)
+            .noOptimize()
+            .duration(2000)
+            .eut(TierEU.RECIPE_IV)
+            .addTo(DTR);
     }
 }

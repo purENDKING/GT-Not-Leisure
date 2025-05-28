@@ -71,6 +71,7 @@ import com.science.gtnl.common.recipe.GregTech.DistillationTowerRecipes;
 import com.science.gtnl.common.recipe.GregTech.DistilleryRecipes;
 import com.science.gtnl.common.recipe.GregTech.DragonEvolutionFusionCraftingRecipes;
 import com.science.gtnl.common.recipe.GregTech.ElectrolyzerRecipes;
+import com.science.gtnl.common.recipe.GregTech.FluidCannerRecipes;
 import com.science.gtnl.common.recipe.GregTech.FluidExtraction;
 import com.science.gtnl.common.recipe.GregTech.FluidExtractorRecipes;
 import com.science.gtnl.common.recipe.GregTech.FusionReactorRecipes;
@@ -81,6 +82,7 @@ import com.science.gtnl.common.recipe.GregTech.PlasmaForgeRecipes;
 import com.science.gtnl.common.recipe.GregTech.PreciseAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.SpaceAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
+import com.science.gtnl.common.recipe.GregTech.VacuumFreezerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFurnaceRecipes;
 import com.science.gtnl.common.recipe.GregTech.multiDehydratorRecipes;
 import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRecipes;
@@ -126,7 +128,8 @@ public class RecipeLoader {
             new SpaceAssemblerRecipes(), new PCBFactoryRecipes(), new PlatinumBasedTreatmentRecipes(),
             new ShallowChemicalCouplingRecipes(), new BloodDemonInjectionRecipes(), new AlchemicChemistrySetRecipes(),
             new AdvancedCircuitAssemblyLineRecipes(), new FallingTowerRecipes(), new AssemblingLineRecipes(),
-            new GasCollectorRecipes(), new EternalGregTechWorkshopUpgradeRecipes() };
+            new GasCollectorRecipes(), new EternalGregTechWorkshopUpgradeRecipes(), new FluidCannerRecipes(),
+            new VacuumFreezerRecipes() };
 
         IRecipePool[] recipePoolsAprilFool = new IRecipePool[] { new CraftingTableAprilFoolRecipes(),
             new SteamManufacturerRecipes(), new SteamCarpenterRecipe(), new LavaMakerRecipes(),

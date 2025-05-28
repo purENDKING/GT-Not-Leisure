@@ -75,5 +75,16 @@ public class CentrifugeRecipes implements IRecipePool {
             .duration(300)
             .eut(TierEU.RECIPE_HV)
             .addTo(CNCR);
+
+        RecipeBuilder.builder()
+            .fluidInputs(MaterialPool.EnderAir.getFluidOrGas(10000))
+            .fluidOutputs(
+                Materials.NitrogenDioxide.getGas(3000),
+                Materials.Deuterium.getGas(1000),
+                Materials.Helium_3.getGas(1000))
+            .noOptimize()
+            .duration(400)
+            .eut(TierEU.RECIPE_HV)
+            .addTo(CNCR);
     }
 }
