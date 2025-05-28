@@ -2,9 +2,9 @@ package com.science.gtnl.config;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -98,9 +98,9 @@ public class MainConfig {
     public static int specialIconType = 0;
 
     // SuperCreeper
-    public static List<String> targetBlockSpecs = new ArrayList<>();
+    public static List<String> targetBlockSpecs = new CopyOnWriteArrayList<>();
     public static String[] defaultTargetBlocks = { "minecraft:chest", "appliedenergistics2:tile.BlockDrive",
-        "gregtech:gt.blockmachines" };
+        "gregtech:gt.blockmachines", "appliedenergistics2:tile.BlockController" };
     public static boolean enableSuperCreeper = false;
     public static int blockTargetInterval = 30;
     public static int playerTargetInterval = 10;
@@ -109,6 +109,17 @@ public class MainConfig {
     public static int explosionPower = 3;
     public static double moveSpeed = 1.0;
     public static double explosionTriggerRange = 2.5;
+    public static double creeperSpeedBonusScale = 3.0;
+    public static boolean enableCreeperBurningExplosion = true;
+    public static int burningExplosionTimer = 30;
+    public static boolean enableCreeperIgnitedDeathExplosion = true;
+    public static boolean enableCreeperHurtByCreeperExplosion = true;
+    public static boolean enableCreeperKilledByCreeperExplosion = true;
+    public static boolean enableCreeperFindSpider = true;
+    public static boolean allowCreeperExplosionBypassGamerule = false;
+    public static double spiderMoveSpeed = 1.3;
+    public static int spiderFindRadius = 16;
+    public static int spiderTargetInterval = 20;
 
     // Effect
     public static int aweEffectID = 186;
@@ -426,6 +437,14 @@ public class MainConfig {
             .get(CATEGORY_SUPER_CREEPER, "MoveSpeed", moveSpeed, "Movement speed multiplier for Super Creeper")
             .getDouble(moveSpeed);
 
+        creeperSpeedBonusScale = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "creeperSpeedBonusScale",
+                creeperSpeedBonusScale,
+                "The higher this value, the faster the creeper moves as it gets closer to its target")
+            .getDouble(creeperSpeedBonusScale);
+
         explosionTriggerRange = config
             .get(
                 CATEGORY_SUPER_CREEPER,
@@ -433,6 +452,86 @@ public class MainConfig {
                 explosionTriggerRange,
                 "Distance at which the Super Creeper will trigger its explosion.")
             .getDouble(explosionTriggerRange);
+
+        enableCreeperBurningExplosion = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "enableCreeperBurningExplosion",
+                enableCreeperBurningExplosion,
+                "Enable Creeper explosion when burning.")
+            .getBoolean(enableCreeperBurningExplosion);
+
+        enableCreeperIgnitedDeathExplosion = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "enableCreeperIgnitedDeathExplosion",
+                enableCreeperIgnitedDeathExplosion,
+                "Enable creeper to explode immediately when killed while already ignited.")
+            .getBoolean(enableCreeperIgnitedDeathExplosion);
+
+        enableCreeperHurtByCreeperExplosion = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "enableCreeperHurtByCreeperExplosion",
+                enableCreeperHurtByCreeperExplosion,
+                "Enable creeper explosion reaction when damaged by another creeper (not only when killed).")
+            .getBoolean(enableCreeperHurtByCreeperExplosion);
+
+        enableCreeperKilledByCreeperExplosion = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "enableCreeperKilledByCreeperExplosion",
+                enableCreeperKilledByCreeperExplosion,
+                "Enable Creeper explosion when killed by another Creeper.")
+            .getBoolean(enableCreeperKilledByCreeperExplosion);
+
+        enableCreeperFindSpider = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "enableCreeperFindSpider",
+                enableCreeperFindSpider,
+                "Enable Creeper to find and mount nearby Spiders.")
+            .getBoolean(enableCreeperFindSpider);
+
+        allowCreeperExplosionBypassGamerule = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "allowCreeperExplosionBypassGamerule",
+                allowCreeperExplosionBypassGamerule,
+                "Allow creeper explosions to ignore mobGriefing gamerule and always break blocks")
+            .getBoolean(allowCreeperExplosionBypassGamerule);
+
+        spiderMoveSpeed = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "spiderMoveSpeed",
+                spiderMoveSpeed,
+                "Spider move speed when mounted by a Creeper.")
+            .getDouble(spiderMoveSpeed);
+
+        spiderFindRadius = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "spiderFindRadius",
+                spiderFindRadius,
+                "Radius in which Creepers search for Spiders.")
+            .getInt(spiderFindRadius);
+
+        spiderTargetInterval = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "spiderTargetInterval",
+                spiderTargetInterval,
+                "Interval (in ticks) between Creeper spider targeting attempts.")
+            .getInt(spiderTargetInterval);
+
+        burningExplosionTimer = config
+            .get(
+                CATEGORY_SUPER_CREEPER,
+                "burningExplosionTimer",
+                burningExplosionTimer,
+                "Ticks before Creeper explodes due to burning.")
+            .getInt(burningExplosionTimer);
 
         // Debug
         enableDebugMode = config.get(CATEGORY_DEBUG, "enableDebugMode", enableDebugMode, "Enable Debug Print Log")

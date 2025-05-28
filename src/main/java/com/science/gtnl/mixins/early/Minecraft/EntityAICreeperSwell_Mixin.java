@@ -3,9 +3,9 @@ package com.science.gtnl.mixins.early.Minecraft;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAICreeperSwell;
 import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 
@@ -26,6 +26,15 @@ public abstract class EntityAICreeperSwell_Mixin {
 
     @Shadow
     EntityCreeper swellingCreeper;
+
+    @Unique
+    private EntitySpider targetSpider;
+    @Unique
+    private final int spiderTargetInterval = MainConfig.spiderTargetInterval;
+    @Unique
+    private long lastSpiderTargetUpdateTick = 0;
+    @Unique
+    private final int spiderFindRadius = MainConfig.spiderFindRadius;
 
     @Unique
     private Utils.TargetInfo cachedBlockTarget = null;
@@ -121,35 +130,106 @@ public abstract class EntityAICreeperSwell_Mixin {
         return closestTarget;
     }
 
+    public boolean executeSpider() {
+        long currentTick = this.swellingCreeper.worldObj.getTotalWorldTime();
+
+        if (currentTick - lastSpiderTargetUpdateTick >= spiderTargetInterval) {
+            lastSpiderTargetUpdateTick = currentTick;
+
+            if (this.swellingCreeper.ridingEntity != null || this.swellingCreeper.isRiding()) {
+                return false;
+            }
+
+            List<EntitySpider> nearbySpiders = this.swellingCreeper.worldObj.getEntitiesWithinAABB(
+                EntitySpider.class,
+                this.swellingCreeper.boundingBox.expand(spiderFindRadius, spiderFindRadius, spiderFindRadius));
+
+            EntitySpider closestSpider = null;
+            double closestDistance = spiderFindRadius;
+
+            for (EntitySpider spider : nearbySpiders) {
+                if (spider.isEntityAlive() && spider.riddenByEntity == null) {
+                    double dist = this.swellingCreeper.getDistanceToEntity(spider);
+                    if (dist < closestDistance) {
+                        closestDistance = dist;
+                        closestSpider = spider;
+                    }
+                }
+            }
+
+            if (closestSpider != null) {
+                this.targetSpider = closestSpider;
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Inject(method = "shouldExecute", at = @At("HEAD"), cancellable = true)
     public void shouldExecute(CallbackInfoReturnable<Boolean> cir) {
-        EntityLivingBase originalTarget = this.swellingCreeper.getAttackTarget();
         Utils.TargetInfo customTarget = findNearestTarget();
+        if (MainConfig.enableCreeperFindSpider) executeSpider();
+        double customTargetDistance = 0;
+        double spiderDistance = 0;
 
-        if (this.swellingCreeper.getCreeperState() > 0
-            || (originalTarget != null && this.swellingCreeper.getDistanceToEntity(originalTarget) < 16.0D)
-            || (customTarget != null && customTarget.distance < 32.0D)) {
-            cir.setReturnValue(true);
+        if (customTarget != null) {
+            customTargetDistance = customTarget.distance;
+        }
+        if (this.targetSpider != null) {
+            spiderDistance = this.swellingCreeper.getDistanceToEntity(this.targetSpider);
+        }
+
+        if (this.swellingCreeper.getCreeperState() < 0) {
+            if (spiderDistance < spiderFindRadius || customTargetDistance < blockFindRadius) {
+                cir.setReturnValue(true);
+            }
         } else {
             cir.setReturnValue(false);
         }
         cir.cancel();
     }
 
+    @Inject(method = "resetTask", at = @At("HEAD"), cancellable = true)
+    public void resetTask(CallbackInfo ci) {
+        this.targetSpider = null;
+    }
+
     @Inject(method = "updateTask", at = @At("HEAD"), cancellable = true)
     public void updateTask(CallbackInfo ci) {
         Utils.TargetInfo customTarget = findNearestTarget();
+        double customTargetDistance = Double.MAX_VALUE;
+        double spiderDistance = 0;
+
+        if (customTarget != null) {
+            customTargetDistance = customTarget.distance;
+        }
+        if (this.targetSpider != null) {
+            spiderDistance = this.swellingCreeper.getDistanceToEntity(this.targetSpider);
+        }
+
+        if (MainConfig.enableCreeperFindSpider && this.targetSpider != null
+            && spiderDistance < customTargetDistance
+            && this.swellingCreeper.ridingEntity == null
+            && !this.swellingCreeper.isRiding()) {
+            if (spiderDistance < 2.0D) {
+                this.swellingCreeper.mountEntity(this.targetSpider);
+            }
+            this.swellingCreeper.getNavigator()
+                .tryMoveToEntityLiving(this.targetSpider, 1.0D);
+            return;
+        } else {
+            this.targetSpider = null;
+        }
 
         if (customTarget == null) {
-            if (this.swellingCreeper.getAttackTarget() == null) {
-                this.swellingCreeper.setCreeperState(-1);
-            }
+            this.swellingCreeper.setCreeperState(-1);
         } else {
             double targetX = customTarget.x + 0.5;
             double targetY = customTarget.y + 0.5;
             double targetZ = customTarget.z + 0.5;
 
-            if (customTarget.distance <= explosionTriggerRange) {
+            if (customTargetDistance <= explosionTriggerRange) {
                 if (this.swellingCreeper.getCreeperState() < 1) {
                     this.swellingCreeper.setCreeperState(1);
                     ((EntityCreeperAccessor) this.swellingCreeper).setExplosionRadius(explosionPower);
@@ -158,7 +238,11 @@ public abstract class EntityAICreeperSwell_Mixin {
                     .clearPathEntity();
             } else {
                 this.swellingCreeper.getNavigator()
-                    .tryMoveToXYZ(targetX, targetY, targetZ, moveSpeed);
+                    .tryMoveToXYZ(
+                        targetX,
+                        targetY,
+                        targetZ,
+                        Math.max(3, moveSpeed + (MainConfig.creeperSpeedBonusScale / customTarget.distance)));
 
                 boolean canSeeTarget = true;
                 if (customTarget.isEntityTarget() && customTarget.entityTarget != null) {

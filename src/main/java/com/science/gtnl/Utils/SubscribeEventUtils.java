@@ -8,9 +8,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
@@ -23,6 +25,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.WorldEvent;
 
@@ -309,6 +312,20 @@ public class SubscribeEventUtils {
                         // We're already DENYing it. No reason to keep checking
                         return;
                     }
+                }
+            }
+        }
+    }
+
+    // Mobs
+    @SubscribeEvent
+    public void onLivingHurt(LivingHurtEvent event) {
+        if (event.entity instanceof EntityCreeper creeper) {
+            if (event.source.isExplosion() && event.source.getSourceOfDamage() instanceof EntityCreeper) {
+                NBTTagCompound nbt = creeper.getEntityData();
+                if (!nbt.hasKey("creeperExplosionDelayed")) {
+                    nbt.setInteger("creeperExplosionDelay", 30);
+                    nbt.setBoolean("creeperExplosionDelayed", true);
                 }
             }
         }
