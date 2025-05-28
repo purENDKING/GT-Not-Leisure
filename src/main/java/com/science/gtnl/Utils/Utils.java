@@ -429,6 +429,7 @@ public final class Utils {
     }
 
     public static boolean isTargetBlock(Block block, int meta) {
+        if (targetBlockSpecs == null) return false;
         if (block == null) {
             return false;
         }

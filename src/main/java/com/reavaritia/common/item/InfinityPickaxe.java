@@ -206,8 +206,7 @@ public class InfinityPickaxe extends ItemPickaxe implements SubtitleDisplay {
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
+        if (entity instanceof EntityPlayer player) {
             if (player.getFoodStats()
                 .needFood()
                 || player.getFoodStats()
