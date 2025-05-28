@@ -2363,7 +2363,7 @@ public class MachineLoader {
     }
 
     public static void registerGlasses() {
-        BorosilicateGlass.registerGlass(BlockLoader.PlayerDoll, 0, (byte) 12);
+        BorosilicateGlass.registerGlass(BlockLoader.PlayerDoll, 0, (byte) 13);
         BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 0, (byte) 10);
         BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 1, (byte) 8);
         BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 2, (byte) 7);
