@@ -33,21 +33,18 @@ import gtneioreplugin.plugin.block.ModBlocks;
 @SideOnly(Side.CLIENT)
 public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
 
-    private static final float STAR_RESCALE = 0.2f;
-    private static final float MAX_ANGLE = 30;
-    private static final Map<String, Block> BLOCKS = new HashMap<>();
-
     private final ArrayList<OrbitingObject> orbitingObjects = new ArrayList<>();
-    public float angle;
 
-    static {
-        BLOCKS.putAll(ModBlocks.blocks);
+    private final Map<String, Block> blocks = new HashMap<>();
+
+    public MeteorMinerMachineRender() {
+        blocks.putAll(ModBlocks.blocks);
     }
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float timeSinceLastTick) {
         if (!(tile instanceof IGregTechTileEntity tileEntity)) return;
-        if (!(tileEntity.getMetaTileEntity() instanceof MeteorMiner)) return;
+        if (!(tileEntity.getMetaTileEntity() instanceof MeteorMiner meteorMiner)) return;
 
         GL11.glPushMatrix();
         GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
@@ -57,14 +54,14 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
         GL11.glDisable(GL11.GL_BLEND);
 
         renderOuterSpaceShell();
-        renderOrbitObjects();
+        renderOrbitObjects(meteorMiner.getRenderAngle());
         renderStar(IItemRenderer.ItemRenderType.INVENTORY, 1);
 
         GL11.glPopAttrib();
         GL11.glPopMatrix();
     }
 
-    public static void renderStar(IItemRenderer.ItemRenderType type, Color color, int size) {
+    public void renderStar(IItemRenderer.ItemRenderType type, Color color, int size) {
         GL11.glPushMatrix();
         GL11.glScalef(0.05f, 0.05f, 0.05f);
 
@@ -82,11 +79,11 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
-    public static void renderStar(IItemRenderer.ItemRenderType type, int size) {
+    public void renderStar(IItemRenderer.ItemRenderType type, int size) {
         renderStar(type, new Color(1.0f, 0.4f, 0.05f, 1.0f), size);
     }
 
-    public static void renderOuterSpaceShell() {
+    public void renderOuterSpaceShell() {
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 
         GL11.glPushMatrix();
@@ -116,7 +113,8 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
 
     public void generateImportantInfo() {
         int index = 0;
-        for (Block block : selectNRandomElements(BLOCKS.values(), 10)) {
+        for (Block block : selectNRandomElements(blocks.values(), 10)) {
+            float MAX_ANGLE = 30;
             float xAngle = generateRandomFloat(-MAX_ANGLE, MAX_ANGLE);
             float zAngle = generateRandomFloat(-MAX_ANGLE, MAX_ANGLE);
             index += 1;
@@ -128,25 +126,25 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
         }
     }
 
-    private void renderOrbitObjects() {
+    private void renderOrbitObjects(float angle) {
         if (getOrbitingObjects() != null) {
             if (getOrbitingObjects().isEmpty()) {
                 generateImportantInfo();
             }
             for (OrbitingObject t : getOrbitingObjects()) {
-                renderOrbit(t);
+                renderOrbit(t, angle);
             }
         }
     }
 
-    private void renderOrbit(final OrbitingObject orbitingObject) {
-        angle += 0.05f;
+    private void renderOrbit(final OrbitingObject orbitingObject, float angle) {
         GL11.glPushMatrix();
         GL11.glScalef(0.05f, 0.05f, 0.05f);
 
         GL11.glRotatef(orbitingObject.zAngle, 0, 0, 1);
         GL11.glRotatef(orbitingObject.xAngle, 1, 0, 0);
         GL11.glRotatef((orbitingObject.rotationSpeed * 0.1f * angle) % 360.0f, 0F, 1F, 0F);
+        float STAR_RESCALE = 0.2f;
         GL11.glTranslated(-0.2 - orbitingObject.distance - STAR_RESCALE * 10, 0, 0);
         GL11.glRotatef((orbitingObject.orbitSpeed * 0.1f * angle) % 360.0f, 0F, 1F, 0F);
 
@@ -156,7 +154,7 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
         GL11.glPopMatrix();
     }
 
-    public static <T> ArrayList<T> selectNRandomElements(Collection<T> inputList, long n) {
+    public <T> ArrayList<T> selectNRandomElements(Collection<T> inputList, long n) {
         ArrayList<T> randomElements = new ArrayList<>((int) n);
         ArrayList<T> inputArray = new ArrayList<>(inputList);
         Random rand = new Random();
@@ -169,7 +167,7 @@ public class MeteorMinerMachineRender extends TileEntitySpecialRenderer {
         return randomElements;
     }
 
-    public static float generateRandomFloat(float a, float b) {
+    public float generateRandomFloat(float a, float b) {
         Random rand = new Random();
         return rand.nextFloat() * (b - a) + a;
     }
