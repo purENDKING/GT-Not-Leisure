@@ -136,6 +136,8 @@ public class LanguageManager {
         addWerkstoffLocalization(MaterialPool.SandSluice, "沙子泥浆");
         addWerkstoffLocalization(MaterialPool.ObsidianSluice, "黑曜石泥浆");
         addWerkstoffLocalization(MaterialPool.GemSluice, "宝石泥浆");
+        addWerkstoffLocalization(MaterialPool.EnderAir, "末地空气");
+        addWerkstoffLocalization(MaterialPool.FluidEnderAir, "液态末地空气");
         addWerkstoffLocalization(MaterialPool.Periodicium, "錭錤錶");
         addWerkstoffLocalization(MaterialPool.Stargate, "星门");
 

@@ -1535,6 +1535,26 @@ public class MaterialPool implements Runnable {
         offsetID_01 + 119,
         TextureSet.SET_FLUID);
 
+    public static final Werkstoff EnderAir = new Werkstoff(
+        new short[] { 57, 66, 89 },
+        "EnderAir",
+        new Werkstoff.Stats().setGas(true),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 120,
+        TextureSet.SET_FLUID);
+
+    public static final Werkstoff FluidEnderAir = new Werkstoff(
+        new short[] { 61, 71, 98 },
+        "FluidEnderAir",
+        new Werkstoff.Stats(),
+        Werkstoff.Types.ELEMENT,
+        new Werkstoff.GenerationFeatures().disable()
+            .addCells(),
+        offsetID_01 + 121,
+        TextureSet.SET_FLUID);
+
     // Special
 
     public static final Werkstoff Periodicium = new Werkstoff(
