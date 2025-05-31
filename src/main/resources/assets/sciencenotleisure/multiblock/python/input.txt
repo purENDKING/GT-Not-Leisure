@@ -1,207 +1,377 @@
-[14:31:32] [Server thread/INFO] [GregTech GTNH]: 
+[20:03:40] [Server thread/INFO] [GregTech GTNH]: 
 
 Structure:
 
 Blocks:
-A -> ofBlock...(tile.blockDiamond, 0, ...);
-B -> ofBlock...(tile.cloth, 0, ...);
-C -> ofBlock...(tile.cloth, 3, ...);
-D -> ofBlock...(tile.cloth, 11, ...);
-E -> ofBlock...(tile.cloth, 15, ...);
-F -> ofBlock...(tile.stainedGlass, 0, ...);
-G -> ofBlock...(tile.stone, 0, ...);
-H -> ofBlock...(tile.stonebrick, 0, ...);
+A -> ofBlock...(tile.bedrock, 0, ...);
+B -> ofBlock...(tile.blockCoal, 0, ...);
+C -> ofBlock...(tile.blockDiamond, 0, ...);
+D -> ofBlock...(tile.blockIron, 0, ...);
+E -> ofBlock...(tile.cloth, 0, ...);
+F -> ofBlock...(tile.cloth, 3, ...);
+G -> ofBlock...(tile.cloth, 8, ...);
+H -> ofBlock...(tile.cloth, 11, ...);
+I -> ofBlock...(tile.cloth, 15, ...);
+J -> ofBlock...(tile.fenceIron, 0, ...);
+K -> ofBlock...(tile.glass, 0, ...);
+L -> ofBlock...(tile.oreIron, 0, ...);
+M -> ofBlock...(tile.quartzBlock, 0, ...);
+N -> ofBlock...(tile.stainedGlass, 7, ...);
+O -> ofBlock...(tile.stainedGlass, 15, ...);
+P -> ofBlock...(tile.stone, 0, ...);
+Q -> ofBlock...(tile.stonebrick, 0, ...);
 
 Tiles:
 
 Special Tiles:
-I -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will probably want to change it to something else
+R -> ofSpecialTileAdder(gregtech.api.metatileentity.BaseMetaTileEntity, ...); // You will probably want to change it to something else
 
 Offsets:
-5 7 0
+6 8 0
 
 Normal Scan:
 new String[][]{{
-    "           ",
-    "           ",
-    "           ",
-    "           ",
-    "           ",
-    "           ",
-    "    BBB    ",
-    "   BBIBB   ",
-    "   BBBBB   "
+    "             ",
+    "  EEEEEEEEE  ",
+    " EEECCCCCEEE ",
+    "GGGGGGGGGGGGG",
+    "GGMMMGGGMMMGG",
+    "GGMMMGGGMMMGG",
+    "GGMMMGGGMMMGG",
+    "GGGGGGGGGGGGG",
+    "EEEEEEREEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "           ",
-    "     E     ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "  EEEAEEE  ",
-    "EEEEEEEEEEE"
+    "     EEE     ",
+    "  EEEEEEEEE  ",
+    " ENNNNNNNNNE ",
+    "GGGGGGGGGGGGG",
+    "G MMM   MMM G",
+    "G MFM A MFM G",
+    "G MMM   MMM G",
+    "GGGGGGGGGGGGG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "           ",
-    "     E     ",
-    "    EAE    ",
-    "    HBH    ",
-    "    HBH    ",
-    "    HBH    ",
-    "    HBH    ",
-    "E   HBH   E",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    "  EEEEEEEEE  ",
+    " EIIIIIIIIIE ",
+    "GGIIIIIIIIIGG",
+    "PIMMMHHHMMMIP",
+    "G MFMHAHMFM G",
+    "PIMMMHHHMMMIP",
+    "GGIIIIIIIIIGG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "           ",
-    "     E     ",
-    "    DDD    ",
-    "    DGD    ",
-    "    DDD    ",
-    "    F F    ",
-    "    F F    ",
-    "E   F F   E",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    "  OOEEEEEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "NI   HHH   IN",
+    "G  F HAH F  G",
+    "NI   HHH   IN",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "           ",
-    "   DDDDD   ",
-    "   D   D   ",
-    "   D G D   ",
-    "   D   D   ",
-    "   DDDDD   ",
-    "E         E",
-    "E   F F   E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "           ",
-    "FAADDDDDAAF",
-    "FA D F D AF",
-    "EA DFHFD AE",
-    "EA D F D AE",
-    "EA DDDDD AE",
-    "EACCCCCCCAE",
-    "EA CFCFC AE",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "   DDDDD   ",
-    "  D     D  ",
-    "  D     D  ",
-    "  D  H  D  ",
-    "  D     D  ",
-    "  D     D  ",
-    "EFCDDDDDCFE",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "NI   HHH   IN",
+    "G  F HAH F  G",
+    "NI   HHH   IN",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "   DDDDD   ",
-    "  D  F  D  ",
-    "  D  F  D  ",
-    "  DFFHFFD  ",
-    "  D  F  D  ",
-    "  D  F  D  ",
-    " FCDDDDDCF ",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "   DDDDD   ",
-    "  D     D  ",
-    "  D     D  ",
-    "  D  H  D  ",
-    "  D     D  ",
-    "  D     D  ",
-    " FCDDDDDCF ",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "GI         IG",
+    "G  F  A  F  G",
+    "GI         IG",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    " AADDDDDAA ",
-    " AD  F  DA ",
-    " AD  F  DA ",
-    " ADFFHFFDA ",
-    " AD  F  DA ",
-    " AD  F  DA ",
-    " ACDDDDDCA ",
-    " A CFCFC A ",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  EEEQEQEEE  ",
+    " E       EEE ",
+    "GG         GG",
+    "GG  J   J  GG",
+    "G   F A F   G",
+    "GG  J   J  GG",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 },{
-    "   DDDDD   ",
-    "  D     D  ",
-    "  D     D  ",
-    "  D  H  D  ",
-    "  D     D  ",
-    "  D     D  ",
-    " FCDDDDDCF ",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    " DDDDQEQDDDD ",
+    "DDDD      DDD",
+    "DD         DD",
+    "D           D",
+    "D     A     D",
+    "DG         GD",
+    "B    F F    B",
+    "B NLLLLLLLN B",
+    "BBBBBBBBBBBBB"
 },{
-    "   DDDDD   ",
-    "  D  F  D  ",
-    "  D  F  D  ",
-    "  DFFHFFD  ",
-    "  D  F  D  ",
-    "  D  F  D  ",
-    " FCDDDDDCF ",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  KKDQEQDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K     A     K",
+    "DG   J J   GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "   DDDDD   ",
-    "  D     D  ",
-    "  D     D  ",
-    "  D  H  D  ",
-    "  D     D  ",
-    "  D     D  ",
-    "EFCDDDDDCFE",
-    "E  CFCFC  E",
-    "EBBBBBBBBBE"
+    "     NEN     ",
+    "  KKDQEQDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K  N     N  K",
+    "K  F  A  F  K",
+    "DG F     F GD",
+    "B  F FCF F  B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "           ",
-    "FAADDDDDAAF",
-    "FA D F D AF",
-    "EA D HFD AE",
-    "EA D F D AE",
-    "EA DDDDD AE",
-    "EACCCCCCCAE",
-    "EA CFCFC AE",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    "  KKDEEEDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K    JAJ    K",
+    "DG   J J   GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "           ",
-    "   DDDDD   ",
-    "   D   D   ",
-    "   D G D   ",
-    "   D   D   ",
-    "   DDDDD   ",
-    "E         E",
-    "E   F F   E",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    "  KKDEEEDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K     A     K",
+    "DG         GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "           ",
-    "     E     ",
-    "    DDD    ",
-    "    DGD    ",
-    "    DDD    ",
-    "    F F    ",
-    "    F F    ",
-    "E   F F   E",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    " DDDDEEEDDDD ",
+    "DDD      DDDD",
+    "DD         DD",
+    "D           D",
+    "D     A     D",
+    "DG         GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "           ",
-    "     E     ",
-    "    EAE    ",
-    "    HBH    ",
-    "    HBH    ",
-    "    HBH    ",
-    "    HBH    ",
-    "E   HBH   E",
-    "EBBBBBBBBBE"
+    "     EEE     ",
+    "  KKDEEEDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K     A     K",
+    "DG         GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
 },{
-    "           ",
-    "     E     ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "    EAE    ",
-    "  EEEAEEE  ",
-    "EEEEEEEEEEE"
+    "     EEE     ",
+    "  KKDEEEDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K    JAJ    K",
+    "DG   J J   GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
+},{
+    "     NEN     ",
+    "  KKDQEQDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K  N     N  K",
+    "K  F  A  F  K",
+    "DG F     F GD",
+    "B  F FCF F  B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
+},{
+    "     NEN     ",
+    "  KKDQEQDKK  ",
+    " KK       KK ",
+    "D           D",
+    "K           K",
+    "K     A     K",
+    "DG   J J   GD",
+    "B    FCF    B",
+    "  NLGGGGGLN  ",
+    "BGGGGGGGGGGGB"
+},{
+    "     NEN     ",
+    " DDDDQEQDDDD ",
+    "DDD      DDDD",
+    "DD         DD",
+    "D           D",
+    "D     A     D",
+    "DG         GD",
+    "B    F F    B",
+    "B NLLLLLLLN B",
+    "BBBBBBBBBBBBB"
+},{
+    "     NEN     ",
+    "  EEEQEQEEE  ",
+    " EEE       E ",
+    "GG         GG",
+    "GG  J   J  GG",
+    "G   F A F   G",
+    "GG  J   J  GG",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "GI         IG",
+    "G  F  A  F  G",
+    "GI         IG",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "NI   HHH   IN",
+    "G  F HAH F  G",
+    "NI   HHH   IN",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     NEN     ",
+    "  OOEQEQEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "PI   HHH   IP",
+    "G  F HAH F  G",
+    "PI   HHH   IP",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     EEE     ",
+    "  OOEEEEEOO  ",
+    " EO       OE ",
+    "GG         GG",
+    "NI   HHH   IN",
+    "G  F HAH F  G",
+    "NI   HHH   IN",
+    "GG         GG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     EEE     ",
+    "  EEEEEEEEE  ",
+    " EIIIIIIIIIE ",
+    "GGIIIIIIIIIGG",
+    "PIMMMHHHMMMIP",
+    "G MFMHAHMFM G",
+    "PIMMMHHHMMMIP",
+    "GGIIIIIIIIIGG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "     EEE     ",
+    "  EEEEEEEEE  ",
+    " ENNNNNNNNNE ",
+    "GGGGGGGGGGGGG",
+    "G MMM   MMM G",
+    "G MFM A MFM G",
+    "G MMM   MMM G",
+    "GGGGGGGGGGGGG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
+},{
+    "             ",
+    "  EEEEEEEEE  ",
+    " EEECCCCCEEE ",
+    "GGGGGGGGGGGGG",
+    "GGMMMGGGMMMGG",
+    "GGMMMGGGMMMGG",
+    "GGMMMGGGMMMGG",
+    "GGGGGGGGGGGGG",
+    "EEEEEEEEEEEEE",
+    "EEEEEEEEEEEEE"
 }}
 
 
-[14:31:32] [Client thread/INFO]: [CHAT] 已打印到控制台的结构
+[20:03:40] [Client thread/INFO]: [CHAT] 已打印到控制台的结构§7 (2)

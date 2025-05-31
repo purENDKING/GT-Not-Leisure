@@ -351,6 +351,7 @@ public enum GTNLItemList implements IItemContainer {
     SteamFlightModule,
     SteamWeatherModule,
 
+    NanoAssemblerMarkL,
     AetronPressor,
     NanitesCircuitAssemblyFactory,
     MegaMixer,

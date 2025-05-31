@@ -2119,6 +2119,11 @@ NameVortexMatterCentrifuge=旋涡物质离心器
 VortexMatterCentrifugeRecipeType=离心机
 Tooltip_VortexMatterCentrifuge_Casing=任意分子机械方块
 
+NameNanoAssemblerMarkL=纳米组装机Mark-50
+NanoAssemblerMarkLRecipeType=精密组装机
+Tooltip_NanoAssemblerMarkL_00=每级部件装配线外壳等级额外提供10%的加速和耗电减免(乘算叠加)
+Tooltip_NanoAssemblerMarkL_Casing=任意镀铱机械方块
+
 NameNanoPhagocytosisPlant=纳米吞噬厂
 NanoPhagocytosisPlantRecipeType=粉碎机
 Tooltip_NanoPhagocytosisPlant_00=使用纳米蜂群无情的撕碎一切

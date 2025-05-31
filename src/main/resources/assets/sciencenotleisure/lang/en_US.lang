@@ -2114,6 +2114,11 @@ NameVortexMatterCentrifuge=Vortex Matter Centrifuge
 VortexMatterCentrifugeRecipeType=Centrifuge
 Tooltip_VortexMatterCentrifuge_Casing=Any Molecular Casing
 
+NameNanoAssemblerMarkL=Nano Assembler Mark-50
+NanoAssemblerMarkLRecipeType=Precision Assembler
+Tooltip_NanoAssemblerMarkL_00=Each level of Component Assembly Line Casing grade provides an additional 10% acceleration and power consumption reduction (multiplication and superposition)
+Tooltip_NanoAssemblerMarkL_Casing=Ang Advanced Iridium Plated Machine Casing
+
 NameNanoPhagocytosisPlant=Nano Phagocytosis Plant
 NanoPhagocytosisPlantRecipeType=Macerator
 Tooltip_NanoPhagocytosisPlant_00=Ruthlessly shred everything with a swarm of Nanites
