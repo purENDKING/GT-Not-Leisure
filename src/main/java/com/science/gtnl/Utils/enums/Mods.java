@@ -25,6 +25,7 @@ public enum Mods {
     GiveCount(ModIds.GIVECOUNT, Names.GIVECOUNT);
 
     public static class ModIds {
+
         public static final String SCIENCENOTLEISURE = "sciencenotleisure";
         public static final String EYEOFHARMONYBUFFER = "eyeofharmonybuffer";
         public static final String PROGRAMMABLEHATCHES = "programmablehatches";
@@ -43,6 +44,7 @@ public enum Mods {
     }
 
     public static class Names {
+
         public static final String SCIENCENOTLEISURE = "ScienceNotLeisure";
         public static final String EYEOFHARMONYBUFFER = "EyeOfHarmonyBuffer";
         public static final String PROGRAMMABLEHATCHES = "ProgrammableHatches";
@@ -78,8 +80,13 @@ public enum Mods {
         return this.modLoaded;
     }
 
+    public String getModId() {
+        return this.ID;
+    }
+
     public String getResourcePath(String... path) {
-        return this.getResourceLocation(path).toString();
+        return this.getResourceLocation(path)
+            .toString();
     }
 
     public ResourceLocation getResourceLocation(String... path) {
