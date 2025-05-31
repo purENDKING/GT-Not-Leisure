@@ -113,6 +113,12 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
     private static final int MAX_BLOCKS_PER_CYCLE = MainConfig.meteorMinerMaxBlockPerCycle;
     private static final int MAX_ROWS_PER_CYCLE = MainConfig.meteorMinerMaxRowPerCycle;
 
+    public float renderAngle = 0f;
+
+    public float getRenderAngle() {
+        return this.renderAngle;
+    }
+
     @Override
     public IStructureDefinition<MeteorMiner> getStructureDefinition() {
         if (STRUCTURE_DEFINITION == null) {
@@ -434,6 +440,7 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         aNBT.setBoolean("stopAllRendering", stopAllRendering);
         aNBT.setInteger("multiTier", multiTier);
         aNBT.setInteger("fortuneTier", fortuneTier);
+        aNBT.setDouble("renderAngle", renderAngle);
     }
 
     @Override
@@ -448,6 +455,12 @@ public class MeteorMiner extends MTEEnhancedMultiBlockBase<MeteorMiner> implemen
         stopAllRendering = aNBT.getBoolean("stopAllRendering");
         multiTier = aNBT.getInteger("multiTier");
         fortuneTier = aNBT.getInteger("fortuneTier");
+        renderAngle = (float) aNBT.getDouble("renderAngle");
+    }
+
+    @Override
+    public void onPostTick(IGregTechTileEntity aBaseMetaTileEntity, long aTick) {
+        renderAngle += 15f;
     }
 
     public void reset() {

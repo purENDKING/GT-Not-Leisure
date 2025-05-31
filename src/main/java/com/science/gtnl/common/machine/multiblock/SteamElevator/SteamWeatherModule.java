@@ -21,6 +21,7 @@ import WayofTime.alchemicalWizardry.AlchemicalWizardry;
 import gregtech.api.interfaces.metatileentity.IMetaTileEntity;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.logic.ProcessingLogic;
+import gregtech.api.recipe.RecipeMap;
 import gregtech.api.recipe.check.CheckRecipeResult;
 import gregtech.api.recipe.check.CheckRecipeResultRegistry;
 import gregtech.api.util.GTRecipe;
@@ -62,6 +63,11 @@ public class SteamWeatherModule extends SteamElevatorModule {
             .beginStructureBlock(1, 5, 2, false)
             .toolTipFinisher();
         return tt;
+    }
+
+    @Override
+    public RecipeMap<?> getRecipeMap() {
+        return RecipeRegister.SteamWeatherModuleFakeRecipes;
     }
 
     @Override
@@ -208,7 +214,8 @@ public class SteamWeatherModule extends SteamElevatorModule {
         return super.onRunningTick(stack);
     }
 
-    private int getMachineEffectRange() {
+    @Override
+    protected int getMachineEffectRange() {
         return 64 * recipeOcCount;
     }
 }

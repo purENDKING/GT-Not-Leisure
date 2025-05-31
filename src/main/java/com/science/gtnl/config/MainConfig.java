@@ -28,6 +28,7 @@ public class MainConfig {
         + "not_enough_items";
     public static final String CATEGORY_SUPER_CREEPER = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER
         + "super_creeper";
+    public static final String CATEGORY_MESSAGE = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "message";
     public static final String CATEGORY_DEBUG = CATEGORY_GTNL_CONFIG + Configuration.CATEGORY_SPLITTER + "debug";
 
     // --- Deeper Nested Categories (paths constructed using CATEGORY_SPLITTER) ---
@@ -124,6 +125,10 @@ public class MainConfig {
     // Effect
     public static int aweEffectID = 186;
     public static int perfectPhysiqueEffect = 187;
+
+    // Message
+    public static boolean enableShowJoinMessage = true;
+    public static boolean enableShowAddMods = true;
 
     // Debug
     public static boolean enableDebugMode = false;
@@ -532,6 +537,19 @@ public class MainConfig {
                 burningExplosionTimer,
                 "Ticks before Creeper explodes due to burning.")
             .getInt(burningExplosionTimer);
+
+        // Message
+        enableShowJoinMessage = config
+            .get(
+                CATEGORY_MESSAGE,
+                "enableShowJoinMessage",
+                enableShowJoinMessage,
+                "Enable welcome message when player joins")
+            .getBoolean(enableShowJoinMessage);
+
+        enableShowAddMods = config
+            .get(CATEGORY_MESSAGE, "enableShowAddMods", enableShowAddMods, "Enable showing loaded mods info to player")
+            .getBoolean(enableShowAddMods);
 
         // Debug
         enableDebugMode = config.get(CATEGORY_DEBUG, "enableDebugMode", enableDebugMode, "Enable Debug Print Log")

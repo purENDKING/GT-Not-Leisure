@@ -1,4 +1,4 @@
-package com.science.gtnl.mixins.early.Minecraft; // 替换为你的 Mod 包名
+package com.science.gtnl.mixins.early.Minecraft;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.SharedMonsterAttributes;

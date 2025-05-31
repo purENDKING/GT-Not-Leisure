@@ -112,6 +112,7 @@ import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.ETGWEyeOfHa
 import com.science.gtnl.common.machine.multiblock.ModuleMachine.EGTW.EternalGregTechWorkshop;
 import com.science.gtnl.common.machine.multiblock.NanitesCircuitAssemblyFactory;
 import com.science.gtnl.common.machine.multiblock.NanitesIntegratedProcessingCenter;
+import com.science.gtnl.common.machine.multiblock.NanoAssemblerMarkL;
 import com.science.gtnl.common.machine.multiblock.NanoPhagocytosisPlant;
 import com.science.gtnl.common.machine.multiblock.NeutroniumWireCutting;
 import com.science.gtnl.common.machine.multiblock.NineIndustrialMultiMachine;
@@ -1236,6 +1237,13 @@ public class MachineLoader {
                 "SteamWeatherModule",
                 StatCollector.translateToLocal("NameSteamWeatherModule")));
         addItemTooltip(GTNLItemList.SteamWeatherModule.get(1), AnimatedText.SCIENCE_NOT_LEISURE);
+
+        GTNLItemList.NanoAssemblerMarkL.set(
+            new NanoAssemblerMarkL(
+                NANO_ASSEMBLER_MARK_L.ID,
+                "NanoAssemblerMarkL",
+                StatCollector.translateToLocal("NameNanoAssemblerMarkL")));
+        addItemTooltip(GTNLItemList.NanoAssemblerMarkL.get(1), AnimatedText.SNL_QYZG);
 
         // Special Machine
         GTNLItemList.CheatOreProcessingFactory.set(

@@ -640,7 +640,8 @@ public class SteamBeaconModule extends SteamElevatorModule {
         return Math.min(mTier, recipeOcCount);
     }
 
-    private int getMachineEffectRange() {
+    @Override
+    protected int getMachineEffectRange() {
         return switch (mTier) {
             case 1 -> 64;
             case 2 -> 128;

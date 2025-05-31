@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
@@ -35,6 +37,7 @@ import com.science.gtnl.Utils.StructureUtils;
 import com.science.gtnl.common.machine.Special.PortalToAlfheimExplosion;
 import com.science.gtnl.common.machine.hatch.CustomFluidHatch;
 import com.science.gtnl.common.machine.multiMachineClasses.MultiMachineBase;
+import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.BlockLoader;
 import com.science.gtnl.loader.RecipeRegister;
@@ -57,7 +60,6 @@ import gregtech.api.util.MultiblockTooltipBuilder;
 import gregtech.api.util.ParallelHelper;
 import gregtech.api.util.shutdown.ShutDownReasonRegistry;
 import gregtech.common.blocks.BlockCasings8;
-import gtPlusPlus.core.util.minecraft.FluidUtils;
 import gtnhlanth.common.register.LanthItemList;
 import tectech.thing.casing.TTCasingsContainer;
 
@@ -199,6 +201,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             triggerExplosion(aBaseMetaTileEntity, Strength);
             return CheckRecipeResultRegistry.SUCCESSFUL;
         }
+
         return super.checkProcessing();
     }
 
@@ -384,9 +387,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
                     .hasWorkJustBeenEnabled() && !enableInfinityMana) {
                     if (!this.depleteInputFromRestrictedHatches(this.FluidManaInputHatch, 100)) {
                         this.causeMaintenanceIssue();
-                        this.stopMachine(
-                            ShutDownReasonRegistry
-                                .outOfFluid(Objects.requireNonNull(FluidUtils.getFluidStack("fluidmana", 100))));
+                        this.stopMachine(ShutDownReasonRegistry.outOfFluid(MaterialPool.FluidMana.getFluidOrGas(100)));
                     }
                 }
             }
@@ -397,10 +398,17 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
     protected ProcessingLogic createProcessingLogic() {
         return new ProcessingLogic() {
 
+            @Nonnull
+            @Override
+            protected ParallelHelper createParallelHelper(@Nonnull GTRecipe recipe) {
+                if (enableInfinityMana) inputFluids[0] = MaterialPool.FluidMana.getFluidOrGas(Integer.MAX_VALUE);
+                return super.createParallelHelper(recipe).setFluidInputs(inputFluids);
+            }
+
             @NotNull
             @Override
-            protected ParallelHelper createParallelHelper(@NotNull GTRecipe recipe) {
-                return super.createParallelHelper(recipeWithMultiplier(recipe, inputFluids));
+            protected CheckRecipeResult validateRecipe(@NotNull GTRecipe recipe) {
+                return super.validateRecipe(recipeWithMultiplier(recipe, inputFluids));
             }
         };
     }
@@ -410,13 +418,11 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
             return recipe;
         }
 
-        if (recipe.mFluidInputs == null || recipe.mFluidInputs.length == 0
-            || recipe.mFluidOutputs == null
-            || recipe.mFluidOutputs.length == 0) {
+        if (recipe.mFluidInputs == null || recipe.mFluidInputs.length == 0) {
             return recipe;
         }
 
-        if (recipe.mFluidInputs[0] == null || recipe.mFluidOutputs[0] == null) {
+        if (recipe.mFluidInputs[0] == null) {
             return recipe;
         }
 
@@ -428,7 +434,7 @@ public class TeleportationArrayToAlfheim extends MultiMachineBase<TeleportationA
 
         GTRecipe tRecipe = recipe.copy();
         if (enableInfinityMana) {
-            tRecipe.mFluidInputs[0].amount = 0;
+            tRecipe.mFluidInputs = null;
         }
 
         return tRecipe;
