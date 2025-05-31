@@ -8,24 +8,23 @@ import cpw.mods.fml.common.Loader;
 
 public enum Mods {
 
-    ScienceNotLeisure(Names.SCIENCENOTLEISURE),
-    EyeOfHarmonyBuffer(Names.EYEOFHARMONYBUFFER),
-    ProgrammableHatches(Names.PROGRAMMABLEHATCHES),
-    TwistSpaceTechnology(Names.TWISTSPACETECHNOLOGY),
-    BoxPlusPlus(Names.BOXPLUSPLUS),
-    NHUtilities(Names.NHUTILITIES),
-    AE2Thing(Names.AE2THING),
-    QzMiner(Names.QZMINER),
-    OTHTechnology(Names.OTHTECHNOLOGY),
-    Baubles(Names.BAUBLES),
-    Overpowered(Names.OVERPOWERED),
-    ThinkTech(Names.THINKTECH),
-    ReAvaritia(Names.REAVARITIA),
-    Sudoku(Names.SUDOKU),
-    GiveCount(Names.GIVECOUNT);
+    ScienceNotLeisure(ModIds.SCIENCENOTLEISURE, Names.SCIENCENOTLEISURE),
+    EyeOfHarmonyBuffer(ModIds.EYEOFHARMONYBUFFER, Names.EYEOFHARMONYBUFFER),
+    ProgrammableHatches(ModIds.PROGRAMMABLEHATCHES, Names.PROGRAMMABLEHATCHES),
+    TwistSpaceTechnology(ModIds.TWISTSPACETECHNOLOGY, Names.TWISTSPACETECHNOLOGY),
+    BoxPlusPlus(ModIds.BOXPLUSPLUS, Names.BOXPLUSPLUS),
+    NHUtilities(ModIds.NHUTILITIES, Names.NHUTILITIES),
+    AE2Thing(ModIds.AE2THING, Names.AE2THING),
+    QzMiner(ModIds.QZMINER, Names.QZMINER),
+    OTHTechnology(ModIds.OTHTECHNOLOGY, Names.OTHTECHNOLOGY),
+    Baubles(ModIds.BAUBLES, Names.BAUBLES),
+    Overpowered(ModIds.OVERPOWERED, Names.OVERPOWERED),
+    ThinkTech(ModIds.THINKTECH, Names.THINKTECH),
+    ReAvaritia(ModIds.REAVARITIA, Names.REAVARITIA),
+    Sudoku(ModIds.SUDOKU, Names.SUDOKU),
+    GiveCount(ModIds.GIVECOUNT, Names.GIVECOUNT);
 
-    public static class Names {
-
+    public static class ModIds {
         public static final String SCIENCENOTLEISURE = "sciencenotleisure";
         public static final String EYEOFHARMONYBUFFER = "eyeofharmonybuffer";
         public static final String PROGRAMMABLEHATCHES = "programmablehatches";
@@ -43,13 +42,33 @@ public enum Mods {
         public static final String SUDOKU = "sudoku";
     }
 
+    public static class Names {
+        public static final String SCIENCENOTLEISURE = "ScienceNotLeisure";
+        public static final String EYEOFHARMONYBUFFER = "EyeOfHarmonyBuffer";
+        public static final String PROGRAMMABLEHATCHES = "ProgrammableHatches";
+        public static final String TWISTSPACETECHNOLOGY = "TwistSpaceTechnology";
+        public static final String BOXPLUSPLUS = "BoxPlusPlus";
+        public static final String NHUTILITIES = "NH-Utilities";
+        public static final String AE2THING = "AE2Things";
+        public static final String QZMINER = "QzMiner";
+        public static final String OTHTECHNOLOGY = "123Technology";
+        public static final String BAUBLES = "Baubles";
+        public static final String OVERPOWERED = "Overpowered";
+        public static final String THINKTECH = "ThinkTech";
+        public static final String GIVECOUNT = "GiveCount";
+        public static final String REAVARITIA = "ReAvaritia";
+        public static final String SUDOKU = "Sudoku";
+    }
+
     public final String ID;
     public final String resourceDomain;
+    public final String displayName;
     public Boolean modLoaded;
 
-    Mods(String ID) {
+    Mods(String ID, String displayName) {
         this.ID = ID;
         this.resourceDomain = ID.toLowerCase(Locale.ENGLISH);
+        this.displayName = displayName;
     }
 
     public boolean isModLoaded() {
@@ -60,8 +79,7 @@ public enum Mods {
     }
 
     public String getResourcePath(String... path) {
-        return this.getResourceLocation(path)
-            .toString();
+        return this.getResourceLocation(path).toString();
     }
 
     public ResourceLocation getResourceLocation(String... path) {
