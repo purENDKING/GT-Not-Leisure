@@ -103,7 +103,8 @@ public class SteamFlightModule extends SteamElevatorModule {
         return super.onRunningTick(stack);
     }
 
-    private int getMachineEffectRange() {
+    @Override
+    protected int getMachineEffectRange() {
         return 64 * recipeOcCount;
     }
 }

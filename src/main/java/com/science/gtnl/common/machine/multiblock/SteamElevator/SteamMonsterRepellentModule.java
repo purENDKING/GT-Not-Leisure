@@ -104,7 +104,7 @@ public class SteamMonsterRepellentModule extends SteamElevatorModule {
             int[] tCoords = { x, y, z, world.provider.dimensionId };
             SubscribeEventUtils.mobReps.add(tCoords);
             if (!SubscribeEventUtils.mobReps.contains(tCoords)) {
-                mRange = SubscribeEventUtils.getPoweredRepellentRange(mTier);
+                mRange = getMachineEffectRange();
             }
         }
         return CheckRecipeResultRegistry.SUCCESSFUL;
@@ -142,5 +142,10 @@ public class SteamMonsterRepellentModule extends SteamElevatorModule {
             this.getBaseMetaTileEntity()
                 .getWorld().provider.dimensionId };
         SubscribeEventUtils.mobReps.removeIf(coords -> Arrays.equals(coords, tCoords));
+    }
+
+    @Override
+    protected int getMachineEffectRange() {
+        return SubscribeEventUtils.getPoweredRepellentRange(mTier);
     }
 }

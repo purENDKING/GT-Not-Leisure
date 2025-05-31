@@ -106,11 +106,10 @@ import tectech.thing.metaTileEntity.hatch.MTEHatchEnergyTunnel;
 public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> implements ISurvivalConstructable {
 
     private static final Map<String, Pair<GTRecipe.RecipeAssemblyLine, AssemblyLineUtils.LookupResult>> recipeCache = new HashMap<>();
-    private static final String ZERO_STRING = "0";
+    private final String ZERO_STRING = "0";
     private String costingEUText = ZERO_STRING;
     private UUID ownerUUID;
     private boolean wirelessMode = false;
-    private static int minRecipeTime = 20;
     private static IStructureDefinition<GrandAssemblyLine> STRUCTURE_DEFINITION = null;
     private static final String STRUCTURE_PIECE_MAIN = "main";
     private static final String GAL_STRUCTURE_FILE_PATH = RESOURCE_ROOT_ID + ":" + "multiblock/grand_assembly_line";
@@ -124,6 +123,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
     private static Textures.BlockIcons.CustomIcon ScreenON;
     private boolean isDualInputHatch = false;
     private boolean useSingleAmp = true;
+    private int minRecipeTime = 20;
 
     public GrandAssemblyLine(int aID, String aName, String aNameRegional) {
         super(aID, aName, aNameRegional);
@@ -257,6 +257,7 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
         int totalMaxProgressTime = 0; // 累加的最大时间
         int powerParallel = 0;
         int CircuitOC = -1; // 电路板限制超频次数
+        int isPerfectOC = (mParallelTier >= 11) ? 4 : 2;
         costingEUText = ZERO_STRING;
         BigInteger costingEU = BigInteger.ZERO;
         ArrayList<ItemStack> totalOutputs = new ArrayList<>(); // 累加的输出物品
@@ -462,10 +463,11 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     adjustedTime = recipe.mDuration;
 
                     // 检查功耗是否超过 int 的最大值或时间是否小于 1
-                    while (((long) adjustedPower * 4 > Integer.MAX_VALUE || adjustedTime > 4) && overclockCount > 0) {
+                    while (((long) adjustedPower * 4 > Integer.MAX_VALUE || adjustedTime / isPerfectOC > 0)
+                        && overclockCount > 0) {
                         overclockCount--;
                         adjustedPower *= 4;
-                        adjustedTime /= (mParallelTier >= 11) ? 4 : 2;
+                        adjustedTime /= isPerfectOC;
                     }
                 }
 
@@ -656,18 +658,10 @@ public class GrandAssemblyLine extends GTMMultiMachineBase<GrandAssemblyLine> im
                     needTime *= 2;
                 }
 
-                while ((needEU / needTime) * 8 < energyEU) {
-                    if (needEUt > Long.MAX_VALUE / 4) {
-                        needEUt = Long.MAX_VALUE;
-                        break;
-                    }
-
-                    if (needTime / 2 < 1) {
-                        break;
-                    }
-
+                while (needTime / isPerfectOC > 0 && needEUt < Long.MAX_VALUE / 4
+                    && (needEU / needTime) * 8 < energyEU) {
                     needEUt *= 4;
-                    needTime /= (mParallelTier >= 11) ? 4 : 2;
+                    needTime /= isPerfectOC;
                 }
 
                 totalNeedEUt = needEUt;

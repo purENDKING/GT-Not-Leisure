@@ -237,4 +237,6 @@ public abstract class SteamElevatorModule extends SteamMultiMachineBase<SteamEle
         isConnected = false;
     }
 
+    protected abstract int getMachineEffectRange();
+
 }
