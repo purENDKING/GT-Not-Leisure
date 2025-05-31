@@ -23,6 +23,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldInfo;
@@ -81,10 +82,10 @@ public class SubscribeEventUtils {
 
                 if (MainConfig.enableShowAddMods) {
                     for (Mods mod : Mods.values()) {
-                        if (mod.isModLoaded() && !MOD_BLACKLIST.contains(mod.name())) {
-                            String langKey = "Welcome_GTNL_" + mod.name();
+                        if (mod.isModLoaded() && !MOD_BLACKLIST.contains(mod.getModId())) {
+                            String translatedPrefix = StatCollector.translateToLocal("Welcome_GTNL_ModInstall");
                             player.addChatMessage(
-                                new ChatComponentTranslation(langKey)
+                                new ChatComponentText(mod.displayName + translatedPrefix)
                                     .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.AQUA)));
                         }
                     }
