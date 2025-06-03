@@ -20,9 +20,7 @@ import com.science.gtnl.common.machine.multiMachineClasses.EdenGardenManager.EIG
 import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
-import com.science.gtnl.loader.RecipeLoader;
 import com.science.gtnl.loader.RecipeLoaderRunnable;
-import com.science.gtnl.loader.ScriptLoader;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -103,8 +101,8 @@ public class ScienceNotLeisure {
 
     @Mod.EventHandler
     public void completeInit(FMLLoadCompleteEvent event) {
-        ScriptLoader.run();
-        RecipeLoader.loadRecipesCompleteInit();
+        // ScriptLoader.run(); // Moved to BartworkLoad_Head_Mixin
+        // RecipeLoader.loadRecipesCompleteInit(); // Moved to BartworkLoad_Head_Mixin
     }
 
     // register server commands in this event handler (Remove if not needed)
