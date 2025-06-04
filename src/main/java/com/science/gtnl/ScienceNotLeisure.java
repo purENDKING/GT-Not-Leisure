@@ -21,6 +21,7 @@ import com.science.gtnl.config.MainConfig;
 import com.science.gtnl.loader.MachineLoader;
 import com.science.gtnl.loader.MaterialLoader;
 import com.science.gtnl.loader.RecipeLoaderRunnable;
+import com.science.gtnl.loader.ScriptLoader;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
