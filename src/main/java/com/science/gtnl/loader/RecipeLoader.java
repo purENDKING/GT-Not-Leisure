@@ -3,6 +3,7 @@ package com.science.gtnl.loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.science.gtnl.Utils.recipes.RecipeUtil;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.ProcessingArrayRecipeLoader;
 import com.science.gtnl.common.materials.MaterialPool;
@@ -26,6 +27,7 @@ import com.science.gtnl.common.recipe.GTNL.DecayHastenerRecipes;
 import com.science.gtnl.common.recipe.GTNL.DesulfurizerRecipes;
 import com.science.gtnl.common.recipe.GTNL.ElementCopyingRecipes;
 import com.science.gtnl.common.recipe.GTNL.EternalGregTechWorkshopUpgradeRecipes;
+import com.science.gtnl.common.recipe.GTNL.ExtremeExtremeEntityCrusherRecipes;
 import com.science.gtnl.common.recipe.GTNL.FallingTowerRecipes;
 import com.science.gtnl.common.recipe.GTNL.FishingGroundRecipes;
 import com.science.gtnl.common.recipe.GTNL.FuelRefiningComplexRecipes;
@@ -80,6 +82,8 @@ import com.science.gtnl.common.recipe.GregTech.MixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.PCBFactoryRecipes;
 import com.science.gtnl.common.recipe.GregTech.PlasmaForgeRecipes;
 import com.science.gtnl.common.recipe.GregTech.PreciseAssemblerRecipes;
+import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblerConvertRecipes;
+import com.science.gtnl.common.recipe.GregTech.ServerStart.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.SpaceAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
 import com.science.gtnl.common.recipe.GregTech.VacuumFreezerRecipes;
@@ -89,11 +93,13 @@ import com.science.gtnl.common.recipe.Special.OreDictionary.PortalToAlfheimOreRe
 import com.science.gtnl.common.recipe.Thaumcraft.TCRecipePool;
 import com.science.gtnl.common.recipe.Thaumcraft.TCResearches;
 
+import bartworks.API.recipe.BartWorksRecipeMaps;
 import goodgenerator.util.CrackRecipeAdder;
+import gregtech.api.enums.Mods;
 
 public class RecipeLoader {
 
-    public static void loadRecipesCompleteInit() {
+    public static void loadRecipesServerStart() {
 
         MeteorsRecipes.registerMeteors();
 
@@ -108,6 +114,10 @@ public class RecipeLoader {
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.MolybdenumDisilicide, 800, 1920, 2300, true);
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.HSLASteel, 1000, 480, 1711, true);
         CrackRecipeAdder.reAddBlastRecipe(MaterialPool.Germaniumtungstennitride, 800, 30720, 8200, true);
+
+        if (Mods.MobsInfo.isModLoaded()) {
+            ExtremeExtremeEntityCrusherRecipes.init();
+        }
 
         IRecipePool[] recipePools = new IRecipePool[] { new ChemicalRecipes(), new ElectrolyzerRecipes(),
             new MixerRecipes(), new multiDehydratorRecipes(), new AssemblerRecipes(), new AutoclaveRecipes(),
@@ -139,6 +149,9 @@ public class RecipeLoader {
 
         };
 
+        IRecipePool[] recipePoolsServerStart = new IRecipePool[] { new FormingPressRecipes(),
+            new CircuitAssemblerConvertRecipes(), new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
+
         for (IRecipePool recipePool : recipePools) {
             recipePool.loadRecipes();
         }
@@ -147,8 +160,15 @@ public class RecipeLoader {
             recipePoolAprilFool.loadRecipes();
         }
 
+        for (IRecipePool recipePoolServerStart : recipePoolsServerStart) {
+            recipePoolServerStart.loadRecipes();
+        }
+
         for (ItemStack stone : OreDictionary.getOres("stone")) {
             PortalToAlfheimOreRecipes.addManaInfusionOreRecipes(stone);
         }
+
+        RecipeUtil
+            .generateRecipesNotUsingCells(BartWorksRecipeMaps.bioLabRecipes, RecipeRegister.LargeBioLabRecipes, true);
     }
 }
