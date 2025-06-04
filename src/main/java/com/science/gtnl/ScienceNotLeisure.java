@@ -101,8 +101,7 @@ public class ScienceNotLeisure {
 
     @Mod.EventHandler
     public void completeInit(FMLLoadCompleteEvent event) {
-        // ScriptLoader.run(); // Moved to BartworkLoad_Head_Mixin
-        // RecipeLoader.loadRecipesCompleteInit(); // Moved to BartworkLoad_Head_Mixin
+        ScriptLoader.run();
     }
 
     // register server commands in this event handler (Remove if not needed)
