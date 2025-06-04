@@ -19,26 +19,10 @@ public class RecipeLoaderServerStart {
 
     public static void loadRecipesServerStart() {
         if (!recipesAdded) {
-            loadRecipes();
+            RecipeLoader.loadRecipesServerStart();
         }
         loadCircuitRelatedRecipes();
         recipesAdded = true;
-    }
-
-    private static void loadRecipes() {
-        if (Mods.MobsInfo.isModLoaded()) {
-            ExtremeExtremeEntityCrusherRecipes.init();
-        }
-
-        IRecipePool[] recipePools = new IRecipePool[] { new FormingPressRecipes(), new CircuitAssemblerConvertRecipes(),
-            new AlloyBlastSmelterRecipes(), new VacuumFurnaceRecipes() };
-
-        for (IRecipePool recipePool : recipePools) {
-            recipePool.loadRecipes();
-        }
-
-        RecipeUtil
-            .generateRecipesNotUsingCells(BartWorksRecipeMaps.bioLabRecipes, RecipeRegister.LargeBioLabRecipes, true);
     }
 
     private static void loadCircuitRelatedRecipes() {
