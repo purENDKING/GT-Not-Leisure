@@ -3,6 +3,7 @@ package com.science.gtnl.loader;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.Nxer.TwistSpaceTechnology.recipe.machineRecipe.expanded.CircuitAssemblyLineWithoutImprintRecipePool;
 import com.science.gtnl.Utils.recipes.RecipeUtil;
 import com.science.gtnl.common.machine.OreProcessing.OP_NormalProcessing;
 import com.science.gtnl.common.machine.multiMachineClasses.ProcessingArrayRecipeLoader;
@@ -83,6 +84,7 @@ import com.science.gtnl.common.recipe.GregTech.PCBFactoryRecipes;
 import com.science.gtnl.common.recipe.GregTech.PlasmaForgeRecipes;
 import com.science.gtnl.common.recipe.GregTech.PreciseAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblerConvertRecipes;
+import com.science.gtnl.common.recipe.GregTech.ServerStart.CircuitAssemblyLineRecipes;
 import com.science.gtnl.common.recipe.GregTech.ServerStart.FormingPressRecipes;
 import com.science.gtnl.common.recipe.GregTech.SpaceAssemblerRecipes;
 import com.science.gtnl.common.recipe.GregTech.TranscendentPlasmaMixerRecipes;
@@ -96,10 +98,21 @@ import com.science.gtnl.common.recipe.Thaumcraft.TCResearches;
 import bartworks.API.recipe.BartWorksRecipeMaps;
 import goodgenerator.util.CrackRecipeAdder;
 import gregtech.api.enums.Mods;
+import gregtech.api.recipe.RecipeMaps;
 
 public class RecipeLoader {
 
+    private static boolean recipesAdded;
+
     public static void loadRecipesServerStart() {
+        if (!recipesAdded) {
+            loadRecipes();
+        }
+        loadCircuitRelatedRecipes();
+        recipesAdded = true;
+    }
+
+    public static void loadRecipes() {
 
         MeteorsRecipes.registerMeteors();
 
@@ -170,5 +183,15 @@ public class RecipeLoader {
 
         RecipeUtil
             .generateRecipesNotUsingCells(BartWorksRecipeMaps.bioLabRecipes, RecipeRegister.LargeBioLabRecipes, true);
+    }
+
+    private static void loadCircuitRelatedRecipes() {
+        RecipeUtil.copyAllRecipes(RecipeRegister.ConvertToCircuitAssembler, RecipeMaps.circuitAssemblerRecipes);
+
+        new CircuitAssemblyLineRecipes().loadRecipes();
+
+        if (!recipesAdded && com.science.gtnl.Utils.enums.Mods.TwistSpaceTechnology.isModLoaded()) {
+            CircuitAssemblyLineWithoutImprintRecipePool.loadRecipes();
+        }
     }
 }
