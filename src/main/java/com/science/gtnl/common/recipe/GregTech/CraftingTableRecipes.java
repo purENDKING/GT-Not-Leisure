@@ -5,6 +5,7 @@ import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.addCraftingRecipe;
 import static gregtech.api.util.GTModHandler.addShapelessCraftingRecipe;
 
+import gtPlusPlus.core.item.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -67,7 +68,7 @@ public class CraftingTableRecipes implements IRecipePool {
         addCraftingRecipe(
             GTNLItemList.LargeSteamAlloySmelter.get(1),
             new Object[] { "ABA", "CDC", "AEA", 'A', GTOreDictUnificator.get(OrePrefixes.plate, Materials.Bronze, 1),
-                'B', GregtechItemList.BasicBronzeTurbine.get(1), 'C', ItemList.Casing_Firebox_Bronze.get(1), 'D',
+                'B', new ItemStack(ModItems.itemBasicTurbine, 1, 1), 'C', ItemList.Casing_Firebox_Bronze.get(1), 'D',
                 new ItemStack(Items.cauldron, 1), 'E', ItemList.Machine_Bronze_AlloySmelter.get(1) });
 
         addCraftingRecipe(
