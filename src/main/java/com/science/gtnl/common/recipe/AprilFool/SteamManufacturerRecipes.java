@@ -12,6 +12,7 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.loader.IRecipePool;
 import com.science.gtnl.loader.RecipeRegister;
 
+import bartworks.common.loaders.ItemRegistry;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.ItemList;
@@ -27,7 +28,6 @@ import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
-import bartworks.common.loaders.ItemRegistry;
 
 public class SteamManufacturerRecipes implements IRecipePool {
 
@@ -726,7 +726,7 @@ public class SteamManufacturerRecipes implements IRecipePool {
             .eut(400)
             .addTo(SMFR);
 
-        // MEBF
+        // MEBF SiHuo
         RA.stdBuilder()
             .itemInputs(ItemList.Machine_Multi_BlastFurnace.get(64))
             .itemOutputs(ItemRegistry.megaMachines[0])
