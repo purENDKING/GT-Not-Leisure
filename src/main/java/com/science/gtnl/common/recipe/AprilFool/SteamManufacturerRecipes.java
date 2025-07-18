@@ -726,7 +726,7 @@ public class SteamManufacturerRecipes implements IRecipePool {
             .eut(400)
             .addTo(SMFR);
 
-        // MEBF
+        // MEBF SiHuo
         RA.stdBuilder()
             .itemInputs(ItemList.Machine_Multi_BlastFurnace.get(64))
             .itemOutputs(ItemRegistry.megaMachines[0])
