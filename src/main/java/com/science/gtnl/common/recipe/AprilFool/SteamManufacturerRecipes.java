@@ -27,6 +27,7 @@ import gtPlusPlus.core.item.ModItems;
 import gtPlusPlus.core.material.MaterialsAlloy;
 import gtPlusPlus.core.util.minecraft.ItemUtils;
 import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
+import bartworks.common.loaders.ItemRegistry;
 
 public class SteamManufacturerRecipes implements IRecipePool {
 
@@ -725,5 +726,12 @@ public class SteamManufacturerRecipes implements IRecipePool {
             .eut(400)
             .addTo(SMFR);
 
+        // MEBF
+        RA.stdBuilder()
+            .itemInputs(ItemList.Machine_Multi_BlastFurnace.get(64))
+            .itemOutputs(ItemRegistry.megaMachines[0])
+            .duration(3600 * SECONDS)
+            .eut(512)
+            .addTo(SMFR);
     }
 }
