@@ -2,6 +2,7 @@ package com.science.gtnl.loader;
 
 import static com.gtnewhorizon.gtnhlib.util.AnimatedTooltipHandler.*;
 import static com.science.gtnl.Utils.enums.GTNLMachineID.*;
+import static com.science.gtnl.Utils.enums.Mods.ScienceNotLeisure;
 import static gregtech.api.enums.Textures.BlockIcons.*;
 import static gregtech.api.enums.Textures.BlockIcons.OVERLAY_VALVE;
 
@@ -208,6 +209,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.SoundResource;
 import gregtech.api.metatileentity.implementations.MTEBasicMachineWithRecipe;
 import gregtech.api.render.TextureFactory;
+import gregtech.api.util.GlassTier
 import gregtech.common.covers.CoverConveyor;
 import gregtech.common.covers.CoverFluidRegulator;
 import gregtech.common.covers.CoverPump;
@@ -2371,17 +2373,22 @@ public class MachineLoader {
     }
 
     public static void registerGlasses() {
+        GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.MetaBlockGlass.getBlockName(), 0, 10, 1000)
+        GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.MetaBlockGlass.getBlockName(), 1, 8, 1000)
+        GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.MetaBlockGlass.getBlockName(), 2, 7, 1000)
         BorosilicateGlass.registerGlass(BlockLoader.PlayerDoll, 0, (byte) 13);
-        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 0, (byte) 10);
-        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 1, (byte) 8);
-        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 2, (byte) 7);
+//        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 0, (byte) 10);
+//        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 1, (byte) 8);
+//        BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 2, (byte) 7);
 
         for (int LampMeta = 1; LampMeta <= 32; LampMeta++) {
-            BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlow, LampMeta, (byte) 3);
+            GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.MetaBlockGlow.getBlockName(), LampMeta, 3, 1000 + LampMeta - 1)
+//            BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlow, LampMeta, (byte) 3);
         }
 
         for (int LampOffMeta = 3; LampOffMeta <= 34; LampOffMeta++) {
-            BorosilicateGlass.registerGlass(BlockLoader.MetaBlock, LampOffMeta, (byte) 3);
+            GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.MetaBlock.getBlockName(), LampOffMeta, 3, 1032 + LampOffMeta - 3)
+//            BorosilicateGlass.registerGlass(BlockLoader.MetaBlock, LampOffMeta, (byte) 3);
         }
     }
 
