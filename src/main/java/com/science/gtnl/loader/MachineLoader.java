@@ -203,7 +203,6 @@ import com.science.gtnl.common.materials.MaterialPool;
 import com.science.gtnl.common.materials.MaterialUtils;
 
 import bartworks.API.BorosilicateGlass;
-import bartworks.API.GlassTier;
 import goodgenerator.util.CrackRecipeAdder;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
