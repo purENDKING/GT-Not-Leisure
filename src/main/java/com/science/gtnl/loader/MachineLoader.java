@@ -2373,7 +2373,6 @@ public class MachineLoader {
     }
 
     public static void registerGlasses() {
-        GlassTier.addCustomGlass(ScienceNotLeisure.ID, BlockLoader.PlayerDoll.getBlockName(), 0, 13);
         BorosilicateGlass.registerGlass(BlockLoader.PlayerDoll, 0, (byte) 13);
         BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 0, (byte) 10);
         BorosilicateGlass.registerGlass(BlockLoader.MetaBlockGlass, 1, (byte) 8);
